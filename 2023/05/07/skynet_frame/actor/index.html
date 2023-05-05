@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/actor.png">
 <meta property="article:published_time" content="2023-05-07T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-05T14:09:56.892Z">
+<meta property="article:modified_time" content="2023-05-05T14:54:13.654Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_frame">
 <meta name="twitter:card" content="summary_large_image">
@@ -198,7 +198,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.9k 字
         
       </span>
     
@@ -209,7 +209,7 @@
         
         
         
-          9 分钟
+          17 分钟
         
       </span>
     
@@ -271,8 +271,9 @@
 <h2 id="行为-1"><a href="#行为-1" class="headerlink" title="行为"></a>行为</h2><p>woker线程把消息传入<strong>cb</strong>回调函数处理,跟着传入的还有<strong>cb_ud</strong>。</p>
 <h2 id="邮箱-1"><a href="#邮箱-1" class="headerlink" title="邮箱"></a>邮箱</h2><p><strong>message_queue</strong>消息队列，存放待处理消息。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>skynet通过actor模型抽象skynet服务，赋予了服务之间强隔离性和原子性，避免了频繁加锁，使得在开发中能够高效简单实现业务，同时还能高效利用多核。</p>
-<p>哈哈哈哈</p>
-
+<h1 id="延伸问题"><a href="#延伸问题" class="headerlink" title="延伸问题"></a>延伸问题</h1><h2 id="actor模块是如何定义的？"><a href="#actor模块是如何定义的？" class="headerlink" title="actor模块是如何定义的？"></a>actor模块是如何定义的？</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">static void<span class="hljs-operator"> *</span><br><span class="hljs-operator"></span>get<span class="hljs-constructor">_api(<span class="hljs-params">struct</span> <span class="hljs-params">skynet_module</span> <span class="hljs-operator">*</span><span class="hljs-params">mod</span>, <span class="hljs-params">const</span> <span class="hljs-params">char</span> <span class="hljs-operator">*</span><span class="hljs-params">api_name</span>)</span> &#123;<br>	size_t name_size = strlen(<span class="hljs-keyword">mod</span>-&gt;name);<br>	size_t api_size = strlen(api_name);<br>	<span class="hljs-built_in">char</span> tmp<span class="hljs-literal">[<span class="hljs-identifier">name_size</span> + <span class="hljs-identifier">api_size</span> + <span class="hljs-number">1</span>]</span>;<br>	memcpy(tmp, <span class="hljs-keyword">mod</span>-&gt;name, name_size);<br>	memcpy(tmp+name_size, api_name, api_size+<span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">char</span> *ptr = strrchr(tmp, <span class="hljs-character">&#x27;.&#x27;</span>);<br>	<span class="hljs-keyword">if</span> (ptr<span class="hljs-operator"> == </span>NULL) &#123;<br>		ptr = tmp;<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		ptr = ptr + <span class="hljs-number">1</span>;<br>	&#125;<br>	return dlsym(<span class="hljs-keyword">mod</span>-&gt;<span class="hljs-keyword">module</span>, ptr);<br>&#125;<br><br>static <span class="hljs-built_in">int</span><br><span class="hljs-keyword">open</span><span class="hljs-constructor">_sym(<span class="hljs-params">struct</span> <span class="hljs-params">skynet_module</span> <span class="hljs-operator">*</span><span class="hljs-params">mod</span>)</span> &#123;<br>	<span class="hljs-keyword">mod</span>-&gt;create = get<span class="hljs-constructor">_api(<span class="hljs-params">mod</span>, <span class="hljs-string">&quot;_create&quot;</span>)</span>;<br>	<span class="hljs-keyword">mod</span>-&gt;init = get<span class="hljs-constructor">_api(<span class="hljs-params">mod</span>, <span class="hljs-string">&quot;_init&quot;</span>)</span>;<br>	<span class="hljs-keyword">mod</span>-&gt;release = get<span class="hljs-constructor">_api(<span class="hljs-params">mod</span>, <span class="hljs-string">&quot;_release&quot;</span>)</span>;<br>	<span class="hljs-keyword">mod</span>-&gt;signal = get<span class="hljs-constructor">_api(<span class="hljs-params">mod</span>, <span class="hljs-string">&quot;_signal&quot;</span>)</span>;<br><br>	return <span class="hljs-keyword">mod</span>-&gt;init<span class="hljs-operator"> == </span>NULL;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>skynet c服务模块约定需要实现<code>create</code> <code>init</code> <code>release</code>  <code>signal</code>四个API接口。<br><code>create</code>负责创建实例。<br><code>init</code>负责初始化，一般是绑定<code>cb</code> <code>cb_ud</code><br><code>release</code>释放实例时调用。<br><code>signal</code>通过API直接调用，接口实现需要包装线程安全。</p>
+<h2 id="actor实例（状态）的生命周期？"><a href="#actor实例（状态）的生命周期？" class="headerlink" title="actor实例（状态）的生命周期？"></a>actor实例（状态）的生命周期？</h2><h2 id="actor队列（邮箱）消息由谁投递，由谁消费？"><a href="#actor队列（邮箱）消息由谁投递，由谁消费？" class="headerlink" title="actor队列（邮箱）消息由谁投递，由谁消费？"></a>actor队列（邮箱）消息由谁投递，由谁消费？</h2><h2 id="如何新建一个actor模块并且处理消息（行为）？"><a href="#如何新建一个actor模块并且处理消息（行为）？" class="headerlink" title="如何新建一个actor模块并且处理消息（行为）？"></a>如何新建一个actor模块并且处理消息（行为）？</h2>
                 
               </div>
             
