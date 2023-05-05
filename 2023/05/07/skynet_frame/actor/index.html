@@ -16,18 +16,20 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="特点actor模型由">
+    <meta name="description" content="简介Actor模型由状态（State）、行为（Behavior）和邮箱（MailBox，可以认为是一个消息队列）三部分组成： 状态Actor模型中的状态指Actor对象的变量信息，状态由Actor模型自己管理，避免了并发环境下的锁和内存原子性等问题。 行为Actor模型中的计算逻辑，通过Actor模型接收到的消息来改变Actor模型的状态。 邮箱邮箱是Actor和Actor之间的通信桥梁，邮箱内部">
 <meta property="og:type" content="article">
 <meta property="og:title" content="actor模型">
-<meta property="og:url" content="https://huahua132.github.io/2023/05/05/skynet_frame/actor/index.html">
+<meta property="og:url" content="https://huahua132.github.io/2023/05/07/skynet_frame/actor/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="特点actor模型由">
+<meta property="og:description" content="简介Actor模型由状态（State）、行为（Behavior）和邮箱（MailBox，可以认为是一个消息队列）三部分组成： 状态Actor模型中的状态指Actor对象的变量信息，状态由Actor模型自己管理，避免了并发环境下的锁和内存原子性等问题。 行为Actor模型中的计算逻辑，通过Actor模型接收到的消息来改变Actor模型的状态。 邮箱邮箱是Actor和Actor之间的通信桥梁，邮箱内部">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-05T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-05T02:41:01.458Z">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/actor.png">
+<meta property="article:published_time" content="2023-05-07T02:33:49.000Z">
+<meta property="article:modified_time" content="2023-05-05T08:57:08.853Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_frame">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_frame/actor.png">
   
   
   
@@ -184,8 +186,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-05 10:33" pubdate>
-          2023年5月5日 上午
+        <time datetime="2023-05-07 10:33" pubdate>
+          2023年5月7日 上午
         </time>
       </span>
     
@@ -196,7 +198,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10 字
+          1k 字
         
       </span>
     
@@ -207,7 +209,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -250,7 +252,23 @@
             
               <div class="markdown-body">
                 
-                <h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>actor模型由</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Actor模型由状态（State）、行为（Behavior）和邮箱（MailBox，可以认为是一个消息队列）三部分组成：</p>
+<h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><p>Actor模型中的状态指Actor对象的变量信息，状态由Actor模型自己管理，避免了并发环境下的锁和内存原子性等问题。</p>
+<h2 id="行为"><a href="#行为" class="headerlink" title="行为"></a>行为</h2><p>Actor模型中的计算逻辑，通过Actor模型接收到的消息来改变Actor模型的状态。</p>
+<h2 id="邮箱"><a href="#邮箱" class="headerlink" title="邮箱"></a>邮箱</h2><p>邮箱是Actor和Actor之间的通信桥梁，邮箱内部通过FIFO（先入先出）消息队列来存储发送方Actor的消息，接收方Actor再从邮箱队列中获取消息。</p>
+<p><img src="/img/skynet_frame/actor.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><h2 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h2><p>每个actor实例的状态只能通过自己的行为修改。</p>
+<h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><p>单个actor实例同时只会有一个线程在执行，类似redis只用单线程去读写内存数据，避免了多线程下的并发问题，actor修改内部状态不需要加锁。</p>
+<h2 id="异步消息处理"><a href="#异步消息处理" class="headerlink" title="异步消息处理"></a>异步消息处理</h2><p>actor之前发消息并不是直接调用接口，而是类似邮件在对方邮箱放一个邮件，之后actor实例会按照先入先出的规则去处理邮件。</p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>actor实例可以在运行中动态创建和释放。</p>
+<h2 id="容错"><a href="#容错" class="headerlink" title="容错"></a>容错</h2><p>actor实例的断言不会导致整个程序崩溃。</p>
+<h2 id="模型抽象"><a href="#模型抽象" class="headerlink" title="模型抽象"></a>模型抽象</h2><p>每个actor模型可以对自己的状态，行为进入定义。</p>
+<h1 id="skynet对actor的应用"><a href="#skynet对actor的应用" class="headerlink" title="skynet对actor的应用"></a>skynet对actor的应用</h1><p>skynet通过抽象skynet_context结构体实现对actor模型的应用。</p>
+<h2 id="skynet-context"><a href="#skynet-context" class="headerlink" title="skynet_context"></a>skynet_context</h2><p>贴一段skynet_context结构部分定义。<br><code>struct skynet_context &#123; </code><br><code>	void * instance;            --实例数据</code><br><code>	struct skynet_module * mod; --模型</code><br><code>	void * cb_ud;				--回调函数实例数据</code><br><code>	skynet_cb cb;				--消息回调函数</code><br><code>	struct message_queue *queue;--消息队列</code><br><code>	uint32_t handle;            --实例id</code><br><code>&#125;;</code></p>
+<h2 id="状态-1"><a href="#状态-1" class="headerlink" title="状态"></a>状态</h2><p>skynet_context中的<strong>instance</strong>和<strong>cb_ud</strong>指向的是实例数据，通常<strong>cb_ud</strong>指向的就是<strong>instance</strong>指向的数据，或者是<strong>instance</strong>中的成员数据，可以认为<strong>instance</strong>和<strong>cb_ud</strong>就是对actor模型的<strong>状态</strong>定义。</p>
+<h2 id="行为-1"><a href="#行为-1" class="headerlink" title="行为"></a>行为</h2><p>woker线程把消息传入<strong>cb</strong>回调函数处理,跟着传入的还有<strong>cb_ud</strong>。</p>
+<h2 id="邮箱-1"><a href="#邮箱-1" class="headerlink" title="邮箱"></a>邮箱</h2><p><strong>message_queue</strong>消息队列，存放待处理消息。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>skynet通过actor模型抽象skynet服务，赋予了服务之间强隔离和原子性，避免了频繁加锁，使得在开发中能够高效简单实现业务，同时还能高效利用多核。</p>
 
                 
               </div>
@@ -276,7 +294,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>actor模型</div>
-      <div>https://huahua132.github.io/2023/05/05/skynet_frame/actor/</div>
+      <div>https://huahua132.github.io/2023/05/07/skynet_frame/actor/</div>
     </div>
     <div class="license-meta">
       
@@ -288,7 +306,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月5日</div>
+          <div>2023年5月7日</div>
         </div>
       
       
@@ -320,7 +338,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/05/whywrite/" title="为什么写blog">
+                      <a href="/2023/05/07/whywrite/" title="为什么写blog">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">为什么写blog</span>
                         <span class="visible-mobile">上一篇</span>
