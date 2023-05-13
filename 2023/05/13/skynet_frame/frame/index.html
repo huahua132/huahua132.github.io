@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="架构图上图是skynet框架的核心的架构图，看完整体我们再去细看内部实现细节，架构图就像一张完整的地图，我们需要由面到点深入到图中，才能真正的了解吃透skynet，使用中才知道要注意哪些细节。现实中了解地图中的一个地方自然是实地去走一走。了解代码框架的话当然是结合源码和文档(skynet github 上的wiki文档就写的非常不错)。源码不止看了一遍，所以基本上都是n探，探多了就清楚自己哪些地方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="skynet c层的整体架构">
+<meta property="og:url" content="https://huahua132.github.io/2023/05/13/skynet_frame/frame/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="架构图上图是skynet框架的核心的架构图，看完整体我们再去细看内部实现细节，架构图就像一张完整的地图，我们需要由面到点深入到图中，才能真正的了解吃透skynet，使用中才知道要注意哪些细节。现实中了解地图中的一个地方自然是实地去走一走。了解代码框架的话当然是结合源码和文档(skynet github 上的wiki文档就写的非常不错)。源码不止看了一遍，所以基本上都是n探，探多了就清楚自己哪些地方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/frame.png">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/mq.png">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/mq.png">
+<meta property="article:published_time" content="2023-05-13T03:33:49.000Z">
+<meta property="article:modified_time" content="2023-05-13T04:57:57.156Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="skynet_frame">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_frame/frame.png">
+  
+  
+  
+  <title>skynet c层的整体架构 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="skynet c层的整体架构"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-13 11:33" pubdate>
+          2023年5月13日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          84 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet"
+        id="heading-9c99ea17ef6f233bf515953c811d555b" role="tab" data-toggle="collapse" href="#collapse-9c99ea17ef6f233bf515953c811d555b"
+        aria-expanded="true"
+      >
+        skynet
+        <span class="list-group-count">(2)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-9c99ea17ef6f233bf515953c811d555b"
+           role="tabpanel" aria-labelledby="heading-9c99ea17ef6f233bf515953c811d555b">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/05/07/skynet_frame/actor/" title="actor模型在sknyet中的应用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">actor模型在sknyet中的应用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/13/skynet_frame/frame/" title="skynet c层的整体架构"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">skynet c层的整体架构</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">skynet c层的整体架构</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h1><p><img src="/img/skynet_frame/frame.png" srcset="/img/loading.gif" lazyload><br>上图是skynet框架的核心的架构图，看完整体我们再去细看内部实现细节，架构图就像一张完整的地图，我们需要由面到点深入到图中，才能真正的了解吃透skynet，使用中才知道要注意哪些细节。<br>现实中了解地图中的一个地方自然是实地去走一走。了解代码框架的话当然是结合源码和文档(skynet github 上的wiki文档就写的非常不错)。<br>源码不止看了一遍，所以基本上都是n探，探多了就清楚自己哪些地方很熟哪些还不熟，哪些是重点，哪些使用中需要注意。</p>
+<h1 id="n探main"><a href="#n探main" class="headerlink" title="n探main"></a>n探main</h1><p>启动skynet必须携带一个config配置文件，配置项的详细介绍可以看<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Config#%E5%90%8E%E5%8F%B0%E6%A8%A1%E5%BC%8Fdaemon-mode">skynet wiki</a>，那里非常详细。<br>我简单介绍一下比较常用的配置项：</p>
+<ul>
+<li><strong>thread</strong> 启动多少个工作线程。通常不要将它配置超过你实际拥有的 CPU 核心数。<strong>实际开发中可以根据业务流量把控</strong></li>
+<li><strong>bootstrap</strong> 启动的第一个服务以及其启动参数。默认配置为 snlua bootstrap ，即启动一个名为 bootstrap 的 lua 服务。通常指的是 service&#x2F;bootstrap.lua 这段代码。<strong>基本上用默认的就行</strong></li>
+<li><strong>harbor</strong> 节点id，<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Cluster#cluster-%E5%92%8C-snax-service">skynet cluster(master&#x2F;slave)</a>模式使用,云风大佬不推荐使用。所以一般直接配置为0单节点模式。如果需要RPC调用，可以考虑 cluster mode模式。可以读一读<a target="_blank" rel="noopener" href="http://blog.codingnow.com/2017/03/skynet_cluster.html">云风设计心路历程。</a></li>
+<li><strong>daemon</strong> 配置 daemon &#x3D; “.&#x2F;skynet.pid” 可以以后台模式启动 skynet 。注意，同时请配置 logger 项输出 log 。<strong>后台运行</strong></li>
+<li><strong>logger</strong> 日志文件目录。</li>
+<li><strong>logservice</strong> 日志服务,通常直接用skynet自带的logger服务，不提供日志切割，可以自己配置linux上的<strong>logrotate</strong>实现日志切割。</li>
+<li><strong>profile</strong> 是否统计每个服务使用cpu时间。在<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/DebugConsole">debugconsole</a>中可以查看。</li>
+<li><strong>preload</strong> 前置加载lua文件。<strong>通常用来加载自定义的全局工具函数</strong></li>
+<li><strong>lualoader</strong> 用哪一段 lua 代码加载 lua 服务。通常配置为 lualib&#x2F;loader.lua。</li>
+<li><strong>start</strong> 这是 bootstrap 最后一个环节将启动的 lua 服务，也就是你定制的 skynet 节点的主程序。默认为 main ，即启动 main.lua 这个脚本。这个 lua 服务的路径由下面的 luaservice 指定。</li>
+<li><strong>cpath</strong> c服务模块查找加载路径。</li>
+<li><strong>luaservice</strong> lua服务查找加载路径。</li>
+<li><strong>lua_cpath</strong> 将添加到 package.cpath 中的路径，供 require 调用。</li>
+<li><strong>lua_path</strong>  将添加到 package.path 中的路径，供 require 调用。</li>
+</ul>
+<p>读完配置之后main函数就根据配置项做一些初始化的工作。</p>
+<ul>
+<li>注册系统信号HUP（接收后会发送system消息给logger服务，logger接送后会重新打开日志文件，可用于日志切割。）触发信号(kill -HUP 进程号)<strong>单发</strong>，或者（pkill -HUP -f skynet.(配置文件)<strong>单发</strong>） 或者<strong>群发</strong>(pkill -HUP skynet)</li>
+<li>daemon守护进程。(检测skynet.pid进程号是否系统正在运行，在运行启动不了)</li>
+<li>初始化harbor handle mq module timer socket</li>
+<li>启动logger日志服务。</li>
+<li>启动lua bootstrap服务。</li>
+<li>启动 monitor timer socket worker线程。</li>
+</ul>
+<p>重点讲一下worker线程初始化的配置。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">static</span> <span class="hljs-type">int</span> weight[] = &#123;<br>		<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>,<br>		<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>,<br>		<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>,<br>		<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, &#125;;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">worker_parm</span> <span class="hljs-title">wp</span>[<span class="hljs-title">thread</span>];</span><br>	<span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;thread;i++) &#123;<br>		wp[i].m = m;<br>		wp[i].id = i;<br>		<span class="hljs-keyword">if</span> (i &lt; <span class="hljs-keyword">sizeof</span>(weight)/<span class="hljs-keyword">sizeof</span>(weight[<span class="hljs-number">0</span>])) &#123;<br>			wp[i].weight= weight[i];<br>		&#125; <span class="hljs-keyword">else</span> &#123;<br>			wp[i].weight = <span class="hljs-number">0</span>;<br>		&#125;<br>		create_thread(&amp;pid[i+<span class="hljs-number">3</span>], thread_worker, &amp;wp[i]);<br>	&#125;<br><br><span class="hljs-comment">//skynet_context_message_dispatch 部分代码</span><br>	&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i==<span class="hljs-number">0</span> &amp;&amp; weight &gt;= <span class="hljs-number">0</span>) &#123;<br>			n = skynet_mq_length(q);<br>			n &gt;&gt;= weight;<br>		&#125;<br></code></pre></td></tr></table></figure>
+<p>每个启动的worker线程都会绑定一个weight值。<br>云风写死了32个weight的配置。<br>在<code>skynet_context_message_dispatch</code>函数中，也就是worker线程从全局队列中弹出ctx mq时，会用weight值决定它本次处理的消息数量。<br>如上代码，n为待处理消息数量,weight&gt;&#x3D;0时，n等于n&gt;&gt;weight，也就是说，根据weight适配的处理规则如下：</p>
+<ol>
+<li>-1 1</li>
+<li>0 n</li>
+<li>1 n的2分之1</li>
+<li>2 n的4分之1</li>
+<li>3 n的8分之1</li>
+</ol>
+<p>云风大佬这样设计是为了防止出现服务饿死的情况，在机器cpu很多的情况下也能充分利用多核优势，快速处理消息，减少cpu切换调度。</p>
+<h1 id="n探skynet-module"><a href="#n探skynet-module" class="headerlink" title="n探skynet_module"></a>n探skynet_module</h1><p>module的源码总共210行，非常简单易懂，module的的任务就是<strong>查找、加载、缓存、调用</strong>模块。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_module</span> &#123;</span><br>	<span class="hljs-type">const</span> <span class="hljs-type">char</span> * name;         <span class="hljs-comment">//名称</span><br>	<span class="hljs-type">void</span> * module;			   <span class="hljs-comment">//动态库</span><br>	skynet_dl_create create;   <span class="hljs-comment">//create接口函数</span><br>	skynet_dl_init init;	   <span class="hljs-comment">//init接口函数</span><br>	skynet_dl_release release; <span class="hljs-comment">//release接口函数</span><br>	skynet_dl_signal signal;   <span class="hljs-comment">//signal接口函数</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>在创建skynet_context的时候通过<code>skynet_module_query(const char* name)</code>函数绑定一个模块，该函数会在<code>skynet_module_init(const char *path)</code>传入的path路径中<strong>查找</strong> <strong>(name).so</strong>动态库文件并且<strong>加载</strong>再绑定<strong>create,init,release,signal</strong>接口函数。然后<strong>缓存</strong>到modules结构中,以便下次使用不需要再加载动态库，提高速度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MAX_MODULE_TYPE 32</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">modules</span> &#123;</span><br>	<span class="hljs-type">int</span> count;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">spinlock</span> <span class="hljs-title">lock</span>;</span><br>	<span class="hljs-type">const</span> <span class="hljs-type">char</span> * path;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_module</span> <span class="hljs-title">m</span>[<span class="hljs-title">MAX_MODULE_TYPE</span>];</span><br>&#125;;<br><br><span class="hljs-type">static</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">modules</span> * <span class="hljs-title">M</span> =</span> <span class="hljs-literal">NULL</span>;<br></code></pre></td></tr></table></figure>
+<p>可以发现，云风写死了只能加载32个模块服务动态库。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> * <span class="hljs-title function_">skynet_module_instance_create</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> skynet_module *)</span>;<br><span class="hljs-type">int</span> <span class="hljs-title function_">skynet_module_instance_init</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> skynet_module *, <span class="hljs-type">void</span> * inst, <span class="hljs-keyword">struct</span> skynet_context *ctx, <span class="hljs-type">const</span> <span class="hljs-type">char</span> * parm)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">skynet_module_instance_release</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> skynet_module *, <span class="hljs-type">void</span> *inst)</span>;<br><span class="hljs-type">void</span> <span class="hljs-title function_">skynet_module_instance_signal</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> skynet_module *, <span class="hljs-type">void</span> *inst, <span class="hljs-type">int</span> signal)</span>;<br></code></pre></td></tr></table></figure>
+<p>模块提供接口<strong>调用</strong>函数,其中<strong>create,init</strong>在skynet_context_new中调用，<strong>release</strong>服务退出时调用,<strong>signal</strong>是API直接调用的。<br>写一个模块服务需要注意的是模块<strong>名字</strong>的文件名必须是（service_<strong>名字</strong>),接口名必须是(<strong>名字</strong>_接口名），可以参考<strong>service-src&#x2F;service_logger.c</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">logger_create()<br>logger_release()<br>logger_init()<br></code></pre></td></tr></table></figure>
+
+<h1 id="n探skynet-message-message-queue-global-queue"><a href="#n探skynet-message-message-queue-global-queue" class="headerlink" title="n探skynet_message,message_queue,global_queue"></a>n探skynet_message,message_queue,global_queue</h1><ul>
+<li><p><strong>skynet_message</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_message</span> &#123;</span><br>	<span class="hljs-type">uint32_t</span> source;  <span class="hljs-comment">//消息来源地址就是来源handle id</span><br>	<span class="hljs-type">int</span> session;	  <span class="hljs-comment">//唯一会话id 一般用session来确定回复消息</span><br>	<span class="hljs-type">void</span> * data;	  <span class="hljs-comment">//数据</span><br>	<span class="hljs-type">size_t</span> sz;		  <span class="hljs-comment">//数据大小</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>以上是sknyet_message的组成，其中sz中最左边的一个字节用来存放type。比如<code>smsg.sz = len | ((size_t)PTYPE_TEXT &lt;&lt; MESSAGE_TYPE_SHIFT);</code></p>
+</li>
+<li><p><strong>message_queue</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">message_queue</span> &#123;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">spinlock</span> <span class="hljs-title">lock</span>;</span> <span class="hljs-comment">//多线程自旋锁</span><br>	<span class="hljs-type">uint32_t</span> handle;      <span class="hljs-comment">//绑定的ctx</span><br>	<span class="hljs-type">int</span> cap;			  <span class="hljs-comment">//容量</span><br>	<span class="hljs-type">int</span> head;			  <span class="hljs-comment">//队列头(pop)</span><br>	<span class="hljs-type">int</span> tail;			  <span class="hljs-comment">//队列尾(push)</span><br>	<span class="hljs-type">int</span> release;          <span class="hljs-comment">//标记是否释放队列</span><br>	<span class="hljs-type">int</span> in_global;        <span class="hljs-comment">//是否在全局队列里</span><br>	<span class="hljs-type">int</span> overload;		  <span class="hljs-comment">//待处理消息数量是否超过overload_threshold</span><br>	<span class="hljs-type">int</span> overload_threshold;<span class="hljs-comment">//默认1024</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_message</span> *<span class="hljs-title">queue</span>;</span> <span class="hljs-comment">//消息队列</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">message_queue</span> *<span class="hljs-title">next</span>;</span>   <span class="hljs-comment">//下一个message_queue</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><img src="/img/skynet_frame/mq.png" srcset="/img/loading.gif" lazyload><br>message_queue初始容量为64，当待处理消息超过容量时会进行扩容，扩容现有容量的一倍，消息队列扩容后<strong>不支持缩容量</strong>。<br>当有worker_thread在pop消息时会检查消息队列长度是否大于overload_threshold，大于时会标记overload待处理消息数量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> overload = skynet_mq_overload(q);<br><span class="hljs-keyword">if</span> (overload) &#123;<br>	skynet_error(ctx, <span class="hljs-string">&quot;May overload, message queue length = %d&quot;</span>, overload);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果overload不等于0，会在处理消息之前打印一个日志，启到报警作用。<br>出现这个日志就说明这个服务的消息<strong>处理速度</strong>远远<strong>低于</strong>消息<strong>创建速度</strong>，要<strong>警惕</strong>了。</p>
+</li>
+</ul>
+<p>当服务退出后，worker线程就不在处理该服务的消息，会将所以消息进行丢弃处理。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <br><span class="hljs-title function_">skynet_mq_release</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> message_queue *q, message_drop drop_func, <span class="hljs-type">void</span> *ud)</span> &#123;<br>	SPIN_LOCK(q)<br>	<br>	<span class="hljs-keyword">if</span> (q-&gt;release) &#123;<br>		SPIN_UNLOCK(q)<br>		_drop_queue(q, drop_func, ud);<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		skynet_globalmq_push(q);<br>		SPIN_UNLOCK(q)<br>	&#125;<br>&#125;<br><br><span class="hljs-type">static</span> <span class="hljs-type">void</span><br>_drop_queue(<span class="hljs-keyword">struct</span> message_queue *q, message_drop drop_func, <span class="hljs-type">void</span> *ud) &#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_message</span> <span class="hljs-title">msg</span>;</span><br>	<span class="hljs-keyword">while</span>(!skynet_mq_pop(q, &amp;msg)) &#123;<br>		drop_func(&amp;msg, ud);<br>	&#125;<br>	_release(q);<br>&#125;<br><br><span class="hljs-type">static</span> <span class="hljs-type">void</span><br><span class="hljs-title function_">drop_message</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> skynet_message *msg, <span class="hljs-type">void</span> *ud)</span> &#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">drop_t</span> *<span class="hljs-title">d</span> =</span> ud;<br>	skynet_free(msg-&gt;data);<br>	<span class="hljs-type">uint32_t</span> source = d-&gt;handle;<br>	assert(source);<br>	<span class="hljs-comment">// report error to the message source</span><br>	skynet_send(<span class="hljs-literal">NULL</span>, source, msg-&gt;source, PTYPE_ERROR, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>丢弃处理是给消息来源方发送<code>PTYPE_ERROR</code>消息。</p>
+<ul>
+<li>global_queue<br>全局消息队列主要负责把次级消息队列(message_queue)串起来，供worker_thread消费执行。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">global_queue</span> &#123;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">message_queue</span> *<span class="hljs-title">head</span>;</span> <span class="hljs-comment">//头部pop</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">message_queue</span> *<span class="hljs-title">tail</span>;</span> <span class="hljs-comment">//尾部push</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">spinlock</span> <span class="hljs-title">lock</span>;</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+此时可以再回头是看看架构图，应该就清晰许多了😊</li>
+</ul>
+<h1 id="n探skynet-context"><a href="#n探skynet-context" class="headerlink" title="n探skynet_context"></a>n探skynet_context</h1><p>skynet框架核心结构，源代码中遍地都是handle，其实就是服务的唯一id。<br>skynet_context是什么，它是sknyet中的主角，skynet中的所有服务都是skynet_context抽象的，可以说它是母体。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_context</span> &#123;</span><br>	<span class="hljs-type">void</span> * instance;			<span class="hljs-comment">//实例数据</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_module</span> * <span class="hljs-title">mod</span>;</span> <span class="hljs-comment">//绑定的服务模块</span><br>	<span class="hljs-type">void</span> * cb_ud;				<span class="hljs-comment">//回调实例数据</span><br>	skynet_cb cb;				<span class="hljs-comment">//绑定的回调函数</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">message_queue</span> *<span class="hljs-title">queue</span>;</span><span class="hljs-comment">//消息队列</span><br>	FILE * logfile;				<span class="hljs-comment">//服务消息处理日志</span><br>	<span class="hljs-type">uint64_t</span> cpu_cost;	<span class="hljs-comment">// in microsec //cpu时间片总占用</span><br>	<span class="hljs-type">uint64_t</span> cpu_start;	<span class="hljs-comment">// in microsec //辅助记录cpu_cost</span><br>	<span class="hljs-type">char</span> result[<span class="hljs-number">32</span>];			<span class="hljs-comment">//lua-c api结果存储</span><br>	<span class="hljs-type">uint32_t</span> handle;		    <span class="hljs-comment">//服务唯一id</span><br>	<span class="hljs-type">int</span> session_id;				<span class="hljs-comment">//服务维护的会话id</span><br>	<span class="hljs-type">int</span> ref;					<span class="hljs-comment">//引用计数</span><br>	<span class="hljs-type">int</span> message_count;			<span class="hljs-comment">//处理消息总数</span><br>	<span class="hljs-type">bool</span> init;					<span class="hljs-comment">//是否已经初始化</span><br>	<span class="hljs-type">bool</span> endless;				<span class="hljs-comment">//是否可以存在死循环</span><br>	<span class="hljs-type">bool</span> profile;				<span class="hljs-comment">//是否记录cpu_cost</span><br><br>	CHECKCALLING_DECL<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>可以看到skynet_context依赖了skynet_module,和message_queue。</p>
+<ul>
+<li><p><strong>服务创建</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">struct</span> skynet_context *<br><span class="hljs-title function_">skynet_context_new</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span> * name, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *param)</span> &#123;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_module</span> * <span class="hljs-title">mod</span> =</span> skynet_module_query(name);<br><br>	<span class="hljs-keyword">if</span> (mod == <span class="hljs-literal">NULL</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br><br>	<span class="hljs-type">void</span> *inst = skynet_module_instance_create(mod);<br>	<span class="hljs-keyword">if</span> (inst == <span class="hljs-literal">NULL</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_context</span> * <span class="hljs-title">ctx</span> =</span> skynet_malloc(<span class="hljs-keyword">sizeof</span>(*ctx));<br>	CHECKCALLING_INIT(ctx)<br><br>	ctx-&gt;mod = mod;<br>	ctx-&gt;instance = inst;<br>	ctx-&gt;ref = <span class="hljs-number">2</span>;<br>	ctx-&gt;cb = <span class="hljs-literal">NULL</span>;<br>	ctx-&gt;cb_ud = <span class="hljs-literal">NULL</span>;<br>	ctx-&gt;session_id = <span class="hljs-number">0</span>;<br>	ctx-&gt;logfile = <span class="hljs-literal">NULL</span>;<br><br>	ctx-&gt;init = <span class="hljs-literal">false</span>;<br>	ctx-&gt;endless = <span class="hljs-literal">false</span>;<br><br>	ctx-&gt;cpu_cost = <span class="hljs-number">0</span>;<br>	ctx-&gt;cpu_start = <span class="hljs-number">0</span>;<br>	ctx-&gt;message_count = <span class="hljs-number">0</span>;<br>	ctx-&gt;profile = G_NODE.profile;<br>	<span class="hljs-comment">// Should set to 0 first to avoid skynet_handle_retireall get an uninitialized handle</span><br>	ctx-&gt;handle = <span class="hljs-number">0</span>;<br>	ctx-&gt;handle = skynet_handle_register(ctx);<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">message_queue</span> * <span class="hljs-title">queue</span> =</span> ctx-&gt;<span class="hljs-built_in">queue</span> = skynet_mq_create(ctx-&gt;handle);<br>	<span class="hljs-comment">// init function maybe use ctx-&gt;handle, so it must init at last</span><br>	context_inc();<br><br>	CHECKCALLING_BEGIN(ctx)<br>	<span class="hljs-type">int</span> r = skynet_module_instance_init(mod, inst, ctx, param);<br>	CHECKCALLING_END(ctx)<br>	<span class="hljs-keyword">if</span> (r == <span class="hljs-number">0</span>) &#123;<br>		<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">skynet_context</span> * <span class="hljs-title">ret</span> =</span> skynet_context_release(ctx);<br>		<span class="hljs-keyword">if</span> (ret) &#123;<br>			ctx-&gt;init = <span class="hljs-literal">true</span>;<br>		&#125;<br>		skynet_globalmq_push(<span class="hljs-built_in">queue</span>);<br>		<span class="hljs-keyword">if</span> (ret) &#123;<br>			skynet_error(ret, <span class="hljs-string">&quot;LAUNCH %s %s&quot;</span>, name, param ? param : <span class="hljs-string">&quot;&quot;</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span> ret;<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		skynet_error(ctx, <span class="hljs-string">&quot;FAILED launch %s&quot;</span>, name);<br>		<span class="hljs-type">uint32_t</span> handle = ctx-&gt;handle;<br>		skynet_context_release(ctx);<br>		skynet_handle_retire(handle);<br>		<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">drop_t</span> <span class="hljs-title">d</span> =</span> &#123; handle &#125;;<br>		skynet_mq_release(<span class="hljs-built_in">queue</span>, drop_message, &amp;d);<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>创建服务会查询绑定<code>模块名称</code>对应的模块库，然后调用<code>create</code>接口，注册handle_id，调用<code>init</code>接口函数。<br>init接口返回0表示创建成功，返回其他表示创建失败，最终创建函数返回新ctx的指针。</p>
+</li>
+<li><p><strong>服务销毁</strong><br>skynet 销毁服务是通过<code>skynet_handle_retire(uint32_t handle)</code>函数执行的，不过它只是把长驻的ref给释放了，不一定在这个函数中销毁。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">struct</span> skynet_context *<br><span class="hljs-title function_">skynet_context_release</span><span class="hljs-params">(<span class="hljs-keyword">struct</span> skynet_context *ctx)</span> &#123;<br>	<span class="hljs-keyword">if</span> (ATOM_DEC(&amp;ctx-&gt;ref) == <span class="hljs-number">0</span>) &#123;<br>		delete_context(ctx);<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> ctx;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>需要当ctx.ref也就是引用计数为0时才真正销毁实例，保证多线程安全性。</p>
+</li>
+</ul>
+<h1 id="n探skynet-handle"><a href="#n探skynet-handle" class="headerlink" title="n探skynet_handle"></a>n探skynet_handle</h1><p>如果说skynet_context是主角，这TM就是主角们的大别墅，看见上面skynet_context创建过程有什么,<code>skynet_handle_register</code>这TM就相当于去别墅里去拿个房卡，这个房卡就是skynet_context.handle。</p>
+<ul>
+<li><p><strong>房子多大</strong> 一开始有4个房间，当来了5个人，房子就扩建了，增加原来容量的一倍，人走了，别墅不缩，别墅最大容量为<strong>16,777,215</strong>。<br>如果用handle查询房间会很快<code>O1</code>的时间复杂度,应该云风采用的是hash结构存储。</p>
+</li>
+<li><p><strong>房间名</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">const</span> <span class="hljs-type">char</span> * <br><span class="hljs-title function_">skynet_handle_namehandle</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> handle, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *name)</span> &#123;<br>	rwlock_wlock(&amp;H-&gt;lock);<br><br>	<span class="hljs-type">const</span> <span class="hljs-type">char</span> * ret = _insert_name(H, name, handle);<br><br>	rwlock_wunlock(&amp;H-&gt;lock);<br><br>	<span class="hljs-keyword">return</span> ret;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>可以为服务创建一个别名，然后通过别名去找对应的handle实例,通过别名采用的是二分查找，时间复杂度是<code>log n</code>，名称对比还有一个<code>o n</code>的时间复杂度，所以我觉得能不用别名就不用，除非那个服务很特殊，比如logger日志服务。</p>
+</li>
+</ul>
+<h1 id="n探timer-timer-event-time-node-time-list"><a href="#n探timer-timer-event-time-node-time-list" class="headerlink" title="n探timer,timer_event,time_node,time_list"></a>n探timer,timer_event,time_node,time_list</h1><p>skynet定时器非常的高效，因为timer_thread只需要关心即将到期的定时事件。</p>
+<ul>
+<li><p><strong>timer_event</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timer_event</span> &#123;</span><br>	<span class="hljs-type">uint32_t</span> handle;  <span class="hljs-comment">//注册的handle_id</span><br>	<span class="hljs-type">int</span> session;	  <span class="hljs-comment">//绑定会话id</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>session id用于定时事件触发时，会通过消息的方式返回给handle实例，handle实例可以通过session确定定时任务触发。</p>
+</li>
+<li><p><strong>time_node</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timer_node</span> &#123;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timer_node</span> *<span class="hljs-title">next</span>;</span> <span class="hljs-comment">//下一个节点</span><br>	<span class="hljs-type">uint32_t</span> expire;         <span class="hljs-comment">//过期时间</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>link_list</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">link_list</span> &#123;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timer_node</span> <span class="hljs-title">head</span>;</span>  <span class="hljs-comment">//链表头</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timer_node</span> *<span class="hljs-title">tail</span>;</span> <span class="hljs-comment">//链表尾</span><br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><p><strong>timer</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timer</span> &#123;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">link_list</span> <span class="hljs-title">near</span>[<span class="hljs-title">TIME_NEAR</span>];</span>  <span class="hljs-comment">//近期链表 </span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">link_list</span> <span class="hljs-title">t</span>[4][<span class="hljs-title">TIME_LEVEL</span>];</span> <span class="hljs-comment">//散列链表</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">spinlock</span> <span class="hljs-title">lock</span>;</span><br>	<span class="hljs-type">uint32_t</span> time;                     <span class="hljs-comment">//服务启动时间累加滴答数</span><br>	<span class="hljs-type">uint32_t</span> starttime;				   <span class="hljs-comment">//服务启动时间</span><br>	<span class="hljs-type">uint64_t</span> current;				   <span class="hljs-comment">//当前服务启动时间累加的时间</span><br>	<span class="hljs-type">uint64_t</span> current_point;			   <span class="hljs-comment">//当前的系统时间</span><br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>近期链表：0-255个滴答数的定时任务会加入。特征：链表里都是触发时间相同的<br>散列链表：256 &lt;&#x3D; interval &lt;&#x3D; 0xffffffff 加入。   特征：链表里触发时间不一定相同<br>滴答数： skynet的定时器精度为0.01秒，按照它算法的定义就是0.01为1个滴答数。<br>到期时间：每一个加入的定时任务都会给它标记一个到期时间（加入时定时器当前滴答数+定时滴答数）。<br>skynet每次update都会取当前时间减去上次update时间获取流逝的滴答数。<br>然后把流逝的滴答数一滴答一滴答的执行。<br>执行过程中只关心到期间隔时间为 0 到 255 滴答数的处理。暂时不关注256 &lt;&#x3D; interval &lt;&#x3D; 0xffffffff。<br>滴答滴答流逝过程中，每走完一次0到255就会有一个对应的散列链表被移动（其实就是重新加入定时器，会重新给它们定位。<br><img src="/img/skynet_frame/mq.png" srcset="/img/loading.gif" lazyload><br>上图是我对定时器程序的简化模拟，我画的hash槽是7+3+3+3+3,skynet_time是255+64+64+64+64个哈希槽。<br>可以把near,t[0],t[1],t[2],t[3]想象成秒，分，时，天，周</p>
+</li>
+<li><p><strong>插入事件</strong> 可以说是给它找位置，秒内触发就插入秒，分内触发就插入分。</p>
+</li>
+<li><p><strong>调整过程</strong> 用机械表来举例子吧，比如这一分钟的秒针走完了到了12点的位置，此时分钟指针指向下一秒钟，就要把下一分钟的事件重新分配到秒指针上。<br>小时，周也是这样一个逻辑，比如秒针分针都到12点，触发时针指向跳动，就要把下一个小时的事件重新分配了。</p>
+</li>
+</ul>
+<p>定时器只提供的注册没有提供注销，不过有sesion,在上层实现一个注销功能还是很简单的。</p>
+<h1 id="n探socker-server-socker-message"><a href="#n探socker-server-socker-message" class="headerlink" title="n探socker_server,socker_message"></a>n探socker_server,socker_message</h1><h1 id="n探worker-thread"><a href="#n探worker-thread" class="headerlink" title="n探worker_thread"></a>n探worker_thread</h1><h1 id="n探timer-thread"><a href="#n探timer-thread" class="headerlink" title="n探timer_thread"></a>n探timer_thread</h1><h1 id="n探socket-thread"><a href="#n探socket-thread" class="headerlink" title="n探socket_thread"></a>n探socket_thread</h1><h1 id="n探monitor-thread"><a href="#n探monitor-thread" class="headerlink" title="n探monitor_thread"></a>n探monitor_thread</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/skynet-frame/">#skynet_frame</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>skynet c层的整体架构</div>
+      <div>https://huahua132.github.io/2023/05/13/skynet_frame/frame/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/07/whywrite/" title="为什么写blog">
+                        <span class="hidden-mobile">为什么写blog</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
