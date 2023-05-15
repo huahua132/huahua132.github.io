@@ -212,15 +212,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/14/socket/epoll/" target="_self">
-          select,poll,epoll 对比
+        <a href="/2023/05/14/socket/c/" target="_self">
+          网络七层模型
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/c/" target="_self">
         <div>
-          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
+          7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h
         </div>
       </a>
 
@@ -334,6 +334,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/05/14/socket/epoll/" target="_self">
+          select,poll,epoll 对比
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
+        <div>
+          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/socket/">#socket</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/05/13/skynet_frame/frame/" target="_self">
           skynet c层的整体架构
         </a>
@@ -352,6 +413,67 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-05-13 11:33" pubdate>
               2023-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-frame/">#skynet_frame</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/07/skynet_frame/actor/" target="_self">
+          actor模型在sknyet中的应用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/skynet_frame/actor/" target="_self">
+        <div>
+          简介Actor模型由状态（State）、行为（Behavior）和邮箱（MailBox，可以认为是一个消息队列）三部分组成： 状态Actor模型中的状态指Actor对象的变量信息，状态由Actor模型自己管理，避免了并发环境下的锁和内存原子性等问题。 行为Actor模型中的计算逻辑，通过Actor模型接收到的消息来改变Actor模型的状态。 邮箱邮箱是Actor和Actor之间的通信桥梁，邮箱内部
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-07 10:33" pubdate>
+              2023-05-07
             </time>
           </div>
         
@@ -422,67 +544,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/07/skynet_frame/actor/" target="_self">
-          actor模型在sknyet中的应用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/skynet_frame/actor/" target="_self">
-        <div>
-          简介Actor模型由状态（State）、行为（Behavior）和邮箱（MailBox，可以认为是一个消息队列）三部分组成： 状态Actor模型中的状态指Actor对象的变量信息，状态由Actor模型自己管理，避免了并发环境下的锁和内存原子性等问题。 行为Actor模型中的计算逻辑，通过Actor模型接收到的消息来改变Actor模型的状态。 邮箱邮箱是Actor和Actor之间的通信桥梁，邮箱内部
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-07 10:33" pubdate>
-              2023-05-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-frame/">#skynet_frame</a>
             
           </div>
         
