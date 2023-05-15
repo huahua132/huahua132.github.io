@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/mq.png">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/time.png">
 <meta property="article:published_time" content="2023-05-13T03:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-13T12:25:45.097Z">
+<meta property="article:modified_time" content="2023-05-15T04:11:06.078Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_frame">
 <meta name="twitter:card" content="summary_large_image">
@@ -408,7 +408,7 @@
 </ul>
 <h1 id="n探skynet-handle"><a href="#n探skynet-handle" class="headerlink" title="n探skynet_handle"></a>n探skynet_handle</h1><p>如果说skynet_context是主角，这TM就是主角们的大别墅，看见上面skynet_context创建过程有什么,<code>skynet_handle_register</code>这TM就相当于去别墅里去拿个房卡，这个房卡就是skynet_context.handle。</p>
 <ul>
-<li><p><strong>房子多大</strong> 一开始有4个房间，当来了5个人，房子就扩建了，增加原来容量的一倍，人走了，别墅不缩，别墅最大容量为<strong>16,777,215</strong>。<br>如果用handle查询房间会很快<code>O1</code>的时间复杂度,应该云风采用的是hash结构存储。</p>
+<li><p><strong>房子多大</strong> 一开始有4个房间，当来了5个人，房子就扩建了，增加原来容量的一倍，人走了，别墅不缩，别墅最大容量为<strong>16,777,215</strong>。<br>如果用handle查询房间会很快<code>O1</code>的时间复杂度，因为云风采用的是hash结构存储。</p>
 </li>
 <li><p><strong>房间名</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">const</span> <span class="hljs-type">char</span> * <br><span class="hljs-title function_">skynet_handle_namehandle</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> handle, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *name)</span> &#123;<br>	rwlock_wlock(&amp;H-&gt;lock);<br><br>	<span class="hljs-type">const</span> <span class="hljs-type">char</span> * ret = _insert_name(H, name, handle);<br><br>	rwlock_wunlock(&amp;H-&gt;lock);<br><br>	<span class="hljs-keyword">return</span> ret;<br>&#125;<br></code></pre></td></tr></table></figure>
