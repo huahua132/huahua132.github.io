@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/redis/cache2.webp">
 <meta property="og:image" content="https://huahua132.github.io/img/redis/ADIC.webp">
 <meta property="article:published_time" content="2023-05-13T03:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-15T09:29:50.781Z">
+<meta property="article:modified_time" content="2023-05-15T09:42:12.116Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary_large_image">
@@ -429,14 +429,18 @@
 <li><strong>zset：</strong> zliblist，跳表</li>
 <li><strong>set：</strong> intset，hash</li>
 </ul>
-<h2 id="压缩列表的构成"><a href="#压缩列表的构成" class="headerlink" title="压缩列表的构成"></a>压缩列表的构成</h2><h2 id="表头有zlibytes，zltail，zllen，分别表示列表长度，列表尾的偏移量，以及列表的entry个数，压缩列表之所以可以节省内存，是因为它是用一系列连续的entry保存数据。entry结构"><a href="#表头有zlibytes，zltail，zllen，分别表示列表长度，列表尾的偏移量，以及列表的entry个数，压缩列表之所以可以节省内存，是因为它是用一系列连续的entry保存数据。entry结构" class="headerlink" title="表头有zlibytes，zltail，zllen，分别表示列表长度，列表尾的偏移量，以及列表的entry个数，压缩列表之所以可以节省内存，是因为它是用一系列连续的entry保存数据。entry结构"></a>表头有zlibytes，zltail，zllen，分别表示列表长度，列表尾的偏移量，以及列表的entry个数，压缩列表之所以可以节省内存，是因为它是用一系列连续的entry保存数据。<br>entry结构</h2><ul>
+<h2 id="压缩列表的构成"><a href="#压缩列表的构成" class="headerlink" title="压缩列表的构成"></a>压缩列表的构成</h2><p>表头有zlibytes，zltail，zllen，分别表示列表长度，列表尾的偏移量，以及列表的entry个数，压缩列表之所以可以节省内存，是因为它是用一系列连续的entry保存数据。</p>
+<h2 id="entry结构"><a href="#entry结构" class="headerlink" title="entry结构"></a>entry结构</h2><ul>
 <li><strong>prev_len：</strong> 表示前一个entry的长度，1或5字节</li>
 <li><strong>len：</strong> 表示自身长度，4字节</li>
 <li><strong>encoding：</strong> 1字节</li>
 <li><strong>content：</strong> 保存实际数据</li>
 </ul>
 <p>如果实际数据是int类型8字节，总共是1+4+1+8&#x3D;14字节往上适配是16字节。<br>这样新增一个数据只需要16字节，少了dict_entry和2个redis_object的创建，比使用string类型少了48字节。</p>
-<p>inset结构：<br>    uint32_t encoding;<br>    uint_32_t length;<br>    int8_t contents[];</p>
+<h2 id="inset结构"><a href="#inset结构" class="headerlink" title="inset结构"></a>inset结构</h2><pre><code class="hljs">uint32_t encoding;
+uint_32_t length;
+int8_t contents[];
+</code></pre>
 <ol>
 <li>inset在元素是整型结果的时候使用。</li>
 <li>inset会根据encoding编码调整contents类型，当插入的元素字节长度大于之前所以元素的长度时会进行升级，调整contents的元素内存占用宽度，inset不会进行降级。</li>
