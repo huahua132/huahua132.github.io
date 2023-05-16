@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/mq.png">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_frame/time.png">
 <meta property="article:published_time" content="2023-05-13T03:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-13T05:01:22.957Z">
+<meta property="article:modified_time" content="2023-05-16T13:26:09.405Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_frame">
 <meta name="twitter:card" content="summary_large_image">
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10k 字
+          12k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          84 分钟
+          100 分钟
         
       </span>
     
@@ -408,7 +408,7 @@
 </ul>
 <h1 id="n探skynet-handle"><a href="#n探skynet-handle" class="headerlink" title="n探skynet_handle"></a>n探skynet_handle</h1><p>如果说skynet_context是主角，这TM就是主角们的大别墅，看见上面skynet_context创建过程有什么,<code>skynet_handle_register</code>这TM就相当于去别墅里去拿个房卡，这个房卡就是skynet_context.handle。</p>
 <ul>
-<li><p><strong>房子多大</strong> 一开始有4个房间，当来了5个人，房子就扩建了，增加原来容量的一倍，人走了，别墅不缩，别墅最大容量为<strong>16,777,215</strong>。<br>如果用handle查询房间会很快<code>O1</code>的时间复杂度,应该云风采用的是hash结构存储。</p>
+<li><p><strong>房子多大</strong> 一开始有4个房间，当来了5个人，房子就扩建了，增加原来容量的一倍，人走了，别墅不缩，别墅最大容量为<strong>16,777,215</strong>。<br>如果用handle查询房间会很快<code>O1</code>的时间复杂度，因为云风采用的是hash结构存储。</p>
 </li>
 <li><p><strong>房间名</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">const</span> <span class="hljs-type">char</span> * <br><span class="hljs-title function_">skynet_handle_namehandle</span><span class="hljs-params">(<span class="hljs-type">uint32_t</span> handle, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *name)</span> &#123;<br>	rwlock_wlock(&amp;H-&gt;lock);<br><br>	<span class="hljs-type">const</span> <span class="hljs-type">char</span> * ret = _insert_name(H, name, handle);<br><br>	rwlock_wunlock(&amp;H-&gt;lock);<br><br>	<span class="hljs-keyword">return</span> ret;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -436,7 +436,29 @@
 </li>
 </ul>
 <p>定时器只提供的注册没有提供注销，不过有sesion,在上层实现一个注销功能还是很简单的。</p>
-<h1 id="n探socker-server-socker-message"><a href="#n探socker-server-socker-message" class="headerlink" title="n探socker_server,socker_message"></a>n探socker_server,socker_message</h1><h1 id="n探worker-thread"><a href="#n探worker-thread" class="headerlink" title="n探worker_thread"></a>n探worker_thread</h1><h1 id="n探timer-thread"><a href="#n探timer-thread" class="headerlink" title="n探timer_thread"></a>n探timer_thread</h1><h1 id="n探socket-thread"><a href="#n探socket-thread" class="headerlink" title="n探socket_thread"></a>n探socket_thread</h1><h1 id="n探monitor-thread"><a href="#n探monitor-thread" class="headerlink" title="n探monitor_thread"></a>n探monitor_thread</h1><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>
+<h1 id="n探socker-server-socker-message"><a href="#n探socker-server-socker-message" class="headerlink" title="n探socker_server,socker_message"></a>n探socker_server,socker_message</h1><p>socket是skynet比较复杂的模块，总代码量有2千1百行。<br>对TCP,UDP进行了封装。</p>
+<ul>
+<li><p><strong>TCP</strong> FreeBSD系统下用kqueue,linux系统下用epoll,skynet epoll采用的是水平触发模式。</p>
+</li>
+<li><p><strong>UDP</strong> skynet封装了链接，发送，读取回调等等。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">socket</span> &#123;</span><br>	<span class="hljs-type">uintptr_t</span> opaque;                   <span class="hljs-comment">//handle</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">wb_list</span> <span class="hljs-title">high</span>;</span>				<span class="hljs-comment">//高优先级写数据列表</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">wb_list</span> <span class="hljs-title">low</span>;</span>					<span class="hljs-comment">//低优先级写数据列表</span><br>	<span class="hljs-type">int64_t</span> wb_size;					<span class="hljs-comment">//写数据长度</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">socket_stat</span> <span class="hljs-title">stat</span>;</span>			<span class="hljs-comment">//链接统计信息 总读 总写 上次写的时间 上次读的时间</span><br>	<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint32_t</span> sending;<br>	<span class="hljs-type">int</span> fd;<br>	<span class="hljs-type">int</span> id;<br>	<span class="hljs-type">uint8_t</span> protocol;<br>	<span class="hljs-type">uint8_t</span> type;<br>	<span class="hljs-type">uint16_t</span> udpconnecting;<br>	<span class="hljs-type">int64_t</span> warn_size;<br>	<span class="hljs-class"><span class="hljs-keyword">union</span> &#123;</span><br>		<span class="hljs-type">int</span> size;<br>		<span class="hljs-type">uint8_t</span> udp_address[UDP_ADDRESS_SIZE];<br>	&#125; p;<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">spinlock</span> <span class="hljs-title">dw_lock</span>;</span><br>	<span class="hljs-type">int</span> dw_offset;						<span class="hljs-comment">//偏移量n</span><br>	<span class="hljs-type">const</span> <span class="hljs-type">void</span> * dw_buffer;				<span class="hljs-comment">//同步直写失败时，会把buffer clone到这，注册epoll写事件，异步再试</span><br>	<span class="hljs-type">size_t</span> dw_size;						<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">socket_server</span> &#123;</span><br>	<span class="hljs-keyword">volatile</span> <span class="hljs-type">uint64_t</span> time;<br>	<span class="hljs-type">int</span> recvctrl_fd;                    <span class="hljs-comment">//socket thread读取管道</span><br>	<span class="hljs-type">int</span> sendctrl_fd;					<span class="hljs-comment">//发送管道</span><br>	<span class="hljs-type">int</span> checkctrl;                      <span class="hljs-comment">//标记 在处理管道消息和读取网络消息来回切换</span><br>	poll_fd event_fd;					<span class="hljs-comment">//create epoll的 poll_fd</span><br>	<span class="hljs-type">int</span> alloc_id;						<span class="hljs-comment">//用于分配id</span><br>	<span class="hljs-type">int</span> event_n;						<span class="hljs-comment">//网络事件数量</span><br>	<span class="hljs-type">int</span> event_index;					<span class="hljs-comment">//网络事件处理下标</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">socket_object_interface</span> <span class="hljs-title">soi</span>;</span> <span class="hljs-comment">//socket对象接口</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">event</span> <span class="hljs-title">ev</span>[<span class="hljs-title">MAX_EVENT</span>];</span>			<span class="hljs-comment">//待处理网络事件</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">socket</span> <span class="hljs-title">slot</span>[<span class="hljs-title">MAX_SOCKET</span>];</span>		<span class="hljs-comment">//socket 管理池</span><br>	<span class="hljs-type">char</span> buffer[MAX_INFO];				<span class="hljs-comment">//tcp临时数据</span><br>	<span class="hljs-type">uint8_t</span> udpbuffer[MAX_UDP_PACKAGE]; <span class="hljs-comment">//udp数据</span><br>	fd_set rfds;						<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>socket层主要围绕读写管道、socket事件通知、处理结果下发这三个流程做一些处理。</p>
+</li>
+<li><p><strong>读写管道</strong> 像listen,connenct,bind,start,close,shutdown,close,nodelay接口全部是先写到发送管道，之后socket thread再读取管道，解析请求，处理请求，再转发消息到handle实例中。</p>
+</li>
+<li><p><strong>socket</strong> epoll的accept,connect,read,write事件通知处理，然后再把结果转发到handle实例中.</p>
+</li>
+<li><p><strong>处理结果</strong> 转发给handle的消息定义了一系列类型，供上层去接送处理。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> SKYNET_SOCKET_TYPE_DATA 1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SKYNET_SOCKET_TYPE_CONNECT 2</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SKYNET_SOCKET_TYPE_CLOSE 3</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SKYNET_SOCKET_TYPE_ACCEPT 4</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SKYNET_SOCKET_TYPE_ERROR 5</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SKYNET_SOCKET_TYPE_UDP 6</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> SKYNET_SOCKET_TYPE_WARNING 7</span><br></code></pre></td></tr></table></figure>
+<p>非常典型的上层处理方案就是云风大佬自己封装的lua层的socket.lua。</p>
+</li>
+</ul>
+<h1 id="n探worker-thread"><a href="#n探worker-thread" class="headerlink" title="n探worker_thread"></a>n探worker_thread</h1><p>负责从全局队列中拿出次级队列，再从次级队列拿出消息进行处理。<br>worker线程是多个的，数量是启动配置thread设置的，每个worker_thread会根据weight适配一次处理skynet_message的数量。</p>
+<h1 id="n探timer-thread"><a href="#n探timer-thread" class="headerlink" title="n探timer_thread"></a>n探timer_thread</h1><p>timer线程是唯一的。<br>负责时间滴答数的向前推进、定时器事件的管理、到期事件的消息投递。</p>
+<h1 id="n探socket-thread"><a href="#n探socket-thread" class="headerlink" title="n探socket_thread"></a>n探socket_thread</h1><p>socket线程也是唯一的。<br>负责读取处理管道请求、读取处理socket事件，然后转发消息到相关的handle实例中。</p>
+<h1 id="n探monitor-thread"><a href="#n探monitor-thread" class="headerlink" title="n探monitor_thread"></a>n探monitor_thread</h1><p>monitor线程也是唯一的.<br>负责监控worker_thread在处理消息中，是否存在阻塞的情况，就是卡，或者死循环了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>整体又捋了一遍后，我发现我对skynet c层的架构更清晰也更系统全面，零零散散的知识好像一下子整合起来的😊。</p>
+
                 
               </div>
             
@@ -525,6 +547,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/05/13/redis/redis/" title="redis 知识杂谈">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">redis 知识杂谈</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
