@@ -16,16 +16,19 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="特征 有序性 所以结点都是左子树比自己小，右子树比自己大。 平衡性 所以结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m">
+    <meta name="description" content="特征 有序性 所以结点都是左子树比自己小，右子树比自己大。 平衡性 所以结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m  缺点 内存地址分散 每个结点都是独立数据块，存储地址分散，操作速度非常依赖存储设备的寻址速度，基于机械硬盘运行将会非常慢。  操作时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平衡二叉树的lua实现">
 <meta property="og:url" content="https://huahua132.github.io/2023/05/21/data_struct/avltree/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="特征 有序性 所以结点都是左子树比自己小，右子树比自己大。 平衡性 所以结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m">
+<meta property="og:description" content="特征 有序性 所以结点都是左子树比自己小，右子树比自己大。 平衡性 所以结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m  缺点 内存地址分散 每个结点都是独立数据块，存储地址分散，操作速度非常依赖存储设备的寻址速度，基于机械硬盘运行将会非常慢。  操作时">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/data_struct/avltree.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreefind.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreelist.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreeba.png">
 <meta property="article:published_time" content="2023-05-21T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-20T01:45:53.300Z">
+<meta property="article:modified_time" content="2023-05-20T03:34:03.120Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -210,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          116 字
+          1.1k 字
         
       </span>
     
@@ -221,7 +224,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -324,8 +327,27 @@
 <p><img src="/img/data_struct/avltree.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><ul>
 <li><strong>适合有序性数据存储</strong> 二叉树的天然有序性</li>
-<li><strong>适合范围查找</strong>	基于有序的范围查找时间复杂度为o(log n) + m</li>
+<li><strong>适合范围查找</strong>	基于有序的范围查找时间复杂度为<strong>o(log n) + m</strong></li>
 </ul>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><ul>
+<li><strong>内存地址分散</strong> 每个结点都是独立数据块，存储<strong>地址分散</strong>，操作速度非常依赖<strong>存储设备的寻址速度</strong>，基于机械硬盘运行将会非常慢。</li>
+</ul>
+<h1 id="操作时间复杂度"><a href="#操作时间复杂度" class="headerlink" title="操作时间复杂度"></a>操作时间复杂度</h1><ul>
+<li><strong>插入，查询，删除</strong> 时间复杂度都是<strong>o(log n)</strong></li>
+</ul>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>通过动手实现一个平衡二叉树，加深对平衡二叉树的了解，其实二年前用C++也实现过，所以这次想尝试用lua实现，发现用lua实现和用c++实现的区别是，在删除和增加结点的的时候，因为c++有指针，所以可以直接这样写 <code>node = new(tree_node)</code>,lua<br>没有就只能<code>parent.left = new(tree_node)</code>，所以递归函数传参需要把父节点的table传递进入，而c++只需要传递父节点成员的指针引用或者二级指针，实现的时候一定要理清逻辑，脑子里想不明白的时候就画图，特别注意别出现环引用。</p>
+<p>一个平衡二叉树包含基本插入，删除，查询三个API,lua的实现我增加了一个range范围查询的API。</p>
+<h2 id="结构定义"><a href="#结构定义" class="headerlink" title="结构定义"></a>结构定义</h2><p>标准的二叉树定义,左右子结点，结点高度，k,v值，基于k有序。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">new_node</span><span class="hljs-params">(k,v)</span></span><br>	<span class="hljs-keyword">return</span> &#123;<br>		left = <span class="hljs-literal">nil</span>,<br>		right = <span class="hljs-literal">nil</span>,<br>		depth = <span class="hljs-number">1</span>,<br>		k = k,<br>		v = v,<br>	&#125;<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p>开胃菜查询，查询是平衡二叉树里面最简单的,根据k值决定是去左边找还是右边找，类似二分查找。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">find_node</span><span class="hljs-params">(node,k)</span></span><br>	<span class="hljs-keyword">if</span> node.k == k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">return</span> node.v<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">if</span> node.k &gt; k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">if</span> node.left <span class="hljs-keyword">then</span><br>			<span class="hljs-keyword">return</span> find_node(node.left,k)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">if</span> node.right <span class="hljs-keyword">then</span><br>			<span class="hljs-keyword">return</span> find_node(node.right,k)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p><img src="/img/data_struct/alvtreefind.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>普通的二叉树插入也非常简单，跟查询一样的寻路，找到空的树枝挂上去就行。平衡二叉树就需要多操作一次平衡调整。<br>为什么要做平衡操作，试想一下，普通二叉树我们插入1到10，会一直插入到最右边的结点，就会退化成链表了。</p>
+<p><img src="/img/data_struct/alvtreelist.png" srcset="/img/loading.gif" lazyload></p>
+<p>此时的二叉树就跟链表差不多，查询，插入，删除基本上就是o(n)的时间复杂度了。<br>我们再看看平衡二叉树。</p>
+<p><img src="/img/data_struct/alvtreeba.png" srcset="/img/loading.gif" lazyload></p>
+<p>但插入结点3后，树<strong>失衡</strong>，此时对二叉树进行左旋调整。</p>
 
                 
               </div>
