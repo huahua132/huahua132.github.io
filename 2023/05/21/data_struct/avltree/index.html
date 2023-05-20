@@ -27,8 +27,10 @@
 <meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreefind.png">
 <meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreelist.png">
 <meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreeba.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreero.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreeroch.png">
 <meta property="article:published_time" content="2023-05-21T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-20T03:34:03.120Z">
+<meta property="article:modified_time" content="2023-05-20T04:33:41.825Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -213,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.8k 字
         
       </span>
     
@@ -224,7 +226,7 @@
         
         
         
-          9 分钟
+          15 分钟
         
       </span>
     
@@ -347,8 +349,23 @@
 <p><img src="/img/data_struct/alvtreelist.png" srcset="/img/loading.gif" lazyload></p>
 <p>此时的二叉树就跟链表差不多，查询，插入，删除基本上就是o(n)的时间复杂度了。<br>我们再看看平衡二叉树。</p>
 <p><img src="/img/data_struct/alvtreeba.png" srcset="/img/loading.gif" lazyload></p>
-<p>但插入结点3后，树<strong>失衡</strong>，此时对二叉树进行左旋调整。</p>
-
+<ul>
+<li><strong>失衡</strong> 所以结点左右子树<strong>高度差绝对值</strong>小于等于一。</li>
+<li><strong>检测失衡</strong> 插入结点经过的路径结点都需要检测。<strong>压栈的顺序的更新，先入后出</strong>。</li>
+<li><strong>更新树高</strong> 插入结点经过的路径结点都需要更新树高，<strong>检测失衡前要先更新树高，压栈的顺序的更新，先入后出</strong>。</li>
+</ul>
+<p>插入结点3后，树<strong>失衡</strong>，此时对二叉树进行<strong>左旋调整</strong>，插入结点4，5后又再次<strong>失衡</strong>，再次进行<strong>左旋调整</strong>。<br>这里我提到了<strong>左旋调整</strong>，<strong>右旋调整</strong>，我们需要列出树的失衡状态，根据失衡的定义我们可以列出如下6种失衡4种调整。</p>
+<p><img src="/img/data_struct/alvtreero.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们只需要实现<strong>左旋调整</strong>和<strong>右旋调整</strong>，<strong>先左后右</strong>和<strong>先右后左</strong>就是调用左、右调整，只不过是先调整子节点，再调整父节点。</p>
+<p>我们以左旋调整为例，看图。</p>
+<p><img src="/img/data_struct/alvtreeroch.png" srcset="/img/loading.gif" lazyload></p>
+<p>调整过程我们需要改变3个指针指向。</p>
+<ul>
+<li><strong>父指针</strong> 从指向<strong>自身</strong>改为指向<strong>右子节点</strong>(从指向1改为指向3)</li>
+<li><strong>自身右指针</strong> 从指向<strong>自身右子节点</strong>改为指向<strong>右子节点的左子节点</strong>(从指向3改为指向2)</li>
+<li><strong>右子结点左指针</strong> 从指向<strong>右子节点左子结点</strong>改为指向<strong>自身</strong>(从指向2改为指向1)</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ll_rotate</span><span class="hljs-params">(parent,node)</span></span><br>	<span class="hljs-keyword">local</span> son = node.right<br>	<span class="hljs-comment">--父指针change</span><br>	<span class="hljs-keyword">if</span> parent.root <span class="hljs-keyword">then</span><br>		parent.root = son<br>	<span class="hljs-keyword">elseif</span> parent.left == node <span class="hljs-keyword">then</span><br>		parent.left = son<br>	<span class="hljs-keyword">else</span><br>		parent.right = son<br>	<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">local</span> son_l = son.left<br>	<span class="hljs-comment">--右子结点左指针change</span><br>	node.right.left = node<br>	<span class="hljs-comment">--自身右指针change</span><br>	node.right = son_l<br>	update_depth(node)<br>	update_depth(son)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
