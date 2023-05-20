@@ -16,13 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e">
+<meta property="og:type" content="article">
 <meta property="og:title" content="关于skynet做服务热更新">
 <meta property="og:url" content="https://huahua132.github.io/2023/05/22/think/reload/index.html">
 <meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-22T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-20T01:46:13.809Z">
+<meta property="article:modified_time" content="2023-05-20T08:10:45.219Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -206,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          793 字
         
       </span>
     
@@ -217,7 +219,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -260,7 +262,16 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="为什么要做热更新"><a href="#为什么要做热更新" class="headerlink" title="为什么要做热更新"></a>为什么要做热更新</h1><p>那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。<br><strong>无状态</strong>的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是<strong>有状态</strong>的服务，不能直接重启，重启就可能出现数据丢失了。</p>
+<h1 id="热更方式"><a href="#热更方式" class="headerlink" title="热更方式"></a>热更方式</h1><ul>
+<li><strong>在原本的lua虚拟机中更新</strong><br>这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_env中的数据，要处理好table被引用、全局变量、闭包的upvalue,而且还会出现本身旧状态数据不适应新版本处理函数的情况，比如一个函数检测一个状态的值等不等于一个枚举值，旧版本枚举值等于1，新版本等于2，但是旧版本状态数据是1，这个时候你热更还需要抉择状态数据是用旧的还是要改成新的，而且有些状态数据是运行时玩家之间的API交互产生的结果，比如A玩家击杀了B玩家，B玩家状态是挂了，但是标记挂了的枚举在新版本改了，此时的热更肯定不符合预期，所以这种热更方式只适合更新bug。少量更改人为可预见行为，才使用。</li>
+</ul>
+<p>比如skynet提供的inject注入方式。</p>
+<ul>
+<li><strong>旧服务顶替新服务的方式</strong><br>这种方式处理起来不复杂而且稳定可控性强,有点类似重启服务然后更新,但是我们可以做到无缝衔接,新服务到岗之后再停止旧服务,传统的进程服务,可能就是启动新服务,然后把旧服务流量切换到新服务上面,等服务没有流量以后再关掉旧服务。<br>skynet可以直接在进程内存就实现这个需求,skynet通过lua沙盒就像一个一个微小的进程,我们在内部实现一个服务做出服务网关,记录所以可热更服务的地址,服务通过向网关注册时的名字联系,发消息都通过网关,然后我们关闭掉skynet.codecache,服务更新之后网关记录新服务地址，通知旧服务下岗，做到无缝热更。</li>
+</ul>
+<p>不过还需要考虑新服务上线，旧服务还不能下岗的情况，比如一把游戏还没有结束。</p>
+
                 
               </div>
             
