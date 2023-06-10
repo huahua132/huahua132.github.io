@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="特征 有序性 所以结点都是左子树比自己小，右子树比自己大。 平衡性 所以结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m  缺点 内存地址分散 每个结点都是独立数据块，存储地址分散，操作速度非常依赖存储设备的寻址速度，基于机械硬盘运行将会非常慢。  操作时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="平衡二叉树的lua实现">
+<meta property="og:url" content="https://huahua132.github.io/2023/05/21/data_struct/avltree/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="特征 有序性 所以结点都是左子树比自己小，右子树比自己大。 平衡性 所以结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m  缺点 内存地址分散 每个结点都是独立数据块，存储地址分散，操作速度非常依赖存储设备的寻址速度，基于机械硬盘运行将会非常慢。  操作时">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/avltree.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreefind.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreelist.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreeba.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreero.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreeroch.png">
+<meta property="og:image" content="https://huahua132.github.io/img/data_struct/alvtreedel.png">
+<meta property="article:published_time" content="2023-05-21T02:33:49.000Z">
+<meta property="article:modified_time" content="2023-05-27T01:40:02.184Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/data_struct/avltree.png">
+  
+  
+  
+  <title>平衡二叉树的lua实现 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="平衡二叉树的lua实现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-21 10:33" pubdate>
+          2023年5月21日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          48 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="数据结构"
+        id="heading-0fea7c47d93da5689f31820ee525b367" role="tab" data-toggle="collapse" href="#collapse-0fea7c47d93da5689f31820ee525b367"
+        aria-expanded="true"
+      >
+        数据结构
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-0fea7c47d93da5689f31820ee525b367"
+           role="tabpanel" aria-labelledby="heading-0fea7c47d93da5689f31820ee525b367">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/05/21/data_struct/avltree/" title="平衡二叉树的lua实现"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">平衡二叉树的lua实现</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">平衡二叉树的lua实现</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h1><ul>
+<li><strong>有序性</strong> 所以结点都是<strong>左子树比自己小，右子树比自己大</strong>。</li>
+<li><strong>平衡性</strong> 所以结点左右子树<strong>高度差绝对值</strong>小于等于一。</li>
+<li><strong>唯一性</strong> 结点key唯一，不能重复。</li>
+</ul>
+<p><img src="/img/data_struct/avltree.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h1><ul>
+<li><strong>适合有序性数据存储</strong> 二叉树的天然有序性</li>
+<li><strong>适合范围查找</strong>	基于有序的范围查找时间复杂度为<strong>o(log n) + m</strong></li>
+</ul>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><ul>
+<li><strong>内存地址分散</strong> 每个结点都是独立数据块，存储<strong>地址分散</strong>，操作速度非常依赖<strong>存储设备的寻址速度</strong>，基于机械硬盘运行将会非常慢。</li>
+</ul>
+<h1 id="操作时间复杂度"><a href="#操作时间复杂度" class="headerlink" title="操作时间复杂度"></a>操作时间复杂度</h1><ul>
+<li><strong>插入，查询，删除</strong> 时间复杂度都是<strong>o(log n)</strong></li>
+</ul>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>通过动手实现一个平衡二叉树，加深对平衡二叉树的了解，其实二年前用C++也实现过，所以这次想尝试用lua实现，发现用lua实现和用c++实现的区别是，在删除和增加结点的的时候，因为c++有指针，所以可以直接这样写 <code>node = new(tree_node)</code>,lua<br>没有就只能<code>parent.left = new(tree_node)</code>，所以递归函数传参需要把父节点的table传递进入，而c++只需要传递父节点成员的指针引用或者二级指针，实现的时候一定要理清逻辑，脑子里想不明白的时候就画图，特别注意别出现环引用。</p>
+<p>一个平衡二叉树包含基本插入，删除，查询三个API,lua的实现我增加了一个range范围查询的API。</p>
+<h2 id="结构定义"><a href="#结构定义" class="headerlink" title="结构定义"></a>结构定义</h2><p>标准的二叉树定义,左右子结点，结点高度，k,v值，基于k有序。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">new_node</span><span class="hljs-params">(k,v)</span></span><br>	<span class="hljs-keyword">return</span> &#123;<br>		left = <span class="hljs-literal">nil</span>,<br>		right = <span class="hljs-literal">nil</span>,<br>		depth = <span class="hljs-number">1</span>,<br>		k = k,<br>		v = v,<br>	&#125;<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p>开胃菜查询，查询是平衡二叉树里面最简单的,根据k值决定是去左边找还是右边找，类似二分查找。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">find_node</span><span class="hljs-params">(node,k)</span></span><br>	<span class="hljs-keyword">if</span> node.k == k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">return</span> node.v<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">if</span> node.k &gt; k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">if</span> node.left <span class="hljs-keyword">then</span><br>			<span class="hljs-keyword">return</span> find_node(node.left,k)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">if</span> node.right <span class="hljs-keyword">then</span><br>			<span class="hljs-keyword">return</span> find_node(node.right,k)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<p>比例下图👇查找4,<strong>路径</strong>就是root[5]-&gt;left[3]-&gt;right[4]<br><img src="/img/data_struct/alvtreefind.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>普通的二叉树插入也非常简单，跟查询一样的寻路，找到空的树枝挂上去就行。平衡二叉树就需要操作平衡调整。<br>为什么要做平衡操作，试想一下，普通二叉树我们插入1到10，会一直插入到最右边的结点，就会退化成链表了。</p>
+<p><img src="/img/data_struct/alvtreelist.png" srcset="/img/loading.gif" lazyload></p>
+<p>此时的二叉树就跟链表差不多，查询，插入，删除基本上就是o(n)的时间复杂度了。<br>我们再看看平衡二叉树。</p>
+<p><img src="/img/data_struct/alvtreeba.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><strong>失衡</strong> 所以结点左右子树<strong>高度差绝对值</strong>小于等于一。</li>
+<li><strong>检测失衡</strong> 插入结点经过的路径结点都需要检测。<strong>按照压栈的顺序执行，先入后出</strong>。</li>
+<li><strong>更新树高</strong> 插入结点经过的路径结点都需要更新树高，<strong>检测失衡前要先更新树高，按照压栈的顺序执行，先入后出</strong>。</li>
+</ul>
+<p>插入结点3后，树<strong>失衡</strong>，此时对二叉树进行<strong>左旋调整</strong>，插入结点4，5后又再次<strong>失衡</strong>，再次进行<strong>左旋调整</strong>。<br>这里我提到了<strong>左旋调整</strong>，<strong>右旋调整</strong>，我们需要列出树的<strong>失衡</strong>状态，根据失衡的定义我们可以列出如下<strong>6种失衡4种调整</strong>。</p>
+<p><img src="/img/data_struct/alvtreero.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们只需要实现<strong>左旋调整</strong>和<strong>右旋调整</strong>，<strong>先左后右</strong>和<strong>先右后左</strong>就是调用左、右调整，只不过是先调整子节点，再调整父节点。</p>
+<p>我们以左旋调整为例，看图。</p>
+<p><img src="/img/data_struct/alvtreeroch.png" srcset="/img/loading.gif" lazyload></p>
+<p>调整过程我们需要改变3个指针指向。</p>
+<ul>
+<li><strong>父指针</strong> 从指向<strong>自身</strong>改为指向<strong>右子节点</strong>(从指向1改为指向3)</li>
+<li><strong>自身右指针</strong> 从指向<strong>自身右子节点</strong>改为指向<strong>右子节点的左子节点</strong>(从指向3改为指向2)</li>
+<li><strong>右子结点左指针</strong> 从指向<strong>右子节点左子结点</strong>改为指向<strong>自身</strong>(从指向2改为指向1)</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--获取高度</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_depth</span><span class="hljs-params">(node)</span></span><br>	<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> node <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>	<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">return</span> node.depth<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--更新高度</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update_depth</span><span class="hljs-params">(node)</span></span><br>	<span class="hljs-keyword">local</span> l_depth = get_depth(node.left)<br>	<span class="hljs-keyword">local</span> r_depth = get_depth(node.right)<br>	node.depth = l_depth &gt; r_depth <span class="hljs-keyword">and</span> l_depth + <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> r_depth + <span class="hljs-number">1</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--获取平衡值</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_node_balance</span><span class="hljs-params">(node)</span></span><br>	<span class="hljs-keyword">local</span> l_depth = get_depth(node.left)<br>	<span class="hljs-keyword">local</span> r_depth = get_depth(node.right)<br>	<span class="hljs-keyword">return</span> l_depth - r_depth<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--左旋</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ll_rotate</span><span class="hljs-params">(parent,node)</span></span><br>	<span class="hljs-keyword">local</span> son = node.right<br>	<span class="hljs-comment">--父指针change</span><br>	<span class="hljs-keyword">if</span> parent.root <span class="hljs-keyword">then</span><br>		parent.root = son<br>	<span class="hljs-keyword">elseif</span> parent.left == node <span class="hljs-keyword">then</span><br>		parent.left = son<br>	<span class="hljs-keyword">else</span><br>		parent.right = son<br>	<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">local</span> son_l = son.left<br>	<span class="hljs-comment">--右子结点左指针change</span><br>	node.right.left = node<br>	<span class="hljs-comment">--自身右指针change</span><br>	node.right = son_l<br>	<span class="hljs-comment">--更新结点高度</span><br>	update_depth(node)<br>	update_depth(son)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--右旋</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rr_rotate</span><span class="hljs-params">(parent,node)</span></span><br>	<span class="hljs-keyword">local</span> son = node.left<br>	<span class="hljs-comment">--父指针change</span><br>	<span class="hljs-keyword">if</span> parent.root <span class="hljs-keyword">then</span><br>		parent.root = son<br>	<span class="hljs-keyword">elseif</span> parent.left == node <span class="hljs-keyword">then</span><br>		parent.left = son<br>	<span class="hljs-keyword">else</span><br>		parent.right = son<br>	<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">local</span> son_r = son.right<br>	<span class="hljs-comment">--左子结点右指针change</span><br>	node.left.right = node<br>	<span class="hljs-comment">--自身右指针change</span><br>	node.left = son_r<br>	<span class="hljs-comment">--更新结点高度</span><br>	update_depth(node)<br>	update_depth(son)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--先左后右</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">lr_rotate</span><span class="hljs-params">(parent,node)</span></span><br>	ll_rotate(node,node.left)<br>	rr_rotate(parent,node)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--先右后左</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rl_rotate</span><span class="hljs-params">(parent,node)</span></span><br>	rr_rotate(node,node.right)<br>	ll_rotate(parent,node)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--左边失衡</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">balance_left</span><span class="hljs-params">(parent,node)</span></span><br>	<span class="hljs-keyword">local</span> l_balance = get_node_balance(node.left)<br>	<span class="hljs-keyword">if</span> l_balance &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">then</span><br>		rr_rotate(parent,node)<br>	<span class="hljs-keyword">else</span><br>		lr_rotate(parent,node)<br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--右边失衡</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">balance_right</span><span class="hljs-params">(parent,node)</span></span><br>	<span class="hljs-keyword">local</span> r_balance = get_node_balance(node.right)<br>	<span class="hljs-keyword">if</span> r_balance &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">then</span><br>		rl_rotate(parent,node)<br>	<span class="hljs-keyword">else</span><br>		ll_rotate(parent,node)<br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--检测失衡并调整</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">avl_node</span><span class="hljs-params">(parent,node)</span></span><br>	<span class="hljs-keyword">local</span> balance = get_node_balance(node)<br>	<span class="hljs-keyword">if</span> balance &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">then</span><br>		balance_left(parent,node)<br>	<span class="hljs-keyword">elseif</span> balance &lt; <span class="hljs-number">-1</span> <span class="hljs-keyword">then</span><br>		balance_right(parent,node)<br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_node</span><span class="hljs-params">(parent,node,k,v)</span></span><br>	<span class="hljs-keyword">if</span> node.k == k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">return</span><br>	<span class="hljs-keyword">end</span><br>	<br>	<span class="hljs-keyword">if</span> node.k &gt; k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">if</span> node.left <span class="hljs-keyword">then</span><br>			add_node(node,node.left,k,v)<br>		<span class="hljs-keyword">else</span><br>			node.left = new_node(k,v)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">if</span> node.right <span class="hljs-keyword">then</span><br>			add_node(node,node.right,k,v)<br>		<span class="hljs-keyword">else</span><br>			node.right = new_node(k,v)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	update_depth(node)<br>	avl_node(parent,node)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p>完整的插入过程可以分为2个步骤，按照压栈的过程，先入后出。</p>
+<ul>
+<li><strong>进</strong> 进的时候栈会记录<strong>路径</strong>。</li>
+<li><strong>出</strong> 把路过的结点进行<strong>更新树高</strong>和<strong>检测失衡和调整失衡</strong>。</li>
+</ul>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>删除结点有4种情况需要考虑🤔</p>
+<ol>
+<li><strong>叶子结点</strong> 没有左右子结点的，直接删除就行。</li>
+<li><strong>仅有左子结点</strong> 让父节点继承。</li>
+<li><strong>仅有右子结点</strong> 让父节点继承。</li>
+<li><strong>左右子结点都有</strong> <strong>中序遍历</strong>遍历的前继或者后继结点代替自己。</li>
+</ol>
+<p><strong>如何找前继或者后继结点</strong><br>如图，我们看下<strong>中序遍历</strong>结点的位置情况。<br><img src="/img/data_struct/alvtreedel.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li><strong>前继结点位置</strong> <strong>左结点</strong>或者左节点的<strong>最右</strong>结点。</li>
+<li><strong>后继结点位置</strong> <strong>右结点</strong>或者右节点的<strong>最左</strong>结点。</li>
+</ul>
+<p>删除结点的过程中我们不能忘了把路过的结点进行更新<strong>更新树高</strong>和<strong>检测失衡和调整失衡</strong>。<br>删除比较特殊的是删除<strong>左右子结点都有</strong>的结点时，会进行<strong>前继结点位置</strong>或者<strong>后继结点位置</strong>位置的深入，这个路径的结点都需要<strong>更新树高</strong>。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">del_node</span><span class="hljs-params">(parent,node,k,v)</span></span><br>	<span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">del</span><span class="hljs-params">(p,n,next)</span></span><br>		<span class="hljs-keyword">if</span> p.root <span class="hljs-keyword">then</span><br>			<span class="hljs-keyword">if</span> <span class="hljs-built_in">next</span> <span class="hljs-keyword">then</span><br>				p.root = <span class="hljs-built_in">next</span><br>			<span class="hljs-keyword">else</span><br>				p.root = <span class="hljs-literal">nil</span><br>			<span class="hljs-keyword">end</span>	<br>		<span class="hljs-keyword">elseif</span> p.left == n <span class="hljs-keyword">then</span><br>			<span class="hljs-keyword">if</span> <span class="hljs-built_in">next</span> <span class="hljs-keyword">then</span><br>				p.left = <span class="hljs-built_in">next</span><br>			<span class="hljs-keyword">else</span><br>				p.left = <span class="hljs-literal">nil</span><br>			<span class="hljs-keyword">end</span><br>		<span class="hljs-keyword">else</span><br>			<span class="hljs-keyword">if</span> <span class="hljs-built_in">next</span> <span class="hljs-keyword">then</span><br>				p.right = <span class="hljs-built_in">next</span><br>			<span class="hljs-keyword">else</span><br>				p.right = <span class="hljs-literal">nil</span><br>			<span class="hljs-keyword">end</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">local</span> res = <span class="hljs-literal">false</span><br>	<span class="hljs-keyword">if</span> node.k == k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> node.left <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> node.right <span class="hljs-keyword">then</span><br>			del(parent,node)<br>		<span class="hljs-keyword">elseif</span> <span class="hljs-keyword">not</span> node.left <span class="hljs-keyword">then</span><br>			del(parent,node,node.right)<br>			node.right = <span class="hljs-literal">nil</span><br>		<span class="hljs-keyword">elseif</span> <span class="hljs-keyword">not</span> node.right <span class="hljs-keyword">then</span><br>			del(parent,node,node.left)<br>			node.left = <span class="hljs-literal">nil</span><br>		<span class="hljs-keyword">else</span><br>			<span class="hljs-comment">--找node在中序遍历的前继节点或者后继节点</span><br>			<span class="hljs-comment">--我这里找前继,前继结点是左节点或者左节点的最右节点</span><br>			<span class="hljs-keyword">local</span> pp_node = <span class="hljs-literal">nil</span><br>			<span class="hljs-keyword">local</span> pre_node = node.left<br>			<span class="hljs-keyword">while</span> pre_node.right <span class="hljs-keyword">do</span><br>				pp_node = pre_node<br>				pre_node = pre_node.right<br>			<span class="hljs-keyword">end</span><br>			del(parent,node,pre_node)<br>			pre_node.right = node.right<br>			node.right = <span class="hljs-literal">nil</span><br>			<span class="hljs-keyword">if</span> pp_node <span class="hljs-keyword">then</span><br>				pp_node.right = pre_node.left<br>				pre_node.left = node.left<br>			<span class="hljs-keyword">end</span><br>			<br>			node.left = <span class="hljs-literal">nil</span><br><br>			<span class="hljs-keyword">local</span> uplist = &#123;pre_node&#125;<br>			<span class="hljs-keyword">local</span> unode = pre_node.left<br>			<span class="hljs-keyword">while</span> unode <span class="hljs-keyword">do</span><br>				<span class="hljs-built_in">table</span>.<span class="hljs-built_in">insert</span>(uplist,unode)<br>				unode = unode.right<br>			<span class="hljs-keyword">end</span><br>			<span class="hljs-keyword">for</span> i = #uplist,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span> <span class="hljs-keyword">do</span><br>				update_depth(uplist[i])<br>			<span class="hljs-keyword">end</span><br>		<span class="hljs-keyword">end</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>	<span class="hljs-keyword">end</span><br>	<br>	<span class="hljs-keyword">if</span> node.k &gt; k <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">if</span> node.left <span class="hljs-keyword">then</span><br>			res = del_node(node,node.left,k,v)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">if</span> node.right <span class="hljs-keyword">then</span><br>			res = del_node(node,node.right,k,v)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">if</span> res <span class="hljs-keyword">then</span><br>		update_depth(node)<br>		avl_node(parent,node)<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">return</span> res<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="访问查询"><a href="#访问查询" class="headerlink" title="访问查询"></a>访问查询</h2><p>访问查询需要注意的是要用中序遍历，保证结果的有序性就行了。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">find_by_range</span><span class="hljs-params">(node,b_key,e_key,res_list)</span></span><br>	<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> node <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">if</span> node.left <span class="hljs-keyword">and</span> b_key &lt; node.k <span class="hljs-keyword">then</span><br>		find_by_range(node.left,b_key,e_key,res_list)<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">if</span> node.k &gt;= b_key <span class="hljs-keyword">and</span> node.k &lt;= e_key <span class="hljs-keyword">then</span><br>		<span class="hljs-built_in">table</span>.<span class="hljs-built_in">insert</span>(res_list,node.k)<br>		<span class="hljs-built_in">table</span>.<span class="hljs-built_in">insert</span>(res_list,node.v)<br>	<span class="hljs-keyword">end</span> <br>	<br>	<span class="hljs-keyword">if</span> node.right <span class="hljs-keyword">and</span> e_key &gt; node.k <span class="hljs-keyword">then</span><br>		find_by_range(node.right,b_key,e_key,res_list)<br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/lua_test">完整代码</a></h1><p>觉得写得不错，给个星星，非常感谢O(∩_∩)O哈哈~</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>平衡二叉树的lua实现</div>
+      <div>https://huahua132.github.io/2023/05/21/data_struct/avltree/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于skynet做服务热更新</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/21/think/link/" title="链接记录">
+                        <span class="hidden-mobile">链接记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
