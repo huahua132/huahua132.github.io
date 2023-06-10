@@ -24,7 +24,7 @@
 <meta property="og:description" content="为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-22T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-06-10T03:36:30.210Z">
+<meta property="article:modified_time" content="2023-06-10T03:38:50.955Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2k 字
         
       </span>
     
@@ -346,7 +346,7 @@
 <p>  <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">方案二实现</a><br>  实现过程中，发现方案二有2个问题</p>
 <ul>
 <li><strong>问题一</strong><br>  给可热更服务发消息必须用call，不能用send，因为<strong>可热更服务</strong>需要<strong>反馈</strong>自身状态。稍微有点影响性能，但是比方案一还是要好。</li>
-<li><strong>问题二</strong><br>  客户缓存的旧地址长时间不访问，过了一段时间再访问，地址的目标服务可能已经<strong>更替</strong>了,不过这种情况要<code>uint32</code>自增的id走了一个轮回,如果机器上是4字节的话,也就是已经新建了<code>16777215</code>个服务,才有可能重用服务id,虽然很难出现,但是还是要处理这种情况,这里考虑🤔加个版本号加模块名的<strong>校验</strong>。(测试的时候改下skynet源码的服务id分配，比如id到100就轮转),实现并增加了测试代码<strong>hot_module3</strong>。</li>
+<li><strong>问题二</strong><br>  客户缓存的旧地址长时间不访问，过了一段时间再访问，地址的目标服务可能已经<strong>更替</strong>了,不过这种情况要<code>uint32</code>自增的id走了一个轮回,如果机器上是4字节的话,也就是已经新建了<code>16777215(0x00ffffff)</code>个服务,才有可能重用服务id,虽然很难出现,但是还是要处理这种情况,这里考虑🤔加个版本号加模块名的<strong>校验</strong>。(测试的时候改下skynet源码的服务id分配，比如id到100就轮转),实现并增加了测试代码<strong>hot_module3</strong>。</li>
 </ul>
 </li>
 <li><p><strong>方案三</strong><br>  热更服务管理员还是做配置中心，<strong>客户端</strong>发消息用本地记录地址，如果没有<strong>客户端</strong>只要询问一次配置中心地址，然后通过sub&#x2F;pub机制更新新服务地址，此时就会有一个问题，客户拥有新，旧地址，需要考虑需不需要继续和旧地址通信，此时从方案二的服务切流变成客户切流。</p>
