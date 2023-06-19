@@ -8,7 +8,7 @@
     <link href="/2023/05/22/think/reload/"/>
     <url>/2023/05/22/think/reload/</url>
     
-    <content type="html"><![CDATA[<h1 id="为什么要做热更新"><a href="#为什么要做热更新" class="headerlink" title="为什么要做热更新"></a>为什么要做热更新</h1><p>那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。<br><strong>无状态</strong>的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是<strong>有状态</strong>的服务，不能直接重启，重启就可能出现数据丢失了。</p><h1 id="热更方式"><a href="#热更方式" class="headerlink" title="热更方式"></a>热更方式</h1><ul><li><strong>在原本的lua虚拟机中更新</strong><br>这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_env中的数据，要处理好table被引用、全局变量、闭包的upvalue,而且还会出现本身旧状态数据不适应新版本处理函数的情况，比如一个函数检测一个状态的值等不等于一个枚举值，旧版本枚举值等于1，新版本等于2，但是旧版本状态数据是1，这个时候你热更还需要抉择状态数据是用旧的还是要改成新的，而且有些状态数据是运行时玩家之间的API交互产生的结果，比如A玩家击杀了B玩家，B玩家状态是挂了，但是标记挂了的枚举在新版本改了，此时的热更肯定不符合预期，所以这种热更方式只适合更新bug。少量更改人为可预见行为，才使用。</li></ul><p>比如skynet提供的inject注入方式。</p><ul><li><strong>旧服务顶替新服务的方式</strong><br>这种方式处理起来不复杂而且稳定可控性强,有点类似重启服务然后更新,但是我们可以做到无缝衔接,新服务到岗之后再停止旧服务,传统的进程服务,可能就是启动新服务,然后把旧服务流量切换到新服务上面,等服务没有流量以后再关掉旧服务。<br>skynet可以直接在进程内存就实现这个需求,skynet通过lua沙盒就像一个一个微小的进程,我们在内部实现一个服务做出服务网关,记录所以可热更服务的地址,服务通过向网关注册时的名字联系,发消息都通过网关,然后我们关闭掉skynet.codecache,服务更新之后网关记录新服务地址，通知旧服务下岗，做到无缝热更。</li></ul><p>不过还需要考虑新服务上线，旧服务还不能下岗的情况，比如一把游戏还没有结束。</p><h2 id="新服务顶替旧服务实现方案的一些思考"><a href="#新服务顶替旧服务实现方案的一些思考" class="headerlink" title="新服务顶替旧服务实现方案的一些思考"></a>新服务顶替旧服务实现方案的一些思考</h2><p>所有方案都是利用关闭掉skynet的code.cache来实现业务代码的热更，过程中抽象三种角色。</p><ul><li><p><strong>客户</strong><br>  所有需要RPC调用某个可热更服务的服务。</p></li><li><p><strong>热更服务管理员</strong><br>  需要在恰当的时间进行切流，比如新服务启动了，也有可能新服务启动了，暂时不切流（比如一把游戏还没有结束）。</p></li><li><p><strong>可热更服务</strong><br>  新服务启动了，旧服务要考虑在什么时候销毁。</p></li><li><p><strong>方案一</strong><br>  热更服务管理员做网关，RPC调用客户发消息都通过热更服务管理员转发，热更服务管理员还负责启动新服务和通知旧服务关闭，这也是我在工作中实现并使用的方案。不过有些值得诟病的缺点，比如经过转发的消息从1v1变成了1v1v1,消息从2次打包解包变成3次打包解包，微微增加一点系统开销，还有就是没有提供AB面切流的实现，不能给有状态的服务进去更新。</p></li><li><p><strong>方案二</strong><br>  热更服务管理员做<strong>配置中心</strong>，<strong>RPC</strong>调用前客户先尝试调用本地记录地址，如果失败(服务已经退出)或者下岗，询问<strong>配置中心</strong>要新的地址，<strong>可热更服务</strong>启动需要向<strong>配置中心</strong>注册，新的<strong>可热更新服务</strong>注册后，<strong>配置中心</strong>通知旧的<strong>可热更服务</strong>可以下岗了，旧的可热更服务根据自身情况决定什么时候退出。如果是有状态的需要维持到状态结束，这个可以通过<strong>可热更服务</strong>去控制，根据自身情况<strong>反馈</strong>给客户。比如一局游戏还没结束，正常处理请求，结束后用户想开始下一把，此时通知用户我要下岗了，此方案就能解决消息多一次打解包，有状态服务的通讯保持。此方案没有什么诟病的地方有点类似redis切片集群方案，一个key的不在这个redis结点的地址，通知客户端move新地址，可以考虑配置中心通知旧服务下岗时接收一下新服务地址，到时候客户发消息过来，如果要<strong>move</strong>就可以直接<strong>切换地址</strong>，不需要向配置中心要了。</p><p>  (方案二实现)[<a href="https://github.com/huahua132/skynet_fly]">https://github.com/huahua132/skynet_fly]</a><br>  实现过程中，发现方案二有2个问题</p><ul><li><strong>问题一</strong><br>  给可热更服务发消息必须用call，不能用send，因为<strong>可热更服务</strong>需要<strong>反馈</strong>自身状态。稍微有点影响性能，但是比方案一还是要好。</li><li><strong>问题二</strong><br>  客户缓存的旧地址长时间不访问，过了一段时间再访问，地址的目标服务可能已经<strong>更替</strong>了,不过这种情况要<code>uint32</code>自增的id走了一个轮回,如果机器上是4字节的话,也就是已经新建了<code>16777215</code>个服务,才有可能重用服务id,虽然很难出现,但是还是要处理这种情况,这里考虑🤔加个版本号加模块名的<strong>校验</strong>。(测试的时候改下skynet源码的服务id分配，比如id到100就轮转),实现并增加了测试代码<strong>hot_module3</strong>。</li></ul></li><li><p><strong>方案三</strong><br>  热更服务管理员还是做配置中心，RPC调用，客户只要询问一次配置中心地址，然后通过sub&#x2F;pub机制更新新服务地址，此时就会有一个问题，客户拥有新，旧地址，需要考虑需不需要继续和旧地址通信，此时从方案二的服务切流变成客户切流。</p></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="为什么要做热更新"><a href="#为什么要做热更新" class="headerlink" title="为什么要做热更新"></a>为什么要做热更新</h1><p>那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。<br><strong>无状态</strong>的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是<strong>有状态</strong>的服务，不能直接重启，重启就可能出现数据丢失了。</p><h1 id="热更方式"><a href="#热更方式" class="headerlink" title="热更方式"></a>热更方式</h1><ul><li><strong>在原本的lua虚拟机中更新</strong><br>这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_env中的数据，要处理好table被引用、全局变量、闭包的upvalue,而且还会出现本身旧状态数据不适应新版本处理函数的情况，比如一个函数检测一个状态的值等不等于一个枚举值，旧版本枚举值等于1，新版本等于2，但是旧版本状态数据是1，这个时候你热更还需要抉择状态数据是用旧的还是要改成新的，而且有些状态数据是运行时玩家之间的API交互产生的结果，比如A玩家击杀了B玩家，B玩家状态是挂了，但是标记挂了的枚举在新版本改了，此时的热更肯定不符合预期，所以这种热更方式只适合更新bug。少量更改人为可预见行为，才使用。</li></ul><p>比如skynet提供的inject注入方式。</p><ul><li><strong>旧服务顶替新服务的方式</strong><br>这种方式处理起来不复杂而且稳定可控性强,有点类似重启服务然后更新,但是我们可以做到无缝衔接,新服务到岗之后再停止旧服务,传统的进程服务,可能就是启动新服务,然后把旧服务流量切换到新服务上面,等服务没有流量以后再关掉旧服务。<br>skynet可以直接在进程内存就实现这个需求,skynet通过lua沙盒就像一个一个微小的进程,我们在内部实现一个服务做出服务网关,记录所以可热更服务的地址,服务通过向网关注册时的名字联系,发消息都通过网关,然后我们关闭掉skynet.codecache,服务更新之后网关记录新服务地址，通知旧服务下岗，做到无缝热更。</li></ul><p>不过还需要考虑新服务上线，旧服务还不能下岗的情况，比如一把游戏还没有结束。</p><h2 id="新服务顶替旧服务实现方案的一些思考"><a href="#新服务顶替旧服务实现方案的一些思考" class="headerlink" title="新服务顶替旧服务实现方案的一些思考"></a>新服务顶替旧服务实现方案的一些思考</h2><p>所有方案都是利用关闭掉skynet的code.cache来实现业务代码的热更，过程中抽象三种角色。</p><ul><li><p><strong>客户端</strong><br>  所有需要RPC调用某个可热更服务的服务。</p></li><li><p><strong>热更服务管理员</strong><br>  需要在恰当的时间进行切流，比如新服务启动了，也有可能新服务启动了，暂时不切流（比如一把游戏还没有结束）。</p></li><li><p><strong>可热更服务</strong><br>  新服务启动了，旧服务要考虑在什么时候销毁。</p></li><li><p><strong>方案一</strong><br>  热更服务管理员做网关，<strong>客户端</strong>发消息都通过热更服务管理员转发，热更服务管理员还负责启动新服务和通知旧服务关闭，这也是我在工作中实现并使用的方案。不过有些值得诟病的缺点，比如经过转发的消息从1v1变成了1v1v1,消息从2次打包解包变成3次打包解包，微微增加一点系统开销，还有就是没有提供AB面切流的实现，不能给有状态的服务进去更新。</p></li><li><p><strong>方案二</strong><br>  热更服务管理员做<strong>配置中心</strong>，<strong>客户端</strong>发消息先尝试调用本地记录地址，如果没有或者失败(服务已经退出)或者下岗，询问<strong>配置中心</strong>要新的地址，<strong>可热更服务</strong>启动需要向<strong>配置中心</strong>注册，新的<strong>可热更新服务</strong>注册后，<strong>配置中心</strong>通知旧的<strong>可热更服务</strong>可以下岗了，旧的可热更服务根据自身情况决定什么时候退出。如果是有状态的需要维持到状态结束，这个可以通过<strong>可热更服务</strong>去控制，根据自身情况<strong>反馈</strong>给客户。比如一局游戏还没结束，正常处理请求，结束后用户想开始下一把，此时通知用户我要下岗了，此方案就能解决消息多一次打解包，有状态服务的通讯保持。此方案没有什么诟病的地方有点类似redis切片集群方案，一个key的不在这个redis结点的地址，通知客户端move新地址，可以考虑配置中心通知旧服务下岗时接收一下新服务地址，到时候客户发消息过来，如果要<strong>move</strong>就可以直接<strong>切换地址</strong>，不需要向配置中心要了。</p><p>  <a href="https://github.com/huahua132/skynet_fly">方案二实现</a><br>  实现过程中，发现方案二有2个问题</p><ul><li><strong>问题一</strong><br>  给可热更服务发消息必须用call，不能用send，因为<strong>可热更服务</strong>需要<strong>反馈</strong>自身状态。稍微有点影响性能，但是比方案一还是要好。</li><li><strong>问题二</strong><br>  客户缓存的旧地址长时间不访问，过了一段时间再访问，地址的目标服务可能已经<strong>更替</strong>了,不过这种情况要<code>uint32</code>自增的id走了一个轮回,如果机器上是4字节的话,也就是已经新建了<code>16777215(0x00ffffff)</code>个服务,才有可能重用服务id,虽然很难出现,但是还是要处理这种情况,这里考虑🤔加个版本号加模块名的<strong>校验</strong>。(测试的时候改下skynet源码的服务id分配，比如id到100就轮转),实现并增加了测试代码<strong>hot_module3</strong>。</li></ul></li><li><p><strong>方案三</strong><br>  热更服务管理员还是做配置中心，<strong>客户端</strong>发消息用本地记录地址，如果没有<strong>客户端</strong>只要询问一次配置中心地址，然后通过sub&#x2F;pub机制更新新服务地址，此时就会有一个问题，客户拥有新，旧地址，需要考虑需不需要继续和旧地址通信，此时从方案二的服务切流变成客户切流。<br>  <a href="https://github.com/huahua132/skynet_fly">方案三实现</a><br>  方案三的好处就是解决了方案二每次使用call的问题。</p><ul><li><strong>客户端</strong>自己决定什么时候切换到新服务(一般就是状态结束了切换)</li><li><strong>服务</strong> 服务就是看自己什么时候退出(一般就是没有用户状态了退出)</li></ul></li></ul>]]></content>
     
     
     <categories>
@@ -21,25 +21,6 @@
     <tags>
       
       <tag>一些想法</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>链接记录</title>
-    <link href="/2023/05/21/think/link/"/>
-    <url>/2023/05/21/think/link/</url>
-    
-    <content type="html"><![CDATA[<p>链接记录</p><p>床长人工智能教程<br><a href="https://captainbed.vip/login/">https://captainbed.vip/login/</a></p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>笔记</tag>
       
     </tags>
     
@@ -73,6 +54,25 @@
   
   
   <entry>
+    <title>链接记录</title>
+    <link href="/2023/05/21/think/link/"/>
+    <url>/2023/05/21/think/link/</url>
+    
+    <content type="html"><![CDATA[<p>链接记录</p><p>床长人工智能教程<br><a href="https://captainbed.vip/login/">https://captainbed.vip/login/</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>笔记</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>网络七层模型</title>
     <link href="/2023/05/14/socket/c/"/>
     <url>/2023/05/14/socket/c/</url>
@@ -98,11 +98,11 @@
   
   
   <entry>
-    <title>select,poll,epoll 对比</title>
-    <link href="/2023/05/14/socket/epoll/"/>
-    <url>/2023/05/14/socket/epoll/</url>
+    <title>tcp知识整理</title>
+    <link href="/2023/05/14/socket/tcp/"/>
+    <url>/2023/05/14/socket/tcp/</url>
     
-    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul><li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li><li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li><li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li></ul><h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol><li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p></li><li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p></li></ol><h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul><li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li><li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li><li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li><li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li></ul><p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p><h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p><h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>]]></content>
     
     
     <categories>
@@ -123,11 +123,11 @@
   
   
   <entry>
-    <title>tcp知识整理</title>
-    <link href="/2023/05/14/socket/tcp/"/>
-    <url>/2023/05/14/socket/tcp/</url>
+    <title>select,poll,epoll 对比</title>
+    <link href="/2023/05/14/socket/epoll/"/>
+    <url>/2023/05/14/socket/epoll/</url>
     
-    <content type="html"><![CDATA[<h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul><li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li><li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li><li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li></ul><h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol><li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p></li><li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p></li></ol><h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul><li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li><li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li><li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li><li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li></ul><p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p><h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p><h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
     
     
     <categories>
