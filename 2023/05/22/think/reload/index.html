@@ -24,7 +24,7 @@
 <meta property="og:description" content="为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-22T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-06-25T04:34:30.736Z">
+<meta property="article:modified_time" content="2023-06-25T06:06:00.730Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -357,7 +357,9 @@
 </li>
 </ul>
 <h1 id="关闭codecache的性能影响测试"><a href="#关闭codecache的性能影响测试" class="headerlink" title="关闭codecache的性能影响测试"></a>关闭codecache的性能影响测试</h1><p>skynet.codecache开启状态是把加载(require )过得lua代码文件缓存到内存，下次其他服务再加载的时候就直接用缓存就行，不需要再去读取代码文件了。<br>我们利用关闭掉codecache来实现热更只会稍微影响新服务启动的速度。<br>    <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">code_cache_test</a></p>
-<pre><code class="hljs">通过测试，新服务的启动速度下降28%，影响不大。
+<pre><code class="hljs">cache情况下启动1万个服务需要2.65s
+关闭cache情况下启动1万个服务需要3.69s
+通过测试，新服务的启动速度下降28%，影响不大。
 </code></pre>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过多方案的实现分析，最终确定<strong>方案三</strong>在性能和灵活性上面最具优势，后续决定在方案三的基础上补充，一键检测热更功能（有变动才热更）。</p>
 
@@ -454,8 +456,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/21/think/link/" title="链接记录">
-                        <span class="hidden-mobile">链接记录</span>
+                      <a href="/2023/05/21/data_struct/avltree/" title="平衡二叉树的lua实现">
+                        <span class="hidden-mobile">平衡二叉树的lua实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
