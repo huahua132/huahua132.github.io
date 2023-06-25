@@ -24,7 +24,7 @@
 <meta property="og:description" content="为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-22T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-06-19T10:36:58.147Z">
+<meta property="article:modified_time" content="2023-06-25T04:34:30.736Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.3k 字
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          18 分钟
+          20 分钟
         
       </span>
     
@@ -329,7 +329,7 @@
 </ul>
 <p>比如skynet提供的inject注入方式。</p>
 <ul>
-<li><strong>旧服务顶替新服务的方式</strong><br>这种方式处理起来不复杂而且稳定可控性强,有点类似重启服务然后更新,但是我们可以做到无缝衔接,新服务到岗之后再停止旧服务,传统的进程服务,可能就是启动新服务,然后把旧服务流量切换到新服务上面,等服务没有流量以后再关掉旧服务。<br>skynet可以直接在进程内存就实现这个需求,skynet通过lua沙盒就像一个一个微小的进程,我们在内部实现一个服务做出服务网关,记录所以可热更服务的地址,服务通过向网关注册时的名字联系,发消息都通过网关,然后我们关闭掉skynet.codecache,服务更新之后网关记录新服务地址，通知旧服务下岗，做到无缝热更。</li>
+<li><strong>旧服务顶替新服务的方式</strong><br>这种方式处理起来不复杂而且稳定可控性强,有点类似重启服务然后更新,但是我们可以做到无缝衔接,新服务到岗之后再停止旧服务,传统的进程服务,可能就是启动新服务,然后把旧服务流量切换到新服务上面,等服务没有流量以后再关掉旧服务。<br>skynet可以直接在进程内就实现这个需求,skynet服务lua沙盒就像一个一个微小的进程,我们在内部实现一个服务做出服务网关,记录所以可热更服务的地址,服务通过向网关注册时的名字联系,发消息都通过网关,然后我们关闭掉skynet.codecache,服务更新之后网关记录新服务地址，通知旧服务下岗，做到无缝热更。</li>
 </ul>
 <p>不过还需要考虑新服务上线，旧服务还不能下岗的情况，比如一把游戏还没有结束。</p>
 <h2 id="新服务顶替旧服务实现方案的一些思考"><a href="#新服务顶替旧服务实现方案的一些思考" class="headerlink" title="新服务顶替旧服务实现方案的一些思考"></a>新服务顶替旧服务实现方案的一些思考</h2><p>所有方案都是利用关闭掉skynet的code.cache来实现业务代码的热更，过程中抽象三种角色。</p>
@@ -340,9 +340,9 @@
 </li>
 <li><p><strong>可热更服务</strong><br>  新服务启动了，旧服务要考虑在什么时候销毁。</p>
 </li>
-<li><p><strong>方案一</strong><br>  热更服务管理员做网关，<strong>客户端</strong>发消息都通过热更服务管理员转发，热更服务管理员还负责启动新服务和通知旧服务关闭，这也是我在工作中实现并使用的方案。不过有些值得诟病的缺点，比如经过转发的消息从1v1变成了1v1v1,消息从2次打包解包变成3次打包解包，微微增加一点系统开销，还有就是没有提供AB面切流的实现，不能给有状态的服务进去更新。</p>
+<li><p><strong>方案一</strong><br>  热更服务管理员做网关，<strong>客户端</strong>发消息都通过热更服务管理员转发，热更服务管理员还负责启动新服务和通知旧服务关闭，这也是我在工作中实现并使用的方案。不过有些值得诟病的缺点，比如经过转发的消息从1v1变成了1v1v1,消息从2次打包解包变成3次打包解包，微微增加一点系统开销，还有就是没有提供AB面切流的实现，不方便给有状态的服务进行更新。</p>
 </li>
-<li><p><strong>方案二</strong><br>  热更服务管理员做<strong>配置中心</strong>，<strong>客户端</strong>发消息先尝试调用本地记录地址，如果没有或者失败(服务已经退出)或者下岗，询问<strong>配置中心</strong>要新的地址，<strong>可热更服务</strong>启动需要向<strong>配置中心</strong>注册，新的<strong>可热更新服务</strong>注册后，<strong>配置中心</strong>通知旧的<strong>可热更服务</strong>可以下岗了，旧的可热更服务根据自身情况决定什么时候退出。如果是有状态的需要维持到状态结束，这个可以通过<strong>可热更服务</strong>去控制，根据自身情况<strong>反馈</strong>给客户。比如一局游戏还没结束，正常处理请求，结束后用户想开始下一把，此时通知用户我要下岗了，此方案就能解决消息多一次打解包，有状态服务的通讯保持。此方案没有什么诟病的地方有点类似redis切片集群方案，一个key的不在这个redis结点的地址，通知客户端move新地址，可以考虑配置中心通知旧服务下岗时接收一下新服务地址，到时候客户发消息过来，如果要<strong>move</strong>就可以直接<strong>切换地址</strong>，不需要向配置中心要了。</p>
+<li><p><strong>方案二</strong><br>  热更服务管理员做<strong>配置中心</strong>，<strong>客户端</strong>发消息先尝试调用本地记录地址，如果没有或者失败(服务已经退出)或者下岗，询问<strong>配置中心</strong>要新的地址，<strong>可热更服务</strong>启动需要向<strong>配置中心</strong>注册，新的<strong>可热更新服务</strong>注册后，<strong>配置中心</strong>通知旧的<strong>可热更服务</strong>可以下岗了，旧的<strong>可热更服务</strong>根据自身情况决定什么时候退出。如果是有状态的需要维持到状态结束，这个可以通过<strong>可热更服务</strong>去控制，根据自身情况<strong>反馈</strong>给<strong>客户端</strong>。比如一局游戏还没结束，正常处理请求，结束后用户想开始下一把，此时通知<strong>客户端</strong>我要下岗了，此方案就能解决消息多一次打解包，有状态服务的通讯保持。此方案没有什么诟病的地方有点类似redis切片集群方案，一个key不在这个redis节点，通知客户端move到目标节点地址，可以考虑配置中心通知旧服务下岗时接收一下新服务地址，到时候客户发消息过来，如果要<strong>move</strong>就可以直接<strong>切换地址</strong>，不需要向配置中心要了。</p>
 <p>  <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">方案二实现</a><br>  实现过程中，发现方案二有2个问题</p>
 <ul>
 <li><strong>问题一</strong><br>  给可热更服务发消息必须用call，不能用send，因为<strong>可热更服务</strong>需要<strong>反馈</strong>自身状态。稍微有点影响性能，但是比方案一还是要好。</li>
@@ -356,6 +356,10 @@
 </ul>
 </li>
 </ul>
+<h1 id="关闭codecache的性能影响测试"><a href="#关闭codecache的性能影响测试" class="headerlink" title="关闭codecache的性能影响测试"></a>关闭codecache的性能影响测试</h1><p>skynet.codecache开启状态是把加载(require )过得lua代码文件缓存到内存，下次其他服务再加载的时候就直接用缓存就行，不需要再去读取代码文件了。<br>我们利用关闭掉codecache来实现热更只会稍微影响新服务启动的速度。<br>    <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">code_cache_test</a></p>
+<pre><code class="hljs">通过测试，新服务的启动速度下降28%，影响不大。
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过多方案的实现分析，最终确定<strong>方案三</strong>在性能和灵活性上面最具优势，后续决定在方案三的基础上补充，一键检测热更功能（有变动才热更）。</p>
 
                 
               </div>
@@ -450,8 +454,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/21/data_struct/avltree/" title="平衡二叉树的lua实现">
-                        <span class="hidden-mobile">平衡二叉树的lua实现</span>
+                      <a href="/2023/05/21/think/link/" title="链接记录">
+                        <span class="hidden-mobile">链接记录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
