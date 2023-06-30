@@ -16,22 +16,22 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,">
+    <meta name="description" content="为什么要做这个？ skynet启动的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tcp知识整理">
-<meta property="og:url" content="https://huahua132.github.io/2023/05/14/socket/tcp/index.html">
+<meta property="og:title" content="关于skynet_fly的一键构建服务配置">
+<meta property="og:url" content="https://huahua132.github.io/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,">
+<meta property="og:description" content="为什么要做这个？ skynet启动的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须要">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-14T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-05-15T07:00:53.574Z">
+<meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-30T07:44:55.686Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="socket">
+<meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>tcp知识整理 - huahua132 blog</title>
+  <title>关于skynet_fly的一键构建服务配置 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="tcp知识整理"></span>
+            <span id="subtitle" data-typed-text="关于skynet_fly的一键构建服务配置"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-14 10:33" pubdate>
-          2023年5月14日 上午
+        <time datetime="2023-06-30 00:00" pubdate>
+          2023年6月30日 凌晨
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          720 字
+          3.1k 字
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          7 分钟
+          27 分钟
         
       </span>
     
@@ -264,17 +264,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="socket"
-        id="heading-61f2529360aec54f5dc9804b842cf3fa" role="tab" data-toggle="collapse" href="#collapse-61f2529360aec54f5dc9804b842cf3fa"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly"
+        id="heading-3f12f48949345263aa7e927c65a85b19" role="tab" data-toggle="collapse" href="#collapse-3f12f48949345263aa7e927c65a85b19"
         aria-expanded="true"
       >
-        socket
-        <span class="list-group-count">(3)</span>
+        skynet_fly
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-61f2529360aec54f5dc9804b842cf3fa"
-           role="tabpanel" aria-labelledby="heading-61f2529360aec54f5dc9804b842cf3fa">
+      <div class="category-collapse collapse show" id="collapse-3f12f48949345263aa7e927c65a85b19"
+           role="tabpanel" aria-labelledby="heading-3f12f48949345263aa7e927c65a85b19">
         
         
           
@@ -283,28 +283,19 @@
     
       
       
-        <a href="/2023/05/14/socket/epoll/" title="select,poll,epoll 对比"
+        <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">select,poll,epoll 对比</span>
+          <span class="category-post">关于skynet_fly热更新实现</span>
         </a>
       
     
       
       
-        <a href="/2023/05/14/socket/tcp/" title="tcp知识整理"
+        <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">tcp知识整理</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/14/socket/c/" title="网络七层模型"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">网络七层模型</span>
+          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
         </a>
       
     
@@ -327,31 +318,55 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">tcp知识整理</h1>
+            <h1 style="display: none">关于skynet_fly的一键构建服务配置</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul>
-<li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li>
-<li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li>
-<li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li>
-</ul>
-<h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol>
-<li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p>
-</li>
-<li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p>
-</li>
+                <h1 id="为什么要做这个？"><a href="#为什么要做这个？" class="headerlink" title="为什么要做这个？"></a>为什么要做这个？</h1><ol>
+<li>skynet启动的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写<strong>path</strong>，用脚本写。</li>
+<li>热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。</li>
+<li>新增一个服务模块每次都有手写一个config好麻烦。</li>
+<li>热更服务需要通过curl连接 debug_console服务去执行热更。</li>
 </ol>
-<h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul>
-<li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li>
-<li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li>
-<li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li>
-<li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li>
+<p>所以这个事情必须要做。</p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>本想着能不能像go-zero框架实现一个类似一键生成工具。但是我觉得这样还要安装一个工具挺麻烦的，就直接用shell+lua的方式来写，自带的环境，方便执行。<br>实现时，不知道使用者要把skynet_fly放在那个文件夹，所有考虑了skynet_fly可以放在同磁盘任意文件夹下。<br>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如如何是examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,如何执行<code>sh ../../binshell/make_server.sh ../../ webapp 4</code><br>然后就会生成webapp_config.lua mod_config.lua script一系列执行脚本。<br>实现细节写在 <code>script</code>和<code>binshell</code>文件夹下。</p>
+<ul>
+<li><strong>关于生成skynet_config</strong><br>path路径生成规则都是由近到远的查找规则， 优先级 本服务svr下文件下 &gt; skynet_fly文件夹 &gt; skynet文件夹</li>
 </ul>
-<p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p>
-<h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p>
-<h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>
+<ul>
+<li>cpath c服务模块查找 写死<code>skynet_fly_path/cservice/?.so; .. skynet_path/cservice/?.so;</code></li>
+<li>lua_cpath c模块查找 写死<code>skynet_fly_path .. &quot;luaclib/?.so;&quot; .. skynet_path .. &quot;luaclib/?.so;&quot;</code></li>
+<li>luaservice c服务查找 写死<code>server_path .. &quot;service/?.lua&quot; .. skynet_fly_path .. &quot;service/?.lua;&quot; .. skynet_path .. &quot;service/?.lua;&quot;</code></li>
+<li>lua_path c模块查找 动态生成构建。</li>
+</ul>
+<p> 构建规则如下<br> <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--创建 lua文件 查找规则，优先级 server下非service文件夹 &gt; skynet_fly lualib下所有文件夹 &gt; skynet lualib下所以文件夹</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">util.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br>	<span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br>	<span class="hljs-keyword">local</span> skynet_path = skynet_fly_path .. <span class="hljs-string">&#x27;/skynet&#x27;</span><br>	<span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> util.diripairs(server_path) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	lua_path = lua_path .. skynet_fly_path .. <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> util.diripairs(skynet_fly_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> util.diripairs(skynet_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><br> skynet服务启动时会加载preload到时会重新构建新的luapath，<strong>再也不用手写path啦</strong>。<br> 同时热更服务也不用担心新加的路径没有写到path中。</p>
+<ul>
+<li><p><strong>关于生成mod_config.lua</strong><br>mod_config是热更模板的配置文件，主要考虑到每个服务使用的配置参数不同，还有不想手写启动代码，而且热更新增服务可以不需要重启。<br>mod_config每次启动或者调用check_reload之后都会拷贝一份mod_config.lua.old，表示目前服务使用的配置，方便在check_reload中对比新旧mod_config，有修改更新对应热更模块。</p>
+</li>
+<li><p><strong>mod_config的重复构建</strong><br>重复构建会递归深层对比load_mods和mod_config，对比之后对于mod_config有4种情况。</p>
+</li>
+</ul>
+<ol>
+<li><code>typedef</code> 类型不同了，比如之前是number类型，现在是string类型的配置。</li>
+<li><code>reduce</code> 删除配置了，load_mods把该配置删除了。</li>
+<li><code>add</code> 增加了新配置,load_mods增加了新配置。</li>
+<li><code>valuedef</code> 值不同，比如 1改成2。</li>
+</ol>
+<p>针对4种情况，在前3种情况下都需要去同步修改mod_config，唯有4不变。</p>
+<ul>
+<li><strong>构建运维脚本</strong><br>skynet_fly会生成run.sh,restart.sh,kill_mod.sh,check_reload.sh,stop.sh一系列脚本，方便运维管理。<br>其中run.sh执行之后会生成logrotate的日志切割配置，重命名方式。通过发送hup信号。<br>重点讲一下check_reload.sh</li>
+</ul>
+<p><code>check_reload.sh</code></p>
+<ul>
+<li>检测可热更服务在关闭skynet.codecache之后require的lua模块是否有修改，检测的是文件最后修改时间。</li>
+<li>对比mod_config.lua 和mod_config.lua.old 是否有改变。<br>如果有改动更新对应模块。</li>
+<li>对比mod_config.lua 和mod_config.lua.old 是否有模块配置删除，有的话通知下线。</li>
+</ul>
+<p> 其他脚本都好理解。</p>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title=" 如何使用"></a> 如何使用</h1><p>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如如何是examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,如何执行<code>sh ../../binshell/make_server.sh ../../ webapp 4</code></p>
+<p>调用 binshell&#x2F;make_server.sh 传入3个参数。<br>skynetfly_path的相对路径，你的服务文件夹名称，使用的线程数量。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>后续可能增加一键构建服务模板，一键构建db model等等。</p>
 
                 
               </div>
@@ -370,7 +385,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/socket/" class="category-chain-item">socket</a>
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
   
   
 
@@ -385,7 +400,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/socket/">#socket</a>
+        <a href="/tags/skynet-fly/">#skynet_fly</a>
       
     </div>
   
@@ -397,8 +412,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>tcp知识整理</div>
-      <div>https://huahua132.github.io/2023/05/14/socket/tcp/</div>
+      <div>关于skynet_fly的一键构建服务配置</div>
+      <div>https://huahua132.github.io/2023/06/30/skynet_fly/关于skynet_fly的一键构建服务配置/</div>
     </div>
     <div class="license-meta">
       
@@ -410,7 +425,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月14日</div>
+          <div>2023年6月30日</div>
         </div>
       
       
@@ -442,9 +457,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/14/socket/epoll/" title="select,poll,epoll 对比">
+                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">select,poll,epoll 对比</span>
+                        <span class="hidden-mobile">关于skynet_fly热更新实现</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -452,8 +467,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/13/redis/redis/" title="redis 知识杂谈">
-                        <span class="hidden-mobile">redis 知识杂谈</span>
+                      <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新">
+                        <span class="hidden-mobile">关于skynet做服务热更新</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
