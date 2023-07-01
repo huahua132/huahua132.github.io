@@ -24,7 +24,7 @@
 <meta property="og:description" content="为什么要做这个？ skynet启动用的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-30T08:13:17.371Z">
+<meta property="article:modified_time" content="2023-07-01T08:32:31.965Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -330,7 +330,7 @@
 <li>热更服务需要通过curl连接 debug_console服务去执行热更。</li>
 </ol>
 <p>所以这个事情必须要做。</p>
-<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>本想着能不能像go-zero框架实现一个类似一键生成工具。但是我觉得这样还要安装一个工具挺麻烦的，就直接用shell+lua的方式来写，自带的环境，方便执行。<br>实现时，不知道使用者要把skynet_fly放在那个文件夹，所有考虑了skynet_fly可以放在同磁盘任意文件夹下。<br>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如如何是examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,如何执行<code>sh ../../binshell/make_server.sh ../../ webapp 4</code><br>然后就会生成webapp_config.lua mod_config.lua script一系列执行脚本。<br>实现细节写在 <code>script</code>和<code>binshell</code>文件夹下。</p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>本想着能不能像go-zero框架实现一个类似一键生成工具。但是我觉得这样还要安装一个工具挺麻烦的，就直接用shell+lua的方式来写，自带的环境，方便执行。<br>实现时，不知道使用者要把skynet_fly放在那个文件夹，所有考虑了skynet_fly可以放在同磁盘任意文件夹下。<br>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如如何是examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,执行<code>sh ../../binshell/make_server.sh ../../ webapp 4</code><br>然后就会生成webapp_config.lua mod_config.lua script一系列执行脚本。<br>实现细节写在 <code>script</code>和<code>binshell</code>文件夹下。</p>
 <ul>
 <li><strong>关于生成skynet_config</strong><br>path路径生成规则都是由近到远的查找规则， 优先级 本服务svr下文件下 &gt; skynet_fly文件夹 &gt; skynet文件夹</li>
 </ul>
@@ -457,12 +457,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于skynet_fly热更新实现</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现">
-                        <span class="hidden-mobile">关于skynet_fly热更新实现</span>
+                      <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新">
+                        <span class="hidden-mobile">关于skynet做服务热更新</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
