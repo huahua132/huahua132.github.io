@@ -24,7 +24,7 @@
 <meta property="og:description" content="实现思路可以先看看这篇关于skynet做服务热更新这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skynet.codecache，这样launch新">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-07-01T08:41:59.878Z">
+<meta property="article:modified_time" content="2023-07-01T08:55:30.848Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -390,7 +390,7 @@
 <ul>
 <li><strong>如何rpc调用</strong><br>rpc调用使用非常简单易用。<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> service_client = contriner_client:new(<span class="hljs-string">&quot;service_m&quot;</span>,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">end</span>)<br>service_client:mod_send(cmd,...)<br>service_client:mod_call(cmd,...)<br>service_client:mod_call(cmd,...)<br><br><span class="hljs-keyword">local</span> agent_client = contriner_client:new(<span class="hljs-string">&quot;agent_m&quot;</span>,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">end</span>)<br>agent_client:mod_send(cmd,...)<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这里就讲解完了，如果有不明白或者觉得不好的地方，欢迎提<strong>issues</strong>。<br>下一遍我准备写一下skynet_fly的配置脚本工具生成。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这里就讲解完了，如果有不明白或者觉得不好的地方，欢迎提<strong>issues</strong>。<br>下一遍我准备写一下skynet_fly的配置脚本工具生成。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
 
                 
               </div>
