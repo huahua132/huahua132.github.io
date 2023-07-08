@@ -4,6 +4,56 @@
   
   
   <entry>
+    <title>关于redis的封装</title>
+    <link href="/2023/07/08/skynet_fly/redis/"/>
+    <url>/2023/07/08/skynet_fly/redis/</url>
+    
+    <content type="html"><![CDATA[<h1 id="为什么要封装redis？"><a href="#为什么要封装redis？" class="headerlink" title="为什么要封装redis？"></a>为什么要封装redis？</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>关于定时器的封装</title>
+    <link href="/2023/07/02/skynet_fly/timer/"/>
+    <url>/2023/07/02/skynet_fly/timer/</url>
+    
+    <content type="html"><![CDATA[<h1 id="为什么要封装定时器？"><a href="#为什么要封装定时器？" class="headerlink" title="为什么要封装定时器？"></a>为什么要封装定时器？</h1><ol><li>skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。</li></ol><h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>一开始尝试用分配定时器id的方式实现，这种方式要考虑<strong>id重用</strong>的情况，虽然说<code>int64</code>走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。<br>后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一个map对应id映射定时器信息表，注册好了返回一个id，供使用者做后续<strong>注销</strong>，<strong>延期</strong>，既然返回id是返回，为什么不直接返回table呢，反正返回的也是table的引用，并没有增加什么开销，感觉分配id的操作有点画蛇添足了。<br>还是用面向对象思想，定时器实例提供<strong>创建定时器</strong>， <strong>取消定时器</strong>，<strong>延长定时器</strong>等等方法。<br>定时器实例可以设置定时回调几次或者循环调用。后续可以再封装按<strong>时间节点</strong>触发的定时器，比如每天上午8点，每周一零点。</p><h1 id="特殊处理"><a href="#特殊处理" class="headerlink" title="特殊处理"></a>特殊处理</h1><p>通常注册一个定时器立马调用skynet.timeout，但是如果你的定时器需要取消，我觉得这样并不好，特别是你注册的时间较长，又会注销，过程中又触发注册很频繁的话，这样会浪费掉很多内存，因为skynet注册一个定时器就会占用一个<strong>lua携程</strong>直到定时器触发回调才释放。如果你注册触发时间为1天，那么会积压1天内注册的定时器。所以我没有直接调用skynet.timeout，而是用一个间隔60秒的check循环，如果中途注销了，循环就结束了，这样非常有效的解决了这个问题，虽然多一些定时器注册回调，但是换来了稳定性，使用者不用担心有内存暴涨的风险。</p><h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul><li><p><strong>创建定时器</strong><br>  <code>timer:new()</code><br>  3个必传参数<br>  <code>expire</code> 回调时间，保留skynet.time_out的100等于1秒。<br>  <code>timer</code> 触发次数，0次表示循环触发。<br>  <code>callback</code> 回调函数。</p><p>  后面省略传参是回调函数的参数。</p></li><li><p><strong>取消定时器</strong><br>  <code>timeobj:cancel()</code></p></li><li><p><strong>延长定时器</strong><br>  <code>timeobj:extend(ex_expire)</code><br>  参数<br>  <code>ex_expire</code> 延长时间，如果创建定时器的时间为5秒，创建时间为：8:10:30,在定时器触发之前调用，定时器会再8:10:36秒触发，在定时器触发之后调用无效。</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>关于skynet_fly热更新实现</title>
     <link href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/"/>
     <url>/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/</url>
@@ -148,11 +198,11 @@
   
   
   <entry>
-    <title>tcp知识整理</title>
-    <link href="/2023/05/14/socket/tcp/"/>
-    <url>/2023/05/14/socket/tcp/</url>
+    <title>select,poll,epoll 对比</title>
+    <link href="/2023/05/14/socket/epoll/"/>
+    <url>/2023/05/14/socket/epoll/</url>
     
-    <content type="html"><![CDATA[<h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul><li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li><li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li><li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li></ul><h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol><li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p></li><li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p></li></ol><h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul><li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li><li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li><li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li><li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li></ul><p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p><h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p><h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
     
     
     <categories>
@@ -173,11 +223,11 @@
   
   
   <entry>
-    <title>select,poll,epoll 对比</title>
-    <link href="/2023/05/14/socket/epoll/"/>
-    <url>/2023/05/14/socket/epoll/</url>
+    <title>tcp知识整理</title>
+    <link href="/2023/05/14/socket/tcp/"/>
+    <url>/2023/05/14/socket/tcp/</url>
     
-    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul><li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li><li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li><li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li></ul><h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol><li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p></li><li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p></li></ol><h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul><li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li><li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li><li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li><li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li></ul><p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p><h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p><h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>]]></content>
     
     
     <categories>
