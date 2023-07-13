@@ -24,7 +24,7 @@
 <meta property="og:description" content="为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-02T05:42:00.000Z">
-<meta property="article:modified_time" content="2023-07-08T13:52:28.410Z">
+<meta property="article:modified_time" content="2023-07-13T11:49:20.779Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          921 字
+          941 字
         
       </span>
     
@@ -344,7 +344,7 @@
                 <h1 id="为什么要封装定时器？"><a href="#为什么要封装定时器？" class="headerlink" title="为什么要封装定时器？"></a>为什么要封装定时器？</h1><ol>
 <li>skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。</li>
 </ol>
-<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>一开始尝试用分配定时器id的方式实现，这种方式要考虑<strong>id重用</strong>的情况，虽然说<code>int64</code>走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。<br>后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一个map对应id映射定时器信息表，注册好了返回一个id，供使用者做后续<strong>注销</strong>，<strong>延期</strong>，既然返回id是返回，为什么不直接返回table呢，反正返回的也是table的引用，并没有增加什么开销，感觉分配id的操作有点画蛇添足了。<br>还是用面向对象思想，定时器实例提供<strong>创建定时器</strong>， <strong>取消定时器</strong>，<strong>延长定时器</strong>等等方法。<br>定时器实例可以设置定时回调几次或者循环调用。后续可以再封装按<strong>时间节点</strong>触发的定时器，比如每天上午8点，每周一零点。</p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>一开始尝试用分配定时器id的方式实现，这种方式要考虑<strong>id重用</strong>的情况，虽然说<code>int64</code>走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。<br>后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一个map对应id映射定时器信息表，注册好了返回一个id，供使用者做后续<strong>注销</strong>，<strong>延期</strong>，既然返回id是返回，为什么不直接返回table呢，反正返回的也是table的引用，并没有增加什么开销，感觉分配id的操作有点画蛇添足了。<br>还是用面向对象思想，定时器实例提供<strong>创建定时器</strong>， <strong>取消定时器</strong>，<strong>延长定时器</strong>等等方法。<br>定时器实例可以设置定时回调几次或者循环调用。后续可以继续实现按<strong>时间节点</strong>触发的定时器，比如每天上午8点，每周一零点。</p>
 <h1 id="特殊处理"><a href="#特殊处理" class="headerlink" title="特殊处理"></a>特殊处理</h1><p>通常注册一个定时器立马调用skynet.timeout，但是如果你的定时器需要取消，我觉得这样并不好，特别是你注册的时间较长，又会注销，过程中又触发注册很频繁的话，这样会浪费掉很多内存，因为skynet注册一个定时器就会占用一个<strong>lua携程</strong>直到定时器触发回调才释放。如果你注册触发时间为1天，那么会积压1天内注册的定时器。所以我没有直接调用skynet.timeout，而是用一个间隔60秒的check循环，如果中途注销了，循环就结束了，这样非常有效的解决了这个问题，虽然多一些定时器注册回调，但是换来了稳定性，使用者不用担心有内存暴涨的风险。</p>
 <h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul>
 <li><p><strong>创建定时器</strong><br>  <code>timer:new()</code><br>  3个必传参数<br>  <code>expire</code> 回调时间，保留skynet.time_out的100等于1秒。<br>  <code>timer</code> 触发次数，0次表示循环触发。<br>  <code>callback</code> 回调函数。</p>
@@ -352,7 +352,7 @@
 </li>
 <li><p><strong>取消定时器</strong><br>  <code>timeobj:cancel()</code></p>
 </li>
-<li><p><strong>延长定时器</strong><br>  <code>timeobj:extend(ex_expire)</code><br>  参数<br>  <code>ex_expire</code> 延长时间，如果创建定时器的时间为5秒，创建时间为：8:10:30,在定时器触发之前调用，定时器会再8:10:36秒触发，在定时器触发之后调用无效。</p>
+<li><p><strong>延长定时器</strong><br>  <code>timeobj:extend(ex_expire)</code><br>  参数<br>  <code>ex_expire</code> 延长时间，如果创建定时器的时间为5秒，创建时间为：8:10:30,在定时器触发之前调用 timeobj:extend(100)，定时器会再8:10:36秒触发，在定时器触发之后调用无效。</p>
 </li>
 </ul>
 
