@@ -348,11 +348,11 @@
   
   
   <entry>
-    <title>select,poll,epoll 对比</title>
-    <link href="/2023/05/14/socket/epoll/"/>
-    <url>/2023/05/14/socket/epoll/</url>
+    <title>tcp知识整理</title>
+    <link href="/2023/05/14/socket/tcp/"/>
+    <url>/2023/05/14/socket/tcp/</url>
     
-    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul><li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li><li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li><li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li></ul><h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol><li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p></li><li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p></li></ol><h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul><li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li><li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li><li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li><li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li></ul><p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p><h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p><h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>]]></content>
     
     
     <categories>
@@ -373,11 +373,11 @@
   
   
   <entry>
-    <title>tcp知识整理</title>
-    <link href="/2023/05/14/socket/tcp/"/>
-    <url>/2023/05/14/socket/tcp/</url>
+    <title>select,poll,epoll 对比</title>
+    <link href="/2023/05/14/socket/epoll/"/>
+    <url>/2023/05/14/socket/epoll/</url>
     
-    <content type="html"><![CDATA[<h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul><li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li><li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li><li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li></ul><h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol><li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p></li><li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p></li></ol><h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul><li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li><li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li><li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li><li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li></ul><p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p><h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p><h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
     
     
     <categories>
