@@ -1,0 +1,734 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于skynet做服务热更新">
+<meta property="og:url" content="https://huahua132.github.io/2023/05/22/think/reload/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-22T02:33:49.000Z">
+<meta property="article:modified_time" content="2023-09-07T06:57:39.213Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="一些想法">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>关于skynet做服务热更新 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="关于skynet做服务热更新"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-22 10:33" pubdate>
+          2023年5月22日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="一些想法"
+        id="heading-57073d08a221e2e9c40741efe796074a" role="tab" data-toggle="collapse" href="#collapse-57073d08a221e2e9c40741efe796074a"
+        aria-expanded="true"
+      >
+        一些想法
+        <span class="list-group-count">(2)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-57073d08a221e2e9c40741efe796074a"
+           role="tabpanel" aria-labelledby="heading-57073d08a221e2e9c40741efe796074a">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/05/07/think/whywrite/" title="为什么写blog"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">为什么写blog</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">关于skynet做服务热更新</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">关于skynet做服务热更新</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="为什么要做热更新"><a href="#为什么要做热更新" class="headerlink" title="为什么要做热更新"></a>为什么要做热更新</h1><p>那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。<br><strong>无状态</strong>的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是<strong>有状态</strong>的服务，不能直接重启，重启就可能出现数据丢失了。</p>
+<h1 id="热更方式"><a href="#热更方式" class="headerlink" title="热更方式"></a>热更方式</h1><ul>
+<li><strong>在原本的lua虚拟机中更新</strong><br>这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_env中的数据，要处理好table被引用、全局变量、闭包的upvalue,而且还会出现本身旧状态数据不适应新版本处理函数的情况，比如一个函数检测一个状态的值等不等于一个枚举值，旧版本枚举值等于1，新版本等于2，但是旧版本状态数据是1，这个时候你热更还需要抉择状态数据是用旧的还是要改成新的，而且有些状态数据是运行时玩家之间的API交互产生的结果，比如A玩家击杀了B玩家，B玩家状态是挂了，但是标记挂了的枚举在新版本改了，此时的热更肯定不符合预期，所以这种热更方式只适合更新bug。少量更改人为可预见行为，才使用。</li>
+</ul>
+<p>比如skynet提供的inject注入方式。</p>
+<ul>
+<li><strong>旧服务顶替新服务的方式</strong><br>这种方式处理起来不复杂而且稳定可控性强,有点类似重启服务然后更新,但是我们可以做到无缝衔接,新服务到岗之后再停止旧服务,传统的进程服务,可能就是启动新服务,然后把旧服务流量切换到新服务上面,等服务没有流量以后再关掉旧服务。<br>skynet可以直接在进程内就实现这个需求,skynet服务lua沙盒就像一个一个微小的进程,我们在内部实现一个服务做出服务网关,记录所以可热更服务的地址,服务通过向网关注册时的名字联系,发消息都通过网关,然后我们关闭掉skynet.codecache,服务更新之后网关记录新服务地址，通知旧服务下岗，做到无缝热更。</li>
+</ul>
+<p>不过还需要考虑新服务上线，旧服务还不能下岗的情况，比如一把游戏还没有结束。</p>
+<h2 id="新服务顶替旧服务实现方案的一些思考"><a href="#新服务顶替旧服务实现方案的一些思考" class="headerlink" title="新服务顶替旧服务实现方案的一些思考"></a>新服务顶替旧服务实现方案的一些思考</h2><p>所有方案都是利用关闭掉skynet的code.cache来实现业务代码的热更，过程中抽象三种角色。</p>
+<ul>
+<li><p><strong>客户端</strong><br>  所有需要RPC调用某个可热更服务的服务。</p>
+</li>
+<li><p><strong>热更服务管理员</strong><br>  需要在恰当的时间进行切流，比如新服务启动了，也有可能新服务启动了，暂时不切流（比如一把游戏还没有结束）。</p>
+</li>
+<li><p><strong>可热更服务</strong><br>  新服务启动了，旧服务要考虑在什么时候销毁。</p>
+</li>
+<li><p><strong>方案一</strong><br>  热更服务管理员做网关，<strong>客户端</strong>发消息都通过热更服务管理员转发，热更服务管理员还负责启动新服务和通知旧服务关闭，这也是我在工作中实现并使用的方案。不过有些值得诟病的缺点，比如经过转发的消息从1v1变成了1v1v1,消息从2次打包解包变成3次打包解包，微微增加一点系统开销，还有就是没有提供AB面切流的实现，不方便给有状态的服务进行更新。</p>
+</li>
+<li><p><strong>方案二</strong><br>  热更服务管理员做<strong>配置中心</strong>，<strong>客户端</strong>发消息先尝试调用本地记录地址，如果没有或者失败(服务已经退出)或者下岗，询问<strong>配置中心</strong>要新的地址，<strong>可热更服务</strong>启动需要向<strong>配置中心</strong>注册，新的<strong>可热更新服务</strong>注册后，<strong>配置中心</strong>通知旧的<strong>可热更服务</strong>可以下岗了，旧的<strong>可热更服务</strong>根据自身情况决定什么时候退出。如果是有状态的需要维持到状态结束，这个可以通过<strong>可热更服务</strong>去控制，根据自身情况<strong>反馈</strong>给<strong>客户端</strong>。比如一局游戏还没结束，正常处理请求，结束后用户想开始下一把，此时通知<strong>客户端</strong>我要下岗了，此方案就能解决消息多一次打解包，有状态服务的通讯保持。此方案没有什么诟病的地方有点类似redis切片集群方案，一个key不在这个redis节点，通知客户端move到目标节点地址，可以考虑配置中心通知旧服务下岗时接收一下新服务地址，到时候客户发消息过来，如果要<strong>move</strong>就可以直接<strong>切换地址</strong>，不需要向配置中心要了。</p>
+<p>  <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">方案二实现</a><br>  实现过程中，发现方案二有2个问题</p>
+<ul>
+<li><strong>问题一</strong><br>  给可热更服务发消息必须用call，不能用send，因为<strong>可热更服务</strong>需要<strong>反馈</strong>自身状态。稍微有点影响性能，但是比方案一还是要好。</li>
+<li><strong>问题二</strong><br>  客户缓存的旧地址长时间不访问，过了一段时间再访问，地址的目标服务可能已经<strong>更替</strong>了,不过这种情况要<code>uint32</code>自增的id走了一个轮回,如果机器上是4字节的话,也就是已经新建了<code>16777215(0x00ffffff)</code>个服务,才有可能重用服务id,虽然很难出现,但是还是要处理这种情况,这里考虑🤔加个版本号加模块名的<strong>校验</strong>。(测试的时候改下skynet源码的服务id分配，比如id到100就轮转),实现并增加了测试代码<strong>hot_module3</strong>。</li>
+</ul>
+</li>
+<li><p><strong>方案三</strong><br>  热更服务管理员还是做配置中心，<strong>客户端</strong>发消息用本地记录地址，如果没有<strong>客户端</strong>只要询问一次配置中心地址，然后通过sub&#x2F;pub机制更新新服务地址，此时就会有一个问题，客户拥有新，旧地址，需要考虑需不需要继续和旧地址通信，此时从方案二的服务切流变成客户切流。<br>  <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">方案三实现</a><br>  方案三的好处就是解决了方案二每次使用call的问题。</p>
+<ul>
+<li><strong>客户端</strong>自己决定什么时候切换到新服务(一般就是状态结束了切换)</li>
+<li><strong>服务</strong> 服务就是看自己什么时候退出(一般就是没有用户状态了退出)</li>
+</ul>
+</li>
+</ul>
+<h1 id="关闭codecache的性能影响测试"><a href="#关闭codecache的性能影响测试" class="headerlink" title="关闭codecache的性能影响测试"></a>关闭codecache的性能影响测试</h1><p>skynet.codecache开启状态是把加载(require )过得lua代码文件缓存到内存，下次其他服务再加载的时候就直接用缓存就行，不需要再去读取代码文件了。<br>我们利用关闭掉codecache来实现热更只会稍微影响新服务启动的速度。<br>    <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">code_cache_test</a></p>
+<pre><code class="hljs">cache情况下启动1万个服务需要2.65s
+关闭cache情况下启动1万个服务需要3.69s
+通过测试，新服务的启动速度下降28%，影响不大。
+</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过多方案的实现分析，最终确定<strong>方案三</strong>在性能和灵活性上面最具优势，后续决定在方案三的基础上补充，一键检测热更功能（有变动才热更）。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>关于skynet做服务热更新</div>
+      <div>https://huahua132.github.io/2023/05/22/think/reload/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于skynet_fly的一键构建服务配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/21/data_struct/avltree/" title="平衡二叉树的lua实现">
+                        <span class="hidden-mobile">平衡二叉树的lua实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
