@@ -8,7 +8,7 @@
     <link href="/2023/09/09/skynet_fly/logrotate/"/>
     <url>/2023/09/09/skynet_fly/logrotate/</url>
     
-    <content type="html"><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。</p><ol><li><strong>软件问题</strong> 可能有些系统并不会默认装载logrotate分割软件。</li><li><strong>权限问题</strong> 非root用户可能无法在<code>/etc/logrotate.d/</code>新增文件。</li></ol><p>就此埋下了我想实现一个内置日志分割模块的决心。</p><h1 id="项目修改"><a href="#项目修改" class="headerlink" title="项目修改"></a>项目修改</h1><ol><li>修改原来的<code>run.sh</code>不再启动即配置日志分割。</li><li>把使用系统日志分割变成一个可选项，增加了<code>create_logrotate.sh</code>，可以主动调用配置。</li><li>内置新增<code>log_rotate_m.lua</code>日志分割模块。</li></ol><h1 id="提供功能"><a href="#提供功能" class="headerlink" title="提供功能"></a>提供功能</h1><p>我没有去增加太多的配置项，我是按照我个人使用日志分割的场景来做的，后续如果有点提意见，也可修改。</p><p>主要提供了两个功能，<strong>切割</strong>，<strong>保留历史日志文件整理</strong>。</p><ul><li><strong>切割</strong> 我目前写死了<strong>每天凌晨</strong>进行切割和整理，还做了文件至少多大才切割。</li><li><strong>保留历史日志文件整理</strong> 提供了保留多少天内，和保留多少个文件的配置。</li></ul><h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>到点重命名日志文件，通过hup消息通知<code>skynet</code>日志服务重新打开日志文件，这种方式不会丢失日志，也不会占用内存。</p><h1 id="配置项说明"><a href="#配置项说明" class="headerlink" title="配置项说明"></a>配置项说明</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    logrotate_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            file_path = <span class="hljs-string">&#x27;./&#x27;</span>,          <span class="hljs-comment">--文件路径</span><br>            filename = <span class="hljs-string">&#x27;server.log&#x27;</span>,   <span class="hljs-comment">--文件名</span><br>            limit_size = <span class="hljs-number">0</span>,            <span class="hljs-comment">--最小分割大小</span><br>            max_age = <span class="hljs-number">7</span>,               <span class="hljs-comment">--最大保留天数</span><br>            max_backups = <span class="hljs-number">7</span>,           <span class="hljs-comment">--最大保留文件数</span><br>            sys_cmd = <span class="hljs-string">[[</span><br><span class="hljs-string">                /usr/bin/pkill -HUP -f skynet.logrotate_config.lua\n</span><br><span class="hljs-string">            ]]</span>,              <span class="hljs-comment">--系统命令</span><br>        &#125;<br>    &#125;,<br><br>    test_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure><p>sys_cmd就是调用系统命令给skynet发送HUP信号，skynet logger服务收到HUP信号就会重新打开日志文件。</p><h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p>examples&#x2F;logrotate</p><h1 id="模块实现路径"><a href="#模块实现路径" class="headerlink" title="模块实现路径"></a>模块实现路径</h1><p>lualib&#x2F;module&#x2F;logrotate_m.lua</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>增加skynet_fly内置日志分割，为skynet_fly扩展了可选使用功能。<br><a href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。</p><ol><li><strong>软件问题</strong> 可能有些系统并不会默认装载logrotate分割软件。</li><li><strong>权限问题</strong> 非root用户可能无法在<code>/etc/logrotate.d/</code>新增文件。</li></ol><p>就此埋下了我想实现一个内置日志分割模块的决心。</p><h1 id="项目修改"><a href="#项目修改" class="headerlink" title="项目修改"></a>项目修改</h1><ol><li>修改原来的<code>run.sh</code>不再启动即配置日志分割。</li><li>把使用系统日志分割变成一个可选项，增加了<code>create_logrotate.sh</code>，可以主动调用配置。</li><li>内置新增<code>log_rotate_m.lua</code>日志分割模块。</li></ol><h1 id="提供功能"><a href="#提供功能" class="headerlink" title="提供功能"></a>提供功能</h1><p>我没有去增加太多的配置项，我是按照我个人使用日志分割的场景来做的，后续如果有优秀建议，也可修改。</p><p>主要提供了两个功能，<strong>切割</strong>，<strong>保留历史日志文件整理</strong>。</p><ul><li><strong>切割</strong> 我目前写死了<strong>每天凌晨</strong>进行切割和整理，还做了文件至少多大才切割。</li><li><strong>保留历史日志文件整理</strong> 提供了保留多少天内，和保留多少个文件的配置。</li></ul><h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>到点重命名日志文件，通过hup消息通知<code>skynet</code>日志服务重新打开日志文件，这种方式不会丢失日志，也不会占用内存。</p><h1 id="配置项说明"><a href="#配置项说明" class="headerlink" title="配置项说明"></a>配置项说明</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    logrotate_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            file_path = <span class="hljs-string">&#x27;./&#x27;</span>,          <span class="hljs-comment">--文件路径</span><br>            filename = <span class="hljs-string">&#x27;server.log&#x27;</span>,   <span class="hljs-comment">--文件名</span><br>            limit_size = <span class="hljs-number">0</span>,            <span class="hljs-comment">--最小分割大小</span><br>            max_age = <span class="hljs-number">7</span>,               <span class="hljs-comment">--最大保留天数</span><br>            max_backups = <span class="hljs-number">7</span>,           <span class="hljs-comment">--最大保留文件数</span><br>            sys_cmd = <span class="hljs-string">[[</span><br><span class="hljs-string">                /usr/bin/pkill -HUP -f skynet.logrotate_config.lua\n</span><br><span class="hljs-string">            ]]</span>,              <span class="hljs-comment">--系统命令</span><br>        &#125;<br>    &#125;,<br><br>    test_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure><p>sys_cmd就是调用系统命令给skynet发送HUP信号，skynet logger服务收到HUP信号就会重新打开日志文件。</p><h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p>examples&#x2F;logrotate[<a href="https://github.com/huahua132/skynet_fly/tree/master/examples/logrotate]">https://github.com/huahua132/skynet_fly/tree/master/examples/logrotate]</a></p><h1 id="模块实现路径"><a href="#模块实现路径" class="headerlink" title="模块实现路径"></a>模块实现路径</h1><p>lualib&#x2F;module&#x2F;logrotate_m.lua[<a href="https://github.com/huahua132/skynet_fly/blob/master/lualib/module/logrotate_m.lua]">https://github.com/huahua132/skynet_fly/blob/master/lualib/module/logrotate_m.lua]</a></p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>增加skynet_fly内置日志分割，为skynet_fly扩展了可选使用功能。<br><a href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>]]></content>
     
     
     <categories>
@@ -348,11 +348,11 @@
   
   
   <entry>
-    <title>select,poll,epoll 对比</title>
-    <link href="/2023/05/14/socket/epoll/"/>
-    <url>/2023/05/14/socket/epoll/</url>
+    <title>网络七层模型</title>
+    <link href="/2023/05/14/socket/c/"/>
+    <url>/2023/05/14/socket/c/</url>
     
-    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
+    <content type="html"><![CDATA[<ul><li><strong>7层</strong> 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层</li><li><strong>5层</strong> 物理层，数据链路层，网络层，传输层，应用层</li><li><strong>4层</strong> 网络接口层，网络层，传输层，应用层</li></ul><p><strong>物理层</strong><br>    传输介质，网线，光纤<br><strong>数据链路层</strong><br>    保持数据的可靠传输<br><strong>网络层</strong><br>    数据路由，ip地址<br><strong>传输层</strong><br>    tcp，udp协议，数据打包<br><strong>会话层</strong><br>    建立与管理应用程序之间的通信<br><strong>表示层</strong><br>    解决不同系统的兼容问题<br><strong>应用层</strong><br>    http，ftp</p>]]></content>
     
     
     <categories>
@@ -398,11 +398,11 @@
   
   
   <entry>
-    <title>网络七层模型</title>
-    <link href="/2023/05/14/socket/c/"/>
-    <url>/2023/05/14/socket/c/</url>
+    <title>select,poll,epoll 对比</title>
+    <link href="/2023/05/14/socket/epoll/"/>
+    <url>/2023/05/14/socket/epoll/</url>
     
-    <content type="html"><![CDATA[<ul><li><strong>7层</strong> 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层</li><li><strong>5层</strong> 物理层，数据链路层，网络层，传输层，应用层</li><li><strong>4层</strong> 网络接口层，网络层，传输层，应用层</li></ul><p><strong>物理层</strong><br>    传输介质，网线，光纤<br><strong>数据链路层</strong><br>    保持数据的可靠传输<br><strong>网络层</strong><br>    数据路由，ip地址<br><strong>传输层</strong><br>    tcp，udp协议，数据打包<br><strong>会话层</strong><br>    建立与管理应用程序之间的通信<br><strong>表示层</strong><br>    解决不同系统的兼容问题<br><strong>应用层</strong><br>    http，ftp</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
     
     
     <categories>
@@ -473,31 +473,6 @@
   
   
   <entry>
-    <title>为什么写blog</title>
-    <link href="/2023/05/07/think/whywrite/"/>
-    <url>/2023/05/07/think/whywrite/</url>
-    
-    <content type="html"><![CDATA[<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>为了总结，强化学习，以及分享和记录。 </p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>日常工作学习中零零散散学习到的知识不成体系，有时候学了又感觉没学，我觉得原因就是没有深度思考，一味求快，写总结会让我们对知识进行深度思考，需要总结出学习到的知识能解决什么样的问题，先提出<strong>问题场景</strong>,提供 <strong>解决方案</strong> 总结出  <strong>知识特点</strong> 再扩展 <strong>类同知识</strong> 进行 <strong>优缺点</strong> 对比 从而 在脑子构建出 <strong>知识体系网络</strong>。</p><h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p>知识学到了，自己会用，但是可能只是用到了需要的部分，比较片面，我想以写blog的方式，来发现自己对哪一块还不是很清楚。需要再加深学习。</p><h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><p>利用<strong>费曼学习法</strong>，来验证自己的学习的成果，验证自己学的好不好最好的办法就是教会别人。过程中还能补充遗漏的知识点。</p><h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p><strong>好记性不如烂笔头</strong>。忘记了查自己的笔记会比查网络上别人的笔记要<strong>快</strong>。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>一些想法</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>一些想法</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>actor模型在sknyet中的应用</title>
     <link href="/2023/05/07/skynet_frame/actor/"/>
     <url>/2023/05/07/skynet_frame/actor/</url>
@@ -515,6 +490,31 @@
     <tags>
       
       <tag>skynet_frame</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>为什么写blog</title>
+    <link href="/2023/05/07/think/whywrite/"/>
+    <url>/2023/05/07/think/whywrite/</url>
+    
+    <content type="html"><![CDATA[<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>为了总结，强化学习，以及分享和记录。 </p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>日常工作学习中零零散散学习到的知识不成体系，有时候学了又感觉没学，我觉得原因就是没有深度思考，一味求快，写总结会让我们对知识进行深度思考，需要总结出学习到的知识能解决什么样的问题，先提出<strong>问题场景</strong>,提供 <strong>解决方案</strong> 总结出  <strong>知识特点</strong> 再扩展 <strong>类同知识</strong> 进行 <strong>优缺点</strong> 对比 从而 在脑子构建出 <strong>知识体系网络</strong>。</p><h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p>知识学到了，自己会用，但是可能只是用到了需要的部分，比较片面，我想以写blog的方式，来发现自己对哪一块还不是很清楚。需要再加深学习。</p><h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><p>利用<strong>费曼学习法</strong>，来验证自己的学习的成果，验证自己学的好不好最好的办法就是教会别人。过程中还能补充遗漏的知识点。</p><h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p><strong>好记性不如烂笔头</strong>。忘记了查自己的笔记会比查网络上别人的笔记要<strong>快</strong>。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>一些想法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>一些想法</tag>
       
     </tags>
     
