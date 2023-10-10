@@ -16,24 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在&#x2F;etc&#x2F;logrotate.d&#x2F;新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo">
+    <meta name="description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我想优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于增加skynet_fly 日志分割模块">
-<meta property="og:url" content="https://huahua132.github.io/2023/09/09/skynet_fly/logrotate/index.html">
+<meta property="og:title" content="skynet_fly热更新存在的问题">
+<meta property="og:url" content="https://huahua132.github.io/2023/10/10/think/reload_error/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在&#x2F;etc&#x2F;logrotate.d&#x2F;新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo">
+<meta property="og:description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我想优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-09T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-09T10:24:27.168Z">
+<meta property="article:published_time" content="2023-10-10T11:22:49.000Z">
+<meta property="article:modified_time" content="2023-10-10T12:17:47.608Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="skynet_fly">
+<meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于增加skynet_fly 日志分割模块 - huahua132 blog</title>
+  <title>skynet_fly热更新存在的问题 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于增加skynet_fly 日志分割模块"></span>
+            <span id="subtitle" data-typed-text="skynet_fly热更新存在的问题"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-09 08:00" pubdate>
-          2023年9月9日 早上
+        <time datetime="2023-10-10 19:22" pubdate>
+          2023年10月10日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.7k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          9 分钟
+          15 分钟
         
       </span>
     
@@ -281,17 +281,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly"
-        id="heading-3f12f48949345263aa7e927c65a85b19" role="tab" data-toggle="collapse" href="#collapse-3f12f48949345263aa7e927c65a85b19"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="一些想法"
+        id="heading-57073d08a221e2e9c40741efe796074a" role="tab" data-toggle="collapse" href="#collapse-57073d08a221e2e9c40741efe796074a"
         aria-expanded="true"
       >
-        skynet_fly
-        <span class="list-group-count">(8)</span>
+        一些想法
+        <span class="list-group-count">(3)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-3f12f48949345263aa7e927c65a85b19"
-           role="tabpanel" aria-labelledby="heading-3f12f48949345263aa7e927c65a85b19">
+      <div class="category-collapse collapse show" id="collapse-57073d08a221e2e9c40741efe796074a"
+           role="tabpanel" aria-labelledby="heading-57073d08a221e2e9c40741efe796074a">
         
         
           
@@ -300,73 +300,28 @@
     
       
       
-        <a href="/2023/07/28/skynet_fly/cluster_rpc/" title="关于cluster 远程rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于cluster 远程rpc调用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/07/08/skynet_fly/redis/" title="关于redis的封装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于redis的封装</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/07/22/skynet_fly/room_game/" title="关于room_game可热更匹配房间类游戏架构"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更新实现</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/08/20/skynet_fly/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/09/09/skynet_fly/logrotate/" title="关于增加skynet_fly 日志分割模块"
+        <a href="/2023/10/10/think/reload_error/" title="skynet_fly热更新存在的问题"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+          <span class="category-post">skynet_fly热更新存在的问题</span>
         </a>
       
     
       
       
-        <a href="/2023/07/02/skynet_fly/timer/" title="关于定时器的封装"
+        <a href="/2023/05/07/think/whywrite/" title="为什么写blog"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于定时器的封装</span>
+          <span class="category-post">为什么写blog</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet做服务热更新</span>
         </a>
       
     
@@ -389,35 +344,40 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于增加skynet_fly 日志分割模块</h1>
+            <h1 style="display: none">skynet_fly热更新存在的问题</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。</p>
-<ol>
-<li><strong>软件问题</strong> 可能有些系统并不会默认装载logrotate分割软件。</li>
-<li><strong>权限问题</strong> 非root用户可能无法在<code>/etc/logrotate.d/</code>新增文件。</li>
-</ol>
-<p>就此埋下了我想实现一个内置日志分割模块的决心。</p>
-<h1 id="项目修改"><a href="#项目修改" class="headerlink" title="项目修改"></a>项目修改</h1><ol>
-<li>修改原来的<code>run.sh</code>不再启动即配置日志分割。</li>
-<li>把使用系统日志分割变成一个可选项，增加了<code>create_logrotate.sh</code>，可以主动调用配置。</li>
-<li>内置新增<code>log_rotate_m.lua</code>日志分割模块。</li>
-</ol>
-<h1 id="提供功能"><a href="#提供功能" class="headerlink" title="提供功能"></a>提供功能</h1><p>我没有去增加太多的配置项，我是按照我个人使用日志分割的场景来做的，后续如果有优秀建议，也可修改。</p>
-<p>主要提供了两个功能，<strong>切割</strong>，<strong>保留历史日志文件整理</strong>。</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我想优化的时候，突然想到的一个热更问题。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><h2 id="触发场景分析"><a href="#触发场景分析" class="headerlink" title="触发场景分析"></a>触发场景分析</h2><p>假如有A、B 两个服务，代码如下：</p>
 <ul>
-<li><strong>切割</strong> 我目前写死了<strong>每天凌晨</strong>进行切割和整理，还做了文件至少多大才切割。</li>
-<li><strong>保留历史日志文件整理</strong> 提供了保留多少天内，和保留多少个文件的配置。</li>
+<li><strong>A服务</strong></li>
 </ul>
-<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>到点重命名日志文件，通过hup消息通知<code>skynet</code>日志服务重新打开日志文件，这种方式不会丢失日志，也不会占用内存。</p>
-<h1 id="配置项说明"><a href="#配置项说明" class="headerlink" title="配置项说明"></a>配置项说明</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    logrotate_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            file_path = <span class="hljs-string">&#x27;./&#x27;</span>,          <span class="hljs-comment">--文件路径</span><br>            filename = <span class="hljs-string">&#x27;server.log&#x27;</span>,   <span class="hljs-comment">--文件名</span><br>            limit_size = <span class="hljs-number">0</span>,            <span class="hljs-comment">--最小分割大小</span><br>            max_age = <span class="hljs-number">7</span>,               <span class="hljs-comment">--最大保留天数</span><br>            max_backups = <span class="hljs-number">7</span>,           <span class="hljs-comment">--最大保留文件数</span><br>            sys_cmd = <span class="hljs-string">[[</span><br><span class="hljs-string">                /usr/bin/pkill -HUP -f skynet.logrotate_config.lua\n</span><br><span class="hljs-string">            ]]</span>,              <span class="hljs-comment">--系统命令</span><br>        &#125;<br>    &#125;,<br><br>    test_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;timer&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    timer:new(timer.second,<span class="hljs-number">0</span>,CMD.send_msg_to_b)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.send_msg_to_b</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> b_client = contriner_client:new(<span class="hljs-string">&quot;B_m&quot;</span>)      <span class="hljs-comment">--用于访问B服务</span><br>    <span class="hljs-keyword">local</span> ret = b_client:mod_call(<span class="hljs-string">&quot;hello&quot;</span>)<br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;send_msg_to_b:&quot;</span>,ret)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
 
-<p>sys_cmd就是调用系统命令给skynet发送HUP信号，skynet logger服务收到HUP信号就会重新打开日志文件。</p>
-<h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/logrotate">examples&#x2F;logrotate</a></p>
-<h1 id="模块实现路径"><a href="#模块实现路径" class="headerlink" title="模块实现路径"></a>模块实现路径</h1><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/module/logrotate_m.lua">lualib&#x2F;module&#x2F;logrotate_m.lua</a></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>增加skynet_fly内置日志分割，为skynet_fly扩展了可选使用功能。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
+<ul>
+<li><strong>B服务</strong></li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.hello</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;HEELO A&quot;</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+
+<p>很简单的一个示例，A服务间隔1秒给B服务发送hello消息。<br>然后我们修改代码如下：</p>
+<ul>
+<li><strong>A服务</strong></li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;timer&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    timer:new(timer.second,<span class="hljs-number">0</span>,CMD.send_msg_to_b)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.send_msg_to_b</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">-- local b_client = contriner_client:new(&quot;B_m&quot;)      --用于访问B服务</span><br>    <span class="hljs-comment">-- local ret = b_client:mod_call(&quot;hello&quot;)</span><br>    <span class="hljs-comment">-- log.info(&quot;send_msg_to_b:&quot;,ret)</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>B服务</strong></li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">-- function CMD.hello()</span><br><span class="hljs-comment">--     return &quot;HEELO A&quot;</span><br><span class="hljs-comment">-- end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+
+<p>再执行热更，我们修改了A,B服务，我们不想让AB服务继续发送消息了，所有直接B服务直接去掉了hello命令，A服务也去掉了向B服务发送消息的代码。此时看起来没什么问题。<br>当时有一个问题，旧的A服务监听到了B服务更新了，此时它的消息会发送到新的B服务，那么问题就出现了。此时新的B服务hello函数并不存在。</p>
+<h1 id="解决方案的思考"><a href="#解决方案的思考" class="headerlink" title="解决方案的思考"></a>解决方案的思考</h1><ul>
+<li><strong>方案一</strong><br>  目前能想到的是，当一个服务是旧版本时，不能去切换访问新的服务，这种方案要保证旧服务需要联系的其他旧服务暂时都不下线。还有就是必须所有服务热更之前就要关闭掉该服务的新服务切换。</li>
+</ul>
+<h1 id="深入思考出现的问题"><a href="#深入思考出现的问题" class="headerlink" title="深入思考出现的问题"></a>深入思考出现的问题</h1><pre><code class="hljs">热更过程中，假设A服务先热更，A服务有可能访问到旧的B服务。也是有问题的。
+</code></pre>
 
                 
               </div>
@@ -436,7 +396,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
   
   
 
@@ -451,7 +411,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/skynet-fly/">#skynet_fly</a>
+        <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
       
     </div>
   
@@ -463,8 +423,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于增加skynet_fly 日志分割模块</div>
-      <div>https://huahua132.github.io/2023/09/09/skynet_fly/logrotate/</div>
+      <div>skynet_fly热更新存在的问题</div>
+      <div>https://huahua132.github.io/2023/10/10/think/reload_error/</div>
     </div>
     <div class="license-meta">
       
@@ -476,7 +436,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月9日</div>
+          <div>2023年10月10日</div>
         </div>
       
       
@@ -508,18 +468,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/10/think/reload_error/" title="skynet_fly热更新存在的问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">skynet_fly热更新存在的问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/02/record/blog/" title="blog编写环境搭建">
-                        <span class="hidden-mobile">blog编写环境搭建</span>
+                      <a href="/2023/09/09/skynet_fly/logrotate/" title="关于增加skynet_fly 日志分割模块">
+                        <span class="hidden-mobile">关于增加skynet_fly 日志分割模块</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
