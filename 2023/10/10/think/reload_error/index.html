@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我想优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
+    <meta name="description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
 <meta property="og:type" content="article">
 <meta property="og:title" content="skynet_fly热更新存在的问题">
 <meta property="og:url" content="https://huahua132.github.io/2023/10/10/think/reload_error/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我想优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
+<meta property="og:description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-10T11:22:49.000Z">
-<meta property="article:modified_time" content="2023-10-10T12:17:47.608Z">
+<meta property="article:modified_time" content="2023-10-10T12:21:15.311Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -349,7 +349,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我想优化的时候，突然想到的一个热更问题。</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。</p>
 <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><h2 id="触发场景分析"><a href="#触发场景分析" class="headerlink" title="触发场景分析"></a>触发场景分析</h2><p>假如有A、B 两个服务，代码如下：</p>
 <ul>
 <li><strong>A服务</strong></li>
@@ -372,7 +372,7 @@
 </ul>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">-- function CMD.hello()</span><br><span class="hljs-comment">--     return &quot;HEELO A&quot;</span><br><span class="hljs-comment">-- end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
 
-<p>再执行热更，我们修改了A,B服务，我们不想让AB服务继续发送消息了，所有直接B服务直接去掉了hello命令，A服务也去掉了向B服务发送消息的代码。此时看起来没什么问题。<br>当时有一个问题，旧的A服务监听到了B服务更新了，此时它的消息会发送到新的B服务，那么问题就出现了。此时新的B服务hello函数并不存在。</p>
+<p>再执行热更，我们修改了A,B服务，我们不想让AB服务继续发送消息了，所有直接B服务直接去掉了hello命令，A服务也去掉了向B服务发送消息的代码。此时看起来没什么问题。<br>这时就会有一个问题，旧的A服务监听到了B服务更新了，此时它的消息会发送到新的B服务，那么问题就出现了。此时新的B服务hello函数并不存在。</p>
 <h1 id="解决方案的思考"><a href="#解决方案的思考" class="headerlink" title="解决方案的思考"></a>解决方案的思考</h1><ul>
 <li><strong>方案一</strong><br>  目前能想到的是，当一个服务是旧版本时，不能去切换访问新的服务，这种方案要保证旧服务需要联系的其他旧服务暂时都不下线。还有就是必须所有服务热更之前就要关闭掉该服务的新服务切换。</li>
 </ul>
