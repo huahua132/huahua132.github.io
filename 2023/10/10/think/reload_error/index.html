@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-10T11:22:49.000Z">
-<meta property="article:modified_time" content="2023-10-10T12:21:15.311Z">
+<meta property="article:modified_time" content="2023-10-12T10:41:21.374Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          2.6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          15 分钟
+          22 分钟
         
       </span>
     
@@ -377,6 +377,35 @@
 <li><strong>方案一</strong><br>  目前能想到的是，当一个服务是旧版本时，不能去切换访问新的服务，这种方案要保证旧服务需要联系的其他旧服务暂时都不下线。还有就是必须所有服务热更之前就要关闭掉该服务的新服务切换。</li>
 </ul>
 <h1 id="深入思考出现的问题"><a href="#深入思考出现的问题" class="headerlink" title="深入思考出现的问题"></a>深入思考出现的问题</h1><pre><code class="hljs">热更过程中，假设A服务先热更，A服务有可能访问到旧的B服务。也是有问题的。
+</code></pre>
+<ul>
+<li><p><strong>解决方案</strong><br>  要解决这个问题就必须保证所有服务热更完之前，对服务id的查询暂时先阻塞。<br>  解决方案是contriner_mgr的所有cmd命令用queue队列包裹起来，这样load启动完所有需要加载的热更模块之前所有query都得先排队，不过这样需要去避免<strong>环队列问题</strong>，load和start过程中不能有服务去调用query。所以在start完之前，需要把contriner_client:new命令暂时禁用掉。<br>  如果是非可热更模块服务就没有这个限制。</p>
+</li>
+<li><p><strong>环队列问题</strong><br>  假设队列里面有A,B两个函数，队列执行顺序为 <code>B&gt;A&gt;</code>,也就是先执行A，再执行B。<br>  前提是<strong>B</strong>的函数执行是因为<strong>A</strong>函数的call调用发起的。<br>  此时就会出现<strong>A</strong>在等<strong>B</strong>的回应，<strong>B</strong>在等<strong>A</strong>先跑完。</p>
+</li>
+</ul>
+<p>做了上诉解决方案的修改后，解决了新旧版本串调的问题，此时又多了一个问题。</p>
+<h1 id="旧服务何时销毁退出"><a href="#旧服务何时销毁退出" class="headerlink" title="旧服务何时销毁退出"></a>旧服务何时销毁退出</h1><pre><code class="hljs">之前旧服务被新服务顶替之后，就可以确定自己不再会新的访问者了，现在是可能存在访问者，不能再像之前一样只需要判断自己还有没有需要处理的数据。
+</code></pre>
+<ul>
+<li><p><strong>解决方案</strong><br>  记录来访者地址，检查是否可以退出时，询问来访者是否也打算退出或者已经退出了，当所有来访者都退出了，说明此服务可以退出了。这种处理方式有<strong>环问题</strong>。</p>
+</li>
+<li><p><strong>边界问题</strong></p>
+<ol>
+<li>当旧服务可以退出时，会不会出现全新的来访者。<br> 除非手动指定id去调用，不然不会出现全新的访问者。新的query查询都会查到新服务，想到这里又想到一个要退出的旧服务可能访问新服务的问题，<strong>迟到访问问题</strong></li>
+<li>来访者不是可热更服务。<br> 默认true就行，不是可热更服务会切换到访问新服务。</li>
+</ol>
+</li>
+</ul>
+<h1 id="迟到访问问题"><a href="#迟到访问问题" class="headerlink" title="迟到访问问题"></a>迟到访问问题</h1><pre><code class="hljs">热更之前A服务没有访问过B服务，就是还没有查询过B服务的地址，热更结束之后，旧A服务想访问B了，此时又会查询到新服务。
+</code></pre>
+<ul>
+<li><p><strong>解决方案</strong><br>  只要用到contriner_client的任何服务，都需要先获取全部的服务地址信息。</p>
+</li>
+<li><p><strong>环问题</strong><br>  A访问B，B访问A，都退出不了。<br>  引入弱访问者，AB互相联系，应该有一个占主导地位的发起方。主导发起方不用管被访问者是否退出。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><pre><code class="hljs">此次发现并解决了热更可能存在的诸多问题。
 </code></pre>
 
                 
