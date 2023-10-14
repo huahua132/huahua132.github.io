@@ -24,7 +24,7 @@
 <meta property="og:description" content="实现思路可以先看看这篇关于skynet做服务热更新这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skynet.codecache，这样launch新">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-10T11:57:08.303Z">
+<meta property="article:modified_time" content="2023-10-14T02:16:48.622Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly
-        <span class="list-group-count">(8)</span>
+        <span class="list-group-count">(9)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -322,6 +322,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/14/skynet_fly/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
     
@@ -403,7 +412,7 @@
 </li>
 </ul>
 <ul>
-<li><p><strong>启动热更服务</strong><br>  <code>load_module MODULE_NAME</code>,通过传入module_name,contriner_mgr会加载<strong>mod_config.lua</strong>,拿到此模板的配置，然后启动服务，启动完毕再通知旧服务<strong>exit</strong>，接下给监听的服务下发新的服务id和版本号。mod_config.lua初始定义在load_mods.lua文件中。</p>
+<li><p><strong>启动热更服务</strong><br>  <code>load_modules MODULE_NAME</code>,通过传入module_name,contriner_mgr会加载<strong>mod_config.lua</strong>,拿到此模板的配置，然后启动服务，启动完毕再通知旧服务<strong>exit</strong>，接下给监听的服务下发新的服务id和版本号。mod_config.lua初始定义在load_mods.lua文件中。</p>
 </li>
 <li><p><strong>关闭热更服务</strong><br>  <code>kill_module MODULE_NAME</code>，比如我们产品可能有些功能不要了，就可以关闭该服务了。</p>
 </li>
@@ -413,7 +422,7 @@
 </li>
 <li><p><strong>监听热更模块</strong><br>  <code>watch MODULE_NAME</code>,监听模块。</p>
 </li>
-<li><p><strong>取消监听模块</strong>,取消监听。</p>
+<li><p><strong>取消监听模块</strong>,<br>  <code>unwatch MODULE_NAME</code>,取消监听。</p>
 </li>
 </ul>
 <p><strong>容器客户端</strong>封装了对了<strong>热更管理员</strong>的交互我们在使用时感觉不到<strong>热更管理员</strong>♥(ˆ◡ˆԅ)的存在。<br><strong>容器客户端</strong>是使用面向对象的方式实现的，为了方便每个<strong>rpc调用对象</strong>有自己的<strong>服务切换处理</strong>。<br>提供了 <strong>new</strong>、<strong>mod_send</strong>、<strong>mod_call</strong>、<strong>balance_send</strong>、<strong>balance_call</strong>、<strong>broadcast</strong>方法。</p>
@@ -561,9 +570,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置">
+                      <a href="/2023/07/02/skynet_fly/timer/" title="关于定时器的封装">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于skynet_fly的一键构建服务配置</span>
+                        <span class="hidden-mobile">关于定时器的封装</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -571,8 +580,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新">
-                        <span class="hidden-mobile">关于skynet做服务热更新</span>
+                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置">
+                        <span class="hidden-mobile">关于skynet_fly的一键构建服务配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

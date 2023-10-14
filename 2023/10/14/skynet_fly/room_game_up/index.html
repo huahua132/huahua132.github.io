@@ -16,26 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="为什么要做这个？ skynet启动用的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须">
+    <meta name="description" content="前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于skynet_fly的一键构建服务配置">
-<meta property="og:url" content="https://huahua132.github.io/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="关于room_game可热更匹配房间类游戏架构的优化">
+<meta property="og:url" content="https://huahua132.github.io/2023/10/14/skynet_fly/room_game_up/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="为什么要做这个？ skynet启动用的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须">
+<meta property="og:description" content="前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/dir.bmp">
-<meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-07T06:57:39.211Z">
+<meta property="article:published_time" content="2023-10-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-14T06:17:40.093Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/dir.bmp">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于skynet_fly的一键构建服务配置 - huahua132 blog</title>
+  <title>关于room_game可热更匹配房间类游戏架构的优化 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于skynet_fly的一键构建服务配置"></span>
+            <span id="subtitle" data-typed-text="关于room_game可热更匹配房间类游戏架构的优化"></span>
           
         </div>
 
@@ -215,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-30 00:00" pubdate>
-          2023年6月30日 凌晨
+        <time datetime="2023-10-14 08:00" pubdate>
+          2023年10月14日 早上
         </time>
       </span>
     
@@ -227,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          3.8k 字
         
       </span>
     
@@ -238,7 +236,7 @@
         
         
         
-          34 分钟
+          32 分钟
         
       </span>
     
@@ -331,7 +329,7 @@
       
         <a href="/2023/10/14/skynet_fly/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
@@ -349,7 +347,7 @@
       
         <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">关于skynet_fly的一键构建服务配置</span>
         </a>
       
@@ -400,66 +398,128 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于skynet_fly的一键构建服务配置</h1>
+            <h1 style="display: none">关于room_game可热更匹配房间类游戏架构的优化</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="为什么要做这个？"><a href="#为什么要做这个？" class="headerlink" title="为什么要做这个？"></a>为什么要做这个？</h1><ol>
-<li>skynet启动用的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写<strong>path</strong>，用脚本写。</li>
-<li>热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。</li>
-<li>新增一个服务模块每次都有手写一个config好麻烦。</li>
-<li>热更服务需要通过curl连接 debug_console服务去执行热更。</li>
-</ol>
-<p>所以这个事情必须要做。</p>
-<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>本想着能不能像go-zero框架实现一个类似一键生成工具。但是我觉得这样还要安装一个工具挺麻烦的，就直接用shell+lua的方式来写，自带的环境，方便执行。<br>实现时，不知道使用者要把skynet_fly放在那个文件夹，所有考虑了skynet_fly可以放在同磁盘任意文件夹下。<br>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如如何是examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,执行<code>sh ../../binshell/make_server.sh ../../</code><br>然后就会生成webapp_config.lua mod_config.lua script一系列执行脚本。<br>实现细节写在 <code>script</code>和<code>binshell</code>文件夹下。</p>
-<ul>
-<li><strong>关于生成skynet_config</strong><br>path路径生成规则都是由近到远的查找规则， 优先级 本服务svr下文件下 &gt; skynet_fly文件夹 &gt; skynet文件夹</li>
-</ul>
-<ul>
-<li>cpath c服务模块查找 写死<code>skynet_fly_path/cservice/?.so; .. skynet_path/cservice/?.so;</code></li>
-<li>lua_cpath c模块查找 写死<code>skynet_fly_path .. &quot;luaclib/?.so;&quot; .. skynet_path .. &quot;luaclib/?.so;&quot;</code></li>
-<li>luaservice c服务查找 写死server_path .. “?.lua;” ..<br>       server_path .. “service&#x2F;?.lua;” ..<br>       skynet_fly_path .. “service&#x2F;?.lua;” ..<br>       common_path .. “service&#x2F;?.lua;” ..<br>      skynet_path .. “service&#x2F;?.lua;”,</li>
-<li>lua_path 动态生成构建。</li>
-</ul>
-<p> 构建查找规则如下图</p>
-<p><img src="/img/skynet_fly/dir.bmp" srcset="/img/loading.gif" lazyload><br>以chinese_chess(server)为例。<br>lua_path 查找优先级为:</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><pre><code class="hljs">在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。
+</code></pre>
 <ol>
-<li>递归查找chinese_chess文件夹下非service文件夹</li>
-<li>递归查找common文件夹下非service文件夹</li>
-<li>递归查找skynet_fly&#x2F;lualib</li>
-<li>递归查找skynet_fly&#x2F;3rd</li>
-<li>递归查找skynet_fly&#x2F;skynet&#x2F;lualib</li>
+<li>gate和fd没必要暴露给业务层。</li>
+<li>登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。</li>
+<li>缺少通用的发消息接口。</li>
+<li>消息处理函数不够优雅。</li>
+<li>业务层缺少CMD命令注册入口。</li>
+<li>table缺少主动访问hall大厅和alloc的接口。</li>
 </ol>
- <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--创建 lua文件 查找规则，优先级 server下非service文件夹 &gt; server上上级目录common文件夹非service文件夹 &gt; skynet_fly lualib下所有文件夹 &gt; skynet lualib下所以文件夹</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br>	<span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br>	<span class="hljs-keyword">local</span> skynet_path = skynet_fly_path .. <span class="hljs-string">&#x27;/skynet&#x27;</span><br>	<span class="hljs-keyword">local</span> common_path = <span class="hljs-string">&#x27;../../common&#x27;</span><br><br>	<span class="hljs-comment">--server下非service文件夹</span><br>	<span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(server_path) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--server上上级目录common所有文件夹</span><br>	lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(common_path) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--skynet_fly lualib下所有文件夹</span><br>	lua_path = lua_path .. skynet_fly_path .. <span class="hljs-string">&#x27;/lualib/?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_fly_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--skynet_fly 3rd下所以文件夹</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_fly_path .. <span class="hljs-string">&#x27;/3rd&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--skynet lualib下所以文件夹</span><br>	lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-
-<p> skynet_fly服务启动时会加载<code>lualib/preload.lua</code>文件，我在那里做了重新构建新的luapath，<strong>再也不用手写path啦</strong>。<br> 同时热更服务也不用担心新加的路径没有写到path中。</p>
-<ul>
-<li><p><strong>关于生成mod_config.lua</strong><br>mod_config是热更模板的配置文件，主要考虑到每个服务使用的配置参数不同，还有不想手写启动代码，而且热更新增服务可以不需要重启。<br>mod_config每次启动或者调用check_reload之后都会拷贝一份mod_config.lua.old，表示目前服务使用的配置，方便在check_reload中对比新旧mod_config，有修改更新对应热更模块。</p>
-</li>
-<li><p><strong>mod_config的重复构建</strong><br>重复构建会递归深层对比load_mods和mod_config，对比之后对于mod_config有4种情况。</p>
-</li>
-</ul>
+<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><pre><code class="hljs">新版本的room_game主要针对以上六点做了相关优化。
+</code></pre>
 <ol>
-<li><code>typedef</code> 类型不同了，比如之前是number类型，现在是string类型的配置。</li>
-<li><code>reduce</code> 删除配置了，load_mods把该配置删除了。</li>
-<li><code>add</code> 增加了新配置,load_mods增加了新配置。</li>
-<li><code>valuedef</code> 值不同，比如 1改成2。</li>
+<li>去掉gate,fd 对上层业务的传递，提供发消息的接口。</li>
+<li>登录仅仅连接大厅，提供桌子的相关操作接口。</li>
+<li>login,hall,table都提供，并且接口保持统一，通用。</li>
+<li>消息是否转发判断逻辑为，大厅服没有注册处理，转发到桌子服，还没有桌子服，或者桌子服没有处理，视为丢弃消息打印日志即可。</li>
+<li>提供业务注册CMD消息的入口，并限制命令不可重复注册。</li>
+<li>提供相关接口。</li>
 </ol>
-<p>针对4种情况，在前3种情况下都需要去同步修改mod_config，唯有4不变。</p>
-<ul>
-<li><strong>构建运维脚本</strong><br>skynet_fly会生成run.sh,restart.sh,kill_mod.sh,check_reload.sh,stop.sh一系列脚本，方便运维管理。<br>其中run.sh执行之后会生成logrotate的日志切割配置，重命名方式。通过发送hup信号。<br>重点讲一下check_reload.sh</li>
+<h1 id="接口介绍"><a href="#接口介绍" class="headerlink" title="接口介绍"></a>接口介绍</h1><pre><code class="hljs">架构的接口可以分为回调接口和主动调用接口。
+</code></pre>
+<h2 id="回调接口"><a href="#回调接口" class="headerlink" title="回调接口"></a>回调接口</h2><pre><code class="hljs">就是模块挂载的插件需要实现的方法。
+</code></pre>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><ul>
+<li><p><code>init(interface_mgr)</code>,初始化。<br>参数：<br><code>interface_mgr</code>是主动接口入口。</p>
+</li>
+<li><p><code>unpack(msg,sz)</code>,解包。<br>参数：<br><code>msg</code> 网络包消息。<br><code>sz</code> 网络包长度。</p>
+</li>
+<li><p><code>send(gate,fd,packname,pack_body)</code>，发包函数。<br>参数：<br><code>gate</code> 网关服务id。<br><code>fd</code> 连接绑定的id。<br><code>packname</code>包名。<br><code>pack_body</code>包内容。</p>
+</li>
+<li><p><code>check(packname,pack_body)</code>，客户端建立连接后，第一条消息应该为登录消息，这里进行登录检查。<br>参数:<br><code>packname</code>包名。<br><code>pack_body</code>包内容。<br>返回值：<br>成功返回：<br><code>player_id</code>玩家id。<br>失败返回：<br><code>false</code><br><code>errorcode</code>失败错误码。<br><code>errormsg</code>失败消息内容。</p>
+</li>
+<li><p><code>login_failed(player_id,errcode,errmsg)</code>，登录失败。<br><code>player_id</code>玩家id。<br><code>errorcode</code>失败错误码。<br><code>errormsg</code>失败消息内容。</p>
+</li>
 </ul>
-<p><code>check_reload.sh</code></p>
+<p>参数传递为check失败或者hall大厅connect连接失败传递的错误码。</p>
 <ul>
-<li>检测可热更服务在关闭skynet.codecache之后require的lua模块是否有修改，检测的是文件最后修改时间。</li>
-<li>对比mod_config.lua 和mod_config.lua.old 是否有改变。<br>如果有改动更新对应模块。</li>
-<li>对比mod_config.lua 和mod_config.lua.old 是否有模块配置删除，有的话通知下线。</li>
+<li><p><code>login_succ(player_id,login_res)</code>，登录成功。<br><code>player_id</code>玩家id。<br><code>login_res</code>大厅服返回的登录结果。</p>
+</li>
+<li><p><code>login_out(player_id)</code>登出，玩家主动登出，或者玩家断线超时了被踢出。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>disconnect(player_id)</code>掉线。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>logining(player_id)</code>正在登录中，正在处理登录消息，通常客户端狂发登录消息导致。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>repeat_login(player_id)</code>重复登录。多连接登录了，此处可以给旧连接发错误码，旧连接将被踢断开。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>register_cmd</code> 注册命令表。</p>
+</li>
 </ul>
-<p> 其他脚本都好理解。</p>
-<h1 id="如何使用"><a href="#如何使用" class="headerlink" title=" 如何使用"></a> 如何使用</h1><p>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如构建examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,如何执行<code>sh ../../binshell/make_server.sh ../../</code></p>
-<p>调用 binshell&#x2F;make_server.sh 传入1个参数。<br>skynetfly_path的相对路径。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>后续可能增加一键构建服务模板，一键构建db model等等。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
+<h3 id="大厅"><a href="#大厅" class="headerlink" title="大厅"></a>大厅</h3><ul>
+<li><p><code>init(interface_mgr)</code>,初始化。<br>参数：<br><code>interface_mgr</code>是主动接口入口。</p>
+</li>
+<li><p><code>unpack(msg,sz)</code>,解包。<br>参数：<br><code>msg</code> 网络包消息。<br><code>sz</code> 网络包长度。</p>
+</li>
+<li><p><code>send(gate,fd,packname,pack_body)</code>，发包函数。<br>参数：<br><code>gate</code> 网关服务id。<br><code>fd</code> 连接绑定的id。<br><code>packname</code>包名。<br><code>pack_body</code>包内容。</p>
+</li>
+<li><p><code>connect(player_id)</code>,连接大厅。<br>参数：<br><code>player_id</code>玩家id。</p>
+</li>
+</ul>
+<p>返回值：<br>不同意连接：<br><code>false</code><br><code>errorcode</code>失败错误码。<br><code>errormsg</code>失败消息内容。<br>传递到<code>login_faild</code></p>
+<p>同意连接：<br><code>login_res</code>连接成功内容，将传递到<code>login_succ</code></p>
+<ul>
+<li><p><code>disconnect(player_id)</code>，掉线。<br>参数：<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>reconnect(player_id)</code>，重连。<br>参数：<br><code>player_id</code>玩家id。<br>返回值：与connect相同即可。</p>
+</li>
+<li><p><code>goout(player_id)</code>，登出，也就是agent对象要被删除了。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>register_cmd</code> 注册命令表。</p>
+</li>
+</ul>
+<h3 id="分配"><a href="#分配" class="headerlink" title="分配"></a>分配</h3><ul>
+<li><p><code>init(interface_mgr)</code>,初始化。<br>参数：<br><code>interface_mgr</code>是主动接口入口。</p>
+</li>
+<li><p><code>match(player_id)</code>，匹配。<br>参数：<br><code>player_id</code>玩家id。</p>
+</li>
+</ul>
+<p>返回值：<br>匹配到：尝试进入桌子。<br><code>table_id</code><br>没有匹配到:会尝试创建新桌子。<br><code>nil</code></p>
+<ul>
+<li><p><code>createtable(table_name, table_id, config, create_player_id)</code>创建桌子<br>参数：<br><code>table_name</code>桌子名称，也就是mod_config参数里面填的instance_name。<br><code>table_id</code>桌子唯一id。<br><code>config</code> 桌子在mod_config中的填写的配置。<br><code>create_player_id</code>创建人，match匹配的创建人没有，表示是系统创建的。</p>
+</li>
+<li><p><code>entertable(table_id,player_id)</code>玩家进入桌子。<br>参数：<br><code>table_id</code>桌子唯一id。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>leavetable(table_id,player_id)</code>离开桌子。<br>参数：<br><code>table_id</code>桌子唯一id。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>dismisstable(table_id)</code>解散桌子，所有玩家都离开后，调用。<br>参数：<br><code>table_id</code>桌子唯一id。<br><code>player_id</code>玩家id。</p>
+</li>
+<li><p><code>tablefull()</code> 桌子已满，创建桌子触发<br>返回值<br><code>false</code><br><code>errorcode</code>失败错误码。<br><code>errormsg</code>失败消息内容。</p>
+</li>
+<li><p><code>table_not_exists()</code> 桌子不存在，进入桌子触发<br>返回值<br><code>false</code><br><code>errorcode</code>失败错误码。<br><code>errormsg</code>失败消息内容。</p>
+</li>
+<li><p><code>register_cmd</code> 注册命令表。</p>
+</li>
+</ul>
+<h3 id="桌子"><a href="#桌子" class="headerlink" title="桌子"></a>桌子</h3><ul>
+<li><p><code>init(interface_mgr)</code>,初始化。<br>参数：<br><code>interface_mgr</code>是主动接口入口。</p>
+</li>
+<li><p><code>send(gate,fd,packname,pack_body)</code>，发包函数。<br>参数：<br><code>gate</code> 网关服务id。<br><code>fd</code> 连接绑定的id。<br><code>packname</code>包名。<br><code>pack_body</code>包内容。</p>
+</li>
+<li><p><code>table_creator(table_id)</code>桌子创建者。<br>参数：<br><code>table_id</code>新建的table_id。</p>
+</li>
+</ul>
+<p>返回值：<br>table<br>字段：<br><code>enter(player_id)</code>,进入玩家。<br>参数：<br><code>player_id</code> 玩家id。<br>返回值：<br>成功：<br><code>true</code><br>失败：<br><code>false</code><br><code>errorcode</code>失败错误码。<br><code>errormsg</code>失败消息内容。</p>
+<p><code>leave(player_id)</code>，离开玩家。<br>参数：<br><code>player_id</code> 玩家id。<br>返回值：<br>成功：<br><code>true</code><br>失败：<br><code>false</code><br><code>errorcode</code>失败错误码。<br><code>errormsg</code>失败消息内容。</p>
+<p><code>disconnect(player_id)</code>，玩家掉线。<br>参数：<br><code>player_id</code> 玩家id。</p>
+<p><code>reconnect(player_id)</code>，重连。<br>参数：<br><code>player_id</code> 玩家id。</p>
+<p><code>handle</code> 消息处理表<br>table<br>key <code>packname</code>包名<br>value <code>handle_func(player_id,packname,pack_body)</code>处理函数<br>参数：<br><code>player_id</code>玩家id。<br><code>packname</code>包名。<br><code>pack_body</code>包内容。</p>
+<ul>
+<li><code>register_cmd</code> 注册命令表。</li>
+</ul>
+<h2 id="主动调用接口"><a href="#主动调用接口" class="headerlink" title="主动调用接口"></a>主动调用接口</h2><h3 id="登录-1"><a href="#登录-1" class="headerlink" title="登录"></a>登录</h3><p><code>is_online(player_id)</code>是否在线。<br><code>send_msg(player_id,packname,pack_body)</code>发送消息。<br><code>send_msg_by_player_list(player_list,packname,pack_body)</code>发送消息给部分玩家。<br><code>broad_cast_msg(packname,pack_body)</code>广播发送消息。</p>
+<h3 id="大厅-1"><a href="#大厅-1" class="headerlink" title="大厅"></a>大厅</h3><p><code>is_online(player_id)</code>是否在线。<br><code>create_join_table(player_id,table_name)</code>创建进入房间。<br><code>match_join_table(player_id,table_name)</code>匹配进入房间。<br><code>join_table(player_id,table_name,table_id)</code>进入房间。<br><code>leave_table(player_id,table_name,table_id)</code>离开桌子。<br><code>goout(player_id)</code>登出。<br><code>handle(packname,func)</code>设置消息处理函数。</p>
+<h3 id="分配-1"><a href="#分配-1" class="headerlink" title="分配"></a>分配</h3><p>暂无</p>
+<h3 id="桌子-1"><a href="#桌子-1" class="headerlink" title="桌子"></a>桌子</h3><p><code>new(table_id)</code>创建绑定table_id的接口对象。<br><code>kick_out_all()</code>踢出该桌子所有玩家。<br><code>kick_player(player_id)</code>踢出单个玩家。<br><code>send_msg(player_id,packname,pack_body)</code>发送消息。<br><code>send_msg_by_player_list(player_list,packname,pack_body)</code>发送消息给部分玩家。<br><code>broad_cast_msg(packname,pack_body)</code>广播发送消息。<br><code>send_hall(player_id,cmd,...)</code>用send的方式给大厅发消息。<br><code>call_hall(player_id,cmd,...)</code>用call的方式给大厅发消息。<br><code>send_alloc(cmd,...)</code>用send的方式给分配服发消息。<br><code>call_alloc(cmd,...)</code>用call的方式给分配服发消息。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过优化架构，提高了架构易用性，扩展性和使用便捷性。</p>
 
                 
               </div>
@@ -505,8 +565,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于skynet_fly的一键构建服务配置</div>
-      <div>https://huahua132.github.io/2023/06/30/skynet_fly/关于skynet_fly的一键构建服务配置/</div>
+      <div>关于room_game可热更匹配房间类游戏架构的优化</div>
+      <div>https://huahua132.github.io/2023/10/14/skynet_fly/room_game_up/</div>
     </div>
     <div class="license-meta">
       
@@ -518,7 +578,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月30日</div>
+          <div>2023年10月14日</div>
         </div>
       
       
@@ -550,18 +610,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于skynet_fly热更新实现</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新">
-                        <span class="hidden-mobile">关于skynet做服务热更新</span>
+                      <a href="/2023/10/10/think/reload_error/" title="skynet_fly热更新存在的问题">
+                        <span class="hidden-mobile">skynet_fly热更新存在的问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
