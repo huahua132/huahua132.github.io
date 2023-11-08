@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-06T11:22:49.000Z">
-<meta property="article:modified_time" content="2023-10-30T10:02:38.719Z">
+<meta property="article:modified_time" content="2023-11-08T01:37:21.772Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -388,7 +388,7 @@
 <h1 id="旧服务何时销毁退出"><a href="#旧服务何时销毁退出" class="headerlink" title="旧服务何时销毁退出"></a>旧服务何时销毁退出</h1><pre><code class="hljs">之前旧服务被新服务顶替之后，就可以确定自己不再会新的访问者了，现在是可能存在访问者，不能再像之前一样只需要判断自己还有没有需要处理的数据。
 </code></pre>
 <ul>
-<li><p><strong>解决方案</strong><br>  记录来访者地址，检查是否可以退出时，询问来访者是否也打算退出或者已经退出了，当所有来访者都退出了，说明此服务可以退出了。这种处理方式有<strong>环问题</strong>。</p>
+<li><p><strong>解决方案</strong><br>  记录来访者地址，检查是否可以退出时，询问来访者是否不需要访问自己了或者已经退出了，当所有来访者都退出了，说明此服务可以退出了。这种处理方式有<strong>环问题</strong>。</p>
 </li>
 <li><p><strong>边界问题</strong></p>
 <ol>
