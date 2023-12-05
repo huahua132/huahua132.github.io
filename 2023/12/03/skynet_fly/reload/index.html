@@ -16,20 +16,20 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。  实现思路可以先看看这篇关于skynet_fly热更新实现 整体还是围绕容器管理员,容器客户端,可热更服务展开。 职责 容器管理员 负责启动，通知关闭，通知更新 容器客户端 负责注册访问，监听，服务切换，记录需要访问，回复是否需要访问 可热更服务 负责记录来访，检查">
+    <meta name="description" content="前言由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。 实现思路可以先看看这篇关于skynet_fly热更新实现 整体还是围绕容器管理员,容器客户端,可热更服务展开。 职责 容器管理员 负责启动，通知关闭，通知更新 容器客户端 负责注册访问，监听，服务切换，记录需要访问，回复是否需要访问 可热更服务 负责记录来访，检查安">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于skynet_fly热更新实现细节">
 <meta property="og:url" content="https://huahua132.github.io/2023/12/03/skynet_fly/reload/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。  实现思路可以先看看这篇关于skynet_fly热更新实现 整体还是围绕容器管理员,容器客户端,可热更服务展开。 职责 容器管理员 负责启动，通知关闭，通知更新 容器客户端 负责注册访问，监听，服务切换，记录需要访问，回复是否需要访问 可热更服务 负责记录来访，检查">
+<meta property="og:description" content="前言由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。 实现思路可以先看看这篇关于skynet_fly热更新实现 整体还是围绕容器管理员,容器客户端,可热更服务展开。 职责 容器管理员 负责启动，通知关闭，通知更新 容器客户端 负责注册访问，监听，服务切换，记录需要访问，回复是否需要访问 可热更服务 负责记录来访，检查安">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/cluster_rpc.png">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/reload.png">
 <meta property="article:published_time" content="2023-12-03T06:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-05T11:38:42.049Z">
+<meta property="article:modified_time" content="2023-12-05T11:49:36.573Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/cluster_rpc.png">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/reload.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -432,8 +432,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><pre><code class="hljs">由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。
-</code></pre>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。</p>
 <h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>可以先看看这篇<a href="https://huahua132.github.io/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">关于skynet_fly热更新实现</a></p>
 <p>整体还是围绕<strong>容器管理员</strong>,<strong>容器客户端</strong>,<strong>可热更服务</strong>展开。</p>
 <h1 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h1><ul>
@@ -442,10 +441,10 @@
 <li><strong>可热更服务</strong> 负责<strong>记录来访</strong>，<strong>检查安全退出</strong></li>
 </ul>
 <h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><p><strong>容器管理员</strong>查看有没有旧服务，有的话<strong>通知关闭</strong>，然后<strong>启动</strong>新服务，<strong>通知更新</strong>（监听的<strong>容器客户端</strong>）更新地址。</p>
-<h2 id="访问流程"><a href="#访问流程" class="headerlink" title="访问流程"></a>访问流程</h2><p><strong>容器客户端</strong> 在加载代码阶段提供好注册表，在skynet.init阶段启动根据注册表启动多个监控循环进行<strong>注册访问</strong>，<strong>监听</strong>地址更新，<strong>记录需要访问</strong>的地址。访问实例直接引用本地记录地址进行消息发送，根据访问实例提供的<code>can_switch_func</code>服务切换检查来决定是否进去<strong>服务切换</strong>。<strong>记录需要访问</strong>的地址使用弱引用表记录，当没有任何访问实例引用时，说明不在需要访问该地址。当需要退出的<strong>可热更服务</strong>来询问是否需要访问它是，它就已经不在<strong>记录需要访问</strong>的表里了（<strong>回复是否需要访问</strong>）。</p>
+<h2 id="访问流程"><a href="#访问流程" class="headerlink" title="访问流程"></a>访问流程</h2><p><strong>容器客户端</strong> 在加载代码阶段提供好注册表，在skynet.init启动阶段根据注册表启动多个监控循环进行<strong>注册访问</strong>，<strong>监听</strong>地址更新，<strong>记录需要访问</strong>的地址。访问实例直接引用本地记录地址进行消息发送，根据访问实例提供的<code>can_switch_func</code>服务切换检查来决定是否进行<strong>服务切换</strong>。<strong>记录需要访问</strong>的地址使用弱引用表记录，当没有任何访问实例引用时，说明不在需要访问该地址。当需要退出的<strong>可热更服务</strong>来询问是否需要访问它是，它就已经不在<strong>记录需要访问</strong>的表里了（<strong>回复是否需要访问</strong>）。</p>
 <h2 id="退出流程"><a href="#退出流程" class="headerlink" title="退出流程"></a>退出流程</h2><p><strong>可热更服务</strong> 在被<strong>通知关闭</strong>后会启动一个定时轮询任务做<strong>检查安全退出</strong>的流程,检查流程分为两步，1是调用本服务的<code>check_exit</code>函数，看本服务的工作结束没有，如果结束，再看条件2询问来访者是否还需要访问自己（<strong>记录来访</strong>的目的），当全部不需要了，确认服务可以退出。</p>
-<h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><p><img src="/img/skynet_fly/cluster_rpc.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="细节展开"><a href="#细节展开" class="headerlink" title="细节展开"></a>细节展开</h1><h2 id="容器管理员"><a href="#容器管理员" class="headerlink" title="容器管理员"></a><strong>容器管理员</strong></h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a><strong>启动</strong></h3><p>因为热更过程中，假设A服务先热更，A服务有可能访问到旧的B服务(<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">AB问题</a>)，所以<strong>容器管理员</strong>必须保证没有重入问题，我才用了skynet.queue做保证。</p>
+<h1 id="流程图"><a href="#流程图" class="headerlink" title="流程图"></a>流程图</h1><p><img src="/img/skynet_fly/reload.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="细节展开"><a href="#细节展开" class="headerlink" title="细节展开"></a>细节展开</h1><h2 id="容器管理员"><a href="#容器管理员" class="headerlink" title="容器管理员"></a><strong>容器管理员</strong></h2><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a><strong>启动</strong></h3><p>因为热更过程中，假设A服务先热更，A服务有可能访问到旧的B服务(<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">AB问题</a>)，所以<strong>容器管理员</strong>必须保证没有重入问题，我使用了skynet.queue来做保证。</p>
 <h3 id="通知关闭"><a href="#通知关闭" class="headerlink" title="通知关闭"></a><strong>通知关闭</strong></h3><p>通知旧服务关闭我分为了<code>herald_exit</code>预告退出，<code>fix_exit</code>确认退出，<code>exit</code>退出，<code>check_exit</code>检查退出，<code>cancel_exit</code>取消退出5个回调为什么要分这么细，肯定是有原因了，一开始只有一个<code>exit</code>的回调。</p>
 <ul>
 <li><strong>herald_exit 预告退出</strong> 由于有些服务需要退出前做一些处理，比如我实现的web_master_m&#x2F;web_slave_m模块，web_master_m会监听一个端口，当web_master_m要热更时，旧服务需要先关闭监听端口，让新服务去监听。</li>
@@ -458,7 +457,7 @@
 <h2 id="容器客户端"><a href="#容器客户端" class="headerlink" title="容器客户端"></a><strong>容器客户端</strong></h2><ul>
 <li><p><strong>注册访问</strong> 为了解决<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">迟到访问问题</a>,访问服务之前要先注册<code>contriner_client:register</code>，确定服务启动好就知道需要访问哪些服务。比较特殊的情况是<code>cluster_server</code>集群服务，一开始并不知道需要访问哪些服务，就需要按照全部都访问的逻辑处理，但是可能存在服务不重启就新增模块的情况，就需要动态的去扩展，于是就新增了<code>monitor_new</code>监听新模块的流程，通过调用<code>contriner_client:monitor_all()</code>就可以监听所有热更服务的地址,用于解决这种情况。</p>
 </li>
-<li><p><strong>监听</strong> 通过sub&#x2F;pub机制保证一直能拿到新的地址。由于成为旧服务的时候，不能去访问新访问，此后不在更新服务地址。</p>
+<li><p><strong>监听</strong> 通过sub&#x2F;pub机制保证一直能拿到新的地址。由于成为旧服务的时候，不能去访问新服务，此后不在更新服务地址。</p>
 </li>
 <li><p><strong>服务切换</strong> 服务切换由<code>new</code>生成的访问实例传入的<code>can_switch_func</code>控制，不传默认切换。使用者自己考量。</p>
 </li>
