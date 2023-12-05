@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言skynet lua服务默认启动加载是使用skynet&#x2F;lualib&#x2F;loader.lua，loader.lua 会加载并执行config中配置的preload路径的lua文件，这个操作的好处是可以把所有服务的一些前置环境操作，或者一些常用工具函数写到全局变量中(我更倾向于封装成工具模块通过require引用，不去污染全局环境，尽量保持原生环境)。在skynet_fly框架中，我就利用prel">
+    <meta name="description" content="前言最近在skynet_fly_demo中尝试用skynet_fly后台管理，想通过后台监控服务器的历史运行状况,服务实时信息，错误日志报警，等等。历史运行状况,服务实时信息这两个通过skynet的debug_console再加上我封装的集群，很方便的就做好了。之后考虑错误日志报警的问题,错误日志分为主动打印的异常日志和被动触发lua断言错误。  主动打印的异常日志 这个好解决，我封装的log模块">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于增加skynet_fly lua服务启动的后置加载">
-<meta property="og:url" content="https://huahua132.github.io/2023/08/20/skynet_fly/after_load/index.html">
+<meta property="og:title" content="关于增加skynet_fly 日志服务">
+<meta property="og:url" content="https://huahua132.github.io/2023/11/19/skynet_fly/logservice/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言skynet lua服务默认启动加载是使用skynet&#x2F;lualib&#x2F;loader.lua，loader.lua 会加载并执行config中配置的preload路径的lua文件，这个操作的好处是可以把所有服务的一些前置环境操作，或者一些常用工具函数写到全局变量中(我更倾向于封装成工具模块通过require引用，不去污染全局环境，尽量保持原生环境)。在skynet_fly框架中，我就利用prel">
+<meta property="og:description" content="前言最近在skynet_fly_demo中尝试用skynet_fly后台管理，想通过后台监控服务器的历史运行状况,服务实时信息，错误日志报警，等等。历史运行状况,服务实时信息这两个通过skynet的debug_console再加上我封装的集群，很方便的就做好了。之后考虑错误日志报警的问题,错误日志分为主动打印的异常日志和被动触发lua断言错误。  主动打印的异常日志 这个好解决，我封装的log模块">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-20T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-14T03:01:21.757Z">
+<meta property="article:published_time" content="2023-11-19T06:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-04T09:18:01.667Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于增加skynet_fly lua服务启动的后置加载 - huahua132 blog</title>
+  <title>关于增加skynet_fly 日志服务 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于增加skynet_fly lua服务启动的后置加载"></span>
+            <span id="subtitle" data-typed-text="关于增加skynet_fly 日志服务"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-20 08:00" pubdate>
-          2023年8月20日 早上
+        <time datetime="2023-11-19 14:00" pubdate>
+          2023年11月19日 下午
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          2.6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          14 分钟
+          22 分钟
         
       </span>
     
@@ -365,7 +365,7 @@
       
         <a href="/2023/08/20/skynet_fly/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
         </a>
       
@@ -383,7 +383,7 @@
       
         <a href="/2023/11/19/skynet_fly/logservice/" title="关于增加skynet_fly 日志服务"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">关于增加skynet_fly 日志服务</span>
         </a>
       
@@ -425,49 +425,26 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于增加skynet_fly lua服务启动的后置加载</h1>
+            <h1 style="display: none">关于增加skynet_fly 日志服务</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>skynet lua服务默认启动加载是使用<code>skynet/lualib/loader.lua</code>，<code>loader.lua</code> 会加载并执行<code>config</code>中配置的preload路径的lua文件，这个操作的好处是可以把所有服务的一些前置环境操作，或者一些常用工具函数写到全局变量中(我更倾向于封装成工具模块通过<code>require</code>引用，不去污染全局环境，尽量保持原生环境)。在skynet_fly框架中，我就利用preload做了<code>luapath</code>的设置来达到不用手写path的目的。在这之前我都没有想改动<code>preload</code>的想法，直到有一天，我萌生了想给<code>skynet_fly</code>日志增加钩子函数的想法，因为在工作中也在严重日志中增加了邮件推送，不过是直接修改的日志服务，不满足开闭原则，不够优雅。</p>
-<h2 id="增加日志钩子函数"><a href="#增加日志钩子函数" class="headerlink" title="增加日志钩子函数"></a>增加日志钩子函数</h2><p>那么如何给日志服务增加钩子函数又满足开闭原则呢？，我目前能想到的，有两种方案。</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>在log服务中实现钩子函数。<br>业务层弃用<strong>skynet logger原生日志服务</strong>，改用<strong>lua自定义日志服务</strong>并在logger服务启动后利用消息的方式通知logger服务需要加载哪些钩子函数文件实现。</p>
-<ul>
-<li><p><strong>优势</strong></p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在skynet_fly_demo中尝试用skynet_fly后台管理，想通过后台监控服务器的<code>历史运行状况</code>,<code>服务实时信息</code>，<code>错误日志报警</code>，等等。<code>历史运行状况</code>,<code>服务实时信息</code>这两个通过skynet的debug_console再加上我封装的集群，很方便的就做好了。之后考虑<code>错误日志报警的问题</code>,错误日志分为<code>主动打印的异常日志</code>和<code>被动触发lua断言错误</code>。</p>
 <ol>
-<li>钩子函数由日志服务执行，业务逻辑不用处理，不影响业务服务吞吐量。</li>
+<li><strong>主动打印的异常日志</strong> 这个好解决，我封装的<code>log</code>模块提供了hook钩子函数，可以截获到日志打印。</li>
+<li><strong>被动触发lua断言错误</strong> 由于在c层调用的<code>pcall</code>断言直接调用的skynet_error日志打印，没有经过我的自定义log模块，没办法截获。目前能想到的有两种方案。<ol>
+<li>修改<code>lua</code>dispath消息分发的地方，再用一次pcall包裹，出错后使用<code>log</code>模块打印日志。<br> <strong>优点</strong><br> 可以使用lua层的log服务，效率高一些。<br> <strong>缺点</strong><br> 截获点是发送日志消息的服务，截获点分散。</li>
+<li>在<code>lua</code>层实现log服务，这样所有日志都可以截获处理了。<br> <strong>优点</strong><br> 截获点统一。<br> <strong>缺点</strong><br> lua效率慢一些。</li>
 </ol>
 </li>
-<li><p><strong>劣势</strong></p>
-<ol>
-<li>用lua写日志服务性能远远低于c层的日志服务，c比lua快10倍。</li>
-<li>skynet原生大量代码依赖原生日志服务，如果自定义要么保留原生日志，要么修改大量源码。</li>
-<li>想要利用signal_hup信号来切割日志也需要修改源码。</li>
 </ol>
-</li>
-</ul>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>在log模块中实现钩子函数。<br>log模块中简单的调用增加钩子函数的API,在<strong>preload</strong>中设置钩子函数，这样每个启动lua服务都挂上钩子函数。</p>
-<ul>
-<li><p><strong>优势</strong></p>
-<ol>
-<li>最小改动。</li>
-</ol>
-</li>
-<li><p><strong>劣势</strong></p>
-<ol>
-<li>增加了业务层log的调用开销。</li>
-</ol>
-</li>
-</ul>
-<p>通过对比两种<strong>方案</strong>，我选用了方案二，原因如下：<br>    1. 尽量保持skynet源码不改动。<br>    2. c实现的日志服务速度更快。</p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>在使用preload去加载钩子函数的时候，想到这个是偏业务的实现，并不是所有项目都要在log日志外挂一个钩子函数，也可能每个项目钩子函数实现不同，这时候有人可能会想到，skynet中的preload不是可以配置的吗，但是我想大部分项目都依赖一个preload文件，突然有一个项目不同，岂不是要拷贝一份再新增不同，或者全部堆叠在一个文件中，我觉得这是很糟糕的设计。不满足开闭原则，本身skynet_fly项目就需要依赖框架的preload.lua文件，当然有个解决方案就是在自定义的preload中再次load preload.lua，手动链式依赖。但是我不想这样设计，我希望我用代码生成config能不手改就不手改，况且这个还是路径，手写挺麻烦的。解决这个问题很简单，把前置加载单个文件，改为前置加载多个文件，skynet_fly默认加载框架的<code>preload.lua</code>，其他项目需要额外加载只需要在main.lua中显示增加。这里又想到了preload有个不好的地方，preload中<code>require</code>的文件是不能热更的，应该在这之前还没有调用<code>skynet.codecache off</code>。所以就想着增加<code>afterload</code>,afterload是lua服务最后加载的，如果是可热更模块已经执行了<code>skynet.codecache off</code>。</p>
-<h1 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h1><p>加载顺序是preload-main-afterload<br>可想而知afterload执行代码，不可能在main<code>require</code>期间生效。</p>
-<h1 id="改动"><a href="#改动" class="headerlink" title="改动"></a>改动</h1><p>后续发现在loader中就关闭cache，这样preload中的require也能检测热更了。</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><pre><code class="hljs">skynet_fly/examples/log_hook
-skynet_fly/examples/pre_after_load
-</code></pre>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>修改了preload和afterload能让skynet_fly在微服务多项目架构增加更多的灵活性和扩展性。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
+<p>由于日志报警功能通常都需要做CD，相同的异常都不会让它一直报，所以我选择第二种方案。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> skynet_util = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet_util&quot;</span><br><span class="hljs-keyword">local</span> file_util = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;file_util&quot;</span><br><span class="hljs-keyword">local</span> time_util = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;time_util&quot;</span><br><span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet.manager&quot;</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">os</span> = <span class="hljs-built_in">os</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">io</span> = <span class="hljs-built_in">io</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">error</span> = <span class="hljs-built_in">error</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">assert</span> = <span class="hljs-built_in">assert</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">print</span> = <span class="hljs-built_in">print</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">string</span> = <span class="hljs-built_in">string</span><br><span class="hljs-keyword">local</span> math_floor = <span class="hljs-built_in">math</span>.<span class="hljs-built_in">floor</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">type</span> = <span class="hljs-built_in">type</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">table</span> = <span class="hljs-built_in">table</span><br><br><span class="hljs-keyword">local</span> SELF_ADDRESS = skynet.<span class="hljs-built_in">self</span>()<br><br><span class="hljs-keyword">local</span> file = <span class="hljs-literal">nil</span><br><span class="hljs-keyword">local</span> file_path = skynet.<span class="hljs-built_in">getenv</span>(<span class="hljs-string">&#x27;logpath&#x27;</span>)<br><span class="hljs-keyword">local</span> file_name = skynet.<span class="hljs-built_in">getenv</span>(<span class="hljs-string">&#x27;logfilename&#x27;</span>)<br><span class="hljs-keyword">local</span> daemon = skynet.<span class="hljs-built_in">getenv</span>(<span class="hljs-string">&#x27;daemon&#x27;</span>)<br><span class="hljs-keyword">local</span> hook_hander_list = &#123;&#125;<br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">open_file</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> daemon <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">if</span> file <span class="hljs-keyword">then</span><br>        file:<span class="hljs-built_in">close</span>()<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-built_in">print</span>(file_path,file_name)<br>    <span class="hljs-built_in">os</span>.<span class="hljs-built_in">execute</span>(<span class="hljs-string">&#x27;mkdir -p &#x27;</span> .. file_path)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">os</span>.<span class="hljs-built_in">execute</span>(<span class="hljs-string">&quot;mkdir -p &quot;</span> .. file_path) <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;create dir err&quot;</span>)<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">local</span> file_p = file_util.path_join(file_path,file_name)<br>    file = <span class="hljs-built_in">io</span>.<span class="hljs-built_in">open</span>(file_p, <span class="hljs-string">&#x27;a+&#x27;</span>)<br>    <span class="hljs-built_in">assert</span>(file, <span class="hljs-string">&quot;can`t open file &quot;</span> .. file_p)<br><span class="hljs-keyword">end</span><br><br>skynet.register_protocol &#123;<br>	name = <span class="hljs-string">&quot;text&quot;</span>,<br>	id = skynet.PTYPE_TEXT,<br>	<span class="hljs-built_in">unpack</span> = skynet.<span class="hljs-built_in">tostring</span>,<br>	dispatch = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(_, address, msg)</span></span><br>        <span class="hljs-keyword">local</span> cur_time = time_util.skynet_int_time()<br>        <span class="hljs-keyword">local</span> second,m = math_floor(cur_time / <span class="hljs-number">100</span>), cur_time % <span class="hljs-number">100</span><br>        <span class="hljs-keyword">local</span> time_date = <span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&#x27;[%Y%m%d:%H:%M:%S &#x27;</span>,second)<br>        <span class="hljs-keyword">local</span> log_str = time_date .. m .. <span class="hljs-string">&#x27;]&#x27;</span> .. msg<br>        <span class="hljs-keyword">if</span> file <span class="hljs-keyword">then</span><br>            file:<span class="hljs-built_in">write</span>(log_str .. <span class="hljs-string">&#x27;\n&#x27;</span>)<br>            file:<span class="hljs-built_in">flush</span>()<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-built_in">print</span>(log_str)<br>        <span class="hljs-keyword">end</span><br><br>        <span class="hljs-keyword">if</span> address ~= SELF_ADDRESS <span class="hljs-keyword">then</span><br>            <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>,#hook_hander_list <span class="hljs-keyword">do</span><br>                hook_hander_list[i](msg)<br>            <span class="hljs-keyword">end</span><br>        <span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br>&#125;<br><br>skynet.register_protocol &#123;<br>	name = <span class="hljs-string">&quot;SYSTEM&quot;</span>,<br>	id = skynet.PTYPE_SYSTEM,<br>	<span class="hljs-built_in">unpack</span> = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(...)</span></span> <span class="hljs-keyword">return</span> ... <span class="hljs-keyword">end</span>,<br>	dispatch = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>		<span class="hljs-comment">-- reopen signal</span><br>        open_file()<br>	<span class="hljs-keyword">end</span><br>&#125;<br><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.add_hook</span><span class="hljs-params">(file_name)</span></span><br>    <span class="hljs-keyword">local</span> func = <span class="hljs-built_in">require</span>(file_name)<br>    <span class="hljs-built_in">assert</span>(<span class="hljs-built_in">type</span>(func) == <span class="hljs-string">&#x27;function&#x27;</span>, <span class="hljs-string">&quot;err file &quot;</span> .. file_name)<br>    <span class="hljs-built_in">table</span>.<span class="hljs-built_in">insert</span>(hook_hander_list, func)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br>skynet.start(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>    open_file()<br>    skynet_util.lua_dispatch(CMD,&#123;&#125;)<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
+
+<p>只需要lua的log服务新增一个add_hook命令。需要截获调用命令即可。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过增加log日志服务并且提供截获处理的方式，进一步提高了skynet_fly框架的业务灵活性。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
 
                 
               </div>
@@ -513,8 +490,8 @@ skynet_fly/examples/pre_after_load
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于增加skynet_fly lua服务启动的后置加载</div>
-      <div>https://huahua132.github.io/2023/08/20/skynet_fly/after_load/</div>
+      <div>关于增加skynet_fly 日志服务</div>
+      <div>https://huahua132.github.io/2023/11/19/skynet_fly/logservice/</div>
     </div>
     <div class="license-meta">
       
@@ -526,7 +503,7 @@ skynet_fly/examples/pre_after_load
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月20日</div>
+          <div>2023年11月19日</div>
         </div>
       
       
@@ -558,9 +535,9 @@ skynet_fly/examples/pre_after_load
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/03/record/blog/" title="blog编写环境搭建">
+                      <a href="/2023/12/03/skynet_fly/reload/" title="关于skynet_fly热更新实现细节">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">blog编写环境搭建</span>
+                        <span class="hidden-mobile">关于skynet_fly热更新实现细节</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -568,8 +545,8 @@ skynet_fly/examples/pre_after_load
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/12/record/linux/" title="linux系统常用命令记录">
-                        <span class="hidden-mobile">linux系统常用命令记录</span>
+                      <a href="/2023/10/22/skynet_fly/time_point/" title="关于新增定时器的扩展 整点报时">
+                        <span class="hidden-mobile">关于新增定时器的扩展 整点报时</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

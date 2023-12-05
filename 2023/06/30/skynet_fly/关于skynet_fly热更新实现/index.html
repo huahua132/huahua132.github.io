@@ -24,7 +24,7 @@
 <meta property="og:description" content="实现思路可以先看看这篇关于skynet做服务热更新这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skynet.codecache，这样launch新">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-14T02:16:48.622Z">
+<meta property="article:modified_time" content="2023-12-05T06:20:56.235Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly
-        <span class="list-group-count">(10)</span>
+        <span class="list-group-count">(12)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -345,6 +345,15 @@
     
       
       
+        <a href="/2023/12/03/skynet_fly/reload/" title="关于skynet_fly热更新实现细节"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
            class="list-group-item list-group-item-action
            ">
@@ -367,6 +376,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/19/skynet_fly/logservice/" title="关于增加skynet_fly 日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
         </a>
       
     
@@ -579,9 +597,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/02/skynet_fly/timer/" title="关于定时器的封装">
+                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于定时器的封装</span>
+                        <span class="hidden-mobile">关于skynet_fly的一键构建服务配置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -589,8 +607,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置">
-                        <span class="hidden-mobile">关于skynet_fly的一键构建服务配置</span>
+                      <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新">
+                        <span class="hidden-mobile">关于skynet做服务热更新</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
