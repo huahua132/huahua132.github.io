@@ -24,7 +24,7 @@
 <meta property="og:description" content="实现思路可以先看看这篇关于skynet做服务热更新这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skynet.codecache，这样launch新">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-05T06:20:56.235Z">
+<meta property="article:modified_time" content="2023-12-06T03:49:28.157Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.2k 字
+          5.8k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          52 分钟
+          49 分钟
         
       </span>
     
@@ -439,7 +439,7 @@
 </li>
 </ul>
 <ul>
-<li><p><strong>启动热更服务</strong><br>  <code>load_modules MODULE_NAME</code>,通过传入module_name,contriner_mgr会加载<strong>mod_config.lua</strong>,拿到此模板的配置，然后启动服务，启动完毕再通知旧服务<strong>exit</strong>，接下给监听的服务下发新的服务id和版本号。mod_config.lua初始定义在load_mods.lua文件中。</p>
+<li><p><strong>启动热更服务</strong><br>  <code>load_modules MODULE_NAME</code>,通过传入module_name,contriner_mgr会加载<strong>loadmodsfile</strong>配置的文件,拿到此模板的配置，然后启动服务，启动完毕再通知旧服务<strong>exit</strong>，接下给监听的服务下发新的服务id和版本号。</p>
 </li>
 <li><p><strong>关闭热更服务</strong><br>  <code>kill_module MODULE_NAME</code>，比如我们产品可能有些功能不要了，就可以关闭该服务了。</p>
 </li>
@@ -482,7 +482,7 @@
 <ul>
 <li><strong>如何启动</strong><ul>
 <li>第一步启动<strong>容器管理员</strong>。</li>
-<li>第二步编写<code>load_mods.lua</code>,之后通过make_server脚本，创建mod_config.lua，也就是热更模块的配置，我希望<strong>热更模块</strong>是可插拔配置启动的，不需要去手写代码启动。<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>	service_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">1</span>,<br>		mod_args = <span class="hljs-literal">nil</span>,<br>		default_arg = &#123;<br>			player_num = <span class="hljs-number">2</span>,<br>			min_num = <span class="hljs-number">1</span>,<br>			max_num = <span class="hljs-number">100</span>,<br>		&#125;<br>	&#125;,<br><br>	agent_m = &#123;<br>		launch_seq = <span class="hljs-number">2</span>,<br>		launch_num = <span class="hljs-number">2</span>,<br>		mod_args = &#123;<br>			&#123;<br>				player_id = <span class="hljs-number">10001</span>,<br>				nickname = <span class="hljs-string">&quot;张三&quot;</span>,<br>			&#125;,<br>			&#123;<br>				player_id = <span class="hljs-number">10004</span>,<br>				nickname = <span class="hljs-string">&quot;李四&quot;</span>,<br>				hello = &#123;a = <span class="hljs-number">1</span>,b = <span class="hljs-number">2</span>&#125;<br>			&#125;,<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<li>第二步编写<code>load_mods.lua</code>。<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>	service_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">1</span>,<br>		mod_args = <span class="hljs-literal">nil</span>,<br>		default_arg = &#123;<br>			player_num = <span class="hljs-number">2</span>,<br>			min_num = <span class="hljs-number">1</span>,<br>			max_num = <span class="hljs-number">100</span>,<br>		&#125;<br>	&#125;,<br><br>	agent_m = &#123;<br>		launch_seq = <span class="hljs-number">2</span>,<br>		launch_num = <span class="hljs-number">2</span>,<br>		mod_args = &#123;<br>			&#123;<br>				player_id = <span class="hljs-number">10001</span>,<br>				nickname = <span class="hljs-string">&quot;张三&quot;</span>,<br>			&#125;,<br>			&#123;<br>				player_id = <span class="hljs-number">10004</span>,<br>				nickname = <span class="hljs-string">&quot;李四&quot;</span>,<br>				hello = &#123;a = <span class="hljs-number">1</span>,b = <span class="hljs-number">2</span>&#125;<br>			&#125;,<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 这是load_mods.lua的一个编写示例，像service_m、和agent_m是需要启动的热更模板。<br>每个模块有4个参数可以配置。</li>
 </ul>
 </li>
@@ -492,7 +492,7 @@
 <li><strong>mod_args</strong> 是一个配置数组，为了应对相同服务可能配置不通的情况。</li>
 </ul>
 <p>有了mod_config之后，我们在main.lua中通过mod_config.lua启动。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> mod_config = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;mod_config&quot;</span><br><span class="hljs-keyword">local</span> table_util = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;table_util&quot;</span><br><br>skynet.start(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	skynet.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;start hot_module5!!!&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span>)<br>	<span class="hljs-keyword">local</span> cmgr = skynet.uniqueservice(<span class="hljs-string">&#x27;contriner_mgr&#x27;</span>)<br><br>	skynet.newservice(<span class="hljs-string">&quot;debug_console&quot;</span>, skynet.<span class="hljs-built_in">getenv</span>(<span class="hljs-string">&#x27;debug_port&#x27;</span>))<br><br>	<span class="hljs-keyword">for</span> mod_name,mod_cfg <span class="hljs-keyword">in</span> table_util.sort_ipairs(mod_config,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a,b)</span></span><br>		<span class="hljs-keyword">return</span> a.launch_seq &lt; b.launch_seq<br>	<span class="hljs-keyword">end</span>) <span class="hljs-keyword">do</span><br>		skynet.call(cmgr,<span class="hljs-string">&#x27;lua&#x27;</span>,<span class="hljs-string">&#x27;load_module&#x27;</span>,mod_name)<br>	<span class="hljs-keyword">end</span><br><br>	skynet.<span class="hljs-built_in">exit</span>()<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> contriner_launcher = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_launcher&quot;</span><br><br>skynet.start(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	skynet.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;start hot_module5!!!&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span>)<br>	contriner_launcher.run()<br><br>	skynet.<span class="hljs-built_in">exit</span>()<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><p><strong>如何rpc调用</strong><br>rpc调用使用非常简单易用。</p>

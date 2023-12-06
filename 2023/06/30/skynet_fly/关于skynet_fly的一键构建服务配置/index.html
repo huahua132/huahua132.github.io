@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/dir.bmp">
 <meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-07T06:57:39.211Z">
+<meta property="article:modified_time" content="2023-12-06T03:46:45.818Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          3.6k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          34 分钟
+          30 分钟
         
       </span>
     
@@ -439,7 +439,7 @@
 <li>热更服务需要通过curl连接 debug_console服务去执行热更。</li>
 </ol>
 <p>所以这个事情必须要做。</p>
-<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>本想着能不能像go-zero框架实现一个类似一键生成工具。但是我觉得这样还要安装一个工具挺麻烦的，就直接用shell+lua的方式来写，自带的环境，方便执行。<br>实现时，不知道使用者要把skynet_fly放在那个文件夹，所有考虑了skynet_fly可以放在同磁盘任意文件夹下。<br>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如如何是examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,执行<code>sh ../../binshell/make_server.sh ../../</code><br>然后就会生成webapp_config.lua mod_config.lua script一系列执行脚本。<br>实现细节写在 <code>script</code>和<code>binshell</code>文件夹下。</p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>本想着能不能像go-zero框架实现一个类似一键生成工具。但是我觉得这样还要安装一个工具挺麻烦的，就直接用shell+lua的方式来写，自带的环境，方便执行。<br>实现时，不知道使用者要把skynet_fly放在那个文件夹，所有考虑了skynet_fly可以放在同磁盘任意文件夹下。<br>构建一个服务需要在服务根目录执行使用<code>skynet_fly_path/binshell/ skynet_fly_path svr_name thread</code>构建。<br>比如如何是examples&#x2F;webapp,你就需要先cd到examples&#x2F;webapp,执行<code>sh ../../binshell/make_server.sh ../../</code><br>然后就会生成webapp_config.lua script一系列执行脚本。<br>实现细节写在 <code>script</code>和<code>binshell</code>文件夹下。</p>
 <ul>
 <li><strong>关于生成skynet_config</strong><br>path路径生成规则都是由近到远的查找规则， 优先级 本服务svr下文件下 &gt; skynet_fly文件夹 &gt; skynet文件夹</li>
 </ul>
@@ -461,19 +461,6 @@
  <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--创建 lua文件 查找规则，优先级 server下非service文件夹 &gt; server上上级目录common文件夹非service文件夹 &gt; skynet_fly lualib下所有文件夹 &gt; skynet lualib下所以文件夹</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br>	<span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br>	<span class="hljs-keyword">local</span> skynet_path = skynet_fly_path .. <span class="hljs-string">&#x27;/skynet&#x27;</span><br>	<span class="hljs-keyword">local</span> common_path = <span class="hljs-string">&#x27;../../common&#x27;</span><br><br>	<span class="hljs-comment">--server下非service文件夹</span><br>	<span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(server_path) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--server上上级目录common所有文件夹</span><br>	lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(common_path) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--skynet_fly lualib下所有文件夹</span><br>	lua_path = lua_path .. skynet_fly_path .. <span class="hljs-string">&#x27;/lualib/?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_fly_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--skynet_fly 3rd下所以文件夹</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_fly_path .. <span class="hljs-string">&#x27;/3rd&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--skynet lualib下所以文件夹</span><br>	lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;\n&#x27;</span><br>	<span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>			lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;\n&#x27;</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
 <p> skynet_fly服务启动时会加载<code>lualib/preload.lua</code>文件，我在那里做了重新构建新的luapath，<strong>再也不用手写path啦</strong>。<br> 同时热更服务也不用担心新加的路径没有写到path中。</p>
-<ul>
-<li><p><strong>关于生成mod_config.lua</strong><br>mod_config是热更模板的配置文件，主要考虑到每个服务使用的配置参数不同，还有不想手写启动代码，而且热更新增服务可以不需要重启。<br>mod_config每次启动或者调用check_reload之后都会拷贝一份mod_config.lua.old，表示目前服务使用的配置，方便在check_reload中对比新旧mod_config，有修改更新对应热更模块。</p>
-</li>
-<li><p><strong>mod_config的重复构建</strong><br>重复构建会递归深层对比load_mods和mod_config，对比之后对于mod_config有4种情况。</p>
-</li>
-</ul>
-<ol>
-<li><code>typedef</code> 类型不同了，比如之前是number类型，现在是string类型的配置。</li>
-<li><code>reduce</code> 删除配置了，load_mods把该配置删除了。</li>
-<li><code>add</code> 增加了新配置,load_mods增加了新配置。</li>
-<li><code>valuedef</code> 值不同，比如 1改成2。</li>
-</ol>
-<p>针对4种情况，在前3种情况下都需要去同步修改mod_config，唯有4不变。</p>
 <ul>
 <li><strong>构建运维脚本</strong><br>skynet_fly会生成run.sh,restart.sh,kill_mod.sh,check_reload.sh,stop.sh一系列脚本，方便运维管理。<br>其中run.sh执行之后会生成logrotate的日志切割配置，重命名方式。通过发送hup信号。<br>重点讲一下check_reload.sh</li>
 </ul>
