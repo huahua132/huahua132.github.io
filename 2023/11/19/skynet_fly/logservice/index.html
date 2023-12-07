@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言最近在skynet_fly_demo中尝试用skynet_fly后台管理，想通过后台监控服务器的历史运行状况,服务实时信息，错误日志报警，等等。历史运行状况,服务实时信息这两个通过skynet的debug_console再加上我封装的集群，很方便的就做好了。之后考虑错误日志报警的问题,错误日志分为主动打印的异常日志和被动触发lua断言错误。  主动打印的异常日志 这个好解决，我封装的log模块">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-19T06:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-04T09:18:01.667Z">
+<meta property="article:modified_time" content="2023-12-07T06:59:24.586Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -443,7 +443,7 @@
 <ol>
 <li><strong>主动打印的异常日志</strong> 这个好解决，我封装的<code>log</code>模块提供了hook钩子函数，可以截获到日志打印。</li>
 <li><strong>被动触发lua断言错误</strong> 由于在c层调用的<code>pcall</code>断言直接调用的skynet_error日志打印，没有经过我的自定义log模块，没办法截获。目前能想到的有两种方案。<ol>
-<li>修改<code>lua</code>dispath消息分发的地方，再用一次pcall包裹，出错后使用<code>log</code>模块打印日志。<br> <strong>优点</strong><br> 可以使用lua层的log服务，效率高一些。<br> <strong>缺点</strong><br> 截获点是发送日志消息的服务，截获点分散。</li>
+<li>修改<code>lua</code>dispath消息分发的地方，再用一次pcall包裹，出错后使用<code>log</code>模块打印日志。<br> <strong>优点</strong><br> 可以使用c层的log服务，效率高一些。<br> <strong>缺点</strong><br> 截获点是发送日志消息的服务，截获点分散。</li>
 <li>在<code>lua</code>层实现log服务，这样所有日志都可以截获处理了。<br> <strong>优点</strong><br> 截获点统一。<br> <strong>缺点</strong><br> lua效率慢一些。</li>
 </ol>
 </li>
