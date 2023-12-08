@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/reload.png">
 <meta property="article:published_time" content="2023-12-03T06:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-05T11:49:36.573Z">
+<meta property="article:modified_time" content="2023-12-08T02:07:28.074Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.1k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          17 分钟
+          18 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
         aria-expanded="true"
       >
         skynet_fly
-        <span class="list-group-count">(13)</span>
+        <span class="list-group-count">(14)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -333,6 +333,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
         </a>
       
     
@@ -464,16 +473,14 @@
 </ul>
 <h3 id="通知更新"><a href="#通知更新" class="headerlink" title="通知更新"></a><strong>通知更新</strong></h3><p>watch机制能保证<strong>容器客户端</strong>一直持有最新的地址信息。</p>
 <h2 id="容器客户端"><a href="#容器客户端" class="headerlink" title="容器客户端"></a><strong>容器客户端</strong></h2><ul>
-<li><p><strong>注册访问</strong> 为了解决<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">迟到访问问题</a>,访问服务之前要先注册<code>contriner_client:register</code>，确定服务启动好就知道需要访问哪些服务。比较特殊的情况是<code>cluster_server</code>集群服务，一开始并不知道需要访问哪些服务，就需要按照全部都访问的逻辑处理，但是可能存在服务不重启就新增模块的情况，就需要动态的去扩展，于是就新增了<code>monitor_new</code>监听新模块的流程，通过调用<code>contriner_client:monitor_all()</code>就可以监听所有热更服务的地址,用于解决这种情况。</p>
-</li>
-<li><p><strong>监听</strong> 通过sub&#x2F;pub机制保证一直能拿到新的地址。由于成为旧服务的时候，不能去访问新服务，此后不在更新服务地址。</p>
-</li>
-<li><p><strong>服务切换</strong> 服务切换由<code>new</code>生成的访问实例传入的<code>can_switch_func</code>控制，不传默认切换。使用者自己考量。</p>
-</li>
-<li><p><strong>记录需要访问</strong> 每次拿到服务地址都会用弱引用表记录，当该服务地址没有强引用时，弱引用也会清除。可以很方便的记录管理需要访问的服务。</p>
-</li>
-<li><p><strong>回复是否需要访问</strong> 判断是否在记录的访问地址中。</p>
-</li>
+<li><strong>注册访问</strong> 为了解决<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">迟到访问问题</a>,访问服务之前要先注册<code>contriner_client:register</code>，确定服务启动好就知道需要访问哪些服务。比较特殊的情况是<code>cluster_server</code>集群服务，一开始并不知道需要访问哪些服务，就需要按照全部都访问的逻辑处理，但是可能存在服务不重启就新增模块的情况，就需要动态的去扩展，于是就新增了<code>monitor_new</code>监听新模块的流程，通过调用<code>contriner_client:monitor_all()</code>就可以监听所有热更服务的地址,用于解决这种情况。</li>
+</ul>
+<p><strong>特殊处理</strong> 因为普通的skynet服务不参与热更，所以它在什么时候注册访问可热更服务都可以，只是需要避免<strong>迟到访问问题</strong>，所有在服务启动好后就直接监听所有热更服务地址，就能很好的避免这个问题。</p>
+<ul>
+<li><strong>监听</strong> 通过sub&#x2F;pub机制保证一直能拿到新的地址。由于成为旧服务的时候，不能去访问新服务，此后不在更新服务地址。</li>
+<li><strong>服务切换</strong> 服务切换由<code>new</code>生成的访问实例传入的<code>can_switch_func</code>控制，不传默认切换。使用者自己考量。</li>
+<li><strong>记录需要访问</strong> 每次拿到服务地址都会用弱引用表记录，当该服务地址没有强引用时，弱引用也会清除。可以很方便的记录管理需要访问的服务。</li>
+<li><strong>回复是否需要访问</strong> 判断是否在记录的访问地址中。</li>
 </ul>
 <h2 id="可热更服务"><a href="#可热更服务" class="headerlink" title="可热更服务"></a><strong>可热更服务</strong></h2><ul>
 <li><strong>记录来访</strong> 每个<strong>容器客户端</strong>都会<strong>注册访问</strong>，此时记录来访地址。注册为弱访问者的不记录（用与解决出现环访问的情况，应该总有一个占主导地方），应该尽量避免出现环访问。</li>
