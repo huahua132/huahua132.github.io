@@ -229,6 +229,250 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/08/20/skynet_fly/after_load/" target="_self">
+          关于增加skynet_fly lua服务启动的后置加载
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/20/skynet_fly/after_load/" target="_self">
+        <div>
+          前言skynet lua服务默认启动加载是使用skynet/lualib/loader.lua，loader.lua 会加载并执行config中配置的preload路径的lua文件，这个操作的好处是可以把所有服务的一些前置环境操作，或者一些常用工具函数写到全局变量中(我更倾向于封装成工具模块通过require引用，不去污染全局环境，尽量保持原生环境)。在skynet_fly框架中，我就利用prel
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-20 08:00" pubdate>
+              2023-08-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly/">#skynet_fly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/12/record/linux/" target="_self">
+          linux系统常用命令记录
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/12/record/linux/" target="_self">
+        <div>
+          gdb调试打开core文件gdb filename core 查看错误堆栈bt centos gcc版本升级sudo yum install centos-release-sclsudo yum install devtoolset-9-gcc*scl enable devtoolset-9 bash 如何使用systemd运行程序cd /etc/systemd/systemvim myapp.s
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-12 11:33" pubdate>
+              2023-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/notebook/" class="category-chain-item">notebook</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/notebook/">#notebook</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/28/record/record/" target="_self">
+          linux不产生core原因
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/record/record/" target="_self">
+        <div>
+          首先可能ulimit限制了。ulimit -a  如果core 限制大小为0，需要修改。调用命令ulimit -c unlimited  考虑产生位置问题查看 /proc/sys/kernel/core_pattern文件内容。如果文件内容不是core，通知命令sudo bash -c &quot;echo core &gt; /proc/sys/kernel/core_pattern&quot
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-28 11:33" pubdate>
+              2023-07-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/record/" class="category-chain-item">record</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/record/">#record</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/28/skynet_fly/cluster_rpc/" target="_self">
+          关于cluster 远程rpc调用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/skynet_fly/cluster_rpc/" target="_self">
+        <div>
+          简介cluster 远程rpc是依赖skynet的cluster模式实现的。    skynet_fly远程rpc调用的实现注重什么：    * 与热更模板系统完美融合。    * 简单易用的API设计。    * 支持多结点。    * 支持服务发现。 定位因为远程rpc调用结点偶尔下线，上线都是常有的事，所以不建议用来做强生效性消息(就是调用了，一定要执行成功)。skynet_fly clus
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-28 08:00" pubdate>
+              2023-07-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly/">#skynet_fly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/07/22/skynet_fly/room_game/" target="_self">
           关于room_game可热更匹配房间类游戏架构
         </a>
@@ -582,229 +826,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/21/data_struct/avltree/" target="_self">
-          平衡二叉树的lua实现
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/21/data_struct/avltree/" target="_self">
-        <div>
-          特征 有序性 所以结点都是左子树比自己小，右子树比自己大。 平衡性 所以结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m  缺点 内存地址分散 每个结点都是独立数据块，存储地址分散，操作速度非常依赖存储设备的寻址速度，基于机械硬盘运行将会非常慢。  操作时
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-21 10:33" pubdate>
-              2023-05-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/21/think/link/" target="_self">
-          链接记录
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/21/think/link/" target="_self">
-        <div>
-          链接记录 床长人工智能教程https://captainbed.vip/login/
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-21 10:33" pubdate>
-              2023-05-21
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/14/socket/c/" target="_self">
-          网络七层模型
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/c/" target="_self">
-        <div>
-          7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-14 10:33" pubdate>
-              2023-05-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/socket/" class="category-chain-item">socket</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/socket/">#socket</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/14/socket/epoll/" target="_self">
-          select,poll,epoll 对比
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
-        <div>
-          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-14 10:33" pubdate>
-              2023-05-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/socket/" class="category-chain-item">socket</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/socket/">#socket</a>
             
           </div>
         
