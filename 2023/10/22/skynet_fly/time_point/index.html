@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。 如何新增一开始想在timer.lua去新增一些新增一些方法，但是想保持timer.lua足够简单，就独立了一个文件用继承的方式来扩展。 提供功能可以像设置闹钟一样设置。  设置每分钟的哪一秒。 设置每小时几分几秒。 设置每天的几时几分几秒。 设置每周的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-22T05:42:00.000Z">
-<meta property="article:modified_time" content="2023-10-25T12:27:00.294Z">
+<meta property="article:modified_time" content="2023-12-25T02:14:25.981Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -457,8 +457,8 @@
 <li>设置每天的几时几分几秒。</li>
 <li>设置每周的周几几时几分几秒。</li>
 <li>设置每月的第几天几时几分几秒。</li>
-<li>设置每年的几月几天几分几秒。</li>
-<li>设置每年的几天几分几秒。</li>
+<li>设置每年的几月几天几时几分几秒。</li>
+<li>设置每年的几天几时几分几秒。</li>
 </ul>
 <h1 id="特殊处理"><a href="#特殊处理" class="headerlink" title="特殊处理"></a>特殊处理</h1><p>当月或者当年没有该天适配到最后一天。</p>
 <h1 id="代码设计模式"><a href="#代码设计模式" class="headerlink" title="代码设计模式"></a>代码设计模式</h1><p>因为每个类型需要设置的参数都不一样，然后参数又较多，就使用了建造者模式，这样构造代码更易读一些。</p>

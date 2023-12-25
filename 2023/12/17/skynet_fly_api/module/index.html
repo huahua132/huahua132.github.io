@@ -16,24 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,">
+    <meta name="description" content="规范统一写在module的文件夹，好处就是review代码时能比较清晰的分清那个文件是可热更服务,还是lua模块文件，还是skynet的普通服务（skynet普通服务建议都放在sevice文件夹下）。 示例1234567891011121314151617181920212223242526272829local CMD &#x3D; &amp;#123;&amp;#125;function CMD.start(confi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tcp知识整理">
-<meta property="og:url" content="https://huahua132.github.io/2023/05/14/socket/tcp/index.html">
+<meta property="og:title" content="新增可热更服务">
+<meta property="og:url" content="https://huahua132.github.io/2023/12/17/skynet_fly_api/module/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,">
+<meta property="og:description" content="规范统一写在module的文件夹，好处就是review代码时能比较清晰的分清那个文件是可热更服务,还是lua模块文件，还是skynet的普通服务（skynet普通服务建议都放在sevice文件夹下）。 示例1234567891011121314151617181920212223242526272829local CMD &#x3D; &amp;#123;&amp;#125;function CMD.start(confi">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-14T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-09-07T06:57:39.213Z">
+<meta property="article:published_time" content="2023-12-17T01:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-19T07:10:00.667Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="socket">
+<meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>tcp知识整理 - huahua132 blog</title>
+  <title>新增可热更服务 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="tcp知识整理"></span>
+            <span id="subtitle" data-typed-text="新增可热更服务"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-14 10:33" pubdate>
-          2023年5月14日 上午
+        <time datetime="2023-12-17 09:00" pubdate>
+          2023年12月17日 上午
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          720 字
+          748 字
         
       </span>
     
@@ -281,17 +281,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="socket"
-        id="heading-61f2529360aec54f5dc9804b842cf3fa" role="tab" data-toggle="collapse" href="#collapse-61f2529360aec54f5dc9804b842cf3fa"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly_api"
+        id="heading-879663778a734ec922ccc8c70de62887" role="tab" data-toggle="collapse" href="#collapse-879663778a734ec922ccc8c70de62887"
         aria-expanded="true"
       >
-        socket
-        <span class="list-group-count">(3)</span>
+        skynet_fly_api
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-61f2529360aec54f5dc9804b842cf3fa"
-           role="tabpanel" aria-labelledby="heading-61f2529360aec54f5dc9804b842cf3fa">
+      <div class="category-collapse collapse show" id="collapse-879663778a734ec922ccc8c70de62887"
+           role="tabpanel" aria-labelledby="heading-879663778a734ec922ccc8c70de62887">
         
         
           
@@ -300,28 +300,19 @@
     
       
       
-        <a href="/2023/05/14/socket/epoll/" title="select,poll,epoll 对比"
+        <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">select,poll,epoll 对比</span>
+          <span class="category-post">启动配置load_mods.lua</span>
         </a>
       
     
       
       
-        <a href="/2023/05/14/socket/tcp/" title="tcp知识整理"
+        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">tcp知识整理</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/14/socket/c/" title="网络七层模型"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">网络七层模型</span>
+          <span class="category-post">新增可热更服务</span>
         </a>
       
     
@@ -344,31 +335,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">tcp知识整理</h1>
+            <h1 style="display: none">新增可热更服务</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul>
-<li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li>
-<li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li>
-<li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li>
-</ul>
-<h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol>
-<li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p>
-</li>
-<li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p>
-</li>
-</ol>
-<h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul>
-<li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li>
-<li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li>
-<li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li>
-<li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li>
-</ul>
-<p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p>
-<h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p>
-<h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>
+                <h1 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h1><p>统一写在<code>module</code>的文件夹，好处就是review代码时能比较清晰的分清那个文件是<strong>可热更服务</strong>,还是lua模块文件，还是skynet的普通服务（skynet普通服务建议都放在sevice文件夹下）。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.herald_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;预告退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.fix_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;确认要退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.cancel_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;取消退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.check_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;检查退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<p><strong>start</strong> （必须实现）开始，通常在这里做一些初始化的操作，config是<strong>load_mods</strong>传入的配置。（限制）不能在这个阶段访问其他可热更服务。<br><strong>herald_exit</strong> 热更时，启动新服务之前会给旧服务发预告。<br><strong>exit</strong> （必须实现）说明可以退出了，返回true的话，10分钟后会销毁改服务，false都话就不会销毁。<br><strong>fix_exit</strong> 确定被新服务替代了。<br><strong>cancel_exit</strong> 热更时新服务启动失败了，比如start没有返回true，这时候旧服务应该继续干活。<br><strong>check_exit</strong> 用于检查能不能退出。</p>
 
                 
               </div>
@@ -387,7 +361,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/socket/" class="category-chain-item">socket</a>
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
   
   
 
@@ -402,7 +376,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/socket/">#socket</a>
+        <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
       
     </div>
   
@@ -414,8 +388,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>tcp知识整理</div>
-      <div>https://huahua132.github.io/2023/05/14/socket/tcp/</div>
+      <div>新增可热更服务</div>
+      <div>https://huahua132.github.io/2023/12/17/skynet_fly_api/module/</div>
     </div>
     <div class="license-meta">
       
@@ -427,7 +401,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月14日</div>
+          <div>2023年12月17日</div>
         </div>
       
       
@@ -459,18 +433,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/14/socket/c/" title="网络七层模型">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">网络七层模型</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/14/socket/epoll/" title="select,poll,epoll 对比">
-                        <span class="hidden-mobile">select,poll,epoll 对比</span>
+                      <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua">
+                        <span class="hidden-mobile">启动配置load_mods.lua</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
