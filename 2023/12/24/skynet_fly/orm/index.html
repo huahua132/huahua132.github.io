@@ -16,24 +16,26 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。 如何新增一开始想在timer.lua去新增一些新增一些方法，但是想保持timer.lua足够简单，就独立了一个文件用继承的方式来扩展。 提供功能可以像设置闹钟一样设置。  设置每分钟的哪一秒。 设置每小时几分几秒。 设置每天的几时几分几秒。 设置每周的">
+    <meta name="description" content="ORM简介ORM（Object-Relational Mapping，对象关系映射）是一种编程技术，用于在不同类型的系统之间转换数据。在关系数据库和面向对象编程语言之间，ORM 为数据的转换提供了一个桥梁。这种技术允许我们使用编程语言中的对象表示和操作数据库中的数据，而不必编写底层的SQL代码。 ORM 的核心优势在于抽象化和自动化数据存储的细节，使开发者可以专注于业务逻辑，而无需关心数据库操作的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于新增定时器的扩展 整点报时">
-<meta property="og:url" content="https://huahua132.github.io/2023/10/22/skynet_fly/time_point/index.html">
+<meta property="og:title" content="关于增加skynet_fly orm数据关系映射">
+<meta property="og:url" content="https://huahua132.github.io/2023/12/24/skynet_fly/orm/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。 如何新增一开始想在timer.lua去新增一些新增一些方法，但是想保持timer.lua足够简单，就独立了一个文件用继承的方式来扩展。 提供功能可以像设置闹钟一样设置。  设置每分钟的哪一秒。 设置每小时几分几秒。 设置每天的几时几分几秒。 设置每周的">
+<meta property="og:description" content="ORM简介ORM（Object-Relational Mapping，对象关系映射）是一种编程技术，用于在不同类型的系统之间转换数据。在关系数据库和面向对象编程语言之间，ORM 为数据的转换提供了一个桥梁。这种技术允许我们使用编程语言中的对象表示和操作数据库中的数据，而不必编写底层的SQL代码。 ORM 的核心优势在于抽象化和自动化数据存储的细节，使开发者可以专注于业务逻辑，而无需关心数据库操作的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-22T05:42:00.000Z">
-<meta property="article:modified_time" content="2023-12-25T02:14:25.981Z">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
+<meta property="article:published_time" content="2023-12-24T13:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-25T12:40:06.599Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于新增定时器的扩展 整点报时 - huahua132 blog</title>
+  <title>关于增加skynet_fly orm数据关系映射 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于新增定时器的扩展 整点报时"></span>
+            <span id="subtitle" data-typed-text="关于增加skynet_fly orm数据关系映射"></span>
           
         </div>
 
@@ -213,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-22 13:42" pubdate>
-          2023年10月22日 下午
+        <time datetime="2023-12-24 21:00" pubdate>
+          2023年12月24日 晚上
         </time>
       </span>
     
@@ -225,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          4.5k 字
         
       </span>
     
@@ -236,7 +238,7 @@
         
         
         
-          19 分钟
+          38 分钟
         
       </span>
     
@@ -392,7 +394,7 @@
       
         <a href="/2023/12/24/skynet_fly/orm/" title="关于增加skynet_fly orm数据关系映射"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
         </a>
       
@@ -428,7 +430,7 @@
       
         <a href="/2023/10/22/skynet_fly/time_point/" title="关于新增定时器的扩展 整点报时"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
@@ -452,30 +454,81 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于新增定时器的扩展 整点报时</h1>
+            <h1 style="display: none">关于增加skynet_fly orm数据关系映射</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。</p>
-<h1 id="如何新增"><a href="#如何新增" class="headerlink" title="如何新增"></a>如何新增</h1><p>一开始想在<code>timer.lua</code>去新增一些新增一些方法，但是想保持<code>timer.lua</code>足够简单，就独立了一个文件用继承的方式来扩展。</p>
-<h1 id="提供功能"><a href="#提供功能" class="headerlink" title="提供功能"></a>提供功能</h1><p>可以像设置闹钟一样设置。</p>
-<ul>
-<li>设置每分钟的哪一秒。</li>
-<li>设置每小时几分几秒。</li>
-<li>设置每天的几时几分几秒。</li>
-<li>设置每周的周几几时几分几秒。</li>
-<li>设置每月的第几天几时几分几秒。</li>
-<li>设置每年的几月几天几时几分几秒。</li>
-<li>设置每年的几天几时几分几秒。</li>
+                <h1 id="ORM简介"><a href="#ORM简介" class="headerlink" title="ORM简介"></a>ORM简介</h1><p>ORM（Object-Relational Mapping，对象关系映射）是一种编程技术，用于在不同类型的系统之间转换数据。在关系数据库和面向对象编程语言之间，ORM 为数据的转换提供了一个桥梁。这种技术允许我们使用编程语言中的对象表示和操作数据库中的数据，而不必编写底层的SQL代码。</p>
+<p>ORM 的核心优势在于抽象化和自动化数据存储的细节，使开发者可以专注于业务逻辑，而无需关心数据库操作的具体实现。</p>
+<h2 id="ORM-的主要功能包括："><a href="#ORM-的主要功能包括：" class="headerlink" title="ORM 的主要功能包括："></a>ORM 的主要功能包括：</h2><ol>
+<li><p>映射（Mapping）：将数据库表（或视图）映射到代码中的类，将记录映射到对象实例，列映射到类的属性。</p>
+</li>
+<li><p>CRUD 操作：提供了对象级别的创建（Create）、读取（Read）、更新（Update）和删除（Delete）操作，不需要直接使用SQL语句。</p>
+</li>
+<li><p>查询接口：提供了建立在对象上的查询接口，允许我们使用类似SQL功能的方法来查询和操作数据。</p>
+</li>
+<li><p>事务管理：支持事务操作，确保数据一致性和完整性。</p>
+</li>
+<li><p>缓存：为了性能优化，ORM系统通常提供了一级或二级缓存机制，减少对数据库的直接访问次数。</p>
+</li>
+</ol>
+<h2 id="ORM-的优点："><a href="#ORM-的优点：" class="headerlink" title="ORM 的优点："></a>ORM 的优点：</h2><ul>
+<li>生产效率：通过简化数据库操作，ORM 可以提高开发速度。</li>
+<li>可维护性：代码通常更清晰、更可维护，因为它遵循面向对象的原则。</li>
+<li>可移植性：ORM 代码通常不依赖于具体的数据库，更容易在不同的数据库系统之间移植。</li>
+<li>减少重复：ORM 库通常提供了大量公共代码，减少开发人员需要编写和维护的代码量。</li>
 </ul>
-<h1 id="特殊处理"><a href="#特殊处理" class="headerlink" title="特殊处理"></a>特殊处理</h1><p>当月或者当年没有该天适配到最后一天。</p>
-<h1 id="代码设计模式"><a href="#代码设计模式" class="headerlink" title="代码设计模式"></a>代码设计模式</h1><p>因为每个类型需要设置的参数都不一样，然后参数又较多，就使用了建造者模式，这样构造代码更易读一些。</p>
-<h1 id="调用示例"><a href="#调用示例" class="headerlink" title="调用示例"></a>调用示例</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><br><span class="hljs-keyword">local</span> ti_12 = timer_point:new(timer_point.EVERY_MINUTE):set_sec(<span class="hljs-number">10</span>):builder(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	<span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;每分钟:&quot;</span>,<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&quot;%Y%m%d-%H:%M:%S&quot;</span>,time_util.<span class="hljs-built_in">time</span>()))<br><span class="hljs-keyword">end</span>)<br><br><span class="hljs-keyword">local</span> ti_13 = timer_point:new(timer_point.EVERY_HOUR):set_min(<span class="hljs-number">5</span>):set_sec(<span class="hljs-number">20</span>):builder(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	<span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;每小时:&quot;</span>,<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&quot;%Y%m%d-%H:%M:%S&quot;</span>,time_util.<span class="hljs-built_in">time</span>()))<br><span class="hljs-keyword">end</span>)<br><br><span class="hljs-keyword">local</span> ti_14 = timer_point:new(timer_point.EVERY_DAY):set_hour(<span class="hljs-number">6</span>):set_min(<span class="hljs-number">5</span>):set_sec(<span class="hljs-number">20</span>):builder(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	<span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;每天:&quot;</span>,<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&quot;%Y%m%d-%H:%M:%S&quot;</span>,time_util.<span class="hljs-built_in">time</span>()))<br><span class="hljs-keyword">end</span>)<br><br><span class="hljs-keyword">local</span> ti_15 = timer_point:new(timer_point.EVERY_WEEK):set_wday(<span class="hljs-number">1</span>):set_hour(<span class="hljs-number">6</span>):set_min(<span class="hljs-number">5</span>):set_sec(<span class="hljs-number">20</span>):builder(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	<span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;每周:&quot;</span>,<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&quot;%Y%m%d-%H:%M:%S&quot;</span>,time_util.<span class="hljs-built_in">time</span>()))<br><span class="hljs-keyword">end</span>)<br><br><span class="hljs-keyword">local</span> ti_16 = timer_point:new(timer_point.EVERY_MOUTH):set_day(<span class="hljs-number">1</span>):set_hour(<span class="hljs-number">6</span>):set_min(<span class="hljs-number">5</span>):set_sec(<span class="hljs-number">20</span>):builder(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	<span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;每月:&quot;</span>,<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&quot;%Y%m%d-%H:%M:%S&quot;</span>,time_util.<span class="hljs-built_in">time</span>()))<br><span class="hljs-keyword">end</span>)<br><br><span class="hljs-keyword">local</span> ti_17 = timer_point:new(timer_point.EVERY_YEAR):set_month(<span class="hljs-number">1</span>):set_day(<span class="hljs-number">1</span>):set_hour(<span class="hljs-number">6</span>):set_min(<span class="hljs-number">5</span>):set_sec(<span class="hljs-number">20</span>):builder(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	<span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;每年:&quot;</span>,<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&quot;%Y%m%d-%H:%M:%S&quot;</span>,time_util.<span class="hljs-built_in">time</span>()))<br><span class="hljs-keyword">end</span>)<br><br><span class="hljs-keyword">local</span> ti_18 = timer_point:new(timer_point.EVERY_YEAR_DAY):set_yday(<span class="hljs-number">1</span>):set_hour(<span class="hljs-number">6</span>):set_min(<span class="hljs-number">5</span>):set_sec(<span class="hljs-number">20</span>):builder(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	<span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;每年第几天:&quot;</span>,<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&quot;%Y%m%d-%H:%M:%S&quot;</span>,time_util.<span class="hljs-built_in">time</span>()))<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="ORM-的缺点："><a href="#ORM-的缺点：" class="headerlink" title="ORM 的缺点："></a>ORM 的缺点：</h2><ul>
+<li>性能开销：ORM 增加了一层抽象，可能会导致性能开销，尤其是在复杂查询和高负载操作的情况下。</li>
+<li>复杂性：在处理复杂的查询或性能优化时，ORM 可能不如使用原生 SQL 灵活。</li>
+<li>学习曲线：需要学习使用 ORM 工具或框架，了解其设计和最佳实践。</li>
+</ul>
+<h1 id="skynet-fly-ORM提供功能"><a href="#skynet-fly-ORM提供功能" class="headerlink" title="skynet_fly ORM提供功能"></a>skynet_fly ORM提供功能</h1><ol>
+<li>映射提供。</li>
+<li>CRUD操作提供。</li>
+<li>提供主键查询和查询所有。</li>
+<li>不支持事务，确保数据一致性和完整性。</li>
+<li>缓存，提供缓存时间和永久缓存机制，定时批量同步修改。</li>
+</ol>
+<p>实现orm的目标是能够应付非常常见的功能数据，比如跟玩家id，角色id关联的数据。并不想适配比较复杂的需求场景，比较分页查询，条件查询等待。这样orm能够更好的适配数据库，比如mysql，redis，mongo等等。<br>这样能够简化实现，方便后续维护优化，也不用担心性能问题（因为不能通过orm做复杂的查询工作）,复杂性也没有了，学习也很简单，因为只有 CRUD 和通过主键查询的接口，并且通过主键查询的也是可以落入缓存的。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>实现上通过<strong>依赖反转</strong>的方式，通过抽象出<strong>数据适配器接口</strong>，让<strong>数据表实体</strong>依赖<strong>数据适配器接口</strong>，这样想对接不同的数据库，只需要实现<strong>数据适配器接口</strong>就行。</p>
+<p>结构图<br><img src="/img/skynet_fly/orm.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><p>数据类型支持。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> FILED_TYPE = &#123;<br>    int8         = <span class="hljs-number">1</span>,<br>    int16        = <span class="hljs-number">2</span>,<br>    int32        = <span class="hljs-number">3</span>,<br>    int64        = <span class="hljs-number">4</span>,<br>   <br>    uint8        = <span class="hljs-number">11</span>,<br>    uint16       = <span class="hljs-number">12</span>,<br>    uint32       = <span class="hljs-number">13</span>,<br>   <br>    string32     = <span class="hljs-number">31</span>,<br>    string64     = <span class="hljs-number">32</span>,<br>    string128    = <span class="hljs-number">33</span>,<br>    string256    = <span class="hljs-number">34</span>,<br>    string512    = <span class="hljs-number">35</span>,<br>    string1024   = <span class="hljs-number">36</span>,<br>    string2048   = <span class="hljs-number">37</span>,<br>    string4096   = <span class="hljs-number">38</span>,<br>    string8192   = <span class="hljs-number">39</span>,<br><br>    text         = <span class="hljs-number">51</span>,<br>    blob         = <span class="hljs-number">52</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>不支持浮点型，因为浮点型有精度问题，并且每个系统，每个语言的处理可能都不一样，业务上尽量不用。<br>不支持bool类型，业务上直接用int8类型替代就行了。</p>
+<h3 id="创建表示例"><a href="#创建表示例" class="headerlink" title="创建表示例"></a>创建表示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> adapter = ormadapter_mysql:new(<span class="hljs-string">&quot;admin&quot;</span>)<br><span class="hljs-keyword">local</span> orm_obj = ormtable:new(<span class="hljs-string">&quot;t_player&quot;</span>)<br>:int64(<span class="hljs-string">&quot;player_id&quot;</span>)<br>:int64(<span class="hljs-string">&quot;role_id&quot;</span>)<br>:int8(<span class="hljs-string">&quot;sex&quot;</span>)<br>:string32(<span class="hljs-string">&quot;nickname&quot;</span>)<br>:string64(<span class="hljs-string">&quot;email&quot;</span>)<br>:uint8(<span class="hljs-string">&quot;sex1&quot;</span>)<br>:int16(<span class="hljs-string">&quot;sex2&quot;</span>)<br>:uint16(<span class="hljs-string">&quot;sex3&quot;</span>)<br>:int32(<span class="hljs-string">&quot;sex4&quot;</span>)<br>:uint32(<span class="hljs-string">&quot;sex5&quot;</span>)<br>:int64(<span class="hljs-string">&quot;sex6&quot;</span>)<br>:string128(<span class="hljs-string">&quot;sex7&quot;</span>)<br>:string256(<span class="hljs-string">&quot;sex8&quot;</span>)<br>:string512(<span class="hljs-string">&quot;sex9&quot;</span>)<br>:string1024(<span class="hljs-string">&quot;sex10&quot;</span>)<br>:string2048(<span class="hljs-string">&quot;sex11&quot;</span>)<br>:string4096(<span class="hljs-string">&quot;sex12&quot;</span>)<br>:string8192(<span class="hljs-string">&quot;sex13&quot;</span>)<br>:text(<span class="hljs-string">&quot;sex14&quot;</span>)<br>:blob(<span class="hljs-string">&quot;sex15&quot;</span>)<br>:set_cache(<span class="hljs-number">500</span>,<span class="hljs-number">500</span>)  <span class="hljs-comment">--设置 5秒的缓存 间隔5秒同步数据库（有修改同步）</span><br>:set_keys(<span class="hljs-string">&quot;player_id&quot;</span>,<span class="hljs-string">&quot;role_id&quot;</span>,<span class="hljs-string">&quot;sex&quot;</span>) <span class="hljs-comment">--设置3个关联key</span><br>:builder(adapter)<br></code></pre></td></tr></table></figure>
+<p>一开始想法是用写lua表字段描述的方式来创建比如：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> des = &#123;<br>    &#123;name = <span class="hljs-string">&quot;player_id&quot;</span>, <span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;int8&quot;</span>, is_key = <span class="hljs-literal">true</span>&#125;,<br>    &#123;name = <span class="hljs-string">&quot;role_id&quot;</span>, <span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;int64&quot;</span>, is_key = <span class="hljs-literal">false</span>&#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>后来想想这种这种用 <strong>建造者模式</strong>更适合。<br><strong>优点</strong></p>
+<ol>
+<li>不需要写name,type描述字段,而且类型的函数没有时或者检查有错，直接在对应的行就报错了，更有利于开发。</li>
+<li>能够设置一些额外属性，比如<strong>set_cache</strong>，设置缓存时间。</li>
+<li>代码结构更清晰。</li>
+</ol>
+<h2 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua">orm_obj:create_entry(<br>    &#123;player_id = <span class="hljs-number">10005</span>,role_id = <span class="hljs-number">1</span>, sex = <span class="hljs-number">1</span>&#125;,<br>    &#123;player_id = <span class="hljs-number">10006</span>,role_id = <span class="hljs-number">1</span>, sex = <span class="hljs-number">2</span>&#125;<br>    )<br></code></pre></td></tr></table></figure>
+<p>支持一次创建多条。</p>
+<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> player_id = <span class="hljs-number">10005</span><br><span class="hljs-keyword">local</span> role_id = <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> sex = <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_entry(player_id)                 <span class="hljs-comment">--查询player_id</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_entry(player_id,role_id)         <span class="hljs-comment">--查询player_id,role_id</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_entry(player_id, role_id, sex)   <span class="hljs-comment">--查询player_id,role_id,sex</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_all_entry()                      <span class="hljs-comment">--查询所有数据</span><br></code></pre></td></tr></table></figure>
+<p>利用关联主键，使用最左原则查询数据。</p>
+<h2 id="修改更新数据"><a href="#修改更新数据" class="headerlink" title="修改更新数据"></a>修改更新数据</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> entry_list = orm_obj:get_entry(player_id, role_id, sex)   <span class="hljs-comment">--查询player_id,role_id,sex</span><br><span class="hljs-keyword">local</span> entry = entry_list[<span class="hljs-number">1</span>]<br>entry:set(<span class="hljs-string">&quot;nickname&quot;</span>,<span class="hljs-string">&quot;abc&quot;</span>)<br><br>orm_obj:save_entry(entry)<br></code></pre></td></tr></table></figure>
 
-<h1 id="快进时间"><a href="#快进时间" class="headerlink" title="快进时间"></a>快进时间</h1><p>这种以天为单位触发的任务，不太好测试，需要增加快进时间的测试手段，修改了skynet源码并提交了requests,如果云大不合并的话，以后skynet_fly submodule指向自己的fork版本算了。</p>
-<h1 id="快进时间修改过程"><a href="#快进时间修改过程" class="headerlink" title="快进时间修改过程"></a>快进时间修改过程</h1><p>刚开始天真的以为修改一下skynet_time.c的get_time就行了，但是仅改动get_time，增加加速时间，相当于直接从A时间跳到B时间，而A时间到B时间过程中的定时器任务可能还没有执行，时间却在加速流逝，这是因为skynet的timer线程只负责流逝时间和触发定时器任务，触发后加入到对应ctx的消息队列，由work线程消费，timer线程和work线程是同步执行的。<br>如果我们起了一个每分钟执行一次的定时任务。如果加速时间从11点到12点，完全看timer在流逝过程中，work线程的处理速度，大概率不能执行60次，所以需要把这个加速过程串行处理才行。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>skynet_fly新增定点触发的定时器，扩展定时器的功能，使得skynet_fly可以为游戏开发提供更便捷的工具。</p>
+<p>修改数据有个限制，主键不能修改（正常也不会去改主键）。<br>更新数据也可以不用主动调用save_entry,可以用set_cache设置缓存，同时设置间隔多少秒去同步，这种方式效率更高，因为是定时批量同步的。</p>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><p>删除数据类似读取数据通过主键keys去删除。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> player_id = <span class="hljs-number">10005</span><br><span class="hljs-keyword">local</span> role_id = <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> sex = <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:delete_entry(player_id)                 <span class="hljs-comment">--删除player_id</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:delete_entry(player_id,role_id)         <span class="hljs-comment">--删除player_id,role_id</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:delete_entry(player_id, role_id, sex)   <span class="hljs-comment">--删除player_id,role_id,sex</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:delete_all_entry()                      <span class="hljs-comment">--删除所有数据</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="适配"><a href="#适配" class="headerlink" title="适配"></a>适配</h1><p>目前针对orm适配了mysql,后续会适配mango。适配器需要实现六个方法分别是：<strong>new</strong>,<strong>builder</strong>,<strong>create_entry</strong>,<strong>get_entry</strong>,<strong>save_entry</strong>,<strong>delete_entry</strong>。</p>
+<ol>
+<li>new, 创建适配器对象。</li>
+<li>builder(tab_name, filed_list, filed_map, key_list) 构建表。</li>
+<li>create_entry(entry_data_list) 创建表数据。</li>
+<li>get_entry(key_values) 查询表数据。</li>
+<li>save_entry(entry_data_list, change_map_list) 保存表数据。</li>
+<li>delete_entry(key_values) 删除表数据。</li>
+</ol>
+<h1 id="适配mysql"><a href="#适配mysql" class="headerlink" title="适配mysql"></a>适配mysql</h1><p>针对适配MySQL，我的设计是这样的，在<strong>builder</strong>构建方法中，表不存在创建表，表存在更新表，主键不能为空，主键不能变更修改。<br>在<strong>create_entry</strong>和<strong>save_entry</strong>中做了批量安全处理（消息长过长的分批执行）。</p>
+<h1 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h1><p>针对ormmysql写了健全的单元测试。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/test/module/ormmysql_test_m.lua">ormmysqltest</a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>为框架增加了orm特性的支持。增强了skynet_fly的功能。</p>
+<h1 id="使用orm的限制"><a href="#使用orm的限制" class="headerlink" title="使用orm的限制"></a>使用orm的限制</h1><p>使用orm需要注意数据一致性问题。orm只能在一个服务中使用才能保证一致性。特别是使用缓存的时候，不用缓存，再多个服务同时用，也需要考虑分布式问题（不用orm多个服务也存在分布式问题）。<br>有一种情况下可以多服使用：比如用player_id绑定服务器，并且服务器只会查询修改连接本服的player_id的数据。<br>其他情况需要在一个服务中处理，后续想利用框架的热更模块对接上<strong>orm</strong>,并且处理好热更问题。因为热更过程中可能新旧服务都持有数据的，可能出现数据不一致，目前的想法是热更后，旧服务的请求全部转给新服务处理，旧服务收到准备下线的时候，保存所有数据，并拒绝之后所有的请求，通知等待新服上线处理，就可以解决这个问题。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
 
                 
@@ -522,8 +575,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于新增定时器的扩展 整点报时</div>
-      <div>https://huahua132.github.io/2023/10/22/skynet_fly/time_point/</div>
+      <div>关于增加skynet_fly orm数据关系映射</div>
+      <div>https://huahua132.github.io/2023/12/24/skynet_fly/orm/</div>
     </div>
     <div class="license-meta">
       
@@ -535,7 +588,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月22日</div>
+          <div>2023年12月24日</div>
         </div>
       
       
@@ -567,18 +620,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/19/skynet_fly/logservice/" title="关于增加skynet_fly 日志服务">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于增加skynet_fly 日志服务</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/10/15/skynet_fly/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化">
-                        <span class="hidden-mobile">关于room_game可热更匹配房间类游戏架构的优化</span>
+                      <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务">
+                        <span class="hidden-mobile">新增可热更服务</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
