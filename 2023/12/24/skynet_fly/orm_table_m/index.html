@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言因为orm在多个服务持有的时候，没法保证一致性，所有需要把orm封装到独立服务中，其他服务通过rpc调用，为了使用便利性，封装了通用的orm可热更服务orm_table_m.lua和rpc调用模块orm_table_client.lua。 orm_table_m.lua转入的config需要提供一个配置项orm_plug，它是lua模块文件。需要提供init,call两个方法。  init()">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-24T14:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-26T08:42:05.796Z">
+<meta property="article:modified_time" content="2024-01-02T10:18:59.389Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -472,7 +472,7 @@
 <li><strong>init()</strong> 方法需要创建出<strong>orm</strong>对象并且返回。</li>
 <li><strong>call(func_name,…)</strong> 方法提供一系列rpc调用的方法。</li>
 </ul>
-<h2 id="热更处理"><a href="#热更处理" class="headerlink" title="热更处理"></a>热更处理</h2><p>当orm热更时，orm_table_m.lua会立即调用保存接口，确保数据全部同步到对应的数据库中，这个过程没有完成，新的服务都不用调用收到<strong>start</strong>回调，也不会收到服务地址变更的推送，这样就保证了数据只有一个服务持有<strong>保证数据一致性</strong>。强制保存过程中，如果操作失败会一直尝试，直到成功<strong>保证数据不丢失</strong>。通常操作失败是连接异常或者数据库挂壁了。</p>
+<h2 id="热更处理"><a href="#热更处理" class="headerlink" title="热更处理"></a>热更处理</h2><p>当orm热更时，orm_table_m.lua会立即调用保存接口，确保数据全部同步到对应的数据库中，这个过程没有完成，新的服务都不会调用收到<strong>start</strong>回调，也不会收到服务地址变更的推送，这样就保证了数据只有一个服务持有<strong>保证数据一致性</strong>。强制保存过程中，如果操作失败会一直尝试，直到成功<strong>保证数据不丢失</strong>。通常操作失败是连接异常或者数据库挂壁了。</p>
 <h2 id="call操作调用"><a href="#call操作调用" class="headerlink" title="call操作调用"></a>call操作调用</h2><p>其他服务调用<strong>orm服务</strong>时，可能orm服务正在热更，旧服务不再提供服务了，就需要通知<strong>rpc客户端</strong>，转移调用。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.call</span><span class="hljs-params">(func_name,...)</span></span><br>    <span class="hljs-keyword">if</span> G_ISCLOSE <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>, queue(g_orm_plug.call, func_name, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.herald_exit</span><span class="hljs-params">()</span></span><br>    G_ISCLOSE = <span class="hljs-literal">true</span><br><br>    queue(g_orm_obj.save_change_now,g_orm_obj)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 <p>只需要在确定下线以后，通知move转移调用。</p>
