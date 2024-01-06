@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="作用定位可热更服务的启动配置文件，用于配置可插拔的可热更服务，可以自定义启动顺序，数量,配置参数，推迟最后启动。 示例参考AB_question 1234567891011121314return &amp;#123;	A_m &#x3D; &amp;#123;		launch_seq &#x3D; 1,		launch_num &#x3D; 1,	&amp;#125;,    B_m &#x3D; &amp;#123;        launch_seq &#x3D; 2,">
+    <meta name="description" content="关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="启动配置load_mods.lua">
-<meta property="og:url" content="https://huahua132.github.io/2023/12/17/skynet_fly_api/load_mods/index.html">
+<meta property="og:title" content="内部rpc调用">
+<meta property="og:url" content="https://huahua132.github.io/2023/01/07/skynet_fly_api/rpc/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="作用定位可热更服务的启动配置文件，用于配置可插拔的可热更服务，可以自定义启动顺序，数量,配置参数，推迟最后启动。 示例参考AB_question 1234567891011121314return &amp;#123;	A_m &#x3D; &amp;#123;		launch_seq &#x3D; 1,		launch_num &#x3D; 1,	&amp;#125;,    B_m &#x3D; &amp;#123;        launch_seq &#x3D; 2,">
+<meta property="og:description" content="关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-17T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-19T07:10:00.666Z">
+<meta property="article:published_time" content="2023-01-07T01:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-06T09:25:00.429Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>启动配置load_mods.lua - huahua132 blog</title>
+  <title>内部rpc调用 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="启动配置load_mods.lua"></span>
+            <span id="subtitle" data-typed-text="内部rpc调用"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-17 08:00" pubdate>
-          2023年12月17日 早上
+        <time datetime="2023-01-07 09:00" pubdate>
+          2023年1月7日 上午
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          727 字
+          1.7k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          7 分钟
+          14 分钟
         
       </span>
     
@@ -302,7 +302,7 @@
       
         <a href="/2023/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">内部rpc调用</span>
         </a>
       
@@ -311,7 +311,7 @@
       
         <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">启动配置load_mods.lua</span>
         </a>
       
@@ -344,18 +344,54 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">启动配置load_mods.lua</h1>
+            <h1 style="display: none">内部rpc调用</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="作用定位"><a href="#作用定位" class="headerlink" title="作用定位"></a>作用定位</h1><p>可热更服务的启动配置文件，用于配置可插拔的可热更服务，可以自定义启动<strong>顺序</strong>，<strong>数量</strong>,<strong>配置参数</strong>，<strong>推迟最后启动</strong>。</p>
-<h1 id="示例参考"><a href="#示例参考" class="headerlink" title="示例参考"></a>示例参考</h1><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/examples/AB_question/load_mods.lua">AB_question</a></p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>	A_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">1</span>,<br>	&#125;,<br>    B_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>		launch_num = <span class="hljs-number">2</span>,<br>		mod_args = &#123;<br>			&#123;instance_name = <span class="hljs-string">&quot;test_one&quot;</span>&#125;,<br>			&#123;instance_name = <span class="hljs-string">&quot;test_two&quot;</span>&#125;,<br>		&#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="关联文件"><a href="#关联文件" class="headerlink" title="关联文件"></a>关联文件</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/client/contriner_client.lua">contriner_client.lua</a></li>
+</ul>
+<h1 id="最常用API"><a href="#最常用API" class="headerlink" title="最常用API"></a>最常用API</h1><ul>
+<li><p><strong>M:register(…)</strong> 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。<br>  参数：module_name列表。</p>
+</li>
+<li><p><strong>M:new(module_name,instance_name,can_switch_func)</strong> 创建调用对象。<br>  参数：<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  * <strong>can_switch_func(function)</strong> 是否可以切换服务(不传默认可以)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
+</li>
+<li><p><strong>M:instance(module_name,instance_name)</strong> 使用单例访问对象(很多时候并不需要创建管理rpc调用对象)。<br>  参数：<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
+</li>
+<li><p><strong>M:mod_send(…)</strong> 使用mod方式映射到一个<strong>server</strong>，之后用<strong>send</strong>方式给<strong>server</strong>发送消息(适用与长期与指定的服务联系)。<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。<br>  mod模式解释:假设<strong>server</strong>启动了<strong>6</strong>个，本服务的<strong>handle</strong>为7，取到的对应<strong>server</strong> handle为server_handle_list[7 % 6 + 1]。</p>
+</li>
+<li><p><strong>M:mod_call(…)</strong> 跟<strong>mod_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
+</li>
+<li><p><strong>M:set_mod_num(num)</strong> 设置mod值，没有设置的情况下，默认使用本服务的<strong>handle</strong>,用于解决有时候需要使用<strong>角色id</strong>来做映射。<br>  参数：<br>  * <strong>num(number)</strong> mod使用值。<br>  返回值：无</p>
+</li>
+<li><p><strong>M:balance_send(…)</strong> balance简单负载均衡，之后用<strong>send</strong>方式给<strong>server</strong>发送消息(适用与需要提高负载)。<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。<br>  balance模式解释: 假如<strong>server</strong>启动了<strong>6</strong>个，就会有<strong>server</strong>的handle列表，这种模式会1,2,3,4,5,6,1这样轮询的访问。</p>
+</li>
+<li><p><strong>M:balance_call(…)</strong> 跟<strong>balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
+</li>
+<li><p><strong>M:mod_send_by_name(…)</strong> 假如<strong>server</strong>启动了<strong>6</strong>个,3个<strong>instance_name</strong>为<strong>A</strong>，3个为<strong>B</strong>。这种方式基于指定的<strong>instance_name</strong>server_handle_list取映射。</p>
+</li>
+<li><p><strong>M:mod_call_by_name(…)</strong> call方式。</p>
+</li>
+<li><p><strong>M:balance_send_by_name(…)</strong> balance模式，send方式。</p>
+</li>
+<li><p><strong>M:balance_call_by_name(…)</strong> balance模式，call方式。</p>
+</li>
+<li><p><strong>M:set_instance_name(name)</strong> 设置instance_name。</p>
+</li>
+</ul>
+<h1 id="不常用API"><a href="#不常用API" class="headerlink" title="不常用API"></a>不常用API</h1><ul>
+<li><strong>M:broadcast(…)</strong> 广播。</li>
+<li><strong>M:broadcast_by_name(…)</strong> 通过instance_name广播。</li>
+<li><strong>M:set_week_visitor(…)</strong> 设置弱访问者,如果业务逻辑实在有环访问问题，可以使用这个设置。</li>
+<li><strong>M:monitor_all()</strong> 监听所有的可热更服务地址，用于解决启动时，不确定访问哪些服务。</li>
+<li><strong>M:CMD(cmd)</strong> 扩展CMD，不能热更服务需要扩展的CMD的命令。</li>
+</ul>
+<h1 id="使用注意点："><a href="#使用注意点：" class="headerlink" title="使用注意点："></a>使用注意点：</h1><p>服务start之后不能使用rpc调用，因为服务还没有准备好，如果这样使用会抛出错误。</p>
+<h1 id="如果实在要在start中去rpc调用："><a href="#如果实在要在start中去rpc调用：" class="headerlink" title="如果实在要在start中去rpc调用："></a>如果实在要在start中去rpc调用：</h1><p>可以用fork包裹。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    skynet.fock(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        rpc call...<br>    <span class="hljs-keyword">end</span>)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
-<h1 id="配置参数说明"><a href="#配置参数说明" class="headerlink" title="配置参数说明"></a>配置参数说明</h1><p><strong>A_m</strong>,<strong>B_m</strong>是指定的热更服务文件名。</p>
-<p><strong>launch_seq</strong> 启动顺序。<br><strong>launch_num</strong> 启动数量。<br><strong>mod_args</strong>   模块对应的启动配置。<br><strong>default_arg</strong> 如果配置都一样，就用default_arg，也可以default_arg和mod_args一起用，启动会优先用mod_args对应的配置（如果对应下标的配置存在）。<br><strong>instance_name</strong> 热更服务实例名称，用于给热更服务做分类，比如每个mysql服务连接的数据库都不同，可以用instance_name来区分，之后通过指定instance_name访问。<br><strong>delay_run</strong> 延迟运行。有时候有些服务需要之后再启动。比如这个<a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/examples/digitalbomb/main.lua">数字炸弹示例的客户端</a></p>
-<h1 id="修改启动配置指向"><a href="#修改启动配置指向" class="headerlink" title="修改启动配置指向"></a>修改启动配置指向</h1><p>通常需要区分<strong>开发环境</strong>，<strong>测试环境</strong>，<strong>预发环境</strong>，<strong>正式环境</strong>的启动配置。<br>我们可以修改由<code>binshell/make_server.sh</code>生成好的skynet启动配置中的<code>loadmodsfile</code>配置项，改变启用的可热更服务配置。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>已经坚持完善skynet_fly有半年多了，新年第一篇。<strong>新年快乐！！！</strong></p>
 
                 
               </div>
@@ -401,8 +437,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>启动配置load_mods.lua</div>
-      <div>https://huahua132.github.io/2023/12/17/skynet_fly_api/load_mods/</div>
+      <div>内部rpc调用</div>
+      <div>https://huahua132.github.io/2023/01/07/skynet_fly_api/rpc/</div>
     </div>
     <div class="license-meta">
       
@@ -414,7 +450,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月17日</div>
+          <div>2023年1月7日</div>
         </div>
       
       
@@ -446,21 +482,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务">
+                      <a href="/2023/05/07/think/whywrite/" title="为什么写blog">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">新增可热更服务</span>
+                        <span class="hidden-mobile">为什么写blog</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2023/12/10/skynet_fly/pack/" title="关于skynet_fly gate，ws_gate消息包设计">
-                        <span class="hidden-mobile">关于skynet_fly gate，ws_gate消息包设计</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
