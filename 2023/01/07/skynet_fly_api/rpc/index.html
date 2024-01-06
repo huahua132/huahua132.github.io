@@ -24,7 +24,7 @@
 <meta property="og:description" content="关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-07T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-06T09:25:00.429Z">
+<meta property="article:modified_time" content="2024-01-06T09:26:59.742Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -387,7 +387,7 @@
 <li><strong>M:monitor_all()</strong> 监听所有的可热更服务地址，用于解决启动时，不确定访问哪些服务。</li>
 <li><strong>M:CMD(cmd)</strong> 扩展CMD，不能热更服务需要扩展的CMD的命令。</li>
 </ul>
-<h1 id="使用注意点："><a href="#使用注意点：" class="headerlink" title="使用注意点："></a>使用注意点：</h1><p>服务start之后不能使用rpc调用，因为服务还没有准备好，如果这样使用会抛出错误。</p>
+<h1 id="使用注意点："><a href="#使用注意点：" class="headerlink" title="使用注意点："></a>使用注意点：</h1><p>服务start之前不能使用rpc调用，因为服务还没有准备好，如果这样使用会抛出错误。</p>
 <h1 id="如果实在要在start中去rpc调用："><a href="#如果实在要在start中去rpc调用：" class="headerlink" title="如果实在要在start中去rpc调用："></a>如果实在要在start中去rpc调用：</h1><p>可以用fork包裹。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    skynet.fock(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        rpc call...<br>    <span class="hljs-keyword">end</span>)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
