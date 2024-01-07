@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>远程rpc调用</title>
+    <link href="/2024/01/07/skynet_fly_api/rpcf/"/>
+    <url>/2024/01/07/skynet_fly_api/rpcf/</url>
+    
+    <content type="html"><![CDATA[<h1 id="关联文件"><a href="#关联文件" class="headerlink" title="关联文件"></a>关联文件</h1><ul><li><a href="https://github.com/huahua132/skynet_fly/blob/master/lualib/client/cluster_client.lua">cluster_client.lua</a></li></ul><h1 id="最常用API"><a href="#最常用API" class="headerlink" title="最常用API"></a>最常用API</h1><ul><li><p><strong>M:new(svr_name,module_name,instance_name)</strong> 创建调用对象。<br>  参数：<br>  * <strong>svr_name(string)</strong> 访问节点名称。<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p></li><li><p><strong>M:instance(svr_name,module_name,instance_name)</strong> 使用单例访问对象(很多时候并不需要创建管理rpc调用对象)。<br>  参数：<br>  * <strong>svr_name(string)</strong> 访问节点名称。<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p></li><li><p><strong>M:one_balance_send(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用balance_send的方式发送消息<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。</p></li><li><p><strong>M:one_balance_call(…)</strong> 跟<strong>one_balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p></li><li><p><strong>M:one_mod_send(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用mod_send的方式发送消息。<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。</p></li><li><p><strong>M:one_mod_call(…)</strong> 跟<strong>balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p></li><li><p><strong>M:one_broadcast(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用broadcast的方式发送消息。</p></li><li><p><strong>M:byid_balance_send(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用balance_send的方式发送消息。</p></li><li><p><strong>M:byid_balance_call(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用balance_call的方式发送消息。</p></li><li><p><strong>M:byid_mod_send(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用mod_send的方式发送消息。</p></li><li><p><strong>M:byid_mod_call(name)</strong> 用svr_id映射的方式给单个结点的module_name模板用mod_call的方式发送消息。</p></li><li><p><strong>M:byid_broadcast(name)</strong> 用svr_id映射的方式给单个结点的module_name模板用broadcast的方式发送消息。</p></li><li><p><strong>M:all_balance_send(…)</strong> 给所有结点的module_name模板用balance_send的方式发送消息。</p></li><li><p><strong>M:all_balance_call(…)</strong> 给所有结点的module_name模板用balance_call的方式发送消息。</p></li><li><p><strong>M:all_mod_send(…)</strong> 给所有结点的module_name模板用mod_send的方式发送消息。</p></li><li><p><strong>M:all_mod_call(name)</strong> 给所有结点的module_name模板用mod_call的方式发送消息。</p></li><li><p><strong>M:all_broadcast(name)</strong> 给所有结点的module_name模板用broadcast的方式发送消息。</p></li><li><p><strong>M:one_balance_send_by_name(…)</strong> </p></li><li><p><strong>M:one_balance_call_by_name(…)</strong> </p></li><li><p><strong>M:one_mod_send_by_name(…)</strong> </p></li><li><p><strong>M:one_mod_call_by_name(name)</strong> </p></li><li><p><strong>M:one_broadcast_by_name(name)</strong> </p></li><li><p><strong>M:byid_balance_send_by_name(…)</strong> </p></li><li><p><strong>M:byid_balance_call_by_name(…)</strong> </p></li><li><p><strong>M:byid_mod_send_by_name(…)</strong> </p></li><li><p><strong>M:byid_mod_call_by_name(name)</strong> </p></li><li><p><strong>M:byid_broadcast_by_name(name)</strong> </p></li><li><p><strong>M:all_balance_send_by_name(…)</strong> </p></li><li><p><strong>M:all_balance_call_by_name(…)</strong> </p></li><li><p><strong>M:all_mod_send_by_name(…)</strong> </p></li><li><p><strong>M:all_mod_call_by_name(name)</strong> </p></li><li><p><strong>M:all_broadcast_by_name(name)</strong></p></li></ul><h1 id="不常用API"><a href="#不常用API" class="headerlink" title="不常用API"></a>不常用API</h1><ul><li><strong>M:set_svr_id(…)</strong> 指定服务id。</li><li><strong>M:set_instance_name(…)</strong> 指定访问实例名</li><li><strong>M:set_mod_num(…)</strong> 指定mod映射数</li></ul><h1 id="使用注意点："><a href="#使用注意点：" class="headerlink" title="使用注意点："></a>使用注意点：</h1><p>服务start之前不能使用rpc调用，因为服务还没有准备好，如果这样使用会抛出错误。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly_api</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_api</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>内部rpc调用</title>
     <link href="/2024/01/07/skynet_fly_api/rpc/"/>
     <url>/2024/01/07/skynet_fly_api/rpc/</url>
