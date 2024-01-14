@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>可热更模块的启动配置项</title>
+    <link href="/2024/01/14/skynet_fly_api/mods/"/>
+    <url>/2024/01/14/skynet_fly_api/mods/</url>
+    
+    <content type="html"><![CDATA[<h1 id="web服务"><a href="#web服务" class="headerlink" title="web服务"></a>web服务</h1><h2 id="web-master-m"><a href="#web-master-m" class="headerlink" title="web_master_m"></a>web_master_m</h2><ul><li><strong>max_client</strong> 最大同时连接数。</li><li><strong>second_conn_limit</strong> 相同ip一秒内建立连接数量限制。</li><li><strong>keep_live_limit</strong> 相同ip保持连接数量限制。</li><li><strong>host</strong> 无默认0.0.0.0。</li><li><strong>port</strong> 无 http默认80 https默认443。</li><li><strong>protocol</strong> 协议 http 或者 https。</li></ul><h2 id="web-agent-m"><a href="#web-agent-m" class="headerlink" title="web_agent_m"></a>web_agent_m</h2><ul><li><strong>protocol</strong> 协议 http 或者 https。</li><li><strong>keep_alive_time</strong> 保活时间。</li><li><strong>second_req_limit</strong> 一秒请求数量限制。</li></ul><h1 id="日志切割服务"><a href="#日志切割服务" class="headerlink" title="日志切割服务"></a>日志切割服务</h1><h2 id="logrotate-m"><a href="#logrotate-m" class="headerlink" title="logrotate_m"></a>logrotate_m</h2><ul><li><strong>filename</strong> 文件名。</li><li><strong>rename_format</strong> 重命名文件格式。日期格式。</li><li><strong>file_path</strong> 文件的路径。</li><li><strong>limit_size</strong> 至少多大才会切割。</li><li><strong>max_age</strong> 最大保留天数。</li><li><strong>max_backups</strong> 最大保留文件数。</li><li><strong>sys_cmd</strong> 轮转时调用的系统命令。</li><li><strong>point_type</strong> 定时轮转的定时器类型。</li><li><strong>month</strong> 几月。</li><li><strong>day</strong> 几天。</li><li><strong>hour</strong> 几时。</li><li><strong>min</strong> 几分。</li><li><strong>sec</strong> 几秒。</li><li><strong>wday</strong> 周几。</li><li><strong>yday</strong> 一年第几天。</li></ul><h1 id="orm服务"><a href="#orm服务" class="headerlink" title="orm服务"></a>orm服务</h1><h2 id="orm-table-m"><a href="#orm-table-m" class="headerlink" title="orm_table_m"></a>orm_table_m</h2><ul><li><strong>orm_plug</strong> 绑定的orm插件文件。</li></ul><h1 id="集群客户端服务"><a href="#集群客户端服务" class="headerlink" title="集群客户端服务"></a>集群客户端服务</h1><h2 id="cluster-client-m"><a href="#cluster-client-m" class="headerlink" title="cluster_client_m"></a>cluster_client_m</h2><ul><li><strong>node_map</strong> 访问的server列表 keyvalue形式 svr_name &#x3D; node。</li><li><strong>watch</strong> 监听方式，目前提供redis服务发现模式。</li></ul><h1 id="大厅房间类架构"><a href="#大厅房间类架构" class="headerlink" title="大厅房间类架构"></a>大厅房间类架构</h1><h2 id="room-game-alloc-m"><a href="#room-game-alloc-m" class="headerlink" title="room_game_alloc_m"></a>room_game_alloc_m</h2><ul><li><strong>alloc_plug</strong> 分配服插件。</li><li><strong>MAX_TABLES</strong> 最大桌子数量。</li></ul><h2 id="room-game-hall-m"><a href="#room-game-hall-m" class="headerlink" title="room_game_hall_m"></a>room_game_hall_m</h2><ul><li><strong>hall_plug</strong> 大厅服插件。</li></ul><h2 id="room-game-table-m"><a href="#room-game-table-m" class="headerlink" title="room_game_table_m"></a>room_game_table_m</h2><ul><li><strong>table_plug</strong> 桌子服插件。</li><li><strong>table_conf</strong> 桌子服配置。</li></ul><h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="mysql-m"><a href="#mysql-m" class="headerlink" title="mysql_m"></a>mysql_m</h2><ul><li><strong>db_conf</strong> mysql连接配置。</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly_api</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_api</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>远程rpc调用</title>
     <link href="/2024/01/07/skynet_fly_api/rpcf/"/>
     <url>/2024/01/07/skynet_fly_api/rpcf/</url>
