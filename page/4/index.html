@@ -229,6 +229,250 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/05/14/socket/tcp/" target="_self">
+          tcp知识整理
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/tcp/" target="_self">
+        <div>
+          三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/socket/">#socket</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/14/socket/epoll/" target="_self">
+          select,poll,epoll 对比
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
+        <div>
+          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/socket/">#socket</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/13/redis/redis/" target="_self">
+          redis 知识杂谈
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/13/redis/redis/" target="_self">
+        <div>
+          redis有哪些好处？ 数据类型丰富，提供了string,list,hash,set,zset五种基础类型，还提供了stream，geo，bitmap扩展类型string数据结构：简单动态字符串list数据结构：双向链表，压缩列表hash压缩列表，哈希表zset压缩列表，跳表set哈希表，整数数组  数据可以设置过期时间  支持事务  支持脚本化运行  哈希冲突解决 少量的冲突redis使用链式哈
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-13 11:33" pubdate>
+              2023-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/redis/" class="category-chain-item">redis</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/redis/">#redis</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/13/skynet_frame/frame/" target="_self">
+          skynet c层的整体架构
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/13/skynet_frame/frame/" target="_self">
+        <div>
+          架构图上图是skynet框架的核心的架构图，看完整体我们再去细看内部实现细节，架构图就像一张完整的地图，我们需要由面到点深入到图中，才能真正的了解吃透skynet，使用中才知道要注意哪些细节。现实中了解地图中的一个地方自然是实地去走一走。了解代码框架的话当然是结合源码和文档(skynet github 上的wiki文档就写的非常不错)。源码不止看了一遍，所以基本上都是n探，探多了就清楚自己哪些地方
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-13 11:33" pubdate>
+              2023-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-frame/">#skynet_frame</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/05/07/skynet_frame/actor/" target="_self">
           actor模型在sknyet中的应用
         </a>
@@ -338,67 +582,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/01/07/skynet_fly_api/rpc/" target="_self">
-          内部rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/01/07/skynet_fly_api/rpc/" target="_self">
-        <div>
-          关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-01-07 09:00" pubdate>
-              2023-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
             
           </div>
         

@@ -229,6 +229,250 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/12/03/skynet_fly/reload/" target="_self">
+          关于skynet_fly热更新实现细节
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/03/skynet_fly/reload/" target="_self">
+        <div>
+          前言由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。 实现思路可以先看看这篇关于skynet_fly热更新实现 整体还是围绕容器管理员,容器客户端,可热更服务展开。 职责 容器管理员 负责启动，通知关闭，通知更新 容器客户端 负责注册访问，监听，服务切换，记录需要访问，回复是否需要访问 可热更服务 负责记录来访，检查安
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-12-03 14:00" pubdate>
+              2023-12-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly/">#skynet_fly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/11/19/skynet_fly/logservice/" target="_self">
+          关于增加skynet_fly 日志服务
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/19/skynet_fly/logservice/" target="_self">
+        <div>
+          前言最近在skynet_fly_demo中尝试用skynet_fly后台管理，想通过后台监控服务器的历史运行状况,服务实时信息，错误日志报警，等等。历史运行状况,服务实时信息这两个通过skynet的debug_console再加上我封装的集群，很方便的就做好了。之后考虑错误日志报警的问题,错误日志分为主动打印的异常日志和被动触发lua断言错误。  主动打印的异常日志 这个好解决，我封装的log模块
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-11-19 14:00" pubdate>
+              2023-11-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly/">#skynet_fly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/22/skynet_fly/time_point/" target="_self">
+          关于新增定时器的扩展 整点报时
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/skynet_fly/time_point/" target="_self">
+        <div>
+          前言对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。 如何新增一开始想在timer.lua去新增一些新增一些方法，但是想保持timer.lua足够简单，就独立了一个文件用继承的方式来扩展。 提供功能可以像设置闹钟一样设置。  设置每分钟的哪一秒。 设置每小时几分几秒。 设置每天的几时几分几秒。 设置每周的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-22 13:42" pubdate>
+              2023-10-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly/">#skynet_fly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/15/skynet_fly/room_game_up/" target="_self">
+          关于room_game可热更匹配房间类游戏架构的优化
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/15/skynet_fly/room_game_up/" target="_self">
+        <div>
+          前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-15 08:00" pubdate>
+              2023-10-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly/">#skynet_fly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/10/06/think/reload_error/" target="_self">
           skynet_fly热更新存在的问题
         </a>
@@ -582,250 +826,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/record/">#record</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/07/28/skynet_fly/cluster_rpc/" target="_self">
-          关于cluster 远程rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/skynet_fly/cluster_rpc/" target="_self">
-        <div>
-          简介cluster 远程rpc是依赖skynet的cluster模式实现的。    skynet_fly远程rpc调用的实现注重什么：    * 与热更模板系统完美融合。    * 简单易用的API设计。    * 支持多结点。    * 支持服务发现。 定位因为远程rpc调用结点偶尔下线，上线都是常有的事，所以不建议用来做强生效性消息(就是调用了，一定要执行成功)。skynet_fly clus
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-28 08:00" pubdate>
-              2023-07-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/07/22/skynet_fly/room_game/" target="_self">
-          关于room_game可热更匹配房间类游戏架构
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/22/skynet_fly/room_game/" target="_self">
-        <div>
-          简介room_game是skynet_fly基于热更系统实现的匹配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，matc
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-22 08:00" pubdate>
-              2023-07-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/07/08/skynet_fly/redis/" target="_self">
-          关于redis的封装
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/08/skynet_fly/redis/" target="_self">
-        <div>
-          为什么要封装redis？ 适用skynet_fly生态。 redis连接配置可以写在mod_config中。  对于实现方式的思考 方式一  用skynet_fly 热更模块的方式，这样连接配置就可以写在mod_config，还可以配置连接多个不同的redis。  优势：  1. 配置redis连接方便。  2. 固定redis连接数量。  劣势  1. 多了一次消息的打包解包。  2. redi
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-08 21:54" pubdate>
-              2023-07-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/07/02/skynet_fly/timer/" target="_self">
-          关于定时器的封装
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/02/skynet_fly/timer/" target="_self">
-        <div>
-          为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-02 13:42" pubdate>
-              2023-07-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
             
           </div>
         

@@ -16,24 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)">
+    <meta name="description" content="测试对象 lua-rax lua-radix-router  测试结果lua-radix-router   TEST CASE Router number nanoseconds &#x2F; op QPS RSS    static-paths 100000 0.352315 ns 2838369 74.60 MB   simple-variable 100000 1.403398 ns 712">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内部rpc调用">
-<meta property="og:url" content="https://huahua132.github.io/2023/01/07/skynet_fly_api/rpc/index.html">
+<meta property="og:title" content="关于skynet_fly 决定web路由工具使用的测试">
+<meta property="og:url" content="https://huahua132.github.io/2024/01/14/skynet_fly/benchmark_rax/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)">
+<meta property="og:description" content="测试对象 lua-rax lua-radix-router  测试结果lua-radix-router   TEST CASE Router number nanoseconds &#x2F; op QPS RSS    static-paths 100000 0.352315 ns 2838369 74.60 MB   simple-variable 100000 1.403398 ns 712">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-07T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-06T09:26:59.742Z">
+<meta property="article:published_time" content="2024-01-14T12:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-17T06:45:42.141Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="skynet_fly_api">
+<meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>内部rpc调用 - huahua132 blog</title>
+  <title>关于skynet_fly 决定web路由工具使用的测试 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="内部rpc调用"></span>
+            <span id="subtitle" data-typed-text="关于skynet_fly 决定web路由工具使用的测试"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-07 09:00" pubdate>
-          2023年1月7日 上午
+        <time datetime="2024-01-14 20:00" pubdate>
+          2024年1月14日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          751 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          14 分钟
+          7 分钟
         
       </span>
     
@@ -281,17 +281,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly_api"
-        id="heading-879663778a734ec922ccc8c70de62887" role="tab" data-toggle="collapse" href="#collapse-879663778a734ec922ccc8c70de62887"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly"
+        id="heading-3f12f48949345263aa7e927c65a85b19" role="tab" data-toggle="collapse" href="#collapse-3f12f48949345263aa7e927c65a85b19"
         aria-expanded="true"
       >
-        skynet_fly_api
-        <span class="list-group-count">(3)</span>
+        skynet_fly
+        <span class="list-group-count">(17)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-879663778a734ec922ccc8c70de62887"
-           role="tabpanel" aria-labelledby="heading-879663778a734ec922ccc8c70de62887">
+      <div class="category-collapse collapse show" id="collapse-3f12f48949345263aa7e927c65a85b19"
+           role="tabpanel" aria-labelledby="heading-3f12f48949345263aa7e927c65a85b19">
         
         
           
@@ -300,28 +300,154 @@
     
       
       
-        <a href="/2023/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
+        <a href="/2023/07/28/skynet_fly/cluster_rpc/" title="关于cluster 远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于cluster 远程rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/08/skynet_fly/redis/" title="关于redis的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于redis的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/22/skynet_fly/room_game/" title="关于room_game可热更匹配房间类游戏架构"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/15/skynet_fly/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/14/skynet_fly/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">内部rpc调用</span>
+          <span class="category-post">关于skynet_fly 决定web路由工具使用的测试</span>
         </a>
       
     
       
       
-        <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
+        <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">启动配置load_mods.lua</span>
+          <span class="category-post">关于skynet_fly热更新实现</span>
         </a>
       
     
       
       
-        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
+        <a href="/2023/12/03/skynet_fly/reload/" title="关于skynet_fly热更新实现细节"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">新增可热更服务</span>
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly/script/" title="关于skynet_fly热更模块启动配置的调整"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/08/20/skynet_fly/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly/orm/" title="关于增加skynet_fly orm数据关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/09/10/skynet_fly/logrotate/" title="关于增加skynet_fly 日志分割模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/19/skynet_fly/logservice/" title="关于增加skynet_fly 日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/02/skynet_fly/timer/" title="关于定时器的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于定时器的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/22/skynet_fly/time_point/" title="关于新增定时器的扩展 整点报时"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
     
@@ -344,54 +470,122 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">内部rpc调用</h1>
+            <h1 style="display: none">关于skynet_fly 决定web路由工具使用的测试</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="关联文件"><a href="#关联文件" class="headerlink" title="关联文件"></a>关联文件</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/client/contriner_client.lua">contriner_client.lua</a></li>
+                <h1 id="测试对象"><a href="#测试对象" class="headerlink" title="测试对象"></a>测试对象</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/hanxi/lua-rax">lua-rax</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/vm-001/lua-radix-router">lua-radix-router</a></li>
 </ul>
-<h1 id="最常用API"><a href="#最常用API" class="headerlink" title="最常用API"></a>最常用API</h1><ul>
-<li><p><strong>M:register(…)</strong> 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。<br>  参数：module_name列表。</p>
-</li>
-<li><p><strong>M:new(module_name,instance_name,can_switch_func)</strong> 创建调用对象。<br>  参数：<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  * <strong>can_switch_func(function)</strong> 是否可以切换服务(不传默认可以)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
-</li>
-<li><p><strong>M:instance(module_name,instance_name)</strong> 使用单例访问对象(很多时候并不需要创建管理rpc调用对象)。<br>  参数：<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
-</li>
-<li><p><strong>M:mod_send(…)</strong> 使用mod方式映射到一个<strong>server</strong>，之后用<strong>send</strong>方式给<strong>server</strong>发送消息(适用与长期与指定的服务联系)。<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。<br>  mod模式解释:假设<strong>server</strong>启动了<strong>6</strong>个，本服务的<strong>handle</strong>为7，取到的对应<strong>server</strong> handle为server_handle_list[7 % 6 + 1]。</p>
-</li>
-<li><p><strong>M:mod_call(…)</strong> 跟<strong>mod_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
-</li>
-<li><p><strong>M:set_mod_num(num)</strong> 设置mod值，没有设置的情况下，默认使用本服务的<strong>handle</strong>,用于解决有时候需要使用<strong>角色id</strong>来做映射。<br>  参数：<br>  * <strong>num(number)</strong> mod使用值。<br>  返回值：无</p>
-</li>
-<li><p><strong>M:balance_send(…)</strong> balance简单负载均衡，之后用<strong>send</strong>方式给<strong>server</strong>发送消息(适用与需要提高负载)。<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。<br>  balance模式解释: 假如<strong>server</strong>启动了<strong>6</strong>个，就会有<strong>server</strong>的handle列表，这种模式会1,2,3,4,5,6,1这样轮询的访问。</p>
-</li>
-<li><p><strong>M:balance_call(…)</strong> 跟<strong>balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
-</li>
-<li><p><strong>M:mod_send_by_name(…)</strong> 假如<strong>server</strong>启动了<strong>6</strong>个,3个<strong>instance_name</strong>为<strong>A</strong>，3个为<strong>B</strong>。这种方式基于指定的<strong>instance_name</strong>server_handle_list取映射。</p>
-</li>
-<li><p><strong>M:mod_call_by_name(…)</strong> call方式。</p>
-</li>
-<li><p><strong>M:balance_send_by_name(…)</strong> balance模式，send方式。</p>
-</li>
-<li><p><strong>M:balance_call_by_name(…)</strong> balance模式，call方式。</p>
-</li>
-<li><p><strong>M:set_instance_name(name)</strong> 设置instance_name。</p>
-</li>
-</ul>
-<h1 id="不常用API"><a href="#不常用API" class="headerlink" title="不常用API"></a>不常用API</h1><ul>
-<li><strong>M:broadcast(…)</strong> 广播。</li>
-<li><strong>M:broadcast_by_name(…)</strong> 通过instance_name广播。</li>
-<li><strong>M:set_week_visitor(…)</strong> 设置弱访问者,如果业务逻辑实在有环访问问题，可以使用这个设置。</li>
-<li><strong>M:monitor_all()</strong> 监听所有的可热更服务地址，用于解决启动时，不确定访问哪些服务。</li>
-<li><strong>M:CMD(cmd)</strong> 扩展CMD，不能热更服务需要扩展的CMD的命令。</li>
-</ul>
-<h1 id="使用注意点："><a href="#使用注意点：" class="headerlink" title="使用注意点："></a>使用注意点：</h1><p>服务start之前不能使用rpc调用，因为服务还没有准备好，如果这样使用会抛出错误。</p>
-<h1 id="如果实在要在start中去rpc调用："><a href="#如果实在要在start中去rpc调用：" class="headerlink" title="如果实在要在start中去rpc调用："></a>如果实在要在start中去rpc调用：</h1><p>可以用fork包裹。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    skynet.fock(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        rpc call...<br>    <span class="hljs-keyword">end</span>)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>已经坚持完善skynet_fly有半年多了，新年第一篇。<strong>新年快乐！！！</strong></p>
+<h1 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h1><h2 id="lua-radix-router"><a href="#lua-radix-router" class="headerlink" title="lua-radix-router"></a>lua-radix-router</h2><table>
+<thead>
+<tr>
+<th>TEST CASE</th>
+<th>Router number</th>
+<th>nanoseconds &#x2F; op</th>
+<th>QPS</th>
+<th>RSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static-paths</td>
+<td>100000</td>
+<td>0.352315 ns</td>
+<td>2838369</td>
+<td>74.60 MB</td>
+</tr>
+<tr>
+<td>simple-variable</td>
+<td>100000</td>
+<td>1.403398 ns</td>
+<td>712556</td>
+<td>129.78 MB</td>
+</tr>
+<tr>
+<td>simple-variable-binding</td>
+<td>100000</td>
+<td>2.443032 ns</td>
+<td>409327</td>
+<td>130.02 MB</td>
+</tr>
+<tr>
+<td>simple-prefix</td>
+<td>100000</td>
+<td>1.082572 ns</td>
+<td>923726</td>
+<td>130.77 MB</td>
+</tr>
+<tr>
+<td>complex-variable</td>
+<td>100000</td>
+<td>14.235308 ns</td>
+<td>70247</td>
+<td>344.34 MB</td>
+</tr>
+<tr>
+<td>github-routes</td>
+<td>609</td>
+<td>4.73934 ns</td>
+<td>210999</td>
+<td>23.27 MB</td>
+</tr>
+</tbody></table>
+<h2 id="lua-rax"><a href="#lua-rax" class="headerlink" title="lua-rax"></a>lua-rax</h2><table>
+<thead>
+<tr>
+<th>TEST CASE</th>
+<th>Router number</th>
+<th>nanoseconds &#x2F; op</th>
+<th>QPS</th>
+<th>RSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static-paths</td>
+<td>100000</td>
+<td>0.298189 ns</td>
+<td>3353577</td>
+<td>66.65 MB</td>
+</tr>
+<tr>
+<td>simple-variable</td>
+<td>100000</td>
+<td>1.905007 ns</td>
+<td>524932</td>
+<td>76.40 MB</td>
+</tr>
+<tr>
+<td>simple-variable-binding</td>
+<td>100000</td>
+<td>1.898845 ns</td>
+<td>526635</td>
+<td>98.68 MB</td>
+</tr>
+<tr>
+<td>simple-prefix</td>
+<td>100000</td>
+<td>1.837813 ns</td>
+<td>544125</td>
+<td>76.52 MB</td>
+</tr>
+<tr>
+<td>complex-variable</td>
+<td>100000</td>
+<td>14.893003 ns</td>
+<td>67145</td>
+<td>63.65 MB</td>
+</tr>
+<tr>
+<td>github-routes</td>
+<td>609</td>
+<td>260.5502 ns</td>
+<td>3838</td>
+<td>23.52 MB</td>
+</tr>
+</tbody></table>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>lua-rax 在github-routes测试项表现非常差劲，在其他项测试各有优劣。所以skynet_fly将切换使用lua-radix-router。</p>
 
                 
               </div>
@@ -410,7 +604,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
   
   
 
@@ -425,7 +619,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+        <a href="/tags/skynet-fly/">#skynet_fly</a>
       
     </div>
   
@@ -437,8 +631,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>内部rpc调用</div>
-      <div>https://huahua132.github.io/2023/01/07/skynet_fly_api/rpc/</div>
+      <div>关于skynet_fly 决定web路由工具使用的测试</div>
+      <div>https://huahua132.github.io/2024/01/14/skynet_fly/benchmark_rax/</div>
     </div>
     <div class="license-meta">
       
@@ -450,7 +644,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月7日</div>
+          <div>2024年1月14日</div>
         </div>
       
       
@@ -482,15 +676,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/07/think/whywrite/" title="为什么写blog">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">为什么写blog</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项">
+                        <span class="hidden-mobile">可热更模块的启动配置项</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
