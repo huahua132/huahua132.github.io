@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在&#x2F;etc&#x2F;logrotate.d&#x2F;新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo">
+    <meta name="description" content="测试对象 lua-rax lua-radix-router  测试结果lua-radix-router   TEST CASE Router number nanoseconds &#x2F; op QPS RSS    static-paths 100000 0.352315 ns 2838369 74.60 MB   simple-variable 100000 1.403398 ns 712">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于增加skynet_fly 日志分割模块">
-<meta property="og:url" content="https://huahua132.github.io/2023/09/10/skynet_fly/logrotate/index.html">
+<meta property="og:title" content="关于skynet_fly 决定web路由工具使用的测试">
+<meta property="og:url" content="https://huahua132.github.io/2024/01/14/skynet_fly/benchmark_rax/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在&#x2F;etc&#x2F;logrotate.d&#x2F;新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo">
+<meta property="og:description" content="测试对象 lua-rax lua-radix-router  测试结果lua-radix-router   TEST CASE Router number nanoseconds &#x2F; op QPS RSS    static-paths 100000 0.352315 ns 2838369 74.60 MB   simple-variable 100000 1.403398 ns 712">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-10T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-12T02:41:51.610Z">
+<meta property="article:published_time" content="2024-01-14T12:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-21T01:59:57.089Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于增加skynet_fly 日志分割模块 - huahua132 blog</title>
+  <title>关于skynet_fly 决定web路由工具使用的测试 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于增加skynet_fly 日志分割模块"></span>
+            <span id="subtitle" data-typed-text="关于skynet_fly 决定web路由工具使用的测试"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-10 08:00" pubdate>
-          2023年9月10日 早上
+        <time datetime="2024-01-14 20:00" pubdate>
+          2024年1月14日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          751 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          9 分钟
+          7 分钟
         
       </span>
     
@@ -347,7 +347,7 @@
       
         <a href="/2024/01/14/skynet_fly/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">关于skynet_fly 决定web路由工具使用的测试</span>
         </a>
       
@@ -419,7 +419,7 @@
       
         <a href="/2023/09/10/skynet_fly/logrotate/" title="关于增加skynet_fly 日志分割模块"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">关于增加skynet_fly 日志分割模块</span>
         </a>
       
@@ -470,35 +470,122 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于增加skynet_fly 日志分割模块</h1>
+            <h1 style="display: none">关于skynet_fly 决定web路由工具使用的测试</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。</p>
-<ol>
-<li><strong>软件问题</strong> 可能有些系统并不会默认装载logrotate分割软件。</li>
-<li><strong>权限问题</strong> 非root用户可能无法在<code>/etc/logrotate.d/</code>新增文件。</li>
-</ol>
-<p>就此埋下了我想实现一个内置日志分割模块的决心。</p>
-<h1 id="项目修改"><a href="#项目修改" class="headerlink" title="项目修改"></a>项目修改</h1><ol>
-<li>修改原来的<code>run.sh</code>不再启动即配置日志分割。</li>
-<li>把使用系统日志分割变成一个可选项，增加了<code>create_logrotate.sh</code>，可以主动调用配置。</li>
-<li>内置新增<code>log_rotate_m.lua</code>日志分割模块。</li>
-</ol>
-<h1 id="提供功能"><a href="#提供功能" class="headerlink" title="提供功能"></a>提供功能</h1><p>我没有去增加太多的配置项，我是按照我个人使用日志分割的场景来做的，后续如果有优秀建议，也可修改。</p>
-<p>主要提供了两个功能，<strong>切割</strong>，<strong>保留历史日志文件整理</strong>。</p>
-<ul>
-<li><strong>切割</strong> 我目前写死了<strong>每天凌晨</strong>进行切割和整理，还做了文件至少多大才切割。</li>
-<li><strong>保留历史日志文件整理</strong> 提供了保留多少天内，和保留多少个文件的配置。</li>
+                <h1 id="测试对象"><a href="#测试对象" class="headerlink" title="测试对象"></a>测试对象</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/hanxi/lua-rax">lua-rax</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/vm-001/lua-radix-router">lua-radix-router</a></li>
 </ul>
-<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>到点重命名日志文件，通过hup消息通知<code>skynet</code>日志服务重新打开日志文件，这种方式不会丢失日志，也不会占用内存。</p>
-<h1 id="配置项说明"><a href="#配置项说明" class="headerlink" title="配置项说明"></a>配置项说明</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    logrotate_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            file_path = <span class="hljs-string">&#x27;./&#x27;</span>,          <span class="hljs-comment">--文件路径</span><br>            filename = <span class="hljs-string">&#x27;server.log&#x27;</span>,   <span class="hljs-comment">--文件名</span><br>            limit_size = <span class="hljs-number">0</span>,            <span class="hljs-comment">--最小分割大小</span><br>            max_age = <span class="hljs-number">7</span>,               <span class="hljs-comment">--最大保留天数</span><br>            max_backups = <span class="hljs-number">7</span>,           <span class="hljs-comment">--最大保留文件数</span><br>            sys_cmd = <span class="hljs-string">[[</span><br><span class="hljs-string">                /usr/bin/pkill -HUP -f skynet.logrotate_config.lua\n</span><br><span class="hljs-string">            ]]</span>,              <span class="hljs-comment">--系统命令</span><br>        &#125;<br>    &#125;,<br><br>    test_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>sys_cmd就是调用系统命令给skynet发送HUP信号，skynet logger服务收到HUP信号就会重新打开日志文件。</p>
-<h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/logrotate">examples&#x2F;logrotate</a></p>
-<h1 id="模块实现路径"><a href="#模块实现路径" class="headerlink" title="模块实现路径"></a>模块实现路径</h1><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/module/logrotate_m.lua">lualib&#x2F;module&#x2F;logrotate_m.lua</a></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>增加skynet_fly内置日志分割，为skynet_fly扩展了可选使用功能。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
+<h1 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h1><h2 id="lua-radix-router"><a href="#lua-radix-router" class="headerlink" title="lua-radix-router"></a>lua-radix-router</h2><table>
+<thead>
+<tr>
+<th>TEST CASE</th>
+<th>Router number</th>
+<th>nanoseconds &#x2F; op</th>
+<th>QPS</th>
+<th>RSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static-paths</td>
+<td>100000</td>
+<td>0.352315 ns</td>
+<td>2838369</td>
+<td>74.60 MB</td>
+</tr>
+<tr>
+<td>simple-variable</td>
+<td>100000</td>
+<td>1.403398 ns</td>
+<td>712556</td>
+<td>129.78 MB</td>
+</tr>
+<tr>
+<td>simple-variable-binding</td>
+<td>100000</td>
+<td>2.443032 ns</td>
+<td>409327</td>
+<td>130.02 MB</td>
+</tr>
+<tr>
+<td>simple-prefix</td>
+<td>100000</td>
+<td>1.082572 ns</td>
+<td>923726</td>
+<td>130.77 MB</td>
+</tr>
+<tr>
+<td>complex-variable</td>
+<td>100000</td>
+<td>14.235308 ns</td>
+<td>70247</td>
+<td>344.34 MB</td>
+</tr>
+<tr>
+<td>github-routes</td>
+<td>609</td>
+<td>4.73934 ns</td>
+<td>210999</td>
+<td>23.27 MB</td>
+</tr>
+</tbody></table>
+<h2 id="lua-rax"><a href="#lua-rax" class="headerlink" title="lua-rax"></a>lua-rax</h2><table>
+<thead>
+<tr>
+<th>TEST CASE</th>
+<th>Router number</th>
+<th>nanoseconds &#x2F; op</th>
+<th>QPS</th>
+<th>RSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static-paths</td>
+<td>100000</td>
+<td>0.298189 ns</td>
+<td>3353577</td>
+<td>66.65 MB</td>
+</tr>
+<tr>
+<td>simple-variable</td>
+<td>100000</td>
+<td>1.905007 ns</td>
+<td>524932</td>
+<td>76.40 MB</td>
+</tr>
+<tr>
+<td>simple-variable-binding</td>
+<td>100000</td>
+<td>1.898845 ns</td>
+<td>526635</td>
+<td>98.68 MB</td>
+</tr>
+<tr>
+<td>simple-prefix</td>
+<td>100000</td>
+<td>1.837813 ns</td>
+<td>544125</td>
+<td>76.52 MB</td>
+</tr>
+<tr>
+<td>complex-variable</td>
+<td>100000</td>
+<td>14.893003 ns</td>
+<td>67145</td>
+<td>63.65 MB</td>
+</tr>
+<tr>
+<td>github-routes</td>
+<td>609</td>
+<td>260.5502 ns</td>
+<td>3838</td>
+<td>23.52 MB</td>
+</tr>
+</tbody></table>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>lua-rax 在github-routes测试项表现非常差劲，在其他项测试各有优劣。所以skynet_fly将切换使用lua-radix-router。</p>
 
                 
               </div>
@@ -544,8 +631,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于增加skynet_fly 日志分割模块</div>
-      <div>https://huahua132.github.io/2023/09/10/skynet_fly/logrotate/</div>
+      <div>关于skynet_fly 决定web路由工具使用的测试</div>
+      <div>https://huahua132.github.io/2024/01/14/skynet_fly/benchmark_rax/</div>
     </div>
     <div class="license-meta">
       
@@ -557,7 +644,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月10日</div>
+          <div>2024年1月14日</div>
         </div>
       
       
@@ -589,9 +676,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/06/think/reload_error/" title="skynet_fly热更新存在的问题">
+                      <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">skynet_fly热更新存在的问题</span>
+                        <span class="hidden-mobile">定时器的使用</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -599,8 +686,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/03/record/blog/" title="blog编写环境搭建">
-                        <span class="hidden-mobile">blog编写环境搭建</span>
+                      <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项">
+                        <span class="hidden-mobile">可热更模块的启动配置项</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
