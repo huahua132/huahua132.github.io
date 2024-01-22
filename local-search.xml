@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>定时器的使用</title>
+    <link href="/2024/01/21/skynet_fly_api/timer/"/>
+    <url>/2024/01/21/skynet_fly_api/timer/</url>
+    
+    <content type="html"><![CDATA[<h1 id="timer-lua"><a href="#timer-lua" class="headerlink" title="timer.lua"></a><a href="https://github.com/huahua132/skynet_fly/blob/master/lualib/timer.lua">timer.lua</a></h1><p>对skynet的定时器做了基础封装，提供了注销，延时，循环次数，获得下次触发的剩余时间等等功能。</p><h1 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h1><ul><li><p><strong>new(expire,times,callback,…)</strong><br>  函数作用域：M 对象的成员函数<br>  函数名称：new<br>  描述:  创建一个定时器对象<br>  参数:<br>  - expire (number): 过期时间 100等于1秒<br>  - times (number): 次数，0表示循环触发<br>  - callback (function): 回调函数<br>  - …  回调参数</p></li><li><p><strong>cancel()</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：cancel<br>  描述:  取消定时器</p></li><li><p><strong>after_next</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：after_next<br>  描述:  之后下一次 ： 回调函数执行完，再注册下一次，默认先注册下一次再执行回调</p></li><li><p><strong>extend</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：extend<br>  描述:  延长定时器<br>  参数:<br>  - ex_expire (number): 延长时间 100等于1秒</p></li><li><p><strong>remain_expire</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：remain_expire<br>  描述:  剩余触发时间</p></li></ul><h1 id="timer-point"><a href="#timer-point" class="headerlink" title="timer_point"></a><a href="https://github.com/huahua132/skynet_fly/blob/master/lualib/time_extend/timer_point.lua">timer_point</a></h1><p>使用基础的timer.lua模块，封装的整点报时功能，功能的概念类似闹钟，比如设置每天下午2点半第30秒，就只需要这样设置。</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">call_back</span><span class="hljs-params">(a, b ,c, d)</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> a,b,c,d = <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span><br><span class="hljs-keyword">local</span> point = timer_point:new(time_point.EVERY_DAY)<br>:set_hour(<span class="hljs-number">14</span>) <span class="hljs-comment">--下午2点</span><br>:set_min(<span class="hljs-number">30</span>)  <span class="hljs-comment">--30分</span><br>:set_sec(<span class="hljs-number">30</span>)  <span class="hljs-comment">--30秒</span><br>:builder(call_back, a, b, c, d)<br><br>point:cancel()  <span class="hljs-comment">--取消整点报时</span><br></code></pre></td></tr></table></figure><p>目前支持设置的时间刻度有：</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;<br>    <span class="hljs-comment">--每分钟</span><br>    EVERY_MINUTE = <span class="hljs-number">1</span>,<br>    <span class="hljs-comment">--每小时</span><br>    EVERY_HOUR = <span class="hljs-number">2</span>,<br>    <span class="hljs-comment">--每天</span><br>    EVERY_DAY = <span class="hljs-number">3</span>,<br>    <span class="hljs-comment">--每周</span><br>    EVERY_WEEK = <span class="hljs-number">4</span>,<br>    <span class="hljs-comment">--每月 超过适配到最后一天</span><br>    EVERY_MOUTH = <span class="hljs-number">5</span>,<br>    <span class="hljs-comment">--每年几月几日几时几分几秒 超过适配到最后一天</span><br>    EVERY_YEAR = <span class="hljs-number">6</span>,<br>    <span class="hljs-comment">--每年的第几天 超过适配到最后一天</span><br>    EVERY_YEAR_DAY = <span class="hljs-number">7</span>,<br>&#125;<br></code></pre></td></tr></table></figure><ul><li><p><strong>new(type)</strong><br>  函数作用域：M 对象的成员函数<br>  函数名称：new<br>  描述:  创建整点报时对象<br>  参数:<br>  - type (number): 时间刻度类型</p></li><li><p><strong>set_month</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：set_month<br>  描述:  指定几月,如果刻度不是每年的话，这个设置没有作用<br>  参数:<br>  - month (number): 月份 1-12</p></li><li><p><strong>set_day</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：set_day<br>  描述:  每月第几天,超过适配到最后一天，比如设置31天，这月只有30天，适配到30天触发。<br>  参数:<br>  - day (number): 天数 1-31</p></li><li><p><strong>set_hour</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：set_hour<br>  描述:  几时<br>  参数:<br>  - hour (number): 几时 0-23</p></li><li><p><strong>set_min</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：set_min<br>  描述:  几分<br>  参数:<br>  - min (number): 几分 0-59</p></li><li><p><strong>set_sec</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：set_sec<br>  描述:  几秒<br>  参数:<br>  - sec (number): 几秒 0-59</p></li><li><p><strong>set_wday</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：set_wday<br>  描述:  周几（仅仅设置每周有效）<br>  参数:<br>  - wday (number): 周几 1-7 星期天为 1</p></li><li><p><strong>set_yday</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：set_yday<br>  描述:  一年第几天（仅仅设置每年第几天有效）<br>  参数:<br>  - yday (number): 第几天 1-366 超过适配到最后一天。</p></li><li><p><strong>builder</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：builder<br>  描述:  构建。<br>  参数:<br>  - callback (function): 回调函数。<br>  - … (any): 回调参数。</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly_api</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_api</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>关于skynet_fly 决定web路由工具使用的测试</title>
     <link href="/2024/01/14/skynet_fly/benchmark_rax/"/>
     <url>/2024/01/14/skynet_fly/benchmark_rax/</url>

@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/12/10/skynet_fly/script/" target="_self">
+          关于skynet_fly热更模块启动配置的调整
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/skynet_fly/script/" target="_self">
+        <div>
+          前言经过几个月的打磨使用，发现之前想的生成mod_config.lua热更模块配置文件用于启动的方式并不是很好。    缺点    1. 很少需要修改里面的值，当修改掉load_mods.lua，需要重新生成mod_config.lua。    2. 数组的配置重新生成也不好覆盖。    3. 有些配置想一直用load_mods.lua中的，却要手动同步改一遍mod_config.lua。 一开始
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-12-10 18:00" pubdate>
+              2023-12-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly/">#skynet_fly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/12/03/skynet_fly/reload/" target="_self">
           关于skynet_fly热更新实现细节
         </a>
@@ -765,67 +826,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/notebook/">#notebook</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/07/28/record/record/" target="_self">
-          linux不产生core原因
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/record/record/" target="_self">
-        <div>
-          首先可能ulimit限制了。ulimit -a  如果core 限制大小为0，需要修改。调用命令ulimit -c unlimited  考虑产生位置问题查看 /proc/sys/kernel/core_pattern文件内容。如果文件内容不是core，通知命令sudo bash -c &quot;echo core &gt; /proc/sys/kernel/core_pattern&quot
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-28 11:33" pubdate>
-              2023-07-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/record/" class="category-chain-item">record</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/record/">#record</a>
             
           </div>
         
