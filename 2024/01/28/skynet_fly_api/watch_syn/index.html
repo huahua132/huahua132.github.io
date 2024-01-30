@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关联文件 cluster_client.lua  最常用API M:new(svr_name,module_name,instance_name) 创建调用对象。  参数：  * svr_name(string) 访问节点名称。  * module_name(string)  模块名称，需要send或者call通信的模块名称(相当于一级索引)。  * instance_name(string) 实">
+    <meta name="description" content="watch_syn.luasever M.new_server(CMD)  函数作用域：M 对象的成员函数  描述:  创建一个发布者对象，需要在代码load中创建好。  参数:  - CMD (table): 模块的CMDtable  返回值: server_obj(table): 发布者对象    为什么需要传递CMD，因为发布者需要创建watch和unwatch两个接口，还有如果是热更服务还">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远程rpc调用">
-<meta property="og:url" content="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/index.html">
+<meta property="og:title" content="watch_syn.lua 监听同步机制">
+<meta property="og:url" content="https://huahua132.github.io/2024/01/28/skynet_fly_api/watch_syn/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="关联文件 cluster_client.lua  最常用API M:new(svr_name,module_name,instance_name) 创建调用对象。  参数：  * svr_name(string) 访问节点名称。  * module_name(string)  模块名称，需要send或者call通信的模块名称(相当于一级索引)。  * instance_name(string) 实">
+<meta property="og:description" content="watch_syn.luasever M.new_server(CMD)  函数作用域：M 对象的成员函数  描述:  创建一个发布者对象，需要在代码load中创建好。  参数:  - CMD (table): 模块的CMDtable  返回值: server_obj(table): 发布者对象    为什么需要传递CMD，因为发布者需要创建watch和unwatch两个接口，还有如果是热更服务还">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-07T03:30:00.000Z">
-<meta property="article:modified_time" content="2024-01-08T01:49:52.322Z">
+<meta property="article:published_time" content="2024-01-28T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-30T09:01:44.111Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>远程rpc调用 - huahua132 blog</title>
+  <title>watch_syn.lua 监听同步机制 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="远程rpc调用"></span>
+            <span id="subtitle" data-typed-text="watch_syn.lua 监听同步机制"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-07 11:30" pubdate>
-          2024年1月7日 中午
+        <time datetime="2024-01-28 08:00" pubdate>
+          2024年1月28日 早上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.2k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          17 分钟
+          19 分钟
         
       </span>
     
@@ -311,7 +311,7 @@
       
         <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">watch_syn.lua 监听同步机制</span>
         </a>
       
@@ -365,7 +365,7 @@
       
         <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">远程rpc调用</span>
         </a>
       
@@ -389,86 +389,76 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">远程rpc调用</h1>
+            <h1 style="display: none">watch_syn.lua 监听同步机制</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="关联文件"><a href="#关联文件" class="headerlink" title="关联文件"></a>关联文件</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/client/cluster_client.lua">cluster_client.lua</a></li>
-</ul>
-<h1 id="最常用API"><a href="#最常用API" class="headerlink" title="最常用API"></a>最常用API</h1><ul>
-<li><p><strong>M:new(svr_name,module_name,instance_name)</strong> 创建调用对象。<br>  参数：<br>  * <strong>svr_name(string)</strong> 访问节点名称。<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
-</li>
-<li><p><strong>M:instance(svr_name,module_name,instance_name)</strong> 使用单例访问对象(很多时候并不需要创建管理rpc调用对象)。<br>  参数：<br>  * <strong>svr_name(string)</strong> 访问节点名称。<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
-</li>
-<li><p><strong>M:one_balance_send(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用balance_send的方式发送消息<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。</p>
-</li>
-<li><p><strong>M:one_balance_call(…)</strong> 跟<strong>one_balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
-</li>
-<li><p><strong>M:one_mod_send(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用mod_send的方式发送消息。<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。</p>
-</li>
-<li><p><strong>M:one_mod_call(…)</strong> 跟<strong>balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
-</li>
-<li><p><strong>M:one_broadcast(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用broadcast的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_balance_send(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用balance_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_balance_call(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用balance_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_mod_send(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用mod_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_mod_call(name)</strong> 用svr_id映射的方式给单个结点的module_name模板用mod_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_broadcast(name)</strong> 用svr_id映射的方式给单个结点的module_name模板用broadcast的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_balance_send(…)</strong> 给所有结点的module_name模板用balance_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_balance_call(…)</strong> 给所有结点的module_name模板用balance_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_mod_send(…)</strong> 给所有结点的module_name模板用mod_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_mod_call(name)</strong> 给所有结点的module_name模板用mod_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_broadcast(name)</strong> 给所有结点的module_name模板用broadcast的方式发送消息。</p>
-</li>
-<li><p><strong>M:one_balance_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:one_balance_call_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:one_mod_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:one_mod_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:one_broadcast_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:byid_balance_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:byid_balance_call_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:byid_mod_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:byid_mod_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:byid_broadcast_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:all_balance_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:all_balance_call_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:all_mod_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:all_mod_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:all_broadcast_by_name(name)</strong></p>
+                <h1 id="watch-syn-lua"><a href="#watch-syn-lua" class="headerlink" title="watch_syn.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/watch/watch_syn.lua">watch_syn.lua</a></h1><h2 id="sever"><a href="#sever" class="headerlink" title="sever"></a><strong>sever</strong></h2><ul>
+<li><strong>M.new_server(CMD)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  创建一个<strong>发布者</strong>对象，需要在代码<strong>load</strong>中创建好。<br>  参数:<br>  - CMD (table): 模块的CMDtable<br>  返回值:<ol>
+<li>server_obj(table): <strong>发布者</strong>对象</li>
+</ol>
 </li>
 </ul>
-<h1 id="不常用API"><a href="#不常用API" class="headerlink" title="不常用API"></a>不常用API</h1><ul>
-<li><strong>M:set_svr_id(…)</strong> 指定服务id。</li>
-<li><strong>M:set_instance_name(…)</strong> 指定访问实例名</li>
-<li><strong>M:set_mod_num(…)</strong> 指定mod映射数</li>
+<p>为什么需要传递CMD，因为<strong>发布者</strong>需要创建<strong>watch</strong>和<strong>unwatch</strong>两个接口，还有如果是热更服务还需要处理<strong>fix_eixt</strong>,<strong>cancel_exit</strong>的回调。</p>
+<ul>
+<li><p><strong>server:register(name, init_v)</strong><br>  函数作用域：M.new_server 对象的成员函数<br>  描述:  注册一个key-value值<br>  参数:<br>  - name (string): 名称<br>  - init_v (any): 初始值<br>  返回值:</p>
+<ol>
+<li>server_obj(table): <strong>发布者</strong>对象</li>
+</ol>
+</li>
+<li><p><strong>server:publish(name, new_value)</strong><br>  函数作用域：M.new_server 对象的成员函数<br>  描述:  发布新值，同时通知<strong>订阅者</strong><br>  参数:<br>  - name (string): 名称<br>  - new_value (any): 新值<br>  返回值:<br>  无</p>
+</li>
 </ul>
-<h1 id="使用注意点："><a href="#使用注意点：" class="headerlink" title="使用注意点："></a>使用注意点：</h1><p>服务start之前不能使用rpc调用，因为服务还没有准备好，如果这样使用会抛出错误。</p>
+<h2 id="client"><a href="#client" class="headerlink" title="client"></a><strong>client</strong></h2><ul>
+<li><strong>M.new_client(rpc_interface)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  创建一个<strong>订阅者</strong>对象<br>  参数:<br>  - rpc_interface (table): watch接口，需要实现send,call方法。<br>  返回值:<ol>
+<li>client_obj(table): <strong>订阅者</strong>对象</li>
+</ol>
+</li>
+</ul>
+<p>因为<strong>server</strong>可能是在<strong>可热更模块服务</strong>中创建，也可能在普通的skynet服务中，所有就抽象出了接口，用于适配这两种情况。</p>
+<p><code>service_watch_interface.lua</code> 在普通的skynet服务中使用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs lua"><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">setmetatable</span> = <span class="hljs-built_in">setmetatable</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><span class="hljs-keyword">local</span> mt = &#123;<span class="hljs-built_in">__index</span> = M&#125;<br><span class="hljs-comment">--skynet服务 接口 传递别名或者handle_id</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:new</span><span class="hljs-params">(name_or_handle)</span></span><br>    <span class="hljs-keyword">local</span> t = &#123;<br>        server = name_or_handle<br>    &#125;<br><br>    <span class="hljs-built_in">setmetatable</span>(t, mt)<br>    <span class="hljs-keyword">return</span> t<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:send</span><span class="hljs-params">(...)</span></span><br>    skynet.send(<span class="hljs-built_in">self</span>.server, <span class="hljs-string">&#x27;lua&#x27;</span>, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:call</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> skynet.call(<span class="hljs-built_in">self</span>.server, <span class="hljs-string">&#x27;lua&#x27;</span>, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p><code>contriner_watch_interface.lua</code> 在<strong>可热更模块服务</strong>中使用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">setmetatable</span> = <span class="hljs-built_in">setmetatable</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><span class="hljs-keyword">local</span> mt = &#123;<span class="hljs-built_in">__index</span> = M&#125;<br><span class="hljs-comment">--可热更模块接口</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:new</span><span class="hljs-params">(mod_name, instance_name)</span></span><br>    <span class="hljs-keyword">local</span> t = &#123;<br>        cli = contriner_client:new(mod_name, instance_name)<br>    &#125;<br><br>    <span class="hljs-built_in">setmetatable</span>(t, mt)<br>    <span class="hljs-keyword">return</span> t<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:send</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>.cli:mod_send(...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:call</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>.cli:mod_call(...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>client:watch(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述:  监听name<br>  参数:<br>  - name (string): 名称<br>  返回值:<ol>
+<li>ret(bool): true</li>
+</ol>
+</li>
+</ul>
+<p>重复监听会断言</p>
+<ul>
+<li><p><strong>client:is_watch(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述: 是否还监听了此name<br>  参数:<br>  - name (string): 名称<br>  返回值:</p>
+<ol>
+<li>ret(bool): true or false</li>
+</ol>
+</li>
+<li><p><strong>client:unwatch(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述: 取消监听<br>  参数:<br>  - name (string): 名称<br>  返回值:<br>  无</p>
+</li>
+</ul>
+<p>没有监听取消会断言</p>
+<ul>
+<li><strong>client:get(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述: 获取name的值<br>  参数:<br>  - name (string): 名称<br>  返回值:<ol>
+<li>value</li>
+</ol>
+</li>
+</ul>
+<p>没有监听会断言<br>监听的，可能值还没有返回。</p>
+<ul>
+<li><strong>client:await_get(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述: 获取name的值（至少第一次结果已经返回）<br>  参数:<br>  - name (string): 名称<br>  返回值:<ol>
+<li>value</li>
+</ol>
+</li>
+</ul>
+<p>至少第一次结果已经返回</p>
+<ul>
+<li><strong>client:await_update(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述: 等待推送新的值，如果是可热更服务也可能是对方下线了。<br>  参数:<br>  - name (string): 名称<br>  返回值:<ol>
+<li>value</li>
+</ol>
+</li>
+</ul>
 
                 
               </div>
@@ -514,8 +504,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>远程rpc调用</div>
-      <div>https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/</div>
+      <div>watch_syn.lua 监听同步机制</div>
+      <div>https://huahua132.github.io/2024/01/28/skynet_fly_api/watch_syn/</div>
     </div>
     <div class="license-meta">
       
@@ -527,7 +517,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月7日</div>
+          <div>2024年1月28日</div>
         </div>
       
       
@@ -559,9 +549,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项">
+                      <a href="/2024/01/28/skynet_fly_api/orm/" title="orm">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">可热更模块的启动配置项</span>
+                        <span class="hidden-mobile">orm</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -569,8 +559,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用">
-                        <span class="hidden-mobile">内部rpc调用</span>
+                      <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用">
+                        <span class="hidden-mobile">定时器的使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
