@@ -24,7 +24,7 @@
 <meta property="og:description" content="watch_syn.luasever M.new_server(CMD)  函数作用域：M 对象的成员函数  描述:  创建一个发布者对象，需要在代码load中创建好。  参数:  - CMD (table): 模块的CMDtable  返回值: server_obj(table): 发布者对象    为什么需要传递CMD，因为发布者需要创建watch和unwatch两个接口，还有如果是热更服务还">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-28T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-01-30T09:01:44.111Z">
+<meta property="article:modified_time" content="2024-01-30T09:13:56.961Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -452,7 +452,7 @@
 </ol>
 </li>
 </ul>
-<p>至少第一次结果已经返回</p>
+<p>还没有拿到第一个值，就会一直等待，直到拿到。</p>
 <ul>
 <li><strong>client:await_update(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述: 等待推送新的值，如果是可热更服务也可能是对方下线了。<br>  参数:<br>  - name (string): 名称<br>  返回值:<ol>
 <li>value</li>
