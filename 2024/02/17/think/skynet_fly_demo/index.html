@@ -16,24 +16,31 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h">
+    <meta name="description" content="架构图 简介skynet_fly_demo是基于skynet_fly框架，开发对战类游戏架构，适用于moba、棋牌类游戏架构。 各服务职责center server 中心服 记录用户账户信息，比如账号，密码，手机号，注册渠道，设备号，平台等等信息。 记录用户创角信息，比如玩家ID，归属大厅服ID等等。 可以记录一些全局唯一的信息，比如登录的公告信息等等。  login server 登录服 登录限">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络七层模型">
-<meta property="og:url" content="https://huahua132.github.io/2023/05/14/socket/c/index.html">
+<meta property="og:title" content="关于skynet_fly_demo的架构设计">
+<meta property="og:url" content="https://huahua132.github.io/2024/02/17/think/skynet_fly_demo/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h">
+<meta property="og:description" content="架构图 简介skynet_fly_demo是基于skynet_fly框架，开发对战类游戏架构，适用于moba、棋牌类游戏架构。 各服务职责center server 中心服 记录用户账户信息，比如账号，密码，手机号，注册渠道，设备号，平台等等信息。 记录用户创角信息，比如玩家ID，归属大厅服ID等等。 可以记录一些全局唯一的信息，比如登录的公告信息等等。  login server 登录服 登录限">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-14T02:33:49.000Z">
-<meta property="article:modified_time" content="2023-09-07T06:57:39.212Z">
+<meta property="og:image" content="https://huahua132.github.io/img/think/skynet_fly_demo.png">
+<meta property="og:image" content="https://huahua132.github.io/img/think/server_monitor.png">
+<meta property="og:image" content="https://huahua132.github.io/img/think/real_list.png">
+<meta property="og:image" content="https://huahua132.github.io/img/think/warnlog.png">
+<meta property="og:image" content="https://huahua132.github.io/img/think/roles.png">
+<meta property="og:image" content="https://huahua132.github.io/img/think/user.png">
+<meta property="article:published_time" content="2024-02-17T02:33:49.000Z">
+<meta property="article:modified_time" content="2024-02-18T09:44:49.955Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="socket">
+<meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/think/skynet_fly_demo.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>网络七层模型 - huahua132 blog</title>
+  <title>关于skynet_fly_demo的架构设计 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +209,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="网络七层模型"></span>
+            <span id="subtitle" data-typed-text="关于skynet_fly_demo的架构设计"></span>
           
         </div>
 
@@ -213,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-14 10:33" pubdate>
-          2023年5月14日 上午
+        <time datetime="2024-02-17 10:33" pubdate>
+          2024年2月17日 上午
         </time>
       </span>
     
@@ -225,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          171 字
+          702 字
         
       </span>
     
@@ -236,7 +243,7 @@
         
         
         
-          2 分钟
+          6 分钟
         
       </span>
     
@@ -281,17 +288,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="socket"
-        id="heading-61f2529360aec54f5dc9804b842cf3fa" role="tab" data-toggle="collapse" href="#collapse-61f2529360aec54f5dc9804b842cf3fa"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="一些想法"
+        id="heading-57073d08a221e2e9c40741efe796074a" role="tab" data-toggle="collapse" href="#collapse-57073d08a221e2e9c40741efe796074a"
         aria-expanded="true"
       >
-        socket
-        <span class="list-group-count">(3)</span>
+        一些想法
+        <span class="list-group-count">(4)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-61f2529360aec54f5dc9804b842cf3fa"
-           role="tabpanel" aria-labelledby="heading-61f2529360aec54f5dc9804b842cf3fa">
+      <div class="category-collapse collapse show" id="collapse-57073d08a221e2e9c40741efe796074a"
+           role="tabpanel" aria-labelledby="heading-57073d08a221e2e9c40741efe796074a">
         
         
           
@@ -300,28 +307,37 @@
     
       
       
-        <a href="/2023/05/14/socket/epoll/" title="select,poll,epoll 对比"
+        <a href="/2023/10/06/think/reload_error/" title="skynet_fly热更新存在的问题"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">select,poll,epoll 对比</span>
+          <span class="category-post">skynet_fly热更新存在的问题</span>
         </a>
       
     
       
       
-        <a href="/2023/05/14/socket/tcp/" title="tcp知识整理"
+        <a href="/2023/05/07/think/whywrite/" title="为什么写blog"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">tcp知识整理</span>
+          <span class="category-post">为什么写blog</span>
         </a>
       
     
       
       
-        <a href="/2023/05/14/socket/c/" title="网络七层模型"
+        <a href="/2024/02/17/think/skynet_fly_demo/" title="关于skynet_fly_demo的架构设计"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">网络七层模型</span>
+          <span class="category-post">关于skynet_fly_demo的架构设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet做服务热更新</span>
         </a>
       
     
@@ -344,17 +360,62 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">网络七层模型</h1>
+            <h1 style="display: none">关于skynet_fly_demo的架构设计</h1>
             
             
               <div class="markdown-body">
                 
-                <ul>
-<li><strong>7层</strong> 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层</li>
-<li><strong>5层</strong> 物理层，数据链路层，网络层，传输层，应用层</li>
-<li><strong>4层</strong> 网络接口层，网络层，传输层，应用层</li>
+                <h1 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h1><p><img src="/img/think/skynet_fly_demo.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>skynet_fly_demo是基于skynet_fly框架，开发对战类游戏架构，适用于<code>moba</code>、<code>棋牌</code>类游戏架构。</p>
+<h1 id="各服务职责"><a href="#各服务职责" class="headerlink" title="各服务职责"></a>各服务职责</h1><h2 id="center-server-中心服"><a href="#center-server-中心服" class="headerlink" title="center server 中心服"></a>center server 中心服</h2><ul>
+<li>记录用户账户信息，比如账号，密码，手机号，注册渠道，设备号，平台等等信息。</li>
+<li>记录用户创角信息，比如玩家ID，归属大厅服ID等等。</li>
+<li>可以记录一些全局唯一的信息，比如登录的公告信息等等。</li>
 </ul>
-<p><strong>物理层</strong><br>    传输介质，网线，光纤<br><strong>数据链路层</strong><br>    保持数据的可靠传输<br><strong>网络层</strong><br>    数据路由，ip地址<br><strong>传输层</strong><br>    tcp，udp协议，数据打包<br><strong>会话层</strong><br>    建立与管理应用程序之间的通信<br><strong>表示层</strong><br>    解决不同系统的兼容问题<br><strong>应用层</strong><br>    http，ftp</p>
+<h2 id="login-server-登录服"><a href="#login-server-登录服" class="headerlink" title="login server 登录服"></a>login server 登录服</h2><ul>
+<li>登录限流，防止突发的流量挤爆<strong>中心服</strong>。</li>
+<li>签发<strong>大厅服的token</strong>。</li>
+</ul>
+<h2 id="hall-server-大厅服"><a href="#hall-server-大厅服" class="headerlink" title="hall server 大厅服"></a>hall server 大厅服</h2><ul>
+<li>验证登录， 验证登录服签发的token。</li>
+<li>负责大厅的商场，活动，邮件等等交互逻辑。</li>
+</ul>
+<h2 id="log-server-日志服"><a href="#log-server-日志服" class="headerlink" title="log server 日志服"></a>log server 日志服</h2><ul>
+<li>记录所有服务的错误日志。</li>
+<li>记录玩家的行为日志。</li>
+<li>记录游戏的记录日志。</li>
+<li>等等。</li>
+</ul>
+<h2 id="match-server-匹配服"><a href="#match-server-匹配服" class="headerlink" title="match server 匹配服"></a>match server 匹配服</h2><ul>
+<li>匹配玩家，分配公共的游戏房间供玩家进入。</li>
+</ul>
+<h2 id="game-server-游戏服"><a href="#game-server-游戏服" class="headerlink" title="game server 游戏服"></a>game server 游戏服</h2><ul>
+<li>实现具体的游戏逻辑。</li>
+</ul>
+<h2 id="admin-server-后台服"><a href="#admin-server-后台服" class="headerlink" title="admin server 后台服"></a>admin server 后台服</h2><ul>
+<li>服务监控。</li>
+<li>数据看板等等。</li>
+<li>后台相关需求。</li>
+</ul>
+<h1 id="各服务功能细节"><a href="#各服务功能细节" class="headerlink" title="各服务功能细节"></a>各服务功能细节</h1><h2 id="admin-server-后台服-1"><a href="#admin-server-后台服-1" class="headerlink" title="admin server 后台服"></a>admin server 后台服</h2><p>使用skynet_fly(后端) + vue(前端)架构。</p>
+<ul>
+<li><p>服务监控<br><img src="/img/think/server_monitor.png" srcset="/img/loading.gif" lazyload><br><strong>后台服</strong>会间隔一分钟去采集各个服务节点的运行信息。目前实现仅仅保留7天的采集信息。</p>
+</li>
+<li><p>实时列表<br><img src="/img/think/real_list.png" srcset="/img/loading.gif" lazyload><br>查看各个服务节点当前运行信息。</p>
+</li>
+<li><p>警告日志<br><img src="/img/think/warnlog.png" srcset="/img/loading.gif" lazyload><br>各个服务节点的严重错误日志，或者断言错误都会汇总到这里，方便查看解决。</p>
+</li>
+<li><p>后台角色权限管理<br><img src="/img/think/roles.png" srcset="/img/loading.gif" lazyload><br>通过角色权限划分，不同角色有不同的访问权限。</p>
+</li>
+<li><p>后台用户管理<br><img src="/img/think/user.png" srcset="/img/loading.gif" lazyload><br>可以管理不同的后台账号。</p>
+</li>
+</ul>
+<p>后续功能待补充。</p>
+<h2 id="center-server-中心服-1"><a href="#center-server-中心服-1" class="headerlink" title="center server 中心服"></a>center server 中心服</h2><p>暂未实现</p>
+<h2 id="login-server-登录服-1"><a href="#login-server-登录服-1" class="headerlink" title="login server 登录服"></a>login server 登录服</h2><p>暂未实现</p>
+<h2 id="hall-server-大厅服-1"><a href="#hall-server-大厅服-1" class="headerlink" title="hall server 大厅服"></a>hall server 大厅服</h2><p>暂未实现</p>
+<h2 id="log-server-日志服-1"><a href="#log-server-日志服-1" class="headerlink" title="log server 日志服"></a>log server 日志服</h2><p>警号日志收集。</p>
+<h2 id="game-server-游戏服-1"><a href="#game-server-游戏服-1" class="headerlink" title="game server 游戏服"></a>game server 游戏服</h2><p>中国象棋游戏</p>
 
                 
               </div>
@@ -373,7 +434,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/socket/" class="category-chain-item">socket</a>
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
   
   
 
@@ -388,7 +449,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/socket/">#socket</a>
+        <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
       
     </div>
   
@@ -400,8 +461,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>网络七层模型</div>
-      <div>https://huahua132.github.io/2023/05/14/socket/c/</div>
+      <div>关于skynet_fly_demo的架构设计</div>
+      <div>https://huahua132.github.io/2024/02/17/think/skynet_fly_demo/</div>
     </div>
     <div class="license-meta">
       
@@ -413,7 +474,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月14日</div>
+          <div>2024年2月17日</div>
         </div>
       
       
@@ -445,18 +506,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/21/think/link/" title="链接记录">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">链接记录</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/14/socket/epoll/" title="select,poll,epoll 对比">
-                        <span class="hidden-mobile">select,poll,epoll 对比</span>
+                      <a href="/2024/01/28/skynet_fly/watch_syn/" title="关于监听同步模块的封装">
+                        <span class="hidden-mobile">关于监听同步模块的封装</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
