@@ -229,13 +229,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/09/10/skynet_fly/logrotate/" target="_self">
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
           关于增加skynet_fly 日志分割模块
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/skynet_fly/logrotate/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
         <div>
           起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在/etc/logrotate.d/新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo
         </div>
@@ -261,7 +261,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -276,7 +276,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -351,13 +351,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/20/skynet_fly/after_load/" target="_self">
+        <a href="/2023/08/20/skynet_fly_ss/after_load/" target="_self">
           关于增加skynet_fly lua服务启动的后置加载
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/20/skynet_fly/after_load/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/20/skynet_fly_ss/after_load/" target="_self">
         <div>
           前言skynet lua服务默认启动加载是使用skynet/lualib/loader.lua，loader.lua 会加载并执行config中配置的preload路径的lua文件，这个操作的好处是可以把所有服务的一些前置环境操作，或者一些常用工具函数写到全局变量中(我更倾向于封装成工具模块通过require引用，不去污染全局环境，尽量保持原生环境)。在skynet_fly框架中，我就利用prel
         </div>
@@ -383,7 +383,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -398,7 +398,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -534,13 +534,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/28/skynet_fly/cluster_rpc/" target="_self">
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" target="_self">
           关于cluster 远程rpc调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/skynet_fly/cluster_rpc/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/skynet_fly_ss/cluster_rpc/" target="_self">
         <div>
           简介cluster 远程rpc是依赖skynet的cluster模式实现的。    skynet_fly远程rpc调用的实现注重什么：    * 与热更模板系统完美融合。    * 简单易用的API设计。    * 支持多结点。    * 支持服务发现。 定位因为远程rpc调用结点偶尔下线，上线都是常有的事，所以不建议用来做强生效性消息(就是调用了，一定要执行成功)。skynet_fly clus
         </div>
@@ -566,7 +566,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -581,7 +581,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -595,13 +595,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/22/skynet_fly/room_game/" target="_self">
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" target="_self">
           关于room_game可热更匹配房间类游戏架构
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/22/skynet_fly/room_game/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/22/skynet_fly_ss/room_game/" target="_self">
         <div>
           简介room_game是skynet_fly基于热更系统实现的匹配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，matc
         </div>
@@ -627,7 +627,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -642,7 +642,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -656,13 +656,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/08/skynet_fly/redis/" target="_self">
+        <a href="/2023/07/08/skynet_fly_ss/redis/" target="_self">
           关于redis的封装
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/08/skynet_fly/redis/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/08/skynet_fly_ss/redis/" target="_self">
         <div>
           为什么要封装redis？ 适用skynet_fly生态。 redis连接配置可以写在mod_config中。  对于实现方式的思考 方式一  用skynet_fly 热更模块的方式，这样连接配置就可以写在mod_config，还可以配置连接多个不同的redis。  优势：  1. 配置redis连接方便。  2. 固定redis连接数量。  劣势  1. 多了一次消息的打包解包。  2. redi
         </div>
@@ -688,7 +688,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -703,7 +703,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -717,13 +717,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/02/skynet_fly/timer/" target="_self">
+        <a href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
           关于定时器的封装
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/02/skynet_fly/timer/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
         <div>
           为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一
         </div>
@@ -749,7 +749,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -764,7 +764,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -778,13 +778,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
           关于skynet_fly热更新实现
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
         <div>
           实现思路可以先看看这篇关于skynet做服务热更新这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skynet.codecache，这样launch新
         </div>
@@ -810,7 +810,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -825,7 +825,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -837,7 +837,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

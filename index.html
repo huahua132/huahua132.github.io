@@ -290,13 +290,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/01/28/skynet_fly/watch_syn/" target="_self">
+        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" target="_self">
           关于监听同步模块的封装
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/28/skynet_fly/watch_syn/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/28/skynet_fly_ss/watch_syn/" target="_self">
         <div>
           为啥需要封装一个监听同步模块？使用skynet开发功能，由于是actor模型，难免会遇到一个服务需要依赖另一个服务的数据的情况，解决这个问题常见的方案有：  封装一个c模块，用于共享数据 优点：  API使用简单，get set 即可。 节省内存。   缺点：  编码难度大，风险高，需要处理好多线程编码问题。 需要加读写锁，读取性能不一定高。 lua调用c，没有直接访问lua快。   要用的时候去
         </div>
@@ -322,7 +322,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -337,7 +337,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -534,13 +534,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/01/14/skynet_fly/benchmark_rax/" target="_self">
+        <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" target="_self">
           关于skynet_fly 决定web路由工具使用的测试
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/14/skynet_fly/benchmark_rax/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/14/skynet_fly_ss/benchmark_rax/" target="_self">
         <div>
           测试对象 lua-rax lua-radix-router  测试结果lua-radix-router   TEST CASE Router number nanoseconds &#x2F; op QPS RSS    static-paths 100000 0.352315 ns 2838369 74.60 MB   simple-variable 100000 1.403398 ns 712
         </div>
@@ -566,7 +566,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -581,7 +581,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -778,13 +778,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/12/24/skynet_fly/orm_table_m/" target="_self">
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" target="_self">
           关于增加skynet_fly orm_table_m 可热更服务
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/24/skynet_fly/orm_table_m/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/24/skynet_fly_ss/orm_table_m/" target="_self">
         <div>
           前言因为orm在多个服务持有的时候，没法保证一致性，所有需要把orm封装到独立服务中，其他服务通过rpc调用，为了使用便利性，封装了通用的orm可热更服务orm_table_m.lua和rpc调用模块orm_table_client.lua。 orm_table_m.lua转入的config需要提供一个配置项orm_plug，它是lua模块文件。需要提供init,call两个方法。  init()
         </div>
@@ -810,7 +810,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly/" class="category-chain-item">skynet_fly</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -825,7 +825,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly/">#skynet_fly</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -837,7 +837,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
