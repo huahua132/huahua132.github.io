@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言">
+    <meta name="description" content="项目简介skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家来使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。skynet_fly持续迭代的原则，尽量向下兼容性，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。 框架优势skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。使用s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前言">
 <meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/home/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言">
+<meta property="og:description" content="项目简介skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家来使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。skynet_fly持续迭代的原则，尽量向下兼容性，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。 框架优势skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。使用s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-26T11:49:14.429Z">
+<meta property="article:modified_time" content="2024-02-26T12:41:45.849Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2 字
+          1.3k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          1 分钟
+          11 分钟
         
       </span>
     
@@ -345,17 +345,17 @@
     
     <div class="category-sub row nomargin-x">
       <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="进阶篇"
-        id="heading-6b7d2340b3468564450cbbd7ee818e02" role="tab" data-toggle="collapse" href="#collapse-6b7d2340b3468564450cbbd7ee818e02"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础篇"
+        id="heading-9248c705575b4b5883daaed3318fda8b" role="tab" data-toggle="collapse" href="#collapse-9248c705575b4b5883daaed3318fda8b"
         aria-expanded="false"
       >
-        进阶篇
+        基础篇
         <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse " id="collapse-6b7d2340b3468564450cbbd7ee818e02"
-           role="tabpanel" aria-labelledby="heading-6b7d2340b3468564450cbbd7ee818e02">
+      <div class="category-collapse collapse " id="collapse-9248c705575b4b5883daaed3318fda8b"
+           role="tabpanel" aria-labelledby="heading-9248c705575b4b5883daaed3318fda8b">
         
         
           
@@ -399,7 +399,49 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>
+                <h1 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h1><p>skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家来使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。<br>skynet_fly持续迭代的原则，尽量向下兼容性，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。</p>
+<h1 id="框架优势"><a href="#框架优势" class="headerlink" title="框架优势"></a>框架优势</h1><p>skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。<br>使用skynet_fly的好处：</p>
+<ul>
+<li>支持不停服更新。</li>
+<li>一键生成skynet的配置文件和skynet_fly的配置文件以及配套shell脚本。</li>
+<li>对匹配房间类游戏做了gate,ws_gate的基础设施封装以及pb,json协议的支持，开发游戏只需要实现相关业务逻辑。</li>
+<li>对redis,mysql,timer,log 使用封装。</li>
+<li>基于skynet cluster封装出简单易用的远程rpc调用。</li>
+<li>支持服务发现。</li>
+<li>支持http服务长连接。</li>
+<li>支持http服务路由，中间件模式。</li>
+<li>支持jwt鉴权。</li>
+<li>内置日志分割。</li>
+<li>支持快进时间。</li>
+<li>支持orm（数据关系映射）目前适配了(mysql,mongo),数据库可无缝切换。</li>
+</ul>
+<h1 id="适合哪些人群"><a href="#适合哪些人群" class="headerlink" title="适合哪些人群"></a>适合哪些人群</h1><ol>
+<li>喜欢lua语言，想用lua开发游戏、网站、后台、API服务等等。</li>
+</ol>
+<p>如果你对skynet没有一点点了解，可能使用该框架会有点困难，建议先大概了解学习<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet">skynet框架</a></p>
+<ol start="2">
+<li>对skynet有一定了解，却迷茫于如何架构服务。</li>
+</ol>
+<p>对skynet有一定了解，那么上手该框架将会轻松很多。</p>
+<h1 id="为什么要开发一个skynet-fly框架？"><a href="#为什么要开发一个skynet-fly框架？" class="headerlink" title="为什么要开发一个skynet_fly框架？"></a>为什么要开发一个skynet_fly框架？</h1><ol>
+<li>skynet框架不是开箱即用的，使用skynet开发游戏基本上或多或少都需要对框架做一些修改。</li>
+</ol>
+<p>在开源框架当中，大部分好用的框架都是开箱即用的，对新手非常友好。使用skynet如果没有人带路的话，还是挺困难的，想要用的好，得看明白底层代码，然后还需要一些架构能力。<br>而使用skynet_fly，提供了很多基础设施的支持，架构服务只需要关注实现业务代码，能够更快速的开发迭代。</p>
+<ol start="2">
+<li>使用lua开发网站的框架较少，我想skynet_fly可以做到。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://github.com/hanxi">涵曦</a>开发的<a target="_blank" rel="noopener" href="https://github.com/hanxi/wlua">wlua</a>可以说是实现了lua版本 <a target="_blank" rel="noopener" href="https://github.com/gin-gonic/gin">gin</a>框架。<br>我把wlua的核心代码嵌入了skynet_fly中，再利用skynet_fly的热更模块机制，可以做到网站服务热更。</p>
+<h1 id="框架提供了这么多功能是不是很复杂，很难用？"><a href="#框架提供了这么多功能是不是很复杂，很难用？" class="headerlink" title="框架提供了这么多功能是不是很复杂，很难用？"></a>框架提供了这么多功能是不是很复杂，很难用？</h1><p>可以说的核心只是基于skynet开发一套方便构建服务的<strong>脚手架</strong>，像web服务，集群RPC，还有一些封装，日志分割等等都是附加功能。<br>可以认为学会使用脚手架的学习使用skynet_fly的<strong>必要知识</strong>。<br>其他都是<strong>附加知识</strong>，只想要用的时候来取就行，不需要一股做气全部学完。</p>
+<h1 id="文档的食用流程"><a href="#文档的食用流程" class="headerlink" title="文档的食用流程"></a>文档的食用流程</h1><ol>
+<li><p>基础篇<br>介绍skynet_fly如何安装编译skynet_fly、开发流程推荐、如何构建skynet_fly服务、开发规范等等，学习完基础篇，可以说就是入门了。新手流程已经走完了，后续都是刷怪捡装备提升实力了，简直轻轻松松。</p>
+</li>
+<li><p>进阶篇<br>学习核心功能模块，主要是RPC，远程RPC调用。</p>
+</li>
+<li><p>强化篇</p>
+</li>
+</ol>
+<p>附加功能模块的使用文档，放心食用。</p>
+
                 
               </div>
             
