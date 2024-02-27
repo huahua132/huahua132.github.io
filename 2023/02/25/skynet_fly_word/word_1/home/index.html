@@ -24,7 +24,7 @@
 <meta property="og:description" content="项目简介skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家来使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。skynet_fly持续迭代的原则，尽量向下兼容性，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。 框架优势skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。使用s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-26T12:41:45.849Z">
+<meta property="article:modified_time" content="2024-02-27T01:22:29.272Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(2)</span>
+        <span class="list-group-count">(10)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -313,7 +313,7 @@
         aria-expanded="true"
       >
         入门篇
-        <span class="list-group-count">(1)</span>
+        <span class="list-group-count">(9)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -327,10 +327,82 @@
     
       
       
+        <a href="/2023/02/25/skynet_fly_word/word_1/load_mods/" title="load_mods配置文件的使用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">load_mods配置文件的使用</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/02/25/skynet_fly_word/word_1/home/" title="前言"
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/module/" title="如何编写可热更服务模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何编写可热更服务模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/env/" title="开发环境推荐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发环境推荐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/file/" title="文件查找规则"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">文件查找规则</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/creator/" title="构建服务脚手架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">构建服务脚手架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/builder/" title="编译"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">编译</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/standard/" title="规范建议"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">规范建议</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/dir/" title="项目文件夹介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">项目文件夹介绍</span>
         </a>
       
     
@@ -431,16 +503,15 @@
 <li>使用lua开发网站的框架较少，我想skynet_fly可以做到。</li>
 </ol>
 <p><a target="_blank" rel="noopener" href="https://github.com/hanxi">涵曦</a>开发的<a target="_blank" rel="noopener" href="https://github.com/hanxi/wlua">wlua</a>可以说是实现了lua版本 <a target="_blank" rel="noopener" href="https://github.com/gin-gonic/gin">gin</a>框架。<br>我把wlua的核心代码嵌入了skynet_fly中，再利用skynet_fly的热更模块机制，可以做到网站服务热更。</p>
-<h1 id="框架提供了这么多功能是不是很复杂，很难用？"><a href="#框架提供了这么多功能是不是很复杂，很难用？" class="headerlink" title="框架提供了这么多功能是不是很复杂，很难用？"></a>框架提供了这么多功能是不是很复杂，很难用？</h1><p>可以说的核心只是基于skynet开发一套方便构建服务的<strong>脚手架</strong>，像web服务，集群RPC，还有一些封装，日志分割等等都是附加功能。<br>可以认为学会使用脚手架的学习使用skynet_fly的<strong>必要知识</strong>。<br>其他都是<strong>附加知识</strong>，只想要用的时候来取就行，不需要一股做气全部学完。</p>
+<h1 id="框架提供了这么多功能是不是很复杂，很难用？"><a href="#框架提供了这么多功能是不是很复杂，很难用？" class="headerlink" title="框架提供了这么多功能是不是很复杂，很难用？"></a>框架提供了这么多功能是不是很复杂，很难用？</h1><p>可以说的核心只是基于skynet开发一套方便构建服务的<strong>脚手架</strong>，像web服务，集群RPC，还有一些封装，日志分割等等都是附加功能。<br>可以认为学会使用脚手架的学习使用skynet_fly的<strong>必要知识</strong>。<br>其他都是<strong>附加知识</strong>，只需要用的时候来取就行，不需要一股作气全部学完。</p>
 <h1 id="文档的食用流程"><a href="#文档的食用流程" class="headerlink" title="文档的食用流程"></a>文档的食用流程</h1><ol>
 <li><p>基础篇<br>介绍skynet_fly如何安装编译skynet_fly、开发流程推荐、如何构建skynet_fly服务、开发规范等等，学习完基础篇，可以说就是入门了。新手流程已经走完了，后续都是刷怪捡装备提升实力了，简直轻轻松松。</p>
 </li>
 <li><p>进阶篇<br>学习核心功能模块，主要是RPC，远程RPC调用。</p>
 </li>
-<li><p>强化篇</p>
+<li><p>强化篇<br>附加功能模块的使用文档，放心食用。</p>
 </li>
 </ol>
-<p>附加功能模块的使用文档，放心食用。</p>
 
                 
               </div>
@@ -538,9 +609,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/07/think/whywrite/" title="为什么写blog">
+                      <a href="/2023/02/25/skynet_fly_word/word_1/file/" title="文件查找规则">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">为什么写blog</span>
+                        <span class="hidden-mobile">文件查找规则</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -548,8 +619,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_2/home/" title="前言">
-                        <span class="hidden-mobile">前言</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_1/module/" title="如何编写可热更服务模块">
+                        <span class="hidden-mobile">如何编写可热更服务模块</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
