@@ -848,6 +848,31 @@
   
   
   <entry>
+    <title>select,poll,epoll 对比</title>
+    <link href="/2023/05/14/socket/epoll/"/>
+    <url>/2023/05/14/socket/epoll/</url>
+    
+    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>socket</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>socket</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>网络七层模型</title>
     <link href="/2023/05/14/socket/c/"/>
     <url>/2023/05/14/socket/c/</url>
@@ -878,31 +903,6 @@
     <url>/2023/05/14/socket/tcp/</url>
     
     <content type="html"><![CDATA[<h1 id="三次握手过程"><a href="#三次握手过程" class="headerlink" title="三次握手过程"></a>三次握手过程</h1><ul><li><strong>第一次握手</strong> 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。</li><li><strong>第二次握手</strong> 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。</li><li><strong>第三次握手</strong> 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,SYN&#x3D;1)。</li></ul><h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><ol><li><p><strong>确保双方读写都正常</strong>。<br> 第一次确定客户端发送正常，第二次确定服务端发送和接送正常，第三次确定客户端接收正常。</p></li><li><p><strong>同步双方初始序列号</strong>。<br> 序列号可以保证消息的发送是有序的。</p></li></ol><h1 id="四次挥手过程"><a href="#四次挥手过程" class="headerlink" title="四次挥手过程"></a>四次挥手过程</h1><ul><li><strong>第一次挥手</strong> 主动断开方发送FIN报文，进入FIN_WAIT_1状态。</li><li><strong>第二次挥手</strong> 被动断开方接收FIN报文后，回复ACK报文，进入CLOSE_WAIT状态。主动断开方接送ACK报文后进入FIN_WAIT_2状态。</li><li><strong>第三次挥手</strong> 被动断开方发送FIN报文后，进入LASTACK状态。</li><li><strong>第四次挥手</strong> 主动断开方发送ACK报文后进入TIME_WAIT状态，等待2MLS后进入closed阶段，被动端口方接收后进入closed阶段。</li></ul><p>MLS表示报文在网络中最大存活时间，1MLS等于2分钟</p><h1 id="为什么需要四次挥手"><a href="#为什么需要四次挥手" class="headerlink" title="为什么需要四次挥手"></a>为什么需要四次挥手</h1><p>因为tcp是全双工的，双方能同时发送，接收消息。<br>所以客户端第一次挥手发送FIN只能确定客户端没有数据发送了，服务端可能还有数据发送给客户端。所以需要服务器接收到FIN之后回复ACK，等服务端没有数据要发送时，再发送FIN给客户端来表示可以关闭。</p><h1 id="为什么要进入time-wait状态"><a href="#为什么要进入time-wait状态" class="headerlink" title="为什么要进入time_wait状态"></a>为什么要进入time_wait状态</h1><p>为了响应服务端重发FIN报文，回复的ACK报文可能丢失，避免服务端重发FIN报文影响新连接。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>socket</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>socket</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>select,poll,epoll 对比</title>
-    <link href="/2023/05/14/socket/epoll/"/>
-    <url>/2023/05/14/socket/epoll/</url>
-    
-    <content type="html"><![CDATA[<h1 id="最大链接数"><a href="#最大链接数" class="headerlink" title="最大链接数"></a>最大链接数</h1><ul><li><strong>select</strong> 有上限FD_SETSIZE设置</li><li><strong>poll</strong> 链表实现，没有上限</li><li><strong>epoll</strong> 没有上限</li></ul><h1 id="fd剧增带来的io效率问题"><a href="#fd剧增带来的io效率问题" class="headerlink" title="fd剧增带来的io效率问题"></a>fd剧增带来的io效率问题</h1><ul><li><strong>select</strong> 轮询机制， o(n)复杂度</li><li><strong>poll</strong> 轮询机制，o(n)复杂度</li><li><strong>epoll</strong> 事件通知机制，o(1)复杂度</li></ul><h1 id="消息传递方式"><a href="#消息传递方式" class="headerlink" title="消息传递方式"></a>消息传递方式</h1><ul><li><strong>select</strong> 完整拷贝</li><li><strong>poll</strong> 完整拷贝</li><li><strong>epoll</strong> 通过内核与用户空间共享内存来实现</li></ul><h1 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h1><ul><li><strong>select</strong> LT</li><li><strong>poll</strong> LT</li><li><strong>epoll</strong> LT水平触发，ET边缘触发</li></ul><h1 id="LT"><a href="#LT" class="headerlink" title="LT"></a>LT</h1><ul><li>读缓存区不为空，就会一直触发可读事件</li><li>写缓冲区不满，触发可写事件</li></ul><h1 id="ET"><a href="#ET" class="headerlink" title="ET"></a>ET</h1><ul><li>读缓存区由空转为非空，触发可读事件</li><li>写缓存区由满转为不满，触发可写事件</li></ul>]]></content>
     
     
     <categories>
@@ -1023,146 +1023,11 @@
   
   
   <entry>
-    <title>集群远程rpc调用</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/C_RPC/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/C_RPC/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>集群远程RPC调用，是基于skynet的<a href="https://github.com/cloudwu/skynet/wiki/Cluster">集群 cluster mode模式</a>封装了一套简单好用、适用用框架的模式。</p><h1 id="配置启动服务端"><a href="#配置启动服务端" class="headerlink" title="配置启动服务端"></a>配置启动服务端</h1><ol><li>配置load_mods.lua</li></ol><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--共享配置</span><br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br><span class="hljs-comment">--cluster_server用的配置</span><br>cluster_server = &#123;<br>host = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>&#125;,<br>&#125;,<br>&#125;,<br></code></pre></td></tr></table></figure><ol start="2"><li>启动集群服务端<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">skynet.uniqueservice(<span class="hljs-string">&quot;cluster_server&quot;</span>)<br></code></pre></td></tr></table></figure></li></ol><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/07/28/skynet_fly_ss/cluster_rpc/">实现细节</a></h1><h1 id="远程RPC调用"><a href="#远程RPC调用" class="headerlink" title="远程RPC调用"></a>远程RPC调用</h1><p>以 <a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_server">cluster_server</a>为例<br>服务有一个<strong>可热更服务模块</strong> <code>test_m.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><br>contriner_client:register(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> <span class="hljs-built_in">string</span> = <span class="hljs-built_in">string</span><br><br><span class="hljs-keyword">local</span> g_config = <span class="hljs-literal">nil</span><br><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.hello</span><span class="hljs-params">(who)</span></span><br><span class="hljs-built_in">log</span>.info(<span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;%s send hello msg for me&quot;</span>,who))<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.ping</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">local</span> confclient = contriner_client:new(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> conf = confclient:mod_call(<span class="hljs-string">&#x27;query&#x27;</span>,<span class="hljs-string">&#x27;cluster_server&#x27;</span>)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;pong %s %s %s&quot;</span>,g_config.instance_name,conf.host,skynet.<span class="hljs-built_in">self</span>())<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>g_config = <span class="hljs-built_in">config</span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><p>那边其他服务改如何调用到这个服务的<code>hello</code>命令呢</p><p><a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_client">cluster_client</a>首先需要配置连接服务端的地址。</p><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;,<br><br>cluster_client_m = &#123;<br>launch_seq = <span class="hljs-number">2</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br>node_map = &#123;<br>[<span class="hljs-string">&#x27;cluster_server&#x27;</span>] = &#123;<br>[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;127.0.0.1:9689&quot;</span>,<br>&#125;<br>&#125;<br>&#125;<br>&#125;,<br><br>test_m = &#123;<br>launch_seq = <span class="hljs-number">4</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>之后使用<code>cluster_client</code>就可以使用<strong>远程RPC</strong>调用了</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cli = cluster_client:new(<span class="hljs-string">&quot;cluster_server&quot;</span>,<span class="hljs-string">&quot;test_m&quot;</span>) <span class="hljs-comment">--访问cluster_server的test_m模板</span><br><br>cli:one_balance_send(<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-string">&quot;one_balance_send&quot;</span>)         <span class="hljs-comment">--调用hello命令</span><br></code></pre></td></tr></table></figure><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/">详细API介绍</a></h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>检查热更的使用以及原理</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/D_reload/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/D_reload/</url>
-    
-    <content type="html"><![CDATA[<h1 id="如何执行"><a href="#如何执行" class="headerlink" title="如何执行"></a>如何执行</h1><p><code>sh script/check_reload.sh load_mods.lua</code></p><h1 id="检测规则"><a href="#检测规则" class="headerlink" title="检测规则"></a>检测规则</h1><p>当 <strong>可热更服务模块</strong> require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。</p><h1 id="重试热更"><a href="#重试热更" class="headerlink" title="重试热更"></a>重试热更</h1><p>当 热更后，某个执行热更的服务，<code>start</code>启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。<br><code>sh script/try_again_reload.sh load_mods.lua</code></p><h1 id="实现细节-https-huahua132-github-io-2023-06-30-skynet-fly-ss-E5-85-B3-E4-BA-8Eskynet-fly-E7-83-AD-E6-9B-B4-E6-96-B0-E5-AE-9E-E7-8E-B0"><a href="#实现细节-https-huahua132-github-io-2023-06-30-skynet-fly-ss-E5-85-B3-E4-BA-8Eskynet-fly-E7-83-AD-E6-9B-B4-E6-96-B0-E5-AE-9E-E7-8E-B0" class="headerlink" title="实现细节(https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/)"></a>实现细节(<a href="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/</a>)</h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>rpc调用</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/B_RPC/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/B_RPC/</url>
-    
-    <content type="html"><![CDATA[<h1 id="常规的RPC调用"><a href="#常规的RPC调用" class="headerlink" title="常规的RPC调用"></a>常规的RPC调用</h1><p>使用skynet.call,skyent.send。</p><h1 id="rpc调用可热更服务模块"><a href="#rpc调用可热更服务模块" class="headerlink" title="rpc调用可热更服务模块"></a>rpc调用可热更服务模块</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> ret = contriner_client:instance(<span class="hljs-string">&quot;B_m&quot;</span>):mod_call(<span class="hljs-string">&quot;hello&quot;</span>)<br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;send_msg_to_b:&quot;</span>,ret)<br></code></pre></td></tr></table></figure><p>这里的意思是给<strong>B_m</strong> 可热更模块发送<strong>hello</strong>消息命令。</p><p>详细可以查看<a href="https://github.com/huahua132/skynet_fly/tree/master/examples">AB_question示例</a></p><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpc/">详细API介绍</a></h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>前言</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/A_home/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/A_home/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过入门篇，我们学会了框架的基本使用规则。但是我们还不知道如何RPC调用，如何远程RPC调用，热更原理机制是什么。<br>学会这些，可以说是使用该框架的高手的。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>前言</title>
     <link href="/2023/02/25/skynet_fly_word/word_1/A_home/"/>
     <url>/2023/02/25/skynet_fly_word/word_1/A_home/</url>
     
     <content type="html"><![CDATA[<h1 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h1><p>skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。<br>skynet_fly持续迭代的原则，尽量向下兼容，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。</p><h1 id="框架优势"><a href="#框架优势" class="headerlink" title="框架优势"></a>框架优势</h1><p>skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。<br>使用skynet_fly的好处：</p><ul><li>支持不停服更新。</li><li>一键生成skynet的配置文件和skynet_fly的配置文件以及配套shell脚本。</li><li>对匹配房间类游戏做了gate,ws_gate的基础设施封装以及pb,json协议的支持，开发游戏只需要实现相关业务逻辑。</li><li>对redis,mysql,timer,log 使用封装。</li><li>基于skynet cluster封装出简单易用的远程rpc调用。</li><li>支持服务发现。</li><li>支持http服务长连接。</li><li>支持http服务路由，中间件模式。</li><li>支持jwt鉴权。</li><li>内置日志分割。</li><li>支持快进时间。</li><li>支持orm（数据关系映射）目前适配了(mysql,mongo),数据库可无缝切换。</li></ul><h1 id="适合哪些人群"><a href="#适合哪些人群" class="headerlink" title="适合哪些人群"></a>适合哪些人群</h1><ol><li>喜欢lua语言，想用lua开发游戏、网站、后台、API服务等等。</li></ol><p>如果你对skynet没有一点点了解，可能使用该框架会有点困难，建议先大概了解学习<a href="https://github.com/cloudwu/skynet">skynet框架</a></p><ol start="2"><li>对skynet有一定了解，却迷茫于如何架构服务。</li></ol><p>对skynet有一定了解，那么上手该框架将会轻松很多。</p><h1 id="为什么要开发一个skynet-fly框架？"><a href="#为什么要开发一个skynet-fly框架？" class="headerlink" title="为什么要开发一个skynet_fly框架？"></a>为什么要开发一个skynet_fly框架？</h1><ol><li>skynet框架不是开箱即用的，使用skynet开发游戏基本上或多或少都需要对框架做一些修改。</li></ol><p>在开源框架当中，大部分好用的框架都是开箱即用的，对新手非常友好。使用skynet如果没有人带路的话，还是挺困难的，想要用的好，得看明白底层代码，然后还需要一些架构能力。<br>而使用skynet_fly，提供了很多基础设施的支持，架构服务只需要关注实现业务代码，能够更快速的开发迭代。</p><ol start="2"><li>使用lua开发网站的框架较少，我想skynet_fly可以做到。</li></ol><p><a href="https://github.com/hanxi">涵曦</a>开发的<a href="https://github.com/hanxi/wlua">wlua</a>可以说是实现了lua版本 <a href="https://github.com/gin-gonic/gin">gin</a>框架。<br>我把wlua的核心代码嵌入了skynet_fly中，再利用skynet_fly的热更模块机制，可以做到网站服务热更。</p><h1 id="框架提供了这么多功能是不是很复杂，很难用？"><a href="#框架提供了这么多功能是不是很复杂，很难用？" class="headerlink" title="框架提供了这么多功能是不是很复杂，很难用？"></a>框架提供了这么多功能是不是很复杂，很难用？</h1><p>可以说的核心只是基于skynet开发一套方便构建服务的<strong>脚手架</strong>，像web服务，集群RPC，还有一些封装，日志分割等等都是附加功能。<br>可以认为学会使用脚手架的学习使用skynet_fly的<strong>必要知识</strong>。<br>其他都是<strong>附加知识</strong>，只需要用的时候来取就行，不需要一股作气全部学完。</p><h1 id="文档的食用流程"><a href="#文档的食用流程" class="headerlink" title="文档的食用流程"></a>文档的食用流程</h1><ol><li><p>基础篇<br>介绍skynet_fly如何安装编译skynet_fly、开发流程推荐、如何构建skynet_fly服务、开发规范等等，学习完基础篇，可以说就是入门了。新手流程已经走完了，后续都是刷怪捡装备提升实力了，简直轻轻松松。</p></li><li><p>进阶篇<br>学习核心功能模块，主要是RPC，远程RPC调用。</p></li><li><p>强化篇<br>附加功能模块的使用文档，放心食用。</p></li></ol>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>入门篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>开发环境推荐</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/B_env/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/B_env/</url>
-    
-    <content type="html"><![CDATA[<h1 id="vscode-Oracle-VM-VirtualBox"><a href="#vscode-Oracle-VM-VirtualBox" class="headerlink" title="vscode + Oracle VM VirtualBox"></a>vscode + Oracle VM VirtualBox</h1><p>vscode加虚拟机的方式，是我常用的开发方式。</p><h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><ol><li>安装VirtualBox,<a href="https://www.virtualbox.org/">官网下载安装即可</a></li><li>下载centos或者ubantu镜像</li></ol><ul><li><a href="https://mirrors.bfsu.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso">centos</a></li><li><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso">ubuntu</a></li></ul><ol start="3"><li>使用VirtualBox安装虚拟机<br>这里自行百度。</li></ol><h2 id="vscode安装插件"><a href="#vscode安装插件" class="headerlink" title="vscode安装插件"></a>vscode安装插件</h2><p><a href="https://github.com/Tencent/LuaHelper">luaHelper</a><br><a href="https://github.com/Natizyskunk/vscode-sftp/releases">sftp</a></p><h3 id="配置SFTP"><a href="#配置SFTP" class="headerlink" title="配置SFTP"></a>配置SFTP</h3><ol><li><p>创建配置<br><code>ctrl shift p</code><br><img src="/img/skynet_fly_word/word_1/sftp.png"></p></li><li><p>编辑配置</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;host&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sftp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">22</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;remotePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/home/weihua/skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;uploadOnSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;useTempFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;openSsh&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li><li><p>上传文件<br><img src="/img/skynet_fly_word/word_1/sftp2.png"></p></li></ol><p>没有出错的话，文件已经上传到linux的对应目录了。</p>]]></content>
     
     
     <categories>
@@ -1212,11 +1077,65 @@
   
   
   <entry>
+    <title>开发环境推荐</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/B_env/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/B_env/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vscode-Oracle-VM-VirtualBox"><a href="#vscode-Oracle-VM-VirtualBox" class="headerlink" title="vscode + Oracle VM VirtualBox"></a>vscode + Oracle VM VirtualBox</h1><p>vscode加虚拟机的方式，是我常用的开发方式。</p><h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><ol><li>安装VirtualBox,<a href="https://www.virtualbox.org/">官网下载安装即可</a></li><li>下载centos或者ubantu镜像</li></ol><ul><li><a href="https://mirrors.bfsu.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso">centos</a></li><li><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso">ubuntu</a></li></ul><ol start="3"><li>使用VirtualBox安装虚拟机<br>这里自行百度。</li></ol><h2 id="vscode安装插件"><a href="#vscode安装插件" class="headerlink" title="vscode安装插件"></a>vscode安装插件</h2><p><a href="https://github.com/Tencent/LuaHelper">luaHelper</a><br><a href="https://github.com/Natizyskunk/vscode-sftp/releases">sftp</a></p><h3 id="配置SFTP"><a href="#配置SFTP" class="headerlink" title="配置SFTP"></a>配置SFTP</h3><ol><li><p>创建配置<br><code>ctrl shift p</code><br><img src="/img/skynet_fly_word/word_1/sftp.png"></p></li><li><p>编辑配置</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;host&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sftp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">22</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;remotePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/home/weihua/skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;uploadOnSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;useTempFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;openSsh&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li><li><p>上传文件<br><img src="/img/skynet_fly_word/word_1/sftp2.png"></p></li></ol><p>没有出错的话，文件已经上传到linux的对应目录了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>入门篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>load_mods配置文件的使用</title>
     <link href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/"/>
     <url>/2023/02/25/skynet_fly_word/word_1/E_load_mods/</url>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。<br>传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做出全局单例，方便读取。</p><h1 id="skynet-有个启动配置，为啥还要新增一个？"><a href="#skynet-有个启动配置，为啥还要新增一个？" class="headerlink" title="skynet 有个启动配置，为啥还要新增一个？"></a>skynet 有个启动配置，为啥还要新增一个？</h1><ol><li>因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。</li><li>skynet_env读取数据需要竞争自选锁，使用中应该尽量少用（尽量在代码加载阶段拿取）。</li><li>不适用于给可插拔的可热更服务编写配置。</li><li>无法热更。</li></ol><h1 id="配置介绍"><a href="#配置介绍" class="headerlink" title="配置介绍"></a>配置介绍</h1><p>以<code>webapp</code>中的配置为例</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br>server_cfg = &#123;<br>thread = <span class="hljs-number">2</span>,<br>debug_port = <span class="hljs-number">9001</span>,<br>&#125;<br>&#125;<br>&#125;,<br><br>web_agent_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">6</span>,<br>default_arg = &#123;<br>protocol = <span class="hljs-string">&#x27;http&#x27;</span>,<br>dispatch = <span class="hljs-string">&#x27;webapp_dispatch&#x27;</span>,<br>keep_alive_time = <span class="hljs-number">300</span>,         <span class="hljs-comment">--最长保活时间</span><br>second_req_limit = <span class="hljs-number">2000</span>,       <span class="hljs-comment">--1秒内请求数量限制</span><br>&#125;<br>&#125;,<br><br>web_master_m = &#123;<br>launch_seq = <span class="hljs-number">2</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br>protocol = <span class="hljs-string">&#x27;http&#x27;</span>,<br>port = <span class="hljs-number">80</span>,         <span class="hljs-comment">--端口</span><br>max_client = <span class="hljs-number">6000</span>, <span class="hljs-comment">--最大连接数</span><br>second_conn_limit = <span class="hljs-number">2000</span>, <span class="hljs-comment">--相同ip 1秒内建立连接数限制</span><br>keep_live_limit = <span class="hljs-number">2000</span>,  <span class="hljs-comment">--相同ip 保持活跃数量限制</span><br>&#125;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>配置返回一个表。<br>表的<strong>key</strong>需要填写想要启动的<strong>可热更服务模块</strong>，就是<code>****_m.lua</code>文件。<br>表的<strong>value</strong>就是对应这个<strong>可热更服务模块</strong>的详细配置。<br>其中字段意义如下:</p><ul><li><strong>launch_seq</strong> 启动顺序。</li><li><strong>launch_num</strong> 启动数量。</li><li><strong>default_arg</strong> 默认配置。</li><li><strong>mod_args</strong> 模块配置。</li></ul><p>假设launch_num &#x3D; 2,就会启动2个可热更模板服务，index 1、2<br>拿取配置规则为: <code>cfg = mod_args[index] or default_arg</code><br>优先拿mod_args的专属配置，没有取默认配置。</p><ul><li><strong>delay_run</strong> 推迟运行。</li></ul><p><strong>可热更模块服务的启动</strong><br><a href="https://github.com/huahua132/skynet_fly/blob/master/lualib/contriner/contriner_launcher.lua">launcher</a></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.run</span><span class="hljs-params">()</span></span><br>    skynet.monitor(<span class="hljs-string">&#x27;monitor_exit&#x27;</span>)<br>    <span class="hljs-keyword">local</span> cmgr = skynet.uniqueservice(<span class="hljs-string">&#x27;contriner_mgr&#x27;</span>)<br>skynet.uniqueservice(<span class="hljs-string">&quot;debug_console&quot;</span>, skynet.<span class="hljs-built_in">getenv</span>(<span class="hljs-string">&#x27;debug_port&#x27;</span>))<br><br>    <span class="hljs-keyword">local</span> before_run_list = &#123;&#125; <span class="hljs-comment">--先跑</span><br>    <span class="hljs-keyword">local</span> delay_run_list = &#123;&#125;  <span class="hljs-comment">--延迟再次调用再跑</span><br><span class="hljs-keyword">for</span> mod_name,mod_cfg <span class="hljs-keyword">in</span> table_util.sort_ipairs(load_mods,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a,b)</span></span><br><span class="hljs-keyword">return</span> a.launch_seq &lt; b.launch_seq<br><span class="hljs-keyword">end</span>) <span class="hljs-keyword">do</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> mod_cfg.delay_run <span class="hljs-keyword">then</span><br>            <span class="hljs-built_in">table</span>.<span class="hljs-built_in">insert</span>(before_run_list, mod_name)<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-built_in">table</span>.<span class="hljs-built_in">insert</span>(delay_run_list, mod_name)<br>        <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">local</span> self_address = skynet.<span class="hljs-built_in">self</span>()<br>    skynet.call(cmgr, <span class="hljs-string">&#x27;lua&#x27;</span>, <span class="hljs-string">&#x27;load_modules&#x27;</span>, self_address, <span class="hljs-built_in">table</span>.<span class="hljs-built_in">unpack</span>(before_run_list))<br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> delay_run_list <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">end</span><br>        skynet.call(cmgr, <span class="hljs-string">&#x27;lua&#x27;</span>, <span class="hljs-string">&#x27;load_modules&#x27;</span>, self_address, <span class="hljs-built_in">table</span>.<span class="hljs-built_in">unpack</span>(delay_run_list))<br>        delay_run_list = <span class="hljs-literal">nil</span><br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><p>启动函数执行会返回需要推迟运行的函数，因为可能存在这种情况，可热更服务模块中依赖的<strong>普通skynet服务</strong>，此时就需要先启动<strong>普通skynet服务</strong>，再启动推迟运行的<strong>可热更模块服务</strong>。</p><h1 id="mod-args-index-或者-default-arg的配置传递到哪了？"><a href="#mod-args-index-或者-default-arg的配置传递到哪了？" class="headerlink" title="mod_args[index] 或者 default_arg的配置传递到哪了？"></a>mod_args[index] 或者 default_arg的配置传递到哪了？</h1><p>一个<strong>可热更服务模板</strong>必须定义<code>start</code>和<code>exit</code>两个回调函数。</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span> <span class="hljs-comment">--mod_args[index] or default_arg</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><p>可以看到，配置传递到<code>start</code>函数中了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>入门篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>如何编写可热更服务模块</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/F_module/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/F_module/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。</p><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>可热更服务模块</strong> 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会<strong>加载指定的 xxx_m.lua文件</strong>,相当于用相同的盒子包装不同的东西。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--start 函数是必须实现的，返回true，说明启动成功，false，说明启动失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- herald_exit 有新服务尝试上线</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.herald_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;预告退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- exit 函数 必须实现，返回true，说明可以退出，将会在1段时间后调用skynet.exit()</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- fix_exit 说明已经热更成功，有新服务上线了，旧服务可以处理下线工作了</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.fix_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;确认要退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- cancel_exit 新服务上线失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.cancel_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;取消退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- check_exit 检查退出，返回true，表示可以退出。</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.check_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;检查退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--自定义 rpc 命令 处理函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.doingsame</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/12/03/skynet_fly_ss/reload/">实现细节</a></h1><p>实现细节，有兴趣可以看看。</p>]]></content>
     
     
     <categories>
@@ -1271,33 +1190,6 @@
     <url>/2023/02/25/skynet_fly_word/word_1/G_dir/</url>
     
     <content type="html"><![CDATA[<h1 id="3rd"><a href="#3rd" class="headerlink" title="3rd"></a>3rd</h1><p>存放第三方依赖</p><h1 id="binshell"><a href="#binshell" class="headerlink" title="binshell"></a>binshell</h1><p>服务构建工具</p><h1 id="examples"><a href="#examples" class="headerlink" title="examples"></a>examples</h1><p>示例学习服务</p><h1 id="lualib"><a href="#lualib" class="headerlink" title="lualib"></a>lualib</h1><p>skynet_fly lua库文件代码</p><h1 id="lualib-x2F-module"><a href="#lualib-x2F-module" class="headerlink" title="lualib&#x2F;module"></a>lualib&#x2F;module</h1><p>skynet_fly 提供的<strong>可热更服务模块</strong></p><h1 id="script"><a href="#script" class="headerlink" title="script"></a>script</h1><p>lua shell 脚本工具代码</p><h1 id="service"><a href="#service" class="headerlink" title="service"></a>service</h1><p>skynet普通服务</p><h1 id="skynet"><a href="#skynet" class="headerlink" title="skynet"></a>skynet</h1><p>skynet代码</p><h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>单元测试服务代码，主要用来编写一些模块的单元测试。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>入门篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>如何编写可热更服务模块</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/F_module/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/F_module/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。</p><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>可热更服务模块</strong> 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会<strong>加载指定的 xxx_m.lua文件</strong>,相当于用相同的盒子包装不同的东西。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--start 函数是必须实现的，返回true，说明启动成功，false，说明启动失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- herald_exit 有新服务尝试上线</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.herald_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;预告退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- exit 函数 必须实现，返回true，说明可以退出，将会在1段时间后调用skynet.exit()</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- fix_exit 说明已经热更成功，有新服务上线了，旧服务可以处理下线工作了</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.fix_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;确认要退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- cancel_exit 新服务上线失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.cancel_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;取消退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- check_exit 检查退出，返回true，表示可以退出。</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.check_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;检查退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--自定义 rpc 命令 处理函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.doingsame</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/12/03/skynet_fly_ss/reload/">实现细节</a></h1><p>实现细节，有兴趣可以看看。</p>]]></content>
     
     
     <categories>
@@ -1386,6 +1278,114 @@
       <category>skynet_fly 文档</category>
       
       <category>入门篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>rpc调用</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/B_RPC/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/B_RPC/</url>
+    
+    <content type="html"><![CDATA[<h1 id="常规的RPC调用"><a href="#常规的RPC调用" class="headerlink" title="常规的RPC调用"></a>常规的RPC调用</h1><p>使用skynet.call,skyent.send。</p><h1 id="rpc调用可热更服务模块"><a href="#rpc调用可热更服务模块" class="headerlink" title="rpc调用可热更服务模块"></a>rpc调用可热更服务模块</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> ret = contriner_client:instance(<span class="hljs-string">&quot;B_m&quot;</span>):mod_call(<span class="hljs-string">&quot;hello&quot;</span>)<br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;send_msg_to_b:&quot;</span>,ret)<br></code></pre></td></tr></table></figure><p>这里的意思是给<strong>B_m</strong> 可热更模块发送<strong>hello</strong>消息命令。</p><p>详细可以查看<a href="https://github.com/huahua132/skynet_fly/tree/master/examples">AB_question示例</a></p><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpc/">详细API介绍</a></h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>前言</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/A_home/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/A_home/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过入门篇，我们学会了框架的基本使用规则。但是我们还不知道如何RPC调用，如何远程RPC调用，热更原理机制是什么。<br>学会这些，可以说是使用该框架的高手的。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>集群远程rpc调用</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/C_RPC/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/C_RPC/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>集群远程RPC调用，是基于skynet的<a href="https://github.com/cloudwu/skynet/wiki/Cluster">集群 cluster mode模式</a>封装了一套简单好用、适用用框架的模式。</p><h1 id="配置启动服务端"><a href="#配置启动服务端" class="headerlink" title="配置启动服务端"></a>配置启动服务端</h1><ol><li>配置load_mods.lua</li></ol><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--共享配置</span><br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br><span class="hljs-comment">--cluster_server用的配置</span><br>cluster_server = &#123;<br>host = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>&#125;,<br>&#125;,<br>&#125;,<br></code></pre></td></tr></table></figure><ol start="2"><li>启动集群服务端<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">skynet.uniqueservice(<span class="hljs-string">&quot;cluster_server&quot;</span>)<br></code></pre></td></tr></table></figure></li></ol><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/07/28/skynet_fly_ss/cluster_rpc/">实现细节</a></h1><h1 id="远程RPC调用"><a href="#远程RPC调用" class="headerlink" title="远程RPC调用"></a>远程RPC调用</h1><p>以 <a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_server">cluster_server</a>为例<br>服务有一个<strong>可热更服务模块</strong> <code>test_m.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><br>contriner_client:register(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> <span class="hljs-built_in">string</span> = <span class="hljs-built_in">string</span><br><br><span class="hljs-keyword">local</span> g_config = <span class="hljs-literal">nil</span><br><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.hello</span><span class="hljs-params">(who)</span></span><br><span class="hljs-built_in">log</span>.info(<span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;%s send hello msg for me&quot;</span>,who))<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.ping</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">local</span> confclient = contriner_client:new(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> conf = confclient:mod_call(<span class="hljs-string">&#x27;query&#x27;</span>,<span class="hljs-string">&#x27;cluster_server&#x27;</span>)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;pong %s %s %s&quot;</span>,g_config.instance_name,conf.host,skynet.<span class="hljs-built_in">self</span>())<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>g_config = <span class="hljs-built_in">config</span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><p>那边其他服务改如何调用到这个服务的<code>hello</code>命令呢</p><p><a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_client">cluster_client</a>首先需要配置连接服务端的地址。</p><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;,<br><br>cluster_client_m = &#123;<br>launch_seq = <span class="hljs-number">2</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br>node_map = &#123;<br>[<span class="hljs-string">&#x27;cluster_server&#x27;</span>] = &#123;<br>[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;127.0.0.1:9689&quot;</span>,<br>&#125;<br>&#125;<br>&#125;<br>&#125;,<br><br>test_m = &#123;<br>launch_seq = <span class="hljs-number">4</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>之后使用<code>cluster_client</code>就可以使用<strong>远程RPC</strong>调用了</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cli = cluster_client:new(<span class="hljs-string">&quot;cluster_server&quot;</span>,<span class="hljs-string">&quot;test_m&quot;</span>) <span class="hljs-comment">--访问cluster_server的test_m模板</span><br><br>cli:one_balance_send(<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-string">&quot;one_balance_send&quot;</span>)         <span class="hljs-comment">--调用hello命令</span><br></code></pre></td></tr></table></figure><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/">详细API介绍</a></h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>检查热更的使用以及原理</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/D_reload/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/D_reload/</url>
+    
+    <content type="html"><![CDATA[<h1 id="如何执行"><a href="#如何执行" class="headerlink" title="如何执行"></a>如何执行</h1><p><code>sh script/check_reload.sh load_mods.lua</code></p><h1 id="检测规则"><a href="#检测规则" class="headerlink" title="检测规则"></a>检测规则</h1><p>当 <strong>可热更服务模块</strong> require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。</p><h1 id="重试热更"><a href="#重试热更" class="headerlink" title="重试热更"></a>重试热更</h1><p>当 热更后，某个执行热更的服务，<code>start</code>启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。<br><code>sh script/try_again_reload.sh load_mods.lua</code></p><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">实现细节</a></h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
       
     </categories>
     
