@@ -1023,18 +1023,18 @@
   
   
   <entry>
-    <title>开发环境推荐</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/B_env/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/B_env/</url>
+    <title>前言</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/home/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/home/</url>
     
-    <content type="html"><![CDATA[<h1 id="vscode-Oracle-VM-VirtualBox"><a href="#vscode-Oracle-VM-VirtualBox" class="headerlink" title="vscode + Oracle VM VirtualBox"></a>vscode + Oracle VM VirtualBox</h1><p>vscode加虚拟机的方式，是我常用的开发方式。</p><h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><ol><li>安装VirtualBox,<a href="https://www.virtualbox.org/">官网下载安装即可</a></li><li>下载centos或者ubantu镜像</li></ol><ul><li><a href="https://mirrors.bfsu.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso">centos</a></li><li><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso">ubuntu</a></li></ul><ol start="3"><li>使用VirtualBox安装虚拟机<br>这里自行百度。</li></ol><h2 id="vscode安装插件"><a href="#vscode安装插件" class="headerlink" title="vscode安装插件"></a>vscode安装插件</h2><p><a href="https://github.com/Tencent/LuaHelper">luaHelper</a><br><a href="https://github.com/Natizyskunk/vscode-sftp/releases">sftp</a></p><h3 id="配置SFTP"><a href="#配置SFTP" class="headerlink" title="配置SFTP"></a>配置SFTP</h3><ol><li><p>创建配置<br><code>ctrl shift p</code><br><img src="/img/skynet_fly_word/word_1/sftp.png"></p></li><li><p>编辑配置</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;host&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sftp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">22</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;remotePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/home/weihua/skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;uploadOnSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;useTempFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;openSsh&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li><li><p>上传文件<br><img src="/img/skynet_fly_word/word_1/sftp2.png"></p></li></ol><p>没有出错的话，文件已经上传到linux的对应目录了。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>]]></content>
     
     
     <categories>
       
       <category>skynet_fly 文档</category>
       
-      <category>入门篇</category>
+      <category>基础篇</category>
       
     </categories>
     
@@ -1077,11 +1077,11 @@
   
   
   <entry>
-    <title>如何编写可热更服务模块</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/F_module/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/F_module/</url>
+    <title>开发环境推荐</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/B_env/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/B_env/</url>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。</p><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>可热更服务模块</strong> 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会<strong>加载指定的 xxx_m.lua文件</strong>,相当于用相同的盒子包装不同的东西。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--start 函数是必须实现的，返回true，说明启动成功，false，说明启动失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- herald_exit 有新服务尝试上线</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.herald_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;预告退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- exit 函数 必须实现，返回true，说明可以退出，将会在1段时间后调用skynet.exit()</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- fix_exit 说明已经热更成功，有新服务上线了，旧服务可以处理下线工作了</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.fix_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;确认要退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- cancel_exit 新服务上线失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.cancel_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;取消退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- check_exit 检查退出，返回true，表示可以退出。</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.check_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;检查退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--自定义 rpc 命令 处理函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.doingsame</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/12/03/skynet_fly_ss/reload/">实现细节</a></h1><p>实现细节，有兴趣可以看看。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="vscode-Oracle-VM-VirtualBox"><a href="#vscode-Oracle-VM-VirtualBox" class="headerlink" title="vscode + Oracle VM VirtualBox"></a>vscode + Oracle VM VirtualBox</h1><p>vscode加虚拟机的方式，是我常用的开发方式。</p><h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><ol><li>安装VirtualBox,<a href="https://www.virtualbox.org/">官网下载安装即可</a></li><li>下载centos或者ubantu镜像</li></ol><ul><li><a href="https://mirrors.bfsu.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso">centos</a></li><li><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso">ubuntu</a></li></ul><ol start="3"><li>使用VirtualBox安装虚拟机<br>这里自行百度。</li></ol><h2 id="vscode安装插件"><a href="#vscode安装插件" class="headerlink" title="vscode安装插件"></a>vscode安装插件</h2><p><a href="https://github.com/Tencent/LuaHelper">luaHelper</a><br><a href="https://github.com/Natizyskunk/vscode-sftp/releases">sftp</a></p><h3 id="配置SFTP"><a href="#配置SFTP" class="headerlink" title="配置SFTP"></a>配置SFTP</h3><ol><li><p>创建配置<br><code>ctrl shift p</code><br><img src="/img/skynet_fly_word/word_1/sftp.png"></p></li><li><p>编辑配置</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;host&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sftp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">22</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;remotePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/home/weihua/skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;uploadOnSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;useTempFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;openSsh&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li><li><p>上传文件<br><img src="/img/skynet_fly_word/word_1/sftp2.png"></p></li></ol><p>没有出错的话，文件已经上传到linux的对应目录了。</p>]]></content>
     
     
     <categories>
@@ -1185,6 +1185,33 @@
   
   
   <entry>
+    <title>如何编写可热更服务模块</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/F_module/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/F_module/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。</p><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>可热更服务模块</strong> 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会<strong>加载指定的 xxx_m.lua文件</strong>,相当于用相同的盒子包装不同的东西。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--start 函数是必须实现的，返回true，说明启动成功，false，说明启动失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- herald_exit 有新服务尝试上线</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.herald_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;预告退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- exit 函数 必须实现，返回true，说明可以退出，将会在1段时间后调用skynet.exit()</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- fix_exit 说明已经热更成功，有新服务上线了，旧服务可以处理下线工作了</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.fix_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;确认要退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- cancel_exit 新服务上线失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.cancel_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;取消退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- check_exit 检查退出，返回true，表示可以退出。</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.check_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;检查退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--自定义 rpc 命令 处理函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.doingsame</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/12/03/skynet_fly_ss/reload/">实现细节</a></h1><p>实现细节，有兴趣可以看看。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>入门篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>项目文件夹介绍</title>
     <link href="/2023/02/25/skynet_fly_word/word_1/G_dir/"/>
     <url>/2023/02/25/skynet_fly_word/word_1/G_dir/</url>
@@ -1251,33 +1278,6 @@
       <category>skynet_fly 文档</category>
       
       <category>入门篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>前言</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/home/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/home/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
       
     </categories>
     
