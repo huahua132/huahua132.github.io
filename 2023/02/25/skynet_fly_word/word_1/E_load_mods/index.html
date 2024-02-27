@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言load_mods配置文件是skynet_fly非常核心的东西。通过一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做出全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读">
+    <meta name="description" content="前言load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做出全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读">
 <meta property="og:type" content="article">
 <meta property="og:title" content="load_mods配置文件的使用">
 <meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/E_load_mods/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言load_mods配置文件是skynet_fly非常核心的东西。通过一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做出全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读">
+<meta property="og:description" content="前言load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做出全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-27T09:03:42.339Z">
+<meta property="article:modified_time" content="2024-02-27T09:25:15.523Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(10)</span>
+        <span class="list-group-count">(12)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -313,7 +313,7 @@
         aria-expanded="true"
       >
         入门篇
-        <span class="list-group-count">(9)</span>
+        <span class="list-group-count">(10)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -406,6 +406,15 @@
         </a>
       
     
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" title="如何更改skynet服务的配置项"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何更改skynet服务的配置项</span>
+        </a>
+      
+    
   </div>
 
         
@@ -422,7 +431,7 @@
         aria-expanded="false"
       >
         基础篇
-        <span class="list-group-count">(1)</span>
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -436,10 +445,19 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/home/" title="前言"
+        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">rpc调用</span>
         </a>
       
     
@@ -471,7 +489,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>load_mods配置文件是skynet_fly非常核心的东西。通过一个服务为了区分不同环境，都会有一个服务配置项。<br>传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做出全局单例，方便读取。</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。<br>传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做出全局单例，方便读取。</p>
 <h1 id="skynet-有个启动配置，为啥还要新增一个？"><a href="#skynet-有个启动配置，为啥还要新增一个？" class="headerlink" title="skynet 有个启动配置，为啥还要新增一个？"></a>skynet 有个启动配置，为啥还要新增一个？</h1><ol>
 <li>因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。</li>
 <li>skynet_env读取数据需要竞争自选锁，使用中应该尽量少用（尽量在代码加载阶段拿取）。</li>
@@ -604,8 +622,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块">
-                        <span class="hidden-mobile">如何编写可热更服务模块</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议">
+                        <span class="hidden-mobile">规范建议</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

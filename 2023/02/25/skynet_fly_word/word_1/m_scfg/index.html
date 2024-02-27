@@ -16,24 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一">
+    <meta name="description" content="配置load_mods.lua 在配置文件中，我们可以启动一个share_config_m共享配置的模块，我们可以把这些配置放在 server_cfg中。 12345678910111213141516return &amp;#123;	share_config_m &#x3D; &amp;#123;		launch_seq &#x3D; 1,		launch_num &#x3D; 1,		default_arg &#x3D; &amp;#123;			ser">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于定时器的封装">
-<meta property="og:url" content="https://huahua132.github.io/2023/07/02/skynet_fly_ss/timer/index.html">
+<meta property="og:title" content="如何更改skynet服务的配置项">
+<meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/m_scfg/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一">
+<meta property="og:description" content="配置load_mods.lua 在配置文件中，我们可以启动一个share_config_m共享配置的模块，我们可以把这些配置放在 server_cfg中。 12345678910111213141516return &amp;#123;	share_config_m &#x3D; &amp;#123;		launch_seq &#x3D; 1,		launch_num &#x3D; 1,		default_arg &#x3D; &amp;#123;			ser">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-02T05:42:00.000Z">
-<meta property="article:modified_time" content="2024-02-26T11:36:17.179Z">
+<meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-02-27T09:33:33.147Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="skynet_fly实现思路历程">
+<meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于定时器的封装 - huahua132 blog</title>
+  <title>如何更改skynet服务的配置项 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于定时器的封装"></span>
+            <span id="subtitle" data-typed-text="如何更改skynet服务的配置项"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-02 13:42" pubdate>
-          2023年7月2日 下午
+        <time datetime="2023-02-25 08:00" pubdate>
+          2023年2月25日 早上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          954 字
+          573 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          8 分钟
+          5 分钟
         
       </span>
     
@@ -281,17 +281,44 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly实现思路历程"
-        id="heading-fb499f79496da9976dd55655b846d7cf" role="tab" data-toggle="collapse" href="#collapse-fb499f79496da9976dd55655b846d7cf"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly 文档"
+        id="heading-8a12ab643e955a87eefc2a19b632005f" role="tab" data-toggle="collapse" href="#collapse-8a12ab643e955a87eefc2a19b632005f"
         aria-expanded="true"
       >
-        skynet_fly实现思路历程
-        <span class="list-group-count">(18)</span>
+        skynet_fly 文档
+        <span class="list-group-count">(12)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-fb499f79496da9976dd55655b846d7cf"
-           role="tabpanel" aria-labelledby="heading-fb499f79496da9976dd55655b846d7cf">
+      <div class="category-collapse collapse show" id="collapse-8a12ab643e955a87eefc2a19b632005f"
+           role="tabpanel" aria-labelledby="heading-8a12ab643e955a87eefc2a19b632005f">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="入门篇"
+        id="heading-fde95b8345d6009bcd3e3b793ef65625" role="tab" data-toggle="collapse" href="#collapse-fde95b8345d6009bcd3e3b793ef65625"
+        aria-expanded="true"
+      >
+        入门篇
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-fde95b8345d6009bcd3e3b793ef65625"
+           role="tabpanel" aria-labelledby="heading-fde95b8345d6009bcd3e3b793ef65625">
         
         
           
@@ -300,168 +327,146 @@
     
       
       
-        <a href="/2023/08/20/skynet_fly_ss/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
+        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" title="前言"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
+          <span class="category-post">前言</span>
         </a>
       
     
       
       
-        <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
+        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly 决定web路由工具使用的测试</span>
+          <span class="category-post">开发环境推荐</span>
         </a>
       
     
       
       
-        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
+        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于cluster 远程rpc调用</span>
+          <span class="category-post">编译</span>
         </a>
       
     
       
       
-        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
+        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+          <span class="category-post">构建服务脚手架</span>
         </a>
       
     
       
       
-        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" title="load_mods配置文件的使用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly 日志服务</span>
+          <span class="category-post">load_mods配置文件的使用</span>
         </a>
       
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+          <span class="category-post">如何编写可热更服务模块</span>
         </a>
       
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" title="项目文件夹介绍"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+          <span class="category-post">项目文件夹介绍</span>
         </a>
       
     
       
       
-        <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
+        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于redis的封装</span>
+          <span class="category-post">规范建议</span>
         </a>
       
     
       
       
-        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+          <span class="category-post">文件查找规则</span>
         </a>
       
     
       
       
-        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更新实现细节</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更匹配房间类游戏架构"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于新增定时器的扩展 整点报时</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于监听同步模块的封装</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/07/02/skynet_fly_ss/timer/" title="关于定时器的封装"
+        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" title="如何更改skynet服务的配置项"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">关于定时器的封装</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更新实现</span>
+          <span class="category-post">如何更改skynet服务的配置项</span>
         </a>
       
     
   </div>
 
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础篇"
+        id="heading-9248c705575b4b5883daaed3318fda8b" role="tab" data-toggle="collapse" href="#collapse-9248c705575b4b5883daaed3318fda8b"
+        aria-expanded="false"
+      >
+        基础篇
+        <span class="list-group-count">(2)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-9248c705575b4b5883daaed3318fda8b"
+           role="tabpanel" aria-labelledby="heading-9248c705575b4b5883daaed3318fda8b">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">rpc调用</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
         
       </div>
     </div>
@@ -479,27 +484,15 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于定时器的封装</h1>
+            <h1 style="display: none">如何更改skynet服务的配置项</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="为什么要封装定时器？"><a href="#为什么要封装定时器？" class="headerlink" title="为什么要封装定时器？"></a>为什么要封装定时器？</h1><ol>
-<li>skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。</li>
-</ol>
-<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>一开始尝试用分配定时器id的方式实现，这种方式要考虑<strong>id重用</strong>的情况，虽然说<code>int64</code>走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。<br>后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一个map对应id映射定时器信息表，注册好了返回一个id，供使用者做后续<strong>注销</strong>，<strong>延期</strong>，既然返回id是返回，为什么不直接返回table呢，反正返回的也是table的引用，并没有增加什么开销，感觉分配id的操作有点画蛇添足了。<br>还是用面向对象思想，定时器实例提供<strong>创建定时器</strong>， <strong>取消定时器</strong>，<strong>延长定时器</strong>等等方法。<br>定时器实例可以设置定时回调几次或者循环调用。后续可以继续实现按<strong>时间节点</strong>触发的定时器，比如每天上午8点，每周一零点。</p>
-<h1 id="特殊处理"><a href="#特殊处理" class="headerlink" title="特殊处理"></a>特殊处理</h1><p>通常注册一个定时器立马调用skynet.timeout，但是如果你的定时器需要取消，我觉得这样并不好，特别是你注册的时间较长，又会注销，过程中又触发注册很频繁的话，这样会浪费掉很多内存，因为skynet注册一个定时器就会占用一个<strong>lua携程</strong>直到定时器触发回调才释放。如果你注册触发时间为1天，那么会积压1天内注册的定时器。所以我没有直接调用skynet.timeout，而是用一个间隔60秒的check循环，如果中途注销了，循环就结束了，这样非常有效的解决了这个问题，虽然多一些定时器注册回调，但是换来了稳定性，使用者不用担心有内存暴涨的风险。</p>
-<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul>
-<li><p><strong>创建定时器</strong><br>  <code>timer:new()</code><br>  3个必传参数<br>  <code>expire</code> 回调时间，保留skynet.time_out的100等于1秒。<br>  <code>timer</code> 触发次数，0次表示循环触发。<br>  <code>callback</code> 回调函数。</p>
-<p>  后面省略传参是回调函数的参数。</p>
-</li>
-<li><p><strong>取消定时器</strong><br>  <code>timeobj:cancel()</code></p>
-</li>
-<li><p><strong>延长定时器</strong><br>  <code>timeobj:extend(ex_expire)</code><br>  参数<br>  <code>ex_expire</code> 延长时间，如果创建定时器的时间为5秒，创建时间为：8:10:30,在定时器触发之前调用 timeobj:extend(100)，定时器会再8:10:36秒触发，在定时器触发之后调用无效。</p>
-</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
-
+                <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p><code>load_mods.lua</code> 在配置文件中，我们可以启动一个<code>share_config_m</code>共享配置的模块，我们可以把这些配置放在 <code>server_cfg</code>中。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>	share_config_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">1</span>,<br>		default_arg = &#123;<br>			server_cfg = &#123;<br>				thread = <span class="hljs-number">2</span>,                 <span class="hljs-comment">--启用线程数</span><br>				debug_port = <span class="hljs-number">9001</span>,          <span class="hljs-comment">--debug端口</span><br>                svr_id = <span class="hljs-number">1</span>,                 <span class="hljs-comment">--服务ID</span><br>                logpath = <span class="hljs-string">&#x27;./logs/&#x27;</span>,        <span class="hljs-comment">--日志目录</span><br>                loglevel = <span class="hljs-string">&#x27;info&#x27;</span>,          <span class="hljs-comment">--日志等级</span><br>                logfilename = <span class="hljs-string">&#x27;server.log&#x27;</span>, <span class="hljs-comment">--日志文件名</span><br>			&#125;<br>		&#125;<br>	&#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h1><p>如果没有配置，这些参数配置的默认值如下</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs lua">thread = <span class="hljs-number">4</span>,                 <span class="hljs-comment">--启用线程数</span><br>debug_port = <span class="hljs-number">8888</span>,          <span class="hljs-comment">--debug端口</span><br>svr_id = <span class="hljs-number">1</span>,                 <span class="hljs-comment">--服务ID</span><br>logpath = <span class="hljs-string">&#x27;./logs/&#x27;</span>,        <span class="hljs-comment">--日志目录</span><br>loglevel = <span class="hljs-string">&#x27;info&#x27;</span>,          <span class="hljs-comment">--日志等级</span><br>logfilename = <span class="hljs-string">&#x27;server.log&#x27;</span>, <span class="hljs-comment">--日志文件名</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -517,8 +510,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
+  
+  
+
   
 
       </span>
@@ -532,7 +532,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+        <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
       
     </div>
   
@@ -544,8 +544,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于定时器的封装</div>
-      <div>https://huahua132.github.io/2023/07/02/skynet_fly_ss/timer/</div>
+      <div>如何更改skynet服务的配置项</div>
+      <div>https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/m_scfg/</div>
     </div>
     <div class="license-meta">
       
@@ -557,7 +557,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月2日</div>
+          <div>2023年2月25日</div>
         </div>
       
       
@@ -589,9 +589,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装">
+                      <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">关于redis的封装</span>
+                        <span class="hidden-mobile">文件查找规则</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -599,8 +599,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置">
-                        <span class="hidden-mobile">关于skynet_fly的一键构建服务配置</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言">
+                        <span class="hidden-mobile">前言</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
