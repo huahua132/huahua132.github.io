@@ -1024,33 +1024,6 @@
   
   <entry>
     <title>前言</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/home/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/home/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>前言</title>
     <link href="/2023/02/25/skynet_fly_word/word_1/A_home/"/>
     <url>/2023/02/25/skynet_fly_word/word_1/A_home/</url>
     
@@ -1077,18 +1050,18 @@
   
   
   <entry>
-    <title>开发环境推荐</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/B_env/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/B_env/</url>
+    <title>前言</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/home/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/home/</url>
     
-    <content type="html"><![CDATA[<h1 id="vscode-Oracle-VM-VirtualBox"><a href="#vscode-Oracle-VM-VirtualBox" class="headerlink" title="vscode + Oracle VM VirtualBox"></a>vscode + Oracle VM VirtualBox</h1><p>vscode加虚拟机的方式，是我常用的开发方式。</p><h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><ol><li>安装VirtualBox,<a href="https://www.virtualbox.org/">官网下载安装即可</a></li><li>下载centos或者ubantu镜像</li></ol><ul><li><a href="https://mirrors.bfsu.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso">centos</a></li><li><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso">ubuntu</a></li></ul><ol start="3"><li>使用VirtualBox安装虚拟机<br>这里自行百度。</li></ol><h2 id="vscode安装插件"><a href="#vscode安装插件" class="headerlink" title="vscode安装插件"></a>vscode安装插件</h2><p><a href="https://github.com/Tencent/LuaHelper">luaHelper</a><br><a href="https://github.com/Natizyskunk/vscode-sftp/releases">sftp</a></p><h3 id="配置SFTP"><a href="#配置SFTP" class="headerlink" title="配置SFTP"></a>配置SFTP</h3><ol><li><p>创建配置<br><code>ctrl shift p</code><br><img src="/img/skynet_fly_word/word_1/sftp.png"></p></li><li><p>编辑配置</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;host&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sftp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">22</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;remotePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/home/weihua/skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;uploadOnSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;useTempFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;openSsh&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li><li><p>上传文件<br><img src="/img/skynet_fly_word/word_1/sftp2.png"></p></li></ol><p>没有出错的话，文件已经上传到linux的对应目录了。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1>]]></content>
     
     
     <categories>
       
       <category>skynet_fly 文档</category>
       
-      <category>入门篇</category>
+      <category>基础篇</category>
       
     </categories>
     
@@ -1136,6 +1109,33 @@
     <url>/2023/02/25/skynet_fly_word/word_1/D_creator/</url>
     
     <content type="html"><![CDATA[<h1 id="为啥需要脚手架？"><a href="#为啥需要脚手架？" class="headerlink" title="为啥需要脚手架？"></a>为啥需要脚手架？</h1><p>如果你对缘由感兴趣，可以看看<a href="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/">这个</a></p><h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><ol><li>生成skynet 启动配置文件</li><li>生成服务基础运维脚本</li></ol><h1 id="构建命令"><a href="#构建命令" class="headerlink" title="构建命令"></a>构建命令</h1><p><code>skynet_fly/binshell/make_server.sh skynet_fly_path</code></p><p>我们已构建<code>skynet_fly/examples/webapp</code>为例子</p><ol><li><p>进入服务文件夹目录下。<br><code>cd skynet_fly/examples/webapp</code></p></li><li><p>构建运维脚本。<br><code>bash ../../binshell/make_server.sh ../../</code></p></li></ol><p>之后会生成以下文件。</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">make ./webapp_config.lua<br>make .<span class="hljs-regexp">/script/</span>run.sh                运行<br>make .<span class="hljs-regexp">/script/</span>reload.sh             热更可热更服务模块<br>make .<span class="hljs-regexp">/script/</span>check_reload.sh       自动检查文件修改并热更<br>make .<span class="hljs-regexp">/script/</span>kill_mod.sh           干掉某些可热更服务模块<br>make .<span class="hljs-regexp">/script/</span>stop.sh               停服<br>make .<span class="hljs-regexp">/script/</span>restart.sh            重启<br>make .<span class="hljs-regexp">/script/</span>try_again_reload.sh   热更失败后，可以重试热更<br>make .<span class="hljs-regexp">/script/</span>fasttime.sh           加速时间<br></code></pre></td></tr></table></figure><p>可以发现<code>webapp_config.lua</code>的生成规则是这样的<code>svr_name</code> .. <code>_config.lua</code>，也就是服务文件夹的名字拼接起来的，在skynet_fly默认服务文件夹名为<strong>服务名称</strong>，这个<strong>服务名称</strong>在<strong>集群远程rpc</strong>中会用到。</p><ol start="3"><li>运行服务。<br>script&#x2F;run.sh 配置文件 是否守护进程(0 不启用 默认启用)<br><code>bash script/run.sh load_mods_prod.lua 0</code> 或者 <code>bash script/run.sh load_mods.lua 0</code></li></ol><p>我们可以使用不同的配置文件来启动服务，这样可以方便的区分，正式环境，开发环境，测试环境不同的配置。<br>也可以方便部署单机多服，单机就能模拟多机部署。</p><p>上面脚本有关于热更的命令，我们先不急着了解热更命令，我们先看看下一节，如何配置运行可热更服务。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>入门篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>开发环境推荐</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/B_env/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/B_env/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vscode-Oracle-VM-VirtualBox"><a href="#vscode-Oracle-VM-VirtualBox" class="headerlink" title="vscode + Oracle VM VirtualBox"></a>vscode + Oracle VM VirtualBox</h1><p>vscode加虚拟机的方式，是我常用的开发方式。</p><h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><ol><li>安装VirtualBox,<a href="https://www.virtualbox.org/">官网下载安装即可</a></li><li>下载centos或者ubantu镜像</li></ol><ul><li><a href="https://mirrors.bfsu.edu.cn/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso">centos</a></li><li><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.4-desktop-amd64.iso">ubuntu</a></li></ul><ol start="3"><li>使用VirtualBox安装虚拟机<br>这里自行百度。</li></ol><h2 id="vscode安装插件"><a href="#vscode安装插件" class="headerlink" title="vscode安装插件"></a>vscode安装插件</h2><p><a href="https://github.com/Tencent/LuaHelper">luaHelper</a><br><a href="https://github.com/Natizyskunk/vscode-sftp/releases">sftp</a></p><h3 id="配置SFTP"><a href="#配置SFTP" class="headerlink" title="配置SFTP"></a>配置SFTP</h3><ol><li><p>创建配置<br><code>ctrl shift p</code><br><img src="/img/skynet_fly_word/word_1/sftp.png"></p></li><li><p>编辑配置</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;host&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;127.0.0.1&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sftp&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">22</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;root&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;remotePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/home/weihua/skynet_fly&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;uploadOnSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;useTempFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;openSsh&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li><li><p>上传文件<br><img src="/img/skynet_fly_word/word_1/sftp2.png"></p></li></ol><p>没有出错的话，文件已经上传到linux的对应目录了。</p>]]></content>
     
     
     <categories>
@@ -1212,33 +1212,6 @@
   
   
   <entry>
-    <title>项目文件夹介绍</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/G_dir/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/G_dir/</url>
-    
-    <content type="html"><![CDATA[<h1 id="3rd"><a href="#3rd" class="headerlink" title="3rd"></a>3rd</h1><p>存放第三方依赖</p><h1 id="binshell"><a href="#binshell" class="headerlink" title="binshell"></a>binshell</h1><p>服务构建工具</p><h1 id="examples"><a href="#examples" class="headerlink" title="examples"></a>examples</h1><p>示例学习服务</p><h1 id="lualib"><a href="#lualib" class="headerlink" title="lualib"></a>lualib</h1><p>skynet_fly lua库文件代码</p><h1 id="lualib-x2F-module"><a href="#lualib-x2F-module" class="headerlink" title="lualib&#x2F;module"></a>lualib&#x2F;module</h1><p>skynet_fly 提供的<strong>可热更服务模块</strong></p><h1 id="script"><a href="#script" class="headerlink" title="script"></a>script</h1><p>lua shell 脚本工具代码</p><h1 id="service"><a href="#service" class="headerlink" title="service"></a>service</h1><p>skynet普通服务</p><h1 id="skynet"><a href="#skynet" class="headerlink" title="skynet"></a>skynet</h1><p>skynet代码</p><h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>单元测试服务代码，主要用来编写一些模块的单元测试。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>入门篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>规范建议</title>
     <link href="/2023/02/25/skynet_fly_word/word_1/H_standard/"/>
     <url>/2023/02/25/skynet_fly_word/word_1/H_standard/</url>
@@ -1271,6 +1244,33 @@
     <url>/2023/02/25/skynet_fly_word/word_1/I_file/</url>
     
     <content type="html"><![CDATA[<h1 id="service"><a href="#service" class="headerlink" title="service"></a>service</h1><p><code>luaservice 约束服务只能放在 server根目录 || server-&gt;service || common-&gt;service || skynet_fly-&gt;service || skynet-&gt;service</code></p><h1 id="cpath"><a href="#cpath" class="headerlink" title="cpath"></a>cpath</h1><p><code>file_util.path_join(skynet_fly_path, &#39;/cservice/?.so;&#39;) .. skynet_path .. &quot;cservice/?.so;&quot;,</code></p><h1 id="lua-cpath"><a href="#lua-cpath" class="headerlink" title="lua_cpath"></a>lua_cpath</h1><p><code>file_util.path_join(skynet_fly_path, &#39;/luaclib/?.so;&#39;) .. skynet_path .. &quot;luaclib/?.so;&quot;</code></p><h1 id="lua-path"><a href="#lua-path" class="headerlink" title="lua_path"></a>lua_path</h1><p><code>--创建 lua文件 查找规则，优先级 server下非service文件夹 &gt; server上上级目录common文件夹非service文件夹 &gt; skynet_fly lualib下所有文件夹 &gt; skynet lualib下所以文件夹</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br><span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br><span class="hljs-keyword">local</span> skynet_path = M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/skynet&#x27;</span>)<br><span class="hljs-keyword">local</span> common_path = <span class="hljs-string">&#x27;../../common/&#x27;</span><br><br><span class="hljs-comment">--server下非service文件夹</span><br><span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(server_path) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--server上上级目录common所有文件夹</span><br>lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(common_path) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet_fly lualib下所有文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span>)<br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib&#x27;</span>)) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet_fly 3rd下所有文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/3rd/?.lua;&#x27;</span>)<br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/3rd&#x27;</span>)) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet lualib下所以文件夹</span><br>lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><p>看到这里，基本上<code>skynet_fly</code>的核心实现已经看了一半了，现在你绝对可以使用<code>skynet_fly</code>编写一些独立工作的服务单元。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>入门篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>项目文件夹介绍</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/G_dir/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/G_dir/</url>
+    
+    <content type="html"><![CDATA[<h1 id="3rd"><a href="#3rd" class="headerlink" title="3rd"></a>3rd</h1><p>存放第三方依赖</p><h1 id="binshell"><a href="#binshell" class="headerlink" title="binshell"></a>binshell</h1><p>服务构建工具</p><h1 id="examples"><a href="#examples" class="headerlink" title="examples"></a>examples</h1><p>示例学习服务</p><h1 id="lualib"><a href="#lualib" class="headerlink" title="lualib"></a>lualib</h1><p>skynet_fly lua库文件代码</p><h1 id="lualib-x2F-module"><a href="#lualib-x2F-module" class="headerlink" title="lualib&#x2F;module"></a>lualib&#x2F;module</h1><p>skynet_fly 提供的<strong>可热更服务模块</strong></p><h1 id="script"><a href="#script" class="headerlink" title="script"></a>script</h1><p>lua shell 脚本工具代码</p><h1 id="service"><a href="#service" class="headerlink" title="service"></a>service</h1><p>skynet普通服务</p><h1 id="skynet"><a href="#skynet" class="headerlink" title="skynet"></a>skynet</h1><p>skynet代码</p><h1 id="test"><a href="#test" class="headerlink" title="test"></a>test</h1><p>单元测试服务代码，主要用来编写一些模块的单元测试。</p>]]></content>
     
     
     <categories>
