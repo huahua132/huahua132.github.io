@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https:&#x2F;&#x2F;github.com&#x2F;huahua132&#x2F;skynet_fly.git 拉取子模块代码git submodule update --init 后续如果需要更新子模块代码git submodule update --re">
+    <meta name="description" content="前言使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。 简介可热更服务模块 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会加载指定的 xxx_m.lua文件,相当于用相同的盒子包装不同的东西。 示例12345678910111213141516171819202122232">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编译">
-<meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/builder/index.html">
+<meta property="og:title" content="如何编写可热更服务模块">
+<meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/F_module/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https:&#x2F;&#x2F;github.com&#x2F;huahua132&#x2F;skynet_fly.git 拉取子模块代码git submodule update --init 后续如果需要更新子模块代码git submodule update --re">
+<meta property="og:description" content="前言使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。 简介可热更服务模块 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会加载指定的 xxx_m.lua文件,相当于用相同的盒子包装不同的东西。 示例12345678910111213141516171819202122232">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-27T02:22:16.816Z">
+<meta property="article:modified_time" content="2024-02-27T08:33:13.132Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>编译 - huahua132 blog</title>
+  <title>如何编写可热更服务模块 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="编译"></span>
+            <span id="subtitle" data-typed-text="如何编写可热更服务模块"></span>
           
         </div>
 
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          765 字
+          828 字
         
       </span>
     
@@ -327,7 +327,7 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/load_mods/" title="load_mods配置文件的使用"
+        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" title="load_mods配置文件的使用"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">load_mods配置文件的使用</span>
@@ -336,7 +336,7 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/home/" title="前言"
+        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" title="前言"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">前言</span>
@@ -345,16 +345,16 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/module/" title="如何编写可热更服务模块"
+        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">如何编写可热更服务模块</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/env/" title="开发环境推荐"
+        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">开发环境推荐</span>
@@ -363,7 +363,7 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/file/" title="文件查找规则"
+        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">文件查找规则</span>
@@ -372,7 +372,7 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/creator/" title="构建服务脚手架"
+        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">构建服务脚手架</span>
@@ -381,16 +381,16 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/builder/" title="编译"
+        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">编译</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/standard/" title="规范建议"
+        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">规范建议</span>
@@ -399,7 +399,7 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/dir/" title="项目文件夹介绍"
+        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" title="项目文件夹介绍"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">项目文件夹介绍</span>
@@ -466,18 +466,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">编译</h1>
+            <h1 style="display: none">如何编写可热更服务模块</h1>
             
             
               <div class="markdown-body">
                 
-                <p>推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。</p>
-<h1 id="拉取代码"><a href="#拉取代码" class="headerlink" title="拉取代码"></a>拉取代码</h1><p><code>git clone https://github.com/huahua132/skynet_fly.git</code></p>
-<h1 id="拉取子模块代码"><a href="#拉取子模块代码" class="headerlink" title="拉取子模块代码"></a>拉取子模块代码</h1><p><code>git submodule update --init</code></p>
-<h2 id="后续如果需要更新子模块代码"><a href="#后续如果需要更新子模块代码" class="headerlink" title="后续如果需要更新子模块代码"></a>后续如果需要更新子模块代码</h2><p><code>git submodule update --remote</code></p>
-<h1 id="使用sftp上传skynet-fly所有文件"><a href="#使用sftp上传skynet-fly所有文件" class="headerlink" title="使用sftp上传skynet_fly所有文件"></a>使用sftp上传skynet_fly所有文件</h1><h1 id="根据系统安装对应依赖软件和库"><a href="#根据系统安装对应依赖软件和库" class="headerlink" title="根据系统安装对应依赖软件和库"></a>根据系统安装对应依赖软件和库</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash.sh</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">安装编译skynet依赖的一些库</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">ubuntu</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">apt-get install gcc</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">apt-get install zlib1g-dev</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">apt-get install openssl</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">apt-get install libssl-dev</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">apt-get install autoconf automake libtool</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">apt-get install curl</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">centos</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum install -y gcc</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum install -y zlib-devel</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum install -y openssl</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum install -y openssl-devel</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum install -y autoconf automake libtool</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum install -y install curl</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">centos 升级gcc</span> <br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum -y install centos-release-scl</span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">yum install devtoolset-9-gcc*</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">scl <span class="hljs-built_in">enable</span> devtoolset-9 bash</span><br></code></pre></td></tr></table></figure>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p><code>cd skynet_fly</code><br><code>make linux</code></p>
-<p>编译没有出错的话，会在生成<code>skynet_fly/skynet/skynet</code>可执行文件。</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><strong>可热更服务模块</strong> 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会<strong>加载指定的 xxx_m.lua文件</strong>,相当于用相同的盒子包装不同的东西。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--start 函数是必须实现的，返回true，说明启动成功，false，说明启动失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- herald_exit 有新服务尝试上线</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.herald_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;预告退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- exit 函数 必须实现，返回true，说明可以退出，将会在1段时间后调用skynet.exit()</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- fix_exit 说明已经热更成功，有新服务上线了，旧服务可以处理下线工作了</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.fix_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;确认要退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- cancel_exit 新服务上线失败</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.cancel_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;取消退出&quot;</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- check_exit 检查退出，返回true，表示可以退出。</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.check_exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;检查退出&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--自定义 rpc 命令 处理函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.doingsame</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+
+<h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/12/03/skynet_fly_ss/reload/">实现细节</a></h1><p>实现细节，有兴趣可以看看。</p>
 
                 
               </div>
@@ -530,8 +528,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>编译</div>
-      <div>https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/builder/</div>
+      <div>如何编写可热更服务模块</div>
+      <div>https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/F_module/</div>
     </div>
     <div class="license-meta">
       
@@ -575,9 +573,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/creator/" title="构建服务脚手架">
+                      <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" title="load_mods配置文件的使用">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">构建服务脚手架</span>
+                        <span class="hidden-mobile">load_mods配置文件的使用</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -585,8 +583,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/env/" title="开发环境推荐">
-                        <span class="hidden-mobile">开发环境推荐</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" title="项目文件夹介绍">
+                        <span class="hidden-mobile">项目文件夹介绍</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
