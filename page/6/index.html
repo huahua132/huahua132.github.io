@@ -365,83 +365,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
-          快进时间
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
+          检查热更的使用以及原理
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
         <div>
-          如何执行sh script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&quot;,
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
-          rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
-        <div>
-          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = contriner_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
+          如何执行sh script/check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh script/try_again
         </div>
       </a>
 
@@ -569,15 +501,83 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
-          检查热更的使用以及原理
+        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
+          前言
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
         <div>
-          如何执行sh script/check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh script/try_again
+          前言这一篇，主要介绍skyent_fly提供的增强功能。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-02-25 08:00" pubdate>
+              2023-02-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+          rpc调用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+        <div>
+          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = contriner_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
         </div>
       </a>
 
@@ -637,15 +637,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
-          前言
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+          快进时间
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
         <div>
-          前言这一篇，主要介绍skyent_fly提供的增强功能。
+          如何执行sh script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&quot;,
         </div>
       </a>
 
@@ -674,7 +674,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
   
   
 
@@ -773,15 +773,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
-          gate,wsgate通用协议的设计
+        <a href="/2023/02/25/skynet_fly_word/word_3/F_redis/" target="_self">
+          redis的封装
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/F_redis/" target="_self">
         <div>
-          gate,wsgate通用协议的设计
+          redis的封装
         </div>
       </a>
 
@@ -841,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/D_timer/" target="_self">
-          定时器的封装
+        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
+          gate,wsgate通用协议的设计
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/D_timer/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
         <div>
-          定时器的封装使用API
+          gate,wsgate通用协议的设计
         </div>
       </a>
 
