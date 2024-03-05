@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-26T11:36:17.182Z">
+<meta property="article:modified_time" content="2024-03-05T07:20:36.441Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.1k 字
+          4.2k 字
         
       </span>
     
@@ -327,6 +327,15 @@
     
       
       
+        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
            class="list-group-item list-group-item-action
            ">
@@ -345,19 +354,10 @@
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
         </a>
       
     
@@ -372,19 +372,10 @@
     
       
       
-        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更新实现细节</span>
+           active">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
     
@@ -399,28 +390,28 @@
     
       
       
+        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
-           class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
     
@@ -439,6 +430,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于监听同步模块的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
     
@@ -598,7 +598,7 @@
 </ul>
 <h2 id="主动调用接口"><a href="#主动调用接口" class="headerlink" title="主动调用接口"></a>主动调用接口</h2><h3 id="登录-1"><a href="#登录-1" class="headerlink" title="登录"></a>登录</h3><p><code>is_online(player_id)</code>是否在线。<br><code>send_msg(player_id,packname,pack_body)</code>发送消息。<br><code>send_msg_by_player_list(player_list,packname,pack_body)</code>发送消息给部分玩家。<br><code>broad_cast_msg(packname,pack_body)</code>广播发送消息。</p>
 <h3 id="大厅-1"><a href="#大厅-1" class="headerlink" title="大厅"></a>大厅</h3><p><code>is_online(player_id)</code>是否在线。<br><code>create_join_table(player_id,table_name)</code>创建进入房间。<br><code>match_join_table(player_id,table_name)</code>匹配进入房间。<br><code>join_table(player_id,table_name,table_id)</code>进入房间。<br><code>leave_table(player_id,table_name,table_id)</code>离开桌子。<br><code>goout(player_id)</code>登出。<br><code>handle(packname,func)</code>设置消息处理函数。<br><code>send_msg(player_id,packname,pack_body)</code>发送消息。<br><code>send_msg_by_player_list(player_list,packname,pack_body)</code>发送消息给部分玩家。<br><code>broad_cast_msg(packname,pack_body)</code>广播发送消息。<br><code>get_hall_server_id()</code>获取大厅id。<br><code>get_alloc_server_id(player_id)</code>获取分配服id。<br><code>get_table_server_id(player_id)</code>获取桌子服id。<br><code>get_table_id()</code>获取桌子id。</p>
-<h3 id="分配-1"><a href="#分配-1" class="headerlink" title="分配"></a>分配</h3><p>暂无</p>
+<h3 id="分配-1"><a href="#分配-1" class="headerlink" title="分配"></a>分配</h3><p><code>create_table(table_name)</code> 创建桌子。<br><code>dismisstable(table_name)</code> 销毁桌子。<br><code>get_empty_map()</code>获取空桌列表。</p>
 <h3 id="桌子-1"><a href="#桌子-1" class="headerlink" title="桌子"></a>桌子</h3><p><code>new(table_id)</code>创建绑定table_id的接口对象。<br><code>kick_out_all()</code>踢出该桌子所有玩家。<br><code>kick_player(player_id)</code>踢出单个玩家。<br><code>send_msg(player_id,packname,pack_body)</code>发送消息。<br><code>send_msg_by_player_list(player_list,packname,pack_body)</code>发送消息给部分玩家。<br><code>broad_cast_msg(packname,pack_body)</code>广播发送消息。<br><code>send_hall(player_id,cmd,...)</code>用send的方式给大厅发消息。<br><code>call_hall(player_id,cmd,...)</code>用call的方式给大厅发消息。<br><code>send_alloc(cmd,...)</code>用send的方式给分配服发消息。<br><code>call_alloc(cmd,...)</code>用call的方式给分配服发消息。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过优化架构，提高了架构易用性，扩展性和使用便捷性。</p>
 
