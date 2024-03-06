@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-05T07:26:21.349Z">
+<meta property="article:modified_time" content="2024-03-06T04:15:53.268Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         
         
         
-          35 分钟
+          36 分钟
         
       </span>
     
@@ -309,15 +309,6 @@
     
       
       
-        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于cluster 远程rpc调用</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
            class="list-group-item list-group-item-action
            ">
@@ -327,19 +318,10 @@
     
       
       
-        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly 日志服务</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+          <span class="category-post">关于cluster 远程rpc调用</span>
         </a>
       
     
@@ -349,6 +331,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
         </a>
       
     
@@ -372,6 +363,15 @@
     
       
       
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
            class="list-group-item list-group-item-action
            ">
@@ -390,19 +390,19 @@
     
       
       
-        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更匹配房间类游戏架构"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
+           ">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
         </a>
       
     
       
       
-        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更匹配房间类游戏架构"
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
+           active">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
     
@@ -532,7 +532,9 @@
 </li>
 <li><p><code>repeat_login(player_id)</code>重复登录。多连接登录了，此处可以给旧连接发错误码，旧连接将被踢断开。<br><code>player_id</code>玩家id。</p>
 </li>
-<li><p><code>register_cmd</code> 注册命令表。</p>
+<li><p>&#96;register_cmd</p>
+</li>
+<li><p>&#96; 注册命令表。</p>
 </li>
 </ul>
 <h3 id="大厅"><a href="#大厅" class="headerlink" title="大厅"></a>大厅</h3><ul>
@@ -555,6 +557,8 @@
 <li><p><code>goout(player_id)</code>，登出，也就是agent对象要被删除了。<br><code>player_id</code>玩家id。</p>
 </li>
 <li><p><code>register_cmd</code> 注册命令表。</p>
+</li>
+<li><p><code>handle_end</code> 消息处理结束。</p>
 </li>
 </ul>
 <h3 id="分配"><a href="#分配" class="headerlink" title="分配"></a>分配</h3><ul>
@@ -594,7 +598,10 @@
 <p><code>reconnect(player_id)</code>，重连。<br>参数：<br><code>player_id</code> 玩家id。</p>
 <p><code>handle</code> 消息处理表<br>table<br>key <code>packname</code>包名<br>value <code>handle_func(player_id,packname,pack_body)</code>处理函数<br>参数：<br><code>player_id</code>玩家id。<br><code>packname</code>包名。<br><code>pack_body</code>包内容。</p>
 <ul>
-<li><code>register_cmd</code> 注册命令表。</li>
+<li><p><code>handle_end</code> 消息处理结束。</p>
+</li>
+<li><p><code>register_cmd</code> 注册命令表。</p>
+</li>
 </ul>
 <h2 id="主动调用接口"><a href="#主动调用接口" class="headerlink" title="主动调用接口"></a>主动调用接口</h2><h3 id="登录-1"><a href="#登录-1" class="headerlink" title="登录"></a>登录</h3><p><code>is_online(player_id)</code>是否在线。<br><code>send_msg(player_id,packname,pack_body)</code>发送消息。<br><code>send_msg_by_player_list(player_list,packname,pack_body)</code>发送消息给部分玩家。<br><code>broad_cast_msg(packname,pack_body)</code>广播发送消息。</p>
 <h3 id="大厅-1"><a href="#大厅-1" class="headerlink" title="大厅"></a>大厅</h3><p><code>is_online(player_id)</code>是否在线。<br><code>create_join_table(player_id,table_name)</code>创建进入房间。<br><code>match_join_table(player_id,table_name)</code>匹配进入房间。<br><code>join_table(player_id,table_name,table_id)</code>进入房间。<br><code>leave_table(player_id,table_name,table_id)</code>离开桌子。<br><code>goout(player_id)</code>登出。<br><code>handle(packname,func)</code>设置消息处理函数。<br><code>send_msg(player_id,packname,pack_body)</code>发送消息。<br><code>send_msg_by_player_list(player_list,packname,pack_body)</code>发送消息给部分玩家。<br><code>broad_cast_msg(packname,pack_body)</code>广播发送消息。<br><code>get_hall_server_id()</code>获取大厅id。<br><code>get_alloc_server_id(player_id)</code>获取分配服id。<br><code>get_table_server_id(player_id)</code>获取桌子服id。<br><code>get_table_id()</code>获取桌子id。</p>
