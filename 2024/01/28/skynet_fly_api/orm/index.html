@@ -24,7 +24,7 @@
 <meta property="og:description" content="ormentry.lua单条数据条目对象。 常用方法 M:get(filed_name)  函数作用域：M:new 对象的成员函数  函数名称：get  描述:  获得对象指定字段的值  参数:  - filed_name (string): 字段名  返回值:  value(number or string): 值   M:set(filed_name, filed_value)  函数作用域：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-28T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-01-29T11:42:54.143Z">
+<meta property="article:modified_time" content="2024-03-09T07:08:21.079Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -354,19 +354,19 @@
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
+        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">watch_syn.lua 监听同步机制</span>
+          <span class="category-post">定时器的使用</span>
         </a>
       
     
       
       
-        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
+        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">定时器的使用</span>
+          <span class="category-post">watch_syn.lua 监听同步机制</span>
         </a>
       
     
@@ -394,7 +394,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="ormentry-lua"><a href="#ormentry-lua" class="headerlink" title="ormentry.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/db/orm/ormentry.lua">ormentry.lua</a></h1><p>单条数据条目对象。</p>
+                <h1 id="ormentry-lua"><a href="#ormentry-lua" class="headerlink" title="ormentry.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/db/orm/ormentry.lua">ormentry.lua</a></h1><p>单条数据条目对象。</p>
 <h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><ul>
 <li><p><strong>M:get(filed_name)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：get<br>  描述:  获得对象指定字段的值<br>  参数:<br>  - filed_name (string): 字段名<br>  返回值:</p>
 <ol>
@@ -423,7 +423,7 @@
 <li><p><strong>M:clear_change()</strong><br>通常只在<code>ormtable.lua</code>中调用，外部不需要调用。<br>  函数作用域：M:new 对象的成员函数<br>  函数名称：clear_change<br>  描述:  清除变更标记<br>  参数:<br>  无<br>  返回值:<br>  无</p>
 </li>
 </ul>
-<h1 id="ormtable-lua"><a href="#ormtable-lua" class="headerlink" title="ormtable.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/db/orm/ormtable.lua">ormtable.lua</a></h1><p>这是orm的核心实现，通常我们创建一个表，通过它来定义。</p>
+<h1 id="ormtable-lua"><a href="#ormtable-lua" class="headerlink" title="ormtable.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/db/orm/ormtable.lua">ormtable.lua</a></h1><p>这是orm的核心实现，通常我们创建一个表，通过它来定义。</p>
 <h2 id="构建前调用"><a href="#构建前调用" class="headerlink" title="构建前调用"></a>构建前调用</h2><ul>
 <li><strong>M:new(tab_name)</strong><br>通常只在<code>ormtable.lua</code>中调用，外部不需要调用。<br>  函数作用域：M 对象的成员函数<br>  函数名称：new<br>  描述:  新建表对象<br>  参数:<br>  - tab_name (string): 对应数据库的表名<br>  返回值:<ol>
 <li>orm_obj(table): 表对象</li>
@@ -568,7 +568,7 @@
 <li><p><strong>M:is_inval_save(entry_data)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：is_inval_save<br>  描述:  是否启动了间隔保存<br>  参数:<br>  返回值:<br>  1. ret(bool)：true or false</p>
 </li>
 </ul>
-<h1 id="ormadapter-mysql-lua"><a href="#ormadapter-mysql-lua" class="headerlink" title="ormadapter_mysql.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/db/ormadapter/ormadapter_mysql.lua">ormadapter_mysql.lua</a></h1><p>mysql适配器。<br>业务开发中，我们只需要调用<strong>new</strong>来创建一个适配器传入<strong>ormtable</strong>的builder构建函数中。</p>
+<h1 id="ormadapter-mysql-lua"><a href="#ormadapter-mysql-lua" class="headerlink" title="ormadapter_mysql.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/db/ormadapter/ormadapter_mysql.lua">ormadapter_mysql.lua</a></h1><p>mysql适配器。<br>业务开发中，我们只需要调用<strong>new</strong>来创建一个适配器传入<strong>ormtable</strong>的builder构建函数中。</p>
 <ul>
 <li><strong>M:new(db_name)</strong><br>  函数作用域：M 对象的成员函数<br>  函数名称：new<br>  描述:  新建适配器对象<br>  参数:<br>  - db_name (string): 表存在的数据库名称。<br>  返回值:<ol>
 <li>apter(table): 适配器对象。</li>
@@ -595,11 +595,11 @@
 <li><p><strong>M:delete_entry(key_values)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：delete_entry<br>  描述:  删除表数据<br>  参数:<br>  keys_values(table)最左原则，keys的值。<br>  返回值:<br>  1. ret(bool): 成功true失败断言</p>
 </li>
 </ul>
-<h1 id="ormadapter-mongo-lua"><a href="#ormadapter-mongo-lua" class="headerlink" title="ormadapter_mongo.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/db/ormadapter/ormadapter_mongo.lua">ormadapter_mongo.lua</a></h1><p>mongo db多了以下两个方法，批量插入和批量更新的时候，设置一次执行的数量，mysql不用这样是因为mysql可以获取到网络包的长度限制，并且数据包的长度外部也能知道(sql的长度),但是mongo，外部获取不到网络包的长度，不确定一次能够执行多少，按照chatgpt的回复，mongo的包长度限制为16M，高版本为64M，想着预留这个接口，用户根据表的数量大小，自己预估单次数量即可，默认一次10条，在大多数情况下都不会超过16M。</p>
+<h1 id="ormadapter-mongo-lua"><a href="#ormadapter-mongo-lua" class="headerlink" title="ormadapter_mongo.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/db/ormadapter/ormadapter_mongo.lua">ormadapter_mongo.lua</a></h1><p>mongo db多了以下两个方法，批量插入和批量更新的时候，设置一次执行的数量，mysql不用这样是因为mysql可以获取到网络包的长度限制，并且数据包的长度外部也能知道(sql的长度),但是mongo，外部获取不到网络包的长度，不确定一次能够执行多少，按照chatgpt的回复，mongo的包长度限制为16M，高版本为64M，想着预留这个接口，用户根据表的数量大小，自己预估单次数量即可，默认一次10条，在大多数情况下都不会超过16M。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--设置单次整合批量插入的数量</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:set_batch_insert_num</span><span class="hljs-params">(num)</span></span><br>    <span class="hljs-built_in">assert</span>(num &gt; <span class="hljs-number">0</span>)<br>    <span class="hljs-built_in">self</span>.batch_insert_num = num<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--设置单次整合批量更新的数量</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:set_batch_update_num</span><span class="hljs-params">(num)</span></span><br>    <span class="hljs-built_in">assert</span>(num &gt; <span class="hljs-number">0</span>)<br>    <span class="hljs-built_in">self</span>.batch_update_num = num<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
 <p>其他接口函数的实现会返回值都是统一的，这也是为什么orm的可以无缝切换数据库的原因。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/module/orm_table_m.lua">orm_table_m.lua</a><br>有多个服务需要使用<strong>orm</strong>的时候，我们需要使用代理访问，这时候我们只在<code>orm_table_m.lua</code>服务中去构建操作orm对象。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/module/orm_table_m.lua">orm_table_m.lua</a><br>有多个服务需要使用<strong>orm</strong>的时候，我们需要使用代理访问，这时候我们只在<code>orm_table_m.lua</code>服务中去构建操作orm对象。</p>
 <p>具体示例可以查看<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/examples/orm/main.lua">orm</a><br>我们可以以这种方式自定义一些方法，比如玩家的道具<code>item</code>,我们必须原子性的加减，并且减少不能小于0，我们可能就需要定义这样的方法。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle.add_item</span><span class="hljs-params">(player_id, item_id, num)</span></span><br>    <span class="hljs-built_in">assert</span>(num &gt;= <span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">local</span> entry = g_orm_obj:get_one_entry(player_id, item_id)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> entry <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;add_item not exist item_id &quot;</span>,player_id, item_id)<br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">local</span> count = entry:get(<span class="hljs-string">&#x27;count&#x27;</span>)<br>    count = count + num<br>    entry:set(<span class="hljs-string">&#x27;count&#x27;</span>, count)<br><br>     <span class="hljs-comment">--没有启动间隔时间自动保存就立即保存</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> g_orm_obj:is_inval_save() <span class="hljs-keyword">then</span><br>        g_orm_obj:save_one_entry(entry)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">return</span> count<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
@@ -626,7 +626,7 @@
 <li><p><strong>save_change_now()</strong><br>  函数作用域：handle<br>  函数名称：save_change_now<br>  描述:  立即保存所有修改<br>  参数:<br>  无<br>  返回值:<br>  无</p>
 </li>
 </ul>
-<h1 id="orm-table-client-lua"><a href="#orm-table-client-lua" class="headerlink" title="orm_table_client.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/client/orm_table_client.lua">orm_table_client.lua</a></h1><p>访问代理，这个文件的实现，主要有两个目的</p>
+<h1 id="orm-table-client-lua"><a href="#orm-table-client-lua" class="headerlink" title="orm_table_client.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/client/orm_table_client.lua">orm_table_client.lua</a></h1><p>访问代理，这个文件的实现，主要有两个目的</p>
 <ol>
 <li>解决热更问题，热更之后需要访问新的orm_table_m服务。</li>
 <li>调用便捷性。</li>
