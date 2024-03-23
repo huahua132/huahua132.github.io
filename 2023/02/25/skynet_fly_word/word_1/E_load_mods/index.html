@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做成全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-06T10:19:05.171Z">
+<meta property="article:modified_time" content="2024-03-23T08:08:56.472Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.8k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          20 分钟
+          24 分钟
         
       </span>
     
@@ -669,6 +669,12 @@
 <h1 id="mod-args-index-或者-default-arg的配置传递到哪了？"><a href="#mod-args-index-或者-default-arg的配置传递到哪了？" class="headerlink" title="mod_args[index] 或者 default_arg的配置传递到哪了？"></a>mod_args[index] 或者 default_arg的配置传递到哪了？</h1><p>一个<strong>可热更服务模板</strong>必须定义<code>start</code>和<code>exit</code>两个回调函数。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span> <span class="hljs-comment">--mod_args[index] or default_arg</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
 <p>可以看到，配置传递到<code>start</code>函数中了。</p>
+<p>我们也可以通过加载<code>skynet-fly.etc.module_info</code>来获取配置信息。</p>
+<p>module_info提供了 <code>get_cfg()</code>方法供获取配置。<br>还提供了<code>get_base_info()</code>供查询可热更服务的基础信息。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lua">module_name = MODULE_NAME,     <span class="hljs-comment">--模块名称  比如 web_master_m web_agent_m</span><br>index = INDEX,				   <span class="hljs-comment">--启动索引  比如启动6   6个服务的索引分别 是 1 - 6</span><br>launch_date = LAUNCH_DATE,	   <span class="hljs-comment">--启动日期</span><br>launch_time = LAUNCH_TIME,	   <span class="hljs-comment">--启动时间戳</span><br>version = VERSION,			   <span class="hljs-comment">--版本号    热更会使版本号增加</span><br></code></pre></td></tr></table></figure>
+
+<p>如果不是可热更服务，调用相关命令<br><code>get_cfg</code>会返回nil<br><code>get_base_info</code>将是一个空table。</p>
+<h1 id="如何区分可热更服务和普通服务"><a href="#如何区分可热更服务和普通服务" class="headerlink" title="如何区分可热更服务和普通服务"></a>如何区分可热更服务和普通服务</h1><p>skynet_fly中，有两个特殊的全局变量。<br>SERVICE_NAME 是skynet启动服务名。<br>MODULE_NAME	是可热更模块的名称。如果一个服务中，这个值为nil，它就是一个可热更服务。</p>
 
                 
               </div>
@@ -766,9 +772,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译">
+                      <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">编译</span>
+                        <span class="hidden-mobile">构建服务脚手架</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
