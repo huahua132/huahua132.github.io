@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
 <meta property="article:published_time" content="2023-12-24T13:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-23T04:02:22.764Z">
+<meta property="article:modified_time" content="2024-03-27T09:14:16.119Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -356,6 +356,15 @@
     
       
       
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
            class="list-group-item list-group-item-action
            ">
@@ -369,15 +378,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于redis的封装</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
         </a>
       
     
@@ -410,19 +410,19 @@
     
       
       
-        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
     
       
       
-        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于新增定时器的扩展 整点报时</span>
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
         </a>
       
     
@@ -527,7 +527,7 @@
 <h3 id="创建表示例"><a href="#创建表示例" class="headerlink" title="创建表示例"></a>创建表示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> adapter = ormadapter_mysql:new(<span class="hljs-string">&quot;admin&quot;</span>)<br><span class="hljs-keyword">local</span> orm_obj = ormtable:new(<span class="hljs-string">&quot;t_player&quot;</span>)<br>:int64(<span class="hljs-string">&quot;player_id&quot;</span>)<br>:int64(<span class="hljs-string">&quot;role_id&quot;</span>)<br>:int8(<span class="hljs-string">&quot;sex&quot;</span>)<br>:string32(<span class="hljs-string">&quot;nickname&quot;</span>)<br>:string64(<span class="hljs-string">&quot;email&quot;</span>)<br>:uint8(<span class="hljs-string">&quot;sex1&quot;</span>)<br>:int16(<span class="hljs-string">&quot;sex2&quot;</span>)<br>:uint16(<span class="hljs-string">&quot;sex3&quot;</span>)<br>:int32(<span class="hljs-string">&quot;sex4&quot;</span>)<br>:uint32(<span class="hljs-string">&quot;sex5&quot;</span>)<br>:int64(<span class="hljs-string">&quot;sex6&quot;</span>)<br>:string128(<span class="hljs-string">&quot;sex7&quot;</span>)<br>:string256(<span class="hljs-string">&quot;sex8&quot;</span>)<br>:string512(<span class="hljs-string">&quot;sex9&quot;</span>)<br>:string1024(<span class="hljs-string">&quot;sex10&quot;</span>)<br>:string2048(<span class="hljs-string">&quot;sex11&quot;</span>)<br>:string4096(<span class="hljs-string">&quot;sex12&quot;</span>)<br>:string8192(<span class="hljs-string">&quot;sex13&quot;</span>)<br>:text(<span class="hljs-string">&quot;sex14&quot;</span>)<br>:blob(<span class="hljs-string">&quot;sex15&quot;</span>)<br>:set_cache(<span class="hljs-number">500</span>,<span class="hljs-number">500</span>)  <span class="hljs-comment">--设置 5秒的缓存 间隔5秒同步数据库（有修改同步）</span><br>:set_keys(<span class="hljs-string">&quot;player_id&quot;</span>,<span class="hljs-string">&quot;role_id&quot;</span>,<span class="hljs-string">&quot;sex&quot;</span>) <span class="hljs-comment">--设置3个关联key</span><br>:builder(adapter)<br></code></pre></td></tr></table></figure>
 <p>一开始想法是用写lua表字段描述的方式来创建比如：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> des = &#123;<br>    &#123;name = <span class="hljs-string">&quot;player_id&quot;</span>, <span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;int8&quot;</span>, is_key = <span class="hljs-literal">true</span>&#125;,<br>    &#123;name = <span class="hljs-string">&quot;role_id&quot;</span>, <span class="hljs-built_in">type</span> = <span class="hljs-string">&quot;int64&quot;</span>, is_key = <span class="hljs-literal">false</span>&#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>后来想想这种这种用 <strong>建造者模式</strong>更适合。<br><strong>优点</strong></p>
+<p>后来想想这种用 <strong>建造者模式</strong>更适合。<br><strong>优点</strong></p>
 <ol>
 <li>不需要写name,type描述字段,而且类型的函数没有时或者检查有错，直接在对应的行就报错了，更有利于开发。</li>
 <li>能够设置一些额外属性，比如<strong>set_cache</strong>，设置缓存时间。</li>
