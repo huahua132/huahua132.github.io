@@ -24,7 +24,7 @@
 <meta property="og:description" content="关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-07T01:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-09T07:08:38.985Z">
+<meta property="article:modified_time" content="2024-04-03T08:05:16.151Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         
         
         
-          14 分钟
+          15 分钟
         
       </span>
     
@@ -309,10 +309,19 @@
     
       
       
-        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
+        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">内部rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更模块的启动配置项</span>
+          <span class="category-post">远程rpc调用</span>
         </a>
       
     
@@ -327,10 +336,10 @@
     
       
       
-        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
+        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">内部rpc调用</span>
+           ">
+          <span class="category-post">可热更模块的启动配置项</span>
         </a>
       
     
@@ -340,15 +349,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">orm</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">远程rpc调用</span>
         </a>
       
     
@@ -427,7 +427,9 @@
 </ul>
 <h1 id="不常用API"><a href="#不常用API" class="headerlink" title="不常用API"></a>不常用API</h1><ul>
 <li><strong>M:broadcast(…)</strong> 广播。</li>
+<li><strong>M:broadcast_call(…)</strong> 广播调用。</li>
 <li><strong>M:broadcast_by_name(…)</strong> 通过instance_name广播。</li>
+<li><strong>M:broadcast_call_by_name(…)</strong> 通过instance_name广播调用。</li>
 <li><strong>M:set_week_visitor(…)</strong> 设置弱访问者,如果业务逻辑实在有环访问问题，可以使用这个设置。</li>
 <li><strong>M:monitor_all()</strong> 监听所有的可热更服务地址，用于解决启动时，不确定访问哪些服务。</li>
 <li><strong>M:CMD(cmd)</strong> 扩展CMD，不能热更服务需要扩展的CMD的命令。</li>
