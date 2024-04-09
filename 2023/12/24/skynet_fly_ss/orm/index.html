@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
 <meta property="article:published_time" content="2023-12-24T13:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-27T09:15:11.487Z">
+<meta property="article:modified_time" content="2024-04-09T04:17:31.877Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.3k 字
+          5.9k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          45 分钟
+          50 分钟
         
       </span>
     
@@ -329,15 +329,6 @@
     
       
       
-        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
-        </a>
-      
-    
-      
-      
         <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
            class="list-group-item list-group-item-action
            active">
@@ -374,10 +365,10 @@
     
       
       
-        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly 日志服务</span>
+          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
         </a>
       
     
@@ -410,10 +401,46 @@
     
       
       
+        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更匹配房间类游戏架构"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于监听同步模块的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
         </a>
       
     
@@ -432,33 +459,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于skynet_fly的一键构建服务配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更新实现</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于监听同步模块的封装</span>
         </a>
       
     
@@ -533,6 +533,11 @@
 <li>能够设置一些额外属性，比如<strong>set_cache</strong>，设置缓存时间。</li>
 <li>代码结构更清晰。</li>
 </ol>
+<h2 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h2><p>通常在实际业务开发中，可能由于需求的变化，想要改动表结构，大部分情况都是新增字段，orm提供修改表的手段，提供<strong>新增字段</strong>，<strong>删除字段</strong>。<br>不可以删除<strong>主键</strong>，也不可以修改<strong>关联主键顺序</strong>。</p>
+<h2 id="修改示例"><a href="#修改示例" class="headerlink" title="修改示例"></a>修改示例</h2><p>修改表并不需要调用其他<strong>API</strong>，使用中，只需要去调整创建过程即可。<br>基于上面的<strong>创建示例</strong>，<strong>修改示例</strong>如下。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs lua"> <span class="hljs-keyword">local</span> adapter = ormadapter_mysql:new(<span class="hljs-string">&quot;admin&quot;</span>)<br><span class="hljs-keyword">local</span> orm_obj = ormtable:new(<span class="hljs-string">&quot;t_player&quot;</span>)<br>    :int64(<span class="hljs-string">&quot;player_id&quot;</span>)<br>    :int64(<span class="hljs-string">&quot;role_id&quot;</span>)<br>    :int8(<span class="hljs-string">&quot;sex&quot;</span>)<br>    :int8(<span class="hljs-string">&quot;nickname1&quot;</span>)<br>    :set_keys(<span class="hljs-string">&quot;player_id&quot;</span>,<span class="hljs-string">&quot;role_id&quot;</span>,<span class="hljs-string">&quot;sex&quot;</span>)<br>    :builder(adapter)<br></code></pre></td></tr></table></figure>
+<p>这个修改示例中，我们去掉了多余不想用的字段，增加了<strong>nickname1</strong>字段。<br><strong>删除字段</strong>并不会真的去对应数据库执行删除字段(这个是ormadapter接口实现决定的)，只是<strong>orm</strong>不在关心该字段，查询不取，插入不写。</p>
+<h2 id="字段默认值"><a href="#字段默认值" class="headerlink" title="字段默认值"></a>字段默认值</h2><p>当我们没有为字段设置值的时候，字段提供默认值。<br>对于lua是<strong>string</strong>类型的默认为空串,也就是””<br>对于lua是<strong>number</strong>类型的默认为0</p>
 <h2 id="创建数据"><a href="#创建数据" class="headerlink" title="创建数据"></a>创建数据</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua">orm_obj:create_entry(<br>    &#123;player_id = <span class="hljs-number">10005</span>,role_id = <span class="hljs-number">1</span>, sex = <span class="hljs-number">1</span>&#125;,<br>    &#123;player_id = <span class="hljs-number">10006</span>,role_id = <span class="hljs-number">1</span>, sex = <span class="hljs-number">2</span>&#125;<br>    )<br></code></pre></td></tr></table></figure>
 <p>支持一次创建多条。</p>
 <h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> player_id = <span class="hljs-number">10005</span><br><span class="hljs-keyword">local</span> role_id = <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> sex = <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_entry(player_id)                 <span class="hljs-comment">--查询player_id</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_entry(player_id,role_id)         <span class="hljs-comment">--查询player_id,role_id</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_entry(player_id, role_id, sex)   <span class="hljs-comment">--查询player_id,role_id,sex</span><br><span class="hljs-keyword">local</span> entry_list = orm_obj:get_all_entry()                      <span class="hljs-comment">--查询所有数据</span><br></code></pre></td></tr></table></figure>
