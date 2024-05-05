@@ -998,31 +998,6 @@
   
   
   <entry>
-    <title>为什么写blog</title>
-    <link href="/2023/05/07/think/whywrite/"/>
-    <url>/2023/05/07/think/whywrite/</url>
-    
-    <content type="html"><![CDATA[<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>为了总结，强化学习，以及分享和记录。 </p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>日常工作学习中零零散散学习到的知识不成体系，有时候学了又感觉没学，我觉得原因就是没有深度思考，一味求快，写总结会让我们对知识进行深度思考，需要总结出学习到的知识能解决什么样的问题，先提出<strong>问题场景</strong>,提供 <strong>解决方案</strong> 总结出  <strong>知识特点</strong> 再扩展 <strong>类同知识</strong> 进行 <strong>优缺点</strong> 对比 从而 在脑中构建出 <strong>知识体系网络</strong>。</p><h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p>知识学到了，自己会用，但是可能只是用到了需要的部分，比较片面，我想以写blog的方式，来发现自己对哪一块还不是很清楚。需要再加深学习。</p><h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><p>利用<strong>费曼学习法</strong>，来验证自己的学习的成果，验证自己学的好不好最好的办法就是教会别人。过程中还能补充遗漏的知识点。</p><h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p><strong>好记性不如烂笔头</strong>。忘记了查自己的笔记会比查网络上别人的笔记要<strong>快</strong>。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>一些想法</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>一些想法</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>actor模型在sknyet中的应用</title>
     <link href="/2023/05/07/skynet_frame/actor/"/>
     <url>/2023/05/07/skynet_frame/actor/</url>
@@ -1048,11 +1023,36 @@
   
   
   <entry>
+    <title>为什么写blog</title>
+    <link href="/2023/05/07/think/whywrite/"/>
+    <url>/2023/05/07/think/whywrite/</url>
+    
+    <content type="html"><![CDATA[<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>为了总结，强化学习，以及分享和记录。 </p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>日常工作学习中零零散散学习到的知识不成体系，有时候学了又感觉没学，我觉得原因就是没有深度思考，一味求快，写总结会让我们对知识进行深度思考，需要总结出学习到的知识能解决什么样的问题，先提出<strong>问题场景</strong>,提供 <strong>解决方案</strong> 总结出  <strong>知识特点</strong> 再扩展 <strong>类同知识</strong> 进行 <strong>优缺点</strong> 对比 从而 在脑中构建出 <strong>知识体系网络</strong>。</p><h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p>知识学到了，自己会用，但是可能只是用到了需要的部分，比较片面，我想以写blog的方式，来发现自己对哪一块还不是很清楚。需要再加深学习。</p><h2 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h2><p>利用<strong>费曼学习法</strong>，来验证自己的学习的成果，验证自己学的好不好最好的办法就是教会别人。过程中还能补充遗漏的知识点。</p><h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p><strong>好记性不如烂笔头</strong>。忘记了查自己的笔记会比查网络上别人的笔记要<strong>快</strong>。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>一些想法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>一些想法</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>前言</title>
     <link href="/2023/04/27/skynet_fly_word/word_4/A_home/"/>
     <url>/2023/04/27/skynet_fly_word/word_4/A_home/</url>
     
-    <content type="html"><![CDATA[<p>这个篇章主要介绍skynet_fly_demo的设计，如何基于skynet_fly_demo做开发。</p><h1 id="skynet-fly-demo简介"><a href="#skynet-fly-demo简介" class="headerlink" title="skynet_fly_demo简介"></a><a href="https://github.com/huahua132/skynet_fly_demo">skynet_fly_demo</a>简介</h1><p>skynet_fly_demo是基于skynet_fly的试验性项目，目的是全面的使用<code>skynet_fly</code>的功能并验证其可行性。</p>]]></content>
+    <content type="html"><![CDATA[<p>这个篇章主要介绍skynet_fly_demo的设计，如何基于skynet_fly_demo做开发。</p><h1 id="skynet-fly-demo简介"><a href="#skynet-fly-demo简介" class="headerlink" title="skynet_fly_demo简介"></a><a href="https://github.com/huahua132/skynet_fly_demo">skynet_fly_demo</a>简介</h1><p>skynet_fly_demo是基于skynet_fly的试验性项目，目的是全面的使用<code>skynet_fly</code>的功能并验证其可行性。<br>skynet_fly_demo深度的使用了<code>skynet_fly</code>如下功能:<br><strong>orm</strong><br><strong>cluster rpc</strong><br><strong>日志切割</strong><br><strong>time_point整点报时定时器</strong><br><strong>room_game游戏房间类架构</strong><br><strong>http server</strong><br><strong>ws gate</strong><br><strong>jwt</strong></p><h1 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h1><p><img src="/img/think/skynet_fly_demo.png"></p><p>skynet_fly_demo整体的架构是为大厅房间类游戏设计的，整个后端的服务都是用<code>skynet_fly</code>实现，包括后台。实现上采用了分布式架构，保证了系统了横向扩展性。目前在<strong>8核8G虚拟机</strong>压测5000机器人，服务器机器人同机器运行，没有出现性能瓶颈。</p><h2 id="center-server（唯一服务）"><a href="#center-server（唯一服务）" class="headerlink" title="center server（唯一服务）"></a>center server（唯一服务）</h2><pre><code class="hljs">记录处理需要全服唯一的数据。比如所有玩家的账号信息。全服邮件。全服唯一ID等等。</code></pre><h2 id="log-server-唯一服务"><a href="#log-server-唯一服务" class="headerlink" title="log server (唯一服务)"></a>log server (唯一服务)</h2><pre><code class="hljs">记录全局的日志信息。比如其他服务严重错误日志，错误堆栈（收集），这样可以通过后台方便的查看服务器有没有出现严重错误。这样服务多的时候就不必一个服一个服去翻看日志文件(这很痛苦，效率也很低)</code></pre><h2 id="login-server-可多开"><a href="#login-server-可多开" class="headerlink" title="login server (可多开)"></a>login server (可多开)</h2><pre><code class="hljs">玩家登录注册的门户，通常流量较大。需要支持多看，必要时需要做登录排队，限流等功能。此服务保证了已登录的玩家不受未登录的玩家的流量影响。</code></pre><h2 id="hall-server-可多开"><a href="#hall-server-可多开" class="headerlink" title="hall server (可多开)"></a>hall server (可多开)</h2><pre><code class="hljs">每个玩家注册后，都会绑定一个大厅服，玩家通过大厅服操作一下邮件、活动、任务、商店、匹配游戏等等功能。</code></pre><h2 id="match-server-（唯一服务）"><a href="#match-server-（唯一服务）" class="headerlink" title="match server （唯一服务）"></a>match server （唯一服务）</h2><pre><code class="hljs">提供各个游戏的匹配功能，协调游戏服创建房间。</code></pre><h2 id="game-server-可多开"><a href="#game-server-可多开" class="headerlink" title="game server (可多开)"></a>game server (可多开)</h2><pre><code class="hljs">各个游戏具体实现的游戏逻辑，玩家被分配到房间后，直连游戏服。</code></pre><h2 id="robot-server-可多开"><a href="#robot-server-可多开" class="headerlink" title="robot server (可多开)"></a>robot server (可多开)</h2><pre><code class="hljs">各个游戏的机器人实现。</code></pre><h2 id="admin-server-唯一服务"><a href="#admin-server-唯一服务" class="headerlink" title="admin server (唯一服务)"></a>admin server (唯一服务)</h2><pre><code class="hljs">后台服务</code></pre>]]></content>
     
     
     <categories>
@@ -1060,6 +1060,438 @@
       <category>skynet_fly 文档</category>
       
       <category>实战篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>可热更匹配房间类游戏架构基础设施</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/B_game/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/B_game/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/07/22/skynet_fly_ss/room_game/">可热更匹配房间类游戏架构基础设施</a><br><a href="https://huahua132.github.io/2023/10/15/skynet_fly_ss/room_game_up/">后续优化</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>gate,wsgate通用协议的设计</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/C_proto/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/C_proto/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/12/10/skynet_fly_ss/pack/">gate,wsgate通用协议的设计</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>前言</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/A_home/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/A_home/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这一篇，主要介绍<code>skyent_fly</code>提供的增强功能。</p><p><img src="/img/skynet_fly_word/word_3/dog.png"></p><p>我想应该有很多读者一股脑把文档看了个遍，之后发现学费了。<br>正常的。技术能力提升并不能一蹴而就，需要经过大量的实践思考学习，慢慢累计起来方能有所成。</p><p><img src="/img/skynet_fly_word/word_3/f.png"><br>加油！</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>定时器的封装</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/D_timer/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/D_timer/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/07/02/skynet_fly_ss/timer/">定时器的封装</a><br><a href="https://huahua132.github.io/2024/01/21/skynet_fly_api/timer/">使用API</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>redis的封装</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/F_redis/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/F_redis/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/07/08/skynet_fly_ss/redis/">redis的封装</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>可热更模块的启动配置项</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/E_module/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/E_module/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2024/01/14/skynet_fly_api/mods/">可热更模块的启动配置项</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>orm数据库关系映射</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/H_orm/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/H_orm/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/12/24/skynet_fly_ss/orm/">orm数据库关系映射</a><br><a href="https://huahua132.github.io/2024/01/28/skynet_fly_api/orm/">api</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>整点报时</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/G_point/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/G_point/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/10/22/skynet_fly_ss/time_point/">整点报时</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>监听同步模块</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/I_watch/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/I_watch/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2024/01/28/skynet_fly_ss/watch_syn/">监听同步模块</a><br><a href="https://huahua132.github.io/2024/01/28/skynet_fly_api/watch_syn/">api</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>日志分割</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/J_logrotate/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/J_logrotate/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/09/10/skynet_fly_ss/logrotate/">日志分割</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>日志服务</title>
+    <link href="/2023/02/25/skynet_fly_word/word_3/K_log/"/>
+    <url>/2023/02/25/skynet_fly_word/word_3/K_log/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/11/19/skynet_fly_ss/logservice/">日志服务</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>强化篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>rpc调用</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/B_RPC/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/B_RPC/</url>
+    
+    <content type="html"><![CDATA[<h1 id="常规的RPC调用"><a href="#常规的RPC调用" class="headerlink" title="常规的RPC调用"></a>常规的RPC调用</h1><p>使用skynet.call,skyent.send。</p><h1 id="rpc调用可热更服务模块"><a href="#rpc调用可热更服务模块" class="headerlink" title="rpc调用可热更服务模块"></a>rpc调用可热更服务模块</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> ret = contriner_client:instance(<span class="hljs-string">&quot;B_m&quot;</span>):mod_call(<span class="hljs-string">&quot;hello&quot;</span>)<br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;send_msg_to_b:&quot;</span>,ret)<br></code></pre></td></tr></table></figure><p>这里的意思是给<strong>B_m</strong> 可热更模块发送<strong>hello</strong>消息命令。</p><p>详细可以查看<a href="https://github.com/huahua132/skynet_fly/tree/master/examples">AB_question示例</a></p><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpc/">详细API介绍</a></h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>前言</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/A_home/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/A_home/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过入门篇，我们学会了框架的基本使用规则。但是我们还不知道如何RPC调用，如何远程RPC调用，热更原理机制是什么。<br>学会这些，可以说是使用该框架的高手的。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>检查热更的使用以及原理</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/D_reload/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/D_reload/</url>
+    
+    <content type="html"><![CDATA[<h1 id="如何执行"><a href="#如何执行" class="headerlink" title="如何执行"></a>如何执行</h1><p><code>sh script/check_reload.sh load_mods.lua</code></p><h1 id="检测规则"><a href="#检测规则" class="headerlink" title="检测规则"></a>检测规则</h1><p>当 <strong>可热更服务模块</strong> require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。</p><h1 id="重试热更"><a href="#重试热更" class="headerlink" title="重试热更"></a>重试热更</h1><p>当 热更后，某个执行热更的服务，<code>start</code>启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。<br><code>sh script/try_again_reload.sh load_mods.lua</code></p><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">实现细节</a></h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>集群远程rpc调用</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/C_RPC/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/C_RPC/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>集群远程RPC调用，是基于skynet的<a href="https://github.com/cloudwu/skynet/wiki/Cluster">集群 cluster mode模式</a>封装了一套简单好用、适用用框架的模式。</p><h1 id="配置启动服务端"><a href="#配置启动服务端" class="headerlink" title="配置启动服务端"></a>配置启动服务端</h1><ol><li>配置load_mods.lua</li></ol><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--共享配置</span><br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br><span class="hljs-comment">--cluster_server用的配置</span><br>cluster_server = &#123;<br>host = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>&#125;,<br>&#125;,<br>&#125;,<br></code></pre></td></tr></table></figure><ol start="2"><li>启动集群服务端<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">skynet.uniqueservice(<span class="hljs-string">&quot;cluster_server&quot;</span>)<br></code></pre></td></tr></table></figure></li></ol><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/07/28/skynet_fly_ss/cluster_rpc/">实现细节</a></h1><h1 id="远程RPC调用"><a href="#远程RPC调用" class="headerlink" title="远程RPC调用"></a>远程RPC调用</h1><p>以 <a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_server">cluster_server</a>为例<br>服务有一个<strong>可热更服务模块</strong> <code>test_m.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><br>contriner_client:register(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> <span class="hljs-built_in">string</span> = <span class="hljs-built_in">string</span><br><br><span class="hljs-keyword">local</span> g_config = <span class="hljs-literal">nil</span><br><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.hello</span><span class="hljs-params">(who)</span></span><br><span class="hljs-built_in">log</span>.info(<span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;%s send hello msg for me&quot;</span>,who))<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.ping</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">local</span> confclient = contriner_client:new(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> conf = confclient:mod_call(<span class="hljs-string">&#x27;query&#x27;</span>,<span class="hljs-string">&#x27;cluster_server&#x27;</span>)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;pong %s %s %s&quot;</span>,g_config.instance_name,conf.host,skynet.<span class="hljs-built_in">self</span>())<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>g_config = <span class="hljs-built_in">config</span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><p>那边其他服务改如何调用到这个服务的<code>hello</code>命令呢</p><p><a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_client">cluster_client</a>首先需要配置连接服务端的地址。</p><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;,<br><br>cluster_client_m = &#123;<br>launch_seq = <span class="hljs-number">2</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br>node_map = &#123;<br>[<span class="hljs-string">&#x27;cluster_server&#x27;</span>] = &#123;<br>[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;127.0.0.1:9689&quot;</span>,<br>&#125;<br>&#125;<br>&#125;<br>&#125;,<br><br>test_m = &#123;<br>launch_seq = <span class="hljs-number">4</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>之后使用<code>cluster_client</code>就可以使用<strong>远程RPC</strong>调用了</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cli = cluster_client:new(<span class="hljs-string">&quot;cluster_server&quot;</span>,<span class="hljs-string">&quot;test_m&quot;</span>) <span class="hljs-comment">--访问cluster_server的test_m模板</span><br><br>cli:one_balance_send(<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-string">&quot;one_balance_send&quot;</span>)         <span class="hljs-comment">--调用hello命令</span><br></code></pre></td></tr></table></figure><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/">详细API介绍</a></h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>快进时间</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/E_fasttime/</url>
+    
+    <content type="html"><![CDATA[<h1 id="如何执行"><a href="#如何执行" class="headerlink" title="如何执行"></a>如何执行</h1><p><code>sh script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1</code></p><p>最后一个<code>1</code>表示1秒1秒的快进。</p><h1 id="快进时间存在的问题"><a href="#快进时间存在的问题" class="headerlink" title="快进时间存在的问题"></a>快进时间存在的问题</h1><p>比如一分钟一分钟的快进。<br>有如下代码</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cnt = <span class="hljs-number">1</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">do</span><br>    skynet.sleep(<span class="hljs-number">100</span>)<br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;hello&quot;</span>, cnt)<br>    cnt = cnt + <span class="hljs-number">1</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><p>正常流逝1小时，cnt能达到3600次。<br>按1秒1秒快进能达到3600次。<br>按60秒秒快进只能达到60次。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
       
     </categories>
     
@@ -1087,6 +1519,33 @@
       <category>skynet_fly 文档</category>
       
       <category>入门篇</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>skynet_fly_word</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>启动时生成的临时文件说明</title>
+    <link href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/"/>
+    <url>/2023/02/25/skynet_fly_word/word_2/F_tmpfile/</url>
+    
+    <content type="html"><![CDATA[<p><img src="/img/skynet_fly_word/word_2/tmpfile.png"></p><h1 id="chinese-chess-config-lua"><a href="#chinese-chess-config-lua" class="headerlink" title="chinese_chess_config.lua"></a>chinese_chess_config.lua</h1><p>介入生成的<strong>script</strong>脚本中有很多命令都需要通过debug_console入口去操作，比如<strong>检测热更</strong>，<strong>快进时间</strong>。所有需要有一个地方拿到启动时的debug_port参数，由于生成的<strong>chinese_chess_config.lua</strong>会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。</p><h1 id="module-info"><a href="#module-info" class="headerlink" title="module_info"></a>module_info</h1><p>用于记录可如果模块文件的修改时间，用于后续检测热更。</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.time_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/time_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1712716696</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.timer&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/timer.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.string_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/string_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.client.contriner_client&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/client/contriner_client.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1712131772</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.log&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/log.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709621604</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.etc.module_info&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/etc/module_info.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;share_config_m&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/module/share_config_m.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.contriner.contriner_interface&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/contriner/contriner_interface.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.skynet_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/skynet_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.write_mod_required&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/write_mod_required.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.table_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/table_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>&#125;<br></code></pre></td></tr></table></figure><p>这是其中一个的内容。</p><h1 id="load-mod-lua-old"><a href="#load-mod-lua-old" class="headerlink" title="load_mod.lua.old"></a>load_mod.lua.old</h1><p>也是记录运行的配置，用于对比检测热更。</p><h1 id="skynet-load-mods-lua-pid"><a href="#skynet-load-mods-lua-pid" class="headerlink" title="skynet.load_mods.lua.pid"></a>skynet.load_mods.lua.pid</h1><p>记录运行时的pid，用于守护进程，防止重复启动。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>skynet_fly 文档</category>
+      
+      <category>基础篇</category>
       
     </categories>
     
@@ -1210,33 +1669,6 @@
   
   
   <entry>
-    <title>文件查找规则</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/I_file/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/I_file/</url>
-    
-    <content type="html"><![CDATA[<h1 id="service"><a href="#service" class="headerlink" title="service"></a>service</h1><p><code>luaservice 约束服务只能放在 server根目录 || server-&gt;service || common-&gt;service || skynet_fly-&gt;service || skynet-&gt;service</code></p><h1 id="cpath"><a href="#cpath" class="headerlink" title="cpath"></a>cpath</h1><p><code>file_util.path_join(skynet_fly_path, &#39;/cservice/?.so;&#39;) .. skynet_path .. &quot;cservice/?.so;&quot;,</code></p><h1 id="lua-cpath"><a href="#lua-cpath" class="headerlink" title="lua_cpath"></a>lua_cpath</h1><p><code>file_util.path_join(skynet_fly_path, &#39;/luaclib/?.so;&#39;) .. skynet_path .. &quot;luaclib/?.so;&quot;</code></p><h1 id="lua-path"><a href="#lua-path" class="headerlink" title="lua_path"></a>lua_path</h1><p><code>--创建 lua文件 查找规则，优先级 server下非service文件夹 &gt; server上上级目录common文件夹非service文件夹 &gt; skynet_fly lualib下所有文件夹 &gt; skynet lualib下所以文件夹</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br><span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br><span class="hljs-keyword">local</span> skynet_path = M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/skynet&#x27;</span>)<br><span class="hljs-keyword">local</span> common_path = <span class="hljs-string">&#x27;../../common/&#x27;</span><br><br><span class="hljs-comment">--server下非service文件夹</span><br><span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(server_path) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--server上上级目录common所有文件夹</span><br>lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(common_path) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet_fly lualib下所有文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span>)<br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib&#x27;</span>)) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet_fly 3rd下所有文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/3rd/?.lua;&#x27;</span>)<br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/3rd&#x27;</span>)) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet lualib下所以文件夹</span><br>lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><p>看到这里，基本上<code>skynet_fly</code>的核心实现已经看了一半了，现在你绝对可以使用<code>skynet_fly</code>编写一些独立工作的服务单元。</p><h1 id="版本更新-2024-03-04"><a href="#版本更新-2024-03-04" class="headerlink" title="版本更新[2024.03.04]"></a>版本更新[2024.03.04]</h1><h2 id="github-tag"><a href="#github-tag" class="headerlink" title="github tag"></a>github <a href="https://github.com/huahua132/skynet_fly/commit/cb8ec734b359b7fbe4c9c683dbe10182ab61f4fb">tag</a></h2><h2 id="修改原因"><a href="#修改原因" class="headerlink" title="修改原因"></a>修改原因</h2><p>由于有使用者发现<code>skynet_fly</code>在wsl上启动服务很慢，差不多一秒启动一个服务，而<code>skynet</code>提供的示例还是非常快的，因为wsl访问window文件，因为需要兼容文件系统，所以比访问linux文件要慢很多。起初我怀疑是因为读取文件导致，因为<code>skynet_fly</code>与<code>skynet</code>文件相关的差异就是关闭了代码缓存(skynet.codecache “OFF”)，每个新启动的服务都需要去完整的读取文件，当我尝试去除这个差异再重启服务时，问题依旧没有改善。后面怀疑到<code>lua_path</code>上面，因为按照之前我对<code>lua-path</code>的处理，查找路径可能有几十个，路径多加上路径下的文件多，而<code>require</code>的加载过程会从头到尾，逐个路径查找，直到找到为止，由于我把<code>skynet</code>的库优先级排在最低，所以查找过程几乎都跑完了<code>o(n)</code>的时间复杂度。之后我参数把冗余的<code>3rd</code>中的路径去除一些，再次启动服务，发现速度快不少，从而确定问题。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在实际开发服务中，一般需要<code>require</code>加载<strong>本服库</strong>，<strong>公共库</strong>，<strong>skynet_fly库</strong>，<strong>skynet库</strong>。我们只需要把这4个库的根目录写入lua_path,<code>require</code>文件依赖是使用<br>本服库.aaa.bbb.ccc的风格引入即可，这样做，不行加载速度快，也更好查找文件的来源。</p><p>修改后的luapath 优先级是这样的</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br><span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br><span class="hljs-keyword">local</span> skynet_path = M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/skynet&#x27;</span>)<br><span class="hljs-keyword">local</span> common_path = <span class="hljs-string">&#x27;../../commonlualib/&#x27;</span><br><br><span class="hljs-comment">--server文件夹</span><br><span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><br><span class="hljs-comment">--server 下 ./module文件夹</span><br>lua_path = lua_path .. server_path .. <span class="hljs-string">&#x27;module/?.lua;&#x27;</span><br><br><span class="hljs-comment">--server上上级目录commonlualib文件夹</span><br>lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><br><span class="hljs-comment">--server上上级目录commonlualib/module文件夹</span><br>lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;/module/?.lua;&#x27;</span><br><br><span class="hljs-comment">--skynet_fly lualib文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span>)<br><br><span class="hljs-comment">--skyent_fly module文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/module/?.lua;&#x27;</span>)<br><br><span class="hljs-comment">--skynet lualib文件夹</span><br>lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span><br><br><span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><h2 id="风格"><a href="#风格" class="headerlink" title="风格"></a>风格</h2><ul><li><p><strong>本服库</strong><br><code>require(&quot;enum.code&quot;)</code></p></li><li><p><strong>公共库</strong><br>根节点下面创建一个common目录<br><code>require(&quot;common.enum.code&quot;)</code></p></li><li><p><strong>skynet_fly库</strong><br><code>require(&quot;skynet-fly.enum.code&quot;)</code></p></li><li><p><strong>skynet库</strong><br><code>require(&quot;skynet.enum.code&quot;)</code><br>由于改成这种风格需要调整到skynet源码，暂时不改动，目前仅把skynet.lualib加上lua_path中，所有加载<code>skynet</code>与加载本地库的风格是一致的。</p></li></ul><h2 id="server文件夹是指？"><a href="#server文件夹是指？" class="headerlink" title="server文件夹是指？"></a>server文件夹是指？</h2><p>是指我们启动服务的根目录。<br>比如我们启动示例中的 webapp，就需要cd到webapp的根目录然后启动。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>入门篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>项目文件夹介绍</title>
     <link href="/2023/02/25/skynet_fly_word/word_1/G_dir/"/>
     <url>/2023/02/25/skynet_fly_word/word_1/G_dir/</url>
@@ -1291,33 +1723,6 @@
   
   
   <entry>
-    <title>规范建议</title>
-    <link href="/2023/02/25/skynet_fly_word/word_1/H_standard/"/>
-    <url>/2023/02/25/skynet_fly_word/word_1/H_standard/</url>
-    
-    <content type="html"><![CDATA[<h1 id="启动配置文件"><a href="#启动配置文件" class="headerlink" title="启动配置文件"></a>启动配置文件</h1><p><code>load_mods_xxx.lua</code></p><h1 id="可热更模块"><a href="#可热更模块" class="headerlink" title="可热更模块"></a>可热更模块</h1><p>都存放在 <strong>module</strong>命名的文件夹下，以<code>xxx_m.lua</code>命名。<br>编写规范以CMD命令。</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><h1 id="普通skynet服务"><a href="#普通skynet服务" class="headerlink" title="普通skynet服务"></a>普通skynet服务</h1><p>都存放在 <strong>service</strong>命名的文件夹下，命令随意，因为service的查找规则，只会在service文件夹下查找，文件名重复有可能，但是手动查找范围小。</p><h1 id="普通lua模块"><a href="#普通lua模块" class="headerlink" title="普通lua模块"></a>普通lua模块</h1><p>建议规范</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>入门篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>如何更改skynet服务的配置项</title>
     <link href="/2023/02/25/skynet_fly_word/word_1/m_scfg/"/>
     <url>/2023/02/25/skynet_fly_word/word_1/m_scfg/</url>
@@ -1345,18 +1750,18 @@
   
   
   <entry>
-    <title>前言</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/A_home/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/A_home/</url>
+    <title>规范建议</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/H_standard/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/H_standard/</url>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这一篇，主要介绍<code>skyent_fly</code>提供的增强功能。</p><p><img src="/img/skynet_fly_word/word_3/dog.png"></p><p>我想应该有很多读者一股脑把文档看了个遍，之后发现学费了。<br>正常的。技术能力提升并不能一蹴而就，需要经过大量的实践思考学习，慢慢累计起来方能有所成。</p><p><img src="/img/skynet_fly_word/word_3/f.png"><br>加油！</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="启动配置文件"><a href="#启动配置文件" class="headerlink" title="启动配置文件"></a>启动配置文件</h1><p><code>load_mods_xxx.lua</code></p><h1 id="可热更模块"><a href="#可热更模块" class="headerlink" title="可热更模块"></a>可热更模块</h1><p>都存放在 <strong>module</strong>命名的文件夹下，以<code>xxx_m.lua</code>命名。<br>编写规范以CMD命令。</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><h1 id="普通skynet服务"><a href="#普通skynet服务" class="headerlink" title="普通skynet服务"></a>普通skynet服务</h1><p>都存放在 <strong>service</strong>命名的文件夹下，命令随意，因为service的查找规则，只会在service文件夹下查找，文件名重复有可能，但是手动查找范围小。</p><h1 id="普通lua模块"><a href="#普通lua模块" class="headerlink" title="普通lua模块"></a>普通lua模块</h1><p>建议规范</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
       
       <category>skynet_fly 文档</category>
       
-      <category>强化篇</category>
+      <category>入门篇</category>
       
     </categories>
     
@@ -1372,423 +1777,18 @@
   
   
   <entry>
-    <title>可热更匹配房间类游戏架构基础设施</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/B_game/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/B_game/</url>
+    <title>文件查找规则</title>
+    <link href="/2023/02/25/skynet_fly_word/word_1/I_file/"/>
+    <url>/2023/02/25/skynet_fly_word/word_1/I_file/</url>
     
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/07/22/skynet_fly_ss/room_game/">可热更匹配房间类游戏架构基础设施</a><br><a href="https://huahua132.github.io/2023/10/15/skynet_fly_ss/room_game_up/">后续优化</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>gate,wsgate通用协议的设计</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/C_proto/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/C_proto/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/12/10/skynet_fly_ss/pack/">gate,wsgate通用协议的设计</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="service"><a href="#service" class="headerlink" title="service"></a>service</h1><p><code>luaservice 约束服务只能放在 server根目录 || server-&gt;service || common-&gt;service || skynet_fly-&gt;service || skynet-&gt;service</code></p><h1 id="cpath"><a href="#cpath" class="headerlink" title="cpath"></a>cpath</h1><p><code>file_util.path_join(skynet_fly_path, &#39;/cservice/?.so;&#39;) .. skynet_path .. &quot;cservice/?.so;&quot;,</code></p><h1 id="lua-cpath"><a href="#lua-cpath" class="headerlink" title="lua_cpath"></a>lua_cpath</h1><p><code>file_util.path_join(skynet_fly_path, &#39;/luaclib/?.so;&#39;) .. skynet_path .. &quot;luaclib/?.so;&quot;</code></p><h1 id="lua-path"><a href="#lua-path" class="headerlink" title="lua_path"></a>lua_path</h1><p><code>--创建 lua文件 查找规则，优先级 server下非service文件夹 &gt; server上上级目录common文件夹非service文件夹 &gt; skynet_fly lualib下所有文件夹 &gt; skynet lualib下所以文件夹</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br><span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br><span class="hljs-keyword">local</span> skynet_path = M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/skynet&#x27;</span>)<br><span class="hljs-keyword">local</span> common_path = <span class="hljs-string">&#x27;../../common/&#x27;</span><br><br><span class="hljs-comment">--server下非service文件夹</span><br><span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(server_path) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--server上上级目录common所有文件夹</span><br>lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(common_path) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">and</span> file_name ~= <span class="hljs-string">&#x27;service&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet_fly lualib下所有文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span>)<br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib&#x27;</span>)) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet_fly 3rd下所有文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/3rd/?.lua;&#x27;</span>)<br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/3rd&#x27;</span>)) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--skynet lualib下所以文件夹</span><br>lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span><br><span class="hljs-keyword">for</span> file_name,file_path,file_info <span class="hljs-keyword">in</span> M.diripairs(skynet_path .. <span class="hljs-string">&#x27;/lualib&#x27;</span>) <span class="hljs-keyword">do</span><br><span class="hljs-keyword">if</span> file_info.mode == <span class="hljs-string">&#x27;directory&#x27;</span> <span class="hljs-keyword">then</span><br>lua_path = lua_path .. file_path .. <span class="hljs-string">&#x27;/?.lua;&#x27;</span><br><span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><p>看到这里，基本上<code>skynet_fly</code>的核心实现已经看了一半了，现在你绝对可以使用<code>skynet_fly</code>编写一些独立工作的服务单元。</p><h1 id="版本更新-2024-03-04"><a href="#版本更新-2024-03-04" class="headerlink" title="版本更新[2024.03.04]"></a>版本更新[2024.03.04]</h1><h2 id="github-tag"><a href="#github-tag" class="headerlink" title="github tag"></a>github <a href="https://github.com/huahua132/skynet_fly/commit/cb8ec734b359b7fbe4c9c683dbe10182ab61f4fb">tag</a></h2><h2 id="修改原因"><a href="#修改原因" class="headerlink" title="修改原因"></a>修改原因</h2><p>由于有使用者发现<code>skynet_fly</code>在wsl上启动服务很慢，差不多一秒启动一个服务，而<code>skynet</code>提供的示例还是非常快的，因为wsl访问window文件，因为需要兼容文件系统，所以比访问linux文件要慢很多。起初我怀疑是因为读取文件导致，因为<code>skynet_fly</code>与<code>skynet</code>文件相关的差异就是关闭了代码缓存(skynet.codecache “OFF”)，每个新启动的服务都需要去完整的读取文件，当我尝试去除这个差异再重启服务时，问题依旧没有改善。后面怀疑到<code>lua_path</code>上面，因为按照之前我对<code>lua-path</code>的处理，查找路径可能有几十个，路径多加上路径下的文件多，而<code>require</code>的加载过程会从头到尾，逐个路径查找，直到找到为止，由于我把<code>skynet</code>的库优先级排在最低，所以查找过程几乎都跑完了<code>o(n)</code>的时间复杂度。之后我参数把冗余的<code>3rd</code>中的路径去除一些，再次启动服务，发现速度快不少，从而确定问题。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在实际开发服务中，一般需要<code>require</code>加载<strong>本服库</strong>，<strong>公共库</strong>，<strong>skynet_fly库</strong>，<strong>skynet库</strong>。我们只需要把这4个库的根目录写入lua_path,<code>require</code>文件依赖是使用<br>本服库.aaa.bbb.ccc的风格引入即可，这样做，不行加载速度快，也更好查找文件的来源。</p><p>修改后的luapath 优先级是这样的</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_luapath</span><span class="hljs-params">(skynet_fly_path)</span></span><br><span class="hljs-keyword">local</span> server_path = <span class="hljs-string">&#x27;./&#x27;</span><br><span class="hljs-keyword">local</span> skynet_path = M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/skynet&#x27;</span>)<br><span class="hljs-keyword">local</span> common_path = <span class="hljs-string">&#x27;../../commonlualib/&#x27;</span><br><br><span class="hljs-comment">--server文件夹</span><br><span class="hljs-keyword">local</span> lua_path = server_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><br><span class="hljs-comment">--server 下 ./module文件夹</span><br>lua_path = lua_path .. server_path .. <span class="hljs-string">&#x27;module/?.lua;&#x27;</span><br><br><span class="hljs-comment">--server上上级目录commonlualib文件夹</span><br>lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;?.lua;&#x27;</span><br><br><span class="hljs-comment">--server上上级目录commonlualib/module文件夹</span><br>lua_path = lua_path .. common_path .. <span class="hljs-string">&#x27;/module/?.lua;&#x27;</span><br><br><span class="hljs-comment">--skynet_fly lualib文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span>)<br><br><span class="hljs-comment">--skyent_fly module文件夹</span><br>lua_path = lua_path .. M.path_join(skynet_fly_path, <span class="hljs-string">&#x27;/module/?.lua;&#x27;</span>)<br><br><span class="hljs-comment">--skynet lualib文件夹</span><br>lua_path = lua_path .. skynet_path .. <span class="hljs-string">&#x27;/lualib/?.lua;&#x27;</span><br><br><span class="hljs-keyword">return</span> lua_path<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><h2 id="风格"><a href="#风格" class="headerlink" title="风格"></a>风格</h2><ul><li><p><strong>本服库</strong><br><code>require(&quot;enum.code&quot;)</code></p></li><li><p><strong>公共库</strong><br>根节点下面创建一个common目录<br><code>require(&quot;common.enum.code&quot;)</code></p></li><li><p><strong>skynet_fly库</strong><br><code>require(&quot;skynet-fly.enum.code&quot;)</code></p></li><li><p><strong>skynet库</strong><br><code>require(&quot;skynet.enum.code&quot;)</code><br>由于改成这种风格需要调整到skynet源码，暂时不改动，目前仅把skynet.lualib加上lua_path中，所有加载<code>skynet</code>与加载本地库的风格是一致的。</p></li></ul><h2 id="server文件夹是指？"><a href="#server文件夹是指？" class="headerlink" title="server文件夹是指？"></a>server文件夹是指？</h2><p>是指我们启动服务的根目录。<br>比如我们启动示例中的 webapp，就需要cd到webapp的根目录然后启动。</p>]]></content>
     
     
     <categories>
       
       <category>skynet_fly 文档</category>
       
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>定时器的封装</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/D_timer/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/D_timer/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/07/02/skynet_fly_ss/timer/">定时器的封装</a><br><a href="https://huahua132.github.io/2024/01/21/skynet_fly_api/timer/">使用API</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>整点报时</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/G_point/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/G_point/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/10/22/skynet_fly_ss/time_point/">整点报时</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>可热更模块的启动配置项</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/E_module/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/E_module/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2024/01/14/skynet_fly_api/mods/">可热更模块的启动配置项</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>orm数据库关系映射</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/H_orm/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/H_orm/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/12/24/skynet_fly_ss/orm/">orm数据库关系映射</a><br><a href="https://huahua132.github.io/2024/01/28/skynet_fly_api/orm/">api</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>redis的封装</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/F_redis/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/F_redis/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/07/08/skynet_fly_ss/redis/">redis的封装</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>日志分割</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/J_logrotate/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/J_logrotate/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/09/10/skynet_fly_ss/logrotate/">日志分割</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>监听同步模块</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/I_watch/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/I_watch/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2024/01/28/skynet_fly_ss/watch_syn/">监听同步模块</a><br><a href="https://huahua132.github.io/2024/01/28/skynet_fly_api/watch_syn/">api</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>日志服务</title>
-    <link href="/2023/02/25/skynet_fly_word/word_3/K_log/"/>
-    <url>/2023/02/25/skynet_fly_word/word_3/K_log/</url>
-    
-    <content type="html"><![CDATA[<p><a href="https://huahua132.github.io/2023/11/19/skynet_fly_ss/logservice/">日志服务</a></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>强化篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>集群远程rpc调用</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/C_RPC/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/C_RPC/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>集群远程RPC调用，是基于skynet的<a href="https://github.com/cloudwu/skynet/wiki/Cluster">集群 cluster mode模式</a>封装了一套简单好用、适用用框架的模式。</p><h1 id="配置启动服务端"><a href="#配置启动服务端" class="headerlink" title="配置启动服务端"></a>配置启动服务端</h1><ol><li>配置load_mods.lua</li></ol><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--共享配置</span><br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br><span class="hljs-comment">--cluster_server用的配置</span><br>cluster_server = &#123;<br>host = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>&#125;,<br>&#125;,<br>&#125;,<br></code></pre></td></tr></table></figure><ol start="2"><li>启动集群服务端<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lua">skynet.uniqueservice(<span class="hljs-string">&quot;cluster_server&quot;</span>)<br></code></pre></td></tr></table></figure></li></ol><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/07/28/skynet_fly_ss/cluster_rpc/">实现细节</a></h1><h1 id="远程RPC调用"><a href="#远程RPC调用" class="headerlink" title="远程RPC调用"></a>远程RPC调用</h1><p>以 <a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_server">cluster_server</a>为例<br>服务有一个<strong>可热更服务模块</strong> <code>test_m.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><br>contriner_client:register(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> <span class="hljs-built_in">string</span> = <span class="hljs-built_in">string</span><br><br><span class="hljs-keyword">local</span> g_config = <span class="hljs-literal">nil</span><br><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.hello</span><span class="hljs-params">(who)</span></span><br><span class="hljs-built_in">log</span>.info(<span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;%s send hello msg for me&quot;</span>,who))<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.ping</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">local</span> confclient = contriner_client:new(<span class="hljs-string">&quot;share_config_m&quot;</span>)<br><span class="hljs-keyword">local</span> conf = confclient:mod_call(<span class="hljs-string">&#x27;query&#x27;</span>,<span class="hljs-string">&#x27;cluster_server&#x27;</span>)<br><span class="hljs-keyword">return</span> <span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;pong %s %s %s&quot;</span>,g_config.instance_name,conf.host,skynet.<span class="hljs-built_in">self</span>())<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">(config)</span></span><br>g_config = <span class="hljs-built_in">config</span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure><p>那边其他服务改如何调用到这个服务的<code>hello</code>命令呢</p><p><a href="https://github.com/huahua132/skynet_fly/tree/master/examples/cluster_client">cluster_client</a>首先需要配置连接服务端的地址。</p><p><code>load_mods.lua</code></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>share_config_m = &#123;<br>launch_seq = <span class="hljs-number">1</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;,<br><br>cluster_client_m = &#123;<br>launch_seq = <span class="hljs-number">2</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>default_arg = &#123;<br>node_map = &#123;<br>[<span class="hljs-string">&#x27;cluster_server&#x27;</span>] = &#123;<br>[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;127.0.0.1:9688&quot;</span>,<br>[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;127.0.0.1:9689&quot;</span>,<br>&#125;<br>&#125;<br>&#125;<br>&#125;,<br><br>test_m = &#123;<br>launch_seq = <span class="hljs-number">4</span>,<br>launch_num = <span class="hljs-number">1</span>,<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>之后使用<code>cluster_client</code>就可以使用<strong>远程RPC</strong>调用了</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cli = cluster_client:new(<span class="hljs-string">&quot;cluster_server&quot;</span>,<span class="hljs-string">&quot;test_m&quot;</span>) <span class="hljs-comment">--访问cluster_server的test_m模板</span><br><br>cli:one_balance_send(<span class="hljs-string">&quot;hello&quot;</span>,<span class="hljs-string">&quot;one_balance_send&quot;</span>)         <span class="hljs-comment">--调用hello命令</span><br></code></pre></td></tr></table></figure><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/">详细API介绍</a></h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>rpc调用</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/B_RPC/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/B_RPC/</url>
-    
-    <content type="html"><![CDATA[<h1 id="常规的RPC调用"><a href="#常规的RPC调用" class="headerlink" title="常规的RPC调用"></a>常规的RPC调用</h1><p>使用skynet.call,skyent.send。</p><h1 id="rpc调用可热更服务模块"><a href="#rpc调用可热更服务模块" class="headerlink" title="rpc调用可热更服务模块"></a>rpc调用可热更服务模块</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> ret = contriner_client:instance(<span class="hljs-string">&quot;B_m&quot;</span>):mod_call(<span class="hljs-string">&quot;hello&quot;</span>)<br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;send_msg_to_b:&quot;</span>,ret)<br></code></pre></td></tr></table></figure><p>这里的意思是给<strong>B_m</strong> 可热更模块发送<strong>hello</strong>消息命令。</p><p>详细可以查看<a href="https://github.com/huahua132/skynet_fly/tree/master/examples">AB_question示例</a></p><h1 id="详细API介绍"><a href="#详细API介绍" class="headerlink" title="详细API介绍"></a><a href="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpc/">详细API介绍</a></h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>前言</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/A_home/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/A_home/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过入门篇，我们学会了框架的基本使用规则。但是我们还不知道如何RPC调用，如何远程RPC调用，热更原理机制是什么。<br>学会这些，可以说是使用该框架的高手的。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>快进时间</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/E_fasttime/</url>
-    
-    <content type="html"><![CDATA[<h1 id="如何执行"><a href="#如何执行" class="headerlink" title="如何执行"></a>如何执行</h1><p><code>sh script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1</code></p><p>最后一个<code>1</code>表示1秒1秒的快进。</p><h1 id="快进时间存在的问题"><a href="#快进时间存在的问题" class="headerlink" title="快进时间存在的问题"></a>快进时间存在的问题</h1><p>比如一分钟一分钟的快进。<br>有如下代码</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cnt = <span class="hljs-number">1</span><br><span class="hljs-keyword">while</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">do</span><br>    skynet.sleep(<span class="hljs-number">100</span>)<br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;hello&quot;</span>, cnt)<br>    cnt = cnt + <span class="hljs-number">1</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure><p>正常流逝1小时，cnt能达到3600次。<br>按1秒1秒快进能达到3600次。<br>按60秒秒快进只能达到60次。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>检查热更的使用以及原理</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/D_reload/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/D_reload/</url>
-    
-    <content type="html"><![CDATA[<h1 id="如何执行"><a href="#如何执行" class="headerlink" title="如何执行"></a>如何执行</h1><p><code>sh script/check_reload.sh load_mods.lua</code></p><h1 id="检测规则"><a href="#检测规则" class="headerlink" title="检测规则"></a>检测规则</h1><p>当 <strong>可热更服务模块</strong> require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。</p><h1 id="重试热更"><a href="#重试热更" class="headerlink" title="重试热更"></a>重试热更</h1><p>当 热更后，某个执行热更的服务，<code>start</code>启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。<br><code>sh script/try_again_reload.sh load_mods.lua</code></p><h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">实现细节</a></h1>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>skynet_fly_word</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>启动时生成的临时文件说明</title>
-    <link href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/"/>
-    <url>/2023/02/25/skynet_fly_word/word_2/F_tmpfile/</url>
-    
-    <content type="html"><![CDATA[<p><img src="/img/skynet_fly_word/word_2/tmpfile.png"></p><h1 id="chinese-chess-config-lua"><a href="#chinese-chess-config-lua" class="headerlink" title="chinese_chess_config.lua"></a>chinese_chess_config.lua</h1><p>介入生成的<strong>script</strong>脚本中有很多命令都需要通过debug_console入口去操作，比如<strong>检测热更</strong>，<strong>快进时间</strong>。所有需要有一个地方拿到启动时的debug_port参数，由于生成的<strong>chinese_chess_config.lua</strong>会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。</p><h1 id="module-info"><a href="#module-info" class="headerlink" title="module_info"></a>module_info</h1><p>用于记录可如果模块文件的修改时间，用于后续检测热更。</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.time_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/time_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1712716696</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.timer&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/timer.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.string_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/string_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.client.contriner_client&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/client/contriner_client.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1712131772</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.log&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/log.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709621604</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.etc.module_info&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/etc/module_info.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;share_config_m&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/module/share_config_m.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.contriner.contriner_interface&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/contriner/contriner_interface.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.skynet_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/skynet_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.write_mod_required&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/write_mod_required.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.table_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/table_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>&#125;<br></code></pre></td></tr></table></figure><p>这是其中一个的内容。</p><h1 id="load-mod-lua-old"><a href="#load-mod-lua-old" class="headerlink" title="load_mod.lua.old"></a>load_mod.lua.old</h1><p>也是记录运行的配置，用于对比检测热更。</p><h1 id="skynet-load-mods-lua-pid"><a href="#skynet-load-mods-lua-pid" class="headerlink" title="skynet.load_mods.lua.pid"></a>skynet.load_mods.lua.pid</h1><p>记录运行时的pid，用于守护进程，防止重复启动。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>skynet_fly 文档</category>
-      
-      <category>基础篇</category>
+      <category>入门篇</category>
       
     </categories>
     
