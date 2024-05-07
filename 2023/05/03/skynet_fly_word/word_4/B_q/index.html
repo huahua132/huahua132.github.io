@@ -24,7 +24,7 @@
 <meta property="og:description" content="简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的注册接口 s2s loginserver 调用 centerserver 注册 s2s centerserver 调用 hallserver 注册 s2c loginserver 返回注册结果  流程1涉及skynet_fly技术* http server  * cluster rp">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-03T10:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-07T03:11:24.350Z">
+<meta property="article:modified_time" content="2024-05-07T07:08:56.169Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -472,19 +472,19 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">检查热更的使用以及原理</span>
+          <span class="category-post">快进时间</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">快进时间</span>
+          <span class="category-post">检查热更的使用以及原理</span>
         </a>
       
     
@@ -768,7 +768,7 @@
 <ol>
 <li><p>选择大厅服</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 获取自增ID所属的模块ID</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.get_module_id</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> cli = cluster_client:instance(<span class="hljs-string">&quot;hallserver&quot;</span>, <span class="hljs-string">&quot;player_m&quot;</span>)<br>    <span class="hljs-keyword">local</span> ret = cli:one_balance_call(<span class="hljs-string">&quot;get_module_id&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">local</span> cluster_name = ret.cluster_name<br>    <span class="hljs-keyword">local</span> result = ret.result<br>    <span class="hljs-keyword">local</span> module_id = result[<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">local</span> svr_id = <span class="hljs-built_in">tonumber</span>(string_util.split(cluster_name, <span class="hljs-string">&#x27;:&#x27;</span>)[<span class="hljs-number">2</span>])<br>    <span class="hljs-keyword">return</span> module_id, svr_id<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-<p> 目前我才用的简单轮询负载均衡，这里也可以定制做其他负载均衡的策略。<br> <code>rpc_hallserver_player_m.get_module_id</code> 调用实现才用了banlance简单负载均衡的方式，假如开启了hallserver1,hallserver2,调用此接口4次返回的svr_id将会是1，2，1，2。<br> module_id是对应hallserver绑定的自增模块ID,分配玩家ID，为了避免ID重复我们需要一个自增ID分配器，使用orm来做就是一个非常不错的选择。自增ID的orm可以配置为永久缓存，自增的时候不需要访问到数据库，非常便捷，快速。</p>
+<p> 目前我才用的简单轮询负载均衡，这里也可以定制做其他负载均衡的策略。<br> <code>rpc_hallserver_player_m.get_module_id</code> 调用实现采用了banlance简单负载均衡的方式，假如开启了hallserver1,hallserver2,调用此接口4次返回的svr_id将会是1，2，1，2。<br> module_id是对应hallserver绑定的自增模块ID,分配玩家ID，为了避免ID重复我们需要一个自增ID分配器，使用orm来做就是一个非常不错的选择。自增ID的orm可以配置为永久缓存，自增的时候不需要访问到数据库，非常便捷，快速。</p>
 </li>
 <li><p>分配玩家ID</p>
 <p> 由于架构的设计玩家ID会跟指定的大厅服绑定，我们可以让玩家ID携带一些额外信息，比如大厅服的ID，这样其他服想拿取玩家的数据时，通过玩家ID就能知道访问哪个服务器。</p>
