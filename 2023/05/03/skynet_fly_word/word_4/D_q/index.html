@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t">
+    <meta name="description" content="简介通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通过不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。 skynet_fly_demo是如何做的？一个突独立的功能模块无法是需要处理5种事件  客户端消息 服务器之间的消息 模块之间的接口调用 用户的登录，登出事情 自己注册的定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用户是如何登录的？">
-<meta property="og:url" content="https://huahua132.github.io/2023/04/27/skynet_fly_word/word_4/C_q/index.html">
+<meta property="og:title" content="大厅服如何对模块功能进行拆分隔离？">
+<meta property="og:url" content="https://huahua132.github.io/2023/05/03/skynet_fly_word/word_4/D_q/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t">
+<meta property="og:description" content="简介通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通过不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。 skynet_fly_demo是如何做的？一个突独立的功能模块无法是需要处理5种事件  客户端消息 服务器之间的消息 模块之间的接口调用 用户的登录，登出事情 自己注册的定">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-27T10:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-06T10:15:55.088Z">
+<meta property="article:published_time" content="2023-05-03T10:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-07T03:11:25.617Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>用户是如何登录的？ - huahua132 blog</title>
+  <title>大厅服如何对模块功能进行拆分隔离？ - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="用户是如何登录的？"></span>
+            <span id="subtitle" data-typed-text="大厅服如何对模块功能进行拆分隔离？"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-27 18:00" pubdate>
-          2023年4月27日 晚上
+        <time datetime="2023-05-03 18:00" pubdate>
+          2023年5月3日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          4.6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          21 分钟
+          39 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(32)</span>
+        <span class="list-group-count">(33)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -513,7 +513,7 @@
         aria-expanded="true"
       >
         实战篇
-        <span class="list-group-count">(5)</span>
+        <span class="list-group-count">(6)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -527,7 +527,7 @@
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/A_home/" title="前言"
+        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" title="前言"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">前言</span>
@@ -536,7 +536,7 @@
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">用户是如何注册的？</span>
@@ -545,28 +545,37 @@
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">用户是如何登录的？</span>
         </a>
       
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">大厅服如何对模块功能进行拆分隔离？</span>
         </a>
       
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">用户是如何匹配进入到游戏的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" title="如何在skynet_fly_demo新增一个游戏？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何在skynet_fly_demo新增一个游戏？</span>
         </a>
       
     
@@ -720,54 +729,36 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">用户是如何登录的？</h1>
+            <h1 style="display: none">大厅服如何对模块功能进行拆分隔离？</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>skynet_fly_demo在账号上采用了传统的账号密码方式。</p>
-<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ol>
-<li>c2s 用户调用loginserver的登录接口</li>
-<li>s2s loginserver 调用 centerserver 验证账号，密码</li>
-<li>s2s loginserver 调用 hallserver 生成token</li>
-<li>s2c loginserver 返回登录结果和token</li>
-<li>c2s 连接大厅服，发送登录请求，hallserver验证token</li>
-<li>s2c hallserver 回复登录结果</li>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通过不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。</p>
+<h1 id="skynet-fly-demo是如何做的？"><a href="#skynet-fly-demo是如何做的？" class="headerlink" title="skynet_fly_demo是如何做的？"></a>skynet_fly_demo是如何做的？</h1><p>一个突独立的功能模块无法是需要处理<strong>5种事件</strong></p>
+<ol>
+<li>客户端消息</li>
+<li>服务器之间的消息</li>
+<li>模块之间的接口调用</li>
+<li>用户的登录，登出事情</li>
+<li>自己注册的定时器任务</li>
 </ol>
-<h2 id="流程1"><a href="#流程1" class="headerlink" title="流程1"></a>流程1</h2><h3 id="涉及skynet-fly技术"><a href="#涉及skynet-fly技术" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* http server 
-* cluster rpc
-</code></pre>
-<h3 id="涉及服务"><a href="#涉及服务" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* loginserver
-* centerserver
-</code></pre>
-<p>客户端通过http方式调用<code>user/login</code>接口进行注册,客户端传递账号，密码,之后loginserver rpc 调用centerserver 进行登录验证。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--登录</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">login</span><span class="hljs-params">(c)</span></span><br>    <span class="hljs-keyword">local</span> req = c.req<br>    <span class="hljs-keyword">local</span> body = req.body<br>    <span class="hljs-keyword">local</span> account = body.account<br>    <span class="hljs-keyword">local</span> password = body.password<br>    <span class="hljs-built_in">assert</span>(account, <span class="hljs-string">&quot;not account&quot;</span>)<br>    <span class="hljs-built_in">assert</span>(password, <span class="hljs-string">&quot;not passwword&quot;</span>)<br><br>    <span class="hljs-keyword">local</span> isok, errcode, errmsg = rpc_center_account.auth(account, password)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> isok <span class="hljs-keyword">then</span><br>        rsp_body.set_rsp(c, <span class="hljs-literal">nil</span>, errcode, errmsg)<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">local</span> player_id, hall_server_id = errcode, errmsg<br>        <span class="hljs-keyword">local</span> host = rpc_hall_player.get_host(player_id)<br>        <span class="hljs-built_in">assert</span>(host, <span class="hljs-string">&quot;can`t get host&quot;</span>)<br>        <span class="hljs-keyword">local</span> token = rpc_hall_player.create_token(player_id, ENUM.LOGIN_TOKEN_TIME_OUT)<br>        <span class="hljs-built_in">assert</span>(<span class="hljs-built_in">type</span>(token) == <span class="hljs-string">&quot;string&quot;</span>, <span class="hljs-string">&quot;create token err &quot;</span>)<br>        rsp_body.set_rsp(c, &#123;<br>            token = token,<br>            host = host,<br>            player_id = player_id,<br>        &#125;)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p>关于第五条，非常简单，只是使用定时器即可</p>
+<p>1，2，4 通过抽象出通用的hall_plug就可以做到。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><code class="hljs lua"><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.log&quot;</span><br><span class="hljs-keyword">local</span> ws_pbnet_util = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.utils.net.ws_pbnet_util&quot;</span><br><span class="hljs-keyword">local</span> pb_netpack = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.netpack.pb_netpack&quot;</span><br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.timer&quot;</span><br><span class="hljs-keyword">local</span> errors_msg = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;gamecommon.msg.errors_msg&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> g_modules_list = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hall.hall&quot;</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">assert</span> = <span class="hljs-built_in">assert</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">ipairs</span> = <span class="hljs-built_in">ipairs</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">pairs</span> = <span class="hljs-built_in">pairs</span><br><br><span class="hljs-keyword">local</span> g_interface_mgr = <span class="hljs-literal">nil</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">--指定解包函数</span><br>M.<span class="hljs-built_in">unpack</span> = ws_pbnet_util.<span class="hljs-built_in">unpack</span><br>M.send = ws_pbnet_util.send<br>M.broadcast = ws_pbnet_util.broadcast<br>M.disconn_time_out = timer.minute                   <span class="hljs-comment">--掉线一分钟就清理</span><br><br><span class="hljs-comment">--初始化</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.init</span><span class="hljs-params">(interface_mgr)</span></span><br>	<span class="hljs-comment">--加载协议</span><br>	pb_netpack.<span class="hljs-built_in">load</span>(<span class="hljs-string">&#x27;../../commonlualib/gamecommon/proto&#x27;</span>)<br>	pb_netpack.<span class="hljs-built_in">load</span>(<span class="hljs-string">&#x27;./proto&#x27;</span>)<br>	g_interface_mgr = interface_mgr<br>	errors_msg = errors_msg:new(interface_mgr)<br><br>	<span class="hljs-comment">--注册handle</span><br>	<span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">local</span> handle = m.handle<br>		<span class="hljs-keyword">for</span> packname,func <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(handle) <span class="hljs-keyword">do</span><br>			g_interface_mgr:handle(packname, func)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-comment">--初始化</span><br>	<span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>		m.init(interface_mgr)<br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">on_login</span><span class="hljs-params">(player_id)</span></span><br>	<span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> m.on_login <span class="hljs-keyword">then</span><br>			m.on_login(player_id)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--连接成功</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.connect</span><span class="hljs-params">(player_id)</span></span><br>	skynet.fork(on_login, player_id)<br>	<span class="hljs-keyword">return</span> &#123;<br>		isreconnect = <span class="hljs-number">0</span>,<br>	&#125;<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--掉线</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.disconnect</span><span class="hljs-params">(player_id)</span></span><br>	<span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> m.on_disconnect <span class="hljs-keyword">then</span><br>			m.on_disconnect(player_id)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">on_reconnect</span><span class="hljs-params">(player_id)</span></span><br>	<span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> m.on_reconnect <span class="hljs-keyword">then</span><br>			m.on_reconnect(player_id)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--重连</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.reconnect</span><span class="hljs-params">(player_id)</span></span><br>	skynet.fork(on_reconnect, player_id)<br>	<span class="hljs-keyword">return</span> &#123;<br>		isreconnect = <span class="hljs-number">1</span>,<br>	&#125;<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--登出</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.goout</span><span class="hljs-params">(player_id)</span></span><br>	<span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>		<span class="hljs-keyword">if</span> m.on_loginout <span class="hljs-keyword">then</span><br>			m.on_loginout(player_id)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br>M.register_cmd = &#123;&#125;<br><br><span class="hljs-comment">--设置CMD命令</span><br><span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>	<span class="hljs-keyword">local</span> register_cmd = m.register_cmd<br>	<span class="hljs-keyword">for</span> cmdname,func <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(register_cmd) <span class="hljs-keyword">do</span><br>		<span class="hljs-built_in">assert</span>(<span class="hljs-keyword">not</span> M.register_cmd[cmdname], <span class="hljs-string">&quot;exists cmdname: &quot;</span> .. cmdname)<br>		M.register_cmd[cmdname] = func<br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">-- 客户端消息处理结束</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.handle_end</span><span class="hljs-params">(player_id, packname, pack_body, ret, errcode, errmsg)</span></span><br>	<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret <span class="hljs-keyword">then</span><br>		<span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;handle_end err &gt;&gt;&gt; &quot;</span>, packname, ret, errcode, errmsg)<br>		errors_msg:errors(player_id, errcode, errmsg, packname)<br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">-- 离开房间回调</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.leave_table</span><span class="hljs-params">(player_id, table_name, table_id)</span></span><br>	<span class="hljs-comment">--离开房间说明对局结束了，就直接踢掉吧</span><br>	skynet.fork(g_interface_mgr.goout, g_interface_mgr, player_id)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p>最关键的一行代码就是 <code>local g_modules_list = require &quot;hall.hall&quot;</code><br>引入hall_plug的服务只需要再hall文件夹下创建hall.lua，文件hall.lua再去require对应的模块入口即可。</p>
+<p>hall.lua</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hall.player.player&quot;</span>,<br>	<span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hall.match.match&quot;</span>,<br>	<span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hall.item.item&quot;</span>,<br>	<span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hall.game_record.game_record&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="流程2"><a href="#流程2" class="headerlink" title="流程2"></a>流程2</h2><h3 id="涉及skynet-fly技术-1"><a href="#涉及skynet-fly技术-1" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
-* orm
-</code></pre>
-<h3 id="涉及服务-1"><a href="#涉及服务-1" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* loginserver
-* centerserver
-</code></pre>
-<p>调用<code>rpc_center_account.auth(account, password)</code> 到centerserver 验证账号密码。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--验证登录</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.auth</span><span class="hljs-params">(account, password)</span></span><br>    <span class="hljs-keyword">local</span> orm_clinet = get_orm_by_account(account)<br>    <span class="hljs-keyword">local</span> account_info = orm_clinet:get_one_entry(account)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> account_info <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, CODE.NOT_USER, <span class="hljs-string">&quot;NOT_USER&quot;</span><br>    <span class="hljs-keyword">end</span><br><br>    password = crypt_util.HMAC.SHA256(password, crypt.base64decode(account_info.key))<br>    <span class="hljs-keyword">if</span> account_info.password ~= password <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, CODE.ERR_PASSWORD, <span class="hljs-string">&quot;ERR_PASSWORD&quot;</span><br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-comment">--log.info(&quot;auth &gt;&gt;&gt;&gt;&gt; :&quot;, account_info)</span><br>    account_info.last_login_time = time_util.<span class="hljs-built_in">time</span>()<br>    orm_clinet:change_save_one_entry(account_info)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>, account_info.player_id, account_info.hall_server_id<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs lua"><br><span class="hljs-keyword">local</span> match_logic = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hall.match.match_logic&quot;</span><br><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.init</span><span class="hljs-params">(interface_mgr)</span></span><br>    match_logic.init(interface_mgr)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.on_login</span><span class="hljs-params">(player_id)</span></span><br>    match_logic.on_login(player_id)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.on_reconnect</span><span class="hljs-params">(player_id)</span></span><br>    match_logic.on_reconnect(player_id)<br><span class="hljs-keyword">end</span><br><br>M.handle = &#123;<br>    <span class="hljs-comment">--匹配</span><br>    [<span class="hljs-string">&#x27;.hallserver_match.MatchGameReq&#x27;</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(player_id, packname, pack_body)</span></span><br>       <span class="hljs-keyword">return</span> match_logic.do_match_game(player_id, pack_body)<br>    <span class="hljs-keyword">end</span>,<br>    <span class="hljs-comment">--取消匹配</span><br>    [<span class="hljs-string">&#x27;.hallserver_match.CancelMatchGameReq&#x27;</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(player_id, packname, pack_body)</span></span><br>        <span class="hljs-keyword">return</span> match_logic.do_cancel_match_game(player_id, pack_body)<br>    <span class="hljs-keyword">end</span>,<br>    <span class="hljs-comment">--接受对局</span><br>    [<span class="hljs-string">&#x27;.hallserver_match.AcceptMatchReq&#x27;</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(player_id, packname, pack_body)</span></span><br>        <span class="hljs-keyword">return</span> match_logic.do_accept_match(player_id, pack_body)<br>    <span class="hljs-keyword">end</span>,<br>&#125;<br><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--匹配成功</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.match_succ</span><span class="hljs-params">(...)</span></span><br>   <span class="hljs-keyword">return</span> match_logic.cmd_match_succ(...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--加入对局</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.match_join_game</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> match_logic.cmd_join_game(...)<br><span class="hljs-keyword">end</span><br><br>M.register_cmd = CMD<br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p>服务启动之后，会根据require的顺序调用init函数。</p>
+<h2 id="客户端消息处理"><a href="#客户端消息处理" class="headerlink" title="客户端消息处理"></a>客户端消息处理</h2><p>通过在M.handle中实现对应消息名处理函数。</p>
+<h2 id="服务器之间的消息"><a href="#服务器之间的消息" class="headerlink" title="服务器之间的消息"></a>服务器之间的消息</h2><p>通过<code>register_cmd</code>注册服务之间的消息处理函数。</p>
+<h2 id="用户的登录，登出事情"><a href="#用户的登录，登出事情" class="headerlink" title="用户的登录，登出事情"></a>用户的登录，登出事情</h2><p>通过实现 <code>on_login</code>接口来实现，调用顺序按照require顺序执行。</p>
+<h2 id="模块之间的接口调用"><a href="#模块之间的接口调用" class="headerlink" title="模块之间的接口调用"></a>模块之间的接口调用</h2><p>通过各模块提供interface.lua文件来实现接口调用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-built_in">error</span> = <span class="hljs-built_in">error</span><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">--这是player对外的接口 这里写定义，player_logic写实现</span><br><br><span class="hljs-comment">--获取玩家列表</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.get_online_list</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;调用了未实现的接口 get_online_list&quot;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--获取玩家信息</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.get_info</span><span class="hljs-params">(player_id)</span></span><br>    <span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;调用了未实现的接口 get_info&quot;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--注册</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.register</span><span class="hljs-params">(account_info, channel)</span></span> <br>    <span class="hljs-keyword">local</span> cli = cluster_client:instance(<span class="hljs-string">&quot;centerserver&quot;</span>, <span class="hljs-string">&quot;account_m&quot;</span>)<br>    cli:set_mod_num(sbyte(account_info.account, account_info.account:<span class="hljs-built_in">len</span>()))<br>    <span class="hljs-keyword">local</span> ret = cli:one_mod_call(<span class="hljs-string">&quot;register&quot;</span>, account_info, channel)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">table</span>.<span class="hljs-built_in">unpack</span>(ret.result)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-
-<p>成功后，进入到流程3通知大厅服为改玩家创建登录的token。</p>
-<h2 id="流程3"><a href="#流程3" class="headerlink" title="流程3"></a>流程3</h2><h3 id="涉及skynet-fly技术-2"><a href="#涉及skynet-fly技术-2" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
-</code></pre>
-<h3 id="涉及服务-2"><a href="#涉及服务-2" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* loginserver
-* hallserver
-</code></pre>
-<p>通过<code>rpc_hall_player.create_token(player_id, ENUM.LOGIN_TOKEN_TIME_OUT)</code>调用得到token</p>
-<h2 id="流程4"><a href="#流程4" class="headerlink" title="流程4"></a>流程4</h2><h3 id="涉及skynet-fly技术-3"><a href="#涉及skynet-fly技术-3" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
-</code></pre>
-<p>把得到的token返回给客户端。</p>
-<h2 id="流程5"><a href="#流程5" class="headerlink" title="流程5"></a>流程5</h2><h3 id="涉及skynet-fly技术-4"><a href="#涉及skynet-fly技术-4" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* ws gate
-</code></pre>
-<p>客户端拿到hallserver的连接host和token通过ws 建立连接，进行登录，hallserver收到登录消息，进去token验证</p>
-<h2 id="流程6"><a href="#流程6" class="headerlink" title="流程6"></a>流程6</h2><p>验证通过返回登录成功</p>
+<p>比如这是player模块定义的接口，player逻辑模块需要重写这样接口，否则其他模块调用就会报错。</p>
 
                 
               </div>
@@ -820,8 +811,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>用户是如何登录的？</div>
-      <div>https://huahua132.github.io/2023/04/27/skynet_fly_word/word_4/C_q/</div>
+      <div>大厅服如何对模块功能进行拆分隔离？</div>
+      <div>https://huahua132.github.io/2023/05/03/skynet_fly_word/word_4/D_q/</div>
     </div>
     <div class="license-meta">
       
@@ -833,7 +824,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月27日</div>
+          <div>2023年5月3日</div>
         </div>
       
       
@@ -865,9 +856,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/27/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？">
+                      <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" title="前言">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">用户是如何注册的？</span>
+                        <span class="hidden-mobile">前言</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -875,8 +866,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/27/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？">
-                        <span class="hidden-mobile">用户是如何匹配进入到游戏的？</span>
+                      <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？">
+                        <span class="hidden-mobile">用户是如何登录的？</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

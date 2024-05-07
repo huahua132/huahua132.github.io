@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。  匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver">
+    <meta name="description" content="简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的注册接口 s2s loginserver 调用 centerserver 注册 s2s centerserver 调用 hallserver 注册 s2c loginserver 返回注册结果  流程1涉及skynet_fly技术* http server  * cluster rp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用户是如何匹配进入到游戏的？">
-<meta property="og:url" content="https://huahua132.github.io/2023/04/27/skynet_fly_word/word_4/E_q/index.html">
+<meta property="og:title" content="用户是如何注册的？">
+<meta property="og:url" content="https://huahua132.github.io/2023/05/03/skynet_fly_word/word_4/B_q/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。  匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver">
+<meta property="og:description" content="简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的注册接口 s2s loginserver 调用 centerserver 注册 s2s centerserver 调用 hallserver 注册 s2c loginserver 返回注册结果  流程1涉及skynet_fly技术* http server  * cluster rp">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-27T10:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-06T12:57:48.884Z">
+<meta property="article:published_time" content="2023-05-03T10:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-07T03:11:24.350Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>用户是如何匹配进入到游戏的？ - huahua132 blog</title>
+  <title>用户是如何注册的？ - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="用户是如何匹配进入到游戏的？"></span>
+            <span id="subtitle" data-typed-text="用户是如何注册的？"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-27 18:00" pubdate>
-          2023年4月27日 晚上
+        <time datetime="2023-05-03 18:00" pubdate>
+          2023年5月3日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.8k 字
+          5.4k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          41 分钟
+          46 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(32)</span>
+        <span class="list-group-count">(33)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -513,7 +513,7 @@
         aria-expanded="true"
       >
         实战篇
-        <span class="list-group-count">(5)</span>
+        <span class="list-group-count">(6)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -527,7 +527,7 @@
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/A_home/" title="前言"
+        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" title="前言"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">前言</span>
@@ -536,16 +536,16 @@
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">用户是如何注册的？</span>
         </a>
       
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">用户是如何登录的？</span>
@@ -554,7 +554,7 @@
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">大厅服如何对模块功能进行拆分隔离？</span>
@@ -563,10 +563,19 @@
     
       
       
-        <a href="/2023/04/27/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
+        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">用户是如何匹配进入到游戏的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" title="如何在skynet_fly_demo新增一个游戏？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何在skynet_fly_demo新增一个游戏？</span>
         </a>
       
     
@@ -720,62 +729,62 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">用户是如何匹配进入到游戏的？</h1>
+            <h1 style="display: none">用户是如何注册的？</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code class="hljs">目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。
-</code></pre>
-<h1 id="匹配进入游戏流程"><a href="#匹配进入游戏流程" class="headerlink" title="匹配进入游戏流程"></a>匹配进入游戏流程</h1><ol>
-<li>c2s 玩家请求hallserver匹配</li>
-<li>s2s hallserver请求matchserver匹配</li>
-<li>matchserver 定时执行撮合逻辑</li>
-<li>s2s matchserver找到撮合对象后，请求对应gameserver游戏服分配房间，生成token并记录到redis</li>
-<li>s2s matchserver 通知 到对应玩家的hallserver匹配成功</li>
-<li>s2c hallserver 通知 客户端匹配成功</li>
-<li>cs2 客户端请求hallserver接受对局</li>
-<li>s2s hallserver 通知 matchserver接受对局</li>
-<li>s2s matchserver 统计到所有玩家接受对局后，请求对应游戏服记录游戏房间信息，通知玩家对应hallserver对局开始</li>
-<li>s2c hallserver 通知玩家对局开始</li>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>skynet_fly_demo在账号上采用了传统的账号密码方式。</p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ol>
+<li>c2s 用户调用loginserver的注册接口</li>
+<li>s2s loginserver 调用 centerserver 注册</li>
+<li>s2s centerserver 调用 hallserver 注册</li>
+<li>s2c loginserver 返回注册结果</li>
 </ol>
-<h2 id="流程1-c2s-玩家请求hallserver匹配"><a href="#流程1-c2s-玩家请求hallserver匹配" class="headerlink" title="流程1 c2s 玩家请求hallserver匹配"></a>流程1 c2s 玩家请求hallserver匹配</h2><h3 id="涉及skynet-fly技术"><a href="#涉及skynet-fly技术" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
+<h2 id="流程1"><a href="#流程1" class="headerlink" title="流程1"></a>流程1</h2><h3 id="涉及skynet-fly技术"><a href="#涉及skynet-fly技术" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* http server 
+* cluster rpc
 </code></pre>
-<h3 id="涉及服务"><a href="#涉及服务" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* hallserver
-* matchserver
+<h3 id="涉及服务"><a href="#涉及服务" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* loginserver
+* centerserver
 </code></pre>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--请求匹配</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.do_match_game</span><span class="hljs-params">(player_id, pack_body)</span></span><br>    <span class="hljs-comment">--log.info(&quot;do_match_game &gt;&gt;&gt; &quot;,player_id, pack_body)</span><br>    <span class="hljs-keyword">local</span> game_id = pack_body.game_id<br>    <span class="hljs-keyword">local</span> game_server = GAME_ID_ENUM[game_id]<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> game_server <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;do_match_game not exists gameid &quot;</span>, game_id)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, errorcode.GAME_NOT_EXISTS, <span class="hljs-string">&quot;GAME_NOT_EXISTS&quot;</span><br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">local</span> game_room_info = game_redis.get_game_room_info(player_id)<br>    <span class="hljs-keyword">if</span> game_room_info <span class="hljs-keyword">and</span> <span class="hljs-built_in">next</span>(game_room_info) <span class="hljs-keyword">then</span><br>        <span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;exists game_room_info &quot;</span>,player_id, game_room_info)<br>        <span class="hljs-keyword">return</span> <br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">--log.info(&quot;do_match_game2 &gt;&gt;&gt; &quot;,player_id, pack_body)</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> rpc_matchserver_match.<span class="hljs-built_in">match</span>(game_server, player_id) <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-comment">--log.info(&quot;do_match_game3 &gt;&gt;&gt; &quot;,player_id, pack_body)</span><br>    <span class="hljs-comment">--回复匹配</span><br>    match_msg:match_game_res(player_id, &#123;game_id = game_id&#125;)<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-<p>玩家请求匹配游戏，指定游戏ID,通过游戏ID索引找到对应游戏服名称，然后通过<code>rpc_matchserver_match.match(game_server, player_id)</code>rpc传递到匹配服。</p>
-<h2 id="流程2-s2s-hallserver请求matchserver匹配"><a href="#流程2-s2s-hallserver请求matchserver匹配" class="headerlink" title="流程2 s2s hallserver请求matchserver匹配"></a>流程2 s2s hallserver请求matchserver匹配</h2><h3 id="涉及skynet-fly技术-1"><a href="#涉及skynet-fly技术-1" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
-</code></pre>
-<h3 id="涉及服务-1"><a href="#涉及服务-1" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* hallserver
-* matchserver
-</code></pre>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--匹配</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.match</span><span class="hljs-params">(game_server, player_id)</span></span><br>    <span class="hljs-keyword">local</span> ret = cluster_client:instance(<span class="hljs-string">&quot;matchserver&quot;</span>, <span class="hljs-string">&quot;match_m&quot;</span>, game_server):one_balance_call_by_name(<span class="hljs-string">&quot;match&quot;</span>, player_id)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">end</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">table</span>.<span class="hljs-built_in">unpack</span>(ret.result)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-<p><code>cluster_client:instance(&quot;matchserver&quot;, &quot;match_m&quot;, game_server):one_balance_call_by_name(&quot;match&quot;, player_id)</code>这个语句的意思是发给<strong>matchserver</strong>中的<strong>match_m</strong>服务one_balance_call_by_name意思是在所有<strong>match_m</strong> <strong>instance_name</strong>为<strong>game_server</strong>的服务中进行简单轮询负载均衡。</p>
-<p>match_m的启动配置</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--匹配逻辑</span><br>   match_m = &#123;<br>       launch_seq = <span class="hljs-number">5</span>,<br>       launch_num = <span class="hljs-number">2</span>,<br>       mod_args = &#123;<br>           &#123;instance_name = <span class="hljs-string">&quot;chinese_chess&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;digitalbomb&quot;</span>&#125;,<br>       &#125;<br>   &#125;,<br></code></pre></td></tr></table></figure>
-<p>可以看到，match_m启动了2个，一个instance_name &#x3D; chinese_chess, 一个为 digitalbomb<br>但我们想为chinese_chess匹配时就是这样调用 <code>cluster_client:instance(&quot;matchserver&quot;, &quot;match_m&quot;, &#39;chinese_chess&#39;):one_balance_call_by_name(&quot;match&quot;, player_id)</code></p>
-<h2 id="流程3-s2s-matchserver-定时执行撮合逻辑"><a href="#流程3-s2s-matchserver-定时执行撮合逻辑" class="headerlink" title="流程3 s2s matchserver 定时执行撮合逻辑"></a>流程3 s2s matchserver 定时执行撮合逻辑</h2><p>match_m启动了2个间隔5秒的定时器，一个用于同步指定instance_name游戏服的游戏房间信息用于负载均衡。一个用于撮合匹配。</p>
-<h2 id="流程4-s2s-matchserver找到撮合对象后，请求对应gameserver游戏服分配房间，生成token并记录到redis"><a href="#流程4-s2s-matchserver找到撮合对象后，请求对应gameserver游戏服分配房间，生成token并记录到redis" class="headerlink" title="流程4 s2s matchserver找到撮合对象后，请求对应gameserver游戏服分配房间，生成token并记录到redis"></a>流程4 s2s matchserver找到撮合对象后，请求对应gameserver游戏服分配房间，生成token并记录到redis</h2><h3 id="涉及skynet-fly技术-2"><a href="#涉及skynet-fly技术-2" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
-* redis script
-</code></pre>
-<h3 id="涉及服务-2"><a href="#涉及服务-2" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* hallserver
-* matchserver
-</code></pre>
-<p>匹配成功后，会先把玩家剔除出集合,这里需要用到redis的脚本调用，由于这个过程有异步，可能玩家在这个过程中已经取消匹配了，所以需要用脚本检查所有玩家是否存在，然后再剔除出去。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--清除出redis匹配集合</span><br>           <span class="hljs-keyword">local</span> script_str = <span class="hljs-string">[[</span><br><span class="hljs-string">               local key = KEYS[1]</span><br><span class="hljs-string">               for i = 1,#ARGV do</span><br><span class="hljs-string">                   local player_id = ARGV[i]</span><br><span class="hljs-string">                   local rank = redis.call(&#x27;zrank&#x27;, key, player_id)</span><br><span class="hljs-string">                   if not rank then</span><br><span class="hljs-string">                       return 0</span><br><span class="hljs-string">                   end</span><br><span class="hljs-string">               end</span><br><span class="hljs-string"></span><br><span class="hljs-string">               for i = 1,#ARGV do</span><br><span class="hljs-string">                   redis.call(&#x27;zrem&#x27;, key, ARGV[i])</span><br><span class="hljs-string">               end</span><br><span class="hljs-string">               </span><br><span class="hljs-string">               return 1</span><br><span class="hljs-string">           ]]</span><br></code></pre></td></tr></table></figure>
+<p>客户端通过http方式调用<code>user/signup</code>接口进行注册,客户端传递账号，密码，渠道号,之后loginserver rpc 调用centerserver 进行注册，为啥不让客户端直接去centerserver直接注册，因为center server只有1个，能提供的负载能力有限，我们需要通过loginserver 做一些限流或者排队措施，防止centerserver 超负载。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--注册</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">signup</span><span class="hljs-params">(c)</span></span><br>    <span class="hljs-keyword">local</span> req = c.req<br>    <span class="hljs-keyword">local</span> body = req.body<br>    <span class="hljs-keyword">local</span> account = body.account<br>    <span class="hljs-keyword">local</span> password = body.password<br>    <span class="hljs-keyword">local</span> channel = body.channel<br><br>    <span class="hljs-built_in">assert</span>(account, <span class="hljs-string">&quot;not account&quot;</span>)<br>    <span class="hljs-built_in">assert</span>(password, <span class="hljs-string">&quot;not passwword&quot;</span>)<br>    <span class="hljs-built_in">assert</span>(channel, <span class="hljs-string">&quot;not channel&quot;</span>)<br>    <span class="hljs-built_in">assert</span>(CHANNEL[channel], <span class="hljs-string">&quot;not exists channel&quot;</span>, channel)<br><br>    <span class="hljs-keyword">local</span> isok, errcode, errmsg = rpc_center_account.register(&#123;<br>        account = account,<br>        password = password,<br>    &#125;, channel)<br>    <span class="hljs-keyword">if</span> isok <span class="hljs-keyword">then</span><br>        rsp_body.set_rsp(c, <span class="hljs-string">&quot;success&quot;</span>)<br>    <span class="hljs-keyword">else</span><br>        rsp_body.set_rsp(c, <span class="hljs-literal">nil</span>, errcode, errmsg)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="流程5-s2s-matchserver-通知-到对应玩家的hallserver匹配成功"><a href="#流程5-s2s-matchserver-通知-到对应玩家的hallserver匹配成功" class="headerlink" title="流程5  s2s matchserver 通知 到对应玩家的hallserver匹配成功"></a>流程5  s2s matchserver 通知 到对应玩家的hallserver匹配成功</h2><p>剔除之后记录关键的房间信息，然后通过player_id找到玩家对应的大厅服的服务ID，通过<strong>byid_mod_send</strong>通知到对应的游戏服。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--通知大厅服，匹配成功了</span><br><span class="hljs-keyword">for</span> j,player_id <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(match_list) <span class="hljs-keyword">do</span><br>    <span class="hljs-keyword">local</span> svr_id = player_util.get_svr_id_by_player_id(player_id)<br>    <span class="hljs-comment">--log.info(&quot;get_svr_id_by_player_id &gt;&gt;&gt; &quot;,player_id, svr_id)</span><br>    <span class="hljs-keyword">local</span> hallcli = cluster_client:instance(<span class="hljs-string">&quot;hallserver&quot;</span>, <span class="hljs-string">&quot;room_game_hall_m&quot;</span>)<br>    hallcli:set_svr_id(svr_id)              <span class="hljs-comment">--指定服</span><br>    hallcli:set_mod_num(player_id)          <span class="hljs-comment">--指定mod_num </span><br>    hallcli:byid_mod_send(<span class="hljs-string">&quot;match_succ&quot;</span>, player_id, session_id, GAME_ID_ENUM[module_info.get_cfg().instance_name], ENUM.MATCH_ACCEPT_TIME_OUT)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<h2 id="流程2"><a href="#流程2" class="headerlink" title="流程2"></a>流程2</h2><h3 id="涉及skynet-fly技术-1"><a href="#涉及skynet-fly技术-1" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
+* orm
+</code></pre>
+<h3 id="涉及服务-1"><a href="#涉及服务-1" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* centerserver
+* hallserver
+</code></pre>
+<p>由于centerserver只有一个，它记录了所以玩家的账号信息，所以有必要对玩家的账号信息进行分表处理,我用orm为账号分了10个表。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua">   <span class="hljs-comment">-- orm</span><br>orm_table_m = &#123;<br>	launch_seq = <span class="hljs-number">5000</span>,<br>	launch_num = <span class="hljs-number">11</span>,<br>	mod_args = &#123;<br>		&#123;instance_name = <span class="hljs-string">&quot;account_1&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_2&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_3&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_4&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_5&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_6&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_7&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_8&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_9&quot;</span>,orm_plug  = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br>           &#123;instance_name = <span class="hljs-string">&quot;account_10&quot;</span>,orm_plug = <span class="hljs-string">&quot;orm_entity.account_entity&quot;</span>&#125;,<br><br>           <span class="hljs-comment">--自增id分配</span><br>           &#123;instance_name = <span class="hljs-string">&quot;allocid&quot;</span>,   orm_plug = <span class="hljs-string">&quot;orm_entity.allocid_entity&quot;</span>&#125;,<br>	&#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
 
-<h2 id="流程6-s2c-hallserver-通知-客户端匹配成功"><a href="#流程6-s2c-hallserver-通知-客户端匹配成功" class="headerlink" title="流程6 s2c hallserver 通知 客户端匹配成功"></a>流程6 s2c hallserver 通知 客户端匹配成功</h2><p>hallserver 再通知玩家匹配成功了</p>
-<h2 id="流程7-cs2-客户端请求hallserver接受对局"><a href="#流程7-cs2-客户端请求hallserver接受对局" class="headerlink" title="流程7 cs2 客户端请求hallserver接受对局"></a>流程7 cs2 客户端请求hallserver接受对局</h2><p>玩家需要在指定时间内接受对局，超时或者拒绝后，客户端等待定时器结束，进去重试匹配。</p>
-<h2 id="流程8-s2s-hallserver-通知-matchserver接受对局"><a href="#流程8-s2s-hallserver-通知-matchserver接受对局" class="headerlink" title="流程8 s2s hallserver 通知 matchserver接受对局"></a>流程8 s2s hallserver 通知 matchserver接受对局</h2><p>match server 收到接受对局，记录接受数量</p>
-<h2 id="流程9-s2s-matchserver-统计到所有玩家接受对局后，请求对应游戏服记录游戏房间信息，通知玩家对应hallserver对局开始"><a href="#流程9-s2s-matchserver-统计到所有玩家接受对局后，请求对应游戏服记录游戏房间信息，通知玩家对应hallserver对局开始" class="headerlink" title="流程9 s2s matchserver 统计到所有玩家接受对局后，请求对应游戏服记录游戏房间信息，通知玩家对应hallserver对局开始"></a>流程9 s2s matchserver 统计到所有玩家接受对局后，请求对应游戏服记录游戏房间信息，通知玩家对应hallserver对局开始</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--通知游戏服记录游戏房间信息</span><br>g_game_cli:set_svr_id(svr_id)<br><span class="hljs-keyword">local</span> ret = g_game_cli:byid_mod_call(<span class="hljs-string">&quot;set_game_room_info&quot;</span>, game_info_map) <span class="hljs-comment">--记录游戏房间信息</span><br><span class="hljs-comment">--log.info(&quot;set_game_room_info ret &gt;&gt;&gt;&quot;, ret)</span><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret <span class="hljs-keyword">then</span><br>    <span class="hljs-built_in">log</span>.warn(<span class="hljs-string">&quot;set_game_room_info err &quot;</span>, svr_name, svr_id, table_id)<br>    <span class="hljs-keyword">return</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">for</span> l_player_id,info <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(game_info_map) <span class="hljs-keyword">do</span><br>    <span class="hljs-comment">--通知加入对局</span><br>    <span class="hljs-keyword">local</span> svr_id = player_util.get_svr_id_by_player_id(l_player_id)<br>    <span class="hljs-comment">--log.info(&quot;get_svr_id_by_player_id &gt;&gt;&gt; &quot;,l_player_id, svr_id)</span><br>    <span class="hljs-keyword">local</span> hallcli = cluster_client:instance(<span class="hljs-string">&quot;hallserver&quot;</span>, <span class="hljs-string">&quot;room_game_hall_m&quot;</span>)<br>    hallcli:set_svr_id(svr_id)                <span class="hljs-comment">--指定服</span><br>    hallcli:set_mod_num(l_player_id)          <span class="hljs-comment">--指定mod_num </span><br>    hallcli:byid_mod_send(<span class="hljs-string">&quot;match_join_game&quot;</span>, l_player_id, info.token, host, table_id)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-<p>set_game_room_info 会把房间信息记录到redis,在退出房间的时候清除，这样方便做重连。</p>
-<h2 id="流程10-s2c-hallserver-通知玩家对局开始"><a href="#流程10-s2c-hallserver-通知玩家对局开始" class="headerlink" title="流程10 s2c hallserver 通知玩家对局开始"></a>流程10 s2c hallserver 通知玩家对局开始</h2><p>hallserver 在通知玩家进入游戏，此时客户端可以拿着游戏服的host和token去进去游戏了。</p>
-<h2 id="重连处理"><a href="#重连处理" class="headerlink" title="重连处理"></a>重连处理</h2><p>当玩家重新登录时，hallserver大厅服，会去尝试拿玩家的游戏服房间信息，如果房间还存在会发给玩家进去重连，如果房间已经不存在，删除信息避免玩家不能再进去匹配。</p>
+<p>如何映射到表，通常账号是不支持更改的，我们直接使用账号尾部字符编码 mod 分表数量得到一个索引进行映射。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--注册</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.register</span><span class="hljs-params">(account_info, channel)</span></span> <br>    <span class="hljs-keyword">local</span> cli = cluster_client:instance(<span class="hljs-string">&quot;centerserver&quot;</span>, <span class="hljs-string">&quot;account_m&quot;</span>)<br>    cli:set_mod_num(sbyte(account_info.account, account_info.account:<span class="hljs-built_in">len</span>()))<br>    <span class="hljs-keyword">local</span> ret = cli:one_mod_call(<span class="hljs-string">&quot;register&quot;</span>, account_info, channel)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">table</span>.<span class="hljs-built_in">unpack</span>(ret.result)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<p>注册到大厅服，我们需要做两件事情</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> MAX_INCRID = <span class="hljs-number">9999999</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">register</span><span class="hljs-params">(account_info, channel)</span></span><br>    <span class="hljs-built_in">assert</span>(channel &lt;= <span class="hljs-number">9999</span>, <span class="hljs-string">&quot;overflow  channel = &quot;</span>,channel)<br>    <span class="hljs-keyword">local</span> account = account_info.account <span class="hljs-comment">--账号</span><br>    <span class="hljs-built_in">assert</span>(account:<span class="hljs-built_in">len</span>() &gt;= <span class="hljs-number">6</span>, <span class="hljs-string">&quot;account not long enough&quot;</span>)<br>    <span class="hljs-keyword">local</span> orm_clinet = get_orm_by_account(account)<br>    <span class="hljs-keyword">if</span> orm_clinet:get_one_entry(account) <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, CODE.EXISTS_USER, <span class="hljs-string">&quot;EXISTS_USER&quot;</span><br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">local</span> module_id, svr_id = rpc_hallserver_player_m.get_module_id()<br>    <span class="hljs-built_in">assert</span>(module_id, <span class="hljs-string">&quot;register err &quot;</span>)<br><br>    <span class="hljs-keyword">local</span> incrid = g_alloc_client:incr(module_id)<br>    <span class="hljs-built_in">assert</span>(incrid &lt;= MAX_INCRID, <span class="hljs-string">&quot;incr overflow&quot;</span>)<br>    <span class="hljs-keyword">local</span> player_id = player_util.builder_player_id(channel, svr_id, incrid)<br>    <span class="hljs-keyword">local</span> ret = rpc_hallserver_player_m.register(player_id, account)<br>    <span class="hljs-built_in">assert</span>(ret, <span class="hljs-string">&quot;register err&quot;</span>)<br><br>    account_info.key = crypt.randomkey()<br>    account_info.password = crypt_util.HMAC.SHA256(account_info.password, account_info.key)<br>    account_info.key = crypt.base64encode(account_info.key)<br>    account_info.player_id = player_id<br>    account_info.hall_server_id = svr_id<br>    account_info.channel = channel<br>    account_info.create_time = time_util.<span class="hljs-built_in">time</span>()<br>    <span class="hljs-keyword">if</span> orm_clinet:create_one_entry(account_info) <span class="hljs-keyword">then</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><p>选择大厅服</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 获取自增ID所属的模块ID</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.get_module_id</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> cli = cluster_client:instance(<span class="hljs-string">&quot;hallserver&quot;</span>, <span class="hljs-string">&quot;player_m&quot;</span>)<br>    <span class="hljs-keyword">local</span> ret = cli:one_balance_call(<span class="hljs-string">&quot;get_module_id&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> ret <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">local</span> cluster_name = ret.cluster_name<br>    <span class="hljs-keyword">local</span> result = ret.result<br>    <span class="hljs-keyword">local</span> module_id = result[<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">local</span> svr_id = <span class="hljs-built_in">tonumber</span>(string_util.split(cluster_name, <span class="hljs-string">&#x27;:&#x27;</span>)[<span class="hljs-number">2</span>])<br>    <span class="hljs-keyword">return</span> module_id, svr_id<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p> 目前我才用的简单轮询负载均衡，这里也可以定制做其他负载均衡的策略。<br> <code>rpc_hallserver_player_m.get_module_id</code> 调用实现才用了banlance简单负载均衡的方式，假如开启了hallserver1,hallserver2,调用此接口4次返回的svr_id将会是1，2，1，2。<br> module_id是对应hallserver绑定的自增模块ID,分配玩家ID，为了避免ID重复我们需要一个自增ID分配器，使用orm来做就是一个非常不错的选择。自增ID的orm可以配置为永久缓存，自增的时候不需要访问到数据库，非常便捷，快速。</p>
+</li>
+<li><p>分配玩家ID</p>
+<p> 由于架构的设计玩家ID会跟指定的大厅服绑定，我们可以让玩家ID携带一些额外信息，比如大厅服的ID，这样其他服想拿取玩家的数据时，通过玩家ID就能知道访问哪个服务器。</p>
+</li>
+</ol>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--构建玩家ID</span><br><span class="hljs-comment">--由于js没有long类型，最大能表示 2^53-1的整数，所以调整一下ID结构,为了尽可能的兼容所有客户端</span><br><span class="hljs-comment">-- 9      0071      9925   4740991      (1个能注册1千万-1个账号)</span><br><span class="hljs-comment">-- 预留位 渠道id    服务id   自增id</span><br><br><span class="hljs-keyword">local</span> MAX_INCRID = <span class="hljs-number">9999999</span><br><span class="hljs-keyword">local</span> INCRID_LIMIT = MAX_INCRID + <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> MAX_CHANELLID = <span class="hljs-number">9999</span><br><span class="hljs-keyword">local</span> CHANELLID_LIMIT = MAX_CHANELLID + <span class="hljs-number">1</span><br><span class="hljs-keyword">local</span> MAX_SVRID = <span class="hljs-number">9999</span><br><span class="hljs-keyword">local</span> SVRID_LIMIT = MAX_SVRID + <span class="hljs-number">1</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.builder_player_id</span><span class="hljs-params">(channel_id, svr_id, incrid)</span></span><br>    <span class="hljs-built_in">assert</span>(channel_id &lt;= MAX_CHANELLID, <span class="hljs-string">&quot;channel_id overflow&quot;</span>)<br>    <span class="hljs-built_in">assert</span>(svr_id &lt;= MAX_SVRID, <span class="hljs-string">&quot;svr_id overflow&quot;</span>)<br>    <span class="hljs-built_in">assert</span>(incrid &lt;= MAX_INCRID, <span class="hljs-string">&quot;incr overflow&quot;</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">tonumber</span>(<span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;1%04d%04d%07d&quot;</span>, channel_id, svr_id, incrid))<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="流程3"><a href="#流程3" class="headerlink" title="流程3"></a>流程3</h2><h3 id="涉及skynet-fly技术-2"><a href="#涉及skynet-fly技术-2" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
+</code></pre>
+<h3 id="涉及服务-2"><a href="#涉及服务-2" class="headerlink" title="涉及服务"></a>涉及服务</h3><pre><code class="hljs">* centerserver
+* hallserver
+</code></pre>
+<p>分配创建好对应的玩家ID后，就会去对应的hallserver创建好玩家数据。<code>rpc_hallserver_player_m.register(player_id, account)</code>。<br>到这RPC请求的过程已经走完了，轮到了回复。<br>hallserver 回复 centerserver 注册结果。<br>centerserver 回复 loginserver 注册结果。</p>
+<h2 id="流程4"><a href="#流程4" class="headerlink" title="流程4"></a>流程4</h2><h3 id="涉及skynet-fly技术-3"><a href="#涉及skynet-fly技术-3" class="headerlink" title="涉及skynet_fly技术"></a>涉及skynet_fly技术</h3><pre><code class="hljs">* cluster rpc
+</code></pre>
+<p>loginserver 回复 客户端 注册结果。至此注册流程结束。</p>
 
                 
               </div>
@@ -828,8 +837,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>用户是如何匹配进入到游戏的？</div>
-      <div>https://huahua132.github.io/2023/04/27/skynet_fly_word/word_4/E_q/</div>
+      <div>用户是如何注册的？</div>
+      <div>https://huahua132.github.io/2023/05/03/skynet_fly_word/word_4/B_q/</div>
     </div>
     <div class="license-meta">
       
@@ -841,7 +850,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月27日</div>
+          <div>2023年5月3日</div>
         </div>
       
       
@@ -873,7 +882,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/27/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？">
+                      <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">用户是如何登录的？</span>
                         <span class="visible-mobile">上一篇</span>
@@ -883,8 +892,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/27/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？">
-                        <span class="hidden-mobile">大厅服如何对模块功能进行拆分隔离？</span>
+                      <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？">
+                        <span class="hidden-mobile">用户是如何匹配进入到游戏的？</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
