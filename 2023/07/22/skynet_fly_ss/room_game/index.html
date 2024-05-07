@@ -16,16 +16,16 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="简介room_game是skynet_fly基于热更系统实现的匹配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，matc">
+    <meta name="description" content="简介room_game是skynet_fly基于热更系统实现的分配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，allo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于room_game可热更匹配房间类游戏架构">
+<meta property="og:title" content="关于room_game可热更分配房间类游戏架构">
 <meta property="og:url" content="https://huahua132.github.io/2023/07/22/skynet_fly_ss/room_game/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="简介room_game是skynet_fly基于热更系统实现的匹配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，matc">
+<meta property="og:description" content="简介room_game是skynet_fly基于热更系统实现的分配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，allo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/room_game.png">
 <meta property="article:published_time" content="2023-07-22T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-04T11:38:48.868Z">
+<meta property="article:modified_time" content="2024-05-07T06:59:26.274Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于room_game可热更匹配房间类游戏架构 - huahua132 blog</title>
+  <title>关于room_game可热更分配房间类游戏架构 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于room_game可热更匹配房间类游戏架构"></span>
+            <span id="subtitle" data-typed-text="关于room_game可热更分配房间类游戏架构"></span>
           
         </div>
 
@@ -347,6 +347,33 @@
     
       
       
+        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
            class="list-group-item list-group-item-action
            ">
@@ -365,28 +392,10 @@
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更匹配房间类游戏架构"
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
         </a>
       
     
@@ -401,10 +410,10 @@
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
         </a>
       
     
@@ -428,6 +437,15 @@
     
       
       
+        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于监听同步模块的封装</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
            class="list-group-item list-group-item-action
            ">
@@ -441,24 +459,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于skynet_fly的一键构建服务配置</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于监听同步模块的封装</span>
         </a>
       
     
@@ -481,13 +481,13 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于room_game可热更匹配房间类游戏架构</h1>
+            <h1 style="display: none">关于room_game可热更分配房间类游戏架构</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>room_game是skynet_fly基于热更系统实现的匹配房间类游戏架构。<br>    room_game注重什么：<br>    * 框架与业务解耦。<br>    * 可热更。<br>    * 协议使用自由，目前提供protobuf和json协议。<br>    * socket和websocket通用。</p>
-<h1 id="架构介绍"><a href="#架构介绍" class="headerlink" title="架构介绍"></a>架构介绍</h1><p>room_game架构由多个skynet服务组成,由<strong>gate网关</strong>，<strong>login登录服</strong>,<strong>hall大厅服</strong>，<strong>match匹配服</strong>,<strong>room房间服</strong>组成。<br>room_game针对玩家登录、登出事情处理好了服务之间消息处理。预留了相关事件的接口，开发新游戏只需要针对相关接口做对应的处理就行。</p>
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>room_game是skynet_fly基于热更系统实现的分配房间类游戏架构。<br>    room_game注重什么：<br>    * 框架与业务解耦。<br>    * 可热更。<br>    * 协议使用自由，目前提供protobuf和json协议。<br>    * socket和websocket通用。</p>
+<h1 id="架构介绍"><a href="#架构介绍" class="headerlink" title="架构介绍"></a>架构介绍</h1><p>room_game架构由多个skynet服务组成,由<strong>gate网关</strong>，<strong>login登录服</strong>,<strong>hall大厅服</strong>，<strong>alloc分配服</strong>,<strong>room房间服</strong>组成。<br>room_game针对玩家登录、登出事情处理好了服务之间消息处理。预留了相关事件的接口，开发新游戏只需要针对相关接口做对应的处理就行。</p>
 <p><img src="/img/skynet_fly/room_game.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li><p><strong>gate网关</strong><br>room_game可以选择使用gate或者ws_gate，gate用的是skynet原生的gate，ws_gate是skynet_fly基于skynet的websocket实现的。<br>ws_gate是基于master&#x2F;slave模式，slave可以开多个，可以充分利用多核优势。</p>
@@ -514,7 +514,7 @@
 </li>
 <li><p><code>repeat_login(gate,fd,player_id)</code> 被挤号。 一般这里通知在其他设备登录。</p>
 </li>
-<li><p><strong>hall大厅服</strong><br>大厅服可以启动多个，用于管理agent，记录玩家绑定的match服务和room服务，保证断线重连可以重回房间。<br>大厅服支持热更，热更之后的玩家都会登录到新的服务，旧的服务一直维持到该服务中的所有玩家登出。<br>大厅服配置</p>
+<li><p><strong>hall大厅服</strong><br>大厅服可以启动多个，用于管理agent，记录玩家绑定的alloc服务和room服务，保证断线重连可以重回房间。<br>大厅服支持热更，热更之后的玩家都会登录到新的服务，旧的服务一直维持到该服务中的所有玩家登出。<br>大厅服配置</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs lua">	<span class="hljs-comment">--大厅服</span><br>room_game_hall_m = &#123;<br>	launch_seq = <span class="hljs-number">2</span>,<br>	launch_num = <span class="hljs-number">6</span>,<br>	default_arg = &#123;<br>		hall_plug = <span class="hljs-string">&quot;hall_plug&quot;</span>,<br>	&#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
 <p>其中<code>hall_plug</code>表示大厅服需要实现的插件接口。</p>
 </li>
@@ -535,12 +535,12 @@
 </li>
 <li><p><code>goout(player_id)</code> 登出。</p>
 </li>
-<li><p><strong>match匹配服</strong><br>匹配服只有一个，我觉得单服设计应该简单一点。<br>可以热更。热更后，旧的匹配服不会再进入玩家了。<br>匹配服配置</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--匹配服</span><br>room_game_match_m = &#123;<br>	launch_seq = <span class="hljs-number">3</span>,<br>	launch_num = <span class="hljs-number">1</span>,<br>	default_arg = &#123;<br>		match_plug = <span class="hljs-string">&quot;match_plug&quot;</span>,<br>		MAX_TABLES = <span class="hljs-number">10000</span>,<br>	&#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
-<p>其中MAX_TABLES是最大桌子数量，match用了简单轮询机制去给room服分配房间。<br>match_plug表示匹配服需要实现的插件接口。</p>
+<li><p><strong>alloc分配服</strong><br>分配服只有一个，我觉得单服设计应该简单一点。<br>可以热更。热更后，旧的分配服不会再进入玩家了。<br>分配服配置</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--分配服</span><br>room_game_alloc_m = &#123;<br>	launch_seq = <span class="hljs-number">3</span>,<br>	launch_num = <span class="hljs-number">1</span>,<br>	default_arg = &#123;<br>		alloc_plug = <span class="hljs-string">&quot;alloc_plug&quot;</span>,<br>		MAX_TABLES = <span class="hljs-number">10000</span>,<br>	&#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>其中MAX_TABLES是最大桌子数量，alloc用了简单轮询机制去给room服分配房间。<br>alloc_plug表示分配服需要实现的插件接口。</p>
 </li>
 </ul>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-built_in">assert</span>(match_plug.init,<span class="hljs-string">&quot;not match init&quot;</span>)           <span class="hljs-comment">--初始化</span><br><span class="hljs-built_in">assert</span>(match_plug.<span class="hljs-built_in">match</span>,<span class="hljs-string">&quot;not match&quot;</span>)		       <span class="hljs-comment">--匹配</span><br><span class="hljs-built_in">assert</span>(match_plug.tablefull,<span class="hljs-string">&quot;not tablefull&quot;</span>)       <span class="hljs-comment">--桌子已满</span><br><span class="hljs-built_in">assert</span>(match_plug.createtable,<span class="hljs-string">&quot;not createtable&quot;</span>)   <span class="hljs-comment">--创建桌子</span><br><span class="hljs-built_in">assert</span>(match_plug.entertable,<span class="hljs-string">&quot;not entertable&quot;</span>)     <span class="hljs-comment">--进入桌子</span><br><span class="hljs-built_in">assert</span>(match_plug.leavetable,<span class="hljs-string">&quot;not leavetable&quot;</span>)     <span class="hljs-comment">--离开桌子</span><br><span class="hljs-built_in">assert</span>(match_plug.dismisstable,<span class="hljs-string">&quot;not dismisstable&quot;</span>) <span class="hljs-comment">--解散桌子</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-built_in">assert</span>(alloc_plug.init,<span class="hljs-string">&quot;not alloc init&quot;</span>)           <span class="hljs-comment">--初始化</span><br><span class="hljs-built_in">assert</span>(alloc_plug.<span class="hljs-built_in">match</span>,<span class="hljs-string">&quot;not match&quot;</span>)		       <span class="hljs-comment">--匹配</span><br><span class="hljs-built_in">assert</span>(alloc_plug.tablefull,<span class="hljs-string">&quot;not tablefull&quot;</span>)       <span class="hljs-comment">--桌子已满</span><br><span class="hljs-built_in">assert</span>(alloc_plug.createtable,<span class="hljs-string">&quot;not createtable&quot;</span>)   <span class="hljs-comment">--创建桌子</span><br><span class="hljs-built_in">assert</span>(alloc_plug.entertable,<span class="hljs-string">&quot;not entertable&quot;</span>)     <span class="hljs-comment">--进入桌子</span><br><span class="hljs-built_in">assert</span>(alloc_plug.leavetable,<span class="hljs-string">&quot;not leavetable&quot;</span>)     <span class="hljs-comment">--离开桌子</span><br><span class="hljs-built_in">assert</span>(alloc_plug.dismisstable,<span class="hljs-string">&quot;not dismisstable&quot;</span>) <span class="hljs-comment">--解散桌子</span><br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><p><code>init()</code> 初始化.</p>
@@ -617,7 +617,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于room_game可热更匹配房间类游戏架构</div>
+      <div>关于room_game可热更分配房间类游戏架构</div>
       <div>https://huahua132.github.io/2023/07/22/skynet_fly_ss/room_game/</div>
     </div>
     <div class="license-meta">
