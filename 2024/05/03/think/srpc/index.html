@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言目前skynet_fly的远程调用方式，是采用了封装skynet的cluster 集群方式，每个连接都会有一个服务端有一个clusteragent 接收代理，客户端有一个sender 发送代理服务。再加上我封装的cluster_server和cluster_client，这样发送端和接收端就分别存在了2个代理服务。也就是说调用一个rpc请求会经过非常多次的打包解包流程。 发送者-&gt;clu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-03T11:22:49.000Z">
-<meta property="article:modified_time" content="2024-05-14T02:47:34.965Z">
+<meta property="article:modified_time" content="2024-05-14T03:02:50.566Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -309,15 +309,6 @@
     
       
       
-        <a href="/2023/10/06/think/reload_error/" title="skynet_fly热更新存在的问题"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">skynet_fly热更新存在的问题</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/02/17/think/skynet_fly_demo/" title="关于skynet_fly_demo的架构设计"
            class="list-group-item list-group-item-action
            ">
@@ -327,10 +318,10 @@
     
       
       
-        <a href="/2024/05/03/think/srpc/" title="为skynet_fly新增远程调用方式"
+        <a href="/2023/10/06/think/reload_error/" title="skynet_fly热更新存在的问题"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">为skynet_fly新增远程调用方式</span>
+           ">
+          <span class="category-post">skynet_fly热更新存在的问题</span>
         </a>
       
     
@@ -340,6 +331,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">为什么写blog</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/05/03/think/srpc/" title="为skynet_fly新增远程调用方式"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">为skynet_fly新增远程调用方式</span>
         </a>
       
     
@@ -393,7 +393,7 @@
 <li>send call 等待连接建立后发送（可配置超时时间）</li>
 <li>大包分包处理</li>
 </ul>
-<p>frpc的打包方式借鉴了skynet cluster的打包方式，使其可适合skynet_fly，初版的frpc完全适配了之前的cluster-server的接口调用方式，可以做到无缝切换，在skynet_fly_demo进去切换时，只是全局替换了 <code>cluster_server-frpc_server</code>, <code>cluster_client-frpc_client</code>, <code>cluster_client_m-&gt;frpc_client_m</code>，就可以了。</p>
+<p>frpc的打包方式借鉴了skynet cluster的打包方式，使其更适合skynet_fly，初版的frpc完全适配了之前的cluster-server的接口调用方式，可以做到无缝切换，在skynet_fly_demo进去切换时，只是全局替换了 <code>cluster_server-frpc_server</code>, <code>cluster_client-frpc_client</code>, <code>cluster_client_m-&gt;frpc_client_m</code>，就可以了。</p>
 <p>提供了一个握手过程，可用于后续支持<strong>身份验证支持</strong>,<strong>加密传输支持</strong>。</p>
 <p>后续打算先实现 <strong>身份验证支持</strong>， <strong>加密传输支持</strong>。</p>
 <p>再考虑 <strong>新增 sub&#x2F;pub 机制的支持</strong>， <strong>建立连接，断开连接（被动），关闭连接（主动）的回调</strong>。</p>
