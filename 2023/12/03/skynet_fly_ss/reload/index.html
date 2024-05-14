@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/reload.png">
 <meta property="article:published_time" content="2023-12-03T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-26T11:36:17.185Z">
+<meta property="article:modified_time" content="2024-05-14T02:49:06.363Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -356,19 +356,19 @@
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
         </a>
       
     
       
       
-        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
         </a>
       
     
@@ -401,19 +401,10 @@
     
       
       
-        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
+        <a href="/2023/07/02/skynet_fly_ss/timer/" title="关于定时器的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+          <span class="category-post">关于定时器的封装</span>
         </a>
       
     
@@ -428,19 +419,19 @@
     
       
       
-        <a href="/2023/07/02/skynet_fly_ss/timer/" title="关于定时器的封装"
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于定时器的封装</span>
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
         </a>
       
     
       
       
-        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly热更新实现</span>
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
     
@@ -450,6 +441,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于监听同步模块的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现</span>
         </a>
       
     
@@ -509,7 +509,7 @@
 </ul>
 <h3 id="通知更新"><a href="#通知更新" class="headerlink" title="通知更新"></a><strong>通知更新</strong></h3><p>watch机制能保证<strong>容器客户端</strong>一直持有最新的地址信息。</p>
 <h2 id="容器客户端"><a href="#容器客户端" class="headerlink" title="容器客户端"></a><strong>容器客户端</strong></h2><ul>
-<li><strong>注册访问</strong> 为了解决<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">迟到访问问题</a>,访问服务之前要先注册<code>contriner_client:register</code>，确定服务启动好就知道需要访问哪些服务。比较特殊的情况是<code>cluster_server</code>集群服务，一开始并不知道需要访问哪些服务，就需要按照全部都访问的逻辑处理，但是可能存在服务不重启就新增模块的情况，就需要动态的去扩展，于是就新增了<code>monitor_new</code>监听新模块的流程，通过调用<code>contriner_client:monitor_all()</code>就可以监听所有热更服务的地址,用于解决这种情况。</li>
+<li><strong>注册访问</strong> 为了解决<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">迟到访问问题</a>,访问服务之前要先注册<code>contriner_client:register</code>，确定服务启动好就知道需要访问哪些服务。比较特殊的情况是<code>frpc_server</code>集群服务，一开始并不知道需要访问哪些服务，就需要按照全部都访问的逻辑处理，但是可能存在服务不重启就新增模块的情况，就需要动态的去扩展，于是就新增了<code>monitor_new</code>监听新模块的流程，通过调用<code>contriner_client:monitor_all()</code>就可以监听所有热更服务的地址,用于解决这种情况。</li>
 </ul>
 <p><strong>特殊处理</strong> 因为普通的skynet服务不参与热更，所以它在什么时候注册访问可热更服务都可以，只是需要避免<strong>迟到访问问题</strong>，所有在服务启动好后就直接监听所有热更服务地址，就能很好的避免这个问题。</p>
 <ul>
