@@ -16,24 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https:&#x2F;&#x2F;github.com&#x2F;huahua132&#x2F;skynet_fly.git 拉取子模块代码cd skynet_flygit submodule update --init 拉取skynet代码代码子模块cd skynetg">
+    <meta name="description" content="watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编译">
-<meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/C_builder/index.html">
+<meta property="og:title" content="远程订阅发布模式">
+<meta property="og:url" content="https://huahua132.github.io/2024/06/29/skynet_fly_api/frpc_watch/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https:&#x2F;&#x2F;github.com&#x2F;huahua132&#x2F;skynet_fly.git 拉取子模块代码cd skynet_flygit submodule update --init 拉取skynet代码代码子模块cd skynetg">
+<meta property="og:description" content="watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-08T03:04:43.238Z">
+<meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-29T04:46:09.845Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="skynet_fly_word">
+<meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>编译 - huahua132 blog</title>
+  <title>远程订阅发布模式 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="编译"></span>
+            <span id="subtitle" data-typed-text="远程订阅发布模式"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-25 08:00" pubdate>
-          2023年2月25日 早上
+        <time datetime="2024-06-29 22:00" pubdate>
+          2024年6月29日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          412 字
+          1.7k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          4 分钟
+          14 分钟
         
       </span>
     
@@ -281,44 +281,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly 文档"
-        id="heading-8a12ab643e955a87eefc2a19b632005f" role="tab" data-toggle="collapse" href="#collapse-8a12ab643e955a87eefc2a19b632005f"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly_api"
+        id="heading-879663778a734ec922ccc8c70de62887" role="tab" data-toggle="collapse" href="#collapse-879663778a734ec922ccc8c70de62887"
         aria-expanded="true"
       >
-        skynet_fly 文档
-        <span class="list-group-count">(35)</span>
+        skynet_fly_api
+        <span class="list-group-count">(9)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-8a12ab643e955a87eefc2a19b632005f"
-           role="tabpanel" aria-labelledby="heading-8a12ab643e955a87eefc2a19b632005f">
-        
-        
-          
-          
-  <div class="category-post-list">
-    
-    
-  </div>
-
-          
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="入门篇"
-        id="heading-fde95b8345d6009bcd3e3b793ef65625" role="tab" data-toggle="collapse" href="#collapse-fde95b8345d6009bcd3e3b793ef65625"
-        aria-expanded="true"
-      >
-        入门篇
-        <span class="list-group-count">(10)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse show" id="collapse-fde95b8345d6009bcd3e3b793ef65625"
-           role="tabpanel" aria-labelledby="heading-fde95b8345d6009bcd3e3b793ef65625">
+      <div class="category-collapse collapse show" id="collapse-879663778a734ec922ccc8c70de62887"
+           role="tabpanel" aria-labelledby="heading-879663778a734ec922ccc8c70de62887">
         
         
           
@@ -327,325 +300,25 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" title="前言"
+        <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">前言</span>
+          <span class="category-post">启动配置load_mods.lua</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">开发环境推荐</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译"
+        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" title="远程订阅发布模式"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">编译</span>
+          <span class="category-post">远程订阅发布模式</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">构建服务脚手架</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" title="load_mods配置文件的使用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">load_mods配置文件的使用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何编写可热更服务模块</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" title="项目文件夹介绍"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">项目文件夹介绍</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">规范建议</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">文件查找规则</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" title="如何更改skynet服务的配置项"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何更改skynet服务的配置项</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础篇"
-        id="heading-9248c705575b4b5883daaed3318fda8b" role="tab" data-toggle="collapse" href="#collapse-9248c705575b4b5883daaed3318fda8b"
-        aria-expanded="false"
-      >
-        基础篇
-        <span class="list-group-count">(6)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-9248c705575b4b5883daaed3318fda8b"
-           role="tabpanel" aria-labelledby="heading-9248c705575b4b5883daaed3318fda8b">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">前言</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">rpc调用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" title="集群远程rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">集群远程rpc调用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">检查热更的使用以及原理</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">快进时间</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" title="启动时生成的临时文件说明"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">启动时生成的临时文件说明</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="实战篇"
-        id="heading-1b9782790120709faa567d4706ca8771" role="tab" data-toggle="collapse" href="#collapse-1b9782790120709faa567d4706ca8771"
-        aria-expanded="false"
-      >
-        实战篇
-        <span class="list-group-count">(6)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-1b9782790120709faa567d4706ca8771"
-           role="tabpanel" aria-labelledby="heading-1b9782790120709faa567d4706ca8771">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" title="前言"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">前言</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">用户是如何注册的？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">用户是如何登录的？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">大厅服如何对模块功能进行拆分隔离？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">用户是如何匹配进入到游戏的？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" title="如何在skynet_fly_demo新增一个游戏？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何在skynet_fly_demo新增一个游戏？</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="强化篇"
-        id="heading-1ff092fdfc21b9430eba6915fcf9cf06" role="tab" data-toggle="collapse" href="#collapse-1ff092fdfc21b9430eba6915fcf9cf06"
-        aria-expanded="false"
-      >
-        强化篇
-        <span class="list-group-count">(13)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-1ff092fdfc21b9430eba6915fcf9cf06"
-           role="tabpanel" aria-labelledby="heading-1ff092fdfc21b9430eba6915fcf9cf06">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" title="前言"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">前言</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" title="可热更匹配房间类游戏架构基础设施"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">可热更匹配房间类游戏架构基础设施</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" title="gate,wsgate通用协议的设计"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">gate,wsgate通用协议的设计</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_3/D_timer/" title="定时器的封装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">定时器的封装</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_3/E_module/" title="可热更模块的启动配置项"
+        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">可热更模块的启动配置项</span>
@@ -654,82 +327,60 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/F_redis/" title="redis的封装"
+        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">redis的封装</span>
+          <span class="category-post">新增可热更服务</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/G_point/" title="整点报时"
+        <a href="/2024/01/28/skynet_fly_api/orm/" title="orm"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">整点报时</span>
+          <span class="category-post">orm</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/H_orm/" title="orm数据库关系映射"
+        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">orm数据库关系映射</span>
+          <span class="category-post">内部rpc调用</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/I_watch/" title="监听同步模块"
+        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">监听同步模块</span>
+          <span class="category-post">远程rpc调用</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/J_logrotate/" title="日志分割"
+        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">日志分割</span>
+          <span class="category-post">定时器的使用</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/K_log/" title="日志服务"
+        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">日志服务</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_3/M_http/" title="http服务"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">http服务</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
+          <span class="category-post">watch_syn.lua 监听同步机制</span>
         </a>
       
     
   </div>
 
-        
-      </div>
-    </div>
-  
         
       </div>
     </div>
@@ -747,24 +398,37 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">编译</h1>
+            <h1 style="display: none">远程订阅发布模式</h1>
             
             
               <div class="markdown-body">
                 
-                <p>推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。</p>
-<h1 id="拉取代码"><a href="#拉取代码" class="headerlink" title="拉取代码"></a>拉取代码</h1><p><code>git clone https://github.com/huahua132/skynet_fly.git</code></p>
-<h1 id="拉取子模块代码"><a href="#拉取子模块代码" class="headerlink" title="拉取子模块代码"></a>拉取子模块代码</h1><p><code>cd skynet_fly</code><br><code>git submodule update --init</code></p>
-<h1 id="拉取skynet代码代码子模块"><a href="#拉取skynet代码代码子模块" class="headerlink" title="拉取skynet代码代码子模块"></a>拉取skynet代码代码子模块</h1><p><code>cd skynet</code><br><code>git submodule update --init</code><br><code>cd ../</code></p>
-<h2 id="后续如果需要更新子模块代码"><a href="#后续如果需要更新子模块代码" class="headerlink" title="后续如果需要更新子模块代码"></a>后续如果需要更新子模块代码</h2><p><code>git submodule update --remote</code></p>
-<h1 id="使用sftp上传skynet-fly所有文件"><a href="#使用sftp上传skynet-fly所有文件" class="headerlink" title="使用sftp上传skynet_fly所有文件"></a>使用sftp上传skynet_fly所有文件</h1><h1 id="根据系统安装对应依赖软件和库"><a href="#根据系统安装对应依赖软件和库" class="headerlink" title="根据系统安装对应依赖软件和库"></a>根据系统安装对应依赖软件和库</h1><ul>
-<li><p><strong>ubuntu</strong><br><code>sh install_ubuntu.sh</code></p>
+                <h1 id="watch-server-lua"><a href="#watch-server-lua" class="headerlink" title="watch_server.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/rpc/watch_server.lua">watch_server.lua</a></h1><h2 id="sever"><a href="#sever" class="headerlink" title="sever"></a><strong>sever</strong></h2><ul>
+<li><p><strong>M.publish(channel_name, …)</strong><br>  描述:  发布名为channel_name的事件<br>  参数:<br>  - channel_name (string): 事件名</p>
 </li>
-<li><p><strong>centos</strong><br><code>sh install_centos.sh</code></p>
+<li><p><strong>M.pubsyn(channel_name, …)</strong><br>  描述:  发布名为channel_name的同步事件<br>  参数:<br>  - channel_name (string): 事件名</p>
 </li>
 </ul>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>cd 到skynet_fly根目录<br><code>make linux</code></p>
-<p>编译没有出错的话，会在生成<code>skynet_fly/skynet/skynet</code>可执行文件。</p>
+<h1 id="watch-client-lua"><a href="#watch-client-lua" class="headerlink" title="watch_client.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/rpc/watch_client.lua">watch_client.lua</a></h1><h2 id="sub-x2F-pub-clinet"><a href="#sub-x2F-pub-clinet" class="headerlink" title="sub&#x2F;pub clinet"></a><strong>sub&#x2F;pub clinet</strong></h2><ul>
+<li><p><strong>M.watch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  watch监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
+</li>
+<li><p><strong>M.unwatch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  取消监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
+</li>
+<li><p><strong>M.watch_byid(svr_name, svr_id, channel_name, handle_name, handler)</strong><br>  描述:  指定svr_id监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
+</li>
+<li><p><strong>M.unwatch_byid(svr_name, svr_id, channel_name, handle_name)</strong><br>  描述:  指定svr_id取消监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
+</li>
+</ul>
+<h1 id="watch-syn-client-lua"><a href="#watch-syn-client-lua" class="headerlink" title="watch_syn_client.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/rpc/watch_syn_client.lua">watch_syn_client.lua</a></h1><h2 id="subsyn-x2F-pubsyn-clinet"><a href="#subsyn-x2F-pubsyn-clinet" class="headerlink" title="subsyn&#x2F;pubsyn clinet"></a><strong>subsyn&#x2F;pubsyn clinet</strong></h2><ul>
+<li><p><strong>M.watch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  watch监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
+</li>
+<li><p><strong>M.unwatch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  取消监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
+</li>
+<li><p><strong>M.watch_byid(svr_name, svr_id, channel_name, handle_name, handler)</strong><br>  描述:  指定svr_id监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
+</li>
+<li><p><strong>M.unwatch_byid(svr_name, svr_id, channel_name, handle_name)</strong><br>  描述:  指定svr_id取消监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
+</li>
+</ul>
 
                 
               </div>
@@ -783,15 +447,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -805,7 +462,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+        <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
       
     </div>
   
@@ -817,8 +474,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>编译</div>
-      <div>https://huahua132.github.io/2023/02/25/skynet_fly_word/word_1/C_builder/</div>
+      <div>远程订阅发布模式</div>
+      <div>https://huahua132.github.io/2024/06/29/skynet_fly_api/frpc_watch/</div>
     </div>
     <div class="license-meta">
       
@@ -830,7 +487,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月25日</div>
+          <div>2024年6月29日</div>
         </div>
       
       
@@ -862,18 +519,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前言</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用">
-                        <span class="hidden-mobile">rpc调用</span>
+                      <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式">
+                        <span class="hidden-mobile">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
