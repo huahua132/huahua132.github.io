@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/reload.png">
 <meta property="article:published_time" content="2023-12-03T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-14T02:49:06.363Z">
+<meta property="article:modified_time" content="2024-07-09T07:26:23.669Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -365,15 +365,6 @@
     
       
       
-        <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于redis的封装</span>
-        </a>
-      
-    
-      
-      
         <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
            class="list-group-item list-group-item-action
            ">
@@ -383,19 +374,19 @@
     
       
       
-        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
+        <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
+          <span class="category-post">关于redis的封装</span>
         </a>
       
     
       
       
-        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">关于skynet_fly热更新实现细节</span>
+           ">
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
         </a>
       
     
@@ -414,6 +405,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
         </a>
       
     
@@ -487,7 +487,7 @@
               <div class="markdown-body">
                 
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。</p>
-<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>可以先看看这篇<a href="https://huahua132.github.io/2023/06/30/skynet_fly/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">关于skynet_fly热更新实现</a></p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>可以先看看这篇<a href="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">关于skynet_fly热更新实现</a></p>
 <p>整体还是围绕<strong>容器管理员</strong>,<strong>容器客户端</strong>,<strong>可热更服务</strong>展开。</p>
 <h1 id="职责"><a href="#职责" class="headerlink" title="职责"></a>职责</h1><ul>
 <li><strong>容器管理员</strong> 负责<strong>启动</strong>，<strong>通知关闭</strong>，<strong>通知更新</strong></li>
