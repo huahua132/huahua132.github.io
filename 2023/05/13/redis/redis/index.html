@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/redis/cache2.webp">
 <meta property="og:image" content="https://huahua132.github.io/img/redis/ADIC.webp">
 <meta property="article:published_time" content="2023-05-13T03:33:49.000Z">
-<meta property="article:modified_time" content="2023-09-07T06:57:39.209Z">
+<meta property="article:modified_time" content="2024-07-15T10:23:11.827Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary_large_image">
@@ -357,7 +357,7 @@
 <ul>
 <li><p><strong>rehash机制</strong><br>  redis有两张全局hash表，hash1,hash2，起初hash2没有分配空间<br>  当触发rehash时：<br>  会给hash2分配更大的空间，重设hash函数，增加hash桶总量，把hash1重新映射到hash2，释放hash1</p>
 </li>
-<li><p><strong>渐进式rehash机制</strong><br>  由于rehash机制非常耗时，会阻塞redis<br>  所以将集中迁移改为分散迁移，当处理一个请求时，就从hash1中的第一个索引位置开始，把位置1的所以entries重新映射到hash2中。</p>
+<li><p><strong>渐进式rehash机制</strong><br>  由于rehash机制非常耗时，会阻塞redis<br>  所以将集中迁移改为分散迁移，当处理一个请求时，就从hash1中的第一个索引位置开始，把位置1的所有entries重新映射到hash2中。</p>
 </li>
 </ul>
 <h1 id="单线程的redis为什么这么快？"><a href="#单线程的redis为什么这么快？" class="headerlink" title=" 单线程的redis为什么这么快？"></a> 单线程的redis为什么这么快？</h1><ol>
