@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
 <meta property="article:published_time" content="2023-12-24T13:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-16T13:01:00.097Z">
+<meta property="article:modified_time" content="2024-07-19T08:57:27.484Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.1k 字
+          6.2k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          51 分钟
+          52 分钟
         
       </span>
     
@@ -311,15 +311,6 @@
     
       
       
-        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于cluster 远程rpc调用</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
            class="list-group-item list-group-item-action
            ">
@@ -347,6 +338,15 @@
     
       
       
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于cluster 远程rpc调用</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
            class="list-group-item list-group-item-action
            active">
@@ -356,19 +356,19 @@
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
         </a>
       
     
       
       
-        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
         </a>
       
     
@@ -387,6 +387,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于skynet_fly热更新实现细节</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
         </a>
       
     
@@ -414,15 +423,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于新增定时器的扩展 整点报时</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
         </a>
       
     
@@ -562,6 +562,7 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>为框架增加了orm特性的支持。增强了skynet_fly的功能。</p>
 <h1 id="使用orm的限制"><a href="#使用orm的限制" class="headerlink" title="使用orm的限制"></a>使用orm的限制</h1><p>使用orm需要注意数据一致性问题。orm只能在一个服务中使用才能保证一致性。特别是使用缓存的时候，不用缓存，在多个服务同时用，也需要考虑分布式问题（不用orm多个服务也存在分布式问题）。<br>有一种情况下可以多服使用：比如用player_id绑定服务器，并且服务器只会查询修改连接本服的player_id的数据。<br>其他情况需要在一个服务中处理，后续想利用框架的热更模块对接上<strong>orm</strong>,并且处理好热更问题。因为热更过程中可能新旧服务都持有数据的，可能出现数据不一致，目前的想法是热更后，旧服务的请求全部转给新服务处理，旧服务收到准备下线的时候，保存所有数据，并拒绝之后所有的请求，通知等待新服上线处理，就可以解决这个问题。</p>
 <h1 id="热更orm-table-注意点"><a href="#热更orm-table-注意点" class="headerlink" title="热更orm_table 注意点"></a>热更orm_table 注意点</h1><p>如果一个服务访问了orm_table_m服务，这个服务同时跟orm_table_m一起热更，由于 <strong>使用orm的限制</strong>的特性，旧的orm服务不在提供服务，然后旧的访问orm的服务又不能切换访问到新的orm服务。这时旧的服务将访问不了orm服务。</p>
+<h1 id="orm-table-m不支持热更"><a href="#orm-table-m不支持热更" class="headerlink" title="orm_table_m不支持热更"></a><strong>orm_table_m不支持热更</strong></h1><p>由于<strong>热更orm_table 注意点</strong>的问题，会导致旧服务<strong>访问不了orm_table_m服务</strong>，这很可能不符合业务预期，所以就禁止了<strong>orm_table_m</strong>热更，对于<strong>orm</strong>的修改，都需要重启更新。</p>
 <h1 id="orm的缓存策略"><a href="#orm的缓存策略" class="headerlink" title="orm的缓存策略"></a>orm的缓存策略</h1><p>面对高并发的场景，我们需要尽量减少访问数据库，<code>skynet_fly</code>提供了<strong>设置缓存时间、改动统一同步的设置项</strong>。<br>比如设置5秒缓存，1秒同步一次修改。 set_cache(500,100)。<br>orm会在创建和查询的时间重置一下缓存。这样可以尽可能保留热数据的缓存不失效。</p>
 <h1 id="缓存优化-2024-x2F-3-x2F-17"><a href="#缓存优化-2024-x2F-3-x2F-17" class="headerlink" title="缓存优化 2024&#x2F;3&#x2F;17"></a>缓存优化 2024&#x2F;3&#x2F;17</h1><p>由于之前的缓存，没有考虑缓存总量控制，当缓存时长过长，缓存量大的时候，会导致服务器内存增长不可控。所以需要引入缓存淘汰策略来控制缓存总量。<br>常见的缓存淘汰策略有:</p>
 <ul>
