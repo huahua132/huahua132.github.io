@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" target="_self">
-          文件查找规则
+        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" target="_self">
+          规范建议
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/I_file/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/H_standard/" target="_self">
         <div>
-          serviceluaservice 约束服务只能放在 server根目录 || server-&gt;service || common-&gt;service || skynet_fly-&gt;service || skynet-&gt;service cpathfile_util.path_join(skynet_fly_path, &#39;/cservice/?.so;&#39;) ..
+          启动配置文件load_mods_xxx.lua 可热更模块都存放在 module命名的文件夹下，以xxx_m.lua命名。编写规范以CMD命令。 123local CMD = &#123;&#125;return CMD  普通skynet服务都存放在 service命名的文件夹下，命令随意，因为service的查找规则，只会在service文件夹下查找，文件名重复有可能，但是手动查找范围小。 普
         </div>
       </a>
 
@@ -297,15 +297,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
-          如何更改skynet服务的配置项
+        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" target="_self">
+          文件查找规则
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/I_file/" target="_self">
         <div>
-          配置load_mods.lua 在配置文件中，我们可以启动一个share_config_m共享配置的模块，我们可以把这些配置放在 server_cfg中。 12345678910111213141516return &#123;	share_config_m = &#123;		launch_seq = 1,		launch_num = 1,		default_arg = &#123;			ser
+          serviceluaservice 约束服务只能放在 server根目录 || server-&gt;service || common-&gt;service || skynet_fly-&gt;service || skynet-&gt;service cpathfile_util.path_join(skynet_fly_path, &#39;/cservice/?.so;&#39;) ..
         </div>
       </a>
 
@@ -403,6 +403,74 @@
     <span>></span>
     
   <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
+          如何更改skynet服务的配置项
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
+        <div>
+          配置load_mods.lua 在配置文件中，我们可以启动一个share_config_m共享配置的模块，我们可以把这些配置放在 server_cfg中。 12345678910111213141516return &#123;	share_config_m = &#123;		launch_seq = 1,		launch_num = 1,		default_arg = &#123;			ser
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-02-25 08:00" pubdate>
+              2023-02-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
   
   
 
@@ -569,15 +637,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
-          检查热更的使用以及原理
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+          快进时间
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
         <div>
-          如何执行sh script/check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh script/try_again
+          如何执行sh script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&quot;,
         </div>
       </a>
 
@@ -637,15 +705,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
-          快进时间
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
+          检查热更的使用以及原理
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
         <div>
-          如何执行sh script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&quot;,
+          如何执行sh script/check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh script/try_again
         </div>
       </a>
 
@@ -835,79 +903,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
-          可热更匹配房间类游戏架构基础设施
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
-        <div>
-          可热更匹配房间类游戏架构基础设施后续优化 2024&#x2F;6&#x2F;14 22:30支持同时开websocket 和 socket load_mods 配置改动123456789101112131415161718192021222324252627--共享配置share_config_m = &#123;	launch_seq = 1,	launch_num = 1,	default_a
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

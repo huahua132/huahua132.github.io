@@ -1,0 +1,1219 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言对于有状态的服务，利用新服务替换旧服务的方式，旧服务我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，旧服务没法立即更新，没法完美的解决问题，这时候可能就需要用到热更脚本来解决突发的一些简单逻辑bug。 限制热更脚本对比滚服更新的最大区别就是：  热更脚本是在旧的lua服务中完成  滚服更新启动新lua服务，流量切入新的lua服务   使用滚服更新的好处是，我们不需要考虑热更后对于服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可热更服务，热更脚本支持">
+<meta property="og:url" content="https://huahua132.github.io/2024/07/27/skynet_fly_word/word_3/O_hotfix/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="前言对于有状态的服务，利用新服务替换旧服务的方式，旧服务我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，旧服务没法立即更新，没法完美的解决问题，这时候可能就需要用到热更脚本来解决突发的一些简单逻辑bug。 限制热更脚本对比滚服更新的最大区别就是：  热更脚本是在旧的lua服务中完成  滚服更新启动新lua服务，流量切入新的lua服务   使用滚服更新的好处是，我们不需要考虑热更后对于服">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-27T14:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-27T03:31:16.153Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="skynet_fly_word">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>可热更服务，热更脚本支持 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="可热更服务，热更脚本支持"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-27 22:00" pubdate>
+          2024年7月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly 文档"
+        id="heading-8a12ab643e955a87eefc2a19b632005f" role="tab" data-toggle="collapse" href="#collapse-8a12ab643e955a87eefc2a19b632005f"
+        aria-expanded="true"
+      >
+        skynet_fly 文档
+        <span class="list-group-count">(37)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-8a12ab643e955a87eefc2a19b632005f"
+           role="tabpanel" aria-labelledby="heading-8a12ab643e955a87eefc2a19b632005f">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="入门篇"
+        id="heading-fde95b8345d6009bcd3e3b793ef65625" role="tab" data-toggle="collapse" href="#collapse-fde95b8345d6009bcd3e3b793ef65625"
+        aria-expanded="false"
+      >
+        入门篇
+        <span class="list-group-count">(10)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-fde95b8345d6009bcd3e3b793ef65625"
+           role="tabpanel" aria-labelledby="heading-fde95b8345d6009bcd3e3b793ef65625">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发环境推荐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">编译</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">构建服务脚手架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" title="load_mods配置文件的使用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">load_mods配置文件的使用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何编写可热更服务模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" title="项目文件夹介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">项目文件夹介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">规范建议</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">文件查找规则</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" title="如何更改skynet服务的配置项"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何更改skynet服务的配置项</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础篇"
+        id="heading-9248c705575b4b5883daaed3318fda8b" role="tab" data-toggle="collapse" href="#collapse-9248c705575b4b5883daaed3318fda8b"
+        aria-expanded="false"
+      >
+        基础篇
+        <span class="list-group-count">(6)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-9248c705575b4b5883daaed3318fda8b"
+           role="tabpanel" aria-labelledby="heading-9248c705575b4b5883daaed3318fda8b">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" title="集群远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">集群远程rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">快进时间</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">检查热更的使用以及原理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" title="启动时生成的临时文件说明"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">启动时生成的临时文件说明</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="实战篇"
+        id="heading-1b9782790120709faa567d4706ca8771" role="tab" data-toggle="collapse" href="#collapse-1b9782790120709faa567d4706ca8771"
+        aria-expanded="false"
+      >
+        实战篇
+        <span class="list-group-count">(7)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-1b9782790120709faa567d4706ca8771"
+           role="tabpanel" aria-labelledby="heading-1b9782790120709faa567d4706ca8771">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">用户是如何注册的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">用户是如何登录的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">大厅服如何对模块功能进行拆分隔离？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">用户是如何匹配进入到游戏的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" title="如何在skynet_fly_demo新增一个游戏？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何在skynet_fly_demo新增一个游戏？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_word/word_4/H_q/" title="如何在skynet_fly_demo新增一个后台模块？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何在skynet_fly_demo新增一个后台模块？</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="强化篇"
+        id="heading-1ff092fdfc21b9430eba6915fcf9cf06" role="tab" data-toggle="collapse" href="#collapse-1ff092fdfc21b9430eba6915fcf9cf06"
+        aria-expanded="true"
+      >
+        强化篇
+        <span class="list-group-count">(14)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-1ff092fdfc21b9430eba6915fcf9cf06"
+           role="tabpanel" aria-labelledby="heading-1ff092fdfc21b9430eba6915fcf9cf06">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" title="可热更匹配房间类游戏架构基础设施"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更匹配房间类游戏架构基础设施</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" title="gate,wsgate通用协议的设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">gate,wsgate通用协议的设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/D_timer/" title="定时器的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">定时器的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/E_module/" title="可热更模块的启动配置项"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更模块的启动配置项</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/F_redis/" title="redis的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">redis的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/G_point/" title="整点报时"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">整点报时</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/H_orm/" title="orm数据库关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm数据库关系映射</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/I_watch/" title="监听同步模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">监听同步模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/J_logrotate/" title="日志分割"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">日志分割</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/K_log/" title="日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">日志服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/M_http/" title="http服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">http服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">可热更服务，热更脚本支持</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">可热更服务，热更脚本支持</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于有状态的服务，利用<strong>新服务</strong>替换<strong>旧服务</strong>的方式，<strong>旧服务</strong>我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，<strong>旧服务</strong>没法立即更新，没法完美的解决问题，这时候可能就需要用到<strong>热更脚本</strong>来解决突发的一些简单逻辑bug。</p>
+<h1 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h1><p><strong>热更脚本</strong>对比<strong>滚服更新</strong>的最大区别就是：</p>
+<ul>
+<li><p><strong>热更脚本</strong><br>是在旧的lua服务中完成</p>
+</li>
+<li><p><strong>滚服更新</strong><br>启动新lua服务，流量切入新的lua服务</p>
+</li>
+</ul>
+<p>使用<strong>滚服更新</strong>的好处是，我们不需要考虑热更后对于服务内部状态的影响，编码方式可以随意使用，闭包，函数式编程，随便用。<br>想安全可靠的使用<strong>热更脚本</strong>更新，我们必须要限制我们的编码行为，才能做到功能按照预期完成更新。</p>
+<h2 id="限制一-匿名函数生成"><a href="#限制一-匿名函数生成" class="headerlink" title="限制一 匿名函数生成"></a>限制一 匿名函数生成</h2><p>假设我们需要热更模块如下:</p>
+<figure class="highlight lua"><figcaption><span>hello.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_count</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> a = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        a = a + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> a<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> hello = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hello&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> count = hello.create_count()<br>    <span class="hljs-comment">--hotfix</span><br>    <span class="hljs-keyword">local</span> count2 = hello.create_count()<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p>如果我们想把<code>a = a + 1</code>改成 <code>a = a + 2</code>，那么<code>main</code>函数中的count是热更不到的，所有可热更脚本模块，不能使用返回闭包函数。</p>
+<h2 id="限制二-修改全局变量"><a href="#限制二-修改全局变量" class="headerlink" title="限制二 修改全局变量"></a>限制二 修改全局变量</h2><p>改动全局变量本身就是非常危险的行为，需要禁止。</p>
+<h2 id="限制三-模块返回值必须是table-并且其他模块引用时都需要从表根部开始引用"><a href="#限制三-模块返回值必须是table-并且其他模块引用时都需要从表根部开始引用" class="headerlink" title="限制三 模块返回值必须是table,并且其他模块引用时都需要从表根部开始引用"></a>限制三 模块返回值必须是table,并且其他模块引用时都需要从表根部开始引用</h2><p>假设如下例子</p>
+<figure class="highlight lua"><figcaption><span>mode1.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hello</span><span class="hljs-params">()</span></span><br>    <span class="hljs-string">&quot;hello skynet&quot;</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><figcaption><span>main.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> mode1 = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;mode1&quot;</span><br><br><span class="hljs-keyword">local</span> hello = mode1.hello()<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    hello()<br>    mode1.hello()<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<p>热更后脚本</p>
+<figure class="highlight lua"><figcaption><span>mode1.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hello</span><span class="hljs-params">()</span></span><br>    <span class="hljs-string">&quot;hello skynet_fly&quot;</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+
+<p>这样热更后，<code>main</code>中的hello是用的旧版本，而 <code>mode1.hello</code>是新版本。</p>
+<h2 id="限制四-模块-key-对应的value-类型不能变"><a href="#限制四-模块-key-对应的value-类型不能变" class="headerlink" title="限制四 模块 key 对应的value 类型不能变"></a>限制四 模块 key 对应的value 类型不能变</h2><p>突然改变类型，大概率是非常危险的行为。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>实现之前，有仔细的研究下云大的<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Snax#%E7%83%AD%E6%9B%B4%E6%96%B0-hotfix">snax中实现的热更方案</a>。<br>云大的方案是通过注入的方式，刷更新脚本。热更流程会把热更到的<strong>旧版函数</strong>的<strong>upvalue</strong>挂到<strong>新版函数</strong>的<strong>upvalue</strong>，主要考虑的是引用之前的状态数据。<br>而我觉得不想被热更的状态数据完成可以挂到一个不热更的模块中，这样热更并不会重置它，所以我的做法是把<strong>M</strong>中的key value，替换到旧版的。不处理<strong>upvalue</strong>，在新增一个挂载状态数据的模块即可。</p>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><p>云大的热更方式，需要写额外的热更脚本，并不是在利用原文件直接热更，但是实际项目中，我们并不想去单个写一个热更脚本，就想在原文件上修改，然后一键热更。<br>实际项目中，大多时候我们只需要经常热更改动的业务逻辑代码，所以我的做法是区分<strong>可热更脚本</strong>和<strong>不可热更脚本</strong>，可热更脚本用一个特殊的<strong>require</strong>加载，这样也能方便记录到哪些脚本文件是需要检测热更的，启动之后，就能把信息记录到文件中，方便利用shell脚本检测热更。</p>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><h2 id="hot-require-引入"><a href="#hot-require-引入" class="headerlink" title="hot_require 引入"></a>hot_require 引入</h2><p>想<strong>热更</strong>的脚本，需要使用<strong>hot_require</strong>加载。</p>
+<h2 id="script-x2F-check-hotfix-sh-script-x2F-hotfix-sh"><a href="#script-x2F-check-hotfix-sh-script-x2F-hotfix-sh" class="headerlink" title="script&#x2F;check_hotfix.sh  script&#x2F;hotfix.sh"></a>script&#x2F;check_hotfix.sh  script&#x2F;hotfix.sh</h2><p><code>make_server.sh</code> 增加了这2个脚本的生成。</p>
+<ul>
+<li><code>script/check_hotfix.sh</code> 检测并执行热更</li>
+<li><code>script/hotfix.sh</code> 手动指定热更脚本</li>
+</ul>
+<h2 id="state-data-lua"><a href="#state-data-lua" class="headerlink" title="state_data.lua"></a>state_data.lua</h2><p>用于挂载状态数据。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> state_data = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.state_data&quot;</span><br><br><span class="hljs-keyword">local</span> state_map = state_data.alloc_table(<span class="hljs-string">&quot;state_map&quot;</span>)<br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">-------------------------------test1----------------------------</span><br><span class="hljs-comment">--[[</span><br><span class="hljs-comment">    有些状态数据，我们并不想随着热更被重置</span><br><span class="hljs-comment">]]</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.test1</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> state_map.a <span class="hljs-keyword">then</span><br>        state_map.a = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">end</span><br>    state_map.a = state_map.a + <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> state_map.a<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--[[</span><br><span class="hljs-comment">    预期结果: 热更后数据不能被重置</span><br><span class="hljs-comment">]]</span><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p>需要记录状态数据的，在<strong>可热更脚本</strong>中这样写即可，热更后state_map还是之前的<code>table</code>。</p>
+<h1 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h1><p>只有可热更服务中可以使用。</p>
+<h2 id="不要把热更服务之间调用的CMD命令"><a href="#不要把热更服务之间调用的CMD命令" class="headerlink" title="不要把热更服务之间调用的CMD命令"></a>不要把热更服务之间调用的CMD命令</h2><p>假设有2个服务 A B</p>
+<figure class="highlight lua"><figcaption><span>A服务</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--热更前</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.add</span><span class="hljs-params">(a,b)</span></span><br>    <span class="hljs-keyword">return</span> a + b<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--热更后</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.add</span><span class="hljs-params">(a,b,c)</span></span><br>    <span class="hljs-keyword">return</span> a + b + c<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><figcaption><span>B服务</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--热更前</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.do_add</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> count = call(<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;add&#x27;</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--热更后</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.do_add</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> count = call(<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;add&#x27;</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+<p>由于AB是2个服务，热更过程并不是串行的，就可能出现</p>
+<ul>
+<li><p>旧B调用新A<br>调用之后 A肯定要报错，c参数不存在。</p>
+</li>
+<li><p>新B调用旧A<br>结果不符合预期，c参数没加上。</p>
+</li>
+</ul>
+<h2 id="尽量不要在模块中改写其他模块的内容"><a href="#尽量不要在模块中改写其他模块的内容" class="headerlink" title="尽量不要在模块中改写其他模块的内容"></a>尽量不要在模块中改写其他模块的内容</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cccc = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;cccc&quot;</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cccc.xxxx</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p>像这种，如果热更失败了，cccc.xxxx的函数也成新版了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>可热更服务，热更脚本支持</div>
+      <div>https://huahua132.github.io/2024/07/27/skynet_fly_word/word_3/O_hotfix/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/06/29/skynet_fly_api/frpc_watch/" title="远程订阅发布模式">
+                        <span class="hidden-mobile">远程订阅发布模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
