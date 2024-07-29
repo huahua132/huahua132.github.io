@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言对于有状态的服务，利用新服务替换旧服务的方式，旧服务我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，旧服务没法立即更新，没法完美的解决问题，这时候可能就需要用到热更脚本来解决突发的一些简单逻辑bug。 限制热更脚本对比滚服更新的最大区别就是：  热更脚本是在旧的lua服务中完成  滚服更新启动新lua服务，流量切入新的lua服务   使用滚服更新的好处是，我们不需要考虑热更后对于服">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-27T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-29T01:26:19.206Z">
+<meta property="article:modified_time" content="2024-07-29T07:26:50.200Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +236,7 @@
         
         
         
-          24 分钟
+          23 分钟
         
       </span>
     
@@ -795,8 +795,8 @@
 
 <p>这样热更后，<code>main</code>中的hello是用的旧版本，而 <code>mode1.hello</code>是新版本。</p>
 <h2 id="限制四-模块-key-对应的value-类型不能变"><a href="#限制四-模块-key-对应的value-类型不能变" class="headerlink" title="限制四 模块 key 对应的value 类型不能变"></a>限制四 模块 key 对应的value 类型不能变</h2><p>突然改变类型，大概率是非常危险的行为。</p>
-<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>实现之前，有仔细的研究下云大的<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Snax#%E7%83%AD%E6%9B%B4%E6%96%B0-hotfix">snax中实现的热更方案</a>。<br>云大的方案是通过注入的方式，刷更新脚本。热更流程会把热更到的<strong>旧版函数</strong>的<strong>upvalue</strong>挂到<strong>新版函数</strong>的<strong>upvalue</strong>，主要考虑的是引用之前的状态数据。<br>而我觉得不想被热更的状态数据完成可以挂到一个不热更的模块中，这样热更并不会重置它，所以我的做法是把<strong>M</strong>中的key value，替换到旧版的。不处理<strong>upvalue</strong>，在新增一个挂载状态数据的模块即可。</p>
-<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><p>云大的热更方式，需要写额外的热更脚本，并不是在原文件直接热更，但是实际项目中，我们并不想去单个写一个热更脚本，就想在原文件上修改，然后一键热更。<br>实际项目中，大多时候我们只需要经常热更改动的业务逻辑代码，所以我的做法是区分<strong>可热更脚本</strong>和<strong>不可热更脚本</strong>，可热更脚本用一个特殊的<strong>require</strong>加载，这样也能方便记录到哪些脚本文件是需要检测热更的，启动之后，就能把信息记录到文件中，方便利用shell脚本检测热更。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>实现之前，有仔细的研究下云大的<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Snax#%E7%83%AD%E6%9B%B4%E6%96%B0-hotfix">snax中实现的热更方案</a>。<br>云大的方案是通过注入的方式，刷更新脚本。热更流程会把热更到的<strong>旧版函数</strong>的<strong>upvalue</strong>挂到<strong>新版函数</strong>的<strong>upvalue</strong>，主要考虑的是引用之前的状态数据。<br>而我觉得不想被热更的状态数据完成可以挂到一个不热更的模块中，这样热更并不会重置它，所以我的做法是把<strong>M</strong>中的key value，替换到旧版的。不处理<strong>upvalue</strong>，再新增一个挂载状态数据的模块即可。</p>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><p>云大的热更方式，需要写额外的热更脚本，并不是在原文件直接热更，但是实际项目中，我们并不想额外写一个热更脚本，就想在原文件上修改，然后一键热更。<br>实际项目中，大多时候我们只需要热更经常改动的业务逻辑代码，所以我的做法是区分<strong>可热更脚本</strong>和<strong>不可热更脚本</strong>，可热更脚本用一个特殊的<strong>require</strong>加载，这样也能方便记录到哪些脚本文件是需要检测热更的，启动之后，就能把信息记录到文件中，方便利用shell脚本检测热更。</p>
 <h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><h2 id="hotfix-require-引入"><a href="#hotfix-require-引入" class="headerlink" title="hotfix_require 引入"></a>hotfix_require 引入</h2><p>想<strong>热更</strong>的脚本，需要使用<strong>hotfix_require</strong>加载。</p>
 <h2 id="script-x2F-check-hotfix-sh-script-x2F-hotfix-sh"><a href="#script-x2F-check-hotfix-sh-script-x2F-hotfix-sh" class="headerlink" title="script&#x2F;check_hotfix.sh  script&#x2F;hotfix.sh"></a>script&#x2F;check_hotfix.sh  script&#x2F;hotfix.sh</h2><p><code>make_server.sh</code> 增加了这2个脚本的生成。</p>
 <ul>
