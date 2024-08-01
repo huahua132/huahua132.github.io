@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug6.png">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug7.png">
 <meta property="article:published_time" content="2024-08-03T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-01T08:41:58.275Z">
+<meta property="article:modified_time" content="2024-08-01T08:43:53.868Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          2.9k 字
         
       </span>
     
@@ -807,7 +807,7 @@
 <p><img src="/img/skynet_fly_word/word_3/break_points_debug7.png" srcset="/img/loading.gif" lazyload><br>即可命中断点。</p>
 <h1 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h1><h2 id="限制一-不支持多服务同时调试"><a href="#限制一-不支持多服务同时调试" class="headerlink" title="限制一 不支持多服务同时调试"></a>限制一 不支持多服务同时调试</h2><p>可以看到配置项是指定了<code>调试的可热更服务名</code>和对应的<code>启动下标</code>。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua">   breakpoint_debug_module_name = <span class="hljs-string">&quot;debug_test_m&quot;</span>,   <span class="hljs-comment">--调试的可热更服务名</span><br>breakpoint_debug_module_index = <span class="hljs-number">2</span>,               <span class="hljs-comment">--启动下标</span><br>breakpoint_debug_host = <span class="hljs-string">&quot;127.0.0.1&quot;</span>,             <span class="hljs-comment">--vscode监听的IP</span><br>breakpoint_debug_port = <span class="hljs-number">8818</span>,                    <span class="hljs-comment">--vscode监听的端口</span><br></code></pre></td></tr></table></figure>
-<h2 id="限制二-正式服别用"><a href="#限制二-正式服别用" class="headerlink" title="限制二 正式服别用"></a>限制二 正式服别用</h2><p>不配置相关配置即可</p>
+<h2 id="限制二-正式服别用"><a href="#限制二-正式服别用" class="headerlink" title="限制二 正式服别用"></a>限制二 正式服别用</h2><p>调试开启会影响性能,不配置相关配置就不会使用了</p>
 <h1 id="非可热更服务如何调试"><a href="#非可热更服务如何调试" class="headerlink" title="非可热更服务如何调试"></a>非可热更服务如何调试</h1><p>自行在服务中加载<code>luaPanda</code>即可。<br><code>require(&quot;skynet-fly.LuaPanda&quot;).start(&#39;127.0.0.1&#39;, 8818);</code></p>
 
                 
