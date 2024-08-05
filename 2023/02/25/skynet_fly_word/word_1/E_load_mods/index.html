@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做成全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-23T08:08:56.472Z">
+<meta property="article:modified_time" content="2024-08-05T06:05:33.312Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -810,7 +810,7 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lua">module_name = MODULE_NAME,     <span class="hljs-comment">--模块名称  比如 web_master_m web_agent_m</span><br>index = INDEX,				   <span class="hljs-comment">--启动索引  比如启动6   6个服务的索引分别 是 1 - 6</span><br>launch_date = LAUNCH_DATE,	   <span class="hljs-comment">--启动日期</span><br>launch_time = LAUNCH_TIME,	   <span class="hljs-comment">--启动时间戳</span><br>version = VERSION,			   <span class="hljs-comment">--版本号    热更会使版本号增加</span><br></code></pre></td></tr></table></figure>
 
 <p>如果不是可热更服务，调用相关命令<br><code>get_cfg</code>会返回nil<br><code>get_base_info</code>将是一个空table。</p>
-<h1 id="如何区分可热更服务和普通服务"><a href="#如何区分可热更服务和普通服务" class="headerlink" title="如何区分可热更服务和普通服务"></a>如何区分可热更服务和普通服务</h1><p>skynet_fly中，有两个特殊的全局变量。<br>SERVICE_NAME 是skynet启动服务名。<br>MODULE_NAME	是可热更模块的名称。如果一个服务中，这个值为nil，它就是一个可热更服务。</p>
+<h1 id="如何区分可热更服务和普通服务"><a href="#如何区分可热更服务和普通服务" class="headerlink" title="如何区分可热更服务和普通服务"></a>如何区分可热更服务和普通服务</h1><p>skynet_fly中，有两个特殊的全局变量。<br>SERVICE_NAME 是skynet启动服务名。<br>MODULE_NAME	是可热更模块的名称。如果一个服务中，这个值不为nil，它就是一个可热更服务。</p>
 
                 
               </div>
@@ -908,9 +908,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议">
+                      <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">规范建议</span>
+                        <span class="hidden-mobile">构建服务脚手架</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -918,8 +918,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则">
-                        <span class="hidden-mobile">文件查找规则</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块">
+                        <span class="hidden-mobile">如何编写可热更服务模块</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
