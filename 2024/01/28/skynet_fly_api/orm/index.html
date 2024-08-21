@@ -24,7 +24,7 @@
 <meta property="og:description" content="ormentry.lua单条数据条目对象。 常用方法 M:get(filed_name)  函数作用域：M:new 对象的成员函数  函数名称：get  描述:  获得对象指定字段的值  参数:  - filed_name (string): 字段名  返回值:  value(number or string): 值   M:set(filed_name, filed_value)  函数作用域：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-28T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-07-01T02:29:01.077Z">
+<meta property="article:modified_time" content="2024-08-21T11:34:37.588Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.5k 字
+          11k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          71 分钟
+          93 分钟
         
       </span>
     
@@ -318,6 +318,15 @@
     
       
       
+        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更模块的启动配置项</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
            class="list-group-item list-group-item-action
            ">
@@ -345,15 +354,6 @@
     
       
       
-        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">可热更模块的启动配置项</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
            ">
@@ -363,19 +363,19 @@
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
+        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">watch_syn.lua 监听同步机制</span>
+          <span class="category-post">定时器的使用</span>
         </a>
       
     
       
       
-        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
+        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">定时器的使用</span>
+          <span class="category-post">watch_syn.lua 监听同步机制</span>
         </a>
       
     
@@ -576,6 +576,12 @@
 </li>
 <li><p><strong>M:is_inval_save(entry_data)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：is_inval_save<br>  描述:  是否启动了间隔保存<br>  参数:<br>  返回值:<br>  1. ret(bool)：true or false</p>
 </li>
+<li><p><strong>M:get_entry_by_limit(cursor, limit, sort, …)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：get_entry_by_limit<br>  描述:  分页查询<br>  参数:<br>  1. cursor(number or nil): 游标，从头开始传递nil，后续传递返回值cursor<br>  2. limit(number): 单次数量<br>  3. sort(number): 1升序 -1降序<br>  4. …(table): 前缀key的value列表<br>  返回值:<br>  1. cursor(number): 到达游标，下次调用用<br>  2. ret_list(table): 结果列表<br>  3. count(number): 总数 仅开头查询返回</p>
+</li>
+<li><p><strong>M:get_entry_by_in(in_values, …)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：get_entry_by_limit<br>  描述:  分页查询<br>  参数:<br>  1. in_values(table): IN值列表<br>  2. …(table): 前缀key的value列表<br>  返回值:<br>  1. entry_data_list(table): 查询结果列表</p>
+</li>
+<li><p><strong>M:delete_entry_by_range(left, right, …)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：delete_entry_by_range<br>  描述:<br>  – 范围删除 包含left right<br>  – 可以有三种操作方式<br>  – [left, right] 范围删除  &gt;&#x3D; left &lt;&#x3D; right<br>  – [left, nil] 删除 &gt;&#x3D; left<br>  – [nil, right] 删除 &lt;&#x3D; right<br>  参数:<br>  1. left(number or string): 范围左值<br>  2. right(number or string): 范围右值<br>  3. …(table): key_values 最左前缀key值<br>  返回值:<br>  1. ret(bool): 成功返回true</p>
+</li>
 </ul>
 <h1 id="ormadapter-mysql-lua"><a href="#ormadapter-mysql-lua" class="headerlink" title="ormadapter_mysql.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/db/ormadapter/ormadapter_mysql.lua">ormadapter_mysql.lua</a></h1><p>mysql适配器。<br>业务开发中，我们只需要调用<strong>new</strong>来创建一个适配器传入<strong>ormtable</strong>的builder构建函数中。</p>
 <ul>
@@ -602,6 +608,12 @@
 <li><p><strong>M:save_one_entry(entry_data, change_map)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：save_one_entry<br>  描述:  保存一条数据<br>  参数:<br>  entry_data(table)数据表。<br>  change_map(table)变更列表。<br>  返回值:<br>  1. ret(bool): 成功true失败断言</p>
 </li>
 <li><p><strong>M:delete_entry(key_values)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：delete_entry<br>  描述:  删除表数据<br>  参数:<br>  keys_values(table)最左原则，keys的值。<br>  返回值:<br>  1. ret(bool): 成功true失败断言</p>
+</li>
+<li><p><strong>M:get_entry_by_in(in_values, key_values)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：get_entry_by_in<br>  描述:  IN 查询 类型 select * from t_player where player_id in(1,2,3);</p>
+<p>  参数:<br>  1. in_values(table): IN值列表<br>  2. key_valeus(table): 前缀key的value列表<br>  返回值:<br>  1. entry_data_list(table): 查询结果列表</p>
+</li>
+<li><p><strong>M:get_entry_by_limit(cursor, limit, sort, key_values, is_only_key)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：get_entry_by_limit<br>  描述:  分页查询 类型 select * from t_player where player_id &#x3D; 10001 limit 10;</p>
+<p>  参数:<br>  1. cursor(number or nil): 游标，从头开始传递nil，后续传递返回值cursor<br>  2. limit(number): 单次数量<br>  3. sort(number): 1升序 -1降序<br>  4. key_values(table): 前缀key的value列表<br>  5. is_only_key(bool): 是否仅仅返回keys_values<br>  返回值:<br>  1. cursor(number): 到达游标，下次调用用<br>  2. ret_list(table): 结果列表<br>  3. count(number): 总数 开头查询返回即可</p>
 </li>
 </ul>
 <h1 id="ormadapter-mongo-lua"><a href="#ormadapter-mongo-lua" class="headerlink" title="ormadapter_mongo.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/db/ormadapter/ormadapter_mongo.lua">ormadapter_mongo.lua</a></h1><p>mongo db多了以下两个方法，批量插入和批量更新的时候，设置一次执行的数量，mysql不用这样是因为mysql可以获取到网络包的长度限制，并且数据包的长度外部也能知道(sql的长度),但是mongo，外部获取不到网络包的长度，不确定一次能够执行多少，按照chatgpt的回复，mongo的包长度限制为16M，高版本为64M，想着预留这个接口，用户根据表的数量大小，自己预估单次数量即可，默认一次10条，在大多数情况下都不会超过16M。</p>
@@ -633,6 +645,16 @@
 <li><p><strong>delete_all_entry()</strong><br>  函数作用域：handle<br>  函数名称：delete_all_entry<br>  描述:  删除所有数据<br>  参数:<br>  无<br>  返回值:<br>  1. ret(bool): 成功值为true失败断言</p>
 </li>
 <li><p><strong>save_change_now()</strong><br>  函数作用域：handle<br>  函数名称：save_change_now<br>  描述:  立即保存所有修改<br>  参数:<br>  无<br>  返回值:<br>  无</p>
+</li>
+<li><p><strong>M:get_entry_by_in(in_values, key_values)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：get_entry_by_in<br>  描述:  IN 查询 类型 select * from t_player where player_id in(1,2,3);</p>
+<p>  参数:<br>  1. in_values(table): IN值列表<br>  2. key_valeus(table): 前缀key的value列表<br>  返回值:<br>  1. entry_data_list(table): 查询结果列表</p>
+</li>
+<li><p><strong>M:get_entry_by_limit(cursor, limit, sort, key_values, is_only_key)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：get_entry_by_limit<br>  描述:  分页查询 类型 select * from t_player where player_id &#x3D; 10001 limit 10;</p>
+<p>  参数:<br>  1. cursor(number or nil): 游标，从头开始传递nil，后续传递返回值cursor<br>  2. limit(number): 单次数量<br>  3. sort(number): 1升序 -1降序<br>  4. key_values(table): 前缀key的value列表<br>  5. is_only_key(bool): 是否仅仅返回keys_values<br>  返回值:<br>  1. cursor(number): 到达游标，下次调用用<br>  2. ret_list(table): 结果列表<br>  3. count(number): 总数 开头查询返回即可</p>
+</li>
+<li><p><strong>M:delete_entry_by_range(left, right, key_values)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：delete_entry_by_range<br>  描述:<br>  – 范围删除 包含left right<br>  – 可以有三种操作方式<br>  – [left, right] 范围删除  &gt;&#x3D; left &lt;&#x3D; right<br>  – [left, nil] 删除 &gt;&#x3D; left<br>  – [nil, right] 删除 &lt;&#x3D; right<br>  参数:<br>  1. left(number or string): 范围左值<br>  2. right(number or string): 范围右值<br>  3. key_values(table): key_values 最左前缀key值<br>  返回值:<br>  1. ret(bool): 成功返回true</p>
+</li>
+<li><p><strong>M:delete_entry_by_range(left, right, …)</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：delete_entry_by_range<br>  描述:<br>  – 范围删除 包含left right<br>  – 可以有三种操作方式<br>  – [left, right] 范围删除  &gt;&#x3D; left &lt;&#x3D; right<br>  – [left, nil] 删除 &gt;&#x3D; left<br>  – [nil, right] 删除 &lt;&#x3D; right<br>  参数:<br>  1. left(number or string): 范围左值<br>  2. right(number or string): 范围右值<br>  3. …(table): key_values 最左前缀key值<br>  返回值:<br>  1. ret(bool): 成功返回true</p>
 </li>
 </ul>
 <h1 id="orm-table-client-lua"><a href="#orm-table-client-lua" class="headerlink" title="orm_table_client.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/client/orm_table_client.lua">orm_table_client.lua</a></h1><p>访问代理，这个文件的实现，主要有两个目的</p>
