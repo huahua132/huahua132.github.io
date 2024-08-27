@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug6.png">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug7.png">
 <meta property="article:published_time" content="2024-08-03T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-01T08:49:05.914Z">
+<meta property="article:modified_time" content="2024-08-27T13:06:37.064Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -803,7 +803,7 @@
 
 <p>设置好断点。<br><img src="/img/skynet_fly_word/word_3/break_points_debug5.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="luaHelper调试启动"><a href="#luaHelper调试启动" class="headerlink" title="luaHelper调试启动"></a>luaHelper调试启动</h2><p>按F5即可。<br><img src="/img/skynet_fly_word/word_3/break_points_debug6.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="启动skynet-fly程序"><a href="#启动skynet-fly程序" class="headerlink" title="启动skynet_fly程序"></a>启动skynet_fly程序</h2><p><code>cd test</code><br><code>sh make.sh</code><br><code>sh script/restart.sh load_mods_debug.lua 0</code></p>
+<h2 id="启动skynet-fly程序"><a href="#启动skynet-fly程序" class="headerlink" title="启动skynet_fly程序"></a>启动skynet_fly程序</h2><p><code>cd test</code><br><code>sh make.sh</code><br><code>sh make/script/restart.sh load_mods_debug.lua 0</code></p>
 <p><img src="/img/skynet_fly_word/word_3/break_points_debug7.png" srcset="/img/loading.gif" lazyload><br>即可命中断点。</p>
 <h1 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h1><h2 id="限制一-不支持多服务同时调试"><a href="#限制一-不支持多服务同时调试" class="headerlink" title="限制一 不支持多服务同时调试"></a>限制一 不支持多服务同时调试</h2><p>可以看到配置项是指定了<code>调试的可热更服务名</code>和对应的<code>启动下标</code>。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua">   breakpoint_debug_module_name = <span class="hljs-string">&quot;debug_test_m&quot;</span>,   <span class="hljs-comment">--调试的可热更服务名</span><br>breakpoint_debug_module_index = <span class="hljs-number">2</span>,               <span class="hljs-comment">--启动下标</span><br>breakpoint_debug_host = <span class="hljs-string">&quot;127.0.0.1&quot;</span>,             <span class="hljs-comment">--vscode监听的IP</span><br>breakpoint_debug_port = <span class="hljs-number">8818</span>,                    <span class="hljs-comment">--vscode监听的端口</span><br></code></pre></td></tr></table></figure>

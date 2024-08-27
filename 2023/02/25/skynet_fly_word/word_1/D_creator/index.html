@@ -24,7 +24,7 @@
 <meta property="og:description" content="为啥需要脚手架？如果你对缘由感兴趣，可以看看这个 作用 生成skynet 启动配置文件 生成服务基础运维脚本  构建命令skynet_fly&#x2F;binshell&#x2F;make_server.sh skynet_fly_path 我们已构建skynet_fly&#x2F;examples&#x2F;webapp为例子  进入服务文件夹目录下。cd skynet_fly&#x2F;examples&#x2F;webapp  构建运维脚本。bash">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-27T03:33:59.616Z">
+<meta property="article:modified_time" content="2024-08-27T13:05:51.208Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.5k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          12 分钟
+          13 分钟
         
       </span>
     
@@ -793,11 +793,11 @@
 </li>
 </ol>
 <p>之后会生成以下文件。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs awk">make ./webapp_config.lua<br>make .<span class="hljs-regexp">/script/</span>run.sh                运行<br>make .<span class="hljs-regexp">/script/</span>reload.sh             热更可热更服务模块<br>make .<span class="hljs-regexp">/script/</span>check_reload.sh       自动检查文件修改并热更<br>make .<span class="hljs-regexp">/script/</span>kill_mod.sh           干掉某些可热更服务模块<br>make .<span class="hljs-regexp">/script/</span>stop.sh               停服<br>make .<span class="hljs-regexp">/script/</span>restart.sh            重启<br>make .<span class="hljs-regexp">/script/</span>try_again_reload.sh   热更失败后，可以重试热更<br>make .<span class="hljs-regexp">/script/</span>fasttime.sh           加速时间<br>make .<span class="hljs-regexp">/script/</span>check_hotfix.sh       检测刷热更脚本<br>make .<span class="hljs-regexp">/script/</span>hotfix.sh             刷热更脚本<br></code></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs awk">make ./webapp_config.lua<br>make .<span class="hljs-regexp">/make/</span>script/run.sh                运行<br>make .<span class="hljs-regexp">/make/</span>script/reload.sh             热更可热更服务模块<br>make .<span class="hljs-regexp">/make/</span>script/check_reload.sh       自动检查文件修改并热更<br>make .<span class="hljs-regexp">/make/</span>script/kill_mod.sh           干掉某些可热更服务模块<br>make .<span class="hljs-regexp">/make/</span>script/stop.sh               停服<br>make .<span class="hljs-regexp">/make/</span>script/restart.sh            重启<br>make .<span class="hljs-regexp">/make/</span>script/try_again_reload.sh   热更失败后，可以重试热更<br>make .<span class="hljs-regexp">/make/</span>script/fasttime.sh           加速时间<br>make .<span class="hljs-regexp">/make/</span>script/check_hotfix.sh       检测刷热更脚本<br>make .<span class="hljs-regexp">/make/</span>script/hotfix.sh             刷热更脚本<br></code></pre></td></tr></table></figure>
 
 <p>可以发现<code>webapp_config.lua</code>的生成规则是这样的<code>svr_name</code> .. <code>_config.lua</code>，也就是服务文件夹的名字拼接起来的，在skynet_fly默认服务文件夹名为<strong>服务名称</strong>，这个<strong>服务名称</strong>在<strong>集群远程rpc</strong>中会用到。</p>
 <ol start="3">
-<li>运行服务。<br>script&#x2F;run.sh 配置文件 是否守护进程(0 不启用 默认启用)<br><code>bash script/run.sh load_mods_prod.lua 0</code> 或者 <code>bash script/run.sh load_mods.lua 0</code></li>
+<li>运行服务。<br>make&#x2F;script&#x2F;run.sh 配置文件 是否守护进程(0 不启用 默认启用)<br><code>bash make/script/run.sh load_mods_prod.lua 0</code> 或者 <code>bash make/script/run.sh load_mods.lua 0</code></li>
 </ol>
 <ul>
 <li>守护进程运行，后台运行，log会写在日志文件，目前日志文件默认放在<code>logs/server.log</code>下面。</li>
@@ -806,13 +806,13 @@
 <p>我们可以使用不同的配置文件来启动服务，这样可以方便的区分，正式环境，开发环境，测试环境不同的配置。<br>也可以方便部署单机多服，单机就能模拟多机部署。</p>
 <p>比如以上的两种启动方式就相当于启动了两个服务。</p>
 <ul>
-<li>bash script&#x2F;run.sh load_mods_prod.lua     用生成环境配置</li>
-<li>bash script&#x2F;run.sh load_mods.lua          用测试环境配置</li>
+<li>bash make&#x2F;script&#x2F;run.sh load_mods_prod.lua     用生成环境配置</li>
+<li>bash make&#x2F;script&#x2F;run.sh load_mods.lua          用测试环境配置</li>
 </ul>
 <p>我们给指定的服务执行命令时，需要带上启动的<strong>配置文件名</strong>，因为当单机上部署多个相同服务时我们需要区分它们。<br>比如<strong>检查热更</strong></p>
 <ul>
-<li>正式环境 bash script&#x2F;check_reload.sh load_mods_prod.lua</li>
-<li>测试环境 bash script&#x2F;check_reload.sh load_mods.lua</li>
+<li>正式环境 bash make&#x2F;script&#x2F;check_reload.sh load_mods_prod.lua</li>
+<li>测试环境 bash make&#x2F;script&#x2F;check_reload.sh load_mods.lua</li>
 </ul>
 <h1 id="命令使用注意点"><a href="#命令使用注意点" class="headerlink" title="命令使用注意点"></a>命令使用注意点</h1><p>script中的脚本命令并不能在任意目录下执行。script中的shell命令，都默认当前路径的服务的根目录，所有必须在服务的根目录执行。<br>比如你cd 到script目录，执行相关命令就不行。</p>
 <p>上面脚本有关于热更的命令，我们先不急着了解热更命令，我们先看看下一节，如何配置运行可热更服务。</p>
@@ -913,9 +913,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" title="前言">
+                      <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前言</span>
+                        <span class="hidden-mobile">开发环境推荐</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -923,8 +923,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐">
-                        <span class="hidden-mobile">开发环境推荐</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译">
+                        <span class="hidden-mobile">编译</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
