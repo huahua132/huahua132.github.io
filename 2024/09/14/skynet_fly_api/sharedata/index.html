@@ -24,7 +24,7 @@
 <meta property="og:description" content="sharedata.lua加载配置 M.load(dir_list, mode)  函数作用域：M 对象的成员函数  描述:  以mode方式加载指定dir_list目录列表的lua配置文件  参数:  - dir_list (table): 路径列表  - mode (number): 模式  访问对象 M:new(file_path, mode)  函数作用域：M 对象的成员函数  描述:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-14T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-13T03:25:19.817Z">
+<meta property="article:modified_time" content="2024-09-13T04:14:43.086Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -345,15 +345,6 @@
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/orm/" title="orm"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">orm</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
            ">
@@ -367,6 +358,15 @@
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">sharedata.lua 共享配置数据</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/28/skynet_fly_api/orm/" title="orm"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm</span>
         </a>
       
     
@@ -416,7 +416,7 @@
 <li><strong>M.load(dir_list, mode)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  以mode方式加载指定dir_list目录列表的lua配置文件<br>  参数:<br>  - dir_list (table): 路径列表<br>  - mode (number): 模式</li>
 </ul>
 <h1 id="访问对象"><a href="#访问对象" class="headerlink" title="访问对象"></a>访问对象</h1><ul>
-<li><p><strong>M:new(file_path, mode)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  新建一个file_path配置的访问对象<br>  参数:<br>  - file_path (table): 配置文件路径<br>  - mode (number): 对于加载模式<br>  返回值:<br>  - obj(table): 访问对象</p>
+<li><p><strong>M:new(file_path, mode)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  新建一个file_path配置的访问对象<br>  参数:<br>  - file_path (table): 配置文件路径<br>  - mode (number): 加载模式<br>  返回值:<br>  - obj(table): 访问对象</p>
 </li>
 <li><p><strong>M:set_check_field(field_name, func)</strong><br>  函数作用域：M:new() 对象的成员函数<br>  描述:  设置一行配置中，单个字段检查函数<br>  参数:<br>  - field_name (string): 字段名<br>  - func (function): 检查函数<br>  返回值:<br>  - obj(table): 访问对象</p>
 </li>
