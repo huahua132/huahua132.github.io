@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言由于skynet每个服务都是独立的lua虚拟机，一般游戏开发又需要加载大量的配置文件，如果每个服务都加载一遍，会造成过多的内存浪费，所有skynet就提供了sharedata,sharetable共享配置数据的手段。由于两种方案各有优缺点，所以我在封装实现上让使用者可以任选其一，在make&#x2F;script增加热更配置命令，方便于热更配置。 优缺点对比sharedata 优点  c内存占">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-14T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-13T03:53:05.093Z">
+<meta property="article:modified_time" content="2024-09-14T09:59:40.459Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -823,7 +823,7 @@
 <h2 id="热更"><a href="#热更" class="headerlink" title="热更"></a>热更</h2><p>通过记录文件修改时间，决定哪些文件需要更新，在script增加触发热更检查命令。</p>
 <h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>通常对于配置访问，需要检查<strong>配置合理性</strong>、<strong>建立访问索引</strong>。</p>
 <ul>
-<li><p><strong>配置合理性</strong><br>对于配置合理性，可以在配置导出阶级检查，也可以在重新运行时检查，我在设计上对于运行时检查做了少量支持。</p>
+<li><p><strong>配置合理性</strong><br>对于配置合理性，可以在配置导出阶级检查，也可以在程序运行时检查，我在设计上对于运行时检查做了少量支持。</p>
 </li>
 <li><p><strong>建立访问索引</strong><br>我们需要建立<strong>map</strong>,<strong>maplist</strong>索引。</p>
 </li>
