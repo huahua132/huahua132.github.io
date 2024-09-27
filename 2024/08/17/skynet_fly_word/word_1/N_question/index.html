@@ -24,7 +24,7 @@
 <meta property="og:description" content="问题11234root@VirtualBox:&#x2F;skynet_fly&#x2F;test# sh ..&#x2F;binshell&#x2F;make_server.sh ..&#x2F;: not found&#x2F;make_server.sh: 3:: not found&#x2F;make_server.sh: 5:..&#x2F;binshell&#x2F;make_server.sh: 24: Syntax error: end of file unexpect">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-17T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-09-27T07:16:56.908Z">
+<meta property="article:modified_time" content="2024-09-27T07:34:22.093Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          4k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          23 分钟
+          34 分钟
         
       </span>
     
@@ -819,6 +819,19 @@
 <p>永久禁用有问题的仓库<br> 要永久禁用特定仓库，可以如下操作：<br>yum-config-manager –disable <repoid></p>
 <p>删除有问题的仓库<br> 如果确认不再使用某个仓库，可以直接删除仓库配置文件：<br>rm &#x2F;etc&#x2F;yum.repos.d&#x2F;<repoid>.repo</p>
 <p>通过上面的方法，你应该能够解决 CentOS 系统中镜像源无法解析的问题。如果还有其他问题或需要进一步的帮助，欢迎继续提问。</p>
+<h1 id="centos-升级gcc问题"><a href="#centos-升级gcc问题" class="headerlink" title="centos 升级gcc问题"></a>centos 升级gcc问题</h1><p>这个错误提示是说你正在尝试安装的 devtoolset-9-binutils-2.32-16.el7.x86_64.rpm 软件包的公钥尚未安装。我们需要导入用于签署这些软件包的公钥。<br>由于 CentOS 7 的软件包通常是由 CentOS 项目或相关的 SCL (Software Collections) 项目团队签署的，你可能需要导入用于签署这些软件包的额外公钥。<br>导入 GPG 公钥<br>执行以下命令导入必要的 GPG 公钥：<br>sudo rpm –import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-CentOS-7<br>sudo rpm –import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-CentOS-SIG-SCLo</p>
+<p>如果你还没有导入 Aliyun 提供的密钥，也可以执行以下命令：<br>sudo rpm –import <a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7">https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<p>再次更新 YUM 缓存<br>在导入公钥之后，我们需要刷新 YUM 的缓存来确保已经安装的公钥被识别：<br>sudo yum clean all<br>sudo yum makecache</p>
+<p>重新尝试安装软件包<br>现在重新尝试安装你需要的软件包：<br>sudo yum install devtoolset-9-gcc-c++</p>
+<p>疑难解答步骤</p>
+<p>检查并导入所有必要的公钥：<br> 有时，需要导入多个公钥来覆盖所有可能的软件包源。</p>
+<h1 id="CentOS-7-Main-Key"><a href="#CentOS-7-Main-Key" class="headerlink" title="CentOS 7 Main Key"></a>CentOS 7 Main Key</h1><p>sudo rpm –import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-CentOS-7</p>
+<h1 id="SCLo-SIG-Key"><a href="#SCLo-SIG-Key" class="headerlink" title="SCLo SIG Key"></a>SCLo SIG Key</h1><p>sudo rpm –import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-CentOS-SIG-SCLo</p>
+<h1 id="Aliyun-provided-key"><a href="#Aliyun-provided-key" class="headerlink" title="Aliyun provided key"></a>Aliyun provided key</h1><p>sudo rpm –import <a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7">https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7</a></p>
+<p>检查并更新 YUM 配置文件：<br> 确保你的 &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-SCLo-scl.repo 和 &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-SCLo-scl-rh.repo 文件中的 gpgkey 字段正确指向刚才导入的 GPG 公钥。</p>
+<p>调试信息：<br> 如果问题依然存在，启用更多的调试信息以帮助识别问题：<br>sudo yum install -y devtoolset-9-gcc-c++ –setopt&#x3D;debuglevel&#x3D;10</p>
+<p>临时禁用 GPG 检查：<br> 虽然不推荐，但如果以上步骤无法解决问题，可以暂时禁用 GPG 检查仅用于调试：<br>sudo yum install –nogpgcheck devtoolset-9-gcc-c++</p>
+<p>希望这些步骤能帮助你解决当前的问题。如果仍然遇到问题，可以考虑参阅 CentOS或阿里云的官方文档 或社区论坛寻求更多的帮助。</p>
 
                 
               </div>
