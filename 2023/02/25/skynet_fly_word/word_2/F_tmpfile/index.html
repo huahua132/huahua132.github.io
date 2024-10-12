@@ -16,16 +16,16 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="chinese_chess_config.lua由于生成的script脚本中有很多命令都需要通过debug_console入口去操作，比如检测热更，快进时间。所有需要有一个地方拿到启动时的debug_port参数，由于生成的chinese_chess_config.lua会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。 module_info用">
+    <meta name="description" content="chinese_chess_config.lua由于生成的make&#x2F;script脚本中有很多命令都需要通过debug_console入口去操作，比如检测热更，快进时间。所有需要有一个地方拿到启动时的debug_port参数，由于生成的chinese_chess_config.lua会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。 mo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="启动时生成的临时文件说明">
 <meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_2/F_tmpfile/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="chinese_chess_config.lua由于生成的script脚本中有很多命令都需要通过debug_console入口去操作，比如检测热更，快进时间。所有需要有一个地方拿到启动时的debug_port参数，由于生成的chinese_chess_config.lua会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。 module_info用">
+<meta property="og:description" content="chinese_chess_config.lua由于生成的make&#x2F;script脚本中有很多命令都需要通过debug_console入口去操作，比如检测热更，快进时间。所有需要有一个地方拿到启动时的debug_port参数，由于生成的chinese_chess_config.lua会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。 mo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_2/tmpfile.png">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-05T06:24:32.393Z">
+<meta property="article:modified_time" content="2024-10-12T03:32:42.745Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(40)</span>
+        <span class="list-group-count">(41)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -442,7 +442,7 @@
         aria-expanded="true"
       >
         基础篇
-        <span class="list-group-count">(6)</span>
+        <span class="list-group-count">(7)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -505,6 +505,15 @@
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">启动时生成的临时文件说明</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" title="对安全关服的支持"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">对安全关服的支持</span>
         </a>
       
     
@@ -800,7 +809,7 @@
               <div class="markdown-body">
                 
                 <p><img src="/img/skynet_fly_word/word_2/tmpfile.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="chinese-chess-config-lua"><a href="#chinese-chess-config-lua" class="headerlink" title="chinese_chess_config.lua"></a>chinese_chess_config.lua</h1><p>由于生成的<strong>script</strong>脚本中有很多命令都需要通过debug_console入口去操作，比如<strong>检测热更</strong>，<strong>快进时间</strong>。所有需要有一个地方拿到启动时的debug_port参数，由于生成的<strong>chinese_chess_config.lua</strong>会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。</p>
+<h1 id="chinese-chess-config-lua"><a href="#chinese-chess-config-lua" class="headerlink" title="chinese_chess_config.lua"></a>chinese_chess_config.lua</h1><p>由于生成的<strong>make&#x2F;script</strong>脚本中有很多命令都需要通过debug_console入口去操作，比如<strong>检测热更</strong>，<strong>快进时间</strong>。所有需要有一个地方拿到启动时的debug_port参数，由于生成的<strong>chinese_chess_config.lua</strong>会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。</p>
 <h1 id="module-info"><a href="#module-info" class="headerlink" title="module_info"></a>module_info</h1><p>用于记录<strong>可热更模块服务</strong>加载文件的修改时间，用于后续检测热更。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.time_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/time_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1712716696</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.timer&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/timer.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.string_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/string_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.client.contriner_client&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/client/contriner_client.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1712131772</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.log&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/log.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709621604</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.etc.module_info&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/etc/module_info.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;share_config_m&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/module/share_config_m.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.contriner.contriner_interface&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/contriner/contriner_interface.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.skynet_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/skynet_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.write_mod_required&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/write_mod_required.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>        [<span class="hljs-string">&#x27;skynet-fly.utils.table_util&#x27;</span>] = &#123;<br>                [<span class="hljs-string">&#x27;dir&#x27;</span>] = <span class="hljs-string">&#x27;../../skynet_fly/lualib/skynet-fly/utils/table_util.lua&#x27;</span>,<br>                [<span class="hljs-string">&#x27;last_change_time&#x27;</span>] = <span class="hljs-number">1709543644</span>,<br>        &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>这是其中一个的内容。</p>
@@ -904,15 +913,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用">
+                      <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">rpc调用</span>
+                        <span class="hidden-mobile">检查热更的使用以及原理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间">
+                        <span class="hidden-mobile">快进时间</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
