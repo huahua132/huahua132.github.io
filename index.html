@@ -191,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="不积跬步，无以至千里！追求完美"></span>
+            <span id="subtitle" data-typed-text="不积跬步，无以至千里！"></span>
           
         </div>
 
@@ -222,6 +222,74 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/10/25/skynet_fly_word/word_3/S_record/" target="_self">
+          服务录像于重放
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/25/skynet_fly_word/word_3/S_record/" target="_self">
+        <div>
+          前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，我们不太方案对整个进程进行录像，对于skynet的单个服务，能保证消息是同步处理的，所以我选择对单个服务录像，可以同时录制多个服务。录像的实现对于skynet来说，非常方便，主要就是把所有消息记录下来，重放时读取消息，重放消息即可
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-10-25 22:00" pubdate>
+              2024-10-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -807,67 +875,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/03/24/skynet_frame/reent/" target="_self">
-          详解skynet 频发的重入问题
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/24/skynet_frame/reent/" target="_self">
-        <div>
-          例子说明我们假设有2个服务，1个用户。银行服务 提供转账。分控服务 对用户进行风控，提供阻止转账取款功能。用户一 用手机转账。 bank_service.lua 1234567891011121314151617181920local account_amonut_map = &#123;&#125;   --账户余额local CMD = &#123;&#125;--转账function CMD
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-03-24 11:33" pubdate>
-              2024-03-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-frame/">#skynet_frame</a>
             
           </div>
         
