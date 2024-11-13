@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="orm数据库关系映射api 修改记录2024&#x2F;8&#x2F;16增加APIget_entry_by_limit分页查询get_entry_by_inIN 查询 2024&#x2F;8&#x2F;17delete_entry_by_range 范围删除">
+    <meta name="description" content="orm数据库关系映射api 修改记录2024&#x2F;8&#x2F;16增加APIget_entry_by_limit分页查询get_entry_by_inIN 查询 2024&#x2F;8&#x2F;17delete_entry_by_range 范围删除 2024&#x2F;11&#x2F;13热更支持 之前热更存在这个问题。 热更orm_table 注意点如果一个服务访问了orm_tabl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="orm数据库关系映射">
 <meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_3/H_orm/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="orm数据库关系映射api 修改记录2024&#x2F;8&#x2F;16增加APIget_entry_by_limit分页查询get_entry_by_inIN 查询 2024&#x2F;8&#x2F;17delete_entry_by_range 范围删除">
+<meta property="og:description" content="orm数据库关系映射api 修改记录2024&#x2F;8&#x2F;16增加APIget_entry_by_limit分页查询get_entry_by_inIN 查询 2024&#x2F;8&#x2F;17delete_entry_by_range 范围删除 2024&#x2F;11&#x2F;13热更支持 之前热更存在这个问题。 热更orm_table 注意点如果一个服务访问了orm_tabl">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-21T11:34:37.590Z">
+<meta property="article:modified_time" content="2024-11-13T12:43:44.977Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          126 字
+          2.3k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          2 分钟
+          20 分钟
         
       </span>
     
@@ -481,19 +481,19 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">检查热更的使用以及原理</span>
+          <span class="category-post">快进时间</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">快进时间</span>
+          <span class="category-post">检查热更的使用以及原理</span>
         </a>
       
     
@@ -827,6 +827,28 @@
                 <p><a href="https://huahua132.github.io/2023/12/24/skynet_fly_ss/orm/">orm数据库关系映射</a><br><a href="https://huahua132.github.io/2024/01/28/skynet_fly_api/orm/">api</a></p>
 <h1 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h1><h2 id="2024-x2F-8-x2F-16"><a href="#2024-x2F-8-x2F-16" class="headerlink" title="2024&#x2F;8&#x2F;16"></a>2024&#x2F;8&#x2F;16</h2><p>增加API<br><code>get_entry_by_limit</code>分页查询<br><code>get_entry_by_in</code>IN 查询</p>
 <h2 id="2024-x2F-8-x2F-17"><a href="#2024-x2F-8-x2F-17" class="headerlink" title="2024&#x2F;8&#x2F;17"></a>2024&#x2F;8&#x2F;17</h2><p><code>delete_entry_by_range</code> 范围删除</p>
+<h2 id="2024-x2F-11-x2F-13"><a href="#2024-x2F-11-x2F-13" class="headerlink" title="2024&#x2F;11&#x2F;13"></a>2024&#x2F;11&#x2F;13</h2><p>热更支持</p>
+<p>之前热更存在这个问题。</p>
+<h3 id="热更orm-table-注意点"><a href="#热更orm-table-注意点" class="headerlink" title="热更orm_table 注意点"></a>热更orm_table 注意点</h3><p>如果一个服务访问了orm_table_m服务，这个服务同时跟orm_table_m一起热更，由于 <strong>使用orm的限制</strong>的特性，旧的orm服务不在提供服务，然后旧的访问orm的服务又不能切换访问到新的orm服务。这时旧的服务将访问不了orm服务。</p>
+<p>然后就暂时禁用的orm的热更支持。</p>
+<h3 id="orm-table-m不支持热更"><a href="#orm-table-m不支持热更" class="headerlink" title="orm_table_m不支持热更"></a><strong>orm_table_m不支持热更</strong></h3><p>由于<strong>热更orm_table 注意点</strong>的问题，会导致旧服务<strong>访问不了orm_table_m服务</strong>，这很可能不符合业务预期，所以就禁止了<strong>orm_table_m</strong>热更，对于<strong>orm</strong>的修改，都需要重启更新。</p>
+<p>仔细想了一段时间，orm热更还是得支持，不然怎么做到大部分情况下不停服更新。为了让orm能热更就得解决<strong>热更orm_table 注意点</strong>这个冲突特性的问题。<br>办法就是旧的服务能切换访问新的orm服务，至于旧服务访问新访问存在的问题，就只能使用者，自己去把握好，如果想热更的好，尽量不要改动到<code>handle</code>的参数和返回值，不然旧服务访问新的orm就可能出错。</p>
+<h3 id="出错情况演示"><a href="#出错情况演示" class="headerlink" title="出错情况演示:"></a>出错情况演示:</h3><p>orm 服务</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.init</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> adapter = ormadapter_mysql:new(<span class="hljs-string">&quot;admin&quot;</span>)<br>    g_orm_obj = ormtable:new(<span class="hljs-string">&quot;t_player&quot;</span>)<br>    :int64(<span class="hljs-string">&quot;player_id&quot;</span>)<br>    :int64(<span class="hljs-string">&quot;nickname&quot;</span>)<br>    :int8(<span class="hljs-string">&quot;sex&quot;</span>)<br>    :int8(<span class="hljs-string">&quot;status&quot;</span>)<br>    :set_keys(<span class="hljs-string">&quot;player_id&quot;</span>)<br>    :builder(adapter)<br><br>    <span class="hljs-keyword">return</span> g_orm_obj<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> handle = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle.get_player</span><span class="hljs-params">(player_id)</span></span><br>    <span class="hljs-keyword">local</span> entry = g_orm_obj:get_one_entry(player_id)<br>    <span class="hljs-keyword">return</span> entry:get_entry_data()<br><span class="hljs-keyword">end</span><br><br>M.handle = handle<br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+
+<p>test_m 服务 </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    skynet.fork(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        orm_table_client:instance(<span class="hljs-string">&quot;player&quot;</span>):get_player(<span class="hljs-number">100001</span>)<br>    <span class="hljs-keyword">end</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+
+<p>修改后 </p>
+<p>orm 服务</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.init</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> adapter = ormadapter_mysql:new(<span class="hljs-string">&quot;admin&quot;</span>)<br>    g_orm_obj = ormtable:new(<span class="hljs-string">&quot;t_player&quot;</span>)<br>    :int64(<span class="hljs-string">&quot;player_id&quot;</span>)<br>    :int64(<span class="hljs-string">&quot;nickname&quot;</span>)<br>    :int8(<span class="hljs-string">&quot;sex&quot;</span>)<br>    :int8(<span class="hljs-string">&quot;status&quot;</span>)<br>    :set_keys(<span class="hljs-string">&quot;player_id&quot;</span>)<br>    :builder(adapter)<br><br>    <span class="hljs-keyword">return</span> g_orm_obj<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> handle = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handle.get_player</span><span class="hljs-params">(player_id, player_id_2)</span></span><br>    <span class="hljs-keyword">local</span> entry = g_orm_obj:get_one_entry(player_id)<br>    <span class="hljs-keyword">local</span> entry_2 = g_orm_obj:get_one_entry(player_id, player_id_2)<br>    <span class="hljs-keyword">return</span> entry:get_entry_data(), entry_2:get_entry_data()<br><span class="hljs-keyword">end</span><br><br>M.handle = handle<br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+
+<p>test_m 服务 </p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    skynet.fork(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        orm_table_client:instance(<span class="hljs-string">&quot;player&quot;</span>):get_player(<span class="hljs-number">100001</span>, <span class="hljs-number">100002</span>)<br>    <span class="hljs-keyword">end</span>)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+
+<p>热更</p>
+<p>此时如果旧的test_m服务调用了新的orm player服务的get_player， get_player指定报错。我觉得需要热更的情况下，更改orm的handle方法的话，就直接新增一个方法吧。</p>
+<h3 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h3><p>热更情况下，不要修改orm 原来的handle函数，只新增，这样确保不会有问题。</p>
 
                 
               </div>
@@ -924,9 +946,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_3/M_http/" title="http服务">
+                      <a href="/2023/02/25/skynet_fly_word/word_3/F_redis/" title="redis的封装">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">http服务</span>
+                        <span class="hidden-mobile">redis的封装</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -934,8 +956,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_3/K_log/" title="日志服务">
-                        <span class="hidden-mobile">日志服务</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_3/G_point/" title="整点报时">
+                        <span class="hidden-mobile">整点报时</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
