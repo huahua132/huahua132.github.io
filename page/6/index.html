@@ -738,15 +738,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
-          用户是如何匹配进入到游戏的？
+        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
+          大厅服如何对模块功能进行拆分隔离？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
         <div>
-          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
+          简介通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通过不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。 skynet_fly_demo是如何做的？一个独立的功能模块无法是需要处理5种事件  客户端消息 服务器之间的消息 模块之间的接口调用 用户的登录，登出事情 自己注册的定时
         </div>
       </a>
 
@@ -806,15 +806,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" target="_self">
-          如何在skynet_fly_demo新增一个游戏？
+        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+          用户是如何匹配进入到游戏的？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/F_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
         <div>
-          简介通常基于游戏大厅的对战类型游戏不会只有一款玩法，像英雄联盟会有匹配场，排位场，大乱斗，还有一些限时玩法，克隆，无限火力。这些特殊玩法，通常分开开服比较好，相互隔离不影响。skynet_fly_demo利用了skynet_fly房间类游戏架构可以非常快速的搭建房间对战类游戏，非常适合这种架构模式。那么如何在skynet_fly_demo新增一个游戏？我将已新增一个数字炸弹游戏为例子，进行逐步讲解
+          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
         </div>
       </a>
 
