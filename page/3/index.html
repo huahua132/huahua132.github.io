@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/01/07/skynet_fly_api/rpc/" target="_self">
+          内部rpc调用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/07/skynet_fly_api/rpc/" target="_self">
+        <div>
+          关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-07 09:00" pubdate>
+              2024-01-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" target="_self">
           关于增加skynet_fly orm_table_m 可热更服务
         </a>
@@ -735,67 +796,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-10-22 13:42" pubdate>
               2023-10-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
-          关于room_game可热更匹配房间类游戏架构的优化
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
-        <div>
-          前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-15 08:00" pubdate>
-              2023-10-15
             </time>
           </div>
         

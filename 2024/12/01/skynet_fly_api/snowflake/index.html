@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关联文件 frpc_client.lua  最常用API M:new(svr_name,module_name,instance_name) 创建调用对象。  参数：  * svr_name(string) 访问节点名称。  * module_name(string)  模块名称，需要send或者call通信的模块名称(相当于一级索引)。  * instance_name(string) 实例名称">
+    <meta name="description" content="利用雪花算法生成全局GUID。 machine_id 机器号 可分配 8191个 time 时间支持到 21060207 14:28:15  也就是说到这个时间，这个雪花算法就用不了了 incr 同一秒支持分配 262143  分配guid M.new_guid()  函数作用域：M 对象的成员函数  描述:  分配guid  参数:  无  返回值  guid(number): 全局唯一ID">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远程rpc调用">
-<meta property="og:url" content="https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/index.html">
+<meta property="og:title" content="全局唯一ID(guid)的生成">
+<meta property="og:url" content="https://huahua132.github.io/2024/12/01/skynet_fly_api/snowflake/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="关联文件 frpc_client.lua  最常用API M:new(svr_name,module_name,instance_name) 创建调用对象。  参数：  * svr_name(string) 访问节点名称。  * module_name(string)  模块名称，需要send或者call通信的模块名称(相当于一级索引)。  * instance_name(string) 实例名称">
+<meta property="og:description" content="利用雪花算法生成全局GUID。 machine_id 机器号 可分配 8191个 time 时间支持到 21060207 14:28:15  也就是说到这个时间，这个雪花算法就用不了了 incr 同一秒支持分配 262143  分配guid M.new_guid()  函数作用域：M 对象的成员函数  描述:  分配guid  参数:  无  返回值  guid(number): 全局唯一ID">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-07T03:30:00.000Z">
-<meta property="article:modified_time" content="2024-09-10T09:50:57.794Z">
+<meta property="article:published_time" content="2024-12-01T02:30:00.000Z">
+<meta property="article:modified_time" content="2024-12-05T12:26:44.541Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>远程rpc调用 - huahua132 blog</title>
+  <title>全局唯一ID(guid)的生成 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="远程rpc调用"></span>
+            <span id="subtitle" data-typed-text="全局唯一ID(guid)的生成"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-07 11:30" pubdate>
-          2024年1月7日 中午
+        <time datetime="2024-12-01 10:30" pubdate>
+          2024年12月1日 上午
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          511 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          23 分钟
+          5 分钟
         
       </span>
     
@@ -356,7 +356,7 @@
       
         <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">远程rpc调用</span>
         </a>
       
@@ -392,7 +392,7 @@
       
         <a href="/2024/12/01/skynet_fly_api/snowflake/" title="全局唯一ID(guid)的生成"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">全局唯一ID(guid)的生成</span>
         </a>
       
@@ -416,110 +416,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">远程rpc调用</h1>
+            <h1 style="display: none">全局唯一ID(guid)的生成</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="关联文件"><a href="#关联文件" class="headerlink" title="关联文件"></a>关联文件</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/client/frpc_client.lua">frpc_client.lua</a></li>
+                <h1 id="利用雪花算法生成全局GUID。"><a href="#利用雪花算法生成全局GUID。" class="headerlink" title="利用雪花算法生成全局GUID。"></a>利用雪花算法生成全局GUID。</h1><ul>
+<li>machine_id 机器号 可分配 8191个</li>
+<li>time 时间支持到 21060207 14:28:15  也就是说到这个时间，这个雪花算法就用不了了</li>
+<li>incr 同一秒支持分配 262143</li>
 </ul>
-<h1 id="最常用API"><a href="#最常用API" class="headerlink" title="最常用API"></a>最常用API</h1><ul>
-<li><p><strong>M:new(svr_name,module_name,instance_name)</strong> 创建调用对象。<br>  参数：<br>  * <strong>svr_name(string)</strong> 访问节点名称。<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
-</li>
-<li><p><strong>M:instance(svr_name,module_name,instance_name)</strong> 使用单例访问对象(很多时候并不需要创建管理rpc调用对象)。<br>  参数：<br>  * <strong>svr_name(string)</strong> 访问节点名称。<br>  * <strong>module_name(string)</strong>  模块名称，需要send或者call通信的模块名称(相当于一级索引)。<br>  * <strong>instance_name(string)</strong> 实例名称，它是模块的二级分类(相当于二级索引)。<br>  返回值：<br>  1. <strong>client(table)</strong> rpc客户端对象。</p>
-</li>
-<li><p><strong>M:one_balance_send(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用balance_send的方式发送消息<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。</p>
-</li>
-<li><p><strong>M:one_balance_call(…)</strong> 跟<strong>one_balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
-</li>
-<li><p><strong>M:one_mod_send(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用mod_send的方式发送消息。<br>  参数: <strong>server</strong>接受的参数。<br>  返回值: 无。</p>
-</li>
-<li><p><strong>M:one_mod_call(…)</strong> 跟<strong>balance_send</strong>一致，唯一区别是使用<strong>call</strong>的方式发消息。</p>
-</li>
-<li><p><strong>M:one_send_by_name(…)</strong> 通过skynet.regiter(name)注册的别名方式调用，module_name填对应别名。</p>
-</li>
-<li><p><strong>M:one_call_by_name(…)</strong> 通过skynet.regiter(name)注册的别名方式调用，module_name填对应别名。</p>
-</li>
-<li><p><strong>M:one_broadcast(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用broadcast的方式发送消息。</p>
-</li>
-<li><p><strong>M:one_broadcast_call(…)</strong> 用简单轮询负载均衡给单个结点的module_name模板用broadcast_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_balance_send(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用balance_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_balance_call(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用balance_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_mod_send(…)</strong> 用svr_id映射的方式给单个结点的module_name模板用mod_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_mod_call(name)</strong> 用svr_id映射的方式给单个结点的module_name模板用mod_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_send_by_name(…)</strong> 通过skynet.regiter(name)注册的别名方式调用，module_name填对应别名。</p>
-</li>
-<li><p><strong>M:byid_call_by_name(…)</strong> 通过skynet.regiter(name)注册的别名方式调用，module_name填对应别名。</p>
-</li>
-<li><p><strong>M:byid_broadcast(name)</strong> 用svr_id映射的方式给单个结点的module_name模板用broadcast的方式发送消息。</p>
-</li>
-<li><p><strong>M:byid_broadcast_call(name)</strong> 用svr_id映射的方式给单个结点的module_name模板用broadcast_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_balance_send(…)</strong> 给所有结点的module_name模板用balance_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_balance_call(…)</strong> 给所有结点的module_name模板用balance_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_mod_send(…)</strong> 给所有结点的module_name模板用mod_send的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_mod_call(name)</strong> 给所有结点的module_name模板用mod_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_send_by_name(…)</strong> 通过skynet.regiter(name)注册的别名方式调用，module_name填对应别名。</p>
-</li>
-<li><p><strong>M:all_call_by_name(…)</strong> 通过skynet.regiter(name)注册的别名方式调用，module_name填对应别名。</p>
-</li>
-<li><p><strong>M:all_broadcast(name)</strong> 给所有结点的module_name模板用broadcast的方式发送消息。</p>
-</li>
-<li><p><strong>M:all_broadcast_call(name)</strong> 给所有结点的module_name模板用broadcast_call的方式发送消息。</p>
-</li>
-<li><p><strong>M:one_balance_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:one_balance_call_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:one_mod_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:one_mod_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:one_broadcast_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:one_broadcast_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:byid_balance_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:byid_balance_call_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:byid_mod_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:byid_mod_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:byid_broadcast_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:byid_broadcast_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:all_balance_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:all_balance_call_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:all_mod_send_by_name(…)</strong> </p>
-</li>
-<li><p><strong>M:all_mod_call_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:all_broadcast_by_name(name)</strong> </p>
-</li>
-<li><p><strong>M:all_broadcast_call_by_name(name)</strong></p>
-</li>
+<h1 id="分配guid"><a href="#分配guid" class="headerlink" title="分配guid"></a>分配guid</h1><ul>
+<li><strong>M.new_guid()</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  分配guid<br>  参数:<br>  无<br>  返回值<br>  guid(number): 全局唯一ID</li>
 </ul>
-<h1 id="不常用API"><a href="#不常用API" class="headerlink" title="不常用API"></a>不常用API</h1><ul>
-<li><strong>M:set_svr_id(…)</strong> 指定服务id。</li>
-<li><strong>M:set_instance_name(…)</strong> 指定访问实例名</li>
-<li><strong>M:set_mod_num(…)</strong> 指定mod映射数</li>
+<h1 id="获取机器号"><a href="#获取机器号" class="headerlink" title="获取机器号"></a>获取机器号</h1><ul>
+<li><strong>M.get_machine_id(guid)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  分配guid<br>  参数:<br>  guid(number): 全局唯一ID<br>  返回值<br>  machine_id(number): 机器号</li>
 </ul>
-<h1 id="使用注意点："><a href="#使用注意点：" class="headerlink" title="使用注意点："></a>使用注意点：</h1><p>服务start之前不能使用rpc调用，因为服务还没有准备好，如果这样使用会抛出错误。</p>
+<h1 id="获取生成时间"><a href="#获取生成时间" class="headerlink" title="获取生成时间"></a>获取生成时间</h1><ul>
+<li><strong>M.get_time(guid)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  分配guid<br>  参数:<br>  guid(number): 全局唯一ID<br>  返回值<br>  time(number): 生成时间</li>
+</ul>
+<h1 id="获取自增号"><a href="#获取自增号" class="headerlink" title="获取自增号"></a>获取自增号</h1><ul>
+<li><strong>M.get_incr(guid)</strong><br>  函数作用域：M 对象的成员函数<br>  描述:  分配guid<br>  参数:<br>  guid(number): 全局唯一ID<br>  返回值<br>  incr(number): 自增号</li>
+</ul>
+<p>需要在share_config_m的default_cfg.server_cfg中配置 machine_id 机器号，机器号全局唯一才能保证guid不重复。</p>
 
                 
               </div>
@@ -565,8 +484,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>远程rpc调用</div>
-      <div>https://huahua132.github.io/2024/01/07/skynet_fly_api/rpcf/</div>
+      <div>全局唯一ID(guid)的生成</div>
+      <div>https://huahua132.github.io/2024/12/01/skynet_fly_api/snowflake/</div>
     </div>
     <div class="license-meta">
       
@@ -578,7 +497,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月7日</div>
+          <div>2024年12月1日</div>
         </div>
       
       
@@ -610,18 +529,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">可热更模块的启动配置项</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用">
-                        <span class="hidden-mobile">内部rpc调用</span>
+                      <a href="/2024/10/27/skynet_fly_word/word_3/S_record/" title="服务录像与重放">
+                        <span class="hidden-mobile">服务录像与重放</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
