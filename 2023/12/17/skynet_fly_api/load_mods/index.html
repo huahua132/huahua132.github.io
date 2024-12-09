@@ -24,7 +24,7 @@
 <meta property="og:description" content="作用定位可热更服务的启动配置文件，用于配置可插拔的可热更服务，可以自定义启动顺序，数量,配置参数，推迟最后启动。 示例参考AB_question 1234567891011121314return &amp;#123;	A_m &#x3D; &amp;#123;		launch_seq &#x3D; 1,		launch_num &#x3D; 1,	&amp;#125;,    B_m &#x3D; &amp;#123;        launch_seq &#x3D; 2,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-17T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-05T12:29:23.379Z">
+<meta property="article:modified_time" content="2024-12-05T12:50:22.422Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.2k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -318,19 +318,19 @@
     
       
       
-        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
+        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">新增可热更服务</span>
+          <span class="category-post">可热更模块的启动配置项</span>
         </a>
       
     
       
       
-        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
+        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更模块的启动配置项</span>
+          <span class="category-post">新增可热更服务</span>
         </a>
       
     
@@ -345,6 +345,15 @@
     
       
       
+        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">内部rpc调用</span>
+        </a>
+      
+    
+      
+      
         <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
            ">
@@ -354,10 +363,10 @@
     
       
       
-        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
+        <a href="/2024/12/01/skynet_fly_api/snowflake/" title="全局唯一ID(guid)的生成"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">内部rpc调用</span>
+          <span class="category-post">全局唯一ID(guid)的生成</span>
         </a>
       
     
@@ -376,15 +385,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">定时器的使用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/12/01/skynet_fly_api/snowflake/" title="全局唯一ID(guid)的生成"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">全局唯一ID(guid)的生成</span>
         </a>
       
     
@@ -428,6 +428,7 @@
 <h1 id="配置参数说明"><a href="#配置参数说明" class="headerlink" title="配置参数说明"></a>配置参数说明</h1><p><strong>A_m</strong>,<strong>B_m</strong>是指定的热更服务文件名。</p>
 <p><strong>launch_seq</strong> 启动顺序。<br><strong>launch_num</strong> 启动数量。<br><strong>mod_args</strong>   模块对应的启动配置。<br><strong>default_arg</strong> 如果配置都一样，就用default_arg，也可以default_arg和mod_args一起用，启动会优先用mod_args对应的配置（如果对应下标的配置存在）。<br><strong>instance_name</strong> 热更服务实例名称，用于给热更服务做分类，比如每个mysql服务连接的数据库都不同，可以用instance_name来区分，之后通过指定instance_name访问。<br><strong>delay_run</strong> 延迟运行。有时候有些服务需要之后再启动。比如这个<a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/examples/digitalbomb/main.lua">数字炸弹示例的客户端</a><br><strong>is_record_on</strong> 是否启动录像<br><strong>auto_reload</strong> 自动定时热更 skynet-fly.time_extend.time_point.lua 的配置项<br>    * type  整点报时类型<br>    * month 几月<br>    * day   哪天<br>    * hour  几时<br>    * min   几分<br>    * sec   几秒<br>    * wday  周几<br>    * yday  一年第几天<br><strong>record_backup</strong> 录像保留文件整理 启动录像才生效，对应logrotate配置项<br>    * max_age      保留几天<br>    * max_backups  保留几个<br>    * point_type   整点报时类型<br>    * month 几月<br>    * day   哪天<br>    * hour  几时<br>    * min   几分<br>    * sec   几秒<br>    * wday  周几<br>    * yday  一年第几天</p>
 <h1 id="修改启动配置指向"><a href="#修改启动配置指向" class="headerlink" title="修改启动配置指向"></a>修改启动配置指向</h1><p>通常需要区分<strong>开发环境</strong>，<strong>测试环境</strong>，<strong>预发环境</strong>，<strong>正式环境</strong>的启动配置。<br>我们可以修改由<code>binshell/make_server.sh</code>生成好的skynet启动配置中的<code>loadmodsfile</code>配置项，改变启用的可热更服务配置。</p>
+<h1 id="auto-reload-避免滥用"><a href="#auto-reload-避免滥用" class="headerlink" title="auto_reload 避免滥用"></a>auto_reload 避免滥用</h1><p>auto_reload设计出来的目的是用于录像文件的分割，并不是方便更新服务。正常更新服务还是调用<code>check_reload.sh</code>，因为它能保证把修改的服务同步一起更新，这样能保证不会出现<strong>新旧服务交叉调用的危险行为</strong>，比如旧服务调用新服务中的某个CMD方法可能被删除或者修改了。</p>
 
                 
               </div>

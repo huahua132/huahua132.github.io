@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/14/socket/tcp/" target="_self">
-          tcp知识整理
+        <a href="/2023/05/14/socket/c/" target="_self">
+          网络七层模型
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/tcp/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/c/" target="_self">
         <div>
-          三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,
+          7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h
         </div>
       </a>
 
@@ -534,74 +534,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
-          前言
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
-        <div>
-          这个篇章主要介绍skynet_fly_demo的设计，如何基于skynet_fly_demo做开发。我将会以讲解一个个问题的方式带你走进了解skynet_fly_demo。 skynet_fly_demo简介skynet_fly_demo是基于skynet_fly的试验性项目，目的是全面的使用skynet_fly的功能并验证其可行性。skynet_fly_demo深度的使用了skynet_fly如
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
           用户是如何注册的？
         </a>
@@ -679,6 +611,74 @@
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
         <div>
           简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-03 18:00" pubdate>
+              2023-05-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
+          前言
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
+        <div>
+          这个篇章主要介绍skynet_fly_demo的设计，如何基于skynet_fly_demo做开发。我将会以讲解一个个问题的方式带你走进了解skynet_fly_demo。 skynet_fly_demo简介skynet_fly_demo是基于skynet_fly的试验性项目，目的是全面的使用skynet_fly的功能并验证其可行性。skynet_fly_demo深度的使用了skynet_fly如
         </div>
       </a>
 
