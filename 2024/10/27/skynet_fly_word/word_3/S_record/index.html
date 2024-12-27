@@ -16,16 +16,16 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便方案对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。，实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细">
+    <meta name="description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务录像与重放">
 <meta property="og:url" content="https://huahua132.github.io/2024/10/27/skynet_fly_word/word_3/S_record/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便方案对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。，实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细">
+<meta property="og:description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/record_1.png">
 <meta property="article:published_time" content="2024-10-27T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-21T04:48:58.738Z">
+<meta property="article:modified_time" content="2024-12-27T10:35:46.714Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -773,19 +773,19 @@
     
       
       
-        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" title="代码加密"
+        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">代码加密</span>
+          <span class="category-post">共享配置数据</span>
         </a>
       
     
       
       
-        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
+        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" title="代码加密"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">共享配置数据</span>
+          <span class="category-post">代码加密</span>
         </a>
       
     
@@ -827,7 +827,7 @@
               <div class="markdown-body">
                 
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于复杂的业务逻辑，出现的bug，通过<strong>日志手段</strong>或者<strong>review代码</strong>都没法查明原因的情况下，这时候我们可以通过<strong>服务录像重放</strong>来还原整个事故现场。</p>
-<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>skynet是多线程的，不太方便方案对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。，实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。<br>其中有一些细节点，比如<code>session</code>分配，<code>socket_id</code>分配，<code>time</code>时间，<code>math.random</code>随机数，<code>hotfix</code>热更，<code>sharedata</code>,<code>sharetable</code>共享配置处理，都需要一些特殊处理才能保证录像重放时确保一致。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。<br>其中有一些细节点，比如<code>session</code>分配，<code>socket_id</code>分配，<code>time</code>时间，<code>math.random</code>随机数，<code>hotfix</code>热更，<code>sharedata</code>,<code>sharetable</code>共享配置处理，都需要一些特殊处理才能保证录像重放时确保一致。</p>
 <ul>
 <li><p>session socket_id skynet.time os.time<br>这些只需要调用时，记录下值，重放时读取即可。</p>
 </li>
@@ -844,7 +844,7 @@
 
 <h1 id="如何重放？"><a href="#如何重放？" class="headerlink" title="如何重放？"></a>如何重放？</h1><p>在<code>make/script/run.sh</code>和<code>make/script/restart.sh</code>中增加了 <code>recordfile</code>参数，播放录像时加上录像文件路径即可。<br><code>sh make/script/restart.sh load_mods.lua 0 records/00000010.record</code></p>
 <h1 id="重放注意点"><a href="#重放注意点" class="headerlink" title="重放注意点"></a>重放注意点</h1><ol>
-<li><p>确保代码环境一致，代码不一致可能会导致录像没有按预期回放。<br>比如说 <code>skynet.time()</code>,<code>os.time()</code>,<code>math.randomseed</code>,还有会创建<code>session</code>和<code>socket_id</code>的函数调用，少调或者多调用一次都会导致录像对不上，因为重放录像的时候每次都是去记录中拿对应的值，少或多都会导致顺序错乱。</p>
+<li><p>确保代码环境一致，代码不一致可能会导致录像没有按预期回放,这时候通常会代码出错。<br>比如说 <code>skynet.time()</code>,<code>os.time()</code>,<code>math.randomseed</code>,还有会创建<code>session</code>和<code>socket_id</code>的函数调用，少调或者多调用一次都会导致录像对不上，因为重放录像的时候每次都是去记录中拿对应的值，少或多都会导致顺序错乱。</p>
 </li>
 <li><p>逻辑代码中<code>pairs</code>调用可能导致重放逻辑乱序<br>因为<code>pairs</code>每次调用并不保证顺序，如果在<code>pairs</code>循环操作分配了<code>session</code>(call,time_out),<code>socket_id</code>(socket.connect),<code>os.time, skynet.time</code>, <code>math.randomseed,math.random</code>，都会因为<code>pairs</code>遍历无法保证顺序而导致重放乱序出错。目前没有想到非常完美的办法来解决这个问题，强行重写<code>pairs</code>让其变成有序遍历，太过损失其性能。我们只好在需要重放录像的业务逻辑中，通过规避上述情况下的<code>pairs使用</code>。</p>
 </li>
