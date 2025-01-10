@@ -298,7 +298,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/01/09/quarter/2025-1-2025-3/" target="_self">
         <div>
-          [最终还原perl环境 pb 打包sharedata数据应注意先copy]https://github.com/huahua132/skynet_fly/commit/0b7ff71d8431c39f2e440a18b9bc2524435c0e51 perl没用还原，会影响到系统其他软件正常工作。 pb打包用sharedata共享的table时，数据打包不进去。怀疑是因为sharedata是sky
+          最终还原perl环境 pb 打包sharedata数据应注意先copy perl没用还原，会影响到系统其他软件正常工作。 pb打包用sharedata共享的table时，数据打包不进去。怀疑是因为sharedata是skynet封装的c object，pb底层无法识别访问，通过先深拷贝sharedata表，再传入pb打包可以规避此问题。  优化sharedata_service 热更支持加载新的文
         </div>
       </a>
 
