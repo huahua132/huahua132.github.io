@@ -24,7 +24,7 @@
 <meta property="og:description" content="最终还原perl环境 pb 打包sharedata数据应注意先copy perl没用还原，会影响到系统其他软件正常工作。 pb打包用sharedata共享的table时，数据打包不进去。怀疑是因为sharedata是skynet封装的c object，pb底层无法识别访问，通过先深拷贝sharedata表，再传入pb打包可以规避此问题。  优化sharedata_service 热更支持加载新的文">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-09T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-10T02:50:03.481Z">
+<meta property="article:modified_time" content="2025-01-11T07:25:26.243Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="季度更新日志">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          236 字
+          475 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -367,6 +367,7 @@
 <li>pb打包用sharedata共享的table时，数据打包不进去。怀疑是因为sharedata是skynet封装的c object，pb底层无法识别访问，通过先深拷贝sharedata表，再传入pb打包可以规避此问题。</li>
 </ul>
 <h1 id="优化sharedata-service-热更支持加载新的文件"><a href="#优化sharedata-service-热更支持加载新的文件" class="headerlink" title="优化sharedata_service 热更支持加载新的文件"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/528b0914982a511df7a34f6576527fdadcc76807">优化sharedata_service 热更支持加载新的文件</a></h1><p>开发中，我们新增系统时，一般都会新增一些配置文件，这时候希望reload可以加载它们。</p>
+<h1 id="优化sharedata使用错误时，输出更友好的错误提示"><a href="#优化sharedata使用错误时，输出更友好的错误提示" class="headerlink" title="优化sharedata使用错误时，输出更友好的错误提示"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/5ff4d7b9c5c6f8f89259a33e10832b49af7bd258">优化sharedata使用错误时，输出更友好的错误提示</a></h1><p>优化前是直接查询skynet的sharedata或者sharatable 当配置不存在，出现的代码断言错误没有给出明确的错误信息，需要查看源码对应行，才能发现错误原因。<br>优化后当配置不存在时会输出错误信息<code>not exists file_path[./common/cfgs/test_cfg3.lua]</code>,当模式不匹配时会输出错误信息<code>mode not match load mode[sharedata] use mode[sharetable]</code></p>
 
                 
               </div>
