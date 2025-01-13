@@ -24,7 +24,7 @@
 <meta property="og:description" content="sharedata使用注意点对于使用sharedata配置，被其他外部引用的表会被更新到，sharetable不会，所以如果想拿到最新的配置就必须用这个文件的get_map,get_map_list,get_data_table拿取对于不想更新到的表sharedata需要做个深拷贝直接用sharedata 的表数据传入pb，该部分数据打包不进去，需要深拷贝后导入 function M.load(d">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-13T13:10:32.086Z">
+<meta property="article:modified_time" content="2025-01-13T13:18:57.267Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          983 字
         
       </span>
     
@@ -438,10 +438,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">skynet_util skynet相关</span>
+          <span class="category-post">env_util env相关</span>
         </a>
       
     
@@ -465,10 +465,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">env_util env相关</span>
+          <span class="category-post">skynet_util skynet相关</span>
         </a>
       
     
@@ -483,19 +483,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">time_util 时间相关</span>
+          <span class="category-post">table_util table相关</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">table_util table相关</span>
+          <span class="category-post">time_util 时间相关</span>
         </a>
       
     
@@ -529,19 +529,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" title="mod映射队列"
+        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" title="并发，单发互斥的队列"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">mod映射队列</span>
+          <span class="category-post">并发，单发互斥的队列</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" title="并发，单发互斥的队列"
+        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" title="mod映射队列"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">并发，单发互斥的队列</span>
+          <span class="category-post">mod映射队列</span>
         </a>
       
     
@@ -615,65 +615,92 @@
 <p>加载指定路径列表下配置，<br><strong>参数</strong></p>
 <ul>
 <li>dir_list table 路径列表</li>
-<li>mode number 模式 sharedata or sharetable<br>**<br>返回值**</li>
+<li>mode number 模式 sharedata or sharetable</li>
 </ul>
+<p><strong>返回值</strong></p>
 <h2 id="function-M-new-file-path-mode"><a href="#function-M-new-file-path-mode" class="headerlink" title="function M:new(file_path, mode)"></a>function M:new(file_path, mode)</h2><p><strong>描述</strong></p>
 <p>配置访问代理<br><strong>参数</strong></p>
 <ul>
 <li>file_path string 配置路径</li>
-<li>mode number 模式 sharedata or sharetable<br>**<br>返回值**</li>
+<li>mode number 模式 sharedata or sharetable</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table obj 代理对象</li>
 </ul>
 <h2 id="function-M-set-check-field-field-name-func"><a href="#function-M-set-check-field-field-name-func" class="headerlink" title="function M:set_check_field(field_name, func)"></a>function M:set_check_field(field_name, func)</h2><p><strong>描述</strong></p>
 <p>设置单个字段检查<br><strong>参数</strong></p>
 <ul>
 <li>field_name string 字段名</li>
-<li>func function 检查函数<br>**<br>返回值**</li>
+<li>func function 检查函数</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table obj 代理对象</li>
 </ul>
 <h2 id="function-M-set-check-line-func"><a href="#function-M-set-check-line-func" class="headerlink" title="function M:set_check_line(func)"></a>function M:set_check_line(func)</h2><p><strong>描述</strong></p>
 <p>设置一行配置检查<br><strong>参数</strong></p>
 <ul>
-<li>func function 检查函数<br>**<br>返回值**</li>
+<li>func function 检查函数</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table obj 代理对象</li>
 </ul>
 <h2 id="function-M-set-map-list-name-…"><a href="#function-M-set-map-list-name-…" class="headerlink" title="function M:set_map_list(name, …)"></a>function M:set_map_list(name, …)</h2><p><strong>描述</strong></p>
 <p>设置map映射列表<br><strong>参数</strong></p>
 <ul>
 <li>name string 检查函数</li>
-<li>… string 字段名<br>**<br>返回值**</li>
+<li>… string 字段名</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table obj 代理对象</li>
 </ul>
 <h2 id="function-M-set-map-name-…"><a href="#function-M-set-map-name-…" class="headerlink" title="function M:set_map(name, …)"></a>function M:set_map(name, …)</h2><p><strong>描述</strong></p>
 <p>设置纯map映射表<br><strong>参数</strong></p>
 <ul>
 <li>name any</li>
-<li>… string 字段名<br>**<br>返回值**</li>
+<li>… string 字段名</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table</li>
 </ul>
 <h2 id="function-M-builder"><a href="#function-M-builder" class="headerlink" title="function M:builder()"></a>function M:builder()</h2><p><strong>描述</strong></p>
-<p>构建<br><strong>参数</strong><br>**<br>返回值**</p>
+<p>构建<br><strong>参数</strong></p>
+<p><strong>返回值</strong></p>
 <h2 id="function-M-copy-table-tab"><a href="#function-M-copy-table-tab" class="headerlink" title="function M:copy_table(tab)"></a>function M:copy_table(tab)</h2><p><strong>描述</strong></p>
 <p>copy 配置表  直接用sharedata 的表数据传入pb，该部分数据打包不进去，需要深拷贝后导入<br><strong>参数</strong></p>
 <ul>
-<li>tab any<br>**<br>返回值**</li>
+<li>tab any</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table</li>
 </ul>
 <h2 id="function-M-get-data-table"><a href="#function-M-get-data-table" class="headerlink" title="function M:get_data_table()"></a>function M:get_data_table()</h2><p><strong>描述</strong></p>
-<p>获取数据表<br><strong>参数</strong><br>**<br>返回值**</p>
+<p>获取数据表<br><strong>参数</strong></p>
+<p><strong>返回值</strong></p>
 <ul>
 <li>table</li>
 </ul>
 <h2 id="function-M-get-map-list-name"><a href="#function-M-get-map-list-name" class="headerlink" title="function M:get_map_list(name)"></a>function M:get_map_list(name)</h2><p><strong>描述</strong></p>
 <p>获取maplist<br><strong>参数</strong></p>
 <ul>
-<li>name string 索引名<br>**<br>返回值**</li>
+<li>name string 索引名</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table</li>
 </ul>
 <h2 id="function-M-get-map-name"><a href="#function-M-get-map-name" class="headerlink" title="function M:get_map(name)"></a>function M:get_map(name)</h2><p><strong>描述</strong></p>
 <p>获取map<br><strong>参数</strong></p>
 <ul>
-<li>name string 索引名<br>**<br>返回值**</li>
+<li>name string 索引名</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table</li>
 </ul>
 
@@ -773,9 +800,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" title="并发，单发互斥的队列">
+                      <a href="/2024/06/29/skynet_fly_api_word/timer/" title="定时器">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">并发，单发互斥的队列</span>
+                        <span class="hidden-mobile">定时器</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

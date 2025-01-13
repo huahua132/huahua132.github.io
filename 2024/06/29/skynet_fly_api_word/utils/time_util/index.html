@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="time_util function M.skynet_int_time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒*100)  function M.time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒)  function M.date(time)描述 获取当前日期参数**返回值**  table 日期格式的table{year&#x3D;2">
+    <meta name="description" content="time_util function M.skynet_int_time()描述 获取当前时间戳参数 返回值  number 时间戳(秒*100)  function M.time()描述 获取当前时间戳参数 返回值  number 时间戳(秒)  function M.date(time)描述 获取当前日期参数 返回值  table 日期格式的table{year&#x3D;2025,month">
 <meta property="og:type" content="article">
 <meta property="og:title" content="time_util 时间相关">
 <meta property="og:url" content="https://huahua132.github.io/2024/06/29/skynet_fly_api_word/utils/time_util/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="time_util function M.skynet_int_time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒*100)  function M.time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒)  function M.date(time)描述 获取当前日期参数**返回值**  table 日期格式的table{year&#x3D;2">
+<meta property="og:description" content="time_util function M.skynet_int_time()描述 获取当前时间戳参数 返回值  number 时间戳(秒*100)  function M.time()描述 获取当前时间戳参数 返回值  number 时间戳(秒)  function M.date(time)描述 获取当前日期参数 返回值  table 日期格式的table{year&#x3D;2025,month">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-13T13:10:32.098Z">
+<meta property="article:modified_time" content="2025-01-13T13:18:57.278Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -438,10 +438,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">skynet_util skynet相关</span>
+          <span class="category-post">env_util env相关</span>
         </a>
       
     
@@ -465,10 +465,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">env_util env相关</span>
+          <span class="category-post">skynet_util skynet相关</span>
         </a>
       
     
@@ -483,19 +483,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">time_util 时间相关</span>
+           ">
+          <span class="category-post">table_util table相关</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">table_util table相关</span>
+           active">
+          <span class="category-post">time_util 时间相关</span>
         </a>
       
     
@@ -529,19 +529,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" title="mod映射队列"
+        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" title="并发，单发互斥的队列"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">mod映射队列</span>
+          <span class="category-post">并发，单发互斥的队列</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" title="并发，单发互斥的队列"
+        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" title="mod映射队列"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">并发，单发互斥的队列</span>
+          <span class="category-post">mod映射队列</span>
         </a>
       
     
@@ -612,17 +612,20 @@
                 
                 <p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/utils/time_util.lua">time_util</a></p>
 <h2 id="function-M-skynet-int-time"><a href="#function-M-skynet-int-time" class="headerlink" title="function M.skynet_int_time()"></a>function M.skynet_int_time()</h2><p><strong>描述</strong></p>
-<p>获取当前时间戳<br><strong>参数</strong><br>**<br>返回值**</p>
+<p>获取当前时间戳<br><strong>参数</strong></p>
+<p><strong>返回值</strong></p>
 <ul>
 <li>number 时间戳(秒*100)</li>
 </ul>
 <h2 id="function-M-time"><a href="#function-M-time" class="headerlink" title="function M.time()"></a>function M.time()</h2><p><strong>描述</strong></p>
-<p>获取当前时间戳<br><strong>参数</strong><br>**<br>返回值**</p>
+<p>获取当前时间戳<br><strong>参数</strong></p>
+<p><strong>返回值</strong></p>
 <ul>
 <li>number 时间戳(秒)</li>
 </ul>
 <h2 id="function-M-date-time"><a href="#function-M-date-time" class="headerlink" title="function M.date(time)"></a>function M.date(time)</h2><p><strong>描述</strong></p>
-<p>获取当前日期<br><strong>参数</strong><br>**<br>返回值**</p>
+<p>获取当前日期<br><strong>参数</strong></p>
+<p><strong>返回值</strong></p>
 <ul>
 <li>table 日期格式的table{year&#x3D;2025,month&#x3D;1,day&#x3D;11,hour&#x3D;18,min&#x3D;12,sec&#x3D;50}</li>
 </ul>
@@ -631,7 +634,10 @@
 <ul>
 <li>str string 被分割的时间格式字符串</li>
 <li>split1 string 分割符1 默认” “</li>
-<li>split2 string 分割符2 默认 “:”<br>**<br>返回值**</li>
+<li>split2 string 分割符2 默认 “:”</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>table|nil 分割后的内容</li>
 <li>string? 失败原因</li>
 </ul>
@@ -639,28 +645,38 @@
 <p>适配当月到某一天，不存在，适配到最后一天，比如2月只有28或者29，当输入30或者31将适配到28或者29天<br><strong>参数</strong></p>
 <ul>
 <li>date table 日期(os.date)</li>
-<li>day number 当月哪天(1,31)<br>**<br>返回值**</li>
+<li>day number 当月哪天(1,31)</li>
 </ul>
+<p><strong>返回值</strong></p>
 <h2 id="function-M-day-time-day-hour-min-sec-curtime"><a href="#function-M-day-time-day-hour-min-sec-curtime" class="headerlink" title="function M.day_time(day, hour, min, sec, curtime)"></a>function M.day_time(day, hour, min, sec, curtime)</h2><p><strong>描述</strong></p>
 <p>获取某天某个时间点的时间戳 比如昨天 8点12分50 参数就是 -1,8,12,50 明天 0点0分0秒 就是 1，0，0，0<br><strong>参数</strong></p>
 <ul>
 <li>day number 相差几天</li>
 <li>hour number 几时[0,23]</li>
 <li>min number 几分[0,59]</li>
-<li>sec number 几秒[0,59]<br>**<br>返回值**</li>
+<li>sec number 几秒[0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-every-min-sec"><a href="#function-M-every-min-sec" class="headerlink" title="function M.every_min(sec)"></a>function M.every_min(sec)</h2><p><strong>描述</strong></p>
 <p>获取下一个每分的几秒时间戳<br><strong>参数</strong></p>
 <ul>
-<li>sec number 几秒[0,59]<br>**<br>返回值**</li>
+<li>sec number 几秒[0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-every-hour-min-sec"><a href="#function-M-every-hour-min-sec" class="headerlink" title="function M.every_hour(min, sec)"></a>function M.every_hour(min, sec)</h2><p><strong>描述</strong></p>
 <p>获取下一个每时的几分几秒时间戳<br><strong>参数</strong></p>
 <ul>
 <li>min number 几分 [0,59]</li>
-<li>sec number 几秒 [0,59]<br>**<br>返回值**</li>
+<li>sec number 几秒 [0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-every-day-hour-min-sec"><a href="#function-M-every-day-hour-min-sec" class="headerlink" title="function M.every_day(hour, min, sec)"></a>function M.every_day(hour, min, sec)</h2><p><strong>描述</strong></p>
@@ -668,7 +684,10 @@
 <ul>
 <li>hour number 几时[0,23]</li>
 <li>min number  几分[0,59]</li>
-<li>sec number  几秒[0,59]<br>**<br>返回值**</li>
+<li>sec number  几秒[0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-every-week-wday-hour-min-sec"><a href="#function-M-every-week-wday-hour-min-sec" class="headerlink" title="function M.every_week(wday, hour, min, sec)"></a>function M.every_week(wday, hour, min, sec)</h2><p><strong>描述</strong></p>
@@ -677,7 +696,10 @@
 <li>wday number 周几[1,7] </li>
 <li>hour number 几时[0,23] </li>
 <li>min number 几分[0,59] </li>
-<li>sec number 几秒[0,59]<br>**<br>返回值**</li>
+<li>sec number 几秒[0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-every-month-day-hour-min-sec"><a href="#function-M-every-month-day-hour-min-sec" class="headerlink" title="function M.every_month(day, hour, min, sec)"></a>function M.every_month(day, hour, min, sec)</h2><p><strong>描述</strong></p>
@@ -686,7 +708,10 @@
 <li>day number 第几天[1,31]</li>
 <li>hour number 几时[0,23]</li>
 <li>min number 几分[0,59]</li>
-<li>sec number 几秒[0,59]<br>**<br>返回值**</li>
+<li>sec number 几秒[0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-every-year-month-day-hour-min-sec"><a href="#function-M-every-year-month-day-hour-min-sec" class="headerlink" title="function M.every_year(month, day, hour, min, sec)"></a>function M.every_year(month, day, hour, min, sec)</h2><p><strong>描述</strong></p>
@@ -696,7 +721,10 @@
 <li>day number 第几天[1,31]</li>
 <li>hour number 几时[0,23]</li>
 <li>min number 几分[0,59]</li>
-<li>sec number 几秒[0,59]<br>**<br>返回值**</li>
+<li>sec number 几秒[0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-every-year-day-yday-hour-min-sec"><a href="#function-M-every-year-day-yday-hour-min-sec" class="headerlink" title="function M.every_year_day(yday, hour, min, sec)"></a>function M.every_year_day(yday, hour, min, sec)</h2><p><strong>描述</strong></p>
@@ -705,7 +733,10 @@
 <li>yday number 第几天[1,366] </li>
 <li>hour number 几时[0,23]</li>
 <li>min number  几分[0,59]</li>
-<li>sec number  几秒[0,59]<br>**<br>返回值**</li>
+<li>sec number  几秒[0,59]</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 时间戳</li>
 </ul>
 <h2 id="function-M-is-cross-day-pre-time-cur-time-hour"><a href="#function-M-is-cross-day-pre-time-cur-time-hour" class="headerlink" title="function M.is_cross_day(pre_time, cur_time, hour)"></a>function M.is_cross_day(pre_time, cur_time, hour)</h2><p><strong>描述</strong></p>
@@ -713,7 +744,10 @@
 <ul>
 <li>pre_time number 之前记录的时间</li>
 <li>cur_time number 当前时间(可选 默认当前时间)</li>
-<li>hour number 几点[0,23]算一天的开始(可选 默认零点)<br>**<br>返回值**</li>
+<li>hour number 几点[0,23]算一天的开始(可选 默认零点)</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>boolean 是否跨天</li>
 </ul>
 <h2 id="function-M-diff-day-pre-time-cur-time-hour"><a href="#function-M-diff-day-pre-time-cur-time-hour" class="headerlink" title="function M.diff_day(pre_time, cur_time, hour)"></a>function M.diff_day(pre_time, cur_time, hour)</h2><p><strong>描述</strong></p>
@@ -721,7 +755,10 @@
 <ul>
 <li>pre_time number 之前记录的时间</li>
 <li>cur_time number 当前时间(可选 默认当前时间)</li>
-<li>hour number 几点[0,23]算一天的开始(可选 默认零点)<br>**<br>返回值**</li>
+<li>hour number 几点[0,23]算一天的开始(可选 默认零点)</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
 <li>number 相差几天</li>
 </ul>
 
@@ -821,9 +858,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/utils/string_util/" title="string_util string相关">
+                      <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">string_util string相关</span>
+                        <span class="hidden-mobile">table_util table相关</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -831,8 +868,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关">
-                        <span class="hidden-mobile">table_util table相关</span>
+                      <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式">
+                        <span class="hidden-mobile">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
