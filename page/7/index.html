@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
-          用户是如何注册的？
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" target="_self">
+          关于skynet_fly的一键构建服务配置
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" target="_self">
         <div>
-          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的注册接口 s2s loginserver 调用 centerserver 注册 s2s centerserver 调用 hallserver 注册 s2c loginserver 返回注册结果  流程1涉及skynet_fly技术* http server  * cluster rp
+          为什么要做这个？ skynet启动用的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须
         </div>
       </a>
 
@@ -245,8 +245,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-06-30 00:00" pubdate>
+              2023-06-30
             </time>
           </div>
         
@@ -261,15 +261,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -283,7 +276,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -297,15 +290,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
-          用户是如何登录的？
+        <a href="/2023/05/22/think/reload/" target="_self">
+          关于skynet做服务热更新
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/22/think/reload/" target="_self">
         <div>
-          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t
+          为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e
         </div>
       </a>
 
@@ -313,8 +306,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-05-22 10:33" pubdate>
+              2023-05-22
             </time>
           </div>
         
@@ -329,15 +322,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -351,7 +337,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
             
           </div>
         
@@ -365,15 +351,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
-          大厅服如何对模块功能进行拆分隔离？
+        <a href="/2023/05/21/data_struct/avltree/" target="_self">
+          平衡二叉树的lua实现
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/21/data_struct/avltree/" target="_self">
         <div>
-          简介通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通过不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。 skynet_fly_demo是如何做的？一个独立的功能模块无法是需要处理5种事件  客户端消息 服务器之间的消息 模块之间的接口调用 用户的登录，登出事情 自己注册的定时
+          特征 有序性 所有结点都是左子树比自己小，右子树比自己大。 平衡性 所有结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m  缺点 内存地址分散 每个结点都是独立数据块，存储地址分散，操作速度非常依赖存储设备的寻址速度，基于机械硬盘运行将会非常慢。  操作时
         </div>
       </a>
 
@@ -381,8 +367,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-05-21 10:33" pubdate>
+              2023-05-21
             </time>
           </div>
         
@@ -397,15 +383,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -419,7 +398,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
             
           </div>
         
@@ -433,15 +412,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
-          用户是如何匹配进入到游戏的？
+        <a href="/2023/05/21/think/link/" target="_self">
+          链接记录
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/21/think/link/" target="_self">
         <div>
-          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
+          链接记录 床长人工智能教程https://captainbed.vip/login/ https://datuchat.com/
         </div>
       </a>
 
@@ -449,45 +428,17 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-05-21 10:33" pubdate>
+              2023-05-21
             </time>
           </div>
         
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
             
           </div>
         
@@ -501,15 +452,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" target="_self">
-          如何在skynet_fly_demo新增一个游戏？
+        <a href="/2023/05/14/socket/c/" target="_self">
+          网络七层模型
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/F_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/c/" target="_self">
         <div>
-          简介通常基于游戏大厅的对战类型游戏不会只有一款玩法，像英雄联盟会有匹配场，排位场，大乱斗，还有一些限时玩法，克隆，无限火力。这些特殊玩法，通常分开开服比较好，相互隔离不影响。skynet_fly_demo利用了skynet_fly房间类游戏架构可以非常快速的搭建房间对战类游戏，非常适合这种架构模式。那么如何在skynet_fly_demo新增一个游戏？我将已新增一个数字炸弹游戏为例子，进行逐步讲解
+          7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h
         </div>
       </a>
 
@@ -517,8 +468,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
             </time>
           </div>
         
@@ -533,15 +484,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -555,7 +499,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/socket/">#socket</a>
             
           </div>
         
@@ -569,15 +513,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
-          前言
+        <a href="/2023/05/14/socket/epoll/" target="_self">
+          select,poll,epoll 对比
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
         <div>
-          项目简介skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。skynet_fly持续迭代的原则，尽量向下兼容，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。 框架优势skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。使用sky
+          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
         </div>
       </a>
 
@@ -585,8 +529,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
             </time>
           </div>
         
@@ -601,15 +545,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -623,7 +560,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/socket/">#socket</a>
             
           </div>
         
@@ -637,15 +574,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
-          开发环境推荐
+        <a href="/2023/05/14/socket/tcp/" target="_self">
+          tcp知识整理
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/tcp/" target="_self">
         <div>
-          vscode + Oracle VM VirtualBoxvscode加虚拟机的方式，是我常用的开发方式。 安装虚拟机 安装VirtualBox,官网下载安装即可 下载centos或者ubantu镜像   centos ubuntu   使用VirtualBox安装虚拟机这里自行百度。  vscode安装插件luaHelpersftp 配置SFTP 创建配置ctrl shift p  编辑配置 1
+          三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,
         </div>
       </a>
 
@@ -653,8 +590,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
             </time>
           </div>
         
@@ -669,15 +606,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -691,7 +621,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/socket/">#socket</a>
             
           </div>
         
@@ -705,15 +635,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
-          编译
+        <a href="/2023/05/13/redis/redis/" target="_self">
+          redis 知识杂谈
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/13/redis/redis/" target="_self">
         <div>
-          推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https://github.com/huahua132/skynet_fly.git 拉取子模块代码cd skynet_flygit submodule update --init 拉取skynet代码代码子模块cd skynetg
+          redis有哪些好处？ 数据类型丰富，提供了string,list,hash,set,zset五种基础类型，还提供了stream，geo，bitmap扩展类型string数据结构：简单动态字符串list数据结构：双向链表，压缩列表hash压缩列表，哈希表zset压缩列表，跳表set哈希表，整数数组  数据可以设置过期时间  支持事务  支持脚本化运行  哈希冲突解决 少量的冲突redis使用链式哈
         </div>
       </a>
 
@@ -721,8 +651,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-13 11:33" pubdate>
+              2023-05-13
             </time>
           </div>
         
@@ -737,15 +667,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/redis/" class="category-chain-item">redis</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -759,7 +682,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/redis/">#redis</a>
             
           </div>
         
@@ -773,15 +696,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" target="_self">
-          load_mods配置文件的使用
+        <a href="/2023/05/13/skynet_frame/frame/" target="_self">
+          skynet c层的整体架构
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/13/skynet_frame/frame/" target="_self">
         <div>
-          前言load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做成全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读
+          架构图上图是skynet框架的核心的架构图，看完整体我们再去细看内部实现细节，架构图就像一张完整的地图，我们需要由面到点深入到图中，才能真正的了解吃透skynet，使用中才知道要注意哪些细节。现实中了解地图中的一个地方自然是实地去走一走。了解代码框架的话当然是结合源码和文档(skynet github 上的wiki文档就写的非常不错)。源码不止看了一遍，所以基本上都是n探，探多了就清楚自己哪些地方
         </div>
       </a>
 
@@ -789,8 +712,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-13 11:33" pubdate>
+              2023-05-13
             </time>
           </div>
         
@@ -805,15 +728,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -827,7 +743,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-frame/">#skynet_frame</a>
             
           </div>
         
@@ -841,15 +757,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
-          构建服务脚手架
+        <a href="/2023/05/07/think/whywrite/" target="_self">
+          为什么写blog
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/think/whywrite/" target="_self">
         <div>
-          为啥需要脚手架？如果你对缘由感兴趣，可以看看这个 作用 生成skynet 启动配置文件 生成服务基础运维脚本  构建命令skynet_fly/binshell/make_server.sh skynet_fly_path 我们已构建skynet_fly/examples/webapp为例子  进入服务文件夹目录下。cd skynet_fly/examples/webapp  构建运维脚本。bash
+          原因为了总结，强化学习，以及分享和记录。  总结日常工作学习中零零散散学习到的知识不成体系，有时候学了又感觉没学，我觉得原因就是没有深度思考，一味求快，写总结会让我们对知识进行深度思考，需要总结出学习到的知识能解决什么样的问题，先提出问题场景,提供 解决方案 总结出  知识特点 再扩展 类同知识 进行 优缺点 对比 从而 在脑中构建出 知识体系网络。 强化学习知识学到了，自己会用，但是可能只是用到
         </div>
       </a>
 
@@ -857,8 +773,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-07 10:33" pubdate>
+              2023-05-07
             </time>
           </div>
         
@@ -873,15 +789,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -895,7 +804,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
             
           </div>
         
@@ -907,7 +816,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

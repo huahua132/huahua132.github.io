@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/08/12/record/linux/" target="_self">
-          linux系统常用命令记录
+        <a href="/2023/12/17/skynet_fly_api/load_mods/" target="_self">
+          启动配置load_mods.lua
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/12/record/linux/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/17/skynet_fly_api/load_mods/" target="_self">
         <div>
-          gdb调试打开core文件gdb filename core 查看错误堆栈bt centos gcc版本升级sudo yum install centos-release-sclsudo yum install devtoolset-9-gcc*scl enable devtoolset-9 bash 如何使用systemd运行程序cd /etc/systemd/systemvim myapp.s
+          作用定位可热更服务的启动配置文件，用于配置可插拔的可热更服务，可以自定义启动顺序，数量,配置参数，推迟最后启动。 示例参考AB_question 1234567891011121314return &#123;	A_m = &#123;		launch_seq = 1,		launch_num = 1,	&#125;,    B_m = &#123;        launch_seq = 2,
         </div>
       </a>
 
@@ -245,8 +245,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-08-12 11:33" pubdate>
-              2023-08-12
+            <time datetime="2023-12-17 08:00" pubdate>
+              2023-12-17
             </time>
           </div>
         
@@ -261,7 +261,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/notebook/" class="category-chain-item">notebook</a>
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
   
   
 
@@ -276,7 +276,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/notebook/">#notebook</a>
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
             
           </div>
         
@@ -290,15 +290,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/28/record/record/" target="_self">
-          linux不产生core原因
+        <a href="/2023/12/10/skynet_fly_ss/pack/" target="_self">
+          关于skynet_fly gate，ws_gate消息包设计
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/record/record/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/skynet_fly_ss/pack/" target="_self">
         <div>
-          首先可能ulimit限制了。ulimit -a  如果core 限制大小为0，需要修改。调用命令ulimit -c unlimited  考虑产生位置问题查看 /proc/sys/kernel/core_pattern文件内容。如果文件内容不是core，通知命令sudo bash -c &quot;echo core &gt; /proc/sys/kernel/core_pattern&quot
+          前言最近skynet_fly被群友用来写项目，并且上线了，感觉还是很欣慰的，群友用了我的房间类游戏架构，大概三周的时间，游戏就直接上线了，过程中咨询过我一些问题，其中关于协议这一块，解释的比较久，并且最后是我把我写好的中国象棋客户端上传了github，让他给客户端参考，才较快解决了前后端协议对接。所以想写这一篇来拆解一下协议封装。 协议图 skynet gate协议包skynet协议包就是上图红色
         </div>
       </a>
 
@@ -306,69 +306,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-28 11:33" pubdate>
-              2023-07-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/record/" class="category-chain-item">record</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/record/">#record</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" target="_self">
-          关于cluster 远程rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/skynet_fly_ss/cluster_rpc/" target="_self">
-        <div>
-          简介cluster 远程rpc是依赖skynet的cluster模式实现的。    skynet_fly远程rpc调用的实现注重什么：    * 与热更模板系统完美融合。    * 简单易用的API设计。    * 支持多结点。    * 支持服务发现。 定位因为远程rpc调用结点偶尔下线，上线都是常有的事，所以不建议用来做强生效性消息(就是调用了，一定要执行成功)。skynet_fly clus
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-28 08:00" pubdate>
-              2023-07-28
+            <time datetime="2023-12-10 18:00" pubdate>
+              2023-12-10
             </time>
           </div>
         
@@ -412,15 +351,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/22/skynet_fly_ss/room_game/" target="_self">
-          关于room_game可热更分配房间类游戏架构
+        <a href="/2023/12/10/skynet_fly_ss/script/" target="_self">
+          关于skynet_fly热更模块启动配置的调整
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/22/skynet_fly_ss/room_game/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/skynet_fly_ss/script/" target="_self">
         <div>
-          简介room_game是skynet_fly基于热更系统实现的分配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，allo
+          前言经过几个月的打磨使用，发现之前想的生成mod_config.lua热更模块配置文件用于启动的方式并不是很好。    缺点    1. 很少需要修改里面的值，当修改掉load_mods.lua，需要重新生成mod_config.lua。    2. 数组的配置重新生成也不好覆盖。    3. 有些配置想一直用load_mods.lua中的，却要手动同步改一遍mod_config.lua。 一开始
         </div>
       </a>
 
@@ -428,8 +367,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-22 08:00" pubdate>
-              2023-07-22
+            <time datetime="2023-12-10 18:00" pubdate>
+              2023-12-10
             </time>
           </div>
         
@@ -473,15 +412,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/08/skynet_fly_ss/redis/" target="_self">
-          关于redis的封装
+        <a href="/2023/12/03/skynet_fly_ss/reload/" target="_self">
+          关于skynet_fly热更新实现细节
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/08/skynet_fly_ss/redis/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/03/skynet_fly_ss/reload/" target="_self">
         <div>
-          为什么要封装redis？ 适用skynet_fly生态。 redis连接配置可以写在mod_config中。  对于实现方式的思考 方式一  用skynet_fly 热更模块的方式，这样连接配置就可以写在mod_config，还可以配置连接多个不同的redis。  优势：  1. 配置redis连接方便。  2. 固定redis连接数量。  劣势  1. 多了一次消息的打包解包。  2. redi
+          前言由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。 实现思路可以先看看这篇关于skynet_fly热更新实现 整体还是围绕容器管理员,容器客户端,可热更服务展开。 职责 容器管理员 负责启动，通知关闭，通知更新 容器客户端 负责注册访问，监听，服务切换，记录需要访问，回复是否需要访问 可热更服务 负责记录来访，检查安
         </div>
       </a>
 
@@ -489,8 +428,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-08 21:54" pubdate>
-              2023-07-08
+            <time datetime="2023-12-03 14:00" pubdate>
+              2023-12-03
             </time>
           </div>
         
@@ -534,15 +473,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
-          关于定时器的封装
+        <a href="/2023/11/19/skynet_fly_ss/logservice/" target="_self">
+          关于增加skynet_fly 日志服务
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/19/skynet_fly_ss/logservice/" target="_self">
         <div>
-          为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一
+          前言最近在skynet_fly_demo中尝试用skynet_fly后台管理，想通过后台监控服务器的历史运行状况,服务实时信息，错误日志报警，等等。历史运行状况,服务实时信息这两个通过skynet的debug_console再加上我封装的集群，很方便的就做好了。之后考虑错误日志报警的问题,错误日志分为主动打印的异常日志和被动触发lua断言错误。  主动打印的异常日志 这个好解决，我封装的log模块
         </div>
       </a>
 
@@ -550,8 +489,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-07-02 13:42" pubdate>
-              2023-07-02
+            <time datetime="2023-11-19 14:00" pubdate>
+              2023-11-19
             </time>
           </div>
         
@@ -595,15 +534,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/30/skynet_fly_word/word_4/H_q/" target="_self">
-          如何在skynet_fly_demo新增一个后台模块？
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" target="_self">
+          关于新增定时器的扩展 整点报时
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_word/word_4/H_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/skynet_fly_ss/time_point/" target="_self">
         <div>
-          前言skynet_fly_demo 中的admin用的go语言gin框架的中间件模式。客户端用的vue-admin-template,项目架构是前后端分离的。我们将以添加一个警告日志模块为示例。 服务端服务端只需要通过API接口即可，通常API接口我们会按模块划分，比如用户模块就是提供/user/login,user/loginout,这在gin分格的中间件模式中，我们可以把user建一个组(gr
+          前言对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。 如何新增一开始想在timer.lua去新增一些新增一些方法，但是想保持timer.lua足够简单，就独立了一个文件用继承的方式来扩展。 提供功能可以像设置闹钟一样设置。  设置每分钟的哪一秒。 设置每小时几分几秒。 设置每天的几时几分几秒。 设置每周的
         </div>
       </a>
 
@@ -611,8 +550,130 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-30 18:00" pubdate>
-              2023-06-30
+            <time datetime="2023-10-22 13:42" pubdate>
+              2023-10-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
+          关于room_game可热更匹配房间类游戏架构的优化
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
+        <div>
+          前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-15 08:00" pubdate>
+              2023-10-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" target="_self">
+          对安全关服的支持
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" target="_self">
+        <div>
+          前言我们通常使用kill命令去关闭一个，在单进程序中，程序结尾一般都会有收尾的关闭动作。skynet并没有对收尾动作做太多文章，对于skynet.abort()也只是粗暴的关闭掉所有服务，清除掉所有未处理的消息。但是在实际应用开发中，我们通常需要做一个收尾处理，比如orm缓存的修改进行同步、把在线的玩家都踢出。 实现方式对于skynet，不太好依赖信号去处理，信号那需要阻塞等待所有服务都完成收尾动
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-12 22:00" pubdate>
+              2023-10-12
             </time>
           </div>
         
@@ -632,7 +693,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
   
   
 
@@ -663,15 +724,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
-          关于skynet_fly热更新实现
+        <a href="/2023/10/06/think/reload_error/" target="_self">
+          skynet_fly热更新存在的问题
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/think/reload_error/" target="_self">
         <div>
-          实现思路可以先看看这篇关于skynet做服务热更新这篇可以说是最初的实现版本，最新的完整实现 这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skyn
+          前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local
         </div>
       </a>
 
@@ -679,130 +740,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-30 00:00" pubdate>
-              2023-06-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" target="_self">
-          关于skynet_fly的一键构建服务配置
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" target="_self">
-        <div>
-          为什么要做这个？ skynet启动用的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-30 00:00" pubdate>
-              2023-06-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/22/think/reload/" target="_self">
-          关于skynet做服务热更新
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/22/think/reload/" target="_self">
-        <div>
-          为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-22 10:33" pubdate>
-              2023-05-22
+            <time datetime="2023-10-06 19:22" pubdate>
+              2023-10-06
             </time>
           </div>
         
@@ -840,11 +779,72 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
+          关于增加skynet_fly 日志分割模块
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
+        <div>
+          起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在/etc/logrotate.d/新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-09-10 08:00" pubdate>
+              2023-09-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

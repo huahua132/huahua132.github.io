@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="time_util function M.skynet_int_time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒*100)  function M.time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒)  function M.date(time)描述 获取当前日期参数**返回值**  table 日期格式的table{year&#x3D;2">
+    <meta name="description" content="table_util function M.is_loop_table(check_table,is_route)描述 检测表是否有环引用参数  check_table table 目标表 is_route boolean 是否需要返回环路径**返回值** boolean 是否出现环引用 string|nil 环路径 string|nil 环路径  function M.dump(tab)描述 不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="time_util 时间相关">
-<meta property="og:url" content="https://huahua132.github.io/2025/01/12/skynet_fly_api_word/utils/time_util/index.html">
+<meta property="og:title" content="table_util table相关">
+<meta property="og:url" content="https://huahua132.github.io/2024/06/29/skynet_fly_api_word/utils/table_util/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="time_util function M.skynet_int_time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒*100)  function M.time()描述 获取当前时间戳参数**返回值**  number 时间戳(秒)  function M.date(time)描述 获取当前日期参数**返回值**  table 日期格式的table{year&#x3D;2">
+<meta property="og:description" content="table_util function M.is_loop_table(check_table,is_route)描述 检测表是否有环引用参数  check_table table 目标表 is_route boolean 是否需要返回环路径**返回值** boolean 是否出现环引用 string|nil 环路径 string|nil 环路径  function M.dump(tab)描述 不">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-12T03:03:29.458Z">
-<meta property="article:modified_time" content="2025-01-12T03:23:08.261Z">
+<meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-13T13:10:32.097Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>time_util 时间相关 - huahua132 blog</title>
+  <title>table_util table相关 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="time_util 时间相关"></span>
+            <span id="subtitle" data-typed-text="table_util table相关"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-12 11:03" pubdate>
-          2025年1月12日 上午
+        <time datetime="2024-06-29 22:00" pubdate>
+          2024年6月29日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          1.6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          17 分钟
+          14 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly API 文档
-        <span class="list-group-count">(1)</span>
+        <span class="list-group-count">(13)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -307,13 +307,124 @@
     
     
     <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="共享配置数据"
+        id="heading-a38d05b339ac4a3a50422d71111c30c3" role="tab" data-toggle="collapse" href="#collapse-a38d05b339ac4a3a50422d71111c30c3"
+        aria-expanded="false"
+      >
+        共享配置数据
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-a38d05b339ac4a3a50422d71111c30c3"
+           role="tabpanel" aria-labelledby="heading-a38d05b339ac4a3a50422d71111c30c3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/sharedata/" title="共享配置数据"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">共享配置数据</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="唯一ID生成"
+        id="heading-e62e14a9c91de575961d0d71a267df92" role="tab" data-toggle="collapse" href="#collapse-e62e14a9c91de575961d0d71a267df92"
+        aria-expanded="false"
+      >
+        唯一ID生成
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-e62e14a9c91de575961d0d71a267df92"
+           role="tabpanel" aria-labelledby="heading-e62e14a9c91de575961d0d71a267df92">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/snowflake/" title="雪花算法生成唯一ID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">雪花算法生成唯一ID</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="定时器相关"
+        id="heading-0c6f92c580433a087e899d9ed155b8a6" role="tab" data-toggle="collapse" href="#collapse-0c6f92c580433a087e899d9ed155b8a6"
+        aria-expanded="false"
+      >
+        定时器相关
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-0c6f92c580433a087e899d9ed155b8a6"
+           role="tabpanel" aria-labelledby="heading-0c6f92c580433a087e899d9ed155b8a6">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/timer/" title="定时器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">定时器</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
       <a class="category-subitem 
           list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具函数"
         id="heading-2ac18c98a08e56752553d98a41218ee0" role="tab" data-toggle="collapse" href="#collapse-2ac18c98a08e56752553d98a41218ee0"
         aria-expanded="true"
       >
         工具函数
-        <span class="list-group-count">(1)</span>
+        <span class="list-group-count">(7)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -327,10 +438,147 @@
     
       
       
-        <a href="/2025/01/12/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">skynet_util skynet相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">file_util file相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/math_util/" title="math_util math相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">math_util math相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">env_util env相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/string_util/" title="string_util string相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">string_util string相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">time_util 时间相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">time_util 时间相关</span>
+          <span class="category-post">table_util table相关</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="执行队列"
+        id="heading-63789a35887a898fb372377d45e0ae28" role="tab" data-toggle="collapse" href="#collapse-63789a35887a898fb372377d45e0ae28"
+        aria-expanded="false"
+      >
+        执行队列
+        <span class="list-group-count">(2)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-63789a35887a898fb372377d45e0ae28"
+           role="tabpanel" aria-labelledby="heading-63789a35887a898fb372377d45e0ae28">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" title="mod映射队列"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">mod映射队列</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" title="并发，单发互斥的队列"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">并发，单发互斥的队列</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="日志轮换"
+        id="heading-71e615dd0501620901e29146565f2e88" role="tab" data-toggle="collapse" href="#collapse-71e615dd0501620901e29146565f2e88"
+        aria-expanded="false"
+      >
+        日志轮换
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-71e615dd0501620901e29146565f2e88"
+           role="tabpanel" aria-labelledby="heading-71e615dd0501620901e29146565f2e88">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/logrotate/" title="日志轮换"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">日志轮换</span>
         </a>
       
     
@@ -357,123 +605,115 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">time_util 时间相关</h1>
+            <h1 style="display: none">table_util table相关</h1>
             
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/utils/time_util.lua">time_util</a></p>
-<h2 id="function-M-skynet-int-time"><a href="#function-M-skynet-int-time" class="headerlink" title="function M.skynet_int_time()"></a>function M.skynet_int_time()</h2><p><strong>描述</strong></p>
-<p>获取当前时间戳<br><strong>参数</strong><br>**<br>返回值**</p>
+                <p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/utils/table_util.lua">table_util</a></p>
+<h2 id="function-M-is-loop-table-check-table-is-route"><a href="#function-M-is-loop-table-check-table-is-route" class="headerlink" title="function M.is_loop_table(check_table,is_route)"></a>function M.is_loop_table(check_table,is_route)</h2><p><strong>描述</strong></p>
+<p>检测表是否有环引用<br><strong>参数</strong></p>
 <ul>
-<li>number 时间戳(秒*100)</li>
+<li>check_table table 目标表</li>
+<li>is_route boolean 是否需要返回环路径<br>**<br>返回值**</li>
+<li>boolean 是否出现环引用</li>
+<li>string|nil 环路径</li>
+<li>string|nil 环路径</li>
 </ul>
-<h2 id="function-M-time"><a href="#function-M-time" class="headerlink" title="function M.time()"></a>function M.time()</h2><p><strong>描述</strong></p>
-<p>获取当前时间戳<br><strong>参数</strong><br>**<br>返回值**</p>
+<h2 id="function-M-dump-tab"><a href="#function-M-dump-tab" class="headerlink" title="function M.dump(tab)"></a>function M.dump(tab)</h2><p><strong>描述</strong></p>
+<p>不会死循环的表dump<br><strong>参数</strong></p>
 <ul>
-<li>number 时间戳(秒)</li>
+<li>tab table 目标表<br>**<br>返回值**</li>
+<li>string dump后的内容</li>
 </ul>
-<h2 id="function-M-date-time"><a href="#function-M-date-time" class="headerlink" title="function M.date(time)"></a>function M.date(time)</h2><p><strong>描述</strong></p>
-<p>获取当前日期<br><strong>参数</strong><br>**<br>返回值**</p>
+<h2 id="function-M-check-def-table-new-t-old-t"><a href="#function-M-check-def-table-new-t-old-t" class="headerlink" title="function M.check_def_table(new_t,old_t)"></a>function M.check_def_table(new_t,old_t)</h2><p><strong>描述</strong></p>
+<p>检测2张表有什么同  共有4种不同 类型不同：typedef 相对于old_t有新增: add 相对于old_t有删除: reduce 值不同：valuedef<br><strong>参数</strong></p>
 <ul>
-<li>table 日期格式的table{year&#x3D;2025,month&#x3D;1,day&#x3D;11,hour&#x3D;18,min&#x3D;12,sec&#x3D;50}</li>
+<li>new_t table 新表</li>
+<li>old_t table 旧表<br>**<br>返回值**</li>
+<li>table 不同的描述信息</li>
 </ul>
-<h2 id="function-M-string-to-date-str-split1-split2"><a href="#function-M-string-to-date-str-split1-split2" class="headerlink" title="function M.string_to_date(str, split1, split2)"></a>function M.string_to_date(str, split1, split2)</h2><p><strong>描述</strong></p>
-<p>string格式的时间转换成date日期table 2023:10:26 19:22:50<br><strong>参数</strong></p>
+<h2 id="function-M-def-tostring-def"><a href="#function-M-def-tostring-def" class="headerlink" title="function M.def_tostring(def)"></a>function M.def_tostring(def)</h2><p><strong>描述</strong></p>
+<p>把check_def_table返回值转换成string<br><strong>参数</strong></p>
 <ul>
-<li>string str 被分割的时间格式字符串</li>
-<li>string split1 分割符1 默认” “</li>
-<li>string split2 分割符2 默认 “:”<br>**<br>返回值**</li>
-<li>table 分割后的内容</li>
+<li>def table check_def_table返回值<br>**<br>返回值**</li>
+<li>string string格式</li>
 </ul>
-<h2 id="function-M-month-day-date-day"><a href="#function-M-month-day-date-day" class="headerlink" title="function M.month_day(date, day)"></a>function M.month_day(date, day)</h2><p><strong>描述</strong></p>
-<p>适配当月到某一天，不存在，适配到最后一天，比如2月只有28或者29，当输入30或者31将适配到28或者29天<br><strong>参数</strong></p>
+<h2 id="function-M-update-tab-by-def-def-old-t-change-flags"><a href="#function-M-update-tab-by-def-def-old-t-change-flags" class="headerlink" title="function M.update_tab_by_def(def,old_t,change_flags)"></a>function M.update_tab_by_def(def,old_t,change_flags)</h2><p><strong>描述</strong></p>
+<p>根据check_def_table的结果去更新旧值，change_flags表面哪些flag需要更新成新值<br><strong>参数</strong></p>
 <ul>
-<li>table date[os.date] 日期</li>
-<li>number day[1,31] 当月哪天<br>**<br>返回值**</li>
+<li>def table check_def_table返回值</li>
+<li>old_t table 旧表</li>
+<li>change_flags table 需要更新的flags  可选 typedef add reduce valuedef<br>**<br>返回值**</li>
+<li>table 更新后的表</li>
 </ul>
-<h2 id="function-M-day-time-day-hour-min-sec-curtime"><a href="#function-M-day-time-day-hour-min-sec-curtime" class="headerlink" title="function M.day_time(day, hour, min, sec, curtime)"></a>function M.day_time(day, hour, min, sec, curtime)</h2><p><strong>描述</strong></p>
-<p>获取某天某个时间点的时间戳 比如昨天 8点12分50 参数就是 -1,8,12,50 明天 0点0分0秒 就是 1，0，0，0<br><strong>参数</strong></p>
+<h2 id="function-M-sort-ipairs-t-comp"><a href="#function-M-sort-ipairs-t-comp" class="headerlink" title="function M.sort_ipairs(t,comp)"></a>function M.sort_ipairs(t,comp)</h2><p><strong>描述</strong></p>
+<p>通用的排序后遍历 对比v<br><strong>参数</strong></p>
 <ul>
-<li>number day 相差几天</li>
-<li>number hour[0,23] 几时</li>
-<li>number min[0,59] 几分</li>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>t table 需要排序的表</li>
+<li>comp function|nil 比较函数<br>**<br>返回值**</li>
+<li>function 遍历函数</li>
 </ul>
-<h2 id="function-M-every-min-sec"><a href="#function-M-every-min-sec" class="headerlink" title="function M.every_min(sec)"></a>function M.every_min(sec)</h2><p><strong>描述</strong></p>
-<p>获取下一个每分的几秒时间戳<br><strong>参数</strong></p>
+<h2 id="function-M-sort-ipairs-byk-t-comp"><a href="#function-M-sort-ipairs-byk-t-comp" class="headerlink" title="function M.sort_ipairs_byk(t,comp)"></a>function M.sort_ipairs_byk(t,comp)</h2><p><strong>描述</strong></p>
+<p>通用的排序后遍历 对比k<br><strong>参数</strong></p>
 <ul>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>t table 需要排序的表</li>
+<li>comp function|nil 比较函数<br>**<br>返回值**</li>
+<li>function 遍历函数</li>
 </ul>
-<h2 id="function-M-every-hour-min-sec"><a href="#function-M-every-hour-min-sec" class="headerlink" title="function M.every_hour(min, sec)"></a>function M.every_hour(min, sec)</h2><p><strong>描述</strong></p>
-<p>获取下一个每时的几分几秒时间戳<br><strong>参数</strong></p>
+<h2 id="function-M-table-to-luafile-mode-tab"><a href="#function-M-table-to-luafile-mode-tab" class="headerlink" title="function M.table_to_luafile(mode,tab)"></a>function M.table_to_luafile(mode,tab)</h2><p><strong>描述</strong></p>
+<p>table转成lua文件格式的string<br><strong>参数</strong></p>
 <ul>
-<li>number min[0,59] 几分</li>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>mode string G表示全局模式 M表示模块模式<br>**<br>返回值**</li>
+<li>string 转换后的string</li>
 </ul>
-<h2 id="function-M-every-day-hour-min-sec"><a href="#function-M-every-day-hour-min-sec" class="headerlink" title="function M.every_day(hour, min, sec)"></a>function M.every_day(hour, min, sec)</h2><p><strong>描述</strong></p>
-<p>获取下一个每天的几点几分几秒时间戳<br><strong>参数</strong></p>
+<h2 id="function-M-kvsortipairs-map"><a href="#function-M-kvsortipairs-map" class="headerlink" title="function M.kvsortipairs(map)"></a>function M.kvsortipairs(map)</h2><p><strong>描述</strong></p>
+<p>map按 字符编码顺序排序后遍历<br><strong>参数</strong></p>
 <ul>
-<li>number hour[0,23] 几时</li>
-<li>number min[0,59] 几分</li>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>map table 遍历的表<br>**<br>返回值**</li>
+<li>function 遍历函数</li>
 </ul>
-<h2 id="function-M-every-week-wday-hour-min-sec"><a href="#function-M-every-week-wday-hour-min-sec" class="headerlink" title="function M.every_week(wday, hour, min, sec)"></a>function M.every_week(wday, hour, min, sec)</h2><p><strong>描述</strong></p>
-<p>获取下一个周几几点几分几秒的时间戳<br><strong>参数</strong></p>
+<h2 id="function-M-deep-copy-orig"><a href="#function-M-deep-copy-orig" class="headerlink" title="function M.deep_copy(orig)"></a>function M.deep_copy(orig)</h2><p><strong>描述</strong></p>
+<p>深拷贝(考虑原表情况)<br><strong>参数</strong></p>
 <ul>
-<li>number wday[1,7] 周几</li>
-<li>number hour[0,23] 几时</li>
-<li>number min[0,59] 几分</li>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>orig table<br>**<br>返回值**</li>
+<li>table 拷贝后的表</li>
 </ul>
-<h2 id="function-M-every-month-day-hour-min-sec"><a href="#function-M-every-month-day-hour-min-sec" class="headerlink" title="function M.every_month(day, hour, min, sec)"></a>function M.every_month(day, hour, min, sec)</h2><p><strong>描述</strong></p>
-<p>获取下一个每月的第几天几时几分几秒的时间戳，如果单月没有该天，适配到最后一天<br><strong>参数</strong></p>
+<h2 id="function-M-copy-tab"><a href="#function-M-copy-tab" class="headerlink" title="function M.copy(tab)"></a>function M.copy(tab)</h2><p><strong>描述</strong></p>
+<p>拷贝(不考虑原表)<br><strong>参数</strong></p>
 <ul>
-<li>number day[1,31] 第几天</li>
-<li>number hour[0,23] 几时</li>
-<li>number min[0,59] 几分</li>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>tab table 表<br>**<br>返回值**</li>
+<li>table 拷贝后的表</li>
 </ul>
-<h2 id="function-M-every-year-month-day-hour-min-sec"><a href="#function-M-every-year-month-day-hour-min-sec" class="headerlink" title="function M.every_year(month, day, hour, min, sec)"></a>function M.every_year(month, day, hour, min, sec)</h2><p><strong>描述</strong></p>
-<p>获取下一个每年的第几月第几天几时几分几秒的时间戳，如果单月没有该天，适配到最后一天<br><strong>参数</strong></p>
+<h2 id="function-M-depth-to-list-tab-depth"><a href="#function-M-depth-to-list-tab-depth" class="headerlink" title="function M.depth_to_list(tab, depth)"></a>function M.depth_to_list(tab, depth)</h2><p><strong>描述</strong></p>
+<p>按深度元素转成list<br><strong>参数</strong></p>
 <ul>
-<li>number month[1,12] 第几月</li>
-<li>number day[1,31] 第几天</li>
-<li>number hour[0,23] 几时</li>
-<li>number min[0,59] 几分</li>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>tab table 原数据</li>
+<li>depth number 转换深度<br>**<br>返回值**</li>
+<li>table 转换结果表</li>
 </ul>
-<h2 id="function-M-every-year-day-yday-hour-min-sec"><a href="#function-M-every-year-day-yday-hour-min-sec" class="headerlink" title="function M.every_year_day(yday, hour, min, sec)"></a>function M.every_year_day(yday, hour, min, sec)</h2><p><strong>描述</strong></p>
-<p>获取下一个每年的第几天几时几分几秒的时间戳<br><strong>参数</strong></p>
+<h2 id="function-M-inlist-list-v"><a href="#function-M-inlist-list-v" class="headerlink" title="function M.inlist(list, v)"></a>function M.inlist(list, v)</h2><p><strong>描述</strong></p>
+<p>是否在列表中<br><strong>参数</strong></p>
 <ul>
-<li>number yday[1,366] 第几天</li>
-<li>number hour[0,23] 几时</li>
-<li>number min[0,59] 几分</li>
-<li>number sec[0,59] 几秒<br>**<br>返回值**</li>
-<li>number 时间戳</li>
+<li>list table 列表</li>
+<li>v any 值<br>**<br>返回值**</li>
+<li>boolean 结果</li>
 </ul>
-<h2 id="function-M-is-cross-day-pre-time-cur-time-hour"><a href="#function-M-is-cross-day-pre-time-cur-time-hour" class="headerlink" title="function M.is_cross_day(pre_time, cur_time, hour)"></a>function M.is_cross_day(pre_time, cur_time, hour)</h2><p><strong>描述</strong></p>
-<p>是否跨天<br><strong>参数</strong></p>
+<h2 id="function-M-find-index-list-v-index"><a href="#function-M-find-index-list-v-index" class="headerlink" title="function M.find_index(list, v, index)"></a>function M.find_index(list, v, index)</h2><p><strong>描述</strong></p>
+<p>查找在表中的位置<br><strong>参数</strong></p>
 <ul>
-<li>number pre_time 之前记录的时间</li>
-<li>number cur_time 当前时间(可选 默认当前时间)</li>
-<li>number hour[0,23] 几点算一天的开始(可选 默认零点)<br>**<br>返回值**</li>
-<li>bool 是否跨天</li>
+<li>list table 列表</li>
+<li>v any 值</li>
+<li>index number 起始索引<br>**<br>返回值**</li>
+<li>number|nil 存在返回目标位置，不存在返回nil</li>
 </ul>
-<h2 id="function-M-diff-day-pre-time-cur-time-hour"><a href="#function-M-diff-day-pre-time-cur-time-hour" class="headerlink" title="function M.diff_day(pre_time, cur_time, hour)"></a>function M.diff_day(pre_time, cur_time, hour)</h2><p><strong>描述</strong></p>
-<p>计算pre_time(更小) cur_time(更大) 相差几天<br><strong>参数</strong></p>
+<h2 id="function-M-merge-target-source"><a href="#function-M-merge-target-source" class="headerlink" title="function M.merge(target, source)"></a>function M.merge(target, source)</h2><p><strong>描述</strong></p>
+<p>合并table (source合并进入target)<br><strong>参数</strong></p>
 <ul>
-<li>number pre_time 之前记录的时间</li>
-<li>number cur_time 当前时间(可选 默认当前时间)</li>
-<li>number hour[0,23] 几点算一天的开始(可选 默认零点)<br>**<br>返回值**</li>
-<li>number 相差几天</li>
+<li>tab table 表</li>
+<li>target table 目标表</li>
+<li>source table 来源表<br>**<br>返回值**</li>
+<li>number 长度</li>
 </ul>
 
                 
@@ -527,8 +767,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>time_util 时间相关</div>
-      <div>https://huahua132.github.io/2025/01/12/skynet_fly_api_word/utils/time_util/</div>
+      <div>table_util table相关</div>
+      <div>https://huahua132.github.io/2024/06/29/skynet_fly_api_word/utils/table_util/</div>
     </div>
     <div class="license-meta">
       
@@ -540,7 +780,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年1月12日</div>
+          <div>2024年6月29日</div>
         </div>
       
       
@@ -572,12 +812,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">time_util 时间相关</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/12/31/year/2024/" title="2024 年度总结">
-                        <span class="hidden-mobile">2024 年度总结</span>
+                      <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式">
+                        <span class="hidden-mobile">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
