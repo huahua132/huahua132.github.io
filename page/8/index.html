@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/07/think/whywrite/" target="_self">
-          为什么写blog
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
+          关于room_game可热更匹配房间类游戏架构的优化
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/think/whywrite/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
         <div>
-          原因为了总结，强化学习，以及分享和记录。  总结日常工作学习中零零散散学习到的知识不成体系，有时候学了又感觉没学，我觉得原因就是没有深度思考，一味求快，写总结会让我们对知识进行深度思考，需要总结出学习到的知识能解决什么样的问题，先提出问题场景,提供 解决方案 总结出  知识特点 再扩展 类同知识 进行 优缺点 对比 从而 在脑中构建出 知识体系网络。 强化学习知识学到了，自己会用，但是可能只是用到
+          前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room
         </div>
       </a>
 
@@ -245,8 +245,137 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-07 10:33" pubdate>
-              2023-05-07
+            <time datetime="2023-10-15 08:00" pubdate>
+              2023-10-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" target="_self">
+          对安全关服的支持
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" target="_self">
+        <div>
+          前言我们通常使用kill命令去关闭一个，在单进程序中，程序结尾一般都会有收尾的关闭动作。skynet并没有对收尾动作做太多文章，对于skynet.abort()也只是粗暴的关闭掉所有服务，清除掉所有未处理的消息。但是在实际应用开发中，我们通常需要做一个收尾处理，比如orm缓存的修改进行同步、把在线的玩家都踢出。 实现方式对于skynet，不太好依赖信号去处理，信号那需要阻塞等待所有服务都完成收尾动
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-12 22:00" pubdate>
+              2023-10-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/06/think/reload_error/" target="_self">
+          skynet_fly热更新存在的问题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/think/reload_error/" target="_self">
+        <div>
+          前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-06 19:22" pubdate>
+              2023-10-06
             </time>
           </div>
         
@@ -290,15 +419,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
-          前言
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
+          关于增加skynet_fly 日志分割模块
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
         <div>
-          这个篇章主要介绍skynet_fly_demo的设计，如何基于skynet_fly_demo做开发。我将会以讲解一个个问题的方式带你走进了解skynet_fly_demo。 skynet_fly_demo简介skynet_fly_demo是基于skynet_fly的试验性项目，目的是全面的使用skynet_fly的功能并验证其可行性。skynet_fly_demo深度的使用了skynet_fly如
+          起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在/etc/logrotate.d/新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo
         </div>
       </a>
 
@@ -306,8 +435,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-09-10 08:00" pubdate>
+              2023-09-10
             </time>
           </div>
         
@@ -322,15 +451,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -344,7 +466,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -358,15 +480,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
-          用户是如何登录的？
+        <a href="/2023/09/03/record/blog/" target="_self">
+          blog编写环境搭建
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/03/record/blog/" target="_self">
         <div>
-          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t
+          前言偶然可能换电脑了，需要重新搭建起编写blog的环境。 步骤 安装git,拉取blog工程。 设置git环境。      123git config --global user.name &quot;你的GitHub用户名&quot;git config --global user.email &quot;你的GitHub注册邮箱&quot;ssh-keygen -t rsa -C &quot;
         </div>
       </a>
 
@@ -374,8 +496,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-09-03 11:33" pubdate>
+              2023-09-03
             </time>
           </div>
         
@@ -390,15 +512,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/notebook/" class="category-chain-item">notebook</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -412,7 +527,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/notebook/">#notebook</a>
             
           </div>
         
@@ -426,15 +541,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
-          大厅服如何对模块功能进行拆分隔离？
+        <a href="/2023/08/20/skynet_fly_ss/after_load/" target="_self">
+          关于增加skynet_fly lua服务启动的后置加载
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/20/skynet_fly_ss/after_load/" target="_self">
         <div>
-          简介通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通过不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。 skynet_fly_demo是如何做的？一个独立的功能模块无法是需要处理5种事件  客户端消息 服务器之间的消息 模块之间的接口调用 用户的登录，登出事情 自己注册的定时
+          前言skynet lua服务默认启动加载是使用skynet/lualib/loader.lua，loader.lua 会加载并执行config中配置的preload路径的lua文件，这个操作的好处是可以把所有服务的一些前置环境操作，或者一些常用工具函数写到全局变量中(我更倾向于封装成工具模块通过require引用，不去污染全局环境，尽量保持原生环境)。在skynet_fly框架中，我就利用prel
         </div>
       </a>
 
@@ -442,8 +557,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-08-20 08:00" pubdate>
+              2023-08-20
             </time>
           </div>
         
@@ -458,15 +573,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -480,7 +588,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -494,15 +602,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
-          用户是如何匹配进入到游戏的？
+        <a href="/2023/08/12/record/linux/" target="_self">
+          linux系统常用命令记录
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/08/12/record/linux/" target="_self">
         <div>
-          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
+          gdb调试打开core文件gdb filename core 查看错误堆栈bt centos gcc版本升级sudo yum install centos-release-sclsudo yum install devtoolset-9-gcc*scl enable devtoolset-9 bash 如何使用systemd运行程序cd /etc/systemd/systemvim myapp.s
         </div>
       </a>
 
@@ -510,8 +618,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-08-12 11:33" pubdate>
+              2023-08-12
             </time>
           </div>
         
@@ -526,15 +634,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/notebook/" class="category-chain-item">notebook</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -548,7 +649,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/notebook/">#notebook</a>
             
           </div>
         
@@ -562,15 +663,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
-          用户是如何注册的？
+        <a href="/2023/07/28/record/record/" target="_self">
+          linux不产生core原因
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/record/record/" target="_self">
         <div>
-          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的注册接口 s2s loginserver 调用 centerserver 注册 s2s centerserver 调用 hallserver 注册 s2c loginserver 返回注册结果  流程1涉及skynet_fly技术* http server  * cluster rp
+          首先可能ulimit限制了。ulimit -a  如果core 限制大小为0，需要修改。调用命令ulimit -c unlimited  考虑产生位置问题查看 /proc/sys/kernel/core_pattern文件内容。如果文件内容不是core，通知命令sudo bash -c &quot;echo core &gt; /proc/sys/kernel/core_pattern&quot
         </div>
       </a>
 
@@ -578,8 +679,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-07-28 11:33" pubdate>
+              2023-07-28
             </time>
           </div>
         
@@ -594,15 +695,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/record/" class="category-chain-item">record</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -616,7 +710,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/record/">#record</a>
             
           </div>
         
@@ -630,15 +724,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" target="_self">
-          如何在skynet_fly_demo新增一个游戏？
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" target="_self">
+          关于cluster 远程rpc调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/F_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/28/skynet_fly_ss/cluster_rpc/" target="_self">
         <div>
-          简介通常基于游戏大厅的对战类型游戏不会只有一款玩法，像英雄联盟会有匹配场，排位场，大乱斗，还有一些限时玩法，克隆，无限火力。这些特殊玩法，通常分开开服比较好，相互隔离不影响。skynet_fly_demo利用了skynet_fly房间类游戏架构可以非常快速的搭建房间对战类游戏，非常适合这种架构模式。那么如何在skynet_fly_demo新增一个游戏？我将已新增一个数字炸弹游戏为例子，进行逐步讲解
+          简介cluster 远程rpc是依赖skynet的cluster模式实现的。    skynet_fly远程rpc调用的实现注重什么：    * 与热更模板系统完美融合。    * 简单易用的API设计。    * 支持多结点。    * 支持服务发现。 定位因为远程rpc调用结点偶尔下线，上线都是常有的事，所以不建议用来做强生效性消息(就是调用了，一定要执行成功)。skynet_fly clus
         </div>
       </a>
 
@@ -646,8 +740,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
+            <time datetime="2023-07-28 08:00" pubdate>
+              2023-07-28
             </time>
           </div>
         
@@ -662,15 +756,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
   
 
       </span>
@@ -684,7 +771,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -698,15 +785,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
-          前言
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" target="_self">
+          关于room_game可热更分配房间类游戏架构
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/22/skynet_fly_ss/room_game/" target="_self">
         <div>
-          项目简介skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。skynet_fly持续迭代的原则，尽量向下兼容，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。 框架优势skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。使用sky
+          简介room_game是skynet_fly基于热更系统实现的分配房间类游戏架构。    room_game注重什么：    * 框架与业务解耦。    * 可热更。    * 协议使用自由，目前提供protobuf和json协议。    * socket和websocket通用。 架构介绍room_game架构由多个skynet服务组成,由gate网关，login登录服,hall大厅服，allo
         </div>
       </a>
 
@@ -714,8 +801,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-07-22 08:00" pubdate>
+              2023-07-22
             </time>
           </div>
         
@@ -730,15 +817,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -752,143 +832,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
-          开发环境推荐
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
-        <div>
-          vscode + Oracle VM VirtualBoxvscode加虚拟机的方式，是我常用的开发方式。 安装虚拟机 安装VirtualBox,官网下载安装即可 下载centos或者ubantu镜像   centos ubuntu   使用VirtualBox安装虚拟机这里自行百度。  vscode安装插件luaHelpersftp 配置SFTP 创建配置ctrl shift p  编辑配置 1
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
-          编译
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
-        <div>
-          推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https://github.com/huahua132/skynet_fly.git 拉取子模块代码cd skynet_flygit submodule update --init 拉取skynet代码代码子模块cd skynetg
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -900,7 +844,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/7/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/#board">9</a><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/9/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/7/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/#board">9</a><a class="page-number" href="/page/10/#board">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/9/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

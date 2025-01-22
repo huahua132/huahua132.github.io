@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" target="_self">
-          load_mods配置文件的使用
+        <a href="/2023/07/08/skynet_fly_ss/redis/" target="_self">
+          关于redis的封装
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/08/skynet_fly_ss/redis/" target="_self">
         <div>
-          前言load_mods配置文件是skynet_fly非常核心的东西。通常一个服务为了区分不同环境，都会有一个服务配置项。传统的服务端配置可能就是key-value形式的配置项，因为大部分传统服务端都是把配置做成全局单例，方便读取。 skynet 有个启动配置，为啥还要新增一个？ 因为skynet_env都是key-value形式的，而且是配置在全局变量中，不方便做配置遍历。 skynet_env读
+          为什么要封装redis？ 适用skynet_fly生态。 redis连接配置可以写在mod_config中。  对于实现方式的思考 方式一  用skynet_fly 热更模块的方式，这样连接配置就可以写在mod_config，还可以配置连接多个不同的redis。  优势：  1. 配置redis连接方便。  2. 固定redis连接数量。  劣势  1. 多了一次消息的打包解包。  2. redi
         </div>
       </a>
 
@@ -245,8 +245,130 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-07-08 21:54" pubdate>
+              2023-07-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
+          关于定时器的封装
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
+        <div>
+          为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-02 13:42" pubdate>
+              2023-07-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/06/30/skynet_fly_word/word_4/H_q/" target="_self">
+          如何在skynet_fly_demo新增一个后台模块？
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_word/word_4/H_q/" target="_self">
+        <div>
+          前言skynet_fly_demo 中的admin用的go语言gin框架的中间件模式。客户端用的vue-admin-template,项目架构是前后端分离的。我们将以添加一个警告日志模块为示例。 服务端服务端只需要通过API接口即可，通常API接口我们会按模块划分，比如用户模块就是提供/user/login,user/loginout,这在gin分格的中间件模式中，我们可以把user建一个组(gr
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-30 18:00" pubdate>
+              2023-06-30
             </time>
           </div>
         
@@ -266,7 +388,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
   
   
 
@@ -297,15 +419,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
-          构建服务脚手架
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
+          关于skynet_fly热更新实现
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" target="_self">
         <div>
-          为啥需要脚手架？如果你对缘由感兴趣，可以看看这个 作用 生成skynet 启动配置文件 生成服务基础运维脚本  构建命令skynet_fly/binshell/make_server.sh skynet_fly_path 我们已构建skynet_fly/examples/webapp为例子  进入服务文件夹目录下。cd skynet_fly/examples/webapp  构建运维脚本。bash
+          实现思路可以先看看这篇关于skynet做服务热更新这篇可以说是最初的实现版本，最新的完整实现 这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skyn
         </div>
       </a>
 
@@ -313,8 +435,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-06-30 00:00" pubdate>
+              2023-06-30
             </time>
           </div>
         
@@ -329,15 +451,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -351,7 +466,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -365,15 +480,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
-          如何编写可热更服务模块
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" target="_self">
+          关于skynet_fly的一键构建服务配置
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" target="_self">
         <div>
-          前言使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。 简介可热更服务模块 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会加载指定的 xxx_m.lua文件,相当于用相同的盒子包装不同的东西。 示例12345678910111213141516171819202122232
+          为什么要做这个？ skynet启动用的skynet_config新增一个目录都要去增加一个path并重启，我就想有没有办法不用手写path，用脚本写。 热更服务的path如果有新增模块引入，之前没有埋伏路径，增加了新路径，岂不是会找不到，很难受，这样。 新增一个服务模块每次都有手写一个config好麻烦。 热更服务需要通过curl连接 debug_console服务去执行热更。  所以这个事情必须
         </div>
       </a>
 
@@ -381,8 +496,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-06-30 00:00" pubdate>
+              2023-06-30
             </time>
           </div>
         
@@ -397,15 +512,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -419,7 +527,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -433,15 +541,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
-          项目文件夹介绍
+        <a href="/2023/05/22/think/reload/" target="_self">
+          关于skynet做服务热更新
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/22/think/reload/" target="_self">
         <div>
-          3rd存放第三方依赖 binshell服务构建工具 examples示例学习服务 lualibskynet_fly lua库文件代码 moduleskynet_fly 提供的可热更服务模块 scriptlua shell 脚本工具代码 serviceskynet普通服务 skynetskynet代码 test单元测试服务代码，主要用来编写一些模块的单元测试。
+          为什么要做热更新那当然是因为产品需要更新功能，但是服务功能模块又可以有用户在使用，又不想停止服务又想更新功能，就有了需要热更新的需求。无状态的服务非常好更新，例如查询服务，直接重启服务也可以，只是出现短暂的服务不可用。更新难的是有状态的服务，不能直接重启，重启就可能出现数据丢失了。 热更方式 在原本的lua虚拟机中更新这种方式通过重新加载读取_G.package.loaded中的文件，去覆盖旧_e
         </div>
       </a>
 
@@ -449,8 +557,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-22 10:33" pubdate>
+              2023-05-22
             </time>
           </div>
         
@@ -465,15 +573,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -487,7 +588,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
             
           </div>
         
@@ -501,15 +602,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" target="_self">
-          规范建议
+        <a href="/2023/05/21/data_struct/avltree/" target="_self">
+          平衡二叉树的lua实现
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/H_standard/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/21/data_struct/avltree/" target="_self">
         <div>
-          启动配置文件load_mods_xxx.lua 可热更模块都存放在 module命名的文件夹下，以xxx_m.lua命名。编写规范以CMD命令。 123local CMD = &#123;&#125;return CMD  普通skynet服务都存放在 service命名的文件夹下，命令随意，因为service的查找规则，只会在service文件夹下查找，文件名重复有可能，但是手动查找范围小。 普
+          特征 有序性 所有结点都是左子树比自己小，右子树比自己大。 平衡性 所有结点左右子树高度差绝对值小于等于一。 唯一性 结点key唯一，不能重复。   优势 适合有序性数据存储 二叉树的天然有序性 适合范围查找	基于有序的范围查找时间复杂度为o(log n) + m  缺点 内存地址分散 每个结点都是独立数据块，存储地址分散，操作速度非常依赖存储设备的寻址速度，基于机械硬盘运行将会非常慢。  操作时
         </div>
       </a>
 
@@ -517,8 +618,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-21 10:33" pubdate>
+              2023-05-21
             </time>
           </div>
         
@@ -533,15 +634,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -555,7 +649,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
             
           </div>
         
@@ -569,15 +663,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" target="_self">
-          文件查找规则
+        <a href="/2023/05/21/think/link/" target="_self">
+          链接记录
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/I_file/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/21/think/link/" target="_self">
         <div>
-          serviceluaservice 约束服务只能放在 启动根目录(./) || 启动根目录(./)-&gt;service || common-&gt;service || skynet_fly-&gt;service || skynet-&gt;service cpathfile_util.path_join(skynet_fly_path, &#39;/cservice/?.so;&#39;)
+          链接记录 床长人工智能教程https://captainbed.vip/login/ https://datuchat.com/
         </div>
       </a>
 
@@ -585,45 +679,17 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-21 10:33" pubdate>
+              2023-05-21
             </time>
           </div>
         
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
             
           </div>
         
@@ -637,15 +703,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
-          如何更改skynet服务的配置项
+        <a href="/2023/05/14/socket/c/" target="_self">
+          网络七层模型
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/c/" target="_self">
         <div>
-          配置在load_mods.lua 配置文件中，我们可以启动一个share_config_m共享配置的模块，我们可以把这些配置放在 server_cfg中。 12345678910111213141516return &#123;	share_config_m = &#123;		launch_seq = 1,		launch_num = 1,		default_arg = &#123;			ser
+          7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h
         </div>
       </a>
 
@@ -653,8 +719,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
             </time>
           </div>
         
@@ -669,15 +735,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
   
 
       </span>
@@ -691,7 +750,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/socket/">#socket</a>
             
           </div>
         
@@ -705,15 +764,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" target="_self">
-          前言
+        <a href="/2023/05/14/socket/epoll/" target="_self">
+          select,poll,epoll 对比
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
         <div>
-          前言通过入门篇，我们学会了框架的基本使用规则。但是我们还不知道如何RPC调用，如何远程RPC调用，热更原理机制是什么。学会这些，可以说是使用该框架的高手的。
+          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
         </div>
       </a>
 
@@ -721,8 +780,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
             </time>
           </div>
         
@@ -737,15 +796,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
-  
-  
-
   
 
       </span>
@@ -759,143 +811,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
-          rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
-        <div>
-          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = contriner_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
-          集群远程rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
-        <div>
-          前言集群远程RPC调用，是借鉴skynet cluster mode 自己实现的(https://github.com/cloudwu/skynet/wiki/Cluster)封装了一套简单好用、适用用框架的模式。 配置启动服务端 配置load_mods.lua  load_mods.lua 12345678910111213141516--共享配置share_config_m = &#123;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/socket/">#socket</a>
             
           </div>
         
@@ -907,7 +823,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/8/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/10/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/8/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/#board">10</a><a class="page-number" href="/page/11/#board">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/10/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

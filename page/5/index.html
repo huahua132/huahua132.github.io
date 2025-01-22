@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/12/17/skynet_fly_api/load_mods/" target="_self">
-          启动配置load_mods.lua
+        <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" target="_self">
+          time_util 时间相关
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/17/skynet_fly_api/load_mods/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/time_util/" target="_self">
         <div>
-          作用定位可热更服务的启动配置文件，用于配置可插拔的可热更服务，可以自定义启动顺序，数量,配置参数，推迟最后启动。 示例参考AB_question 1234567891011121314return &#123;	A_m = &#123;		launch_seq = 1,		launch_num = 1,	&#125;,    B_m = &#123;        launch_seq = 2,
+          time_util function M.skynet_int_time()描述 获取当前时间戳参数 返回值  number 时间戳(秒*100)  function M.time()描述 获取当前时间戳参数 返回值  number 时间戳(秒)  function M.date(time)描述 获取当前日期参数 返回值  table 日期格式的table{year&#x3D;2025,month
         </div>
       </a>
 
@@ -245,8 +245,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-17 08:00" pubdate>
-              2023-12-17
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
             </time>
           </div>
         
@@ -261,8 +261,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/" class="category-chain-item">工具函数</a>
+  
+  
+
   
 
       </span>
@@ -290,15 +297,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/12/10/skynet_fly_ss/pack/" target="_self">
-          关于skynet_fly gate，ws_gate消息包设计
+        <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" target="_self">
+          table_util table相关
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/skynet_fly_ss/pack/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/table_util/" target="_self">
         <div>
-          前言最近skynet_fly被群友用来写项目，并且上线了，感觉还是很欣慰的，群友用了我的房间类游戏架构，大概三周的时间，游戏就直接上线了，过程中咨询过我一些问题，其中关于协议这一块，解释的比较久，并且最后是我把我写好的中国象棋客户端上传了github，让他给客户端参考，才较快解决了前后端协议对接。所以想写这一篇来拆解一下协议封装。 协议图 skynet gate协议包skynet协议包就是上图红色
+          table_util function M.is_loop_table(check_table,is_route)描述 检测表是否有环引用参数  check_table table 目标表 is_route boolean 是否需要返回环路径  返回值  boolean 是否出现环引用 string|nil 环路径 string|nil 环路径  function M.dump(tab)描述 不会
         </div>
       </a>
 
@@ -306,8 +313,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-10 18:00" pubdate>
-              2023-12-10
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
             </time>
           </div>
         
@@ -322,8 +329,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/" class="category-chain-item">工具函数</a>
+  
+  
+
   
 
       </span>
@@ -337,7 +351,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
             
           </div>
         
@@ -351,15 +365,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/12/10/skynet_fly_ss/script/" target="_self">
-          关于skynet_fly热更模块启动配置的调整
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
+          远程sub/pub 模式 和 远程subsyn/pubsyn 模式
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/skynet_fly_ss/script/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
         <div>
-          前言经过几个月的打磨使用，发现之前想的生成mod_config.lua热更模块配置文件用于启动的方式并不是很好。    缺点    1. 很少需要修改里面的值，当修改掉load_mods.lua，需要重新生成mod_config.lua。    2. 数组的配置重新生成也不好覆盖。    3. 有些配置想一直用load_mods.lua中的，却要手动同步改一遍mod_config.lua。 一开始
+          前言有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到订阅发布模式(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。 对比redisredis也支持sub&#x2F;pub模式，并且有psub批量订阅支持。 skynet_fly目前只实现了sub&#x2F;pub模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。不过skynet_fly实现了red
         </div>
       </a>
 
@@ -367,313 +381,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-10 18:00" pubdate>
-              2023-12-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/12/03/skynet_fly_ss/reload/" target="_self">
-          关于skynet_fly热更新实现细节
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/03/skynet_fly_ss/reload/" target="_self">
-        <div>
-          前言由于几个月的时间里，断断续续发现一些问题，做了很多调整，与最初的版本已经有些许差异了，于是打算重新梳理一下热更的流程实现的细节。 实现思路可以先看看这篇关于skynet_fly热更新实现 整体还是围绕容器管理员,容器客户端,可热更服务展开。 职责 容器管理员 负责启动，通知关闭，通知更新 容器客户端 负责注册访问，监听，服务切换，记录需要访问，回复是否需要访问 可热更服务 负责记录来访，检查安
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-03 14:00" pubdate>
-              2023-12-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/11/19/skynet_fly_ss/logservice/" target="_self">
-          关于增加skynet_fly 日志服务
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/11/19/skynet_fly_ss/logservice/" target="_self">
-        <div>
-          前言最近在skynet_fly_demo中尝试用skynet_fly后台管理，想通过后台监控服务器的历史运行状况,服务实时信息，错误日志报警，等等。历史运行状况,服务实时信息这两个通过skynet的debug_console再加上我封装的集群，很方便的就做好了。之后考虑错误日志报警的问题,错误日志分为主动打印的异常日志和被动触发lua断言错误。  主动打印的异常日志 这个好解决，我封装的log模块
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-11-19 14:00" pubdate>
-              2023-11-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/22/skynet_fly_ss/time_point/" target="_self">
-          关于新增定时器的扩展 整点报时
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/skynet_fly_ss/time_point/" target="_self">
-        <div>
-          前言对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。 如何新增一开始想在timer.lua去新增一些新增一些方法，但是想保持timer.lua足够简单，就独立了一个文件用继承的方式来扩展。 提供功能可以像设置闹钟一样设置。  设置每分钟的哪一秒。 设置每小时几分几秒。 设置每天的几时几分几秒。 设置每周的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-22 13:42" pubdate>
-              2023-10-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
-          关于room_game可热更匹配房间类游戏架构的优化
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/15/skynet_fly_ss/room_game_up/" target="_self">
-        <div>
-          前言在用这种架构模式实现中国象棋游戏的过程中，发现之前的设计有些诟病的地方。   gate和fd没必要暴露给业务层。 登录后连接大厅就行，不用强制进房间，这样能适配的业务功能更广泛，进不进房间应该由业务决定，退出房间也一样，退出不代表登出。 缺少通用的发消息接口。 消息处理函数不够优雅。 业务层缺少CMD命令注册入口。 table缺少主动访问hall大厅和alloc的接口。  优化新版本的room
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-15 08:00" pubdate>
-              2023-10-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" target="_self">
-          对安全关服的支持
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" target="_self">
-        <div>
-          前言我们通常使用kill命令去关闭一个，在单进程序中，程序结尾一般都会有收尾的关闭动作。skynet并没有对收尾动作做太多文章，对于skynet.abort()也只是粗暴的关闭掉所有服务，清除掉所有未处理的消息。但是在实际应用开发中，我们通常需要做一个收尾处理，比如orm缓存的修改进行同步、把在线的玩家都踢出。 实现方式对于skynet，不太好依赖信号去处理，信号那需要阻塞等待所有服务都完成收尾动
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-12 22:00" pubdate>
-              2023-10-12
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
             </time>
           </div>
         
@@ -693,7 +402,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
   
   
 
@@ -724,15 +433,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/10/06/think/reload_error/" target="_self">
-          skynet_fly热更新存在的问题
+        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/contriner_watch_interface/" target="_self">
+          进程内的订阅同步-可热更服务的接口
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/06/think/reload_error/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/watch/interface/contriner_watch_interface/" target="_self">
         <div>
-          前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local
+          contriner_watch_interface function M:new(mod_name, instance_name)描述 可热更模块接口参数  mod_name string 可热更服务模块名 instance_name string 可热更服务模块实例名  返回值  table obj
         </div>
       </a>
 
@@ -740,8 +449,416 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-06 19:22" pubdate>
-              2023-10-06
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83%EF%BC%8C%E8%AE%A2%E9%98%85%E5%90%8C%E6%AD%A5/" class="category-chain-item">订阅发布，订阅同步</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormentry/" target="_self">
+          orm条目
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/orm/ormentry/" target="_self">
+        <div>
+          ormentry function M:get(field_name)描述 获取条目数据的值参数  field_name string 字段名  返回值  any 字段值  function M:set(field_name, field_value)描述 修改条目数据的值参数  field_name string 字段名 field_value any 字段值  返回值 function M:g
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormtable/" target="_self">
+          orm表
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/orm/ormtable/" target="_self">
+        <div>
+          ormtable function M:new(tab_name)描述 新建表对象参数  tab_name string 作用与数据库的表名  返回值  table obj  function M:FIELD_TYPE(field_name)描述 设置字段 FIELD_TYPE对应字段类型 有 int8|int16|int32|int64|uint8|uint16|uint32|string32|
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mongo/" target="_self">
+          orm mongo适配器
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mongo/" target="_self">
+        <div>
+          ormadapter_mongo function M:new(db_name)描述 新建适配器对象参数  db_name string 对应share_config_m 中写的key为mongo表的名为db_name的连接配置  返回值  table obj  function M:set_batch_insert_num(num)描述 设置单次整合批量插入的数量参数  num number 数
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/service_watch_interface/" target="_self">
+          进程内的订阅同步-可热更服务的接口
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/watch/interface/service_watch_interface/" target="_self">
+        <div>
+          service_watch_interface function M:new(name_or_handle)描述 普通skynet服务接口参数  name_or_handle string|number 别名或者handle_id  返回值  table obj
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83%EF%BC%8C%E8%AE%A2%E9%98%85%E5%90%8C%E6%AD%A5/" class="category-chain-item">订阅发布，订阅同步</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mysql/" target="_self">
+          orm mysql适配器
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mysql/" target="_self">
+        <div>
+          ormadapter_mysql function M:new(db_name)描述 新建适配器对象参数  db_name string 对应share_config_m 中写的key为mysql表的名为db_name的连接配置  返回值  table obj  function M:set_batch_insert_num(num)描述 设置单次整合批量插入的数量参数  num number 数
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/05/03/think/srpc/" target="_self">
+          为skynet_fly新增远程调用方式
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/05/03/think/srpc/" target="_self">
+        <div>
+          前言目前skynet_fly的远程调用方式，是采用了封装skynet的cluster 集群方式，每个连接都会有一个服务端有一个clusteragent 接收代理，客户端有一个sender 发送代理服务。再加上我封装的cluster_server和cluster_client，这样发送端和接收端就分别存在了2个代理服务。也就是说调用一个rpc请求会经过非常多次的打包解包流程。 发送者-&gt;clu
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-03 19:22" pubdate>
+              2024-05-03
             </time>
           </div>
         
@@ -779,72 +896,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
-          关于增加skynet_fly 日志分割模块
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
-        <div>
-          起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在/etc/logrotate.d/新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-10 08:00" pubdate>
-              2023-09-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

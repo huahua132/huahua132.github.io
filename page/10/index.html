@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
-          检查热更的使用以及原理
+        <a href="/2023/05/14/socket/tcp/" target="_self">
+          tcp知识整理
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/tcp/" target="_self">
         <div>
-          如何执行sh make/script/check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh make/script
+          三次握手过程 第一次握手 客户端发送建立链接请求报文SYN携带(SYN &#x3D; 1,seq &#x3D; x)后，进入SYN_SENT状态。 第二次握手 服务端接收到SYN报文后回复SYN+ACK报文携带(ACK&#x3D;x+1,SYN&#x3D;1,seq&#x3D;y)，进入SYN_RECV状态。 第三次握手 客户端收到SYN+ACK报文后回复ACK报文携带(ACK&#x3D;y+1,
         </div>
       </a>
 
@@ -245,8 +245,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-14 10:33" pubdate>
+              2023-05-14
             </time>
           </div>
         
@@ -261,15 +261,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/socket/" class="category-chain-item">socket</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
-  
-  
-
   
 
       </span>
@@ -283,7 +276,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/socket/">#socket</a>
             
           </div>
         
@@ -297,15 +290,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" target="_self">
-          启动时生成的临时文件说明
+        <a href="/2023/05/13/redis/redis/" target="_self">
+          redis 知识杂谈
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/13/redis/redis/" target="_self">
         <div>
-          chinese_chess_config.lua由于生成的make&#x2F;script脚本中有很多命令都需要通过debug_console入口去操作，比如检测热更，快进时间。所有需要有一个地方拿到启动时的debug_port参数，由于生成的chinese_chess_config.lua会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。 mo
+          redis有哪些好处？ 数据类型丰富，提供了string,list,hash,set,zset五种基础类型，还提供了stream，geo，bitmap扩展类型string数据结构：简单动态字符串list数据结构：双向链表，压缩列表hash压缩列表，哈希表zset压缩列表，跳表set哈希表，整数数组  数据可以设置过期时间  支持事务  支持脚本化运行  哈希冲突解决 少量的冲突redis使用链式哈
         </div>
       </a>
 
@@ -313,8 +306,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-13 11:33" pubdate>
+              2023-05-13
             </time>
           </div>
         
@@ -329,15 +322,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/redis/" class="category-chain-item">redis</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
-  
-  
-
   
 
       </span>
@@ -351,7 +337,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/redis/">#redis</a>
             
           </div>
         
@@ -365,15 +351,198 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
+        <a href="/2023/05/13/skynet_frame/frame/" target="_self">
+          skynet c层的整体架构
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/13/skynet_frame/frame/" target="_self">
+        <div>
+          架构图上图是skynet框架的核心的架构图，看完整体我们再去细看内部实现细节，架构图就像一张完整的地图，我们需要由面到点深入到图中，才能真正的了解吃透skynet，使用中才知道要注意哪些细节。现实中了解地图中的一个地方自然是实地去走一走。了解代码框架的话当然是结合源码和文档(skynet github 上的wiki文档就写的非常不错)。源码不止看了一遍，所以基本上都是n探，探多了就清楚自己哪些地方
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-13 11:33" pubdate>
+              2023-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-frame/">#skynet_frame</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/07/skynet_frame/actor/" target="_self">
+          actor模型在sknyet中的应用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/skynet_frame/actor/" target="_self">
+        <div>
+          简介Actor模型由状态（State）、行为（Behavior）和邮箱（MailBox，可以认为是一个消息队列）三部分组成： 状态Actor模型中的状态指Actor对象的变量信息，状态由Actor模型自己管理，避免了并发环境下的锁和内存原子性等问题。 行为Actor模型中的计算逻辑，通过Actor模型接收到的消息来改变Actor模型的状态。 邮箱邮箱是Actor和Actor之间的通信桥梁，邮箱内部
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-07 10:33" pubdate>
+              2023-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-frame/">#skynet_frame</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/07/think/whywrite/" target="_self">
+          为什么写blog
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/07/think/whywrite/" target="_self">
+        <div>
+          原因为了总结，强化学习，以及分享和记录。  总结日常工作学习中零零散散学习到的知识不成体系，有时候学了又感觉没学，我觉得原因就是没有深度思考，一味求快，写总结会让我们对知识进行深度思考，需要总结出学习到的知识能解决什么样的问题，先提出问题场景,提供 解决方案 总结出  知识特点 再扩展 类同知识 进行 优缺点 对比 从而 在脑中构建出 知识体系网络。 强化学习知识学到了，自己会用，但是可能只是用到
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-07 10:33" pubdate>
+              2023-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
           前言
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
         <div>
-          前言这一篇，主要介绍skyent_fly提供的增强功能。  我想应该有很多读者一股脑把文档看了个遍，之后发现学费了。正常的。技术能力提升并不能一蹴而就，需要经过大量的实践思考学习，慢慢累计起来方能有所成。 加油！
+          这个篇章主要介绍skynet_fly_demo的设计，如何基于skynet_fly_demo做开发。我将会以讲解一个个问题的方式带你走进了解skynet_fly_demo。 skynet_fly_demo简介skynet_fly_demo是基于skynet_fly的试验性项目，目的是全面的使用skynet_fly的功能并验证其可行性。skynet_fly_demo深度的使用了skynet_fly如
         </div>
       </a>
 
@@ -381,8 +550,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-03 18:00" pubdate>
+              2023-05-03
             </time>
           </div>
         
@@ -402,7 +571,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
   
   
 
@@ -433,15 +602,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
-          gate,wsgate通用协议的设计
+        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
+          用户是如何注册的？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
         <div>
-          gate,wsgate通用协议的设计
+          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的注册接口 s2s loginserver 调用 centerserver 注册 s2s centerserver 调用 hallserver 注册 s2c loginserver 返回注册结果  流程1涉及skynet_fly技术* http server  * cluster rp
         </div>
       </a>
 
@@ -449,8 +618,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-03 18:00" pubdate>
+              2023-05-03
             </time>
           </div>
         
@@ -470,7 +639,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
   
   
 
@@ -501,15 +670,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
-          可热更匹配房间类游戏架构基础设施
+        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
+          用户是如何登录的？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
         <div>
-          可热更匹配房间类游戏架构基础设施后续优化 2024&#x2F;6&#x2F;14 22:30支持同时开websocket 和 socket load_mods 配置改动123456789101112131415161718192021222324252627--共享配置share_config_m = &#123;	launch_seq = 1,	launch_num = 1,	default_a
+          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t
         </div>
       </a>
 
@@ -517,8 +686,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-03 18:00" pubdate>
+              2023-05-03
             </time>
           </div>
         
@@ -538,7 +707,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
   
   
 
@@ -569,15 +738,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/D_timer/" target="_self">
-          定时器的封装
+        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
+          大厅服如何对模块功能进行拆分隔离？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/D_timer/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
         <div>
-          定时器的封装使用API
+          简介通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通过不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。 skynet_fly_demo是如何做的？一个独立的功能模块无法是需要处理5种事件  客户端消息 服务器之间的消息 模块之间的接口调用 用户的登录，登出事情 自己注册的定时
         </div>
       </a>
 
@@ -585,8 +754,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-03 18:00" pubdate>
+              2023-05-03
             </time>
           </div>
         
@@ -606,7 +775,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
   
   
 
@@ -637,15 +806,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/G_point/" target="_self">
-          整点报时
+        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+          用户是如何匹配进入到游戏的？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/G_point/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
         <div>
-          整点报时
+          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
         </div>
       </a>
 
@@ -653,8 +822,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
+            <time datetime="2023-05-03 18:00" pubdate>
+              2023-05-03
             </time>
           </div>
         
@@ -674,211 +843,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_3/F_redis/" target="_self">
-          redis的封装
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/F_redis/" target="_self">
-        <div>
-          redis的封装
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_3/H_orm/" target="_self">
-          orm数据库关系映射
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/H_orm/" target="_self">
-        <div>
-          orm数据库关系映射api 修改记录2024&#x2F;8&#x2F;16增加APIget_entry_by_limit分页查询get_entry_by_inIN 查询 2024&#x2F;8&#x2F;17delete_entry_by_range 范围删除 2024&#x2F;11&#x2F;13热更支持 之前热更存在这个问题。 热更orm_table 注意点如果一个服务访问了orm_tabl
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/25/skynet_fly_word/word_3/I_watch/" target="_self">
-          监听同步模块
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/I_watch/" target="_self">
-        <div>
-          监听同步模块api 修改记录2024&#x2F;8&#x2F;9当触发move转移同步时，如果自身服务是旧服务，就取消同步监听。因为旧服务不能切服，因为存在这个问题
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
   
   
 
@@ -907,7 +872,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/9/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/11/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/9/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#board">11</a><a class="page-number" href="/page/12/#board">12</a><a class="page-number" href="/page/13/#board">13</a><a class="extend next" rel="next" href="/page/11/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
