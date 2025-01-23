@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
-          对外接口
+        <a href="/2024/06/29/skynet_fly_api_word/client/orm_table_client/" target="_self">
+          orm访问对象
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/client/orm_table_client/" target="_self">
         <div>
-          contriner_interfaceloading &#x3D; 1,            –加载中starting &#x3D; 2,           –启动成功fix_exited &#x3D; 3,         –确定退出exited &#x3D; 4,             –退出start_failed &#x3D; 5,       –启动失败 function M.ge
+          orm_table_client因为orm有缓存的情况下，只能一个服务持有，那么我们又想多个服务访问情况下，我们一般把ormtable挂靠在orm_table_m可热更服务中这时候我们通过orm_table_client来访问 function M:new(orm_name)描述 创建一个orm访问对象参数  orm_name string orm_table_m 中的instance_name
         </div>
       </a>
 
@@ -266,75 +266,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
-          启动函数
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
-        <div>
-          contriner_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
   
   
 
@@ -501,6 +433,142 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
+          启动函数
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
+        <div>
+          contriner_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
+          对外接口
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
+        <div>
+          contriner_interfaceloading &#x3D; 1,            –加载中starting &#x3D; 2,           –启动成功fix_exited &#x3D; 3,         –确定退出exited &#x3D; 4,             –退出start_failed &#x3D; 5,       –启动失败 function M.ge
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
           mysql直连调用
         </a>
@@ -539,74 +607,6 @@
     <span>></span>
     
   <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
-          模块信息与配置
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
-        <div>
-          module_info function M.get_cfg()描述 获取load_mods default_cfg|mod_cfgs 绑定的配置信息参数 返回值  table  function M.get_base_info()描述 获取可热更模块的基础信息 [module_name]可热更模块名 [index]启动索引 [launch_date]启动日期 [launch_time]启动时间戳
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
   
   
 
@@ -841,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/rpc/watch_client/" target="_self">
-          远程订阅-订阅端
+        <a href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
+          模块信息与配置
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/rpc/watch_client/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
         <div>
-          watch_client function M.watch(svr_name, channel_name, handle_name, handler)描述 watch监听 svr_name 的所有结点参数  svr_name string 远程结点名称 channel_name string 通道名 handle_name string 绑定的处理名 handler function 回调处理函数
+          module_info function M.get_cfg()描述 获取load_mods default_cfg|mod_cfgs 绑定的配置信息参数 返回值  table  function M.get_base_info()描述 获取可热更模块的基础信息 [module_name]可热更模块名 [index]启动索引 [launch_date]启动日期 [launch_time]启动时间戳
         </div>
       </a>
 
@@ -878,7 +878,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83%EF%BC%8C%E8%AE%A2%E9%98%85%E5%90%8C%E6%AD%A5/" class="category-chain-item">订阅发布，订阅同步</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
   
   
 
