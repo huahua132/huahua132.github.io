@@ -16,24 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="如何执行sh make&#x2F;script&#x2F;check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh make&#x2F;script">
+    <meta name="description" content="前言skynet_fly_demo 项目被开着5千机器人跑了一晚上之后，我第二天查下一下有没有啥异常日志，结果发现有一个机器人邮件插入失败，是因为主键冲突，插入的邮件是全服邮件，因为使用的批量插入并没有触发断言，并不能第一时间发现调用来源。只有错误日志。 1234567891011121314151617181920212223242526272829[:0000001a][20250123 05">
 <meta property="og:type" content="article">
-<meta property="og:title" content="检查热更的使用以及原理">
-<meta property="og:url" content="https://huahua132.github.io/2023/02/25/skynet_fly_word/word_2/D_reload/index.html">
+<meta property="og:title" content="记录一次使用录像查bug">
+<meta property="og:url" content="https://huahua132.github.io/2025/01/23/skynet_fly_ss/record/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="如何执行sh make&#x2F;script&#x2F;check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh make&#x2F;script">
+<meta property="og:description" content="前言skynet_fly_demo 项目被开着5千机器人跑了一晚上之后，我第二天查下一下有没有啥异常日志，结果发现有一个机器人邮件插入失败，是因为主键冲突，插入的邮件是全服邮件，因为使用的批量插入并没有触发断言，并不能第一时间发现调用来源。只有错误日志。 1234567891011121314151617181920212223242526272829[:0000001a][20250123 05">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-27T13:06:04.007Z">
+<meta property="article:published_time" content="2025-01-23T14:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-23T13:13:00.392Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="skynet_fly_word">
+<meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>检查热更的使用以及原理 - huahua132 blog</title>
+  <title>记录一次使用录像查bug - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="检查热更的使用以及原理"></span>
+            <span id="subtitle" data-typed-text="记录一次使用录像查bug"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-25 08:00" pubdate>
-          2023年2月25日 早上
+        <time datetime="2025-01-23 22:00" pubdate>
+          2025年1月23日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          229 字
+          3.7k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          2 分钟
+          31 分钟
         
       </span>
     
@@ -281,353 +281,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly 文档"
-        id="heading-8a12ab643e955a87eefc2a19b632005f" role="tab" data-toggle="collapse" href="#collapse-8a12ab643e955a87eefc2a19b632005f"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly实现思路历程"
+        id="heading-fb499f79496da9976dd55655b846d7cf" role="tab" data-toggle="collapse" href="#collapse-fb499f79496da9976dd55655b846d7cf"
         aria-expanded="true"
       >
-        skynet_fly 文档
-        <span class="list-group-count">(44)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse show" id="collapse-8a12ab643e955a87eefc2a19b632005f"
-           role="tabpanel" aria-labelledby="heading-8a12ab643e955a87eefc2a19b632005f">
-        
-        
-          
-          
-  <div class="category-post-list">
-    
-    
-  </div>
-
-          
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="入门篇"
-        id="heading-fde95b8345d6009bcd3e3b793ef65625" role="tab" data-toggle="collapse" href="#collapse-fde95b8345d6009bcd3e3b793ef65625"
-        aria-expanded="false"
-      >
-        入门篇
-        <span class="list-group-count">(11)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-fde95b8345d6009bcd3e3b793ef65625"
-           role="tabpanel" aria-labelledby="heading-fde95b8345d6009bcd3e3b793ef65625">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" title="前言"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">前言</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">开发环境推荐</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">编译</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">构建服务脚手架</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" title="load_mods配置文件的使用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">load_mods配置文件的使用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何编写可热更服务模块</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" title="项目文件夹介绍"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">项目文件夹介绍</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">规范建议</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">文件查找规则</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" title="如何更改skynet服务的配置项"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何更改skynet服务的配置项</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/08/17/skynet_fly_word/word_1/N_question/" title="常见问题收录"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">常见问题收录</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础篇"
-        id="heading-9248c705575b4b5883daaed3318fda8b" role="tab" data-toggle="collapse" href="#collapse-9248c705575b4b5883daaed3318fda8b"
-        aria-expanded="true"
-      >
-        基础篇
-        <span class="list-group-count">(7)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse show" id="collapse-9248c705575b4b5883daaed3318fda8b"
-           role="tabpanel" aria-labelledby="heading-9248c705575b4b5883daaed3318fda8b">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">前言</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">rpc调用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" title="集群远程rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">集群远程rpc调用</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">快进时间</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
-           class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">检查热更的使用以及原理</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" title="启动时生成的临时文件说明"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">启动时生成的临时文件说明</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" title="对安全关服的支持"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">对安全关服的支持</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="实战篇"
-        id="heading-1b9782790120709faa567d4706ca8771" role="tab" data-toggle="collapse" href="#collapse-1b9782790120709faa567d4706ca8771"
-        aria-expanded="false"
-      >
-        实战篇
-        <span class="list-group-count">(7)</span>
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      
-      <div class="category-collapse collapse " id="collapse-1b9782790120709faa567d4706ca8771"
-           role="tabpanel" aria-labelledby="heading-1b9782790120709faa567d4706ca8771">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" title="前言"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">前言</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">用户是如何注册的？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">用户是如何登录的？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">大厅服如何对模块功能进行拆分隔离？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">用户是如何匹配进入到游戏的？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" title="如何在skynet_fly_demo新增一个游戏？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何在skynet_fly_demo新增一个游戏？</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/06/30/skynet_fly_word/word_4/H_q/" title="如何在skynet_fly_demo新增一个后台模块？"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">如何在skynet_fly_demo新增一个后台模块？</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div class="category-sub row nomargin-x">
-      <a class="category-subitem collapsed
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="强化篇"
-        id="heading-1ff092fdfc21b9430eba6915fcf9cf06" role="tab" data-toggle="collapse" href="#collapse-1ff092fdfc21b9430eba6915fcf9cf06"
-        aria-expanded="false"
-      >
-        强化篇
+        skynet_fly实现思路历程
         <span class="list-group-count">(19)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse " id="collapse-1ff092fdfc21b9430eba6915fcf9cf06"
-           role="tabpanel" aria-labelledby="heading-1ff092fdfc21b9430eba6915fcf9cf06">
+      <div class="category-collapse collapse show" id="collapse-fb499f79496da9976dd55655b846d7cf"
+           role="tabpanel" aria-labelledby="heading-fb499f79496da9976dd55655b846d7cf">
         
         
           
@@ -636,181 +300,177 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" title="前言"
+        <a href="/2023/08/20/skynet_fly_ss/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">前言</span>
+          <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" title="可热更匹配房间类游戏架构基础设施"
+        <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更匹配房间类游戏架构基础设施</span>
+          <span class="category-post">关于skynet_fly 决定web路由工具使用的测试</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" title="gate,wsgate通用协议的设计"
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">gate,wsgate通用协议的设计</span>
+          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/D_timer/" title="定时器的封装"
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">定时器的封装</span>
+          <span class="category-post">关于cluster 远程rpc调用</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/E_module/" title="可热更模块的启动配置项"
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更模块的启动配置项</span>
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/F_redis/" title="redis的封装"
+        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">redis的封装</span>
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/G_point/" title="整点报时"
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">整点报时</span>
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/H_orm/" title="orm数据库关系映射"
+        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">orm数据库关系映射</span>
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/I_watch/" title="监听同步模块"
+        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">监听同步模块</span>
+           active">
+          <span class="category-post">记录一次使用录像查bug</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/J_logrotate/" title="日志分割"
+        <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">日志分割</span>
+          <span class="category-post">关于redis的封装</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/K_log/" title="日志服务"
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">日志服务</span>
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_3/M_http/" title="http服务"
+        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">http服务</span>
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
     
       
       
-        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持"
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更服务，热更脚本支持</span>
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
         </a>
       
     
       
       
-        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调式的支持"
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">断点调式的支持</span>
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
     
       
       
-        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
+        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">共享配置数据</span>
+          <span class="category-post">关于监听同步模块的封装</span>
         </a>
       
     
       
       
-        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" title="代码加密"
+        <a href="/2023/07/02/skynet_fly_ss/timer/" title="关于定时器的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">代码加密</span>
+          <span class="category-post">关于定时器的封装</span>
         </a>
       
     
       
       
-        <a href="/2024/10/27/skynet_fly_word/word_3/S_record/" title="服务录像与重放"
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">服务录像与重放</span>
+          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
         </a>
       
     
       
       
-        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</span>
+          <span class="category-post">关于skynet_fly热更新实现</span>
         </a>
       
     
   </div>
 
-        
-      </div>
-    </div>
-  
         
       </div>
     </div>
@@ -828,15 +488,21 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">检查热更的使用以及原理</h1>
+            <h1 style="display: none">记录一次使用录像查bug</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="如何执行"><a href="#如何执行" class="headerlink" title="如何执行"></a>如何执行</h1><p><code>sh make/script/check_reload.sh load_mods.lua</code></p>
-<h1 id="检测规则"><a href="#检测规则" class="headerlink" title="检测规则"></a>检测规则</h1><p>当 <strong>可热更服务模块</strong> require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。</p>
-<h1 id="重试热更"><a href="#重试热更" class="headerlink" title="重试热更"></a>重试热更</h1><p>当 热更后，某个执行热更的服务，<code>start</code>启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。<br><code>sh make/script/try_again_reload.sh load_mods.lua</code></p>
-<h1 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a><a href="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/">实现细节</a></h1>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>skynet_fly_demo 项目被开着5千机器人跑了一晚上之后，我第二天查下一下有没有啥异常日志，结果发现有一个机器人邮件插入失败，是因为主键冲突，插入的邮件是全服邮件，因为使用的批量插入并没有触发断言，并不能第一时间发现调用来源。只有错误日志。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:0000001a][20250123 05:30:33 84][error][orm_table_m][...fly/lualib/skynet-fly/db/ormadapter/ormadapter_mysql.lua:591]&quot;_insert err &quot; &quot;email&quot; &#123;<br>	[&quot;errno&quot;] = 1062,<br>	[&quot;sqlstate&quot;] = &quot;23000&quot;,<br>	[&quot;badresult&quot;] = true,<br>	[&quot;err&quot;] = &quot;Duplicate entry &#x27;1999900010000001-1581044515209216&#x27; for key &#x27;email.PRIMARY&#x27;&quot;,<br>&#125;<br> &#123;<br>	[1] =  &#123;<br>		[&quot;from_id&quot;] = 0,<br>		[&quot;del_flag&quot;] = 0,<br>		[&quot;content&quot;] = &quot;欢迎来到中国象棋！！！！！！！！！！！！！！&quot;,<br>		[&quot;create_time&quot;] = 1737581433,<br>		[&quot;guid&quot;] = 1581044515209216,<br>		[&quot;item_flag&quot;] = 0,<br>		[&quot;item_list&quot;] =  &#123;<br>			[1] =  &#123;<br>				[&quot;id&quot;] = 10000002,<br>				[&quot;count&quot;] = 100,<br>			&#125;<br>		&#125;<br>		[&quot;read_flag&quot;] = 0,<br>		[&quot;title&quot;] = &quot;欢迎来到中国象棋&quot;,<br>		[&quot;email_type&quot;] = 1,<br>		[&quot;player_id&quot;] = 1999900010000001,<br>		[&quot;vaild_time&quot;] = 0,<br>	&#125;<br>&#125;<br> <br>[:0000003a][20250123 05:30:33 84][error][room_game_hall_m][./hall/email/email_logic.lua:122]change_global_email add email err guid[1581044515209216]<br></code></pre></td></tr></table></figure>
+
+<p>因为插入全服邮件的触发点有两个地方，一个是用户登录时候的检查，一个是全服邮件同步时的差异处理。有2个位置，这时候并不能立马想到是哪里出的问题，不过通过观察时间，5.30正是room_hall_room触发自动热更滚服的时候，我猜想大概率是全服邮件同步的逻辑导致的，因为同步后会对比之前的邮件，因为是刚刚启动服务，之前的全服邮件列表是空的，这时候认定同步过来的全服邮件全部是新的，就给在线的玩家全部添加了一遍，可能刚好这个机器人的号已经从旧服切换过来了，就只给它调用了插入。虽然发现了问题，但是我还是想用一下录像。我在触发全服邮件同步的逻辑中加上了日志之后启动录像。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs txt">run hallserver load_mods_1.lua 0 ../../records/hallserver_1/room_game_hall_m-2-4-20250123-053030.record<br>make ./make/hallserver_config.lua<br>read strseed -1464976427 from recordfile ../../records/hallserver_1/room_game_hall_m-2-4-20250123-053030.record<br>[:00000000][20250123 05:30:32 33]Version:1.2.0<br>[:00000000][20250123 05:30:32 33]start play record &gt;&gt;&gt; ../../records/hallserver_1/room_game_hall_m-2-4-20250123-053030.record<br>[:00000000][20250123 05:30:32 33]skynet_record_parse_open starttime[1737542297] currenttime[3913511] strseed[-1464976427]<br><br>[:0000003a][20250123 05:30:32 33]LAUNCH snlua hot_container room_game_hall_m 4 2025-01-23[05:30:30] 1737581430 2 1       <br>[:0000003a][20250123 05:30:33 84][info][room_game_hall_m][./hall/email/email_logic.lua:114]&quot;on_recv_global_emails &gt;&gt;&gt;&quot; &#123;<br>        [1] = 1999900010000001,<br>&#125;<br> &#123;<br>        [1] =  &#123;<br>                [&quot;title&quot;] = &quot;欢迎来到中国象棋&quot;,<br>                [&quot;item_list&quot;] =  &#123;<br>                        [1] =  &#123;<br>                                [&quot;id&quot;] = 10000002,<br>                                [&quot;count&quot;] = 100,<br>                        &#125;<br>                &#125;<br>                [&quot;content&quot;] = &quot;欢迎来到中国象棋！！！！！！！！！！！！！！&quot;,<br>                [&quot;guid&quot;] = 1581044515209216,<br>                [&quot;vaild_time&quot;] = 0,<br>        &#125;<br>&#125;<br><br>[:0000003a][20250123 05:30:33 84][error][room_game_hall_m][./hall/email/email_logic.lua:127]change_global_email add email err guid[1581044515209216]<br>[:00000000][20250123 05:33:20 78]record speed of progress[1%] curindex[634915] total_len[63490533]<br>[:00000000][20250123 05:35:47 59]record speed of progress[2%] curindex[1269858] total_len[63490533]<br></code></pre></td></tr></table></figure>
+<p>果然和我的判断一致。不过使用过程中发现了一个不够便利的地方，我无法快速定位到我需要播放哪一个录像。<br>总共有2天的录像:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">1</span>-<span class="hljs-number">1</span>-<span class="hljs-number">20250122</span>-<span class="hljs-number">183822</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">1</span>-<span class="hljs-number">2</span>-<span class="hljs-number">20250122</span>-<span class="hljs-number">183822</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">1</span>-<span class="hljs-number">3</span>-<span class="hljs-number">20250122</span>-<span class="hljs-number">183822</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">1</span>-<span class="hljs-number">4</span>-<span class="hljs-number">20250122</span>-<span class="hljs-number">183822</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">1</span>-<span class="hljs-number">5</span>-<span class="hljs-number">20250122</span>-<span class="hljs-number">183822</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">1</span>-<span class="hljs-number">6</span>-<span class="hljs-number">20250122</span>-<span class="hljs-number">183822</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">2</span>-<span class="hljs-number">1</span>-<span class="hljs-number">20250123</span>-<span class="hljs-number">053030</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">2</span>-<span class="hljs-number">2</span>-<span class="hljs-number">20250123</span>-<span class="hljs-number">053030</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">2</span>-<span class="hljs-number">3</span>-<span class="hljs-number">20250123</span>-<span class="hljs-number">053030</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">2</span>-<span class="hljs-number">4</span>-<span class="hljs-number">20250123</span>-<span class="hljs-number">053030</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">2</span>-<span class="hljs-number">5</span>-<span class="hljs-number">20250123</span>-<span class="hljs-number">053030</span>.record<br><span class="hljs-attribute">room_game_hall_m</span>-<span class="hljs-number">2</span>-<span class="hljs-number">6</span>-<span class="hljs-number">20250123</span>-<span class="hljs-number">053030</span>.record<br></code></pre></td></tr></table></figure>
+
+<p>能快速确定的是日期<code>20250123</code>,至于1-6启动索引是哪个，没法快速确定，还需要借助服务地址<code>0000003a</code>来确定，因为文件名并没有写服务地址，我是逐个打开录像文件查看写在头部位置的服务地址来确定的<code>0000003a</code>。后续需要把服务地址也写到录像文件名中。</p>
+
                 
               </div>
             
@@ -854,15 +520,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="category-chain-item">基础篇</a>
-  
-  
-
   
 
       </span>
@@ -876,7 +535,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+        <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
       
     </div>
   
@@ -888,8 +547,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>检查热更的使用以及原理</div>
-      <div>https://huahua132.github.io/2023/02/25/skynet_fly_word/word_2/D_reload/</div>
+      <div>记录一次使用录像查bug</div>
+      <div>https://huahua132.github.io/2025/01/23/skynet_fly_ss/record/</div>
     </div>
     <div class="license-meta">
       
@@ -901,7 +560,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月25日</div>
+          <div>2025年1月23日</div>
         </div>
       
       
@@ -933,18 +592,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">快进时间</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" title="启动时生成的临时文件说明">
-                        <span class="hidden-mobile">启动时生成的临时文件说明</span>
+                      <a href="/2025/01/09/quarter/2025-1-2025-3/" title="季度更新日志2025-1 2025-3">
+                        <span class="hidden-mobile">季度更新日志2025-1 2025-3</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
