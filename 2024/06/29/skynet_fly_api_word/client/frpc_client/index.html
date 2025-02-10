@@ -24,7 +24,7 @@
 <meta property="og:description" content="frpc_client function M:is_active(svr_name, svr_id)描述 判断节点是否活跃(连接是否存在)参数 返回值  boolean  function M:get_active_svr_ids(svr_name)描述 获取指定svr_name活跃的svr_id参数 返回值  table  function M:watch_up(svr_name, handle">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-22T07:15:42.180Z">
+<meta property="article:modified_time" content="2025-02-10T12:24:40.309Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k 字
+          6.1k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          45 分钟
+          51 分钟
         
       </span>
     
@@ -373,19 +373,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" title="对外接口"
+        <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" title="访问对象[远程rpc]"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">对外接口</span>
+           active">
+          <span class="category-post">访问对象[远程rpc]</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" title="访问对象[远程rpc]"
+        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" title="对外接口"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">访问对象[远程rpc]</span>
+           ">
+          <span class="category-post">对外接口</span>
         </a>
       
     
@@ -529,6 +529,15 @@
     
       
       
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">env_util env相关</span>
+        </a>
+      
+    
+      
+      
         <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
            class="list-group-item list-group-item-action
            ">
@@ -538,10 +547,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">env_util env相关</span>
+          <span class="category-post">skynet_util skynet相关</span>
         </a>
       
     
@@ -556,15 +565,6 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/string_util/" title="string_util string相关"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">string_util string相关</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关"
            class="list-group-item list-group-item-action
            ">
@@ -574,10 +574,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/string_util/" title="string_util string相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">skynet_util skynet相关</span>
+          <span class="category-post">string_util string相关</span>
         </a>
       
     
@@ -720,6 +720,15 @@
     
       
       
+        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mongo/" title="orm mongo适配器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm mongo适配器</span>
+        </a>
+      
+    
+      
+      
         <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormentry/" title="orm条目"
            class="list-group-item list-group-item-action
            ">
@@ -733,15 +742,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">orm表</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mongo/" title="orm mongo适配器"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">orm mongo适配器</span>
         </a>
       
     
@@ -1009,317 +1009,317 @@
 <h2 id="function-M-one-balance-send-…"><a href="#function-M-one-balance-send-…" class="headerlink" title="function M:one_balance_send(…)"></a>function M:one_balance_send(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用balance_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-one-balance-call-…"><a href="#function-M-one-balance-call-…" class="headerlink" title="function M:one_balance_call(…)"></a>function M:one_balance_call(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用balance_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-one-mod-send-…"><a href="#function-M-one-mod-send-…" class="headerlink" title="function M:one_mod_send(…)"></a>function M:one_mod_send(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用mod_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-one-mod-call-…"><a href="#function-M-one-mod-call-…" class="headerlink" title="function M:one_mod_call(…)"></a>function M:one_mod_call(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用mod_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-one-broadcast-…"><a href="#function-M-one-broadcast-…" class="headerlink" title="function M:one_broadcast(…)"></a>function M:one_broadcast(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用broadcast的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-one-broadcast-call-…"><a href="#function-M-one-broadcast-call-…" class="headerlink" title="function M:one_broadcast_call(…)"></a>function M:one_broadcast_call(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用broadcast_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-one-send-by-name-…"><a href="#function-M-one-send-by-name-…" class="headerlink" title="function M:one_send_by_name(…)"></a>function M:one_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的别名服务send消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-one-call-by-name-…"><a href="#function-M-one-call-by-name-…" class="headerlink" title="function M:one_call_by_name(…)"></a>function M:one_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的别名服务call消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-byid-balance-send-…"><a href="#function-M-byid-balance-send-…" class="headerlink" title="function M:byid_balance_send(…)"></a>function M:byid_balance_send(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用balance_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-byid-balance-call-…"><a href="#function-M-byid-balance-call-…" class="headerlink" title="function M:byid_balance_call(…)"></a>function M:byid_balance_call(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用balance_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-byid-mod-send-…"><a href="#function-M-byid-mod-send-…" class="headerlink" title="function M:byid_mod_send(…)"></a>function M:byid_mod_send(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用mod_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-byid-mod-call-…"><a href="#function-M-byid-mod-call-…" class="headerlink" title="function M:byid_mod_call(…)"></a>function M:byid_mod_call(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用mod_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-byid-broadcast-…"><a href="#function-M-byid-broadcast-…" class="headerlink" title="function M:byid_broadcast(…)"></a>function M:byid_broadcast(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用broadcast的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-byid-broadcast-call-…"><a href="#function-M-byid-broadcast-call-…" class="headerlink" title="function M:byid_broadcast_call(…)"></a>function M:byid_broadcast_call(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用broadcast_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-byid-send-by-name-…"><a href="#function-M-byid-send-by-name-…" class="headerlink" title="function M:byid_send_by_name(…)"></a>function M:byid_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的指定别名服务用balance_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-byid-call-by-name-…"><a href="#function-M-byid-call-by-name-…" class="headerlink" title="function M:byid_call_by_name(…)"></a>function M:byid_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的指定别名服务用balance_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-all-balance-send-…"><a href="#function-M-all-balance-send-…" class="headerlink" title="function M:all_balance_send(…)"></a>function M:all_balance_send(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用balance_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-all-balance-call-…"><a href="#function-M-all-balance-call-…" class="headerlink" title="function M:all_balance_call(…)"></a>function M:all_balance_call(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用balance_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table, table|nil, errcode, errmsg</li>
 </ul>
 <h2 id="function-M-all-mod-send-…"><a href="#function-M-all-mod-send-…" class="headerlink" title="function M:all_mod_send(…)"></a>function M:all_mod_send(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用mod_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-all-mod-call-…"><a href="#function-M-all-mod-call-…" class="headerlink" title="function M:all_mod_call(…)"></a>function M:all_mod_call(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用mod_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table, table|nil, errcode, errmsg</li>
 </ul>
 <h2 id="function-M-all-broadcast-…"><a href="#function-M-all-broadcast-…" class="headerlink" title="function M:all_broadcast(…)"></a>function M:all_broadcast(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用broadcast的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-all-broadcast-call-…"><a href="#function-M-all-broadcast-call-…" class="headerlink" title="function M:all_broadcast_call(…)"></a>function M:all_broadcast_call(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用broadcast_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table, table|nil, errcode, errmsg</li>
 </ul>
 <h2 id="function-M-all-send-by-name-…"><a href="#function-M-all-send-by-name-…" class="headerlink" title="function M:all_send_by_name(…)"></a>function M:all_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的指定别名服务用balance_send的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-all-call-by-name-…"><a href="#function-M-all-call-by-name-…" class="headerlink" title="function M:all_call_by_name(…)"></a>function M:all_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的指定别名服务用balance_call的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table, table|nil, errcode, errmsg</li>
 </ul>
 <h2 id="function-M-one-balance-send-by-name-…"><a href="#function-M-one-balance-send-by-name-…" class="headerlink" title="function M:one_balance_send_by_name(…)"></a>function M:one_balance_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用balance_send_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-one-balance-call-by-name-…"><a href="#function-M-one-balance-call-by-name-…" class="headerlink" title="function M:one_balance_call_by_name(…)"></a>function M:one_balance_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用balance_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-one-mod-send-by-name-…"><a href="#function-M-one-mod-send-by-name-…" class="headerlink" title="function M:one_mod_send_by_name(…)"></a>function M:one_mod_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用mod_send_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-one-mod-call-by-name-…"><a href="#function-M-one-mod-call-by-name-…" class="headerlink" title="function M:one_mod_call_by_name(…)"></a>function M:one_mod_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用mod_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-one-broadcast-by-name-…"><a href="#function-M-one-broadcast-by-name-…" class="headerlink" title="function M:one_broadcast_by_name(…)"></a>function M:one_broadcast_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用broadcast_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-one-broadcast-call-by-name-…"><a href="#function-M-one-broadcast-call-by-name-…" class="headerlink" title="function M:one_broadcast_call_by_name(…)"></a>function M:one_broadcast_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用简单轮询负载均衡给单个结点的module_name模板用broadcast_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-byid-balance-send-by-name-…"><a href="#function-M-byid-balance-send-by-name-…" class="headerlink" title="function M:byid_balance_send_by_name(…)"></a>function M:byid_balance_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用balance_send_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-byid-balance-call-by-name-…"><a href="#function-M-byid-balance-call-by-name-…" class="headerlink" title="function M:byid_balance_call_by_name(…)"></a>function M:byid_balance_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用balance_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-byid-mod-send-by-name-…"><a href="#function-M-byid-mod-send-by-name-…" class="headerlink" title="function M:byid_mod_send_by_name(…)"></a>function M:byid_mod_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用mod_send_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-byid-mod-call-by-name-…"><a href="#function-M-byid-mod-call-by-name-…" class="headerlink" title="function M:byid_mod_call_by_name(…)"></a>function M:byid_mod_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用mod_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-byid-broadcast-by-name-…"><a href="#function-M-byid-broadcast-by-name-…" class="headerlink" title="function M:byid_broadcast_by_name(…)"></a>function M:byid_broadcast_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用broadcast_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-byid-broadcast-call-by-name-…"><a href="#function-M-byid-broadcast-call-by-name-…" class="headerlink" title="function M:byid_broadcast_call_by_name(…)"></a>function M:byid_broadcast_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>用svr_id映射的方式给单个结点的module_name模板用broadcast_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table|nil, errcode, errmsg, cluster_name</li>
 </ul>
 <h2 id="function-M-all-balance-send-by-name-…"><a href="#function-M-all-balance-send-by-name-…" class="headerlink" title="function M:all_balance_send_by_name(…)"></a>function M:all_balance_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用balance_send_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-all-balance-call-by-name-…"><a href="#function-M-all-balance-call-by-name-…" class="headerlink" title="function M:all_balance_call_by_name(…)"></a>function M:all_balance_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用balance_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table, table|nil, errcode, errmsg</li>
 </ul>
 <h2 id="function-M-all-mod-send-by-name-…"><a href="#function-M-all-mod-send-by-name-…" class="headerlink" title="function M:all_mod_send_by_name(…)"></a>function M:all_mod_send_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用mod_send_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-all-mod-call-by-name-…"><a href="#function-M-all-mod-call-by-name-…" class="headerlink" title="function M:all_mod_call_by_name(…)"></a>function M:all_mod_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用mod_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table, table|nil, errcode, errmsg</li>
 </ul>
 <h2 id="function-M-all-broadcast-by-name-…"><a href="#function-M-all-broadcast-by-name-…" class="headerlink" title="function M:all_broadcast_by_name(…)"></a>function M:all_broadcast_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用broadcast_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <h2 id="function-M-all-broadcast-call-by-name-…"><a href="#function-M-all-broadcast-call-by-name-…" class="headerlink" title="function M:all_broadcast_call_by_name(…)"></a>function M:all_broadcast_call_by_name(…)</h2><p><strong>描述</strong></p>
 <p>给所有结点的module_name模板用broadcast_call_by_name的方式发送消息<br><strong>参数</strong></p>
 <ul>
-<li>… any[] cmd, arg1, arg2, arg3</li>
+<li>… any[] cmd, arg1, arg2, arg3, …</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table</li>
+<li>table, table|nil, errcode, errmsg</li>
 </ul>
 
                 
@@ -1418,9 +1418,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" title="对外接口">
+                      <a href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" title="访问对象[内部rpc]">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">对外接口</span>
+                        <span class="hidden-mobile">访问对象[内部rpc]</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -1428,8 +1428,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" title="启动函数">
-                        <span class="hidden-mobile">启动函数</span>
+                      <a href="/2024/06/29/skynet_fly_api_word/client/orm_table_client/" title="orm访问对象">
+                        <span class="hidden-mobile">orm访问对象</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
