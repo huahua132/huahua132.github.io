@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言一开始，对与客户端交互协议仅仅提供了name, body，包名加包体的简单打包方式，对于body大家可以自由选择任意编码解码方式(json、protobuff、sproto …)。后面觉得name少许增加了包体大小，就新增了packid,body协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-01-06T09:10:51.514Z">
+<meta property="article:modified_time" content="2025-02-25T07:34:46.376Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          905 字
+          929 字
         
       </span>
     
@@ -481,19 +481,19 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">检查热更的使用以及原理</span>
+          <span class="category-post">快进时间</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">快进时间</span>
+          <span class="category-post">检查热更的使用以及原理</span>
         </a>
       
     
@@ -836,19 +836,19 @@
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一开始，对与客户端交互协议仅仅提供了<code>name, body</code>，包名加包体的简单打包方式，对于<code>body</code>大家可以自由选择任意编码解码方式(<code>json</code>、<code>protobuff</code>、<code>sproto</code> …)。后面觉得<code>name</code>少许增加了包体大小，就新增了<code>packid,body</code>协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc 协议的支持。</p>
 <h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><p>以下对于整型都是使用大端无符号方式打包</p>
 <h1 id="name-body-协议拆解"><a href="#name-body-协议拆解" class="headerlink" title="name, body 协议拆解"></a><code>name, body</code> 协议拆解</h1><ul>
-<li>2字节 包体总长度</li>
+<li>2字节 包体总长度(不包括自己)</li>
 <li>2字节 协议包名长度</li>
 <li>包名</li>
 <li>消息体</li>
 </ul>
 <h1 id="packid-body-协议拆解"><a href="#packid-body-协议拆解" class="headerlink" title="packid, body 协议拆解"></a><code>packid, body</code> 协议拆解</h1><ul>
-<li>2字节 包体总长度</li>
+<li>2字节 包体总长度(不包括自己)</li>
 <li>2字节 协议码</li>
 <li>消息体</li>
 </ul>
 <p>这两种方式，因为包头固定都是2字节，所以包体最大长度为65535。</p>
 <h1 id="rpc-协议拆解"><a href="#rpc-协议拆解" class="headerlink" title="rpc 协议拆解"></a>rpc 协议拆解</h1><ul>
-<li>2字节 包体总长度</li>
+<li>2字节 包体总长度(不包括自己)</li>
 <li>1字节 包类型      字段描述：字段描述: (0-整包  1包头  2包体  3包尾)</li>
 <li>1字节 消息类型    字段描述: (0-服务端推送 1-客户端推送 2-客户端请求 3-服务端回复 4-服务器回复错误)</li>
 <li>2字节 协议码      字段描述: 协议码</li>
@@ -858,11 +858,11 @@
 <h2 id="不支持客户端发送大包"><a href="#不支持客户端发送大包" class="headerlink" title="不支持客户端发送大包"></a>不支持客户端发送大包</h2><p>客户端只能发送整包，服务端收到整包以外的消息应该拒绝处理。<br>不支持客户端发送大包的原因是 可能利用此行为进行攻击服务器，导致服务器内存耗尽。</p>
 <h2 id="如何达到支持RPC效果"><a href="#如何达到支持RPC效果" class="headerlink" title="如何达到支持RPC效果"></a>如何达到支持RPC效果</h2><ul>
 <li>使用时规范协议码定义，比如协议10101为请求，10102为回复。 这样我们在打包回复消息的时候只需要用req_packid + 1即可。</li>
-<li>会话号约定，客户端推送为0即可(不能发送大包)，客户端请求(奇数)达到(4,294,967,295)时客户端应该直接切换到1,避免服务端使用溢出后的0进行回复, 服务端回复，服务器回复错误(偶数,奇数基础上1)。</li>
+<li>会话号约定，客户端推送为0即可(不能发送大包)，客户端请求(奇数)达到(4,294,967,295)时客户端应该直接切换到1,避免服务端使用溢出后的0进行回复, 服务端回复，服务器回复错误(偶数,奇数基础上加1)。</li>
 </ul>
 <p>这样客户端在实现时，可以判断如果是客户端请求就用session(会话号)挂起等待服务端回复，收到服务端消息时用session(会话号)找到对于请求状态，用包类型判断需不需要继续等待粘包。</p>
 <h2 id="超时处理"><a href="#超时处理" class="headerlink" title="超时处理"></a>超时处理</h2><p>客户端rpc 实现可以增加超时处理，避免服务端代码报错，或者没有发送回复消息，导致req 一直挂起。</p>
-<h1 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/digitalbomb_byrpc">简单示例</a></h1><h1 id="项目示例服务端"><a href="#项目示例服务端" class="headerlink" title="项目示例服务端"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly_demo">项目示例服务端</a></h1><h1 id="项目示例客户端"><a href="#项目示例客户端" class="headerlink" title="项目示例客户端"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/chinesechess_oops">项目示例客户端</a></h1>
+<h1 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/digitalbomb_byrpc">简单示例</a></h1><h1 id="项目示例服务端"><a href="#项目示例服务端" class="headerlink" title="项目示例服务端"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly_demo">项目示例服务端</a></h1><h1 id="项目示例客户端"><a href="#项目示例客户端" class="headerlink" title="[项目示例客户端]"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly_demo/tree/master/client/chinesechess_oops">[项目示例客户端]</a></h1>
                 
               </div>
             
