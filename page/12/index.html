@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
-          项目文件夹介绍
+        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" target="_self">
+          规范建议
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/H_standard/" target="_self">
         <div>
-          3rd存放第三方依赖 binshell服务构建工具 examples示例学习服务 lualibskynet_fly lua库文件代码 moduleskynet_fly 提供的可热更服务模块 scriptlua shell 脚本工具代码 serviceskynet普通服务 skynetskynet代码 test单元测试服务代码，主要用来编写一些模块的单元测试。
+          启动配置文件load_mods_xxx.lua 可热更模块都存放在 module命名的文件夹下，以xxx_m.lua命名。编写规范以CMD命令。 123local CMD = &#123;&#125;return CMD  普通skynet服务都存放在 service命名的文件夹下，命令随意，因为service的查找规则，只会在service文件夹下查找，文件名重复有可能，但是手动查找范围小。 普
         </div>
       </a>
 
@@ -501,15 +501,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
-          集群远程rpc调用
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+          rpc调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
         <div>
-          前言集群远程RPC调用，是借鉴skynet cluster mode 自己实现的(https://github.com/cloudwu/skynet/wiki/Cluster)封装了一套简单好用、适用用框架的模式。 配置启动服务端 配置load_mods.lua  load_mods.lua 12345678910111213141516--共享配置share_config_m = &#123;
+          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = contriner_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
         </div>
       </a>
 
@@ -569,15 +569,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
-          rpc调用
+        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
+          集群远程rpc调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
         <div>
-          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = contriner_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
+          前言集群远程RPC调用，是借鉴skynet cluster mode 自己实现的(https://github.com/cloudwu/skynet/wiki/Cluster)封装了一套简单好用、适用用框架的模式。 配置启动服务端 配置load_mods.lua  load_mods.lua 12345678910111213141516--共享配置share_config_m = &#123;
         </div>
       </a>
 
