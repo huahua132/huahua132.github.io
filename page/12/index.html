@@ -637,15 +637,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
-          检查热更的使用以及原理
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+          快进时间
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
         <div>
-          如何执行sh make/script/check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh make/script
+          如何执行sh make/script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&qu
         </div>
       </a>
 
@@ -705,15 +705,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
-          快进时间
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
+          检查热更的使用以及原理
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/D_reload/" target="_self">
         <div>
-          如何执行sh make/script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&qu
+          如何执行sh make/script/check_reload.sh load_mods.lua 检测规则当 可热更服务模块 require的代码文件有修改，或者在load_mods.lua中的配置有修改，就会热更该服务。 重试热更当 热更后，某个执行热更的服务，start启动失败了，旧服务此时会继续工作，框架会记录热更失败的命令。我们此时可以去修改掉错误后，进行重试。sh make/script
         </div>
       </a>
 
