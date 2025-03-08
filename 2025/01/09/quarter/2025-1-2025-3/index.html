@@ -24,7 +24,7 @@
 <meta property="og:description" content="最终还原perl环境 pb 打包sharedata数据应注意先copy 编译好skynet_sly之后，perl没有还原，会影响到系统其他软件正常工作。 pb打包用sharedata共享的table时，数据打包不进去。怀疑是因为sharedata是skynet封装的c object，pb底层无法识别访问，通过先深拷贝sharedata表，再传入pb打包可以规避此问题。  优化sharedata_s">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-09T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-06T06:44:15.449Z">
+<meta property="article:modified_time" content="2025-03-08T09:23:30.343Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="季度更新日志">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          904 字
+          1.2k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          8 分钟
+          11 分钟
         
       </span>
     
@@ -376,6 +376,7 @@
 <h2 id="fix-守护模式下-LAUNCH-snlua-cdummy-以上日志丢失"><a href="#fix-守护模式下-LAUNCH-snlua-cdummy-以上日志丢失" class="headerlink" title="fix 守护模式下  LAUNCH snlua cdummy 以上日志丢失"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/f2665d21a5bece6cff51a6ade8a8667bb8cf6ae3">fix 守护模式下  LAUNCH snlua cdummy 以上日志丢失</a></h2><p>日志丢失！</p>
 <h2 id="更新lua-openssl-到0-9-1-0"><a href="#更新lua-openssl-到0-9-1-0" class="headerlink" title="更新lua-openssl 到0.9.1-0"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/5200b09ae7a5da47b689e89fb22d372dcfc3cdaf">更新lua-openssl 到0.9.1-0</a></h2><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/issues/44">解决编译出错问题</a></p>
 <h2 id="同步最新skynet"><a href="#同步最新skynet" class="headerlink" title="同步最新skynet"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/9390ac9c5e6968d2ab20d3a63323cdc30eb2fdfa">同步最新skynet</a></h2><p><a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/pull/2037">allow t[nil] &#x3D;&gt; nil in table returned by sharedata</a><br><a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/pull/2035">增加mysql使用execute方法解析date格式数据</a></p>
+<h2 id="orm新增批量删除方法"><a href="#orm新增批量删除方法" class="headerlink" title="orm新增批量删除方法"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commits/master/">orm新增批量删除方法</a></h2><p>例子：当主键为 key1-key2联合主键时,可以是这2种调用方式。<br><code>ormclient:batch_delete_entry(&#123;&#123;key1, key2&#125;,&#123;key1, key2&#125;&#125;)</code><br><code>ormclient:batch_delete_entry(&#123;&#123;key1&#125;,&#123;key1&#125;&#125;)</code><br>参数中的key长度需要一致。<br><code>ormclient:batch_delete_entry(&#123;&#123;key1, key2&#125;,&#123;key1&#125;&#125;)</code>这种调用方式是会报错的。</p>
 
                 
               </div>
