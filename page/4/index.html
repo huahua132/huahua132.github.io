@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
-          模块信息与配置
+        <a href="/2024/06/29/skynet_fly_api_word/db/redisf/" target="_self">
+          redis调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/redisf/" target="_self">
         <div>
-          module_info function M.get_cfg()描述 获取load_mods default_cfg|mod_cfgs 绑定的配置信息参数 返回值  table  function M.get_base_info()描述 获取可热更模块的基础信息 [module_name]可热更模块名 [index]启动索引 [launch_date]启动日期 [launch_time]启动时间戳
+          redisf调用redis命令的基础封装 function command:script_run(script_str,…)描述 运行redis脚本命令参数  script_str string 脚本串 … number|string|nil 脚本命令参数 arg1为KEY数量然后紧跟KEYS参数，之后是ARGV参数  返回值  number|string|table  function M.ne
         </div>
       </a>
 
@@ -266,7 +266,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
   
   
 
@@ -705,15 +705,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
-          file_util file相关
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
+          env_util env相关
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
         <div>
-          file_util function M.diripairs(path_url, max_depth)描述 递归遍历目录参数  path_url string 路径 max_depth? number|nil 最大深度 nil表示到底  返回值  function 遍历函数  function M.create_luapath(skynet_fly_path)描述 skynet_fly luapa
+          env_util function M.add_pre_load(path)描述 添加服务启动之前加载的lua文件参数  path string 路径  返回值 function M.add_after_load(path)描述 添加服务启动之后加载的lua文件参数  path string 路径  返回值 function M.get_svr_id()描述 获取cluster svr_id参数
         </div>
       </a>
 
@@ -841,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
-          env_util env相关
+        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
+          file_util file相关
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
         <div>
-          env_util function M.add_pre_load(path)描述 添加服务启动之前加载的lua文件参数  path string 路径  返回值 function M.add_after_load(path)描述 添加服务启动之后加载的lua文件参数  path string 路径  返回值 function M.get_svr_id()描述 获取cluster svr_id参数
+          file_util function M.diripairs(path_url, max_depth)描述 递归遍历目录参数  path_url string 路径 max_depth? number|nil 最大深度 nil表示到底  返回值  function 遍历函数  function M.create_luapath(skynet_fly_path)描述 skynet_fly luapa
         </div>
       </a>
 
