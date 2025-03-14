@@ -494,15 +494,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
-          mod映射队列
+        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
+          并发，单发互斥的队列
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
         <div>
-          mod_queue function M:new(cap)描述 新建队列对象参数  cap number 容量  返回值  table  function M:exec(mod_num, func, …)描述 执行函数参数  mod_num number mod_num % cap + 1 决定使用队列 func function 执行函数 … any 函数参数  返回值  … 函数返回值
+          mult_queue��是一个并发，单发互斥的队列��发: key不同不用排队，key相同排队执行，不同key不用排队，有单发执行中，需等待��发: 单发顺序执行需要排队，有并发执行中，需等待 function M:new()描述 新建队列对象参数 返回值  table  function M:multi(key, func, …)描述 调用并发执行参数  key any 不同key可以并发，相同
         </div>
       </a>
 
@@ -630,15 +630,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
-          并发，单发互斥的队列
+        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
+          mod映射队列
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
         <div>
-          mult_queue��是一个并发，单发互斥的队列��发: key不同不用排队，key相同排队执行，不同key不用排队，有单发执行中，需等待��发: 单发顺序执行需要排队，有并发执行中，需等待 function M:new()描述 新建队列对象参数 返回值  table  function M:multi(key, func, …)描述 调用并发执行参数  key any 不同key可以并发，相同
+          mod_queue function M:new(cap)描述 新建队列对象参数  cap number 容量  返回值  table  function M:exec(mod_num, func, …)描述 执行函数参数  mod_num number mod_num % cap + 1 决定使用队列 func function 执行函数 … any 函数参数  返回值  … 函数返回值
         </div>
       </a>
 
