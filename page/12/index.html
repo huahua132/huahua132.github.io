@@ -705,15 +705,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" target="_self">
-          启动时生成的临时文件说明
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+          快进时间
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
         <div>
-          chinese_chess_config.lua由于生成的make&#x2F;script脚本中有很多命令都需要通过debug_console入口去操作，比如检测热更，快进时间。所有需要有一个地方拿到启动时的debug_port参数，由于生成的chinese_chess_config.lua会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。 mo
+          如何执行sh make/script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&qu
         </div>
       </a>
 
@@ -773,15 +773,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
-          快进时间
+        <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" target="_self">
+          启动时生成的临时文件说明
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" target="_self">
         <div>
-          如何执行sh make/script/fasttime.sh load_mods.lua &#39;2023:10:26 19:22:50&#39; 1 最后一个1表示1秒1秒的快进。 快进时间存在的问题比如一分钟一分钟的快进。有如下代码 123456local cnt = 1while true do    skynet.sleep(100)    log.info(&quot;hello&qu
+          chinese_chess_config.lua由于生成的make&#x2F;script脚本中有很多命令都需要通过debug_console入口去操作，比如检测热更，快进时间。所有需要有一个地方拿到启动时的debug_port参数，由于生成的chinese_chess_config.lua会因启动第二服而重写导致改变，所以启动时需要copy一个运行时副本，供script去读取启动时参数。 mo
         </div>
       </a>
 
