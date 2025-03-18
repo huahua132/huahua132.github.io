@@ -24,7 +24,7 @@
 <meta property="og:description" content="ormtable function M:new(tab_name)描述 新建表对象参数  tab_name string 作用与数据库的表名  返回值  table obj  function M:___FIELD_TYPE(field_name)描述 设置字段 FIELD_TYPE对应字段类型 有 int8|int16|int32|int64|uint8|uint16|uint32|string">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-02-10T12:24:40.315Z">
+<meta property="article:modified_time" content="2025-03-18T11:34:14.553Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          3.3k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          19 分钟
+          28 分钟
         
       </span>
     
@@ -538,19 +538,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/math_util/" title="math_util math相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">math_util math相关</span>
+          <span class="category-post">file_util file相关</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/math_util/" title="math_util math相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">file_util file相关</span>
+          <span class="category-post">math_util math相关</span>
         </a>
       
     
@@ -675,19 +675,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/db/mongof/" title="mongo直连"
+        <a href="/2024/06/29/skynet_fly_api_word/db/mysqlf/" title="mysql连接池调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">mongo直连</span>
+          <span class="category-post">mysql连接池调用</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/db/mysqlf/" title="mysql连接池调用"
+        <a href="/2024/06/29/skynet_fly_api_word/db/mongof/" title="mongo直连"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">mysql连接池调用</span>
+          <span class="category-post">mongo直连</span>
         </a>
       
     
@@ -729,15 +729,6 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mysql/" title="orm mysql适配器"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">orm mysql适配器</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormtable/" title="orm表"
            class="list-group-item list-group-item-action
            active">
@@ -751,6 +742,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">orm mongo适配器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mysql/" title="orm mysql适配器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm mysql适配器</span>
         </a>
       
     
@@ -1005,7 +1005,7 @@
 <li>table obj</li>
 </ul>
 <h2 id="function-M-get-entry-…"><a href="#function-M-get-entry-…" class="headerlink" title="function M:get_entry(…)"></a>function M:get_entry(…)</h2><p><strong>描述</strong></p>
-<p>查询多条数据<br><strong>参数</strong></p>
+<p>查询多条数据  format<code>[select * from tab_name where key1 = ? and key2 = ?]</code><br><strong>参数</strong></p>
 <ul>
 <li>… string[] 最左前缀的 key 列表</li>
 </ul>
@@ -1014,7 +1014,7 @@
 <li>table obj<a href="ormentry"></a></li>
 </ul>
 <h2 id="function-M-get-one-entry-…"><a href="#function-M-get-one-entry-…" class="headerlink" title="function M:get_one_entry(…)"></a>function M:get_one_entry(…)</h2><p><strong>描述</strong></p>
-<p>查询一条数据<br><strong>参数</strong></p>
+<p>查询一条数据 查询单条数据，必须提供所有主键 format<code>[select * from tab_name where key1 = ? and key2 = ?]</code><br><strong>参数</strong></p>
 <ul>
 <li>… string[] 最左前缀的 key 列表</li>
 </ul>
@@ -1041,7 +1041,7 @@
 <li>boolean 成功true失败false</li>
 </ul>
 <h2 id="function-M-delete-entry-…"><a href="#function-M-delete-entry-…" class="headerlink" title="function M:delete_entry(…)"></a>function M:delete_entry(…)</h2><p><strong>描述</strong></p>
-<p>删除数据<br><strong>参数</strong></p>
+<p>删除数据 format[delete * from tab_name where key1 &#x3D; ? and key2 &#x3D; ?]<br><strong>参数</strong></p>
 <ul>
 <li>… string[] 最左前缀的 key 列表</li>
 </ul>
@@ -1080,27 +1080,28 @@
 <li>boolean</li>
 </ul>
 <h2 id="function-M-get-entry-by-limit-cursor-limit-sort-…"><a href="#function-M-get-entry-by-limit-cursor-limit-sort-…" class="headerlink" title="function M:get_entry_by_limit(cursor, limit, sort, …)"></a>function M:get_entry_by_limit(cursor, limit, sort, …)</h2><p><strong>描述</strong></p>
-<p>分页查询<br><strong>参数</strong></p>
+<p>分页查询 format<code>[select * from tab_name where key1 = ? and key2 &gt; ? order by ? desc limit ?]</code><br><strong>参数</strong></p>
 <ul>
 <li>cursor number|string 游标</li>
 <li>limit number 数量限制</li>
 <li>sort number 1升序  -1降序</li>
-<li>… string[] 最左前缀主键列表</li>
+<li>… string[] 最左前缀主键列表 key1 key2 … 不填入的key作为游标</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
 <li>table obj<a href="ormentry"></a></li>
 </ul>
 <h2 id="function-M-get-entry-by-in-in-values-…"><a href="#function-M-get-entry-by-in-in-values-…" class="headerlink" title="function M:get_entry_by_in(in_values, …)"></a>function M:get_entry_by_in(in_values, …)</h2><p><strong>描述</strong></p>
-<p>IN 查询<br><strong>参数</strong></p>
+<p>IN 查询  format<code>[select * from tab_name where key1 = ? and key2 = ? and key3 in (?,?,?)]</code><br><strong>参数</strong></p>
 <ul>
-<li>in_values table in对应的值列表 select * from xxx where key1 &#x3D; xxx and key2 &#x3D; xxx and key3 in (xxx,xxx,xxx)</li>
+<li>in_values table in对应的值列表</li>
 <li>… string[] 最左前缀主键列表 无需填入in_values的key</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
 <li>table obj<a href="ormentry"></a></li>
 </ul>
+<p>范围删除 包含left right<br>可以有三种操作方式<br>[left, right] 范围删除  &gt;&#x3D; left &lt;&#x3D; right<br>[left, nil] 删除 &gt;&#x3D; left<br>[nil, right] 删除 &lt;&#x3D; right<br>format<code>[delete from player where key1=? and key2&gt;=? and key2&lt;=?;]</code></p>
 <h2 id="function-M-delete-entry-by-range-left-right-…"><a href="#function-M-delete-entry-by-range-left-right-…" class="headerlink" title="function M:delete_entry_by_range(left, right, …)"></a>function M:delete_entry_by_range(left, right, …)</h2><p><strong>描述</strong></p>
 <p>范围删除 包含left right 可以有三种操作方式 [left, right] 范围删除  &gt;&#x3D; left &lt;&#x3D; right  [left, nil] 删除 &gt;&#x3D; left [nil, right] 删除 &lt;&#x3D; right<br><strong>参数</strong></p>
 <ul>
@@ -1113,14 +1114,32 @@
 <li>boolean</li>
 </ul>
 <h2 id="function-M-delete-entry-by-in-in-values-…"><a href="#function-M-delete-entry-by-in-in-values-…" class="headerlink" title="function M:delete_entry_by_in(in_values, …)"></a>function M:delete_entry_by_in(in_values, …)</h2><p><strong>描述</strong></p>
-<p>IN 删除<br><strong>参数</strong></p>
+<p>IN 删除 format<code>[delete from tab_name where key1 = ? and key2 = ? and key3 in (?,?,?)]</code><br><strong>参数</strong></p>
 <ul>
-<li>in_values table in对应的值列表 delete from xxx where key1 &#x3D; xxx and key2 &#x3D; xxx and key3 in (xxx,xxx,xxx)</li>
+<li>in_values table in对应的值列表 </li>
 <li>… string[] 最左前缀主键列表 无需填入in_values的key</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
 <li>boolean</li>
+</ul>
+<h2 id="function-M-batch-delete-entry-keys-list"><a href="#function-M-batch-delete-entry-keys-list" class="headerlink" title="function M:batch_delete_entry(keys_list)"></a>function M:batch_delete_entry(keys_list)</h2><p><strong>描述</strong></p>
+<p>批量删除 format <code>[delete from tab_name where (key1 = ? and key2 = ?) or (key1 = ? and key2 = ?)]</code><br><strong>参数</strong></p>
+<ul>
+<li>keys_list table 最左前缀主键列表 <code>&#123;&#123;key1,key2,...&#125;,&#123;key1,key2,...&#125;&#125;</code></li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>table boolean 执行结果</li>
+</ul>
+<h2 id="function-M-batch-delete-entry-by-range-query-list"><a href="#function-M-batch-delete-entry-by-range-query-list" class="headerlink" title="function M:batch_delete_entry_by_range(query_list)"></a>function M:batch_delete_entry_by_range(query_list)</h2><p><strong>描述</strong></p>
+<p>��量范围删除 format <code>[delete from tab_name where (key1 = ? and key2 &gt;= ? and key2 &lt;= ?) or (key1 = ? and key2 &gt;= ? and key2 &lt;= ?)]</code>  key长度必须一致， left,right 有无必须一致<br><strong>参数</strong></p>
+<ul>
+<li>query_list table <code>&#123;&#123;left = 1, right = 10, key_values = &#123;10001, 10002&#125;&#125;, &#123;left = 1, right = 10, key_values = &#123;10001, 10002&#125;&#125;&#125; key1[10001], key2[10002] key3[left, right]&#125;&#125;</code></li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>table boolean 执行结果</li>
 </ul>
 
                 
@@ -1219,9 +1238,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mysql/" title="orm mysql适配器">
+                      <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormentry/" title="orm条目">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">orm mysql适配器</span>
+                        <span class="hidden-mobile">orm条目</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

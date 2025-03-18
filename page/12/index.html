@@ -501,15 +501,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
-          rpc调用
+        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
+          集群远程rpc调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
         <div>
-          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = contriner_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
+          前言集群远程RPC调用，是借鉴skynet cluster mode 自己实现的(https://github.com/cloudwu/skynet/wiki/Cluster)封装了一套简单好用、适用用框架的模式。 配置启动服务端 配置load_mods.lua  load_mods.lua 12345678910111213141516--共享配置share_config_m = &#123;
         </div>
       </a>
 
@@ -569,15 +569,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
-          集群远程rpc调用
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+          rpc调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
         <div>
-          前言集群远程RPC调用，是借鉴skynet cluster mode 自己实现的(https://github.com/cloudwu/skynet/wiki/Cluster)封装了一套简单好用、适用用框架的模式。 配置启动服务端 配置load_mods.lua  load_mods.lua 12345678910111213141516--共享配置share_config_m = &#123;
+          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = contriner_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
         </div>
       </a>
 
