@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" target="_self">
+          尝试给orm新增唯一索引，最后还是决定不加了
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/22/skynet_fly_ss/orm_unique_index/" target="_self">
+        <div>
+          前言有群友比较想要orm可以设置唯一索引，方便类似给账号做绑定手机号，绑定邮箱这种需求，其实对于这类需求，我是建议新建一个表做对应映射关系，但是又考虑到，如果能在原本的表建唯一索引，或许做这类需求要简单从容许多。虽然这又会给orm增长一些的复杂度，但是我抱着试一试的心态，开始对本就复杂的orm解剖重构，先把耦合的索引代码抽离独立，方便主键，唯一索引一起用，然后新增唯一索引，接通了查询，写了查询的测
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-22 21:00" pubdate>
+              2025-03-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/02/10/skynet_fly_ss/frpc_error_code/" target="_self">
           关于frpc错误处理的优化
         </a>
@@ -800,74 +861,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
-          共享配置数据
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
-        <div>
-          前言由于skynet每个服务都是独立的lua虚拟机，一般游戏开发又需要加载大量的配置文件，如果每个服务都加载一遍，会造成过多的内存浪费，所有skynet就提供了sharedata,sharetable共享配置数据的手段。由于两种方案各有优缺点，所以我在封装实现上让使用者可以任选其一，在make&#x2F;script增加热更配置命令，方便于热更配置。 优缺点对比sharedata 优点  c内存占
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-14 22:00" pubdate>
-              2024-09-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
             
           </div>
         
