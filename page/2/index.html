@@ -834,15 +834,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/timer/" target="_self">
-          定时器
+        <a href="/2024/06/29/skynet_fly_api_word/snowflake/" target="_self">
+          雪花算法生成唯一ID
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/timer/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/snowflake/" target="_self">
         <div>
-          timer function M:new(expire,times,callback,…)描述 创建一个定时器对象参数  expire number 过期时间 100等于1秒 times number 次数，0表示循环触发 callback function 回调函数 … any 回调参数  返回值  table 定时器对象  function M:cancel()描述 取消定时器参数 返回值
+          timer使用注意，多服架构下，请注意machine_id环境参数的配置分配。 function M.new_guid()描述 创建全局GUID参数 返回值  number 全局GUID  function M.get_machine_id(guid)描述 通过GUID获取机器号参数  guid number 全局GUID  返回值  number 机器号  function M.get_time
         </div>
       </a>
 
@@ -871,7 +871,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3/" class="category-chain-item">定时器相关</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%94%AF%E4%B8%80ID%E7%94%9F%E6%88%90/" class="category-chain-item">唯一ID生成</a>
   
   
 
