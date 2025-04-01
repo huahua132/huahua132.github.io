@@ -365,6 +365,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2025/04/01/skynet_fly_ss/orm_index/" target="_self">
+          orm 新增普通索引
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/01/skynet_fly_ss/orm_index/" target="_self">
+        <div>
+          前言对于游戏数据来说，普通索引大多作用在日志数据上，按时间，玩家，道具ID，等等条件分页查询检索，数据量通常很庞大，不同的普通索引可以做联合条件查询，如果想普通索引也加上本地缓存页的话，需要处理好缓存是否失效的判断，对于主键唯一索引来说就是对比本次查询的范围的数据总量和缓存总量是否相等，数据总量失效是其中的某个缓存过期。而普通索引基于范围，分页来查询不太好维护数据总量和缓存总量数据的控制，而且排序
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-01 21:00" pubdate>
+              2025-04-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/03/28/skynet_fly_api_word/use_log/" target="_self">
           用户日志
         </a>
@@ -807,74 +868,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">#年度总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" target="_self">
-          可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" target="_self">
-        <div>
-          前言一开始，对与客户端交互协议仅仅提供了name, body，包名加包体的简单打包方式，对于body大家可以自由选择任意编码解码方式(json、protobuff、sproto …)。后面觉得name少许增加了包体大小，就新增了packid,body协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-12-29 22:00" pubdate>
-              2024-12-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
             
           </div>
         
