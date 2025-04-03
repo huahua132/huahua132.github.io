@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
+          关于定时器的封装
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/02/skynet_fly_ss/timer/" target="_self">
+        <div>
+          为什么要封装定时器？ skynet只提供定时器注册回调，缺少传参，注销，延伸等等常用方法。  实现思路一开始尝试用分配定时器id的方式实现，这种方式要考虑id重用的情况，虽然说int64走一个轮回要很久，但是这种情况还是要处理，走了一个轮回后，就有可能前面的id还被占用着，后续的id分配效率会降低。这种实现方式不是很稳定可靠。后续想了一下还是用面向对象的思想，因为前一种方式无非是timer模块用一
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-02 13:42" pubdate>
+              2023-07-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/06/30/skynet_fly_word/word_4/H_q/" target="_self">
           如何在skynet_fly_demo新增一个后台模块？
         </a>
@@ -751,67 +812,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/socket/">#socket</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/13/redis/redis/" target="_self">
-          redis 知识杂谈
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/13/redis/redis/" target="_self">
-        <div>
-          redis有哪些好处？ 数据类型丰富，提供了string,list,hash,set,zset五种基础类型，还提供了stream，geo，bitmap扩展类型string数据结构：简单动态字符串list数据结构：双向链表，压缩列表hash压缩列表，哈希表zset压缩列表，跳表set哈希表，整数数组  数据可以设置过期时间  支持事务  支持脚本化运行  哈希冲突解决 少量的冲突redis使用链式哈
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-13 11:33" pubdate>
-              2023-05-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/redis/" class="category-chain-item">redis</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/redis/">#redis</a>
             
           </div>
         

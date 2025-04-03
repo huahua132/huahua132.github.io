@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/03/24/skynet_frame/reent/" target="_self">
+          详解skynet 频发的重入问题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/03/24/skynet_frame/reent/" target="_self">
+        <div>
+          例子说明我们假设有2个服务，1个用户。银行服务 提供转账。风控服务 对用户进行风控，提供阻止转账取款功能。用户一 用手机转账。 bank_service.lua 1234567891011121314151617181920local account_amonut_map = &#123;&#125;   --账户余额local CMD = &#123;&#125;--转账function CMD
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-03-24 11:33" pubdate>
+              2024-03-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet/" class="category-chain-item">skynet</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-frame/">#skynet_frame</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/02/17/think/skynet_fly_demo/" target="_self">
           关于skynet_fly_demo的架构设计
         </a>
@@ -765,67 +826,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" target="_self">
-          关于增加skynet_fly orm_table_m 可热更服务
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/24/skynet_fly_ss/orm_table_m/" target="_self">
-        <div>
-          前言因为orm在多个服务持有的时候，没法保证一致性，所有需要把orm封装到独立服务中，其他服务通过rpc调用，为了使用便利性，封装了通用的orm可热更服务orm_table_m.lua和rpc调用模块orm_table_client.lua。 orm_table_m.lua转入的config需要提供一个配置项orm_plug，它是lua模块文件。需要提供init,call两个方法。  init()
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-24 22:00" pubdate>
-              2023-12-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         

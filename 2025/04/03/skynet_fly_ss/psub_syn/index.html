@@ -16,24 +16,24 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名">
+    <meta name="description" content="前言最近有空在给skynet_fly_demo增加用户日志相关，用于记录游戏中产生的日志，比如用户登录登出记录，道具增加，减少记录。我的想法是把用户日志对接上orm，这样写的日志的方便日志服采集后，根据orm设定的字段索引信息直接构建对接数据库的orm，从而实现日志服无需修改就能采集新增或者变更的日志数据。这个过程就遇到一个问题，日志服如何同步到其他服务的日志orm信息。之前的subsyn监听同步">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远程订阅发布模式">
-<meta property="og:url" content="https://huahua132.github.io/2024/06/29/skynet_fly_api/frpc_watch/index.html">
+<meta property="og:title" content="psub_syn批订阅同步的实现">
+<meta property="og:url" content="https://huahua132.github.io/2025/04/03/skynet_fly_ss/psub_syn/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名">
+<meta property="og:description" content="前言最近有空在给skynet_fly_demo增加用户日志相关，用于记录游戏中产生的日志，比如用户登录登出记录，道具增加，减少记录。我的想法是把用户日志对接上orm，这样写的日志的方便日志服采集后，根据orm设定的字段索引信息直接构建对接数据库的orm，从而实现日志服无需修改就能采集新增或者变更的日志数据。这个过程就遇到一个问题，日志服如何同步到其他服务的日志orm信息。之前的subsyn监听同步">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-29T04:02:38.746Z">
+<meta property="article:published_time" content="2025-04-03T13:15:07.000Z">
+<meta property="article:modified_time" content="2025-04-03T06:51:36.682Z">
 <meta property="article:author" content="huahua132">
-<meta property="article:tag" content="skynet_fly_api">
+<meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>远程订阅发布模式 - huahua132 blog</title>
+  <title>psub_syn批订阅同步的实现 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="远程订阅发布模式"></span>
+            <span id="subtitle" data-typed-text="psub_syn批订阅同步的实现"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-06-29 22:00" pubdate>
-          2024年6月29日 晚上
+        <time datetime="2025-04-03 21:15" pubdate>
+          2025年4月3日 晚上
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          1.4k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          14 分钟
+          12 分钟
         
       </span>
     
@@ -281,17 +281,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly_api"
-        id="heading-879663778a734ec922ccc8c70de62887" role="tab" data-toggle="collapse" href="#collapse-879663778a734ec922ccc8c70de62887"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly实现思路历程"
+        id="heading-fb499f79496da9976dd55655b846d7cf" role="tab" data-toggle="collapse" href="#collapse-fb499f79496da9976dd55655b846d7cf"
         aria-expanded="true"
       >
-        skynet_fly_api
-        <span class="list-group-count">(11)</span>
+        skynet_fly实现思路历程
+        <span class="list-group-count">(23)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-879663778a734ec922ccc8c70de62887"
-           role="tabpanel" aria-labelledby="heading-879663778a734ec922ccc8c70de62887">
+      <div class="category-collapse collapse show" id="collapse-fb499f79496da9976dd55655b846d7cf"
+           role="tabpanel" aria-labelledby="heading-fb499f79496da9976dd55655b846d7cf">
         
         
           
@@ -300,100 +300,208 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" title="远程订阅发布模式"
+        <a href="/2023/08/20/skynet_fly_ss/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly 决定web路由工具使用的测试</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于cluster 远程rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/02/10/skynet_fly_ss/frpc_error_code/" title="关于frpc错误处理的优化"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于frpc错误处理的优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/01/skynet_fly_ss/orm_index/" title="orm 新增普通索引"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm 新增普通索引</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" title="尝试给orm新增唯一索引，最后还是决定不加了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">尝试给orm新增唯一索引，最后还是决定不加了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/03/skynet_fly_ss/psub_syn/" title="psub_syn批订阅同步的实现"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">远程订阅发布模式</span>
+          <span class="category-post">psub_syn批订阅同步的实现</span>
         </a>
       
     
       
       
-        <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
+        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">启动配置load_mods.lua</span>
+          <span class="category-post">记录一次使用录像查bug</span>
         </a>
       
     
       
       
-        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
+        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">新增可热更服务</span>
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
         </a>
       
     
       
       
-        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
+        <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更模块的启动配置项</span>
+          <span class="category-post">关于redis的封装</span>
         </a>
       
     
       
       
-        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">内部rpc调用</span>
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
         </a>
       
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/orm/" title="orm"
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">orm</span>
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
     
       
       
-        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">远程rpc调用</span>
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
         </a>
       
     
       
       
-        <a href="/2024/09/14/skynet_fly_api/sharedata/" title="sharedata.lua 共享配置数据"
+        <a href="/2023/07/02/skynet_fly_ss/timer/" title="关于定时器的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">sharedata.lua 共享配置数据</span>
+          <span class="category-post">关于定时器的封装</span>
         </a>
       
     
       
       
-        <a href="/2024/12/01/skynet_fly_api/snowflake/" title="全局唯一ID(guid)的生成"
+        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">全局唯一ID(guid)的生成</span>
+          <span class="category-post">关于监听同步模块的封装</span>
         </a>
       
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">watch_syn.lua 监听同步机制</span>
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
     
       
       
-        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">定时器的使用</span>
+          <span class="category-post">关于skynet_fly热更新实现</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
         </a>
       
     
@@ -416,37 +524,25 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">远程订阅发布模式</h1>
+            <h1 style="display: none">psub_syn批订阅同步的实现</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="watch-server-lua"><a href="#watch-server-lua" class="headerlink" title="watch_server.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/rpc/watch_server.lua">watch_server.lua</a></h1><h2 id="sever"><a href="#sever" class="headerlink" title="sever"></a><strong>sever</strong></h2><ul>
-<li><p><strong>M.publish(channel_name, …)</strong><br>  描述:  发布名为channel_name的事件<br>  参数:<br>  - channel_name (string): 事件名</p>
-</li>
-<li><p><strong>M.pubsyn(channel_name, …)</strong><br>  描述:  发布名为channel_name的同步事件<br>  参数:<br>  - channel_name (string): 事件名</p>
-</li>
-</ul>
-<h1 id="watch-client-lua"><a href="#watch-client-lua" class="headerlink" title="watch_client.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/rpc/watch_client.lua">watch_client.lua</a></h1><h2 id="sub-x2F-pub-client"><a href="#sub-x2F-pub-client" class="headerlink" title="sub&#x2F;pub client"></a><strong>sub&#x2F;pub client</strong></h2><ul>
-<li><p><strong>M.watch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  watch监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
-</li>
-<li><p><strong>M.unwatch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  取消监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
-</li>
-<li><p><strong>M.watch_byid(svr_name, svr_id, channel_name, handle_name, handler)</strong><br>  描述:  指定svr_id监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
-</li>
-<li><p><strong>M.unwatch_byid(svr_name, svr_id, channel_name, handle_name)</strong><br>  描述:  指定svr_id取消监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
-</li>
-</ul>
-<h1 id="watch-syn-client-lua"><a href="#watch-syn-client-lua" class="headerlink" title="watch_syn_client.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/rpc/watch_syn_client.lua">watch_syn_client.lua</a></h1><h2 id="subsyn-x2F-pubsyn-client"><a href="#subsyn-x2F-pubsyn-client" class="headerlink" title="subsyn&#x2F;pubsyn client"></a><strong>subsyn&#x2F;pubsyn client</strong></h2><ul>
-<li><p><strong>M.watch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  watch监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
-</li>
-<li><p><strong>M.unwatch(svr_name, channel_name, handle_name, handler)</strong><br>  描述:  取消监听 svr_name 的所有结点<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
-</li>
-<li><p><strong>M.watch_byid(svr_name, svr_id, channel_name, handle_name, handler)</strong><br>  描述:  指定svr_id监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名<br>  - handler (function): 回调函数</p>
-</li>
-<li><p><strong>M.unwatch_byid(svr_name, svr_id, channel_name, handle_name)</strong><br>  描述:  指定svr_id取消监听<br>  参数:<br>  - svr_name (string): 集群svr_name<br>  - svr_id (number): 指定svr_id<br>  - channel_name (string): 事件名<br>  - handle_name (string): 回调处理名</p>
-</li>
-</ul>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近有空在给<code>skynet_fly_demo</code>增加用户日志相关，用于记录游戏中产生的日志，比如<code>用户登录登出记录</code>，<code>道具增加，减少记录</code>。我的想法是把用户日志对接上<code>orm</code>，这样写的日志的方便<strong>日志服</strong>采集后，根据<code>orm</code>设定的字段索引信息直接构建对接<strong>数据库</strong>的<code>orm</code>，从而实现<strong>日志服</strong>无需修改就能采集新增或者变更的日志数据。这个过程就遇到一个问题，<strong>日志服</strong>如何同步到其他服务的<strong>日志orm</strong>信息。之前的<strong>subsyn监听同步模块</strong>,只支持监听指定<strong>通道名</strong>的数据，而对于<code>orm</code>日志数据对象会有多个，比如道具变更记录，玩家登录记录。按照监听一个<strong>通道名</strong>的做法就需要把数据全部汇聚到一个服务上然后进行<code>pubsyn</code>,这样做，缺点有2：1是增加了业务实现的复杂度，2是每次同步的数据量变大，有点牵一发而动全身的感觉。考虑再三，最终还是决定实现<code>psubsyn</code>。</p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>实现思路借鉴了redis watch的psub <strong>通配公式</strong>的习惯，例如<code>name:*:address</code>, 这样就能监听<code>channel_name</code>为<code>name:*:address</code>, <code>*</code>可以任意(不包括<code>*</code>,<code>:</code>, 最好是字母和数字或者(_,-))的字符串。<br>对于<code>name:age:address</code>用组合的方式可以拆解出<strong>6</strong>种<strong>通配公式</strong>。</p>
+<ol>
+<li><code>*:age:address</code></li>
+<li><code>name:*:address</code></li>
+<li><code>name:age:*</code></li>
+<li><code>*:*:address</code></li>
+<li><code>*:age:*</code></li>
+<li><code>name:*:*</code></li>
+</ol>
+<p>实现的方式就是通过<strong>推送端</strong>推送的<code>channel_name</code>拆解出匹配的<strong>通配公式</strong>,再用<strong>通配公式</strong>关联上<code>channel_name</code>, 这时候<strong>监听端</strong>通过<code>psubsyn</code>命令把需要监听的<strong>通配公式</strong>发到<strong>推送端</strong>，<strong>推送端</strong>把<strong>通配公式</strong>匹配的<code>channel_name</code>都同步给<strong>监听端</strong>，<strong>监听端</strong>再逐个做<code>subsyn</code>监听同步。这样就实现<code>psubsyn</code>。</p>
+<h1 id="使用例子"><a href="#使用例子" class="headerlink" title="使用例子"></a>使用例子</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua">watch_syn_client.pwatch(<span class="hljs-string">&quot;frpc_s&quot;</span>, <span class="hljs-string">&quot;*:age:address&quot;</span>, <span class="hljs-string">&quot;handle-*:age:address&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluter_name, ...)</span></span><br>	<span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;pwatch handle-*:age:address &gt;&gt;&gt; &quot;</span>, cluter_name, ...)<br><span class="hljs-keyword">end</span>)<br><br>watch_syn_client.pwatch_byid(<span class="hljs-string">&quot;frpc_s&quot;</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;*:age:address&quot;</span>, <span class="hljs-string">&quot;handle-*:age:address&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluter_name, ...)</span></span><br>	<span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;pwatch_byid handle-*:age:address &gt;&gt;&gt; &quot;</span>, cluter_name, ...)<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
+
+<h1 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h1><p>由于<code>psubsyn</code>最终还是用<code>subsyn</code>,所以如果既要<code>psubsyn</code>，又要单独监听(<code>subsyn</code>)某一个的时候，此时<code>psubsyn</code>其实是包含<code>subsyn</code>监听的channel_name了，比如<code>pwatch(*:age:address)</code>,<code>watch(name1:age:address)</code>。这时候不要用相同的<code>handle_name</code>，否决会出现<code>pwatch</code>和<code>watch</code>只有一个能收到<code>name1:age:address</code>的同步回调。</p>
 
                 
               </div>
@@ -465,7 +561,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -480,7 +576,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+        <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
       
     </div>
   
@@ -492,8 +588,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>远程订阅发布模式</div>
-      <div>https://huahua132.github.io/2024/06/29/skynet_fly_api/frpc_watch/</div>
+      <div>psub_syn批订阅同步的实现</div>
+      <div>https://huahua132.github.io/2025/04/03/skynet_fly_ss/psub_syn/</div>
     </div>
     <div class="license-meta">
       
@@ -505,7 +601,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年6月29日</div>
+          <div>2025年4月3日</div>
         </div>
       
       
@@ -537,18 +633,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">可热更服务，热更脚本支持</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/logrotate/" title="日志轮换">
-                        <span class="hidden-mobile">日志轮换</span>
+                      <a href="/2025/04/01/skynet_fly_api_word/utils/guid_util/" title="guid_util guid相关">
+                        <span class="hidden-mobile">guid_util guid相关</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
