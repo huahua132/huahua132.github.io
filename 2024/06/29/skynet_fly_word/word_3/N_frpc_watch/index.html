@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到订阅发布模式(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。 对比redisredis也支持sub&#x2F;pub模式，并且有psub批量订阅支持。 skynet_fly目前只实现了sub&#x2F;pub模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。不过skynet_fly实现了red">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-09T04:12:42.795Z">
+<meta property="article:modified_time" content="2025-04-03T04:00:14.226Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.9k 字
         
       </span>
     
@@ -844,7 +844,7 @@
 </ul>
 <h2 id="优劣对比"><a href="#优劣对比" class="headerlink" title="优劣对比"></a>优劣对比</h2><h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a><strong>redis</strong></h3><p><strong>优点</strong><br>    1. 依赖<strong>redis</strong>,可以跨语言，跨框架使用。<br>    2. 支持psub模式。</p>
 <p><strong>缺点</strong><br>    1. 发布事件值，只能是string，需要额外用json等等协议做中转。<br>    2. 每个监听都需要一个连接。对于skynet内部服务多的情况不适用。</p>
-<h3 id="skynet-fly"><a href="#skynet-fly" class="headerlink" title="skynet_fly"></a><strong>skynet_fly</strong></h3><p><strong>优点</strong><br>    1. 直达，不依赖服务转发。<br>    2. 内部frpc_client_m接收，分发给各订阅的内部服务，不存在多内部服务同时订阅，连接数上升，网络带宽占用上升问题。<br>    3. 消息支持lua可打包的数据类型(string,number,bool,table)。<br>    4. 支持订阅同步模式。</p>
+<h3 id="skynet-fly"><a href="#skynet-fly" class="headerlink" title="skynet_fly"></a><strong>skynet_fly</strong></h3><p><strong>优点</strong><br>    1. 直达，不依赖服务转发。<br>    2. 内部frpc_client_m接收，分发给各订阅的内部服务，不存在多内部服务同时订阅，连接数上升，网络带宽占用上升问题。<br>    3. 消息支持lua可打包的数据类型(string,number,bool,table)。<br>    4. 支持订阅同步模式。<br>    5. 支持psubsyn模式。</p>
 <p><strong>缺点</strong><br>    1. 通用性不强，只支持使用skynet_fly的服务。<br>    2. 暂时不支持psub模式。</p>
 <h1 id="简单使用示例"><a href="#简单使用示例" class="headerlink" title="简单使用示例"></a>简单使用示例</h1><h2 id="sub-x2F-pub"><a href="#sub-x2F-pub" class="headerlink" title="sub&#x2F;pub"></a>sub&#x2F;pub</h2><p>pub推送端</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_server = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_server&quot;</span><br>watch_server.publish(<span class="hljs-string">&quot;test_pub&quot;</span>, <span class="hljs-string">&quot;hello test_pub&quot;</span>, <span class="hljs-number">1</span>)       <span class="hljs-comment">--推送test_pub事件，传递参数 hello test_pub，1</span><br></code></pre></td></tr></table></figure>
@@ -859,6 +859,7 @@
 
 <h2 id="详细使用示例"><a href="#详细使用示例" class="headerlink" title="详细使用示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/frpc_server">详细使用示例</a></h2><h1 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h1><p>当自身是<strong>旧服务</strong>时，watch_client的订阅将接收不到，将只会发到<strong>新服务中</strong>。</p>
 <h1 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h1><h2 id="2024-x2F-8-x2F-9"><a href="#2024-x2F-8-x2F-9" class="headerlink" title="2024&#x2F;8&#x2F;9"></a>2024&#x2F;8&#x2F;9</h2><p>watch_syn_client<br>当触发<code>move</code>转移同步时，如果自身服务是<strong>旧服务</strong>，就取消同步监听。因为旧服务不能<strong>切服</strong>，因为存在这个<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">问题</a></p>
+<h2 id="2025-x2F-04-x2F-03"><a href="#2025-x2F-04-x2F-03" class="headerlink" title="2025&#x2F;04&#x2F;03"></a>2025&#x2F;04&#x2F;03</h2><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/4cacf052ff25fa956c4349817f2a2921c0b97edf">watch_syn_client支持批监听</a></p>
 
                 
               </div>
@@ -966,8 +967,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormentry/" title="orm条目">
-                        <span class="hidden-mobile">orm条目</span>
+                      <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mongo/" title="orm mongo适配器">
+                        <span class="hidden-mobile">orm mongo适配器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
