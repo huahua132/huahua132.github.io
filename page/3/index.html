@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
-          日志轮换
+        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
+          远程订阅发布模式
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
         <div>
-          logrotate function M:new(filename)描述 新建对象参数  filename string? 文件名  返回值  table 对象  function M:set_rename_format(rename_format)描述 重命名文件格式参数  rename_format string  返回值  table 对象  function M:set_file_path
+          watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名
         </div>
       </a>
 
@@ -261,15 +261,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3/" class="category-chain-item">日志相关</a>
-  
-  
-
   
 
       </span>
@@ -335,6 +328,74 @@
     <span>></span>
     
   <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%89%A7%E8%A1%8C%E9%98%9F%E5%88%97/" class="category-chain-item">执行队列</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
+          日志轮换
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
+        <div>
+          logrotate function M:new(filename)描述 新建对象参数  filename string? 文件名  返回值  table 对象  function M:set_rename_format(rename_format)描述 重命名文件格式参数  rename_format string  返回值  table 对象  function M:set_file_path
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3/" class="category-chain-item">日志相关</a>
   
   
 
@@ -637,15 +698,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
-          远程订阅发布模式
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
+          远程sub/pub 模式 和 远程subsyn/pubsyn 模式
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
         <div>
-          watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名
+          前言有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到订阅发布模式(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。 对比redisredis也支持sub&#x2F;pub模式，并且有psub批量订阅支持。 skynet_fly目前只实现了sub&#x2F;pub模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。不过skynet_fly实现了red
         </div>
       </a>
 
@@ -669,8 +730,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  
+  
+
   
 
       </span>
@@ -684,7 +752,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
             
           </div>
         
@@ -775,74 +843,6 @@
       <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
         <div>
           contriner_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" target="_self">
-          访问对象[内部rpc]
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" target="_self">
-        <div>
-          contriner_client function M:register(…)描述 注册访问，想要访问一个可热更访问，首先需要在load阶段注册访问参数  … string[] 可热更访问模块名 列表  返回值 function M:set_week_visitor(…)描述 设置弱访问者 如果2个可热更模块相互访问，需要有一方去标记另一方为弱访问者，这样才不会因环访问导致双方旧服务无法退出参数
         </div>
       </a>
 

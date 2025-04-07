@@ -24,7 +24,7 @@
 <meta property="og:description" content="ormtable function M:new(tab_name)描述 新建表对象参数  tab_name string 作用与数据库的表名  返回值  table obj  function M:___FIELD_TYPE(field_name)描述 设置字段 FIELD_TYPE对应字段类型 有 int8|int16|int32|int64|uint8|uint16|uint32|string">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-07T08:47:36.304Z">
+<meta property="article:modified_time" content="2025-04-07T12:31:26.184Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.2k 字
+          4.3k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          36 分钟
+          37 分钟
         
       </span>
     
@@ -538,15 +538,6 @@
     
       
       
-        <a href="/2025/04/01/skynet_fly_api_word/utils/guid_util/" title="guid_util guid相关"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">guid_util guid相关</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
            class="list-group-item list-group-item-action
            ">
@@ -556,10 +547,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
+        <a href="/2025/04/01/skynet_fly_api_word/utils/guid_util/" title="guid_util guid相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">skynet_util skynet相关</span>
+          <span class="category-post">guid_util guid相关</span>
         </a>
       
     
@@ -569,6 +560,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">math_util math相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">skynet_util skynet相关</span>
         </a>
       
     
@@ -693,10 +693,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/db/redisc/" title="redis命令扩展"
+        <a href="/2024/06/29/skynet_fly_api_word/db/mysqlf/" title="mysql连接池调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">redis命令扩展</span>
+          <span class="category-post">mysql连接池调用</span>
         </a>
       
     
@@ -711,10 +711,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/db/mysqlf/" title="mysql连接池调用"
+        <a href="/2024/06/29/skynet_fly_api_word/db/redisc/" title="redis命令扩展"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">mysql连接池调用</span>
+          <span class="category-post">redis命令扩展</span>
         </a>
       
     
@@ -921,7 +921,7 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/service_watch_interface/" title="进程内的订阅同步-可热更服务的接口"
+        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/contriner_watch_interface/" title="进程内的订阅同步-可热更服务的接口"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">进程内的订阅同步-可热更服务的接口</span>
@@ -930,7 +930,7 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/contriner_watch_interface/" title="进程内的订阅同步-可热更服务的接口"
+        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/service_watch_interface/" title="进程内的订阅同步-可热更服务的接口"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">进程内的订阅同步-可热更服务的接口</span>
@@ -1126,7 +1126,9 @@
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table obj<a href="ormentry"></a></li>
+<li>number cursor? 游标</li>
+<li>table obj<a href="ormentry"></a> 结果数组</li>
+<li>number count? 总数</li>
 </ul>
 <h2 id="function-M-get-entry-by-in-in-values-…"><a href="#function-M-get-entry-by-in-in-values-…" class="headerlink" title="function M:get_entry_by_in(in_values, …)"></a>function M:get_entry_by_in(in_values, …)</h2><p><strong>描述</strong></p>
 <p>IN 查询  format<code>[select * from tab_name where key1 = ? and key2 = ? and key3 in (?,?,?)]</code><br><strong>参数</strong></p>
@@ -1187,7 +1189,7 @@
 <ul>
 <li>table 查询结果列表</li>
 </ul>
-<h2 id="function-M-idx-get-entry-by-limit-cursor-limit-sort-sort-field-name-query"><a href="#function-M-idx-get-entry-by-limit-cursor-limit-sort-sort-field-name-query" class="headerlink" title="function M:idx_get_entry_by_limit(cursor, limit, sort, sort_field_name, query)"></a>function M:idx_get_entry_by_limit(cursor, limit, sort, sort_field_name, query)</h2><p><strong>描述</strong></p>
+<h2 id="function-M-idx-get-entry-by-limit-cursor-limit-sort-sort-field-name-query-offset"><a href="#function-M-idx-get-entry-by-limit-cursor-limit-sort-sort-field-name-query-offset" class="headerlink" title="function M:idx_get_entry_by_limit(cursor, limit, sort, sort_field_name, query, offset)"></a>function M:idx_get_entry_by_limit(cursor, limit, sort, sort_field_name, query, offset)</h2><p><strong>描述</strong></p>
 <p>基于普通索引分页查询 format<code>[select * from tab_name where (key1 = ? and key2 = ? and key3 &gt;= ? and key3 &lt;= ?) order by ? desc limit ?]</code><br><strong>参数</strong></p>
 <ul>
 <li>cursor number|string 游标</li>
@@ -1195,10 +1197,13 @@
 <li>sort number 1升序  -1降序</li>
 <li>sort_field_name string 排序字段名</li>
 <li>query? table 索引值 [key1 &#x3D; xxx, key2 &#x3D; xxx, key3 &#x3D; {[‘$gte’ &#x3D; xxx, ‘$lte’ &#x3D; xxx]}]</li>
+<li>offset? number 偏移量</li>
 </ul>
 <p><strong>返回值</strong></p>
 <ul>
-<li>table obj<a href="ormentry"></a></li>
+<li>number cursor? 游标</li>
+<li>table obj<a href="ormentry"></a> 结果数组</li>
+<li>number count? 总数</li>
 </ul>
 <h2 id="function-M-idx-delete-entry-query"><a href="#function-M-idx-delete-entry-query" class="headerlink" title="function M:idx_delete_entry(query)"></a>function M:idx_delete_entry(query)</h2><p><strong>描述</strong></p>
 <p>通过普通索引删除数据 format <code>delete from tab_name where (key1 = ? and key2 = ? and key3 &gt;= ? and key3 &lt;= ?)</code><br><strong>参数</strong></p>
