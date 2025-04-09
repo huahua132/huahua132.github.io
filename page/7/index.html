@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/05/03/think/srpc/" target="_self">
+          为skynet_fly新增远程调用方式
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/05/03/think/srpc/" target="_self">
+        <div>
+          前言目前skynet_fly的远程调用方式，是采用了封装skynet的cluster 集群方式，每个连接都会有一个服务端有一个clusteragent 接收代理，客户端有一个sender 发送代理服务。再加上我封装的cluster_server和cluster_client，这样发送端和接收端就分别存在了2个代理服务。也就是说调用一个rpc请求会经过非常多次的打包解包流程。 发送者-&gt;clu
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-03 19:22" pubdate>
+              2024-05-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/03/24/skynet_frame/reent/" target="_self">
           详解skynet 频发的重入问题
         </a>
@@ -734,67 +795,6 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
             <time datetime="2024-01-07 11:30" pubdate>
-              2024-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/01/07/skynet_fly_api/rpc/" target="_self">
-          内部rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/07/skynet_fly_api/rpc/" target="_self">
-        <div>
-          关联文件 contriner_client.lua  最常用API M:register(…) 注册访问。(没有注册访问的，去创建对象访问都会报错)，这个服务start之后就不能再调用。  参数：module_name列表。  M:new(module_name,instance_name,can_switch_func) 创建调用对象。  参数：  * module_name(string)
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-01-07 09:00" pubdate>
               2024-01-07
             </time>
           </div>
