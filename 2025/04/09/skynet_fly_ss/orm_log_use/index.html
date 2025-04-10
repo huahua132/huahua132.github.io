@@ -23,11 +23,13 @@
 <meta property="og:site_name" content="huahua132 blog">
 <meta property="og:description" content="前言游戏服务器免不了需要记录大量玩家数据变化、玩家操作行为、对局战斗数据等等数据的记录以及后台提供数据的查询入口。我遇到过两种做法。  方案一   手动创建数据表结构。 服务器代码拼接sql调用插入。 后台再根据表结构定义写查询页面。   方案二   服务器先写本地json文件。 再选用某种日志采集方案采集日志。 采集那边也需要定义表结构，然后插入数据库。 后台再根据表结构定义写查询页面。  总的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/log_pannel.png">
 <meta property="article:published_time" content="2025-04-09T13:15:07.000Z">
-<meta property="article:modified_time" content="2025-04-10T01:25:36.425Z">
+<meta property="article:modified_time" content="2025-04-10T08:45:31.911Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/log_pannel.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -309,6 +311,15 @@
     
       
       
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于cluster 远程rpc调用</span>
+        </a>
+      
+    
+      
+      
         <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
            class="list-group-item list-group-item-action
            ">
@@ -322,15 +333,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于frpc错误处理的优化</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于cluster 远程rpc调用</span>
         </a>
       
     
@@ -354,19 +356,19 @@
     
       
       
-        <a href="/2025/04/01/skynet_fly_ss/orm_index/" title="orm 新增普通索引"
+        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">orm 新增普通索引</span>
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
         </a>
       
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+        <a href="/2025/04/01/skynet_fly_ss/orm_index/" title="orm 新增普通索引"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+          <span class="category-post">orm 新增普通索引</span>
         </a>
       
     
@@ -403,15 +405,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">记录一次使用录像查bug</span>
         </a>
       
     
@@ -466,6 +459,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">记录一次使用录像查bug</span>
         </a>
       
     
@@ -568,6 +570,7 @@
 <h2 id="查询日志面板"><a href="#查询日志面板" class="headerlink" title="查询日志面板"></a>查询日志面板</h2><p>后台服务通过<strong>订阅同步</strong>也能知道<code>orm</code>日志表结构，建立适配数据库的<code>orm</code>，这样后台新增日志或者修改日志就无需修改后台代码了。</p>
 <h2 id="过期数据清理"><a href="#过期数据清理" class="headerlink" title="过期数据清理"></a>过期数据清理</h2><p>通过同步过来的**保留天数(maxage)**信息，再利用<code>orm:idx_delete_entry</code>，利用<code>_time</code>索引做过期数据删除处理。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>大大简化了加数据日志的流程，整个日志系统兼顾了稳定性和吞吐量。</p>
+<p><img src="/img/skynet_fly/log_pannel.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
