@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" target="_self">
-          访问对象[远程rpc]
+        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
+          启动函数
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
         <div>
-          frpc_client function M:is_active(svr_name, svr_id)描述 判断节点是否活跃(连接是否存在)参数 返回值  boolean  function M:get_active_svr_ids(svr_name)描述 获取指定svr_name活跃的svr_id参数 返回值  table  function M:watch_up(svr_name, handle
+          contriner_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块
         </div>
       </a>
 
@@ -297,15 +297,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
-          启动函数
+        <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" target="_self">
+          访问对象[远程rpc]
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" target="_self">
         <div>
-          contriner_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块
+          frpc_client function M:is_active(svr_name, svr_id)描述 判断节点是否活跃(连接是否存在)参数 返回值  boolean  function M:get_active_svr_ids(svr_name)描述 获取指定svr_name活跃的svr_id参数  svr_name string 结点名称  返回值  table  function M:wa
         </div>
       </a>
 
@@ -433,151 +433,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
-          对外接口
+        <a href="/2024/06/29/skynet_fly_api_word/client/orm_table_client/" target="_self">
+          orm访问对象
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/client/orm_table_client/" target="_self">
         <div>
-          contriner_interfaceloading &#x3D; 1,            –加载中starting &#x3D; 2,           –启动成功fix_exited &#x3D; 3,         –确定退出exited &#x3D; 4,             –退出start_failed &#x3D; 5,       –启动失败 function M.ge
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
-          mysql直连调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
-        <div>
-          mysqlimysql直连调用，也就是一个client 会产生一个连接 function M.new_client(db_name)描述 新建一个连接对象参数  db_name string 对应share_config_m 中写的key为mysql表的名为db_name的连接配置  返回值  table  function M.instance(db_name)描述 使用常驻实例参数  db_n
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
-          redis命令扩展
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
-        <div>
-          rediscredis命令扩展重写的例子 function M:hgetall(key)描述 重写hgetall 改为map结果形式参数  key string rediskey  返回值  table  function M:hmset(key,map)描述 重写hmset 能直接传递map参数  key string rediskey map table map表  返回值  number
+          orm_table_client因为orm有缓存的情况下，只能一个服务持有，那么我们又想多个服务访问情况下，我们一般把ormtable挂靠在orm_table_m可热更服务中这时候我们通过orm_table_client来访问 function M:new(orm_name)描述 创建一个orm访问对象参数  orm_name string orm_table_m 中的instance_name
         </div>
       </a>
 
@@ -705,6 +569,74 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
+          mysql直连调用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
+        <div>
+          mysqlimysql直连调用，也就是一个client 会产生一个连接 function M.new_client(db_name)描述 新建一个连接对象参数  db_name string 对应share_config_m 中写的key为mysql表的名为db_name的连接配置  返回值  table  function M.instance(db_name)描述 使用常驻实例参数  db_n
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
           模块信息与配置
         </a>
@@ -743,6 +675,74 @@
     <span>></span>
     
   <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
+          redis命令扩展
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
+        <div>
+          rediscredis命令扩展重写的例子 function M:hgetall(key)描述 重写hgetall 改为map结果形式参数  key string rediskey  返回值  table  function M:hmset(key,map)描述 重写hmset 能直接传递map参数  key string rediskey map table map表  返回值  number
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
   
   
 
@@ -841,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/hotfix/state_data/" target="_self">
-          旧数据处理
+        <a href="/2024/06/29/skynet_fly_api_word/time_extend/timer_point/" target="_self">
+          整点报时
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/hotfix/state_data/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/time_extend/timer_point/" target="_self">
         <div>
-          state_data��想被热更重置的状态数据，我们可以通过这个模块来分配表 function M.alloc_table(tabname)描述 分配一个局部表参数  tabname string 表名  返回值  table  function M.global_table(tab_name)描述 分配一个公共表参数  tabname string 表名  返回值  table
+          timer_point function M:new(type)描述 新建整点报时对象参数  type number 报时类型  返回值  table obj  function M:set_month(month)描述 指定几月参数  month number 几月[1,12]  返回值  table obj  function M:set_day(day)描述 指定月第几天参数  day nu
         </div>
       </a>
 
@@ -878,7 +878,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E7%83%AD%E6%9B%B4%E8%84%9A%E6%9C%AC/" class="category-chain-item">热更脚本</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3/" class="category-chain-item">定时器相关</a>
   
   
 
