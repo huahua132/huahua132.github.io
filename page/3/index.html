@@ -297,67 +297,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
-          远程订阅发布模式
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
-        <div>
-          watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
           日志轮换
         </a>
@@ -426,15 +365,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
-          mod映射队列
+        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
+          并发，单发互斥的队列
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
         <div>
-          mod_queue function M:new(cap)描述 新建队列对象参数  cap number 容量  返回值  table  function M:exec(mod_num, func, …)描述 执行函数参数  mod_num number mod_num % cap + 1 决定使用队列 func function 执行函数 … any 函数参数  返回值  … 函数返回值
+          mult_queue��是一个并发，单发互斥的队列��发: key不同不用排队，key相同排队执行，不同key不用排队，有单发执行中，需等待��发: 单发顺序执行需要排队，有并发执行中，需等待 function M:new()描述 新建队列对象参数 返回值  table  function M:multi(key, func, …)描述 调用并发执行参数  key any 不同key可以并发，相同
         </div>
       </a>
 
@@ -494,15 +433,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
-          并发，单发互斥的队列
+        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
+          mod映射队列
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mult_queue/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
         <div>
-          mult_queue��是一个并发，单发互斥的队列��发: key不同不用排队，key相同排队执行，不同key不用排队，有单发执行中，需等待��发: 单发顺序执行需要排队，有并发执行中，需等待 function M:new()描述 新建队列对象参数 返回值  table  function M:multi(key, func, …)描述 调用并发执行参数  key any 不同key可以并发，相同
+          mod_queue function M:new(cap)描述 新建队列对象参数  cap number 容量  返回值  table  function M:exec(mod_num, func, …)描述 执行函数参数  mod_num number mod_num % cap + 1 决定使用队列 func function 执行函数 … any 函数参数  返回值  … 函数返回值
         </div>
       </a>
 
@@ -630,74 +569,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/timer/" target="_self">
-          定时器
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/timer/" target="_self">
-        <div>
-          timer function M:new(expire,times,callback,…)描述 创建一个定时器对象参数  expire number 过期时间 100等于1秒 times number 次数，0表示循环触发 callback function 回调函数 … any 回调参数  返回值  table 定时器对象  function M:cancel()描述 取消定时器参数 返回值
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3/" class="category-chain-item">定时器相关</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2024/06/29/skynet_fly_api_word/snowflake/" target="_self">
           雪花算法生成唯一ID
         </a>
@@ -766,15 +637,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
-          对外接口
+        <a href="/2024/06/29/skynet_fly_api_word/timer/" target="_self">
+          定时器
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/timer/" target="_self">
         <div>
-          contriner_interfaceloading &#x3D; 1,            –加载中starting &#x3D; 2,           –启动成功fix_exited &#x3D; 3,         –确定退出exited &#x3D; 4,             –退出start_failed &#x3D; 5,       –启动失败 function M.ge
+          timer function M:new(expire,times,callback,…)描述 创建一个定时器对象参数  expire number 过期时间 100等于1秒 times number 次数，0表示循环触发 callback function 回调函数 … any 回调参数  返回值  table 定时器对象  function M:cancel()描述 取消定时器参数 返回值
         </div>
       </a>
 
@@ -803,7 +674,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3/" class="category-chain-item">定时器相关</a>
   
   
 
@@ -834,15 +705,76 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" target="_self">
-          访问对象[内部rpc]
+        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
+          远程订阅发布模式
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
         <div>
-          contriner_client function M:register(…)描述 注册访问，想要访问一个可热更访问，首先需要在load阶段注册访问参数  … string[] 可热更访问模块名 列表  返回值 function M:set_week_visitor(…)描述 设置弱访问者 如果2个可热更模块相互访问，需要有一方去标记另一方为弱访问者，这样才不会因环访问导致双方旧服务无法退出参数
+          watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/mongof/" target="_self">
+          mongo直连
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/mongof/" target="_self">
+        <div>
+          mongof function M.new_client(db_name)描述 新建一个连接对象参数  db_name string 对应share_config_m 中写的key为mongo表的名为db_name的连接配置  返回值  table  function M.instance(db_name)描述 访问常驻实例参数  db_name string 对应share_config_m 中
         </div>
       </a>
 
@@ -871,7 +803,75 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
+          mysql直连调用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
+        <div>
+          mysqlimysql直连调用，也就是一个client 会产生一个连接 function M.new_client(db_name)描述 新建一个连接对象参数  db_name string 对应share_config_m 中写的key为mysql表的名为db_name的连接配置  返回值  table  function M.instance(db_name)描述 使用常驻实例参数  db_n
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
   
   
 
