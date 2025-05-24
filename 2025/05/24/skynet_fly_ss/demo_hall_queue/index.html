@@ -23,14 +23,14 @@
 <meta property="og:site_name" content="huahua132 blog">
 <meta property="og:description" content="前言因为skynet中单进程写业务也容易遇到异步重入问题，写简单个人系统也得警惕此问题，着实让人难受。索性直接用queue包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。 实现方案大厅服的业务函数处理通常以player_id为第一参数用来处理玩家个人系统的数据。我们以player_id来区分不同的队列，这样既可以有效利用skynet多携程优势，又能避免个人系统的重入问题。而对">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
-<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/mult_queue.png">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/loop_queue.png">
 <meta property="article:published_time" content="2025-05-24T13:15:07.000Z">
-<meta property="article:modified_time" content="2025-05-24T09:58:57.785Z">
+<meta property="article:modified_time" content="2025-05-24T10:04:52.896Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/mult_queue.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -330,15 +330,6 @@
     
       
       
-        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" title="给demo hallserver大厅服加上队列"
-           class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">给demo hallserver大厅服加上队列</span>
-        </a>
-      
-    
-      
-      
         <a href="/2025/02/10/skynet_fly_ss/frpc_error_code/" title="关于frpc错误处理的优化"
            class="list-group-item list-group-item-action
            ">
@@ -375,6 +366,15 @@
     
       
       
+        <a href="/2025/04/01/skynet_fly_ss/orm_index/" title="orm 新增普通索引"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm 新增普通索引</span>
+        </a>
+      
+    
+      
+      
         <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" title="orm在用户数据日志上的应用"
            class="list-group-item list-group-item-action
            ">
@@ -384,10 +384,19 @@
     
       
       
-        <a href="/2025/04/01/skynet_fly_ss/orm_index/" title="orm 新增普通索引"
+        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" title="给demo hallserver大厅服加上队列"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">给demo hallserver大厅服加上队列</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">orm 新增普通索引</span>
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
         </a>
       
     
@@ -420,10 +429,10 @@
     
       
       
-        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+          <span class="category-post">记录一次使用录像查bug</span>
         </a>
       
     
@@ -456,15 +465,6 @@
     
       
       
-        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">记录一次使用录像查bug</span>
-        </a>
-      
-    
-      
-      
         <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
            ">
@@ -474,19 +474,19 @@
     
       
       
-        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于新增定时器的扩展 整点报时</span>
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
         </a>
       
     
       
       
-        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
         </a>
       
     
@@ -552,7 +552,7 @@
                 
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为skynet中单进程写业务也容易遇到<a href="https://huahua132.github.io/2024/03/24/skynet_frame/reent/">异步重入问题</a>，写简单个人系统也得警惕此问题，着实让人难受。索性直接用<code>queue</code>包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。</p>
 <h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>大厅服的业务函数处理通常以<code>player_id</code>为第一参数用来处理玩家个人系统的数据。我们以<code>player_id</code>来区分不同的队列，这样既可以有效利用<code>skynet</code>多携程优势，又能避免个人系统的重入问题。<br>而对于需要处理多个玩家数据的函数，如果想简单的避免重入问题，我们需要等所有玩家queue处理完后，再执行，并且阻塞住后续的玩家queue请求。之前实现<code>mult_queue</code>刚好符合这样的需求。</p>
-<h2 id="mult-queue"><a href="#mult-queue" class="headerlink" title="mult_queue"></a>mult_queue</h2><p><img src="/img/skynet_fly/orm.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="mult-queue"><a href="#mult-queue" class="headerlink" title="mult_queue"></a>mult_queue</h2><p><img src="/img/skynet_fly/mult_queue.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="包裹入口处理函数"><a href="#包裹入口处理函数" class="headerlink" title="包裹入口处理函数"></a>包裹入口处理函数</h2><p>大厅服常用的处理入口有<strong>玩家消息</strong>，<strong>luaCMD消息</strong>，<strong>GM消息</strong>，<strong>登录，重连，掉线，登出动作</strong>，<strong>定时器</strong>，<strong>skynet.fock</strong>，<strong>hotfix热更</strong>。<br>不常用的处理入口有<strong>订阅</strong>，<strong>订阅同步</strong>，<strong>整点报时</strong>。</p>
 <p>基于这些需求封装了<code>queue_helper</code>,然后在对应入口函数处，使用对于queue方法包裹住对于处理函数即可确保避免<strong>异步重入问题</strong>。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> mult_queue = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.mult_queue&quot;</span>:new()<br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.timer&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> hotfix = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.hotfix&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.log&quot;</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">--并发玩家函数，player_id相同串行，不同可并发</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.multi_player_func</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    <span class="hljs-keyword">return</span> mult_queue:multi(player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--调用单发执行，执行单发时，并发都暂时等待，此函数适用于操作所有玩家数据时</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.unique</span><span class="hljs-params">(func, ...)</span></span><br>    <span class="hljs-keyword">return</span> mult_queue:unique(func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--玩家定时器操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.new_player_timer</span><span class="hljs-params">(player_id, expire, times, callback, ...)</span></span><br>    <span class="hljs-keyword">return</span> timer:new(expire, times, M.multi_player_func, player_id, callback, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--单发定时器 调用单发执行，执行单发时，并发都暂时等待，此函数适用于操作所有玩家数据时</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.new_unique_timer</span><span class="hljs-params">(expire, times, callback, ...)</span></span><br>    <span class="hljs-keyword">return</span> timer:new(expire, times, M.unique, callback, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">player_fork_func</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    M.multi_player_func(player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--玩家fork操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.player_fork</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    skynet.fork(player_fork_func, player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fork</span><span class="hljs-params">(func, ...)</span></span><br>    M.unique(func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--单发fork操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.fork</span><span class="hljs-params">(func, ...)</span></span><br>    skynet.fork(fork, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--重写hotfix</span><br><span class="hljs-keyword">local</span> old_hotfix_func = hotfix.hotfix<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hotfix.hotfix</span><span class="hljs-params">(hotfixmods)</span></span><br>    <span class="hljs-keyword">return</span> M.unique(old_hotfix_func, hotfixmods)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
@@ -573,7 +573,7 @@
 <h3 id="hotfix热更"><a href="#hotfix热更" class="headerlink" title="hotfix热更"></a>hotfix热更</h3><p>重写了hotfix动作，加了queue包裹。</p>
 <h2 id="其他未处理的入口"><a href="#其他未处理的入口" class="headerlink" title="其他未处理的入口"></a>其他未处理的入口</h2><p>比如<code>time_point</code>回调，<code>watch</code>,<code>watch_syn</code>等等回调，需要使用者在恰当的时机用<code>queue_helper</code>包裹相关处理函数。</p>
 <h1 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h1><h2 id="慎用unique"><a href="#慎用unique" class="headerlink" title="慎用unique"></a>慎用<code>unique</code></h2><p>因为执行完前会阻塞所有<code>mult</code>包裹的处理。</p>
-<h2 id="注意避免环队列问题"><a href="#注意避免环队列问题" class="headerlink" title="注意避免环队列问题"></a>注意避免环队列问题</h2><p>队列中的处理函数调用<code>call</code>最终调用到进入相同队列的处理函数，就会形成环队列。<br><img src="/img/skynet_fly/orm.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="注意避免环队列问题"><a href="#注意避免环队列问题" class="headerlink" title="注意避免环队列问题"></a>注意避免环队列问题</h2><p>队列中的处理函数调用<code>call</code>最终调用到进入相同队列的处理函数，就会形成环队列。<br><img src="/img/skynet_fly/loop_queue.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="如何避免，检查call调用链会不会回归。"><a href="#如何避免，检查call调用链会不会回归。" class="headerlink" title="如何避免，检查call调用链会不会回归。"></a>如何避免，检查<code>call</code>调用链会不会回归。</h3>
                 
               </div>
