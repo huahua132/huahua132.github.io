@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
+          给demo hallserver大厅服加上队列
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
+        <div>
+          前言因为skynet中单进程写业务也容易遇到异步重入问题，写简单个人系统也得警惕此问题，着实让人难受。索性直接用queue包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。 实现方案大厅服的业务函数处理通常以player_id为第一参数用来处理玩家个人系统的数据。我们以player_id来区分不同的队列，这样既可以有效利用skynet多携程优势，又能避免个人系统的重入问题。而对
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-24 21:15" pubdate>
+              2025-05-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" target="_self">
           orm在用户数据日志上的应用
         </a>
@@ -763,67 +824,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2025-02-10 22:00" pubdate>
               2025-02-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/01/23/skynet_fly_ss/record/" target="_self">
-          记录一次使用录像查bug
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/23/skynet_fly_ss/record/" target="_self">
-        <div>
-          前言skynet_fly_demo 项目被开着5千机器人跑了一晚上之后，我第二天查下一下有没有啥异常日志，结果发现有一个机器人邮件插入失败，是因为主键冲突，插入的邮件是全服邮件，因为使用的批量插入并没有触发断言，并不能第一时间发现调用来源。只有错误日志。 1234567891011121314151617181920212223242526272829[:0000001a][20250123 05
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-23 22:00" pubdate>
-              2025-01-23
             </time>
           </div>
         

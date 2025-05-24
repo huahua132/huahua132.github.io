@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言因为skynet中单进程写业务也容易遇到异步重入问题，写简单个人系统也得警惕此问题，着实让人难受。索性直接用queue包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。 实现方案大厅服的业务函数处理通常以player_id为第一参数用来处理玩家个人系统的数据。我们以player_id来区分不同的队列，这样既可以有效利用skynet多携程优势，又能避免个人系统的重入问题。而对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给demo hallserver大厅服加上队列">
+<meta property="og:url" content="https://huahua132.github.io/2025/05/24/skynet_fly_ss/demo_hall_queue/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="前言因为skynet中单进程写业务也容易遇到异步重入问题，写简单个人系统也得警惕此问题，着实让人难受。索性直接用queue包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。 实现方案大厅服的业务函数处理通常以player_id为第一参数用来处理玩家个人系统的数据。我们以player_id来区分不同的队列，这样既可以有效利用skynet多携程优势，又能避免个人系统的重入问题。而对">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
+<meta property="article:published_time" content="2025-05-24T13:15:07.000Z">
+<meta property="article:modified_time" content="2025-05-24T09:58:57.785Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="skynet_fly实现思路历程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/orm.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>给demo hallserver大厅服加上队列 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="给demo hallserver大厅服加上队列"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-24 21:15" pubdate>
+          2025年5月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly实现思路历程"
+        id="heading-fb499f79496da9976dd55655b846d7cf" role="tab" data-toggle="collapse" href="#collapse-fb499f79496da9976dd55655b846d7cf"
+        aria-expanded="true"
+      >
+        skynet_fly实现思路历程
+        <span class="list-group-count">(25)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-fb499f79496da9976dd55655b846d7cf"
+           role="tabpanel" aria-labelledby="heading-fb499f79496da9976dd55655b846d7cf">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/08/20/skynet_fly_ss/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly 决定web路由工具使用的测试</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于cluster 远程rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" title="给demo hallserver大厅服加上队列"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">给demo hallserver大厅服加上队列</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/02/10/skynet_fly_ss/frpc_error_code/" title="关于frpc错误处理的优化"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于frpc错误处理的优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" title="orm在用户数据日志上的应用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm在用户数据日志上的应用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/01/skynet_fly_ss/orm_index/" title="orm 新增普通索引"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm 新增普通索引</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" title="尝试给orm新增唯一索引，最后还是决定不加了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">尝试给orm新增唯一索引，最后还是决定不加了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/03/skynet_fly_ss/psub_syn/" title="psub_syn批订阅同步的实现"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">psub_syn批订阅同步的实现</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于redis的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">记录一次使用录像查bug</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/02/skynet_fly_ss/timer/" title="关于定时器的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于定时器的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于监听同步模块的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">给demo hallserver大厅服加上队列</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为skynet中单进程写业务也容易遇到<a href="https://huahua132.github.io/2024/03/24/skynet_frame/reent/">异步重入问题</a>，写简单个人系统也得警惕此问题，着实让人难受。索性直接用<code>queue</code>包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>大厅服的业务函数处理通常以<code>player_id</code>为第一参数用来处理玩家个人系统的数据。我们以<code>player_id</code>来区分不同的队列，这样既可以有效利用<code>skynet</code>多携程优势，又能避免个人系统的重入问题。<br>而对于需要处理多个玩家数据的函数，如果想简单的避免重入问题，我们需要等所有玩家queue处理完后，再执行，并且阻塞住后续的玩家queue请求。之前实现<code>mult_queue</code>刚好符合这样的需求。</p>
+<h2 id="mult-queue"><a href="#mult-queue" class="headerlink" title="mult_queue"></a>mult_queue</h2><p><img src="/img/skynet_fly/orm.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="包裹入口处理函数"><a href="#包裹入口处理函数" class="headerlink" title="包裹入口处理函数"></a>包裹入口处理函数</h2><p>大厅服常用的处理入口有<strong>玩家消息</strong>，<strong>luaCMD消息</strong>，<strong>GM消息</strong>，<strong>登录，重连，掉线，登出动作</strong>，<strong>定时器</strong>，<strong>skynet.fock</strong>，<strong>hotfix热更</strong>。<br>不常用的处理入口有<strong>订阅</strong>，<strong>订阅同步</strong>，<strong>整点报时</strong>。</p>
+<p>基于这些需求封装了<code>queue_helper</code>,然后在对应入口函数处，使用对于queue方法包裹住对于处理函数即可确保避免<strong>异步重入问题</strong>。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> mult_queue = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.mult_queue&quot;</span>:new()<br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.timer&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> hotfix = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.hotfix&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.log&quot;</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">--并发玩家函数，player_id相同串行，不同可并发</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.multi_player_func</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    <span class="hljs-keyword">return</span> mult_queue:multi(player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--调用单发执行，执行单发时，并发都暂时等待，此函数适用于操作所有玩家数据时</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.unique</span><span class="hljs-params">(func, ...)</span></span><br>    <span class="hljs-keyword">return</span> mult_queue:unique(func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--玩家定时器操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.new_player_timer</span><span class="hljs-params">(player_id, expire, times, callback, ...)</span></span><br>    <span class="hljs-keyword">return</span> timer:new(expire, times, M.multi_player_func, player_id, callback, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--单发定时器 调用单发执行，执行单发时，并发都暂时等待，此函数适用于操作所有玩家数据时</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.new_unique_timer</span><span class="hljs-params">(expire, times, callback, ...)</span></span><br>    <span class="hljs-keyword">return</span> timer:new(expire, times, M.unique, callback, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">player_fork_func</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    M.multi_player_func(player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--玩家fork操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.player_fork</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    skynet.fork(player_fork_func, player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fork</span><span class="hljs-params">(func, ...)</span></span><br>    M.unique(func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--单发fork操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.fork</span><span class="hljs-params">(func, ...)</span></span><br>    skynet.fork(fork, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--重写hotfix</span><br><span class="hljs-keyword">local</span> old_hotfix_func = hotfix.hotfix<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hotfix.hotfix</span><span class="hljs-params">(hotfixmods)</span></span><br>    <span class="hljs-keyword">return</span> M.unique(old_hotfix_func, hotfixmods)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+
+<h3 id="玩家消息处理"><a href="#玩家消息处理" class="headerlink" title="玩家消息处理"></a>玩家消息处理</h3><p>修改 <code>common/plug/hall_plug.lua</code>，在注册消息处理时做相应包裹。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua">   <span class="hljs-comment">--消息前置处理函数</span><br>   <span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">msg_handle_pre</span><span class="hljs-params">(func)</span></span><br>       <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(player_id, pack_id, pack_body)</span></span><br>           <span class="hljs-comment">--加入队列执行</span><br>           <span class="hljs-keyword">return</span> queue_helper.multi_player_func(player_id, func, player_id, pack_id, pack_body)<br>       <span class="hljs-keyword">end</span><br>   <span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--注册handle</span><br><span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>	<span class="hljs-keyword">local</span> handle = m.handle<br>	<span class="hljs-keyword">if</span> handle <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">for</span> pack_id,func <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(handle) <span class="hljs-keyword">do</span><br>			g_interface_mgr:handle(pack_id, msg_handle_pre(func))<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">local</span> switch_ignores = m.switch_ignores<br>	<span class="hljs-keyword">if</span> switch_ignores <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">for</span> pack_id <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(switch_ignores) <span class="hljs-keyword">do</span><br>			g_switch_ignore_map[pack_id] = <span class="hljs-literal">true</span><br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="luaCMD消息"><a href="#luaCMD消息" class="headerlink" title="luaCMD消息"></a>luaCMD消息</h3><p>跟玩家消息差不多，只是得规范第一参数是player_id，如果不是就会用<code>unique</code>。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs lua">   <span class="hljs-comment">--CMD消息前置处理函数</span><br>   <span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cmd_handle_pre</span><span class="hljs-params">(func)</span></span><br>       <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(key, ...)</span></span><br>           <span class="hljs-comment">--加入队列执行</span><br>           <span class="hljs-keyword">local</span> k_type = <span class="hljs-built_in">type</span>(key)<br>           <span class="hljs-keyword">if</span> k_type == <span class="hljs-string">&#x27;number&#x27;</span> <span class="hljs-keyword">then</span><br>               <span class="hljs-keyword">return</span> queue_helper.multi_player_func(key, func, key, ...)<br>           <span class="hljs-keyword">else</span><br>               <span class="hljs-keyword">return</span> queue_helper.unique(func, key, ...)<br>           <span class="hljs-keyword">end</span><br>       <span class="hljs-keyword">end</span><br>   <span class="hljs-keyword">end</span><br><br>   <span class="hljs-comment">--设置CMD命令</span><br><span class="hljs-keyword">for</span> _, m <span class="hljs-keyword">in</span> <span class="hljs-built_in">ipairs</span>(g_modules_list) <span class="hljs-keyword">do</span><br>	<span class="hljs-keyword">local</span> register_cmd = m.register_cmd<br>	<span class="hljs-keyword">if</span> register_cmd <span class="hljs-keyword">then</span><br>		<span class="hljs-keyword">for</span> cmdname,func <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(register_cmd) <span class="hljs-keyword">do</span><br>			<span class="hljs-built_in">assert</span>(<span class="hljs-keyword">not</span> M.register_cmd[cmdname], <span class="hljs-string">&quot;exists cmdname: &quot;</span> .. cmdname)<br>			M.register_cmd[cmdname] = cmd_handle_pre(func)<br>		<span class="hljs-keyword">end</span><br>	<span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="GM消息"><a href="#GM消息" class="headerlink" title="GM消息"></a>GM消息</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--注册gm 命令</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reg_gm_cmd</span><span class="hljs-params">(cmd_name, func, help_des)</span></span><br>    <span class="hljs-built_in">assert</span>(<span class="hljs-keyword">not</span> g_gm_cmd_map[cmd_name], <span class="hljs-string">&quot;exists cmd_name:&quot;</span> .. cmd_name)<br>    <span class="hljs-built_in">assert</span>(<span class="hljs-built_in">type</span>(func) == <span class="hljs-string">&#x27;function&#x27;</span>, <span class="hljs-string">&quot;not func&quot;</span>)<br>    <span class="hljs-built_in">assert</span>(<span class="hljs-built_in">type</span>(help_des) == <span class="hljs-string">&#x27;string&#x27;</span>, <span class="hljs-string">&quot;not help_des&quot;</span>)				<span class="hljs-comment">--描述信息</span><br>    <span class="hljs-keyword">if</span> cmd_name ~= <span class="hljs-string">&#x27;help&#x27;</span> <span class="hljs-keyword">then</span><br>        g_gm_cmd_map[cmd_name] = &#123;<br>            func = cmd_handle_pre(func),<br>            help_des = help_des<br>        &#125;<br>    <span class="hljs-keyword">else</span><br>        g_gm_cmd_map[cmd_name] = &#123;<br>            func = func,<br>            help_des = help_des<br>        &#125;<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="登录，重连，掉线，登出动作"><a href="#登录，重连，掉线，登出动作" class="headerlink" title="登录，重连，掉线，登出动作"></a>登录，重连，掉线，登出动作</h3><p>都是player_id相关的，包裹即可。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--登录</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">queue_on_login</span><span class="hljs-params">(player_id, is_jump_join)</span></span><br>	g_interface_mgr:queue(player_id, queue_helper.multi_player_func, player_id, on_login, player_id, is_jump_join)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--掉线</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.disconnect</span><span class="hljs-params">(player_id)</span></span><br>	g_interface_mgr:queue(player_id, queue_helper.multi_player_func, player_id, on_disconnect, player_id)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--重连</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">queue_on_reconnect</span><span class="hljs-params">(player_id)</span></span><br>	g_interface_mgr:queue(player_id, queue_helper.multi_player_func, player_id, on_reconnect, player_id)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--登出</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.goout</span><span class="hljs-params">(player_id, is_jump_exit)</span></span><br>	g_interface_mgr:queue(player_id, queue_helper.multi_player_func, player_id, on_goout, player_id, is_jump_exit)<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><p>定时器使用<code>queue_helper</code>中包裹的。</p>
+<h3 id="skynet-fock"><a href="#skynet-fock" class="headerlink" title="skynet.fock"></a>skynet.fock</h3><p>fock也使用<code>queue_helper</code>包裹的。</p>
+<h3 id="hotfix热更"><a href="#hotfix热更" class="headerlink" title="hotfix热更"></a>hotfix热更</h3><p>重写了hotfix动作，加了queue包裹。</p>
+<h2 id="其他未处理的入口"><a href="#其他未处理的入口" class="headerlink" title="其他未处理的入口"></a>其他未处理的入口</h2><p>比如<code>time_point</code>回调，<code>watch</code>,<code>watch_syn</code>等等回调，需要使用者在恰当的时机用<code>queue_helper</code>包裹相关处理函数。</p>
+<h1 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h1><h2 id="慎用unique"><a href="#慎用unique" class="headerlink" title="慎用unique"></a>慎用<code>unique</code></h2><p>因为执行完前会阻塞所有<code>mult</code>包裹的处理。</p>
+<h2 id="注意避免环队列问题"><a href="#注意避免环队列问题" class="headerlink" title="注意避免环队列问题"></a>注意避免环队列问题</h2><p>队列中的处理函数调用<code>call</code>最终调用到进入相同队列的处理函数，就会形成环队列。<br><img src="/img/skynet_fly/orm.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="如何避免，检查call调用链会不会回归。"><a href="#如何避免，检查call调用链会不会回归。" class="headerlink" title="如何避免，检查call调用链会不会回归。"></a>如何避免，检查<code>call</code>调用链会不会回归。</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>给demo hallserver大厅服加上队列</div>
+      <div>https://huahua132.github.io/2025/05/24/skynet_fly_ss/demo_hall_queue/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年5月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" title="orm在用户数据日志上的应用">
+                        <span class="hidden-mobile">orm在用户数据日志上的应用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
