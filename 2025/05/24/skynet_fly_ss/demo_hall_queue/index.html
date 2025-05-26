@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/mult_queue.png">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/loop_queue.png">
 <meta property="article:published_time" content="2025-05-24T13:15:07.000Z">
-<meta property="article:modified_time" content="2025-05-24T10:04:52.896Z">
+<meta property="article:modified_time" content="2025-05-26T03:04:58.945Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
@@ -339,10 +339,10 @@
     
       
       
-        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
+        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" title="给demo hallserver大厅服加上队列"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+           active">
+          <span class="category-post">给demo hallserver大厅服加上队列</span>
         </a>
       
     
@@ -384,10 +384,10 @@
     
       
       
-        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" title="给demo hallserver大厅服加上队列"
+        <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" title="尝试给orm新增唯一索引，最后还是决定不加了"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">给demo hallserver大厅服加上队列</span>
+           ">
+          <span class="category-post">尝试给orm新增唯一索引，最后还是决定不加了</span>
         </a>
       
     
@@ -397,15 +397,6 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" title="尝试给orm新增唯一索引，最后还是决定不加了"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">尝试给orm新增唯一索引，最后还是决定不加了</span>
         </a>
       
     
@@ -456,19 +447,19 @@
     
       
       
-        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
         </a>
       
     
       
       
-        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
         </a>
       
     
@@ -510,6 +501,15 @@
     
       
       
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
            class="list-group-item list-group-item-action
            ">
@@ -519,10 +519,10 @@
     
       
       
-        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
+          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
         </a>
       
     
@@ -554,7 +554,7 @@
 <h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>大厅服的业务函数处理通常以<code>player_id</code>为第一参数用来处理玩家个人系统的数据。我们以<code>player_id</code>来区分不同的队列，这样既可以有效利用<code>skynet</code>多携程优势，又能避免个人系统的重入问题。<br>而对于需要处理多个玩家数据的函数，如果想简单的避免重入问题，我们需要等所有玩家queue处理完后，再执行，并且阻塞住后续的玩家queue请求。之前实现<code>mult_queue</code>刚好符合这样的需求。</p>
 <h2 id="mult-queue"><a href="#mult-queue" class="headerlink" title="mult_queue"></a>mult_queue</h2><p><img src="/img/skynet_fly/mult_queue.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="包裹入口处理函数"><a href="#包裹入口处理函数" class="headerlink" title="包裹入口处理函数"></a>包裹入口处理函数</h2><p>大厅服常用的处理入口有<strong>玩家消息</strong>，<strong>luaCMD消息</strong>，<strong>GM消息</strong>，<strong>登录，重连，掉线，登出动作</strong>，<strong>定时器</strong>，<strong>skynet.fock</strong>，<strong>hotfix热更</strong>。<br>不常用的处理入口有<strong>订阅</strong>，<strong>订阅同步</strong>，<strong>整点报时</strong>。</p>
-<p>基于这些需求封装了<code>queue_helper</code>,然后在对应入口函数处，使用对于queue方法包裹住对于处理函数即可确保避免<strong>异步重入问题</strong>。</p>
+<p>基于这些需求封装了<code>queue_helper</code>,然后在对应入口函数处，使用对应queue方法包裹住对应处理函数即可确保避免<strong>异步重入问题</strong>。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> mult_queue = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.mult_queue&quot;</span>:new()<br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.timer&quot;</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> hotfix = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.hotfix&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.log&quot;</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">--并发玩家函数，player_id相同串行，不同可并发</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.multi_player_func</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    <span class="hljs-keyword">return</span> mult_queue:multi(player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--调用单发执行，执行单发时，并发都暂时等待，此函数适用于操作所有玩家数据时</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.unique</span><span class="hljs-params">(func, ...)</span></span><br>    <span class="hljs-keyword">return</span> mult_queue:unique(func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--玩家定时器操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.new_player_timer</span><span class="hljs-params">(player_id, expire, times, callback, ...)</span></span><br>    <span class="hljs-keyword">return</span> timer:new(expire, times, M.multi_player_func, player_id, callback, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--单发定时器 调用单发执行，执行单发时，并发都暂时等待，此函数适用于操作所有玩家数据时</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.new_unique_timer</span><span class="hljs-params">(expire, times, callback, ...)</span></span><br>    <span class="hljs-keyword">return</span> timer:new(expire, times, M.unique, callback, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">player_fork_func</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    M.multi_player_func(player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--玩家fork操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.player_fork</span><span class="hljs-params">(player_id, func, ...)</span></span><br>    skynet.fork(player_fork_func, player_id, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fork</span><span class="hljs-params">(func, ...)</span></span><br>    M.unique(func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--单发fork操作</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.fork</span><span class="hljs-params">(func, ...)</span></span><br>    skynet.fork(fork, func, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--重写hotfix</span><br><span class="hljs-keyword">local</span> old_hotfix_func = hotfix.hotfix<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hotfix.hotfix</span><span class="hljs-params">(hotfixmods)</span></span><br>    <span class="hljs-keyword">return</span> M.unique(old_hotfix_func, hotfixmods)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
 
 <h3 id="玩家消息处理"><a href="#玩家消息处理" class="headerlink" title="玩家消息处理"></a>玩家消息处理</h3><p>修改 <code>common/plug/hall_plug.lua</code>，在注册消息处理时做相应包裹。</p>
