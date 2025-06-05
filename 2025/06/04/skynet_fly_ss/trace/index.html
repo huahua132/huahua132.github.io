@@ -1,0 +1,964 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言使用skynet开发都会启动多个lua服务，如果加上使用远程集群调用的话，服务就更多了，如果被调用方存在多链路，出问题时，无法快速定位问题源头。链接追踪通过给处理添加全局唯一的tag标记，在链路上加上详细的日志，从而达到通过日志快速分析问题的手段。云大为skynet增加过链路追踪，通过使用者主动调用skynet.trace，从而开启一次详细的trace日志。trace_tag是服务地址加递增编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链路追踪的实现">
+<meta property="og:url" content="https://huahua132.github.io/2025/06/04/skynet_fly_ss/trace/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="前言使用skynet开发都会启动多个lua服务，如果加上使用远程集群调用的话，服务就更多了，如果被调用方存在多链路，出问题时，无法快速定位问题源头。链接追踪通过给处理添加全局唯一的tag标记，在链路上加上详细的日志，从而达到通过日志快速分析问题的手段。云大为skynet增加过链路追踪，通过使用者主动调用skynet.trace，从而开启一次详细的trace日志。trace_tag是服务地址加递增编">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-06-04T13:15:07.000Z">
+<meta property="article:modified_time" content="2025-06-05T11:48:11.101Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="skynet_fly实现思路历程">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>链路追踪的实现 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="链路追踪的实现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-04 21:15" pubdate>
+          2025年6月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          39k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          326 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly实现思路历程"
+        id="heading-fb499f79496da9976dd55655b846d7cf" role="tab" data-toggle="collapse" href="#collapse-fb499f79496da9976dd55655b846d7cf"
+        aria-expanded="true"
+      >
+        skynet_fly实现思路历程
+        <span class="list-group-count">(26)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-fb499f79496da9976dd55655b846d7cf"
+           role="tabpanel" aria-labelledby="heading-fb499f79496da9976dd55655b846d7cf">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" title="关于skynet_fly 决定web路由工具使用的测试"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly 决定web路由工具使用的测试</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/08/20/skynet_fly_ss/after_load/" title="关于增加skynet_fly lua服务启动的后置加载"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly lua服务启动的后置加载</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/28/skynet_fly_ss/cluster_rpc/" title="关于cluster 远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于cluster 远程rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" title="给demo hallserver大厅服加上队列"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">给demo hallserver大厅服加上队列</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/19/skynet_fly_ss/logservice/" title="关于增加skynet_fly 日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/02/10/skynet_fly_ss/frpc_error_code/" title="关于frpc错误处理的优化"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于frpc错误处理的优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/09/10/skynet_fly_ss/logrotate/" title="关于增加skynet_fly 日志分割模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly 日志分割模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm/" title="关于增加skynet_fly orm数据关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm数据关系映射</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" title="orm在用户数据日志上的应用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm在用户数据日志上的应用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/01/skynet_fly_ss/orm_index/" title="orm 新增普通索引"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm 新增普通索引</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/24/skynet_fly_ss/orm_table_m/" title="关于增加skynet_fly orm_table_m 可热更服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于增加skynet_fly orm_table_m 可热更服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" title="尝试给orm新增唯一索引，最后还是决定不加了"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">尝试给orm新增唯一索引，最后还是决定不加了</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly_ss/pack/" title="关于skynet_fly gate，ws_gate消息包设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly gate，ws_gate消息包设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/03/skynet_fly_ss/psub_syn/" title="psub_syn批订阅同步的实现"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">psub_syn批订阅同步的实现</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/01/23/skynet_fly_ss/record/" title="记录一次使用录像查bug"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">记录一次使用录像查bug</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/08/skynet_fly_ss/redis/" title="关于redis的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于redis的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/03/skynet_fly_ss/reload/" title="关于skynet_fly热更新实现细节"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现细节</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/15/skynet_fly_ss/room_game_up/" title="关于room_game可热更匹配房间类游戏架构的优化"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更匹配房间类游戏架构的优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/22/skynet_fly_ss/room_game/" title="关于room_game可热更分配房间类游戏架构"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于room_game可热更分配房间类游戏架构</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/12/10/skynet_fly_ss/script/" title="关于skynet_fly热更模块启动配置的调整"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更模块启动配置的调整</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" title="关于新增定时器的扩展 整点报时"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于新增定时器的扩展 整点报时</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/06/04/skynet_fly_ss/trace/" title="链路追踪的实现"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">链路追踪的实现</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/07/02/skynet_fly_ss/timer/" title="关于定时器的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于定时器的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/28/skynet_fly_ss/watch_syn/" title="关于监听同步模块的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于监听同步模块的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly热更新实现</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">关于skynet_fly的一键构建服务配置</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">链路追踪的实现</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>使用skynet开发都会启动多个lua服务，如果加上使用远程集群调用的话，服务就更多了，如果被调用方存在多链路，出问题时，无法快速定位问题源头。链接追踪通过给处理添加全局唯一的tag标记，在链路上加上详细的日志，从而达到通过日志快速分析问题的手段。云大为skynet增加过<a target="_blank" rel="noopener" href="https://blog.codingnow.com/2018/05/skynet_trace.html">链路追踪</a>，通过使用者主动调用skynet.trace，从而开启一次详细的trace日志。trace_tag是服务地址加递增编号生成,trace会在<code>call</code>,<code>request</code>,<code>response</code>,<code>end</code>,<code>resume</code>时打印日志，trace服务间是通过发送前置的trace消息实现。cluster trace trace_tag通过 hostname pid nodename + 之前单服创建方式生成全局唯一tag(&lt;TRACE (Ubuntu1626488-s1_center-47):00000063-7&gt;)。那么为什么skynet已经有trace了，还需要额外实现呢。</p>
+<h1 id="重做原因"><a href="#重做原因" class="headerlink" title="重做原因"></a>重做原因</h1><ol>
+<li>目前skynet的trace不太好用于生产环境，想<code>call</code>,<code>request</code>,<code>response</code>等等这些，生产环境开启的话，打印日志过多，而且trace会多发一个前置消息。</li>
+<li>全局tag无法快速得知是哪个集群服务。</li>
+<li>不适用于skynet_fly做的录像，我想生产环境不打印详细的trace,播放录像时可以打印。</li>
+<li>trace 信息不足，使用skynet大多使用lua服务，使用者大多用发送lua cmd消息，trace其实可以加上cmd打印。还有fork,timer,sleep,skynet.response,wait等等动作都需要补充tarce。</li>
+</ol>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><h2 id="trace-tag生成方式"><a href="#trace-tag生成方式" class="headerlink" title="trace_tag生成方式"></a>trace_tag生成方式</h2><p>直接使用之前做好的<code>guid_util</code>实现的<code>fly_guid()</code>函数，生成的guid是这样的<code>01-0001-0000000e-6840415e-000001</code>。服务类型-服务ID-lua服务地址-时间戳-递增编号。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">---#desc fly风格GUID</span><br><span class="hljs-comment">---@return string 32字节的guid</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.fly_guid</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">assert</span>(g_svr_type &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> g_svr_type &lt;= TYPE_MAX)<br>    <span class="hljs-built_in">assert</span>(g_svr_id &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> g_svr_id &lt;= ID_MAX)<br>    <span class="hljs-keyword">return</span> sformat(<span class="hljs-string">&#x27;%02x-%04x-%s-%08x-%06x&#x27;</span>, g_svr_type, g_svr_id, g_self_address, get_time_incr())<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p>通过 服务类型-服务ID-lua服务地址 能够快速得知触发来源。</p>
+<h2 id="tarce-tag的创建时机"><a href="#tarce-tag的创建时机" class="headerlink" title="tarce_tag的创建时机"></a>tarce_tag的创建时机</h2><p>一个新的执行流就创建一个新的tag，比如timer定时器到期，fork, 而对于call，send需要把tag传递。对于这些tag的创建和传递工作，已经在内部实现。tag绑定携程，传递没有继续采用skynet发送前置trace消息的方式，而是用lua消息前置参数的方式，通过重写skynet.pack,skynet.unpack,skynet.packstring，塞入和取出tag，从而做到不修改底层源码，不影响业务代码的情况下增加了tag参数的传递。用这个方式传递tag，可以做到重放录像时，开启trace。前置trace消息的方式因为生成环境不会开启trace就不会记录到消息，重发录像自然也不能开启。</p>
+<h2 id="socket-消息的tag创建以及其他tag的创建时机"><a href="#socket-消息的tag创建以及其他tag的创建时机" class="headerlink" title="socket 消息的tag创建以及其他tag的创建时机"></a>socket 消息的tag创建以及其他tag的创建时机</h2><p>对于客户端的socket消息，skynet一般会用<code>client</code>自定义协议去接受，我们在自定义的dispatch函数头部调用<code>skynet.set_trace_tag()</code>即可创建tag。对于skynet_fly游戏房间架构，已经在对于的地方加上了。</p>
+<h1 id="未开启trace的日志展示"><a href="#未开启trace的日志展示" class="headerlink" title="未开启trace的日志展示"></a>未开启trace的日志展示</h1><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs txt">open log file./logs/server.log<br>####   #     #   #    ###      ##       #          ##      #      #   #<br>#      # #    # #    #   #    #  #    #####        #       #       # #<br>####   ##      #     #   #    ####      #        #####     #        #<br>   #   # #    #      #   #    #         #          #       #       #<br>####   #     #       #   #    ####      ###        #      ###     #<br>https://github.com/huahua132/skynet_fly.git<br>[:00000002][20250605 10:51:15 50]LAUNCH snlua bootstrap<br>[:00000003][20250605 10:51:15 50]LAUNCH snlua launcher<br>[:00000004][20250605 10:51:15 59]LAUNCH snlua cdummy<br>[:00000005][20250605 10:51:15 67]LAUNCH harbor 0 4<br>[:00000006][20250605 10:51:15 67]LAUNCH snlua datacenterd<br>[:00000007][20250605 10:51:15 75]LAUNCH snlua service_mgr<br>[:00000008][20250605 10:51:15 87]LAUNCH snlua service_provider<br>[:00000009][20250605 10:51:15 95]LAUNCH snlua service_cell ltls_holder<br>[:0000000a][20250605 10:51:16 06]LAUNCH snlua main<br>[:0000000a][20250605 10:51:16 15]start AB_question!!!&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>[:0000000b][20250605 10:51:16 15]LAUNCH snlua monitor_exit<br>[:0000000c][20250605 10:51:16 24]LAUNCH snlua contriner_mgr<br>[:0000000d][20250605 10:51:16 32]LAUNCH snlua debug_console 8888<br>[:0000000d][20250605 10:51:16 43]Start debug console at 127.0.0.1:8888<br>[:0000000e][20250605 10:51:16 43]LAUNCH snlua hot_container A_m 1 2025-06-05[10:51:16] 1749091876 1<br>[:0000000e][20250605 10:51:16 54][info][01-0001-0000000a-68410624-000000][A_m-1-1][../../service/hot_container.lua:172]&quot;start begin&quot; <br>[:0000000e][20250605 10:51:16 54][info][01-0001-0000000a-68410624-000000][A_m-1-1][../../service/hot_container.lua:255]&quot;start end&quot; <br></code></pre></td></tr></table></figure>
+<p>可以看到最下面的2条日志，tag 中有 0000000a 也就是说这两条日志 0000000a(main)服务中发起的。</p>
+<h1 id="开启trace的日志展示"><a href="#开启trace的日志展示" class="headerlink" title="开启trace的日志展示"></a>开启trace的日志展示</h1><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000002][20250605 19:43:50 95]LAUNCH snlua bootstrap<br>[:00000001][20250605 19:43:50 95]&#123;luatrace&#125;&#123;01-0001-00000001-684182f6-000000&#125;&#123;82398200333902&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../service/log_service.lua:140 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000002][20250605 19:43:50 95]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398205925319&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/bootstrap.lua:4 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000002][20250605 19:43:50 95]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398205935019&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:50 95]LAUNCH snlua launcher<br>[:00000002][20250605 19:43:50 95]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398206028920&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000001][20250605 19:43:50 95]&#123;luatrace&#125;&#123;01-0001-00000001-684182f6-000000&#125;&#123;82398206041320&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000001][20250605 19:43:50 95]&#123;luatrace&#125;&#123;01-0001-00000001-684182f6-000000&#125;&#123;82398206052320&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:00000001][20250605 19:43:50 95]&#123;luatrace&#125;&#123;01-0001-00000001-684182f6-000000&#125;&#123;82398206056220&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000003-684182f7-000000&#125;&#123;82398307394642&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/launcher.lua:185 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398307705143&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000004][20250605 19:43:51 05]LAUNCH snlua cdummy<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398307722343&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000001-684182f6-000000&#125;&#123;82398308927946&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000001-684182f6-000000&#125;&#123;82398308945447&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000003-684182f7-000000&#125;&#123;82398309570449&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000003-684182f7-000000&#125;&#123;82398309600449&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000003-684182f7-000000&#125;&#123;82398309605949&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000003-684182f7-000000&#125;&#123;82398310182750&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:51 05]&#123;luatrace&#125;&#123;01-0001-00000003-684182f7-000000&#125;&#123;82398310187251&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000004][20250605 19:43:51 19]&#123;luatrace&#125;&#123;01-0001-00000004-684182f7-000000&#125;&#123;82398451767002&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/cdummy.lua:68 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000004][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000004-684182f7-000000&#125;&#123;82398452823305&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000005][20250605 19:43:51 20]LAUNCH harbor 0 4<br>[:00000004][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000004-684182f7-000000&#125;&#123;82398457761721&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:00000004][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000004-684182f7-000000&#125;&#123;82398457785521&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000004-684182f7-000000&#125;&#123;82398458213523&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398458233423&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000004-684182f7-000000&#125;&#123;82398458237423&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398458489623&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398458541624&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123; @../../skynet/service/bootstrap.lua:37 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000003][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398458603424&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000006][20250605 19:43:51 20]LAUNCH snlua datacenterd<br>[:00000003][20250605 19:43:51 20]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398458691824&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000006][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000006-684182f7-000000&#125;&#123;82398633542982&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/datacenterd.lua:96 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000006][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000006-684182f7-000000&#125;&#123;82398633862683&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000006][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000006-684182f7-000000&#125;&#123;82398634019883&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:00000006][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000006-684182f7-000000&#125;&#123;82398634027983&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000006-684182f7-000000&#125;&#123;82398634259884&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398634271584&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000006-684182f7-000000&#125;&#123;82398634274284&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 38]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398634442384&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 39]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398641205706&#125;&#123;send&#125;&#123;REGISTER&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 39]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398641232606&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123; @../../skynet/service/bootstrap.lua:40 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000004][20250605 19:43:51 39]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398641489507&#125;&#123;request&#125;&#123;REGISTER&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000004][20250605 19:43:51 39]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398641503607&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 39]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398641524807&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000007][20250605 19:43:51 39]LAUNCH snlua service_mgr<br>[:00000003][20250605 19:43:51 39]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398641553807&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:51 52]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398779875148&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/service_mgr.lua:198 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000007][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398779956948&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398786878371&#125;&#123;send&#125;&#123;REGISTER&#125;&#123;&#125;<br>[:00000007][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398786898771&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:00000007][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398786902271&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000004][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398787128371&#125;&#123;request&#125;&#123;REGISTER&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000004][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398787136771&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398787149271&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398787154371&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000007-684182f7-000000&#125;&#123;82398787156471&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398787330472&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398787352572&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1128 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000007][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398787554973&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000007][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398787568773&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398787735573&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000008][20250605 19:43:51 53]LAUNCH snlua service_provider<br>[:00000003][20250605 19:43:51 53]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398787754373&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000008-684182f7-000000&#125;&#123;82398902696040&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/service_provider.lua:104 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000008-684182f7-000000&#125;&#123;82398902924541&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000008-684182f7-000000&#125;&#123;82398903027641&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000008-684182f7-000000&#125;&#123;82398903035141&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000008-684182f7-000000&#125;&#123;82398903359042&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398903367742&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000008-684182f7-000000&#125;&#123;82398903369942&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398903810143&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398903959744&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398903984444&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398903999744&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904046744&#125;&#123;call&#125;&#123;test&#125;&#123; @../../skynet/lualib/skynet/service.lua:20 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904067544&#125;&#123;request&#125;&#123;test&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904071544&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904072844&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904076144&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904088944&#125;&#123;call&#125;&#123;launch&#125;&#123; @../../skynet/lualib/skynet/service.lua:30 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904096244&#125;&#123;request&#125;&#123;launch&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000008][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904143544&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904168045&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000009][20250605 19:43:51 65]LAUNCH snlua service_cell ltls_holder<br>[:00000003][20250605 19:43:51 65]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82398904246245&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000009][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000009-684182f7-000000&#125;&#123;82399018716410&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/service_cell.lua:20 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:00000009][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000009-684182f7-000000&#125;&#123;82399019124811&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000009][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000009-684182f7-000000&#125;&#123;82399019364612&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:00000009][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000009-684182f7-000000&#125;&#123;82399019381312&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000009-684182f7-000000&#125;&#123;82399019710113&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399019723413&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000009-684182f7-000000&#125;&#123;82399019727413&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399019740613&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399019789713&#125;&#123;call&#125;&#123;init&#125;&#123; @../../skynet/service/service_provider.lua:30 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000009][20250605 19:43:51 76]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399019816713&#125;&#123;request&#125;&#123;init&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000009][20250605 19:43:51 80]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399060989545&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000009][20250605 19:43:51 80]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061022645&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 81]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061305846&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 81]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061333446&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000008][20250605 19:43:51 81]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061336446&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 81]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061456946&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000002][20250605 19:43:51 81]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061485046&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 81]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061510846&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000a][20250605 19:43:51 81]LAUNCH snlua main<br>[:00000003][20250605 19:43:51 81]&#123;luatrace&#125;&#123;01-0001-00000002-684182f6-000000&#125;&#123;82399061619447&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:51 95]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399202096895&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @./main.lua:4 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:0000000a][20250605 19:43:51 95]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399202496896&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:51 95]start AB_question!!!&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br>[:0000000a][20250605 19:43:51 95]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399202924997&#125;&#123;call&#125;&#123;GLAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1126 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000007][20250605 19:43:51 95]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399203243298&#125;&#123;request&#125;&#123;GLAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000007][20250605 19:43:51 95]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399203278398&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:51 95]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399203321798&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000b][20250605 19:43:51 95]LAUNCH snlua monitor_exit<br>[:00000003][20250605 19:43:51 95]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399203581099&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000b][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000b-684182f8-000000&#125;&#123;82399338402132&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../service/monitor_exit.lua:47 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:0000000b][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000b-684182f8-000000&#125;&#123;82399338744333&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000b][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000b-684182f8-000000&#125;&#123;82399338901634&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:0000000b][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000b-684182f8-000000&#125;&#123;82399338924134&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000b-684182f8-000000&#125;&#123;82399339108734&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339127934&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000b-684182f8-000000&#125;&#123;82399339132534&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339149634&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339171034&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339175134&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339186634&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339213435&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1128 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000007][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339247235&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000007][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339260935&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 08]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339271335&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000c][20250605 19:43:52 08]LAUNCH snlua contriner_mgr<br>[:00000003][20250605 19:43:52 09]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399339315035&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000c][20250605 19:43:52 22]&#123;luatrace&#125;&#123;01-0001-0000000c-684182f8-000001&#125;&#123;82399480866291&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../service/contriner_mgr.lua:434 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:0000000c][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000c-684182f8-000001&#125;&#123;82399481339292&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000c][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000c-684182f8-000001&#125;&#123;82399481531693&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:0000000c][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000c-684182f8-000001&#125;&#123;82399481543693&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000c-684182f8-000001&#125;&#123;82399482040594&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399482055794&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000c-684182f8-000001&#125;&#123;82399482058794&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399482555296&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399482580896&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399482587296&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399483183798&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399483213398&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1128 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:00000007][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399483246498&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000007][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399483262798&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399483779600&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000d][20250605 19:43:52 23]LAUNCH snlua debug_console 8888<br>[:00000003][20250605 19:43:52 23]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399483818500&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399662967877&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../skynet/service/debug_console.lua:143 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399663290378&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399663695379&#125;&#123;sleep&#125;&#123;nil&#125;&#123; @../../skynet/lualib/skynet/socket.lua:422 @../../skynet/lualib/skynet/socket.lua:53 @../../skynet/lualib/skynet.lua:587&#125;<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399664548382&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000d][20250605 19:43:52 41]Start debug console at 127.0.0.1:8888<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399664617182&#125;&#123;sleep&#125;&#123;nil&#125;&#123; @../../skynet/lualib/skynet/socket.lua:232 @../../skynet/lualib/skynet/socket.lua:53 @../../skynet/lualib/skynet.lua:587&#125;<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399664852683&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399664868483&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:0000000d][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399664894083&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399665146084&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399665172884&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000d-684182f8-000000&#125;&#123;82399665178984&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399665511485&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399665535685&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000007][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399665541185&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399665775586&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000a][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399665819186&#125;&#123;call&#125;&#123;load_modules&#125;&#123; @../../lualib/skynet-fly/contriner/contriner_launcher.lua:50 @../../skynet/lualib/skynet.lua:827 @../../skynet/lualib/skynet.lua:1401&#125;<br>[:0000000c][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399666027887&#125;&#123;request&#125;&#123;load_modules&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000c][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399668065193&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399668113893&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000e][20250605 19:43:52 41]LAUNCH snlua hot_container A_m 1 2025-06-05[19:43:52] 1749123832 1<br>[:00000003][20250605 19:43:52 41]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399668173394&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000000&#125;&#123;82399812448858&#125;&#123;timeout&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/loader.lua:78 @../../service/hot_container.lua:321 @../../skynet/lualib/skynet.lua:1208&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000000&#125;&#123;82399812691759&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000000&#125;&#123;82399812894559&#125;&#123;send&#125;&#123;LAUNCHOK&#125;&#123;&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000000&#125;&#123;82399812900559&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000000&#125;&#123;82399813170260&#125;&#123;request&#125;&#123;LAUNCHOK&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:00000003][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399813202260&#125;&#123;delay response&#125;&#123;nil&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000000&#125;&#123;82399813212860&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000c][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399813434561&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000c][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399813448661&#125;&#123;call&#125;&#123;start&#125;&#123;&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399813736462&#125;&#123;request&#125;&#123;start&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000e][20250605 19:43:52 56][info][01-0001-0000000a-684182f7-000000][A_m-1-1][../../service/hot_container.lua:172]&quot;start begin&quot; <br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000001&#125;&#123;82399813816262&#125;&#123;fork begin&#125;&#123;nil&#125;&#123; @./module/A_m.lua:21 @../../lualib/skynet-fly/timer.lua:105 @../../skynet/lualib/skynet.lua:1018&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000002&#125;&#123;82399813824962&#125;&#123;fork begin&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/utils/skynet_util.lua:62 @../../service/hot_container.lua:182 @../../skynet/lualib/skynet.lua:1018&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000003&#125;&#123;82399813831462&#125;&#123;fork begin&#125;&#123;nil&#125;&#123; @../../lualib/skynet-fly/utils/skynet_util.lua:62 @../../service/hot_container.lua:185 @../../skynet/lualib/skynet.lua:1018&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000004&#125;&#123;82399813844562&#125;&#123;fork begin&#125;&#123;nil&#125;&#123; @../../service/hot_container.lua:246 @../../lualib/skynet-fly/client/contriner_client.lua:267 @../../skynet/lualib/skynet.lua:1018&#125;<br>[:0000000e][20250605 19:43:52 56][info][01-0001-0000000a-684182f7-000000][A_m-1-1][../../service/hot_container.lua:255]&quot;start end&quot; <br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399813851662&#125;&#123;response&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399813853562&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000e][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000e-684182f8-000001&#125;&#123;82399813864563&#125;&#123;sleep&#125;&#123;nil&#125;&#123; @../../skynet/lualib/skynet.lua:1009 @../../lualib/skynet-fly/timer.lua:69 @../../skynet/lualib/skynet.lua:568&#125;<br>[:0000000c][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399814209964&#125;&#123;resume&#125;&#123;nil&#125;&#123;&#125;<br>[:0000000c][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399814254564&#125;&#123;call&#125;&#123;LAUNCH&#125;&#123;&#125;<br>[:00000003][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399816825672&#125;&#123;request&#125;&#123;LAUNCH&#125;&#123; @../../skynet/lualib/skynet.lua:1093&#125;<br>[:0000000f][20250605 19:43:52 56]LAUNCH snlua hot_container B_m 1 2025-06-05[19:43:52] 1749123832 1<br>[:00000003][20250605 19:43:52 56]&#123;luatrace&#125;&#123;01-0001-0000000a-684182f7-000000&#125;&#123;82399816924072&#125;&#123;end&#125;&#123;nil&#125;&#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>开启trace之后如果就可以看见trace的完整日志。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>链路追踪的实现</div>
+      <div>https://huahua132.github.io/2025/06/04/skynet_fly_ss/trace/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年6月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" title="给demo hallserver大厅服加上队列">
+                        <span class="hidden-mobile">给demo hallserver大厅服加上队列</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
