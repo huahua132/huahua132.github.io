@@ -229,83 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
-          大厅服如何对模块功能进行拆分隔离？
+        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
+          用户是如何登录的？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/D_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
         <div>
-          简介通常一个游戏大厅会有很多功能模块，比如用户信息管理，活动大厅，任务，邮件，充值，商店，这些功能通常不会一个人开发，会很多人一起开发，如果都写在一个文件中，耦合度太高，合作编码太容易修改冲突。所以在编码逻辑上要做到尽量隔离。 skynet_fly_demo是如何做的？一个独立的功能模块无非是需要处理5种事件  客户端消息 服务器之间的消息 模块之间的接口调用 用户的登录，登出事情 自己注册的定时
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-03 18:00" pubdate>
-              2023-05-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
-          用户是如何匹配进入到游戏的？
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
-        <div>
-          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
+          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t
         </div>
       </a>
 
@@ -374,6 +306,74 @@
       <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/F_q/" target="_self">
         <div>
           简介通常基于游戏大厅的对战类型游戏不会只有一款玩法，像英雄联盟会有匹配场，排位场，大乱斗，还有一些限时玩法，克隆，无限火力。这些特殊玩法，通常分开开服比较好，相互隔离不影响。skynet_fly_demo利用了skynet_fly房间类游戏架构可以非常快速的搭建房间对战类游戏，非常适合这种架构模式。那么如何在skynet_fly_demo新增一个游戏？我将已新增一个数字炸弹游戏为例子，进行逐步讲解
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-03 18:00" pubdate>
+              2023-05-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%AE%9E%E6%88%98%E7%AF%87/" class="category-chain-item">实战篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+          用户是如何匹配进入到游戏的？
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+        <div>
+          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
         </div>
       </a>
 
@@ -569,15 +569,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
-          编译
+        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
+          构建服务脚手架
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
         <div>
-          推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https://github.com/huahua132/skynet_fly.git 拉取子模块代码cd skynet_flygit submodule update --init 拉取skynet代码代码子模块cd skynetg
+          为啥需要脚手架？如果你对缘由感兴趣，可以看看这个 作用 生成skynet 启动配置文件 生成服务基础运维脚本  构建命令skynet_fly/binshell/make_server.sh skynet_fly_path 我们已构建skynet_fly/examples/webapp为例子  进入服务文件夹目录下。cd skynet_fly/examples/webapp  构建运维脚本。bash
         </div>
       </a>
 
@@ -637,15 +637,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
-          构建服务脚手架
+        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
+          编译
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/D_creator/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/C_builder/" target="_self">
         <div>
-          为啥需要脚手架？如果你对缘由感兴趣，可以看看这个 作用 生成skynet 启动配置文件 生成服务基础运维脚本  构建命令skynet_fly/binshell/make_server.sh skynet_fly_path 我们已构建skynet_fly/examples/webapp为例子  进入服务文件夹目录下。cd skynet_fly/examples/webapp  构建运维脚本。bash
+          推荐使用git,使用git clone的方式拉取下来，因为使用下载的方式，还需要去手动下载对应的submodule，skynet的代码。 拉取代码git clone https://github.com/huahua132/skynet_fly.git 拉取子模块代码cd skynet_flygit submodule update --init 拉取skynet代码代码子模块cd skynetg
         </div>
       </a>
 
@@ -773,15 +773,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
-          如何编写可热更服务模块
+        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
+          项目文件夹介绍
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
         <div>
-          前言使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。 简介可热更服务模块 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会加载指定的 xxx_m.lua文件,相当于用相同的盒子包装不同的东西。 示例12345678910111213141516171819202122232
+          3rd存放第三方依赖 binshell服务构建工具 examples示例学习服务 lualibskynet_fly lua库文件代码 moduleskynet_fly 提供的可热更服务模块 scriptlua shell 脚本工具代码 serviceskynet普通服务 skynetskynet代码 test单元测试服务代码，主要用来编写一些模块的单元测试。
         </div>
       </a>
 
@@ -841,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
-          项目文件夹介绍
+        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
+          如何编写可热更服务模块
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
         <div>
-          3rd存放第三方依赖 binshell服务构建工具 examples示例学习服务 lualibskynet_fly lua库文件代码 moduleskynet_fly 提供的可热更服务模块 scriptlua shell 脚本工具代码 serviceskynet普通服务 skynetskynet代码 test单元测试服务代码，主要用来编写一些模块的单元测试。
+          前言使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。 简介可热更服务模块 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会加载指定的 xxx_m.lua文件,相当于用相同的盒子包装不同的东西。 示例12345678910111213141516171819202122232
         </div>
       </a>
 
