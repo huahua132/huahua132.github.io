@@ -16,24 +16,26 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实现思路可以先看看这篇关于skynet做服务热更新这篇可以说是最初的实现版本，最新的完整实现 这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skyn">
+    <meta name="description" content="前言队列中的处理函数调用call最终调用到进入相同队列的处理函数，就会形成环队列，call调用在等结果，结果处理函数却在call调用处理后面排队，就形成了互相等的队列死机状态。这种状态是非常严重的，整个队列阻塞，后续进队列的还会持续累计，最终可能因内存不足而宕机。发生事故时，我们通常仅仅会认为是内存泄漏导致。因为出现这种情况，日志上不会有什么反应。可能通过debug_console查看stat能够">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于skynet_fly热更新实现">
-<meta property="og:url" content="https://huahua132.github.io/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:title" content="如何使skynet.queue 队列环问题暴露">
+<meta property="og:url" content="https://huahua132.github.io/2025/06/07/skynet_fly_ss/loop_queue/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="实现思路可以先看看这篇关于skynet做服务热更新这篇可以说是最初的实现版本，最新的完整实现 这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。 主要思想围绕新服务替换旧服务的方案，通过讲述如何热更、rpc调用、服务切换、旧服务退出这4个点展开。可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)  如何热更通过设置关闭skyn">
+<meta property="og:description" content="前言队列中的处理函数调用call最终调用到进入相同队列的处理函数，就会形成环队列，call调用在等结果，结果处理函数却在call调用处理后面排队，就形成了互相等的队列死机状态。这种状态是非常严重的，整个队列阻塞，后续进队列的还会持续累计，最终可能因内存不足而宕机。发生事故时，我们通常仅仅会认为是内存泄漏导致。因为出现这种情况，日志上不会有什么反应。可能通过debug_console查看stat能够">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-09T07:25:38.164Z">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly/loop_queue.png">
+<meta property="article:published_time" content="2025-06-07T14:10:00.000Z">
+<meta property="article:modified_time" content="2025-06-07T09:06:25.966Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly实现思路历程">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly/loop_queue.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>关于skynet_fly热更新实现 - huahua132 blog</title>
+  <title>如何使skynet.queue 队列环问题暴露 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于skynet_fly热更新实现"></span>
+            <span id="subtitle" data-typed-text="如何使skynet.queue 队列环问题暴露"></span>
           
         </div>
 
@@ -213,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-30 00:00" pubdate>
-          2023年6月30日 凌晨
+        <time datetime="2025-06-07 22:10" pubdate>
+          2025年6月7日 晚上
         </time>
       </span>
     
@@ -225,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.8k 字
+          400 字
         
       </span>
     
@@ -236,7 +238,7 @@
         
         
         
-          49 分钟
+          4 分钟
         
       </span>
     
@@ -347,7 +349,7 @@
       
         <a href="/2025/06/07/skynet_fly_ss/loop_queue/" title="如何使skynet.queue 队列环问题暴露"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">如何使skynet.queue 队列环问题暴露</span>
         </a>
       
@@ -527,7 +529,7 @@
       
         <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%83%AD%E6%9B%B4%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="关于skynet_fly热更新实现"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">关于skynet_fly热更新实现</span>
         </a>
       
@@ -560,89 +562,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">关于skynet_fly热更新实现</h1>
+            <h1 style="display: none">如何使skynet.queue 队列环问题暴露</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>可以先看看这篇<a href="https://huahua132.github.io/2023/05/22/think/reload/">关于skynet做服务热更新</a><br>这篇可以说是最初的实现版本，<a href="https://huahua132.github.io/2023/12/03/skynet_fly_ss/reload/">最新的完整实现</a></p>
-<p>这里我主要阐述各方案比较之后觉得较好的方案三实现，我在skynet_fly也决定使用方案三，接下来进入正题。</p>
-<p>主要思想围绕新服务替换旧服务的方案，通过讲述<strong>如何热更</strong>、<strong>rpc调用</strong>、<strong>服务切换</strong>、<strong>旧服务退出</strong>这4个点展开。<br>可以结合代码看文档，这样应该会更清晰，表达能力有限♥(ˆ◡ˆԅ)</p>
-<ul>
-<li><p><strong>如何热更</strong><br>通过设置关闭skynet.codecache，这样launch新服务的时候加载的就是新代码了。不过我不想写每个服务的时候都去做这个操作，我就抽象了一个服务，我在skynet_fly封装了hot_container.lua服务 路径<code>service/hot_container.lua</code>。我叫它<strong>热更服务容器</strong>。<br>这个服务启动的时候要传递<strong>MODULE_NAME</strong>,也就是要加载的可热更模板的代码实现。<br>hot_container会加载<strong>MODULE_NAME</strong>名称的lua代码文件，<strong>MODULE_NAME</strong>需要返回一个CMD命令表，也就是skynet lua消息的命令，必须实现<strong>start</strong>,<strong>exit</strong>命令。这样就是实现了可热更容器的抽象。<br><strong>hot_container</strong>是可热更容器的意思。通常我们热更模块实现代码命名为<strong>xxx_m.lua</strong>,我希望这成为skynet_fly的命令规范，并且放在命名为module的文件夹下。</p>
-</li>
-<li><p><strong>rpc调用</strong><br>skynet的rpc调用通过服务id或者服务别名调用。可热更服务不能简单的通过服务别名调用，因为可能出现旧服务和新服务同时存在的情况，我们需要一个管理记录可热更服务的服务，如此就诞生了contriner_mgr.lua服务 路径<code>service/contriner_mgr.lua</code>，我叫它<strong>容器管理员</strong>。<br>以及给需要<strong>rpc</strong>调用的客户配套的lua模块代码contriner_client.lua 路径<code>lualib/contriner_client.lua</code>，我叫它<strong>容器客户端</strong>。<br><strong>容器管理员</strong>提供了<strong>启动热更服务</strong>、<strong>关闭热更服务</strong>、<strong>关闭所有热更服务</strong>，<strong>查询热更模块id</strong>、<strong>监听热更模块</strong>、<strong>取消监听模块</strong>，5个命令，容器管理员服务是不可以热更的。</p>
-</li>
-</ul>
-<ul>
-<li><p><strong>启动热更服务</strong><br>  <code>load_modules MODULE_NAME</code>,通过传入module_name,contriner_mgr会加载<strong>loadmodsfile</strong>配置的文件,拿到此模板的配置，然后启动服务，启动完毕再通知旧服务<strong>exit</strong>，接下给监听的服务下发新的服务id和版本号。</p>
-</li>
-<li><p><strong>关闭热更服务</strong><br>  <code>kill_module MODULE_NAME</code>，比如我们产品可能有些功能不要了，就可以关闭该服务了。</p>
-</li>
-<li><p><strong>关闭所有热更服务</strong><br>  <code>kill_all</code>，停服时使用，需要做停服的数据收尾处理。</p>
-</li>
-<li><p><strong>查询热更模块id</strong><br>  <code>query MODULE_NAME</code>,查询模块服务id,在contriner_client中首次加载使用查询之后挂载监听。</p>
-</li>
-<li><p><strong>监听热更模块</strong><br>  <code>watch MODULE_NAME</code>,监听模块。</p>
-</li>
-<li><p><strong>取消监听模块</strong>,<br>  <code>unwatch MODULE_NAME</code>,取消监听。</p>
-</li>
-</ul>
-<p><strong>容器客户端</strong>封装了对了<strong>热更管理员</strong>的交互我们在使用时感觉不到<strong>热更管理员</strong>♥(ˆ◡ˆԅ)的存在。<br><strong>容器客户端</strong>是使用面向对象的方式实现的，为了方便每个<strong>rpc调用对象</strong>有自己的<strong>服务切换处理</strong>。<br>提供了 <strong>new</strong>、<strong>mod_send</strong>、<strong>mod_call</strong>、<strong>balance_send</strong>、<strong>balance_call</strong>、<strong>broadcast</strong>方法。</p>
-<ul>
-<li><p><strong>new</strong><br>  创建一个<strong>rpc</strong>调用客户端，传入想要联系的<strong>MODULE_NAME</strong>和新服务切换的检查函数。<br>  MODULE_NAME服务地址本地没有的情况下会去<strong>query</strong> <strong>容器管理员</strong>，并且<strong>watch</strong>监听。</p>
-</li>
-<li><p><strong>mod_send</strong><br>  通过取模自己服务id<strong>映射</strong>一个热更服务id，然后对应id skynet.send消息。</p>
-</li>
-<li><p><strong>mod_call</strong><br>  同mod_call，不过是调用call。</p>
-</li>
-<li><p><strong>balance_send</strong><br>  简单轮询负载均衡,send消息</p>
-</li>
-<li><p><strong>balance_call</strong><br>  简单轮询负载均衡。call消息</p>
-</li>
-<li><p><strong>broadcast</strong><br>  广播 send消息</p>
-</li>
-</ul>
-<p>以上发消息函数调用之前都会检测<strong>是否切服</strong>。</p>
-<p>contriner_client还<strong>重写skynet.eixt 函数</strong>，在退出前<strong>注销监听</strong>。</p>
-<ul>
-<li><p><strong>服务切换</strong><br>  服务的实现就是通过contriner_client中的<strong>new</strong>函数传入is_can_switch函数，每次发消息都会调用这个函数。</p>
-</li>
-<li><p><strong>旧服务退出</strong><br>  <strong>容器管理员</strong>launch新服务后会发送exit消息给旧服务，旧服务自己决定什么时候退出。</p>
-</li>
-</ul>
-<p>监听实现思路参考了skynet.sharedata实现，看源码一度怀疑监听机制会有次序bug，觉得在query和monitor之间插入一个load处理的话就暂时收不到新的配置了。不过后面看着看着想通了。<br>传入对象与新对象不同的话，会直接返回新对象。<br>在skynet_fly中我有引入一个版本号来处理这种情况。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.monitor</span><span class="hljs-params">(name, obj)</span></span><br>	<span class="hljs-keyword">local</span> v = <span class="hljs-built_in">assert</span>(pool[name])<br>	<span class="hljs-keyword">if</span> obj ~= v.obj <span class="hljs-keyword">then</span><br>		sharedata.host.incref(v.obj)<br>		<span class="hljs-keyword">return</span> v.obj<br>	<span class="hljs-keyword">end</span><br><br>	<span class="hljs-keyword">local</span> n = pool_count[name].n + <span class="hljs-number">1</span><br>	<span class="hljs-keyword">if</span> n &gt; pool_count[name].threshold <span class="hljs-keyword">then</span><br>		n = n - check_watch(v.watch)<br>		pool_count[name].threshold = n * <span class="hljs-number">2</span><br>	<span class="hljs-keyword">end</span><br>	pool_count[name].n = n<br><br>	<span class="hljs-built_in">table</span>.<span class="hljs-built_in">insert</span>(v.watch, skynet.response())<br><br>	<span class="hljs-keyword">return</span> NORET<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
-
-<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><p>可以参考查看examples下的hot_module5示例，它是一个简单的数字炸弹游戏，热更是使用可以分为2部讲解，<strong>如何启动</strong>，<strong>如何rpc调用</strong>。</p>
-<ul>
-<li><strong>如何启动</strong><ul>
-<li>第一步启动<strong>容器管理员</strong>。</li>
-<li>第二步编写<code>load_mods.lua</code>。<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>	service_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">1</span>,<br>		mod_args = <span class="hljs-literal">nil</span>,<br>		default_arg = &#123;<br>			player_num = <span class="hljs-number">2</span>,<br>			min_num = <span class="hljs-number">1</span>,<br>			max_num = <span class="hljs-number">100</span>,<br>		&#125;<br>	&#125;,<br><br>	agent_m = &#123;<br>		launch_seq = <span class="hljs-number">2</span>,<br>		launch_num = <span class="hljs-number">2</span>,<br>		mod_args = &#123;<br>			&#123;<br>				player_id = <span class="hljs-number">10001</span>,<br>				nickname = <span class="hljs-string">&quot;张三&quot;</span>,<br>			&#125;,<br>			&#123;<br>				player_id = <span class="hljs-number">10004</span>,<br>				nickname = <span class="hljs-string">&quot;李四&quot;</span>,<br>				hello = &#123;a = <span class="hljs-number">1</span>,b = <span class="hljs-number">2</span>&#125;<br>			&#125;,<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-这是load_mods.lua的一个编写示例，像service_m、和agent_m是需要启动的热更模板。<br>每个模块有4个参数可以配置。</li>
-</ul>
-</li>
-<li><strong>launch_seq</strong> 首次启动顺序，从小到大。</li>
-<li><strong>launch_num</strong> 启动数量。</li>
-<li><strong>default_arg</strong> 默认传入配置，热更模板内的<strong>start</strong>函数接收，当<strong>mod_args</strong>中没有对应服务下标的配置时启用。</li>
-<li><strong>mod_args</strong> 是一个配置数组，为了应对相同服务可能配置不通的情况。</li>
-</ul>
-<p>有了mod_config之后，我们在main.lua中通过mod_config.lua启动。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> contriner_launcher = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_launcher&quot;</span><br><br>skynet.start(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	skynet.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;start hot_module5!!!&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span>)<br>	contriner_launcher.run()<br><br>	skynet.<span class="hljs-built_in">exit</span>()<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li><p><strong>如何rpc调用</strong><br>rpc调用使用非常简单易用。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> service_client = contriner_client:new(<span class="hljs-string">&quot;service_m&quot;</span>) <span class="hljs-comment">--新建一个联系service_m的对象</span><br><span class="hljs-comment">--因为service_m可能启动多个，使用模除以的方式去映射一个服务id</span><br>service_client:mod_send(cmd,...)<br>service_client:mod_call(cmd,...)<br>service_client:mod_call(cmd,...)<br><br><span class="hljs-keyword">local</span> agent_client = contriner_client:new(<span class="hljs-string">&quot;agent_m&quot;</span>) <span class="hljs-comment">--新建一个联系agent_m的对象</span><br>agent_client:mod_send(cmd,...)<br></code></pre></td></tr></table></figure>
-<p>contriner_client会帮我们管理好对应服务的id。</p>
-</li>
-<li><p><strong>功能改动</strong><br>在实现mysql连接模块的时候发现同一模板多个服务可以连接不同的数据库，当rpc客户端想要联系指定的数据库时并没有很好办法，于是就扩展了instance_name,使module_name下多了一个二级目录，扩展后的<code>contriner_client</code>多<strong>mod_call_by_name</strong>等等。</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> game_client = contriner_client:new(<span class="hljs-string">&quot;mysql_m&quot;</span>,<span class="hljs-string">&quot;game&quot;</span>)<br><span class="hljs-keyword">local</span> ret = game_client:mod_call_by_name(<span class="hljs-string">&quot;query&quot;</span>,<span class="hljs-string">&quot;show tables;&quot;</span>)<br><span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;ret :&quot;</span>,ret)<br><br><span class="hljs-keyword">local</span> sql_str = <span class="hljs-string">&quot;insert into user(id,name) values(&#x27;1&#x27;,&#x27;skynet_fly&#x27;);&quot;</span><br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;game insert:&quot;</span>,game_client:balance_call_by_name(<span class="hljs-string">&quot;query&quot;</span>,sql_str))<br><br><span class="hljs-keyword">local</span> sql_str = <span class="hljs-string">&quot;select * from user where name = &#x27;skynet_fly&#x27;;&quot;</span><br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;game select:&quot;</span>,game_client:balance_call_by_name(<span class="hljs-string">&quot;query&quot;</span>,sql_str))<br><br><span class="hljs-keyword">local</span> hall_client = contriner_client:new(<span class="hljs-string">&quot;mysql_m&quot;</span>,<span class="hljs-string">&quot;hall&quot;</span>)<br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;hall select:&quot;</span>,hall_client:balance_call_by_name(<span class="hljs-string">&quot;query&quot;</span>,sql_str))<br><span class="hljs-built_in">log</span>.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;mysql_test_m over!!!&quot;</span>)<br></code></pre></td></tr></table></figure>
-<p>对应的启动配置</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs lua"><br>mysql_m = &#123;<br>	launch_seq = <span class="hljs-number">4</span>,<br>	launch_num = <span class="hljs-number">4</span>,<br>	mod_args = &#123;<br>		&#123;<br>			instance_name = <span class="hljs-string">&quot;game&quot;</span>,<br>			db_conf = &#123;<br>				host = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<br>				port = <span class="hljs-string">&#x27;3306&#x27;</span>,<br>				max_packet_size = <span class="hljs-number">1048576</span>,<br>				user = <span class="hljs-string">&#x27;root&#x27;</span>,<br>				password = <span class="hljs-string">&#x27;123456&#x27;</span>,<br>				database = <span class="hljs-string">&#x27;gamedb&#x27;</span>,<br>			&#125;<br>		&#125;,<br>		&#123;<br>			instance_name = <span class="hljs-string">&quot;game&quot;</span>,<br>			db_conf = &#123;<br>				host = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<br>				port = <span class="hljs-string">&#x27;3306&#x27;</span>,<br>				max_packet_size = <span class="hljs-number">1048576</span>,<br>				user = <span class="hljs-string">&#x27;root&#x27;</span>,<br>				password = <span class="hljs-string">&#x27;123456&#x27;</span>,<br>				database = <span class="hljs-string">&#x27;gamedb&#x27;</span>,<br>			&#125;<br>		&#125;,<br>		&#123;<br>			instance_name = <span class="hljs-string">&quot;hall&quot;</span>,<br>			db_conf = &#123;<br>				host = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<br>				port = <span class="hljs-string">&#x27;3306&#x27;</span>,<br>				max_packet_size = <span class="hljs-number">1048576</span>,<br>				user = <span class="hljs-string">&#x27;root&#x27;</span>,<br>				password = <span class="hljs-string">&#x27;123456&#x27;</span>,<br>				database = <span class="hljs-string">&#x27;halldb&#x27;</span>,<br>			&#125;<br>		&#125;,<br>		&#123;<br>			instance_name = <span class="hljs-string">&quot;hall&quot;</span>,<br>			db_conf = &#123;<br>				host = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<br>				port = <span class="hljs-string">&#x27;3306&#x27;</span>,<br>				max_packet_size = <span class="hljs-number">1048576</span>,<br>				user = <span class="hljs-string">&#x27;root&#x27;</span>,<br>				password = <span class="hljs-string">&#x27;123456&#x27;</span>,<br>				database = <span class="hljs-string">&#x27;halldb&#x27;</span>,<br>			&#125;<br>		&#125;,<br>	&#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
-<p>这样就可以配置rpc调用不同的数据库了。<br>之后在实现<code>examples/digitalbomb</code>数字炸弹时发现需要<strong>指定玩家id去映射服务</strong>，还有<strong>外部需要拿服务ID的需求</strong>，于是又扩展了对应函数。</p>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这里就讲解完了，如果有不明白或者觉得不好的地方，欢迎提<strong>issues</strong>。<br>下一遍我准备写一下skynet_fly的配置脚本工具生成。<br><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">skynetfly源码地址</a></p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>队列中的处理函数调用<code>call</code>最终调用到进入相同队列的处理函数，就会形成环队列，call调用在等结果，结果处理函数却在call调用处理后面排队，就形成了互相等的<strong>队列死机状态</strong>。<br>这种状态是非常严重的，整个队列阻塞，后续进队列的还会持续累计，最终可能因内存不足而宕机。发生事故时，我们通常仅仅会认为是内存泄漏导致。因为出现这种情况，日志上不会有什么反应。可能通过debug_console查看stat能够发现对应服务的task数量一直在累计。那么有没有什么办法能提前发现这种情况，并终止调用呢？答案是有的。我在整理实现<code>trace</code>链路追踪的时候发现，环检查不就是需要用链路追踪的方式检查吗？</p>
+<p><img src="/img/skynet_fly/loop_queue.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>每个queue都分配一个guid,携程提供一个记录queue guid的栈，进队列压栈，出队列弹出，<code>call</code>调用把记录的栈传递下去，当queue需要排队时检查 queue guid是否存在，已存在说明形成环队列了。</p>
 
                 
               </div>
@@ -688,8 +615,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>关于skynet_fly热更新实现</div>
-      <div>https://huahua132.github.io/2023/06/30/skynet_fly_ss/关于skynet_fly热更新实现/</div>
+      <div>如何使skynet.queue 队列环问题暴露</div>
+      <div>https://huahua132.github.io/2025/06/07/skynet_fly_ss/loop_queue/</div>
     </div>
     <div class="license-meta">
       
@@ -701,7 +628,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月30日</div>
+          <div>2025年6月7日</div>
         </div>
       
       
@@ -733,18 +660,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/30/skynet_fly_word/word_4/H_q/" title="如何在skynet_fly_demo新增一个后台模块？">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">如何在skynet_fly_demo新增一个后台模块？</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/30/skynet_fly_ss/%E5%85%B3%E4%BA%8Eskynet_fly%E7%9A%84%E4%B8%80%E9%94%AE%E6%9E%84%E5%BB%BA%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" title="关于skynet_fly的一键构建服务配置">
-                        <span class="hidden-mobile">关于skynet_fly的一键构建服务配置</span>
+                      <a href="/2025/06/04/skynet_fly_ss/trace/" title="链路追踪的实现">
+                        <span class="hidden-mobile">链路追踪的实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

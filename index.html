@@ -229,6 +229,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2025/06/07/skynet_fly_ss/loop_queue/" target="_self">
+          如何使skynet.queue 队列环问题暴露
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/07/skynet_fly_ss/loop_queue/" target="_self">
+        <div>
+          前言队列中的处理函数调用call最终调用到进入相同队列的处理函数，就会形成环队列，call调用在等结果，结果处理函数却在call调用处理后面排队，就形成了互相等的队列死机状态。这种状态是非常严重的，整个队列阻塞，后续进队列的还会持续累计，最终可能因内存不足而宕机。发生事故时，我们通常仅仅会认为是内存泄漏导致。因为出现这种情况，日志上不会有什么反应。可能通过debug_console查看stat能够
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-06-07 22:10" pubdate>
+              2025-06-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/06/04/skynet_fly_ss/trace/" target="_self">
           链路追踪的实现
         </a>
@@ -793,67 +854,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" target="_self">
-          尝试给orm新增唯一索引，最后还是决定不加了
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/22/skynet_fly_ss/orm_unique_index/" target="_self">
-        <div>
-          前言有群友比较想要orm可以设置唯一索引，方便类似给账号做绑定手机号，绑定邮箱这种需求，其实对于这类需求，我是建议新建一个表做对应映射关系，但是又考虑到，如果能在原本的表建唯一索引，或许做这类需求要简单从容许多。虽然这又会给orm增长一些的复杂度，但是我抱着试一试的心态，开始对本就复杂的orm解剖重构，先把耦合的索引代码抽离独立，方便主键，唯一索引一起用，然后新增唯一索引，接通了查询，写了查询的测
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-03-22 21:00" pubdate>
-              2025-03-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
