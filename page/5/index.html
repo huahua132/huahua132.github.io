@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
-          redis命令扩展
+        <a href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
+          mysql直连调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/mysqli/" target="_self">
         <div>
-          rediscredis命令扩展重写的例子 function M:hgetall(key)描述 重写hgetall 改为map结果形式参数  key string rediskey  返回值  table  function M:hmset(key,map)描述 重写hmset 能直接传递map参数  key string rediskey map table map表  返回值  number
+          mysqlimysql直连调用，也就是一个client 会产生一个连接 function M.new_client(db_name)描述 新建一个连接对象参数  db_name string 对应share_config_m 中写的key为mysql表的名为db_name的连接配置  返回值  table  function M.instance(db_name)描述 使用常驻实例参数  db_n
         </div>
       </a>
 
@@ -297,15 +297,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
-          模块信息与配置
+        <a href="/2024/06/29/skynet_fly_api_word/rpc/watch_server/" target="_self">
+          远程订阅同步-推送端
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/etc/module_info/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/rpc/watch_server/" target="_self">
         <div>
-          module_info function M.get_cfg()描述 获取load_mods default_cfg|mod_cfgs 绑定的配置信息参数 返回值  table  function M.get_base_info()描述 获取可热更模块的基础信息 [module_name]可热更模块名 [index]启动索引 [launch_date]启动日期 [launch_time]启动时间戳
+          watch_server function M.publish(channel_name, …)描述 远程推送 &#x2F;sub&#x2F;pub (watch)模式用参数  channel_name string 通道名 … string|number|boolean|table|nil 推送的数据  返回值 function M.pubsyn(channel_name, …)描述 远程推送同
         </div>
       </a>
 
@@ -334,7 +334,143 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83%EF%BC%8C%E8%AE%A2%E9%98%85%E5%90%8C%E6%AD%A5/" class="category-chain-item">订阅发布，订阅同步</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/redisf/" target="_self">
+          redis调用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/redisf/" target="_self">
+        <div>
+          redisf调用redis命令的基础封装 function command:script_run(script_str,…)描述 运行redis脚本命令参数  script_str string 脚本串 … number|string|nil 脚本命令参数 arg1为KEY数量然后紧跟KEYS参数，之后是ARGV参数  返回值  number|string|table  function M.ne
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
+          redis命令扩展
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/redisc/" target="_self">
+        <div>
+          rediscredis命令扩展重写的例子 function M:hgetall(key)描述 重写hgetall 改为map结果形式参数  key string rediskey  返回值  table  function M:hmset(key,map)描述 重写hmset 能直接传递map参数  key string rediskey map table map表  返回值  number
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
   
   
 
@@ -501,15 +637,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/db/redisf/" target="_self">
-          redis调用
+        <a href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" target="_self">
+          执行流挂起等待
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/db/redisf/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" target="_self">
         <div>
-          redisf调用redis命令的基础封装 function command:script_run(script_str,…)描述 运行redis脚本命令参数  script_str string 脚本串 … number|string|nil 脚本命令参数 arg1为KEY数量然后紧跟KEYS参数，之后是ARGV参数  返回值  number|string|table  function M.ne
+          wait function M:new(time_out)描述 新建发布端对象参数  time_out number|nil 超时时间，不填永久等待唤醒  返回值  table obj  function M:wait(k)描述 等待参数  k any 等待关联的k  返回值 function M:wakeup(k)描述 唤醒参数  k any 唤醒关联的key  返回值
         </div>
       </a>
 
@@ -538,75 +674,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api_word/rpc/watch_server/" target="_self">
-          远程订阅同步-推送端
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/rpc/watch_server/" target="_self">
-        <div>
-          watch_server function M.publish(channel_name, …)描述 远程推送 &#x2F;sub&#x2F;pub (watch)模式用参数  channel_name string 通道名 … string|number|boolean|table|nil 推送的数据  返回值 function M.pubsyn(channel_name, …)描述 远程推送同
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83%EF%BC%8C%E8%AE%A2%E9%98%85%E5%90%8C%E6%AD%A5/" class="category-chain-item">订阅发布，订阅同步</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3/" class="category-chain-item">定时器相关</a>
   
   
 
@@ -773,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" target="_self">
-          执行流挂起等待
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
+          env_util env相关
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
         <div>
-          wait function M:new(time_out)描述 新建发布端对象参数  time_out number|nil 超时时间，不填永久等待唤醒  返回值  table obj  function M:wait(k)描述 等待参数  k any 等待关联的k  返回值 function M:wakeup(k)描述 唤醒参数  k any 唤醒关联的key  返回值
+          env_util function M.add_pre_load(path)描述 添加服务启动之前加载的lua文件参数  path string 路径  返回值 function M.add_after_load(path)描述 添加服务启动之后加载的lua文件参数  path string 路径  返回值 function M.get_svr_id()描述 获取cluster svr_id参数
         </div>
       </a>
 
@@ -810,7 +878,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3/" class="category-chain-item">定时器相关</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/" class="category-chain-item">工具函数</a>
   
   
 
@@ -828,74 +896,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
-          远程sub/pub 模式 和 远程subsyn/pubsyn 模式
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
-        <div>
-          前言有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到订阅发布模式(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。 对比redisredis也支持sub&#x2F;pub模式，并且有psub批量订阅支持。 skynet_fly目前只实现了sub&#x2F;pub模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。不过skynet_fly实现了red
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
             
           </div>
         
