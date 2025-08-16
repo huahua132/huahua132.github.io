@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/10/27/skynet_fly_word/word_3/S_record/" target="_self">
-          服务录像与重放
+        <a href="/2025/08/16/skynet_fly_ss/sharedata_hotfix/" target="_self">
+          关于实现sharedata配置与hotfix同步更新
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/27/skynet_fly_word/word_3/S_record/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/16/skynet_fly_ss/sharedata_hotfix/" target="_self">
         <div>
-          前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，我们不太方案对整个进程进行录像，对于skynet的单个服务，能保证消息是同步处理的，所以我选择对单个服务录像，可以同时录制多个服务。录像的实现对于skynet来说，非常方便，主要就是把所有消息记录下来，重放时读取消息，重放
+          前言skynet_fly有3种热更。  make/script/check_reload.sh 检测可热更服务新服替代旧服。可以认为是进程内灰度更新。 make/script/check_hotfix.sh 检测可热更服务可热更脚本更新，不会刷旧服务，可以认为是刷脚本。 make/script/upsharedata.sh 检测配置更新，可以认为是更新配置。  之前3种更新方式，可以说是完全独立，
         </div>
       </a>
 
@@ -245,8 +245,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-10-27 22:00" pubdate>
-              2024-10-27
+            <time datetime="2025-08-16 21:03" pubdate>
+              2025-08-16
             </time>
           </div>
         
@@ -261,12 +261,73 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/08/06/quarter/2025-7-2025-9/" target="_self">
+          季度更新日志2025-4 2025-6
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/06/quarter/2025-7-2025-9/" target="_self">
+        <div>
+          sharedata支持跟hotfix同步更新
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-06 21:00" pubdate>
+              2025-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" class="category-chain-item">季度更新日志</a>
   
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/2025/" class="category-chain-item">2025</a>
   
   
 
@@ -283,7 +344,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/">#季度更新日志</a>
             
           </div>
         
@@ -297,15 +358,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" target="_self">
-          代码加密
+        <a href="/2025/06/07/skynet_fly_ss/loop_queue/" target="_self">
+          如何使skynet.queue 队列环问题暴露
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/07/skynet_fly_ss/loop_queue/" target="_self">
         <div>
-          前言很多群友都有加密代码的需求。为了群友辛辛苦苦写的游戏不被人轻易白嫖，这必须得安排上。 实现方案lua加载代码通常都是用loadfile跟require，所以我们可以先把lua文件通过string.dump打成二进制格式，再通过加密算法加密，之后直接使用加密的文件去运行，通过重写loadfile的底层函数，内置解密过程，即可实现代码加密的效果。 如何使用修改解密key修改skynet_fly\s
+          前言队列中的处理函数调用call最终调用到进入相同队列的处理函数，就会形成环队列，call调用在等结果，结果处理函数却在call调用处理后面排队，就形成了互相等的队列死机状态。这种状态是非常严重的，整个队列阻塞，后续进队列的还会持续累计，最终可能因内存不足而宕机。发生事故时，我们通常仅仅会认为是内存泄漏导致。因为出现这种情况，日志上不会有什么反应。可能通过debug_console查看stat能够
         </div>
       </a>
 
@@ -313,8 +374,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-10-14 22:00" pubdate>
-              2024-10-14
+            <time datetime="2025-06-07 22:10" pubdate>
+              2025-06-07
             </time>
           </div>
         
@@ -329,15 +390,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
   
 
       </span>
@@ -351,7 +405,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -365,15 +419,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/09/14/skynet_fly_api/sharedata/" target="_self">
-          sharedata.lua 共享配置数据
+        <a href="/2025/06/04/skynet_fly_ss/trace/" target="_self">
+          链路追踪的实现
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/14/skynet_fly_api/sharedata/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/04/skynet_fly_ss/trace/" target="_self">
         <div>
-          sharedata.lua加载配置 M.load(dir_list, mode)  函数作用域：M 对象的成员函数  描述:  以mode方式加载指定dir_list目录列表的lua配置文件  参数:  - dir_list (table): 路径列表  - mode (number): 模式  访问对象 M:new(file_path, mode)  函数作用域：M 对象的成员函数  描述:
+          前言使用skynet开发都会启动多个lua服务，如果加上使用远程集群调用的话，服务就更多了，如果被调用方存在多链路，出问题时，无法快速定位问题源头。链接追踪通过给处理添加全局唯一的tag标记，在链路上加上详细的日志，从而达到通过日志快速分析问题的手段。云大为skynet增加过链路追踪，通过使用者主动调用skynet.trace，从而开启一次详细的trace日志。trace_tag是服务地址加递增编
         </div>
       </a>
 
@@ -381,8 +435,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-14 22:00" pubdate>
-              2024-09-14
+            <time datetime="2025-06-04 21:15" pubdate>
+              2025-06-04
             </time>
           </div>
         
@@ -397,8 +451,259 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
+          给demo hallserver大厅服加上队列
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
+        <div>
+          前言因为skynet中单进程写业务也容易遇到异步重入问题，写简单个人系统也得警惕此问题，着实让人难受。索性直接用queue包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。 实现方案大厅服的业务函数处理通常以player_id为第一参数用来处理玩家个人系统的数据。我们以player_id来区分不同的队列，这样既可以有效利用skynet多携程优势，又能避免个人系统的重入问题。而对
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-24 21:15" pubdate>
+              2025-05-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" target="_self">
+          orm在用户数据日志上的应用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/09/skynet_fly_ss/orm_log_use/" target="_self">
+        <div>
+          前言游戏服务器免不了需要记录大量玩家数据变化、玩家操作行为、对局战斗数据等等数据的记录以及后台提供数据的查询入口。我遇到过两种做法。  方案一   手动创建数据表结构。 服务器代码拼接sql调用插入。 后台再根据表结构定义写查询页面。   方案二   服务器先写本地json文件。 再选用某种日志采集方案采集日志。 采集那边也需要定义表结构，然后插入数据库。 后台再根据表结构定义写查询页面。  总的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-09 21:15" pubdate>
+              2025-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/04/03/skynet_fly_ss/psub_syn/" target="_self">
+          psub_syn批订阅同步的实现
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/03/skynet_fly_ss/psub_syn/" target="_self">
+        <div>
+          前言最近有空在给skynet_fly_demo增加用户日志相关，用于记录游戏中产生的日志，比如用户登录登出记录，道具增加，减少记录。我的想法是把用户日志对接上orm，这样写的日志的方便日志服采集后，根据orm设定的字段索引信息直接构建对接数据库的orm，从而实现日志服无需修改就能采集新增或者变更的日志数据。这个过程就遇到一个问题，日志服如何同步到其他服务的日志orm信息。之前的subsyn监听同步
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-03 21:15" pubdate>
+              2025-04-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/04/01/skynet_fly_api_word/utils/guid_util/" target="_self">
+          guid_util guid相关
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/01/skynet_fly_api_word/utils/guid_util/" target="_self">
+        <div>
+          guid_util function M.fly_guid()描述 fly风格GUID参数 返回值  string 32字节的guid
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-01 22:00" pubdate>
+              2025-04-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/" class="category-chain-item">工具函数</a>
+  
+  
+
   
 
       </span>
@@ -426,15 +731,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
-          共享配置数据
+        <a href="/2025/04/01/quarter/2025-4-2025-6/" target="_self">
+          季度更新日志2025-4 2025-6
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/01/quarter/2025-4-2025-6/" target="_self">
         <div>
-          前言由于skynet每个服务都是独立的lua虚拟机，一般游戏开发又需要加载大量的配置文件，如果每个服务都加载一遍，会造成过多的内存浪费，所有skynet就提供了sharedata,sharetable共享配置数据的手段。由于两种方案各有优缺点，所以我在封装实现上让使用者可以任选其一，在make&#x2F;script增加热更配置命令，方便于热更配置。 优缺点对比sharedata 优点  c内存占
+          orm支持创建普通索引orm支持普通索引，并提供相关查询和删除函数。普通索引查询是不会走缓存的，直接先查询数据库。 用户日志支持内置按天写入，保留天数支持。 支持批订阅同步。 fix 订阅同步时滚服热更frpc_client_m同步停止问题。解决contriner_client对象使用不活跃导致旧服务长时间不销毁。删除contriner_client:CMD函数 skynet_util.set_c
         </div>
       </a>
 
@@ -442,8 +747,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-14 22:00" pubdate>
-              2024-09-14
+            <time datetime="2025-04-01 21:00" pubdate>
+              2025-04-01
             </time>
           </div>
         
@@ -458,12 +763,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  <a href="/categories/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" class="category-chain-item">季度更新日志</a>
   
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  <a href="/categories/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/2025/" class="category-chain-item">2025</a>
   
   
 
@@ -480,7 +785,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+              <a href="/tags/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/">#季度更新日志</a>
             
           </div>
         
@@ -494,15 +799,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/08/17/skynet_fly_word/word_1/N_question/" target="_self">
-          常见问题收录
+        <a href="/2025/04/01/skynet_fly_ss/orm_index/" target="_self">
+          orm 新增普通索引
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/17/skynet_fly_word/word_1/N_question/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/01/skynet_fly_ss/orm_index/" target="_self">
         <div>
-          问题11234root@VirtualBox:/skynet_fly/test# sh ../binshell/make_server.sh ../: not found/make_server.sh: 3:: not found/make_server.sh: 5:../binshell/make_server.sh: 24: Syntax error: end of file unexpect
+          前言对于游戏数据来说，普通索引大多作用在日志数据上，按时间，玩家，道具ID，等等条件分页查询检索，数据量通常很庞大，不同的普通索引可以做联合条件查询，如果想普通索引也加上本地缓存页的话，需要处理好缓存是否失效的判断，对于主键唯一索引来说就是对比本次查询的范围的数据总量和缓存总量是否相等，数据总量失效是其中的某个缓存过期。而普通索引基于范围，分页来查询不太好维护数据总量和缓存总量数据的控制，而且排序
         </div>
       </a>
 
@@ -510,8 +815,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-17 08:00" pubdate>
-              2024-08-17
+            <time datetime="2025-04-01 21:00" pubdate>
+              2025-04-01
             </time>
           </div>
         
@@ -526,211 +831,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" target="_self">
-          断点调式的支持
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" target="_self">
-        <div>
-          前言很多群友都问怎样调试skynet_fly，于是就有了对单点调式的支持，调式对于老手来说并不是那么的必要，对于新手来说确实有助于编码学习，毕竟刚学编程那会儿也比较依赖调试，后面逐渐习惯用打印日志的方式查找问题。 实现方案在vscode有部分插件说支持了对skynet的调试，我跟着他们的步骤进行操作，都没能成功调试。之后尝试能不能用lua helper插件支持的调式功能。研究之后发现lua hel
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-03 22:00" pubdate>
-              2024-08-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" target="_self">
-          可热更服务，热更脚本支持
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" target="_self">
-        <div>
-          前言对于有状态的服务，利用新服务替换旧服务的方式，旧服务我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，旧服务没法立即更新，没法完美的解决问题，这时候可能就需要用到热更脚本来解决突发的一些简单逻辑bug。 限制热更脚本对比滚服更新的最大区别就是：  热更脚本是在旧的lua服务中完成  滚服更新启动新lua服务，流量切入新的lua服务   使用滚服更新的好处是，我们不需要考虑热更后对于服
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-07-27 22:00" pubdate>
-              2024-07-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
-          远程订阅发布模式
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
-        <div>
-          watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
   
   
 
@@ -745,136 +846,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
-          远程sub/pub 模式 和 远程subsyn/pubsyn 模式
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" target="_self">
-        <div>
-          前言有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到订阅发布模式(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。 对比redisredis也支持sub&#x2F;pub模式，并且有psub批量订阅支持。 skynet_fly目前只实现了sub&#x2F;pub模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。不过skynet_fly实现了red
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/05/03/think/srpc/" target="_self">
-          为skynet_fly新增远程调用方式
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/05/03/think/srpc/" target="_self">
-        <div>
-          前言目前skynet_fly的远程调用方式，是采用了封装skynet的cluster 集群方式，每个连接都会有一个服务端有一个clusteragent 接收代理，客户端有一个sender 发送代理服务。再加上我封装的cluster_server和cluster_client，这样发送端和接收端就分别存在了2个代理服务。也就是说调用一个rpc请求会经过非常多次的打包解包流程。 发送者-&gt;clu
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-05-03 19:22" pubdate>
-              2024-05-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="category-chain-item">一些想法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         
@@ -886,7 +858,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/#board">15</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

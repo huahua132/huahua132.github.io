@@ -24,7 +24,7 @@
 <meta property="og:description" content="可热更匹配房间类游戏架构基础设施后续优化 2024&#x2F;6&#x2F;14 22:30支持同时开websocket 和 socket load_mods 配置改动123456789101112131415161718192021222324252627--共享配置share_config_m &#x3D; &amp;#123;	launch_seq &#x3D; 1,	launch_num &#x3D; 1,	default_a">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-27T02:41:57.969Z">
+<meta property="article:modified_time" content="2025-01-25T14:50:15.308Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          3.3k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          12 分钟
+          28 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(43)</span>
+        <span class="list-group-count">(44)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -481,19 +481,19 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">检查热更的使用以及原理</span>
+          <span class="category-post">快进时间</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">快进时间</span>
+          <span class="category-post">检查热更的使用以及原理</span>
         </a>
       
     
@@ -622,7 +622,7 @@
         aria-expanded="true"
       >
         强化篇
-        <span class="list-group-count">(18)</span>
+        <span class="list-group-count">(19)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -796,6 +796,15 @@
         </a>
       
     
+      
+      
+        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</span>
+        </a>
+      
+    
   </div>
 
         
@@ -837,6 +846,20 @@
 <h1 id="2024-x2F-10-x2F-12-22-00"><a href="#2024-x2F-10-x2F-12-22-00" class="headerlink" title="2024&#x2F;10&#x2F;12 22:00"></a>2024&#x2F;10&#x2F;12 22:00</h1><h2 id="插件适配改动-2"><a href="#插件适配改动-2" class="headerlink" title="插件适配改动"></a>插件适配改动</h2><h3 id="login-plug-2"><a href="#login-plug-2" class="headerlink" title="login_plug"></a>login_plug</h3><p>增加主动接口<code>interface:get_addr(player_id)</code> 获取玩家IP:PORT</p>
 <h3 id="hall-plug-1"><a href="#hall-plug-1" class="headerlink" title="hall_plug"></a>hall_plug</h3><p>增加主动接口<code>interface:get_addr(player_id)</code> 获取玩家IP:PORT<br>增加被动接口<code>handle_before</code> 客户端消息前置处理,返回<code>true</code>继续下放到<code>end_point</code>处理，否则丢弃。</p>
 <h3 id="table-plug-1"><a href="#table-plug-1" class="headerlink" title="table_plug"></a>table_plug</h3><p>增加主动接口<code>interface:get_addr(player_id)</code> 获取玩家IP:PORT<br>增加被动接口<code>handle_before</code> 客户端消息前置处理,返回<code>true</code>继续下放到<code>end_point</code>处理，否则丢弃。</p>
+<h1 id="2024-x2F-12-x2F-29"><a href="#2024-x2F-12-x2F-29" class="headerlink" title="2024&#x2F;12&#x2F;29"></a>2024&#x2F;12&#x2F;29</h1><h2 id="新增客户端-rpc-协议方式支持"><a href="#新增客户端-rpc-协议方式支持" class="headerlink" title="新增客户端 rpc 协议方式支持"></a>新增客户端 rpc 协议方式支持</h2><h3 id="login-plug-3"><a href="#login-plug-3" class="headerlink" title="login_plug"></a>login_plug</h3><ul>
+<li><p><strong>主动接口</strong><br>增加<code>interface:rpc_rsp_msg(player_id, header, msgbody, rsp_session)</code>rpc回复消息<br>增加<code>interface:rpc_rsp_msg_byfd(fd, header, msgbody, rsp_session)</code>rpc回复消息通过fd<br>增加<code>interface:rpc_error_msg(player_id, header, msgbody, rsp_session)</code>rpc回复error消息<br>增加<code>interface:rpc_error_msg_byfd(fd, header, msgbody, rsp_session)</code>rpc回复error消息通过fd<br>增加<code>interface:rpc_push_msg(player_id, header, msgbody)</code>rpc推送消息<br>增加<code>interface:rpc_push_msg_byfd(fd, header, msgbody)</code>rpc推送消息通过fd<br>增加<code>interface:rpc_push_by_player_list(player_list, header, msgbody)</code>rpc推送消息给部分玩家<br>增加<code>interface:rpc_push_broad_cast(header, msgbody, filter_map)</code>rpc推送消息给全部玩家</p>
+</li>
+<li><p><strong>被动接口</strong><br>增加<code>login_plug.rpc_pack</code><br>新增rsp_session参数<code>login_plug.repeat_login(player_id, header, rsp_session)</code><br>新增rsp_session参数<code>login_plug.login_failed(player_id, errcode, errmsg, header, rsp_session)</code><br>新增rsp_session参数<code>login_plug.login_succ(player_id, ret, header, rsp_session)</code><br>新增rsp_session参数<code>login_plug.login_succ(player_id, ret, header, rsp_session)</code><br>新增rsp_session,fd参数<code>login_plug.check(header, body, rsp_session)</code></p>
+</li>
+</ul>
+<h3 id="hall-plug-2"><a href="#hall-plug-2" class="headerlink" title="hall_plug"></a>hall_plug</h3><p>增加<code>interface:rpc_rsp_msg(player_id, header, msgbody, rsp_session)</code>rpc回复消息<br>增加<code>interface:rpc_error_msg(player_id, header, msgbody, rsp_session)</code>rpc回复error消息<br>增加<code>interface:rpc_push_msg(player_id, header, msgbody)</code>rpc推送消息<br>增加<code>interface:rpc_push_by_player_list(player_list, header, msgbody)</code>rpc推送消息给部分玩家<br>增加<code>interface:rpc_push_broad_cast(header, msgbody, filter_map)</code>rpc推送消息给全部玩家<br>增加<code>login_plug.rpc_pack</code></p>
+<ul>
+<li><strong>被动接口</strong><br>新增<code>hall_plug.handle_end_rpc(agent.player_id, header, body, rsp_session, handle_res)</code></li>
+</ul>
+<h3 id="table-plug-2"><a href="#table-plug-2" class="headerlink" title="table_plug"></a>table_plug</h3><p>增加<code>interface:rpc_rsp_msg(player_id, header, msgbody, rsp_session)</code>rpc回复消息<br>增加<code>interface:rpc_error_msg(player_id, header, msgbody, rsp_session)</code>rpc回复error消息<br>增加<code>interface:rpc_push_msg(player_id, header, msgbody)</code>rpc推送消息<br>增加<code>interface:rpc_push_by_player_list(player_list, header, msgbody)</code>rpc推送消息给部分玩家<br>增加<code>interface:rpc_push_broad_cast(header, msgbody, filter_map)</code>rpc推送消息给全部玩家<br>增加<code>login_plug.rpc_pack</code></p>
+<ul>
+<li><strong>被动接口</strong><br>新增<code>hall_plug.handle_end_rpc(agent.player_id, header, body, rsp_session, handle_res)</code></li>
+</ul>
 
                 
               </div>
@@ -934,9 +957,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" title="如何更改skynet服务的配置项">
+                      <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" title="前言">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">如何更改skynet服务的配置项</span>
+                        <span class="hidden-mobile">前言</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

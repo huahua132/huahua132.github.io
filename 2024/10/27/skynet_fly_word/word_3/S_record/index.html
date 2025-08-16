@@ -16,16 +16,16 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，我们不太方案对整个进程进行录像，对于skynet的单个服务，能保证消息是同步处理的，所以我选择对单个服务录像，可以同时录制多个服务。录像的实现对于skynet来说，非常方便，主要就是把所有消息记录下来，重放时读取消息，重放">
+    <meta name="description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务录像与重放">
 <meta property="og:url" content="https://huahua132.github.io/2024/10/27/skynet_fly_word/word_3/S_record/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，我们不太方案对整个进程进行录像，对于skynet的单个服务，能保证消息是同步处理的，所以我选择对单个服务录像，可以同时录制多个服务。录像的实现对于skynet来说，非常方便，主要就是把所有消息记录下来，重放时读取消息，重放">
+<meta property="og:description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/record_1.png">
 <meta property="article:published_time" content="2024-10-27T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-10-27T06:41:27.708Z">
+<meta property="article:modified_time" content="2025-08-16T12:49:55.118Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          10k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          18 分钟
+          85 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(43)</span>
+        <span class="list-group-count">(44)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -483,19 +483,19 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">检查热更的使用以及原理</span>
+          <span class="category-post">快进时间</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">快进时间</span>
+          <span class="category-post">检查热更的使用以及原理</span>
         </a>
       
     
@@ -624,7 +624,7 @@
         aria-expanded="true"
       >
         强化篇
-        <span class="list-group-count">(18)</span>
+        <span class="list-group-count">(19)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -798,6 +798,15 @@
         </a>
       
     
+      
+      
+        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</span>
+        </a>
+      
+    
   </div>
 
         
@@ -827,7 +836,7 @@
               <div class="markdown-body">
                 
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于复杂的业务逻辑，出现的bug，通过<strong>日志手段</strong>或者<strong>review代码</strong>都没法查明原因的情况下，这时候我们可以通过<strong>服务录像重放</strong>来还原整个事故现场。</p>
-<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>skynet是多线程的，我们不太方案对整个进程进行录像，对于skynet的单个服务，能保证消息是同步处理的，所以我选择对单个服务录像，可以同时录制多个服务。录像的实现对于skynet来说，非常方便，主要就是把所有消息记录下来，重放时读取消息，重放消息即可。<br>其中有一些细节点，比如<code>session</code>分配，<code>socket_id</code>分配，<code>time</code>时间，<code>math.random</code>随机数，<code>hotfix</code>热更，<code>sharedata</code>,<code>sharetable</code>共享配置处理，都需要一些特殊处理才能保证录像重放时确保一致。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。<br>其中有一些细节点，比如<code>session</code>分配，<code>socket_id</code>分配，<code>time</code>时间，<code>math.random</code>随机数，<code>hotfix</code>热更，<code>sharedata</code>,<code>sharetable</code>共享配置处理，都需要一些特殊处理才能保证录像重放时确保一致。</p>
 <ul>
 <li><p>session socket_id skynet.time os.time<br>这些只需要调用时，记录下值，重放时读取即可。</p>
 </li>
@@ -844,15 +853,44 @@
 
 <h1 id="如何重放？"><a href="#如何重放？" class="headerlink" title="如何重放？"></a>如何重放？</h1><p>在<code>make/script/run.sh</code>和<code>make/script/restart.sh</code>中增加了 <code>recordfile</code>参数，播放录像时加上录像文件路径即可。<br><code>sh make/script/restart.sh load_mods.lua 0 records/00000010.record</code></p>
 <h1 id="重放注意点"><a href="#重放注意点" class="headerlink" title="重放注意点"></a>重放注意点</h1><ol>
-<li><p>确保代码环境一致，代码不一致可能会导致录像没有按预期回放。<br>比如说 <code>skynet.time()</code>,<code>os.time()</code>,<code>math.randomseed</code>,还有会创建<code>session</code>和<code>socket_id</code>的函数调用，少调或者多调用一次都会导致录像对不上，因为重放录像的时候每次都是去记录中拿对应的，少或多都会导致顺序错乱。</p>
+<li><p>确保代码环境一致，代码不一致可能会导致录像没有按预期回放,这时候通常会代码出错。<br>比如说 <code>skynet.time()</code>,<code>os.time()</code>,<code>math.randomseed</code>,还有会创建<code>session</code>和<code>socket_id</code>的函数调用，少调或者多调用一次都会导致录像对不上，因为重放录像的时候每次都是去记录中拿对应的值，少或多都会导致顺序错乱。</p>
 </li>
-<li><p>逻辑代码中<code>pairs</code>调用可能导致重放逻辑乱序<br>因为<code>pairs</code>每次调用并不保证顺序，如果在<code>pairs</code>循环操作分配了<code>session</code>(call,time_out),<code>socket_id</code>(socket.connect),<code>os.time, skynet.time</code>, <code>math.randomseed,math.random</code>，都会因为<code>pairs</code>遍历无法保证顺序而导致重放乱序出错。目前没有想到非常完美的办法来解决这个问题，强行重写<code>pairs</code>让其变成有序遍历，太过损失其性能。我们只好在业务逻辑中，通过规避上述情况下的<code>pairs使用</code>。</p>
+<li><p>逻辑代码中<code>pairs</code>调用可能导致重放逻辑乱序<br>因为<code>pairs</code>每次调用并不保证顺序，如果在<code>pairs</code>循环操作分配了<code>session</code>(call,time_out),<code>socket_id</code>(socket.connect),<code>os.time, skynet.time</code>, <code>math.randomseed,math.random</code>，都会因为<code>pairs</code>遍历无法保证顺序而导致重放乱序出错。目前没有想到非常完美的办法来解决这个问题，强行重写<code>pairs</code>让其变成有序遍历，太过损失其性能。我们只好在需要重放录像的业务逻辑中，通过规避上述情况下的<code>pairs使用</code>。</p>
 </li>
 </ol>
 <h1 id="对hotfix的处理"><a href="#对hotfix的处理" class="headerlink" title="对hotfix的处理"></a>对hotfix的处理</h1><p>对于录像的服务，我们可能通过<code>check_hotfix.sh</code>对其进行了多次脚本热更，重放的时候我们怎么保证也能重放热更过程，有2种办法，1是把热更文件写进录像，2是把热更文件CP一份，我选择了第二种方法，因为我们重放过程中，一般需要加一些打印日志，这样热更后的文件，我们也能去增加日志打印。</p>
 <h1 id="对于sharedata-sharetable-共享配置热更的处理"><a href="#对于sharedata-sharetable-共享配置热更的处理" class="headerlink" title="对于sharedata,sharetable 共享配置热更的处理"></a>对于sharedata,sharetable 共享配置热更的处理</h1><p>同hotfix处理一样，cp被热更的文件。</p>
 <h1 id="如何正确的重放"><a href="#如何正确的重放" class="headerlink" title="如何正确的重放"></a>如何正确的重放</h1><p>我们应该想办法让代码先回到启动前，通过借助svn，git这些版本控制工具，不过这需要使用者自己去保证了。</p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/record">示例</a></h1>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/record">示例</a></h1><h1 id="2024-x2F-12-x2F-01-优化改动"><a href="#2024-x2F-12-x2F-01-优化改动" class="headerlink" title="2024&#x2F;12&#x2F;01 优化改动"></a>2024&#x2F;12&#x2F;01 优化改动</h1><h2 id="命名优化"><a href="#命名优化" class="headerlink" title="命名优化"></a>命名优化</h2><p>录像的文件命名改为 <code>room_game_hall_m-1-1-20241205-180640.record</code></p>
+<ul>
+<li>room_game_hall_m 可热更服务名</li>
+<li>1 启动版本号</li>
+<li>1 启动索引 </li>
+<li>20241205-180640 启动时间</li>
+</ul>
+<p>录像的热更记录路径命名改为 <code>hotfix_room_game_hall_m-1-20241205-194136\patch_20241205-204136\</code><br>共享配置数据的热更记录路径命名改为 <code>sharedata_room_game_hall_m-1-20241205-194136\patch_20241205-204136\</code></p>
+<ul>
+<li>1 启动版本号</li>
+<li>20241205-194136 启动时间</li>
+<li>20241205-204136 热更时间</li>
+</ul>
+<h2 id="录像文件的切割方式"><a href="#录像文件的切割方式" class="headerlink" title="录像文件的切割方式"></a>录像文件的切割方式</h2><p>由于录像文件必须从头开始跑，所以我们并不能像切割日志文件一样去切割录像文件。只能另辟蹊径了。得益于框架的<code>reload</code>热更机制，我们可以定时每天<code>reload</code>自身服务，这样就开始记录新的录像，而旧的录像文件我们根据策略去删掉，比如用<code>logrotate</code>去整理历史的录像文件。这样一来，我们可以一直保留近期的录像文件，避免了过多占用系统磁盘资源，录像文件更小，也方便重放。</p>
+<p>因此新增了可热更服务 2种机制配置</p>
+<ul>
+<li>auto_reload 自动定时热更 skynet-fly.time_extend.time_point.lua 的配置项</li>
+<li>record_backup  录像文件自动整理 需要启动logrotate_m</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua">   <span class="hljs-comment">--大厅服</span><br>room_game_hall_m = &#123;<br>	launch_seq = <span class="hljs-number">6000</span>,<br>	launch_num = <span class="hljs-number">6</span>,     <span class="hljs-comment">--启动6个</span><br>	is_record_on = <span class="hljs-number">1</span>,   <span class="hljs-comment">--录像</span><br><br>	<span class="hljs-comment">--自动定时热更 skynet-fly.time_extend.time_point.lua 的配置项</span><br>	auto_reload = &#123;<br>		<span class="hljs-built_in">type</span> = <span class="hljs-number">3</span>,    <span class="hljs-comment">--每天</span><br>		hour = <span class="hljs-number">5</span>,    <span class="hljs-comment">--5点</span><br>		<span class="hljs-built_in">min</span> = <span class="hljs-number">30</span>,    <span class="hljs-comment">--30分</span><br>		sec = <span class="hljs-number">30</span>,    <span class="hljs-comment">--30秒</span><br>	&#125;,<br><br>	<span class="hljs-comment">--录像文件自动整理</span><br>	<span class="hljs-comment">--需要启动logrotate_m</span><br>	record_backup = &#123;<br>		max_age = <span class="hljs-number">3</span>,      <span class="hljs-comment">--最大保留天数</span><br>		max_backups = <span class="hljs-number">50</span>, <span class="hljs-comment">--最大保留文件数</span><br>		point_type = <span class="hljs-number">3</span>,   <span class="hljs-comment">--每天</span><br>		hour = <span class="hljs-number">5</span>,         <span class="hljs-comment">--5点</span><br>		sec = <span class="hljs-number">20</span>,         <span class="hljs-comment">--20</span><br>	&#125;,<br><br>	default_arg = &#123;<br>		hall_plug = <span class="hljs-string">&quot;common.plug.hall_plug&quot;</span>,         <span class="hljs-comment">--大厅加载的插件lua模块文件名</span><br>	&#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
+
+<h1 id="2024-x2F-12-x2F-22-优化改动"><a href="#2024-x2F-12-x2F-22-优化改动" class="headerlink" title="2024&#x2F;12&#x2F;22 优化改动"></a>2024&#x2F;12&#x2F;22 优化改动</h1><p>通过查看pairs的源码实现发现 pairs遍历string key 会依赖于 lua_state 创建时生成的strseed 种子。那么只需要录像时记录到strseed 种子。播放时设置好对应的strseed就能保证pairs 遍历 table string key 的顺序了。这样一来。对于number,string key都遍历顺序都能保证一致。<br>table, userdata 为 key 的没发保证顺序，因为hash是基于 table, userdata 的指针地址。 录像重复没发保证指针地址也一致。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--测试 pairs遍历</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test_pairs</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">--测试 string key   播放时可以保证顺序</span><br>    <span class="hljs-keyword">local</span> t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        t[<span class="hljs-string">&#x27;i&#x27;</span> .. i] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;string pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">--测试number key    播放时可以保证顺序</span><br>    <span class="hljs-keyword">local</span> num_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        <span class="hljs-keyword">local</span> num = <span class="hljs-built_in">math</span>.<span class="hljs-built_in">random</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10000</span>)<br>        num_t[num] = i<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(num_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;number pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">--测试table key    播放时不能保证顺序</span><br>    <span class="hljs-keyword">local</span> table_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        table_t[&#123;&#125;] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(table_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;table pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="正常跑服务结果"><a href="#正常跑服务结果" class="headerlink" title="正常跑服务结果"></a>正常跑服务结果</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i1&quot; 1 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i2&quot; 2 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i10&quot; 10 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i9&quot; 9 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i3&quot; 3 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i4&quot; 4 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i6&quot; 6 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i5&quot; 5 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i7&quot; 7 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i8&quot; 8 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6165 8 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 7622 4 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 8647 1 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6339 6 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5005 5 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 432 10 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 3777 9 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 2564 2 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5714 7 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6690 3 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 1 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 5 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 9 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 2 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 6 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 10 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 3 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 7 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 4 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 8 <br></code></pre></td></tr></table></figure>
+
+<h3 id="重放结果"><a href="#重放结果" class="headerlink" title="重放结果"></a>重放结果</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i1&quot; 1 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i2&quot; 2 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i10&quot; 10 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i9&quot; 9 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i3&quot; 3 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i4&quot; 4 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i6&quot; 6 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i5&quot; 5 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i7&quot; 7 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i8&quot; 8 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6165 8 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 7622 4 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 8647 1 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6339 6 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5005 5 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 432 10 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 3777 9 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 2564 2 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5714 7 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6690 3 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 3 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 7 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 4 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 8 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 5 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 9 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 1 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 6 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 10 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 2 <br></code></pre></td></tr></table></figure>
+
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>可以发现number和string重放是一致的。</p>
+
                 
               </div>
             
@@ -948,6 +986,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/12/01/skynet_fly_api/snowflake/" title="全局唯一ID(guid)的生成">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">全局唯一ID(guid)的生成</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
