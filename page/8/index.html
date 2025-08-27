@@ -229,6 +229,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/01/28/skynet_fly_api/watch_syn/" target="_self">
+          watch_syn.lua 监听同步机制
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/28/skynet_fly_api/watch_syn/" target="_self">
+        <div>
+          watch_syn.luasever M.new_server(CMD)  函数作用域：M 对象的成员函数  描述:  创建一个发布者对象，需要在代码load中创建好。  参数:  - CMD (table): 模块的CMDtable  返回值: server_obj(table): 发布者对象    为什么需要传递CMD，因为发布者需要创建watch和unwatch两个接口，还有如果是热更服务还
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-28 08:00" pubdate>
+              2024-01-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/01/21/skynet_fly_api/timer/" target="_self">
+          定时器的使用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/21/skynet_fly_api/timer/" target="_self">
+        <div>
+          timer.lua对skynet的定时器做了基础封装，提供了注销，延时，循环次数，获得下次触发的剩余时间等等功能。 注册 new(expire,times,callback,…)  函数作用域：M 对象的成员函数  函数名称：new  描述:  创建一个定时器对象  参数:  - expire (number): 过期时间 100等于1秒  - times (number): 次数，0表示循环触发
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-21 10:30" pubdate>
+              2024-01-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/01/14/skynet_fly_ss/benchmark_rax/" target="_self">
           关于skynet_fly 决定web路由工具使用的测试
         </a>
@@ -704,128 +826,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/12/10/skynet_fly_ss/pack/" target="_self">
-          关于skynet_fly gate，ws_gate消息包设计
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/skynet_fly_ss/pack/" target="_self">
-        <div>
-          前言最近skynet_fly被群友用来写项目，并且上线了，感觉还是很欣慰的，群友用了我的房间类游戏架构，大概三周的时间，游戏就直接上线了，过程中咨询过我一些问题，其中关于协议这一块，解释的比较久，并且最后是我把我写好的中国象棋客户端上传了github，让他给客户端参考，才较快解决了前后端协议对接。所以想写这一篇来拆解一下协议封装。 协议图 skynet gate协议包skynet协议包就是上图红色
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-10 18:00" pubdate>
-              2023-12-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/12/10/skynet_fly_ss/script/" target="_self">
-          关于skynet_fly热更模块启动配置的调整
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/10/skynet_fly_ss/script/" target="_self">
-        <div>
-          前言经过几个月的打磨使用，发现之前想的生成mod_config.lua热更模块配置文件用于启动的方式并不是很好。    缺点    1. 很少需要修改里面的值，当修改掉load_mods.lua，需要重新生成mod_config.lua。    2. 数组的配置重新生成也不好覆盖。    3. 有些配置想一直用load_mods.lua中的，却要手动同步改一遍mod_config.lua。 一开始
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-12-10 18:00" pubdate>
-              2023-12-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
             
           </div>
         

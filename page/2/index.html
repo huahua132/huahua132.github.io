@@ -229,6 +229,142 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2025/03/28/skynet_fly_api_word/use_log/" target="_self">
+          用户日志
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/28/skynet_fly_api_word/use_log/" target="_self">
+        <div>
+          ormadapter_uselog��于写固定每天轮换的用户日志 function M:new(file_path, file_name, flush_inval, max_age)描述 创建日志对象参数  file_path string 日志存放路径 file_name string 文件名 flush_inval number? flush间隔时间 max_age number? 最大保留天
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-28 21:00" pubdate>
+              2025-03-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3/" class="category-chain-item">日志相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/03/28/skynet_fly_api_word/db/ormadapter/ormadapter_uselog/" target="_self">
+          orm uselog适配器
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/03/28/skynet_fly_api_word/db/ormadapter/ormadapter_uselog/" target="_self">
+        <div>
+          ormadapter_uselog function M:new(file_path, file_name, flush_inval, maxage)描述 新建适配器对象参数  file_path string 日志存放路径 file_name string 文件名 flush_inval number? flush间隔时间 max_age number? 最大保留天数  返回值  table o
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-03-28 21:00" pubdate>
+              2025-03-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="category-chain-item">数据库相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/03/22/skynet_fly_ss/orm_unique_index/" target="_self">
           尝试给orm新增唯一索引，最后还是决定不加了
         </a>
@@ -732,135 +868,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" target="_self">
-          代码加密
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" target="_self">
-        <div>
-          前言很多群友都有加密代码的需求。为了群友辛辛苦苦写的游戏不被人轻易白嫖，这必须得安排上。 实现方案lua加载代码通常都是用loadfile跟require，所以我们可以先把lua文件通过string.dump打成二进制格式，再通过加密算法加密，之后直接使用加密的文件去运行，通过重写loadfile的底层函数，内置解密过程，即可实现代码加密的效果。 如何使用修改解密key修改skynet_fly\s
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-10-14 22:00" pubdate>
-              2024-10-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/09/14/skynet_fly_api/sharedata/" target="_self">
-          sharedata.lua 共享配置数据
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/14/skynet_fly_api/sharedata/" target="_self">
-        <div>
-          sharedata.lua加载配置 M.load(dir_list, mode)  函数作用域：M 对象的成员函数  描述:  以mode方式加载指定dir_list目录列表的lua配置文件  参数:  - dir_list (table): 路径列表  - mode (number): 模式  访问对象 M:new(file_path, mode)  函数作用域：M 对象的成员函数  描述:
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-14 22:00" pubdate>
-              2024-09-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
             
           </div>
         
