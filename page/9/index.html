@@ -229,6 +229,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/12/17/skynet_fly_api/module/" target="_self">
+          新增可热更服务
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/17/skynet_fly_api/module/" target="_self">
+        <div>
+          规范统一写在module的文件夹，好处就是review代码时能比较清晰的分清那个文件是可热更服务,还是lua模块文件，还是skynet的普通服务（skynet普通服务建议都放在sevice文件夹下）。 示例1234567891011121314151617181920212223242526272829local CMD = &#123;&#125;function CMD.start(confi
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-12-17 09:00" pubdate>
+              2023-12-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/12/17/skynet_fly_api/load_mods/" target="_self">
+          启动配置load_mods.lua
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/12/17/skynet_fly_api/load_mods/" target="_self">
+        <div>
+          作用定位可热更服务的启动配置文件，用于配置可插拔的可热更服务，可以自定义启动顺序，数量,配置参数，推迟最后启动。 示例参考AB_question 1234567891011121314return &#123;	A_m = &#123;		launch_seq = 1,		launch_num = 1,	&#125;,    B_m = &#123;        launch_seq = 2,
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-12-17 08:00" pubdate>
+              2023-12-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/12/10/skynet_fly_ss/pack/" target="_self">
           关于skynet_fly gate，ws_gate消息包设计
         </a>
@@ -711,128 +833,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">#一些想法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
-          关于增加skynet_fly 日志分割模块
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/10/skynet_fly_ss/logrotate/" target="_self">
-        <div>
-          起因通过群友对skynet_fly的使用测试，发现使用系统日志分割系统会有两个问题。  软件问题 可能有些系统并不会默认装载logrotate分割软件。 权限问题 非root用户可能无法在/etc/logrotate.d/新增文件。  就此埋下了我想实现一个内置日志分割模块的决心。 项目修改 修改原来的run.sh不再启动即配置日志分割。 把使用系统日志分割变成一个可选项，增加了create_lo
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-10 08:00" pubdate>
-              2023-09-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/03/record/blog/" target="_self">
-          blog编写环境搭建
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/09/03/record/blog/" target="_self">
-        <div>
-          前言偶然可能换电脑了，需要重新搭建起编写blog的环境。 步骤 安装git,拉取blog工程。 设置git环境。      123git config --global user.name &quot;你的GitHub用户名&quot;git config --global user.email &quot;你的GitHub注册邮箱&quot;ssh-keygen -t rsa -C &quot;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-03 11:33" pubdate>
-              2023-09-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/notebook/" class="category-chain-item">notebook</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/notebook/">#notebook</a>
             
           </div>
         
