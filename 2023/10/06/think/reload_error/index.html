@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言最近有空在用skynet_fly写中国象棋的游戏，发现了room_game房间类游戏基础架构有些许不够好的地方，就对room_game房间类游戏基础架构做了优化，具体优化有空会另外写一篇blog，这里主要记录一个我在优化的时候，突然想到的一个热更问题。 问题描述触发场景分析假如有A、B 两个服务，代码如下：  A服务  1234567891011121314151617181920local">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-06T11:22:49.000Z">
-<meta property="article:modified_time" content="2023-12-05T08:20:04.429Z">
+<meta property="article:modified_time" content="2025-10-25T09:47:13.073Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="一些想法">
 <meta name="twitter:card" content="summary_large_image">
@@ -300,19 +300,19 @@
     
       
       
-        <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新"
+        <a href="/2023/10/06/think/reload_error/" title="skynet_fly热更新存在的问题"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">关于skynet做服务热更新</span>
+           active">
+          <span class="category-post">skynet_fly热更新存在的问题</span>
         </a>
       
     
       
       
-        <a href="/2023/10/06/think/reload_error/" title="skynet_fly热更新存在的问题"
+        <a href="/2023/05/22/think/reload/" title="关于skynet做服务热更新"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">skynet_fly热更新存在的问题</span>
+           ">
+          <span class="category-post">关于skynet做服务热更新</span>
         </a>
       
     
@@ -327,19 +327,19 @@
     
       
       
-        <a href="/2023/05/07/think/whywrite/" title="为什么写blog"
+        <a href="/2024/05/03/think/srpc/" title="为skynet_fly新增远程调用方式"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">为什么写blog</span>
+          <span class="category-post">为skynet_fly新增远程调用方式</span>
         </a>
       
     
       
       
-        <a href="/2024/05/03/think/srpc/" title="为skynet_fly新增远程调用方式"
+        <a href="/2023/05/07/think/whywrite/" title="为什么写blog"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">为skynet_fly新增远程调用方式</span>
+          <span class="category-post">为什么写blog</span>
         </a>
       
     
@@ -372,7 +372,7 @@
 <ul>
 <li><strong>A服务</strong></li>
 </ul>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;timer&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    timer:new(timer.second,<span class="hljs-number">0</span>,CMD.send_msg_to_b)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.send_msg_to_b</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> b_client = contriner_client:new(<span class="hljs-string">&quot;B_m&quot;</span>)      <span class="hljs-comment">--用于访问B服务</span><br>    <span class="hljs-keyword">local</span> ret = b_client:mod_call(<span class="hljs-string">&quot;hello&quot;</span>)<br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;send_msg_to_b:&quot;</span>,ret)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> container_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;container_client&quot;</span><br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;timer&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    timer:new(timer.second,<span class="hljs-number">0</span>,CMD.send_msg_to_b)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.send_msg_to_b</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> b_client = container_client:new(<span class="hljs-string">&quot;B_m&quot;</span>)      <span class="hljs-comment">--用于访问B服务</span><br>    <span class="hljs-keyword">local</span> ret = b_client:mod_call(<span class="hljs-string">&quot;hello&quot;</span>)<br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;send_msg_to_b:&quot;</span>,ret)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>B服务</strong></li>
@@ -383,7 +383,7 @@
 <ul>
 <li><strong>A服务</strong></li>
 </ul>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;timer&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    timer:new(timer.second,<span class="hljs-number">0</span>,CMD.send_msg_to_b)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.send_msg_to_b</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">-- local b_client = contriner_client:new(&quot;B_m&quot;)      --用于访问B服务</span><br>    <span class="hljs-comment">-- local ret = b_client:mod_call(&quot;hello&quot;)</span><br>    <span class="hljs-comment">-- log.info(&quot;send_msg_to_b:&quot;,ret)</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> container_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;container_client&quot;</span><br><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;timer&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;log&quot;</span><br><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.start</span><span class="hljs-params">()</span></span><br>    timer:new(timer.second,<span class="hljs-number">0</span>,CMD.send_msg_to_b)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.exit</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.send_msg_to_b</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">-- local b_client = container_client:new(&quot;B_m&quot;)      --用于访问B服务</span><br>    <span class="hljs-comment">-- local ret = b_client:mod_call(&quot;hello&quot;)</span><br>    <span class="hljs-comment">-- log.info(&quot;send_msg_to_b:&quot;,ret)</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>B服务</strong></li>
@@ -397,7 +397,7 @@
 <h1 id="深入思考出现的问题"><a href="#深入思考出现的问题" class="headerlink" title="深入思考出现的问题"></a>深入思考出现的问题</h1><pre><code class="hljs">热更过程中，假设A服务先热更，A服务有可能访问到旧的B服务。也是有问题的。
 </code></pre>
 <ul>
-<li><p><strong>解决方案</strong><br>  要解决这个问题就必须保证所有服务热更完之前，对服务id的查询暂时先阻塞。<br>  解决方案是contriner_mgr的所有cmd命令用queue队列包裹起来，这样load启动完所有需要加载的热更模块之前所有query都得先排队，不过这样需要去避免<strong>环队列问题</strong>，load和start过程中不能有服务去调用query。所以在start完之前，需要把contriner_client:new命令暂时禁用掉。<br>  如果是非可热更模块服务就没有这个限制。</p>
+<li><p><strong>解决方案</strong><br>  要解决这个问题就必须保证所有服务热更完之前，对服务id的查询暂时先阻塞。<br>  解决方案是container_mgr的所有cmd命令用queue队列包裹起来，这样load启动完所有需要加载的热更模块之前所有query都得先排队，不过这样需要去避免<strong>环队列问题</strong>，load和start过程中不能有服务去调用query。所以在start完之前，需要把container_client:new命令暂时禁用掉。<br>  如果是非可热更模块服务就没有这个限制。</p>
 </li>
 <li><p><strong>环队列问题</strong><br>  假设队列里面有A,B两个函数，队列执行顺序为 <code>B&gt;A&gt;</code>,也就是先执行A，再执行B。<br>  前提是<strong>B</strong>的函数执行是因为<strong>A</strong>函数的call调用发起的。<br>  此时就会出现<strong>A</strong>在等<strong>B</strong>的回应，<strong>B</strong>在等<strong>A</strong>先跑完。</p>
 </li>
@@ -416,7 +416,7 @@
 <h1 id="迟到访问问题"><a href="#迟到访问问题" class="headerlink" title="迟到访问问题"></a>迟到访问问题</h1><pre><code class="hljs">热更之前A服务没有访问过B服务，就是还没有查询过B服务的地址，热更结束之后，旧A服务想访问B了，此时又会查询到新服务。
 </code></pre>
 <ul>
-<li><p><strong>解决方案</strong><br>  只要用到contriner_client的任何服务，都需要先先注册好需要访问的服务，没有注册的不能访问。</p>
+<li><p><strong>解决方案</strong><br>  只要用到container_client的任何服务，都需要先先注册好需要访问的服务，没有注册的不能访问。</p>
 </li>
 <li><p><strong>环问题</strong><br>  A访问B，B访问A，都退出不了。<br>  引入弱访问者，AB互相联系，应该有一个占主导地位的发起方。主导发起方不用管被访问者是否退出。</p>
 </li>

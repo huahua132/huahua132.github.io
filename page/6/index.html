@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/rpc/watch_syn_client/" target="_self">
-          远程订阅同步-订阅端
+        <a href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" target="_self">
+          执行流挂起等待
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/rpc/watch_syn_client/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" target="_self">
         <div>
-          watch_syn_client function M.watch(svr_name, channel_name, handle_name, handler)描述 watch监听 svr_name 的所有结点参数  svr_name string 远程结点名称 channel_name string 通道名 handle_name string 绑定的处理名(注意：pwatch包含watch的ch
+          wait function M:new(time_out)描述 新建发布端对象参数  time_out number|nil 超时时间，不填永久等待唤醒  返回值  table obj  function M:wait(k)描述 等待参数  k any 等待关联的k  返回值 function M:wakeup(k)描述 唤醒参数  k any 唤醒关联的key  返回值
         </div>
       </a>
 
@@ -266,7 +266,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83%EF%BC%8C%E8%AE%A2%E9%98%85%E5%90%8C%E6%AD%A5/" class="category-chain-item">订阅发布，订阅同步</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3/" class="category-chain-item">定时器相关</a>
   
   
 
@@ -433,15 +433,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
-          file_util file相关
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
+          env_util env相关
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
         <div>
-          file_util function M.diripairs(path_url, max_depth)描述 递归遍历目录参数  path_url string 路径 max_depth? number|nil 最大深度 nil表示到底  返回值  function 遍历函数  function M.create_luapath(skynet_fly_path)描述 skynet_fly luapa
+          env_util function M.add_pre_load(path)描述 添加服务启动之前加载的lua文件参数  path string 路径  返回值 function M.add_after_load(path)描述 添加服务启动之后加载的lua文件参数  path string 路径  返回值 function M.get_svr_id()描述 获取cluster svr_id参数
         </div>
       </a>
 
@@ -501,15 +501,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
-          env_util env相关
+        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
+          file_util file相关
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/env_util/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/utils/file_util/" target="_self">
         <div>
-          env_util function M.add_pre_load(path)描述 添加服务启动之前加载的lua文件参数  path string 路径  返回值 function M.add_after_load(path)描述 添加服务启动之后加载的lua文件参数  path string 路径  返回值 function M.get_svr_id()描述 获取cluster svr_id参数
+          file_util function M.diripairs(path_url, max_depth)描述 递归遍历目录参数  path_url string 路径 max_depth? number|nil 最大深度 nil表示到底  返回值  function 遍历函数  function M.create_luapath(skynet_fly_path)描述 skynet_fly luapa
         </div>
       </a>
 

@@ -24,7 +24,7 @@
 <meta property="og:description" content="watch_syn.luasever M.new_server(CMD)  函数作用域：M 对象的成员函数  描述:  创建一个发布者对象，需要在代码load中创建好。  参数:  - CMD (table): 模块的CMDtable  返回值: server_obj(table): 发布者对象    为什么需要传递CMD，因为发布者需要创建watch和unwatch两个接口，还有如果是热更服务还">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-28T00:00:00.000Z">
-<meta property="article:modified_time" content="2024-03-09T07:10:20.920Z">
+<meta property="article:modified_time" content="2025-10-25T09:47:13.108Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -309,19 +309,19 @@
     
       
       
-        <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
+        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">启动配置load_mods.lua</span>
+          <span class="category-post">可热更模块的启动配置项</span>
         </a>
       
     
       
       
-        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
+        <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更模块的启动配置项</span>
+          <span class="category-post">启动配置load_mods.lua</span>
         </a>
       
     
@@ -363,10 +363,10 @@
     
       
       
-        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
+        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">远程rpc调用</span>
+          <span class="category-post">定时器的使用</span>
         </a>
       
     
@@ -381,10 +381,10 @@
     
       
       
-        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
+        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">定时器的使用</span>
+          <span class="category-post">远程rpc调用</span>
         </a>
       
     
@@ -446,8 +446,8 @@
 <p>因为<strong>server</strong>可能是在<strong>可热更模块服务</strong>中创建，也可能在普通的skynet服务中，所有就抽象出了接口，用于适配这两种情况。</p>
 <p><code>service_watch_interface.lua</code> 在普通的skynet服务中使用</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs lua"><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">setmetatable</span> = <span class="hljs-built_in">setmetatable</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><span class="hljs-keyword">local</span> mt = &#123;<span class="hljs-built_in">__index</span> = M&#125;<br><span class="hljs-comment">--skynet服务 接口 传递别名或者handle_id</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:new</span><span class="hljs-params">(name_or_handle)</span></span><br>    <span class="hljs-keyword">local</span> t = &#123;<br>        server = name_or_handle<br>    &#125;<br><br>    <span class="hljs-built_in">setmetatable</span>(t, mt)<br>    <span class="hljs-keyword">return</span> t<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:send</span><span class="hljs-params">(...)</span></span><br>    skynet.send(<span class="hljs-built_in">self</span>.server, <span class="hljs-string">&#x27;lua&#x27;</span>, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:call</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> skynet.call(<span class="hljs-built_in">self</span>.server, <span class="hljs-string">&#x27;lua&#x27;</span>, ...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
-<p><code>contriner_watch_interface.lua</code> 在<strong>可热更模块服务</strong>中使用</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> contriner_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;contriner_client&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">setmetatable</span> = <span class="hljs-built_in">setmetatable</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><span class="hljs-keyword">local</span> mt = &#123;<span class="hljs-built_in">__index</span> = M&#125;<br><span class="hljs-comment">--可热更模块接口</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:new</span><span class="hljs-params">(mod_name, instance_name)</span></span><br>    <span class="hljs-keyword">local</span> t = &#123;<br>        cli = contriner_client:new(mod_name, instance_name)<br>    &#125;<br><br>    <span class="hljs-built_in">setmetatable</span>(t, mt)<br>    <span class="hljs-keyword">return</span> t<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:send</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>.cli:mod_send(...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:call</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>.cli:mod_call(...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p><code>container_watch_interface.lua</code> 在<strong>可热更模块服务</strong>中使用</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> container_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;container_client&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">setmetatable</span> = <span class="hljs-built_in">setmetatable</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><span class="hljs-keyword">local</span> mt = &#123;<span class="hljs-built_in">__index</span> = M&#125;<br><span class="hljs-comment">--可热更模块接口</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:new</span><span class="hljs-params">(mod_name, instance_name)</span></span><br>    <span class="hljs-keyword">local</span> t = &#123;<br>        cli = container_client:new(mod_name, instance_name)<br>    &#125;<br><br>    <span class="hljs-built_in">setmetatable</span>(t, mt)<br>    <span class="hljs-keyword">return</span> t<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:send</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>.cli:mod_send(...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M:call</span><span class="hljs-params">(...)</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">self</span>.cli:mod_call(...)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>client:watch(name)</strong><br>  函数作用域：M.new_client 对象的成员函数<br>  描述:  监听name<br>  参数:<br>  - name (string): 名称<br>  返回值:<ol>

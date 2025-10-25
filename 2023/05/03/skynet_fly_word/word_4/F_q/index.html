@@ -24,7 +24,7 @@
 <meta property="og:description" content="简介通常基于游戏大厅的对战类型游戏不会只有一款玩法，像英雄联盟会有匹配场，排位场，大乱斗，还有一些限时玩法，克隆，无限火力。这些特殊玩法，通常分开开服比较好，相互隔离不影响。skynet_fly_demo利用了skynet_fly房间类游戏架构可以非常快速的搭建房间对战类游戏，非常适合这种架构模式。那么如何在skynet_fly_demo新增一个游戏？我将已新增一个数字炸弹游戏为例子，进行逐步讲解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-03T10:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-14T02:54:30.134Z">
+<meta property="article:modified_time" content="2025-10-25T09:47:13.083Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -481,19 +481,19 @@
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">快进时间</span>
+          <span class="category-post">检查热更的使用以及原理</span>
         </a>
       
     
       
       
-        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">检查热更的使用以及原理</span>
+          <span class="category-post">快进时间</span>
         </a>
       
     
@@ -771,19 +771,19 @@
     
       
       
-        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
+        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" title="代码加密"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">共享配置数据</span>
+          <span class="category-post">代码加密</span>
         </a>
       
     
       
       
-        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" title="代码加密"
+        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">代码加密</span>
+          <span class="category-post">共享配置数据</span>
         </a>
       
     
@@ -836,7 +836,7 @@
                 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>通常基于游戏大厅的对战类型游戏不会只有一款玩法，像英雄联盟会有匹配场，排位场，大乱斗，还有一些限时玩法，克隆，无限火力。这些特殊玩法，通常分开开服比较好，相互隔离不影响。<br>skynet_fly_demo利用了skynet_fly房间类游戏架构可以非常快速的搭建房间对战类游戏，非常适合这种架构模式。那么如何在skynet_fly_demo新增一个游戏？我将已新增一个数字炸弹游戏为例子，进行逐步讲解。</p>
 <h1 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h1><p>在上一节(<strong>用户是如何匹配进入到游戏的？</strong>)中,我们了解到了<strong>用户-&gt;匹配-&gt;匹配成功-&gt;进入游戏</strong>的过程。新增一款游戏，其实就是把新款游戏加入到这个过程中，不过前提是先有游戏。</p>
 <h1 id="新增游戏"><a href="#新增游戏" class="headerlink" title="新增游戏"></a>新增游戏</h1><h2 id="stop-1-创建游戏服务项目"><a href="#stop-1-创建游戏服务项目" class="headerlink" title="stop 1 创建游戏服务项目"></a>stop 1 创建游戏服务项目</h2><p>在games文件夹下创建名为<strong>digitalbomb</strong>数字炸弹的游戏，这个文件夹的名字就是<strong>cluster_name</strong>,集群中的服务名。</p>
-<h2 id="stop-2-新增入口文件-main-lua"><a href="#stop-2-新增入口文件-main-lua" class="headerlink" title="stop 2 新增入口文件 main.lua"></a>stop 2 新增入口文件 main.lua</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> contriner_launcher = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.contriner.contriner_launcher&quot;</span><br><br>skynet.start(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	skynet.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;start digitalbomb&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span>)<br>	contriner_launcher.run()<br>	<span class="hljs-comment">--启动集群连接入口</span><br>	skynet.uniqueservice(<span class="hljs-string">&quot;frpc_server&quot;</span>)<br>	<span class="hljs-comment">--启动room_game_login 登录服务</span><br>	skynet.uniqueservice(<span class="hljs-string">&quot;room_game_login&quot;</span>)<br><br>	skynet.call(<span class="hljs-string">&#x27;.logger&#x27;</span>,<span class="hljs-string">&#x27;lua&#x27;</span>,<span class="hljs-string">&#x27;add_hook&#x27;</span>,<span class="hljs-string">&#x27;common.log_hook&#x27;</span>)<br><br>	skynet.<span class="hljs-built_in">exit</span>()<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="stop-2-新增入口文件-main-lua"><a href="#stop-2-新增入口文件-main-lua" class="headerlink" title="stop 2 新增入口文件 main.lua"></a>stop 2 新增入口文件 main.lua</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> container_launcher = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.container.container_launcher&quot;</span><br><br>skynet.start(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>	skynet.<span class="hljs-built_in">error</span>(<span class="hljs-string">&quot;start digitalbomb&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span>)<br>	container_launcher.run()<br>	<span class="hljs-comment">--启动集群连接入口</span><br>	skynet.uniqueservice(<span class="hljs-string">&quot;frpc_server&quot;</span>)<br>	<span class="hljs-comment">--启动room_game_login 登录服务</span><br>	skynet.uniqueservice(<span class="hljs-string">&quot;room_game_login&quot;</span>)<br><br>	skynet.call(<span class="hljs-string">&#x27;.logger&#x27;</span>,<span class="hljs-string">&#x27;lua&#x27;</span>,<span class="hljs-string">&#x27;add_hook&#x27;</span>,<span class="hljs-string">&#x27;common.log_hook&#x27;</span>)<br><br>	skynet.<span class="hljs-built_in">exit</span>()<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
 <p>启动入口文件跟象棋是一样的。</p>
 <h2 id="stop-3-编辑load-mods-lua-文件"><a href="#stop-3-编辑load-mods-lua-文件" class="headerlink" title="stop 3 编辑load_mods.lua 文件"></a>stop 3 编辑load_mods.lua 文件</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> redis_cfg = <span class="hljs-built_in">loadfile</span>(<span class="hljs-string">&quot;../../commonlualib/common/etc/redis_cfg.lua&quot;</span>)()<br><span class="hljs-keyword">local</span> server_cfg = <span class="hljs-built_in">loadfile</span>(<span class="hljs-string">&quot;../../commonlualib/common/etc/server_cfg.lua&quot;</span>)()<br><span class="hljs-keyword">local</span> gate_cfg = <span class="hljs-built_in">loadfile</span>(<span class="hljs-string">&quot;../../commonlualib/common/etc/gate_cfg.lua&quot;</span>)()<br><span class="hljs-keyword">local</span> frpc_server_cfg = <span class="hljs-built_in">loadfile</span>(<span class="hljs-string">&quot;../../commonlualib/common/etc/frpc_server_cfg.lua&quot;</span>)()<br><span class="hljs-keyword">local</span> mysql_cfg = <span class="hljs-built_in">loadfile</span>(<span class="hljs-string">&quot;../../commonlualib/common/etc/mysql_cfg.lua&quot;</span>)()<br><br><span class="hljs-keyword">return</span> &#123;<br>	<span class="hljs-comment">--共享配置</span><br>	share_config_m = &#123;<br>		launch_seq = <span class="hljs-number">1000</span>,     <span class="hljs-comment">--启动顺序，从小到大</span><br>		launch_num = <span class="hljs-number">1</span>,     <span class="hljs-comment">--启动数量</span><br>		default_arg = &#123;     <span class="hljs-comment">--默认配置</span><br>			<span class="hljs-comment">--room_game_login用的配置</span><br>			room_game_login = &#123;<br>				gateservice = <span class="hljs-string">&quot;ws_gate&quot;</span>, <span class="hljs-comment">--gate 或者 ws_gate</span><br>				<span class="hljs-comment">--gate连接配置</span><br>				gateconf = gate_cfg.games.digitalbomb_1,<br>				login_plug = <span class="hljs-string">&quot;common.plug.login_plug&quot;</span>,  <span class="hljs-comment">--login加载的插件lua模块文件名</span><br>			&#125;,<br>			<span class="hljs-comment">--cluster_server用的配置</span><br>			frpc_server = frpc_server_cfg.games.digitalbomb_1,<br><br>			server_cfg = server_cfg.games.digitalbomb_1,<br>		&#125;<br>	&#125;,<br><br>	<span class="hljs-comment">--日志切割</span><br>	logrotate_m = &#123;<br>        launch_seq = <span class="hljs-number">5000</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            file_path = <span class="hljs-string">&#x27;./logs_1/&#x27;</span>,          <span class="hljs-comment">--文件路径</span><br>            filename = <span class="hljs-string">&#x27;server.log&#x27;</span>,   <span class="hljs-comment">--文件名</span><br>            limit_size = <span class="hljs-number">0</span>,            <span class="hljs-comment">--最小分割大小</span><br>            max_age = <span class="hljs-number">7</span>,               <span class="hljs-comment">--最大保留天数</span><br>            max_backups = <span class="hljs-number">7</span>,           <span class="hljs-comment">--最大保留文件数</span><br>            sys_cmd = <span class="hljs-string">[[</span><br><span class="hljs-string">                /usr/bin/pkill -HUP -f skynet.digitalbomb_config.lua.load_mods_1.lua\n</span><br><span class="hljs-string">            ]]</span>,              <span class="hljs-comment">--系统命令</span><br>        &#125;<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>为了方便讲解查看，我把跟象棋相同的配置项都删除了，留下了需要改动的配置项。<br><strong>gateconf</strong> ws_gate连接入口的配置<br><strong>frpc_server</strong> 集群入口配置<br><strong>server_cfg</strong> 服务的环境参数配置<br><strong>sys_cmd</strong> 日志轮换的系统命令</p>
@@ -964,9 +964,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？">
+                      <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">大厅服如何对模块功能进行拆分隔离？</span>
+                        <span class="hidden-mobile">用户是如何匹配进入到游戏的？</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -974,8 +974,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？">
-                        <span class="hidden-mobile">用户是如何注册的？</span>
+                      <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐">
+                        <span class="hidden-mobile">开发环境推荐</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

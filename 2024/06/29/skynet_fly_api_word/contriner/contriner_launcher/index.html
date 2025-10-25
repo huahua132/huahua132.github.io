@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="contriner_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块">
+    <meta name="description" content="container_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块">
 <meta property="og:type" content="article">
 <meta property="og:title" content="启动函数">
 <meta property="og:url" content="https://huahua132.github.io/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="contriner_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块">
+<meta property="og:description" content="container_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-30T06:19:42.038Z">
+<meta property="article:modified_time" content="2025-10-25T09:47:13.089Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -373,19 +373,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" title="访问对象[内部rpc]"
+        <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" title="访问对象[远程rpc]"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">访问对象[内部rpc]</span>
+          <span class="category-post">访问对象[远程rpc]</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" title="访问对象[远程rpc]"
+        <a href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" title="访问对象[内部rpc]"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">访问对象[远程rpc]</span>
+          <span class="category-post">访问对象[内部rpc]</span>
         </a>
       
     
@@ -483,19 +483,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" title="执行流挂起等待"
+        <a href="/2024/06/29/skynet_fly_api_word/time_extend/timer_point/" title="整点报时"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">执行流挂起等待</span>
+          <span class="category-post">整点报时</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/time_extend/timer_point/" title="整点报时"
+        <a href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" title="执行流挂起等待"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">整点报时</span>
+          <span class="category-post">执行流挂起等待</span>
         </a>
       
     
@@ -529,19 +529,19 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">file_util file相关</span>
+          <span class="category-post">env_util env相关</span>
         </a>
       
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
+        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">env_util env相关</span>
+          <span class="category-post">file_util file相关</span>
         </a>
       
     
@@ -684,15 +684,6 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api_word/db/mongof/" title="mongo直连"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">mongo直连</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/06/29/skynet_fly_api_word/db/mysqlf/" title="mysql连接池调用"
            class="list-group-item list-group-item-action
            ">
@@ -706,6 +697,15 @@
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">mysql直连调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/mongof/" title="mongo直连"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">mongo直连</span>
         </a>
       
     
@@ -965,7 +965,7 @@
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/contriner/contriner_launcher.lua">contriner_launcher</a></p>
+                <p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/container/container_launcher.lua">container_launcher</a></p>
 <h2 id="function-M-run"><a href="#function-M-run" class="headerlink" title="function M.run()"></a>function M.run()</h2><p><strong>描述</strong></p>
 <p>这是启动函数通常在main.lua中调用<br><strong>参数</strong></p>
 <p><strong>返回值</strong></p>
@@ -1069,9 +1069,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/client/orm_table_client/" title="orm访问对象">
+                      <a href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" title="访问对象[内部rpc]">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">orm访问对象</span>
+                        <span class="hidden-mobile">访问对象[内部rpc]</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -1079,8 +1079,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api_word/db/mongof/" title="mongo直连">
-                        <span class="hidden-mobile">mongo直连</span>
+                      <a href="/2024/06/29/skynet_fly_api_word/db/mysqlf/" title="mysql连接池调用">
+                        <span class="hidden-mobile">mysql连接池调用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
