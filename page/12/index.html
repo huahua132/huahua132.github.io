@@ -229,15 +229,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/14/socket/c/" target="_self">
-          网络七层模型
+        <a href="/2023/05/14/socket/epoll/" target="_self">
+          select,poll,epoll 对比
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/c/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
         <div>
-          7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h
+          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
         </div>
       </a>
 
@@ -290,15 +290,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/14/socket/epoll/" target="_self">
-          select,poll,epoll 对比
+        <a href="/2023/05/14/socket/c/" target="_self">
+          网络七层模型
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/epoll/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/14/socket/c/" target="_self">
         <div>
-          最大链接数 select 有上限FD_SETSIZE设置 poll 链表实现，没有上限 epoll 没有上限  fd剧增带来的io效率问题 select 轮询机制， o(n)复杂度 poll 轮询机制，o(n)复杂度 epoll 事件通知机制，o(1)复杂度  消息传递方式 select 完整拷贝 poll 完整拷贝 epoll 通过内核与用户空间共享内存来实现  工作方式 select LT p
+          7层 物理层，数据链路层，网络层，传输层，会话层，表示层，应用层 5层 物理层，数据链路层，网络层，传输层，应用层 4层 网络接口层，网络层，传输层，应用层  物理层    传输介质，网线，光纤数据链路层    保持数据的可靠传输网络层    数据路由，ip地址传输层    tcp，udp协议，数据打包会话层    建立与管理应用程序之间的通信表示层    解决不同系统的兼容问题应用层    h
         </div>
       </a>
 
@@ -792,15 +792,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
-          用户是如何匹配进入到游戏的？
+        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
+          用户是如何登录的？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/E_q/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/C_q/" target="_self">
         <div>
-          简介目前domo中实现了一个完整的游戏，中国象棋，实现了对应用cocos creator实现的客户端。之后做了匹配逻辑，匹配逻辑的表现是仿照LOL英雄联盟做的。 匹配进入游戏流程 c2s 玩家请求hallserver匹配 s2s hallserver请求matchserver匹配 matchserver 定时执行撮合逻辑 s2s matchserver找到撮合对象后，请求对应gameserver游
+          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的登录接口 s2s loginserver 调用 centerserver 验证账号，密码 s2s loginserver 调用 hallserver 生成token s2c loginserver 返回登录结果和token c2s 连接大厅服，发送登录请求，hallserver验证t
         </div>
       </a>
 

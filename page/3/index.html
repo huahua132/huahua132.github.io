@@ -230,14 +230,14 @@
       <h1 class="index-header">
         
         <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" target="_self">
-          可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持
+          可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持
         </a>
       </h1>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" target="_self">
         <div>
-          前言一开始，对与客户端交互协议仅仅提供了name, body，包名加包体的简单打包方式，对于body大家可以自由选择任意编码解码方式(json、protobuff、sproto …)。后面觉得name少许增加了包体大小，就新增了packid,body协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc
+          📖 前言在项目初期，客户端与服务端的交互协议采用了简单的 name + body 模式（包名 + 包体）。其中 body 支持多种编码方式（JSON、Protobuf、Sproto 等），使用起来非常灵活。 随着项目发展，我们发现 name 字段增加了不必要的包体积，于是优化为 packid + body（协议码 + 包体）的方式。 但这两种方式都存在一个问题：无法让客户端 RPC 调用服务端。
         </div>
       </a>
 
@@ -827,15 +827,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
-          日志轮换
+        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
+          远程订阅发布模式
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
         <div>
-          logrotate function M:new(filename)描述 新建对象参数  filename string? 文件名  返回值  table 对象  function M:set_rename_format(rename_format)描述 重命名文件格式参数  rename_format string  返回值  table 对象  function M:set_file_path
+          watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名
         </div>
       </a>
 
@@ -859,15 +859,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3/" class="category-chain-item">日志相关</a>
-  
-  
-
   
 
       </span>

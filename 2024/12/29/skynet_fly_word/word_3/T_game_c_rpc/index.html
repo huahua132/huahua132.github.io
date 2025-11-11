@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言一开始，对与客户端交互协议仅仅提供了name, body，包名加包体的简单打包方式，对于body大家可以自由选择任意编码解码方式(json、protobuff、sproto …)。后面觉得name少许增加了包体大小，就新增了packid,body协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc">
+    <meta name="description" content="📖 前言在项目初期，客户端与服务端的交互协议采用了简单的 name + body 模式（包名 + 包体）。其中 body 支持多种编码方式（JSON、Protobuf、Sproto 等），使用起来非常灵活。 随着项目发展，我们发现 name 字段增加了不必要的包体积，于是优化为 packid + body（协议码 + 包体）的方式。 但这两种方式都存在一个问题：无法让客户端 RPC 调用服务端。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持">
+<meta property="og:title" content="可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持">
 <meta property="og:url" content="https://huahua132.github.io/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言一开始，对与客户端交互协议仅仅提供了name, body，包名加包体的简单打包方式，对于body大家可以自由选择任意编码解码方式(json、protobuff、sproto …)。后面觉得name少许增加了包体大小，就新增了packid,body协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc">
+<meta property="og:description" content="📖 前言在项目初期，客户端与服务端的交互协议采用了简单的 name + body 模式（包名 + 包体）。其中 body 支持多种编码方式（JSON、Protobuf、Sproto 等），使用起来非常灵活。 随着项目发展，我们发现 name 字段增加了不必要的包体积，于是优化为 packid + body（协议码 + 包体）的方式。 但这两种方式都存在一个问题：无法让客户端 RPC 调用服务端。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-12-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-02-25T07:34:46.376Z">
+<meta property="article:modified_time" content="2025-11-11T12:36:22.446Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持 - huahua132 blog</title>
+  <title>可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"></span>
+            <span id="subtitle" data-typed-text="可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持"></span>
           
         </div>
 
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          929 字
+          2.8k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          8 分钟
+          24 分钟
         
       </span>
     
@@ -798,10 +798,10 @@
     
       
       
-        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"
+        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</span>
+          <span class="category-post">可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持</span>
         </a>
       
     
@@ -828,41 +828,150 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</h1>
+            <h1 style="display: none">可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一开始，对与客户端交互协议仅仅提供了<code>name, body</code>，包名加包体的简单打包方式，对于<code>body</code>大家可以自由选择任意编码解码方式(<code>json</code>、<code>protobuff</code>、<code>sproto</code> …)。后面觉得<code>name</code>少许增加了包体大小，就新增了<code>packid,body</code>协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc 协议的支持。</p>
-<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><p>以下对于整型都是使用大端无符号方式打包</p>
-<h1 id="name-body-协议拆解"><a href="#name-body-协议拆解" class="headerlink" title="name, body 协议拆解"></a><code>name, body</code> 协议拆解</h1><ul>
-<li>2字节 包体总长度(不包括自己)</li>
-<li>2字节 协议包名长度</li>
-<li>包名</li>
-<li>消息体</li>
+                <h1 id="📖-前言"><a href="#📖-前言" class="headerlink" title="📖 前言"></a>📖 前言</h1><p>在项目初期，客户端与服务端的交互协议采用了简单的 <code>name + body</code> 模式（包名 + 包体）。其中 <code>body</code> 支持多种编码方式（<code>JSON</code>、<code>Protobuf</code>、<code>Sproto</code> 等），使用起来非常灵活。</p>
+<p>随着项目发展，我们发现 <code>name</code> 字段增加了不必要的包体积，于是优化为 <code>packid + body</code>（协议码 + 包体）的方式。</p>
+<p>但这两种方式都存在一个问题：<strong>无法让客户端 RPC 调用服务端</strong>。客户端只能被动监听服务端推送的各种消息，开发体验不够友好。因此，我们决定新增<strong>客户端 RPC 协议</strong>的支持。</p>
+<hr>
+<h1 id="📝-协议说明"><a href="#📝-协议说明" class="headerlink" title="📝 协议说明"></a>📝 协议说明</h1><blockquote>
+<p>💡 <strong>约定</strong>：以下所有整型均采用<strong>大端无符号</strong>方式打包</p>
+</blockquote>
+<hr>
+<h2 id="1️⃣-name-body-协议结构"><a href="#1️⃣-name-body-协议结构" class="headerlink" title="1️⃣ name + body 协议结构"></a>1️⃣ <code>name + body</code> 协议结构</h2><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs tap">┌─────────────────────────────────────┐<br>│<span class="hljs-number"> 2 </span>字节  包体总长度（不包括自身）      │<br>├─────────────────────────────────────┤<br>│<span class="hljs-number"> 2 </span>字节  协议包名长度                 │<br>├─────────────────────────────────────┤<br>│ N 字节  包名                         │<br>├─────────────────────────────────────┤<br>│ M 字节  消息体                       │<br>└─────────────────────────────────────┘<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>特点</strong>：</p>
+<ul>
+<li>✅ 协议名直观易读</li>
+<li>❌ 包名占用额外空间</li>
 </ul>
-<h1 id="packid-body-协议拆解"><a href="#packid-body-协议拆解" class="headerlink" title="packid, body 协议拆解"></a><code>packid, body</code> 协议拆解</h1><ul>
-<li>2字节 包体总长度(不包括自己)</li>
-<li>2字节 协议码</li>
-<li>消息体</li>
+<hr>
+<h2 id="2️⃣-packid-body-协议结构"><a href="#2️⃣-packid-body-协议结构" class="headerlink" title="2️⃣ packid + body 协议结构"></a>2️⃣ <code>packid + body</code> 协议结构</h2><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs tap">┌─────────────────────────────────────┐<br>│<span class="hljs-number"> 2 </span>字节  包体总长度（不包括自身）      │<br>├─────────────────────────────────────┤<br>│<span class="hljs-number"> 2 </span>字节  协议码                       │<br>├─────────────────────────────────────┤<br>│ N 字节  消息体                       │<br>└─────────────────────────────────────┘<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>特点</strong>：</p>
+<ul>
+<li>✅ 包体更小</li>
+<li>⚠️ 包头固定 2 字节，<strong>包体最大长度为 65535</strong></li>
 </ul>
-<p>这两种方式，因为包头固定都是2字节，所以包体最大长度为65535。</p>
-<h1 id="rpc-协议拆解"><a href="#rpc-协议拆解" class="headerlink" title="rpc 协议拆解"></a>rpc 协议拆解</h1><ul>
-<li>2字节 包体总长度(不包括自己)</li>
-<li>1字节 包类型      字段描述：字段描述: (0-整包  1包头  2包体  3包尾)</li>
-<li>1字节 消息类型    字段描述: (0-服务端推送 1-客户端推送 2-客户端请求 3-服务端回复 4-服务器回复错误)</li>
-<li>2字节 协议码      字段描述: 协议码</li>
-<li>4字节 会话号      字段描述: 标识同一消息</li>
-<li>消息体|4字节 消息总长度    字段描述：包头时为4字节的消息内容长度</li>
+<hr>
+<h2 id="3️⃣-RPC-协议结构（新增）"><a href="#3️⃣-RPC-协议结构（新增）" class="headerlink" title="3️⃣ RPC 协议结构（新增）"></a>3️⃣ RPC 协议结构（新增）</h2><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs tap">┌──────────────────────────────────────────────┐<br>│<span class="hljs-number"> 2 </span>字节  包体总长度（不包括自身）              │<br>├──────────────────────────────────────────────┤<br>│<span class="hljs-number"> 1 </span>字节  包类型                               │<br>│         0-整包  1-包头  2-包体  3-包尾       │<br>├──────────────────────────────────────────────┤<br>│<span class="hljs-number"> 1 </span>字节  消息类型                             │<br>│         0-服务端推送    1-客户端推送         │<br>│         2-客户端请求    3-服务端回复         │<br>│         4-服务端回复错误                     │<br>├──────────────────────────────────────────────┤<br>│<span class="hljs-number"> 2 </span>字节  协议码                               │<br>├──────────────────────────────────────────────┤<br>│<span class="hljs-number"> 4 </span>字节  会话号（Session ID）                 │<br>│         用于标识同一次请求/响应               │<br>├──────────────────────────────────────────────┤<br>│ N 字节  消息体                               │<br>│  或                                          │<br>│<span class="hljs-number"> 4 </span>字节  消息总长度（仅包头时）               │<br>└──────────────────────────────────────────────┘<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="🔐-安全设计"><a href="#🔐-安全设计" class="headerlink" title="🔐 安全设计"></a>🔐 安全设计</h1><h2 id="⚠️-不支持客户端发送大包"><a href="#⚠️-不支持客户端发送大包" class="headerlink" title="⚠️ 不支持客户端发送大包"></a>⚠️ 不支持客户端发送大包</h2><p>客户端<strong>仅能发送整包</strong>，服务端应拒绝处理除整包外的其他包类型。</p>
+<p><strong>原因</strong>：防止恶意客户端利用分包机制攻击服务器，导致内存耗尽。</p>
+<hr>
+<h1 id="🎯-RPC-实现方案"><a href="#🎯-RPC-实现方案" class="headerlink" title="🎯 RPC 实现方案"></a>🎯 RPC 实现方案</h1><h2 id="协议码规范"><a href="#协议码规范" class="headerlink" title="协议码规范"></a>协议码规范</h2><p>为实现 RPC 效果，需要规范协议码定义：</p>
+<table>
+<thead>
+<tr>
+<th>协议类型</th>
+<th>协议码示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>请求</td>
+<td>10101</td>
+<td>客户端发起请求</td>
+</tr>
+<tr>
+<td>响应</td>
+<td>10102</td>
+<td>服务端返回响应（请求码 + 1）</td>
+</tr>
+</tbody></table>
+<p><strong>打包规则</strong>：回复消息时使用 <code>req_packid + 1</code> 即可</p>
+<hr>
+<h2 id="会话号（Session）约定"><a href="#会话号（Session）约定" class="headerlink" title="会话号（Session）约定"></a>会话号（Session）约定</h2><table>
+<thead>
+<tr>
+<th>发送方</th>
+<th>会话号规则</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>客户端推送</strong></td>
+<td>固定为 <code>0</code></td>
+<td>不需要响应</td>
+</tr>
+<tr>
+<td><strong>客户端请求</strong></td>
+<td>奇数（1, 3, 5…）</td>
+<td>达到 <code>4,294,967,295</code> 时重置为 <code>1</code></td>
+</tr>
+<tr>
+<td><strong>服务端响应</strong></td>
+<td>偶数（请求号 + 1）</td>
+<td>正常响应</td>
+</tr>
+<tr>
+<td><strong>服务端错误</strong></td>
+<td>偶数（请求号 + 1）</td>
+<td>错误响应</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="客户端实现要点"><a href="#客户端实现要点" class="headerlink" title="客户端实现要点"></a>客户端实现要点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 客户端 RPC 实现示例伪代码</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">rpcCall</span>(<span class="hljs-params">packid, body</span>) &#123;<br>    <span class="hljs-keyword">const</span> session = <span class="hljs-title function_">getNextOddSession</span>(); <span class="hljs-comment">// 获取奇数会话号</span><br>    <br>    <span class="hljs-comment">// 发送请求</span><br>    <span class="hljs-title function_">send</span>(&#123;<br>        <span class="hljs-attr">type</span>: <span class="hljs-number">2</span>,        <span class="hljs-comment">// 客户端请求</span><br>        <span class="hljs-attr">packid</span>: packid,<br>        <span class="hljs-attr">session</span>: session,<br>        <span class="hljs-attr">body</span>: body<br>    &#125;);<br>    <br>    <span class="hljs-comment">// 等待响应</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>        pendingRequests[session] = &#123;<br>            resolve,<br>            reject,<br>            <span class="hljs-attr">timeout</span>: <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>                <span class="hljs-keyword">delete</span> pendingRequests[session];<br>                <span class="hljs-title function_">reject</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Request timeout&#x27;</span>));<br>            &#125;, <span class="hljs-number">30000</span>) <span class="hljs-comment">// 30秒超时</span><br>        &#125;;<br>    &#125;);<br>&#125;<br><br><span class="hljs-comment">// 接收消息处理</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">onMessage</span>(<span class="hljs-params">msg</span>) &#123;<br>    <span class="hljs-keyword">if</span> (msg.<span class="hljs-property">type</span> === <span class="hljs-number">3</span> || msg.<span class="hljs-property">type</span> === <span class="hljs-number">4</span>) &#123; <span class="hljs-comment">// 服务端响应</span><br>        <span class="hljs-keyword">const</span> pending = pendingRequests[msg.<span class="hljs-property">session</span> - <span class="hljs-number">1</span>]; <span class="hljs-comment">// 奇数请求对应偶数响应</span><br>        <span class="hljs-keyword">if</span> (pending) &#123;<br>            <span class="hljs-built_in">clearTimeout</span>(pending.<span class="hljs-property">timeout</span>);<br>            <br>            <span class="hljs-keyword">if</span> (msg.<span class="hljs-property">type</span> === <span class="hljs-number">3</span>) &#123;<br>                <span class="hljs-comment">// 检查是否需要继续等待分包</span><br>                <span class="hljs-keyword">if</span> (msg.<span class="hljs-property">packageType</span> !== <span class="hljs-number">3</span>) &#123; <span class="hljs-comment">// 非包尾</span><br>                    <span class="hljs-comment">// 继续等待后续包</span><br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>                pending.<span class="hljs-title function_">resolve</span>(msg.<span class="hljs-property">body</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                pending.<span class="hljs-title function_">reject</span>(msg.<span class="hljs-property">body</span>);<br>            &#125;<br>            <br>            <span class="hljs-keyword">delete</span> pendingRequests[msg.<span class="hljs-property">session</span> - <span class="hljs-number">1</span>];<br>        &#125;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="⏱️-超时处理"><a href="#⏱️-超时处理" class="headerlink" title="⏱️ 超时处理"></a>⏱️ 超时处理</h1><p>客户端 RPC 实现<strong>必须</strong>增加超时机制，避免以下问题：</p>
+<ul>
+<li>❌ 服务端代码异常未回复</li>
+<li>❌ 服务端遗漏发送响应</li>
+<li>❌ 请求永久挂起</li>
 </ul>
-<h2 id="不支持客户端发送大包"><a href="#不支持客户端发送大包" class="headerlink" title="不支持客户端发送大包"></a>不支持客户端发送大包</h2><p>客户端只能发送整包，服务端收到整包以外的消息应该拒绝处理。<br>不支持客户端发送大包的原因是 可能利用此行为进行攻击服务器，导致服务器内存耗尽。</p>
-<h2 id="如何达到支持RPC效果"><a href="#如何达到支持RPC效果" class="headerlink" title="如何达到支持RPC效果"></a>如何达到支持RPC效果</h2><ul>
-<li>使用时规范协议码定义，比如协议10101为请求，10102为回复。 这样我们在打包回复消息的时候只需要用req_packid + 1即可。</li>
-<li>会话号约定，客户端推送为0即可(不能发送大包)，客户端请求(奇数)达到(4,294,967,295)时客户端应该直接切换到1,避免服务端使用溢出后的0进行回复, 服务端回复，服务器回复错误(偶数,奇数基础上加1)。</li>
+<p><strong>建议超时时间</strong>：30 秒</p>
+<hr>
+<h1 id="📚-参考示例"><a href="#📚-参考示例" class="headerlink" title="📚 参考示例"></a>📚 参考示例</h1><h2 id="🔗-快速入门"><a href="#🔗-快速入门" class="headerlink" title="🔗 快速入门"></a>🔗 快速入门</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/digitalbomb_byrpc">简单示例代码</a></li>
 </ul>
-<p>这样客户端在实现时，可以判断如果是客户端请求就用session(会话号)挂起等待服务端回复，收到服务端消息时用session(会话号)找到对于请求状态，用包类型判断需不需要继续等待粘包。</p>
-<h2 id="超时处理"><a href="#超时处理" class="headerlink" title="超时处理"></a>超时处理</h2><p>客户端rpc 实现可以增加超时处理，避免服务端代码报错，或者没有发送回复消息，导致req 一直挂起。</p>
-<h1 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/digitalbomb_byrpc">简单示例</a></h1><h1 id="项目示例服务端"><a href="#项目示例服务端" class="headerlink" title="项目示例服务端"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly_demo">项目示例服务端</a></h1><h1 id="项目示例客户端"><a href="#项目示例客户端" class="headerlink" title="[项目示例客户端]"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly_demo/tree/master/client/chinesechess_oops">[项目示例客户端]</a></h1>
+<h2 id="🎮-完整项目示例"><a href="#🎮-完整项目示例" class="headerlink" title="🎮 完整项目示例"></a>🎮 完整项目示例</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly_demo">服务端实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly_demo/tree/master/client/chinesechess_oops">客户端实现（基于 Cocos Creator Oops Framework）</a></li>
+</ul>
+<hr>
+<h1 id="📊-协议对比总结"><a href="#📊-协议对比总结" class="headerlink" title="📊 协议对比总结"></a>📊 协议对比总结</h1><table>
+<thead>
+<tr>
+<th>协议类型</th>
+<th>包头大小</th>
+<th>支持 RPC</th>
+<th>支持大包</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name + body</code></td>
+<td>4+ 字节</td>
+<td>❌</td>
+<td>❌</td>
+<td>简单推送</td>
+</tr>
+<tr>
+<td><code>packid + body</code></td>
+<td>4 字节</td>
+<td>❌</td>
+<td>❌</td>
+<td>紧凑推送</td>
+</tr>
+<tr>
+<td><strong>RPC 协议</strong></td>
+<td><strong>10 字节</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td><strong>完整交互</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<div align="center">
+
+<p><strong>🎉 祝开发愉快！</strong></p>
+<p>有问题欢迎提 Issue 或 PR</p>
+</div>
                 
               </div>
             
@@ -914,7 +1023,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</div>
+      <div>可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持</div>
       <div>https://huahua132.github.io/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/</div>
     </div>
     <div class="license-meta">
