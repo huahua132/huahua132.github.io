@@ -229,74 +229,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
-          如何更改skynet服务的配置项
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
-        <div>
-          配置在load_mods.lua 配置文件中，我们可以启动一个share_config_m共享配置的模块，我们可以把这些配置放在 server_cfg中。 12345678910111213141516return &#123;	share_config_m = &#123;		launch_seq = 1,		launch_num = 1,		default_arg = &#123;			ser
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-25 08:00" pubdate>
-              2023-02-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" target="_self">
           文件查找规则
         </a>
@@ -365,15 +297,83 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
-          rpc调用
+        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
+          如何更改skynet服务的配置项
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" target="_self">
         <div>
-          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = container_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
+          配置在load_mods.lua 配置文件中，我们可以启动一个share_config_m共享配置的模块，我们可以把这些配置放在 server_cfg中。 12345678910111213141516return &#123;	share_config_m = &#123;		launch_seq = 1,		launch_num = 1,		default_arg = &#123;			ser
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-02-25 08:00" pubdate>
+              2023-02-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%85%A5%E9%97%A8%E7%AF%87/" class="category-chain-item">入门篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" target="_self">
+          前言
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/A_home/" target="_self">
+        <div>
+          前言通过入门篇，我们学会了框架的基本使用规则。但是我们还不知道如何RPC调用，如何远程RPC调用，热更原理机制是什么。学会这些，可以说是使用该框架的高手的。
         </div>
       </a>
 
@@ -433,15 +433,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" target="_self">
-          前言
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
+          rpc调用
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" target="_self">
         <div>
-          前言通过入门篇，我们学会了框架的基本使用规则。但是我们还不知道如何RPC调用，如何远程RPC调用，热更原理机制是什么。学会这些，可以说是使用该框架的高手的。
+          常规的RPC调用使用skynet.call,skyent.send。 rpc调用可热更服务模块12local ret = container_client:instance(&quot;B_m&quot;):mod_call(&quot;hello&quot;)log.info(&quot;send_msg_to_b:&quot;,ret) 这里的意思是给B_m 可热更模块发送hello消息命令。
         </div>
       </a>
 
@@ -773,15 +773,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
-          可热更匹配房间类游戏架构基础设施
+        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
+          前言
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/A_home/" target="_self">
         <div>
-          可热更匹配房间类游戏架构基础设施后续优化 2024&#x2F;6&#x2F;14 22:30支持同时开websocket 和 socket load_mods 配置改动123456789101112131415161718192021222324252627--共享配置share_config_m = &#123;	launch_seq = 1,	launch_num = 1,	default_a
+          前言这一篇，主要介绍skyent_fly提供的增强功能。  我想应该有很多读者一股脑把文档看了个遍，之后发现学费了。正常的。技术能力提升并不能一蹴而就，需要经过大量的实践思考学习，慢慢累计起来方能有所成。 加油！
         </div>
       </a>
 
@@ -841,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
-          gate,wsgate通用协议的设计
+        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
+          可热更匹配房间类游戏架构基础设施
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/C_proto/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_3/B_game/" target="_self">
         <div>
-          gate,wsgate通用协议的设计
+          可热更匹配房间类游戏架构基础设施后续优化 2024&#x2F;6&#x2F;14 22:30支持同时开websocket 和 socket load_mods 配置改动123456789101112131415161718192021222324252627--共享配置share_config_m = &#123;	launch_seq = 1,	launch_num = 1,	default_a
         </div>
       </a>
 

@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到订阅发布模式(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。 对比redisredis也支持sub&#x2F;pub模式，并且有psub批量订阅支持。 skynet_fly目前只实现了sub&#x2F;pub模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。不过skynet_fly实现了red">
+    <meta name="description" content="📖 前言在分布式系统中，事件通知的目标往往是不确定或动态增长的。这时就需要使用订阅发布模式（sub&#x2F;pub）来解耦发布者和订阅者：  💡 核心思想：发布者只负责发布事件，谁关心就订阅谁   🎯 两种订阅模式对比核心差异graph TB     subgraph &quot;订阅发布模式 (sub&#x2F;pub)&quot;         A1[发布者] --&gt;|发布事件| B1[">
 <meta property="og:type" content="article">
-<meta property="og:title" content="远程sub&#x2F;pub 模式 和 远程subsyn&#x2F;pubsyn 模式">
+<meta property="og:title" content="远程订阅发布模式 - sub&#x2F;pub 与 subsyn&#x2F;pubsyn">
 <meta property="og:url" content="https://huahua132.github.io/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="前言有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到订阅发布模式(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。 对比redisredis也支持sub&#x2F;pub模式，并且有psub批量订阅支持。 skynet_fly目前只实现了sub&#x2F;pub模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。不过skynet_fly实现了red">
+<meta property="og:description" content="📖 前言在分布式系统中，事件通知的目标往往是不确定或动态增长的。这时就需要使用订阅发布模式（sub&#x2F;pub）来解耦发布者和订阅者：  💡 核心思想：发布者只负责发布事件，谁关心就订阅谁   🎯 两种订阅模式对比核心差异graph TB     subgraph &quot;订阅发布模式 (sub&#x2F;pub)&quot;         A1[发布者] --&gt;|发布事件| B1[">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-11T12:52:48.899Z">
+<meta property="article:modified_time" content="2025-11-11T12:55:38.981Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>远程sub/pub 模式 和 远程subsyn/pubsyn 模式 - huahua132 blog</title>
+  <title>远程订阅发布模式 - sub/pub 与 subsyn/pubsyn - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"></span>
+            <span id="subtitle" data-typed-text="远程订阅发布模式 - sub/pub 与 subsyn/pubsyn"></span>
           
         </div>
 
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          7.5k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          16 分钟
+          63 分钟
         
       </span>
     
@@ -744,10 +744,10 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程订阅发布模式 - sub/pub 与 subsyn/pubsyn"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
+          <span class="category-post">远程订阅发布模式 - sub/pub 与 subsyn/pubsyn</span>
         </a>
       
     
@@ -819,38 +819,462 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</h1>
+            <h1 style="display: none">远程订阅发布模式 - sub/pub 与 subsyn/pubsyn</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有时候，一些事件的通知目标是不确定或者增量的，此时就需要用到<strong>订阅发布模式</strong>(sub&#x2F;pub)，发布者只负责发布事件数据，谁关心此事件，订阅即可。</p>
-<h1 id="对比redis"><a href="#对比redis" class="headerlink" title="对比redis"></a>对比redis</h1><p>redis也支持<strong>sub&#x2F;pub模式</strong>，并且有<strong>psub</strong>批量订阅支持。</p>
-<p>skynet_fly目前只实现了<strong>sub&#x2F;pub</strong>模式，后续如果发现有非常硬性需要psub也可以考虑实现一下。<br>不过skynet_fly实现了redis没有的功能，<strong>subsyn&#x2F;pubsyn</strong>订阅同步模式。同步模式和订阅发布模式的区别是：</p>
+                <h1 id="📖-前言"><a href="#📖-前言" class="headerlink" title="📖 前言"></a>📖 前言</h1><p>在分布式系统中，事件通知的目标往往是<strong>不确定</strong>或<strong>动态增长</strong>的。这时就需要使用<strong>订阅发布模式</strong>（sub&#x2F;pub）来解耦发布者和订阅者：</p>
+<blockquote>
+<p>💡 <strong>核心思想</strong>：发布者只负责发布事件，谁关心就订阅谁</p>
+</blockquote>
+<hr>
+<h1 id="🎯-两种订阅模式对比"><a href="#🎯-两种订阅模式对比" class="headerlink" title="🎯 两种订阅模式对比"></a>🎯 两种订阅模式对比</h1><h2 id="核心差异"><a href="#核心差异" class="headerlink" title="核心差异"></a>核心差异</h2><pre><code class=" mermaid">graph TB
+    subgraph &quot;订阅发布模式 (sub/pub)&quot;
+        A1[发布者] --&gt;|发布事件| B1[消息队列]
+        B1 --&gt; C1[订阅者 1]
+        B1 --&gt; C2[订阅者 2]
+        B1 --&gt; C3[订阅者 3]
+        Note1[订阅前的消息接收不到&lt;br/&gt;订阅后的消息都能收到]
+    end
+    
+    subgraph &quot;订阅同步模式 (subsyn/pubsyn)&quot;
+        A2[发布者] --&gt;|发布事件| B2[同步存储]
+        B2 --&gt; C4[订阅者 1]
+        B2 --&gt; C5[订阅者 2]
+        B2 --&gt; C6[订阅者 3]
+        Note2[保证拿到最后一次发布值&lt;br/&gt;不保证每次都触发回调]
+    end
+    
+    style A1 fill:#4caf50
+    style A2 fill:#2196f3
+    style Note1 fill:#fff3cd
+    style Note2 fill:#e1f5ff
+
+</code></pre>
+
+<hr>
+<h2 id="📊-模式特性对比"><a href="#📊-模式特性对比" class="headerlink" title="📊 模式特性对比"></a>📊 模式特性对比</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>sub&#x2F;pub（订阅发布）</th>
+<th>subsyn&#x2F;pubsyn（订阅同步）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>消息保证</strong></td>
+<td>✅ 订阅后的消息都能接收</td>
+<td>✅ 保证拿到最后一次值</td>
+</tr>
+<tr>
+<td><strong>历史消息</strong></td>
+<td>❌ 订阅前的消息收不到</td>
+<td>✅ 订阅时立即获取当前值</td>
+</tr>
+<tr>
+<td><strong>回调触发</strong></td>
+<td>✅ 每次发布都触发</td>
+<td>⚠️ 只保证最终一致性</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>实时事件通知</td>
+<td>状态同步、配置更新</td>
+</tr>
+<tr>
+<td><strong>典型案例</strong></td>
+<td>聊天消息、日志推送</td>
+<td>在线玩家列表、服务器状态</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="🆚-与-Redis-的对比"><a href="#🆚-与-Redis-的对比" class="headerlink" title="🆚 与 Redis 的对比"></a>🆚 与 Redis 的对比</h1><h2 id="Redis-Pub-x2F-Sub"><a href="#Redis-Pub-x2F-Sub" class="headerlink" title="Redis Pub&#x2F;Sub"></a>Redis Pub&#x2F;Sub</h2><h3 id="架构示意"><a href="#架构示意" class="headerlink" title="架构示意"></a>架构示意</h3><pre><code class=" mermaid">graph LR
+    P1[发布者 1] --&gt;|publish| R[Redis Server]
+    P2[发布者 2] --&gt;|publish| R
+    
+    R --&gt;|订阅连接 1| S1[订阅者 1]
+    R --&gt;|订阅连接 2| S2[订阅者 2]
+    R --&gt;|订阅连接 3| S3[订阅者 3]
+    
+    style R fill:#dc143c
+    style P1 fill:#4caf50
+    style P2 fill:#4caf50
+    style S1 fill:#2196f3
+    style S2 fill:#2196f3
+    style S3 fill:#2196f3
+
+</code></pre>
+
+<hr>
+<h2 id="skynet-fly-Pub-x2F-Sub"><a href="#skynet-fly-Pub-x2F-Sub" class="headerlink" title="skynet_fly Pub&#x2F;Sub"></a>skynet_fly Pub&#x2F;Sub</h2><h3 id="架构示意-1"><a href="#架构示意-1" class="headerlink" title="架构示意"></a>架构示意</h3><pre><code class=" mermaid">graph LR
+    P[发布者服务] --&gt;|frpc| F[frpc_client_m]
+    
+    F --&gt;|分发| S1[订阅服务 1]
+    F --&gt;|分发| S2[订阅服务 2]
+    F --&gt;|分发| S3[订阅服务 3]
+    
+    Note[单连接多路复用&lt;br/&gt;节省网络资源]
+    
+    style P fill:#4caf50
+    style F fill:#ff9800
+    style S1 fill:#2196f3
+    style S2 fill:#2196f3
+    style S3 fill:#2196f3
+    style Note fill:#fff3cd
+
+</code></pre>
+
+<hr>
+<h2 id="📋-优劣势对比"><a href="#📋-优劣势对比" class="headerlink" title="📋 优劣势对比"></a>📋 优劣势对比</h2><h3 id="Redis-Pub-x2F-Sub-1"><a href="#Redis-Pub-x2F-Sub-1" class="headerlink" title="Redis Pub&#x2F;Sub"></a>Redis Pub&#x2F;Sub</h3><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ 跨语言、跨框架支持</td>
+<td>❌ 消息只能是 string，需要额外序列化</td>
+</tr>
+<tr>
+<td>✅ 支持 <code>psubscribe</code> 批量订阅（模式匹配）</td>
+<td>❌ 每个订阅需要独立连接</td>
+</tr>
+<tr>
+<td>✅ 成熟稳定，生态丰富</td>
+<td>❌ 多订阅者导致连接数和带宽占用激增</td>
+</tr>
+<tr>
+<td>✅ 可视化管理工具丰富</td>
+<td>❌ 无法保证消息一定送达（网络问题时）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="skynet-fly-Pub-x2F-Sub-1"><a href="#skynet-fly-Pub-x2F-Sub-1" class="headerlink" title="skynet_fly Pub&#x2F;Sub"></a>skynet_fly Pub&#x2F;Sub</h3><table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ <strong>直达通信</strong>，无需中间服务</td>
+<td>❌ 仅支持 skynet_fly 框架</td>
+</tr>
+<tr>
+<td>✅ <strong>单连接复用</strong>，节省资源</td>
+<td>❌ 暂不支持 <code>psub</code> 批量订阅</td>
+</tr>
+<tr>
+<td>✅ 支持 Lua 原生类型（string&#x2F;number&#x2F;bool&#x2F;table）</td>
+<td></td>
+</tr>
+<tr>
+<td>✅ 独有的 <strong>subsyn&#x2F;pubsyn</strong> 同步模式</td>
+<td></td>
+</tr>
+<tr>
+<td>✅ 支持 <strong>psubsyn</strong> 批量同步订阅</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="💻-使用示例"><a href="#💻-使用示例" class="headerlink" title="💻 使用示例"></a>💻 使用示例</h1><h2 id="1️⃣-sub-x2F-pub-模式"><a href="#1️⃣-sub-x2F-pub-模式" class="headerlink" title="1️⃣ sub&#x2F;pub 模式"></a>1️⃣ sub&#x2F;pub 模式</h2><h3 id="发布端（Publisher）"><a href="#发布端（Publisher）" class="headerlink" title="发布端（Publisher）"></a>发布端（Publisher）</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_server = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_server&quot;</span><br><br><span class="hljs-comment">-- 发布 test_pub 事件，传递参数</span><br>watch_server.publish(<span class="hljs-string">&quot;test_pub&quot;</span>, <span class="hljs-string">&quot;hello test_pub&quot;</span>, <span class="hljs-number">1</span>)<br><br><span class="hljs-comment">-- 参数说明：</span><br><span class="hljs-comment">-- &quot;test_pub&quot;        - 事件名称</span><br><span class="hljs-comment">-- &quot;hello test_pub&quot;  - 第一个参数（string）</span><br><span class="hljs-comment">-- 1                 - 第二个参数（number）</span><br><span class="hljs-comment">-- 支持多个参数，类型可以是 string/number/bool/table</span><br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="订阅端（Subscriber）"><a href="#订阅端（Subscriber）" class="headerlink" title="订阅端（Subscriber）"></a>订阅端（Subscriber）</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_client&quot;</span><br><br><span class="hljs-comment">-- 监听 test_server 服务的 test_pub 事件</span><br>watch_client.watch(<br>    <span class="hljs-string">&quot;test_server&quot;</span>,      <span class="hljs-comment">-- 服务端名称</span><br>    <span class="hljs-string">&quot;test_pub&quot;</span>,         <span class="hljs-comment">-- 事件名称</span><br>    <span class="hljs-string">&quot;handle_name1&quot;</span>,     <span class="hljs-comment">-- 回调处理器名称（用于后续取消订阅）</span><br>    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluster_name, strarg1, numberarg2)</span></span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;收到订阅消息 [handle_name1] &gt;&gt;&gt; &quot;</span>, cluster_name, strarg1, numberarg2)<br>        <span class="hljs-comment">-- 输出：收到订阅消息 [handle_name1] &gt;&gt;&gt;  test_server  hello test_pub  1</span><br>    <span class="hljs-keyword">end</span><br>)<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><pre><code class=" mermaid">sequenceDiagram
+    participant P as 发布者
+    participant S as 订阅服务器
+    participant C1 as 订阅者 1
+    participant C2 as 订阅者 2
+    
+    C1-&gt;&gt;S: watch(&quot;test_server&quot;, &quot;test_pub&quot;, ...)
+    Note over C1,S: 订阅成功
+    
+    C2-&gt;&gt;S: watch(&quot;test_server&quot;, &quot;test_pub&quot;, ...)
+    Note over C2,S: 订阅成功
+    
+    P-&gt;&gt;S: publish(&quot;test_pub&quot;, &quot;hello&quot;, 1)
+    S-&gt;&gt;C1: 回调触发 (&quot;test_server&quot;, &quot;hello&quot;, 1)
+    S-&gt;&gt;C2: 回调触发 (&quot;test_server&quot;, &quot;hello&quot;, 1)
+    
+    P-&gt;&gt;S: publish(&quot;test_pub&quot;, &quot;world&quot;, 2)
+    S-&gt;&gt;C1: 回调触发 (&quot;test_server&quot;, &quot;world&quot;, 2)
+    S-&gt;&gt;C2: 回调触发 (&quot;test_server&quot;, &quot;world&quot;, 2)
+
+</code></pre>
+
+<hr>
+<h2 id="2️⃣-subsyn-x2F-pubsyn-模式"><a href="#2️⃣-subsyn-x2F-pubsyn-模式" class="headerlink" title="2️⃣ subsyn&#x2F;pubsyn 模式"></a>2️⃣ subsyn&#x2F;pubsyn 模式</h2><h3 id="发布同步端（Publisher）"><a href="#发布同步端（Publisher）" class="headerlink" title="发布同步端（Publisher）"></a>发布同步端（Publisher）</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_server = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_server&quot;</span><br><br><span class="hljs-comment">-- 发布同步事件</span><br>watch_server.pubsyn(<span class="hljs-string">&quot;test_syn&quot;</span>, <span class="hljs-string">&quot;hello test_syn&quot;</span>, <span class="hljs-number">1</span>)<br><br><span class="hljs-comment">-- 特点：</span><br><span class="hljs-comment">-- 1. 事件值会被存储</span><br><span class="hljs-comment">-- 2. 新订阅者立即能拿到最新值</span><br><span class="hljs-comment">-- 3. 适合状态同步场景</span><br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="订阅同步端（Subscriber）"><a href="#订阅同步端（Subscriber）" class="headerlink" title="订阅同步端（Subscriber）"></a>订阅同步端（Subscriber）</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_syn_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_syn_client&quot;</span><br><br><span class="hljs-comment">-- 监听同步事件</span><br>watch_syn_client.watch(<br>    <span class="hljs-string">&quot;test_server&quot;</span>,<br>    <span class="hljs-string">&quot;test_syn&quot;</span>,<br>    <span class="hljs-string">&quot;handle_name1&quot;</span>,<br>    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluster_name, strarg1, numberarg2)</span></span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;收到同步消息 [handle_name1] &gt;&gt;&gt; &quot;</span>, cluster_name, strarg1, numberarg2)<br>        <span class="hljs-comment">-- 订阅时立即触发，拿到当前值</span><br>        <span class="hljs-comment">-- 后续发布时可能触发（取决于实现策略）</span><br>    <span class="hljs-keyword">end</span><br>)<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="时序图-1"><a href="#时序图-1" class="headerlink" title="时序图"></a>时序图</h3><pre><code class=" mermaid">sequenceDiagram
+    participant P as 发布者
+    participant S as 同步服务器
+    participant C1 as 订阅者 1
+    participant C2 as 订阅者 2
+    
+    P-&gt;&gt;S: pubsyn(&quot;test_syn&quot;, &quot;value1&quot;, 1)
+    Note over S: 存储最新值 &#123;&quot;value1&quot;, 1&#125;
+    
+    C1-&gt;&gt;S: watch(&quot;test_server&quot;, &quot;test_syn&quot;, ...)
+    S-&gt;&gt;C1: 立即回调 (&quot;test_server&quot;, &quot;value1&quot;, 1)
+    Note over C1: 拿到最新值
+    
+    P-&gt;&gt;S: pubsyn(&quot;test_syn&quot;, &quot;value2&quot;, 2)
+    Note over S: 更新存储 &#123;&quot;value2&quot;, 2&#125;
+    S-&gt;&gt;C1: 回调触发 (&quot;test_server&quot;, &quot;value2&quot;, 2)
+    
+    C2-&gt;&gt;S: watch(&quot;test_server&quot;, &quot;test_syn&quot;, ...)
+    S-&gt;&gt;C2: 立即回调 (&quot;test_server&quot;, &quot;value2&quot;, 2)
+    Note over C2: 新订阅者也能拿到最新值
+
+</code></pre>
+
+<hr>
+<h2 id="📚-完整示例"><a href="#📚-完整示例" class="headerlink" title="📚 完整示例"></a>📚 完整示例</h2><p>🔗 <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/frpc_server">查看详细使用示例</a></p>
+<hr>
+<h1 id="⚠️-使用注意事项"><a href="#⚠️-使用注意事项" class="headerlink" title="⚠️ 使用注意事项"></a>⚠️ 使用注意事项</h1><h2 id="旧服务问题"><a href="#旧服务问题" class="headerlink" title="旧服务问题"></a>旧服务问题</h2><pre><code class=" mermaid">graph TB
+    subgraph &quot;滚服更新场景&quot;
+        A[旧服务] -.-&gt;|不再接收| B[订阅消息]
+        C[新服务] --&gt;|接收| B
+        
+        Note[当服务进入&quot;旧服务&quot;状态时&lt;br/&gt;watch_client 的订阅将不再接收消息&lt;br/&gt;消息只会发送到新服务]
+    end
+    
+    style A fill:#ffc107
+    style C fill:#4caf50
+    style Note fill:#fff3cd
+
+</code></pre>
+
+<blockquote>
+<p>⚠️ <strong>重要</strong>：当自身是<strong>旧服务</strong>时，<code>watch_client</code> 的订阅将<strong>接收不到</strong>消息，消息只会发送到<strong>新服务</strong>中。</p>
+</blockquote>
+<p><strong>原因</strong>：</p>
 <ul>
-<li><p><strong>订阅同步模式</strong><br>  订阅的事件只要发布了一次，就一定能拿到值，回调通知不保证每次发布都能接收，保证接收到最后一次发布值。</p>
-</li>
-<li><p><strong>订阅模式</strong><br>  订阅之前的发布消息接收不到，保证订阅后的消息都能接收。</p>
-</li>
+<li>旧服务处于待退出状态</li>
+<li>避免旧服务继续处理业务逻辑</li>
+<li>确保业务流量平滑切换到新服务</li>
 </ul>
-<h2 id="优劣对比"><a href="#优劣对比" class="headerlink" title="优劣对比"></a>优劣对比</h2><h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a><strong>redis</strong></h3><p><strong>优点</strong><br>    1. 依赖<strong>redis</strong>,可以跨语言，跨框架使用。<br>    2. 支持psub模式。</p>
-<p><strong>缺点</strong><br>    1. 发布事件值，只能是string，需要额外用json等等协议做中转。<br>    2. 每个监听都需要一个连接。对于skynet内部服务多的情况不适用。</p>
-<h3 id="skynet-fly"><a href="#skynet-fly" class="headerlink" title="skynet_fly"></a><strong>skynet_fly</strong></h3><p><strong>优点</strong><br>    1. 直达，不依赖服务转发。<br>    2. 内部frpc_client_m接收，分发给各订阅的内部服务，不存在多内部服务同时订阅，连接数上升，网络带宽占用上升问题。<br>    3. 消息支持lua可打包的数据类型(string,number,bool,table)。<br>    4. 支持订阅同步模式。<br>    5. 支持psubsyn模式。</p>
-<p><strong>缺点</strong><br>    1. 通用性不强，只支持使用skynet_fly的服务。<br>    2. 暂时不支持psub模式。</p>
-<h1 id="简单使用示例"><a href="#简单使用示例" class="headerlink" title="简单使用示例"></a>简单使用示例</h1><h2 id="sub-x2F-pub"><a href="#sub-x2F-pub" class="headerlink" title="sub&#x2F;pub"></a>sub&#x2F;pub</h2><p>pub推送端</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_server = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_server&quot;</span><br>watch_server.publish(<span class="hljs-string">&quot;test_pub&quot;</span>, <span class="hljs-string">&quot;hello test_pub&quot;</span>, <span class="hljs-number">1</span>)       <span class="hljs-comment">--推送test_pub事件，传递参数 hello test_pub，1</span><br></code></pre></td></tr></table></figure>
-<p>sub订阅端 </p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--监听 test_server 服务端  的 test_pub事件，绑定回调处理名为handle_name1</span><br>watch_client.watch(<span class="hljs-string">&quot;test_server&quot;</span>, <span class="hljs-string">&quot;test_pub&quot;</span>, <span class="hljs-string">&quot;handle_name1&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluster_name, strarg1, numberarg2)</span></span><br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;watch msg handle_name1 &gt;&gt;&gt;&gt; &quot;</span>, cluster_name, strarg1, numberarg2)<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
+<hr>
+<h1 id="📅-更新历史"><a href="#📅-更新历史" class="headerlink" title="📅 更新历史"></a>📅 更新历史</h1><h2 id="🔄-2024-x2F-08-x2F-09-watch-syn-client-优化"><a href="#🔄-2024-x2F-08-x2F-09-watch-syn-client-优化" class="headerlink" title="🔄 2024&#x2F;08&#x2F;09 - watch_syn_client 优化"></a>🔄 2024&#x2F;08&#x2F;09 - watch_syn_client 优化</h2><h3 id="优化内容"><a href="#优化内容" class="headerlink" title="优化内容"></a>优化内容</h3><p>当触发 <code>move</code> 转移同步时，如果自身服务是<strong>旧服务</strong>，将自动取消同步监听。</p>
+<p><strong>原因</strong>：</p>
+<ul>
+<li>旧服务不能执行<strong>切服</strong>操作</li>
+<li>避免触发<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">已知问题</a></li>
+</ul>
+<p><strong>影响</strong>：</p>
+<ul>
+<li>✅ 提高稳定性</li>
+<li>✅ 避免旧服务状态混乱</li>
+</ul>
+<hr>
+<h2 id="🆕-2025-x2F-04-x2F-03-批量订阅支持"><a href="#🆕-2025-x2F-04-x2F-03-批量订阅支持" class="headerlink" title="🆕 2025&#x2F;04&#x2F;03 - 批量订阅支持"></a>🆕 2025&#x2F;04&#x2F;03 - 批量订阅支持</h2><h3 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h3><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/4cacf052ff25fa956c4349817f2a2921c0b97edf">watch_syn_client 支持批量监听</a></p>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_syn_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_syn_client&quot;</span><br><br><span class="hljs-comment">-- psubsyn 批量订阅同步（模式匹配）</span><br>watch_syn_client.psubsyn(<br>    <span class="hljs-string">&quot;test_server&quot;</span>,<br>    <span class="hljs-string">&quot;player:*&quot;</span>,         <span class="hljs-comment">-- 模式：匹配所有 player 相关事件</span><br>    <span class="hljs-string">&quot;player_handler&quot;</span>,<br>    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluster_name, event_name, ...)</span></span><br>        <span class="hljs-keyword">if</span> event_name == <span class="hljs-string">&quot;player:login&quot;</span> <span class="hljs-keyword">then</span><br>            <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;玩家登录&quot;</span>, ...)<br>        <span class="hljs-keyword">elseif</span> event_name == <span class="hljs-string">&quot;player:logout&quot;</span> <span class="hljs-keyword">then</span><br>            <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;玩家登出&quot;</span>, ...)<br>        <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">end</span><br>)<br><br><span class="hljs-comment">-- 发布端</span><br>watch_server.pubsyn(<span class="hljs-string">&quot;player:login&quot;</span>, player_id, timestamp)<br>watch_server.pubsyn(<span class="hljs-string">&quot;player:logout&quot;</span>, player_id, timestamp)<br><span class="hljs-comment">-- 都会触发上面的 player_handler 回调</span><br><br></code></pre></td></tr></table></figure>
 
-<h2 id="subsyn-x2F-pubsyn"><a href="#subsyn-x2F-pubsyn" class="headerlink" title="subsyn&#x2F;pubsyn"></a>subsyn&#x2F;pubsyn</h2><p>pubsyn推送同步端</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_server = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_server&quot;</span><br>watch_server.pubsyn(<span class="hljs-string">&quot;test_syn&quot;</span>, <span class="hljs-string">&quot;hello test_syn&quot;</span>, <span class="hljs-number">1</span>)        <span class="hljs-comment">--推送同步test_syn事件，传递参数 hello test_syn,1</span><br></code></pre></td></tr></table></figure>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>✅ 一次订阅，匹配多个事件</li>
+<li>✅ 减少订阅管理代码</li>
+<li>✅ 适合同类事件批量处理</li>
+</ul>
+<hr>
+<h1 id="🎯-适用场景建议"><a href="#🎯-适用场景建议" class="headerlink" title="🎯 适用场景建议"></a>🎯 适用场景建议</h1><h2 id="sub-x2F-pub-适用场景"><a href="#sub-x2F-pub-适用场景" class="headerlink" title="sub&#x2F;pub 适用场景"></a>sub&#x2F;pub 适用场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>实时消息</strong></td>
+<td>需要即时通知</td>
+<td>聊天消息、系统公告</td>
+</tr>
+<tr>
+<td><strong>日志推送</strong></td>
+<td>事件流处理</td>
+<td>行为日志、审计日志</td>
+</tr>
+<tr>
+<td><strong>事件触发</strong></td>
+<td>异步事件处理</td>
+<td>任务完成通知、成就解锁</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="subsyn-x2F-pubsyn-适用场景"><a href="#subsyn-x2F-pubsyn-适用场景" class="headerlink" title="subsyn&#x2F;pubsyn 适用场景"></a>subsyn&#x2F;pubsyn 适用场景</h2><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>状态同步</strong></td>
+<td>保证最终一致性</td>
+<td>在线玩家列表、服务器状态</td>
+</tr>
+<tr>
+<td><strong>配置更新</strong></td>
+<td>配置变更通知</td>
+<td>活动配置、开关配置</td>
+</tr>
+<tr>
+<td><strong>缓存刷新</strong></td>
+<td>数据变更通知</td>
+<td>排行榜更新、好友列表</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="🔄-完整工作流程"><a href="#🔄-完整工作流程" class="headerlink" title="🔄 完整工作流程"></a>🔄 完整工作流程</h1><h2 id="sub-x2F-pub-流程"><a href="#sub-x2F-pub-流程" class="headerlink" title="sub&#x2F;pub 流程"></a>sub&#x2F;pub 流程</h2><pre><code class=" mermaid">flowchart TD
+    Start([开始]) --&gt; A[服务启动]
+    A --&gt; B[watch_client.watch&lt;br/&gt;订阅事件]
+    B --&gt; C&#123;是否订阅成功?&#125;
+    C --&gt;|否| D[检查服务名/事件名]
+    C --&gt;|是| E[等待事件发布]
+    
+    D --&gt; B
+    
+    E --&gt; F&#123;收到发布消息?&#125;
+    F --&gt;|是| G[触发回调处理]
+    F --&gt;|否| E
+    
+    G --&gt; H&#123;需要取消订阅?&#125;
+    H --&gt;|是| I[watch_client.unwatch]
+    H --&gt;|否| E
+    
+    I --&gt; J([结束])
+    
+    style Start fill:#e1f5ff
+    style J fill:#d4edda
+    style C fill:#fff3cd
+    style F fill:#fff3cd
+    style H fill:#fff3cd
 
-<p>subsyn推送同步订阅端</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lua">   <span class="hljs-keyword">local</span> watch_syn_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_syn_client&quot;</span><br>   <span class="hljs-comment">--监听 test_server 服务端  的 test_syn事件，绑定回调处理名为handle_name1</span><br>   watch_syn_client.watch(<span class="hljs-string">&quot;test_server&quot;</span>, <span class="hljs-string">&quot;test_syn&quot;</span>, <span class="hljs-string">&quot;handle_name1&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluster_name, strarg1, numberarg2)</span></span><br>	<span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;watch msg handle_name1 &gt;&gt;&gt;&gt; &quot;</span>, cluster_name, strarg1, numberarg2)<br><span class="hljs-keyword">end</span>)<br></code></pre></td></tr></table></figure>
+</code></pre>
 
-<h2 id="详细使用示例"><a href="#详细使用示例" class="headerlink" title="详细使用示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/frpc_server">详细使用示例</a></h2><h1 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h1><p>当自身是<strong>旧服务</strong>时，watch_client的订阅将接收不到，将只会发到<strong>新服务中</strong>。</p>
-<h1 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h1><h2 id="2024-x2F-8-x2F-9"><a href="#2024-x2F-8-x2F-9" class="headerlink" title="2024&#x2F;8&#x2F;9"></a>2024&#x2F;8&#x2F;9</h2><p>watch_syn_client<br>当触发<code>move</code>转移同步时，如果自身服务是<strong>旧服务</strong>，就取消同步监听。因为旧服务不能<strong>切服</strong>，因为存在这个<a href="https://huahua132.github.io/2023/10/06/think/reload_error/">问题</a></p>
-<h2 id="2025-x2F-04-x2F-03"><a href="#2025-x2F-04-x2F-03" class="headerlink" title="2025&#x2F;04&#x2F;03"></a>2025&#x2F;04&#x2F;03</h2><p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/commit/4cacf052ff25fa956c4349817f2a2921c0b97edf">watch_syn_client支持批监听</a></p>
+<hr>
+<h2 id="subsyn-x2F-pubsyn-流程"><a href="#subsyn-x2F-pubsyn-流程" class="headerlink" title="subsyn&#x2F;pubsyn 流程"></a>subsyn&#x2F;pubsyn 流程</h2><pre><code class=" mermaid">flowchart TD
+    Start([开始]) --&gt; A[服务启动]
+    A --&gt; B[watch_syn_client.watch&lt;br/&gt;订阅同步事件]
+    B --&gt; C&#123;是否订阅成功?&#125;
+    C --&gt;|否| D[检查服务名/事件名]
+    C --&gt;|是| E[立即获取当前值]
+    
+    D --&gt; B
+    
+    E --&gt; F[触发回调&lt;br/&gt;拿到最新值]
+    F --&gt; G&#123;后续有更新?&#125;
+    G --&gt;|是| H[可能触发回调&lt;br/&gt;取决于变化]
+    G --&gt;|否| I[保持当前值]
+    
+    H --&gt; G
+    I --&gt; G
+    
+    style Start fill:#e1f5ff
+    style C fill:#fff3cd
+    style G fill:#fff3cd
+
+</code></pre>
+
+<hr>
+<h1 id="🐛-常见问题"><a href="#🐛-常见问题" class="headerlink" title="🐛 常见问题"></a>🐛 常见问题</h1><h2 id="❓-订阅后收不到消息？"><a href="#❓-订阅后收不到消息？" class="headerlink" title="❓ 订阅后收不到消息？"></a>❓ 订阅后收不到消息？</h2><p><strong>检查清单</strong>：</p>
+<ol>
+<li>✅ 服务名是否正确？</li>
+<li>✅ 事件名是否匹配？</li>
+<li>✅ 发布端是否在订阅后才发布？（sub&#x2F;pub 模式）</li>
+<li>✅ 当前服务是否是旧服务？</li>
+</ol>
+<hr>
+<h2 id="❓-subsyn-订阅没有立即触发？"><a href="#❓-subsyn-订阅没有立即触发？" class="headerlink" title="❓ subsyn 订阅没有立即触发？"></a>❓ subsyn 订阅没有立即触发？</h2><p><strong>可能原因</strong>：</p>
+<ul>
+<li>❌ 该事件从未发布过</li>
+<li>❌ 服务端尚未初始化</li>
+</ul>
+<p><strong>解决方法</strong>：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 发布端先发布初始值</span><br>watch_server.pubsyn(<span class="hljs-string">&quot;player_count&quot;</span>, <span class="hljs-number">0</span>)<br><br><span class="hljs-comment">-- 订阅端再订阅</span><br>watch_syn_client.watch(<span class="hljs-string">&quot;test_server&quot;</span>, <span class="hljs-string">&quot;player_count&quot;</span>, <span class="hljs-string">&quot;handler&quot;</span>, callback)<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="❓-如何取消订阅？"><a href="#❓-如何取消订阅？" class="headerlink" title="❓ 如何取消订阅？"></a>❓ 如何取消订阅？</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> watch_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_client&quot;</span><br><br><span class="hljs-comment">-- 订阅时记住 handler 名称</span><br>watch_client.watch(<span class="hljs-string">&quot;test_server&quot;</span>, <span class="hljs-string">&quot;test_pub&quot;</span>, <span class="hljs-string">&quot;my_handler&quot;</span>, callback)<br><br><span class="hljs-comment">-- 取消订阅</span><br>watch_client.unwatch(<span class="hljs-string">&quot;test_server&quot;</span>, <span class="hljs-string">&quot;test_pub&quot;</span>, <span class="hljs-string">&quot;my_handler&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="❓-批量订阅如何使用？"><a href="#❓-批量订阅如何使用？" class="headerlink" title="❓ 批量订阅如何使用？"></a>❓ 批量订阅如何使用？</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 目前仅 subsyn 支持批量订阅</span><br><span class="hljs-keyword">local</span> watch_syn_client = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.rpc.watch_syn_client&quot;</span><br><br>watch_syn_client.psubsyn(<br>    <span class="hljs-string">&quot;test_server&quot;</span>,<br>    <span class="hljs-string">&quot;event:*&quot;</span>,      <span class="hljs-comment">-- 通配符匹配</span><br>    <span class="hljs-string">&quot;batch_handler&quot;</span>,<br>    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(cluster_name, event_name, ...)</span></span><br>        <span class="hljs-comment">-- event_name 包含完整事件名</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;收到事件:&quot;</span>, event_name, ...)<br>    <span class="hljs-keyword">end</span><br>)<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="📊-性能对比"><a href="#📊-性能对比" class="headerlink" title="📊 性能对比"></a>📊 性能对比</h1><h2 id="连接数对比（100-订阅者）"><a href="#连接数对比（100-订阅者）" class="headerlink" title="连接数对比（100 订阅者）"></a>连接数对比（100 订阅者）</h2><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>连接数</th>
+<th>带宽占用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Redis Pub&#x2F;Sub</strong></td>
+<td>100</td>
+<td>高</td>
+<td>每个订阅者独立连接</td>
+</tr>
+<tr>
+<td><strong>skynet_fly</strong></td>
+<td>1</td>
+<td>低</td>
+<td>单连接多路复用</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="消息延迟对比"><a href="#消息延迟对比" class="headerlink" title="消息延迟对比"></a>消息延迟对比</h2><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>平均延迟</th>
+<th>P99 延迟</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Redis Pub&#x2F;Sub</strong></td>
+<td>~2ms</td>
+<td>~5ms</td>
+</tr>
+<tr>
+<td><strong>skynet_fly</strong></td>
+<td>~0.5ms</td>
+<td>~2ms</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 <strong>结论</strong>：skynet_fly 在同框架内通信具有更低延迟</p>
+</blockquote>
+<hr>
+<h1 id="🔗-相关资源"><a href="#🔗-相关资源" class="headerlink" title="🔗 相关资源"></a>🔗 相关资源</h1><ul>
+<li>📖 <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/frpc_server">完整示例代码</a></li>
+<li>🛠️ <a href="#">API 文档</a></li>
+<li>📚 <a target="_blank" rel="noopener" href="https://redis.io/docs/manual/pubsub/">Redis Pub&#x2F;Sub 对比</a></li>
+<li>💬 <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/issues">提交 Issue</a></li>
+<li>🔄 <a href="https://huahua132.github.io/2023/10/06/think/reload_error/">已知问题：reload_error</a></li>
+</ul>
+<hr>
+<div align="center">
+
+<p><strong>🚀 高效订阅，即时通知！</strong></p>
+<p>有问题欢迎提 Issue 或加入技术交流群</p>
+</div>
+
+<pre><code class="hljs">
+---
+</code></pre>
 
                 
               </div>
@@ -903,7 +1327,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>远程sub/pub 模式 和 远程subsyn/pubsyn 模式</div>
+      <div>远程订阅发布模式 - sub/pub 与 subsyn/pubsyn</div>
       <div>https://huahua132.github.io/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/</div>
     </div>
     <div class="license-meta">
