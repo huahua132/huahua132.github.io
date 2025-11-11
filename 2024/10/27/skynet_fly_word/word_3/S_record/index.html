@@ -1,0 +1,1536 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📖 前言对于复杂的业务逻辑，当出现的 Bug 通过日志分析或代码审查都无法查明原因时，我们可以使用服务录像重放功能来完整还原事故现场，就像游戏的”回放系统”一样。  🎯 实现方案核心思路Skynet 是多线程架构，对整个进程录像较为困难。但单个 Skynet 服务能保证消息同步处理，因此可以方便地实现单服务录像（支持同时录制多个服务）。 实现原理：记录所有消息 → 重放时读取记录 → 解析并重">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务录像与重放">
+<meta property="og:url" content="https://huahua132.github.io/2024/10/27/skynet_fly_word/word_3/S_record/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="📖 前言对于复杂的业务逻辑，当出现的 Bug 通过日志分析或代码审查都无法查明原因时，我们可以使用服务录像重放功能来完整还原事故现场，就像游戏的”回放系统”一样。  🎯 实现方案核心思路Skynet 是多线程架构，对整个进程录像较为困难。但单个 Skynet 服务能保证消息同步处理，因此可以方便地实现单服务录像（支持同时录制多个服务）。 实现原理：记录所有消息 → 重放时读取记录 → 解析并重">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/record_1.png">
+<meta property="article:published_time" content="2024-10-27T14:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-11T12:47:41.101Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="skynet_fly_word">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/record_1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>服务录像与重放 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="服务录像与重放"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-27 22:00" pubdate>
+          2024年10月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          46 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly 文档"
+        id="heading-8a12ab643e955a87eefc2a19b632005f" role="tab" data-toggle="collapse" href="#collapse-8a12ab643e955a87eefc2a19b632005f"
+        aria-expanded="true"
+      >
+        skynet_fly 文档
+        <span class="list-group-count">(43)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-8a12ab643e955a87eefc2a19b632005f"
+           role="tabpanel" aria-labelledby="heading-8a12ab643e955a87eefc2a19b632005f">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="入门篇"
+        id="heading-fde95b8345d6009bcd3e3b793ef65625" role="tab" data-toggle="collapse" href="#collapse-fde95b8345d6009bcd3e3b793ef65625"
+        aria-expanded="false"
+      >
+        入门篇
+        <span class="list-group-count">(11)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-fde95b8345d6009bcd3e3b793ef65625"
+           role="tabpanel" aria-labelledby="heading-fde95b8345d6009bcd3e3b793ef65625">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" title="开发环境推荐"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">开发环境推荐</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/C_builder/" title="编译"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">编译</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/D_creator/" title="构建服务脚手架"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">构建服务脚手架</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/E_load_mods/" title="load_mods配置文件的使用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">load_mods配置文件的使用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" title="如何编写可热更服务模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何编写可热更服务模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" title="项目文件夹介绍"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">项目文件夹介绍</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/H_standard/" title="规范建议"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">规范建议</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/I_file/" title="文件查找规则"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">文件查找规则</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_1/m_scfg/" title="如何更改skynet服务的配置项"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何更改skynet服务的配置项</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/08/17/skynet_fly_word/word_1/N_question/" title="常见问题收录"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">常见问题收录</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="基础篇"
+        id="heading-9248c705575b4b5883daaed3318fda8b" role="tab" data-toggle="collapse" href="#collapse-9248c705575b4b5883daaed3318fda8b"
+        aria-expanded="false"
+      >
+        基础篇
+        <span class="list-group-count">(7)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-9248c705575b4b5883daaed3318fda8b"
+           role="tabpanel" aria-labelledby="heading-9248c705575b4b5883daaed3318fda8b">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/B_RPC/" title="rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/C_RPC/" title="集群远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">集群远程rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/E_fasttime/" title="快进时间"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">快进时间</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/D_reload/" title="检查热更的使用以及原理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">检查热更的使用以及原理</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_2/F_tmpfile/" title="启动时生成的临时文件说明"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">启动时生成的临时文件说明</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/10/12/skynet_fly_word/word_2/G_shutdown/" title="对安全关服的支持"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">对安全关服的支持</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="实战篇"
+        id="heading-1b9782790120709faa567d4706ca8771" role="tab" data-toggle="collapse" href="#collapse-1b9782790120709faa567d4706ca8771"
+        aria-expanded="false"
+      >
+        实战篇
+        <span class="list-group-count">(7)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-1b9782790120709faa567d4706ca8771"
+           role="tabpanel" aria-labelledby="heading-1b9782790120709faa567d4706ca8771">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" title="用户是如何注册的？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">用户是如何注册的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/C_q/" title="用户是如何登录的？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">用户是如何登录的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/D_q/" title="大厅服如何对模块功能进行拆分隔离？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">大厅服如何对模块功能进行拆分隔离？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/E_q/" title="用户是如何匹配进入到游戏的？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">用户是如何匹配进入到游戏的？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/05/03/skynet_fly_word/word_4/F_q/" title="如何在skynet_fly_demo新增一个游戏？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何在skynet_fly_demo新增一个游戏？</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/06/30/skynet_fly_word/word_4/H_q/" title="如何在skynet_fly_demo新增一个后台模块？"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">如何在skynet_fly_demo新增一个后台模块？</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="强化篇"
+        id="heading-1ff092fdfc21b9430eba6915fcf9cf06" role="tab" data-toggle="collapse" href="#collapse-1ff092fdfc21b9430eba6915fcf9cf06"
+        aria-expanded="true"
+      >
+        强化篇
+        <span class="list-group-count">(18)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-1ff092fdfc21b9430eba6915fcf9cf06"
+           role="tabpanel" aria-labelledby="heading-1ff092fdfc21b9430eba6915fcf9cf06">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/A_home/" title="前言"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">前言</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/B_game/" title="可热更匹配房间类游戏架构基础设施"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更匹配房间类游戏架构基础设施</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/C_proto/" title="gate,wsgate通用协议的设计"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">gate,wsgate通用协议的设计</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/D_timer/" title="定时器的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">定时器的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/E_module/" title="可热更模块的启动配置项"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更模块的启动配置项</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/F_redis/" title="redis的封装"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">redis的封装</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/G_point/" title="整点报时"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">整点报时</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/H_orm/" title="orm数据库关系映射"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm数据库关系映射</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/I_watch/" title="监听同步模块"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">监听同步模块</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/J_logrotate/" title="日志分割"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">日志分割</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/K_log/" title="日志服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">日志服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/02/25/skynet_fly_word/word_3/M_http/" title="http服务"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">http服务</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更服务，热更脚本支持</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调试的支持"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">断点调试的支持</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" title="代码加密"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">代码加密</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/10/27/skynet_fly_word/word_3/S_record/" title="服务录像与重放"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">服务录像与重放</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">服务录像与重放</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="📖-前言"><a href="#📖-前言" class="headerlink" title="📖 前言"></a>📖 前言</h1><p>对于复杂的业务逻辑，当出现的 Bug 通过<strong>日志分析</strong>或<strong>代码审查</strong>都无法查明原因时，我们可以使用<strong>服务录像重放</strong>功能来完整还原事故现场，就像游戏的”回放系统”一样。</p>
+<hr>
+<h1 id="🎯-实现方案"><a href="#🎯-实现方案" class="headerlink" title="🎯 实现方案"></a>🎯 实现方案</h1><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>Skynet 是多线程架构，对整个进程录像较为困难。但单个 Skynet 服务能保证消息同步处理，因此可以方便地实现<strong>单服务录像</strong>（支持同时录制多个服务）。</p>
+<p><strong>实现原理</strong>：记录所有消息 → 重放时读取记录 → 解析并重放</p>
+<hr>
+<h2 id="🔧-技术细节处理"><a href="#🔧-技术细节处理" class="headerlink" title="🔧 技术细节处理"></a>🔧 技术细节处理</h2><p>为确保录像重放的一致性，需要特殊处理以下关键点：</p>
+<table>
+<thead>
+<tr>
+<th>技术点</th>
+<th>处理方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Session 分配</strong></td>
+<td>记录值</td>
+<td>重放时读取</td>
+</tr>
+<tr>
+<td><strong>Socket ID</strong></td>
+<td>记录值</td>
+<td>重放时读取</td>
+</tr>
+<tr>
+<td><strong>时间函数</strong></td>
+<td>记录值</td>
+<td><code>skynet.time()</code> &#x2F; <code>os.time()</code></td>
+</tr>
+<tr>
+<td><strong>随机数</strong></td>
+<td>记录种子</td>
+<td><code>math.randomseed(x,y)</code> 相同种子确保相同随机序列</td>
+</tr>
+<tr>
+<td><strong>热更 (Hotfix)</strong></td>
+<td>拷贝文件</td>
+<td>每次热更文件存储在 <code>recordpath/serverId/</code></td>
+</tr>
+<tr>
+<td><strong>共享配置</strong></td>
+<td>替换加载方式</td>
+<td><code>sharedata</code>&#x2F;<code>sharetable</code> → <code>loadfile</code> 直接加载</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="📌-sharedata-x2F-sharetable-特殊处理"><a href="#📌-sharedata-x2F-sharetable-特殊处理" class="headerlink" title="📌 sharedata &#x2F; sharetable 特殊处理"></a>📌 <code>sharedata</code> &#x2F; <code>sharetable</code> 特殊处理</h3><blockquote>
+<p>⚠️ <strong>问题</strong>：录像记录的是共享数据的 C 指针，重放时该地址数据不存在，访问会崩溃。</p>
+</blockquote>
+<p><strong>解决方案（2选1）</strong>：</p>
+<ol>
+<li><strong>方案A</strong>：启动对应服务并加载数据，重放时重新获取指针</li>
+<li><strong>方案B</strong>：直接使用 <code>loadfile</code> 加载配置 ✅ <strong>推荐（更简单）</strong></li>
+</ol>
+<p><img src="/img/skynet_fly_word/word_3/record_1.png" srcset="/img/loading.gif" lazyload alt="录像架构图"></p>
+<hr>
+<h1 id="🎬-如何录制？"><a href="#🎬-如何录制？" class="headerlink" title="🎬 如何录制？"></a>🎬 如何录制？</h1><h2 id="配置方式"><a href="#配置方式" class="headerlink" title="配置方式"></a>配置方式</h2><p>在 <code>load_mods.lua</code> 中配置可热更服务：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-comment">-- 共享配置</span><br>    share_config_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            server_cfg = &#123;<br>                recordlimit = <span class="hljs-number">1024</span> * <span class="hljs-number">10</span>,      <span class="hljs-comment">-- 录像大小限制 (KB)</span><br>                recordpath = <span class="hljs-string">&quot;../records&quot;</span>,    <span class="hljs-comment">-- 录像存放目录</span><br>            &#125;,<br>            redis = &#123;<br>                test = &#123;<br>                    host = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<br>                    port = <span class="hljs-number">6379</span>,<br>                    auth = <span class="hljs-string">&#x27;123456&#x27;</span>,<br>                    db = <span class="hljs-number">0</span>,<br>                &#125;<br>            &#125;<br>        &#125;,<br>    &#125;,<br>    <br>    A_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>    &#125;,<br>    <br>    B_m = &#123;<br>        launch_seq = <span class="hljs-number">3</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        is_record_on = <span class="hljs-number">1</span>,  <span class="hljs-comment">-- 🎥 开启录像</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>配置说明</strong>：</p>
+<ul>
+<li><code>is_record_on = 1</code>：开启录像功能</li>
+<li><code>recordlimit</code>：单个录像文件大小限制（KB），超过后停止写入</li>
+<li><code>recordpath</code>：录像文件存储目录</li>
+</ul>
+<hr>
+<h1 id="▶️-如何重放？"><a href="#▶️-如何重放？" class="headerlink" title="▶️ 如何重放？"></a>▶️ 如何重放？</h1><h2 id="命令方式"><a href="#命令方式" class="headerlink" title="命令方式"></a>命令方式</h2><p>在启动脚本中添加 <code>recordfile</code> 参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动重放</span><br>sh make/script/run.sh load_mods.lua 0 records/00000010.record<br><br><span class="hljs-comment"># 重启重放</span><br>sh make/script/restart.sh load_mods.lua 0 records/00000010.record<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="⚠️-重放注意事项"><a href="#⚠️-重放注意事项" class="headerlink" title="⚠️ 重放注意事项"></a>⚠️ 重放注意事项</h1><h2 id="1️⃣-确保代码环境一致"><a href="#1️⃣-确保代码环境一致" class="headerlink" title="1️⃣ 确保代码环境一致"></a>1️⃣ 确保代码环境一致</h2><blockquote>
+<p>💡 <strong>重要</strong>：代码不一致会导致录像回放失败或出错</p>
+</blockquote>
+<p><strong>关键点</strong>：以下函数调用次数必须完全一致</p>
+<ul>
+<li><code>skynet.time()</code> &#x2F; <code>os.time()</code></li>
+<li><code>math.randomseed()</code> &#x2F; <code>math.random()</code></li>
+<li>创建 Session 的函数（如 <code>skynet.call</code>、<code>skynet.timeout</code>）</li>
+<li>创建 Socket ID 的函数（如 <code>socket.connect</code>）</li>
+</ul>
+<p><strong>原因</strong>：重放时每次都从记录中读取对应值，调用次数不同会导致顺序错乱。</p>
+<hr>
+<h2 id="2️⃣-pairs-遍历顺序问题"><a href="#2️⃣-pairs-遍历顺序问题" class="headerlink" title="2️⃣ pairs 遍历顺序问题"></a>2️⃣ <code>pairs</code> 遍历顺序问题</h2><h3 id="⚠️-问题描述"><a href="#⚠️-问题描述" class="headerlink" title="⚠️ 问题描述"></a>⚠️ 问题描述</h3><p><code>pairs()</code> 每次调用不保证遍历顺序。如果在 <code>pairs</code> 循环中操作了以下内容，会导致重放顺序错乱：</p>
+<ul>
+<li>❌ 分配 Session（<code>call</code>、<code>timeout</code>）</li>
+<li>❌ 分配 Socket ID（<code>socket.connect</code>）</li>
+<li>❌ 调用时间函数（<code>os.time</code>、<code>skynet.time</code>）</li>
+<li>❌ 使用随机数（<code>math.randomseed</code>、<code>math.random</code>）</li>
+</ul>
+<h3 id="✅-解决方案"><a href="#✅-解决方案" class="headerlink" title="✅ 解决方案"></a>✅ 解决方案</h3><p>在需要重放的业务逻辑中，<strong>规避</strong>上述场景下的 <code>pairs</code> 使用，可改用：</p>
+<ul>
+<li><code>ipairs</code>（数组遍历）</li>
+<li>有序 Key 列表遍历</li>
+</ul>
+<hr>
+<h1 id="🔄-Hotfix-热更处理"><a href="#🔄-Hotfix-热更处理" class="headerlink" title="🔄 Hotfix 热更处理"></a>🔄 Hotfix 热更处理</h1><h2 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h2><p>录像服务的热更文件采用 <strong>CP 拷贝方式</strong>（而非写入录像）。</p>
+<p><strong>原因</strong>：</p>
+<ol>
+<li>✅ 方便在热更后的文件中添加调试日志</li>
+<li>✅ 可独立管理热更版本</li>
+</ol>
+<p><strong>路径</strong>：热更文件存储在 <code>recordpath/serverId/hotfix/</code> 目录下</p>
+<hr>
+<h1 id="📦-共享配置热更处理"><a href="#📦-共享配置热更处理" class="headerlink" title="📦 共享配置热更处理"></a>📦 共享配置热更处理</h1><p>同 Hotfix 处理方式，拷贝被热更的配置文件。</p>
+<p><strong>路径</strong>：<code>recordpath/serverId/sharedata/</code></p>
+<hr>
+<h1 id="🎯-如何正确重放"><a href="#🎯-如何正确重放" class="headerlink" title="🎯 如何正确重放"></a>🎯 如何正确重放</h1><h2 id="推荐流程"><a href="#推荐流程" class="headerlink" title="推荐流程"></a>推荐流程</h2><ol>
+<li><strong>代码回退</strong>：使用 Git&#x2F;SVN 将代码回退到录像时的版本</li>
+<li><strong>启动重放</strong>：运行重放命令</li>
+<li><strong>添加日志</strong>：在关键位置添加调试日志</li>
+<li><strong>分析问题</strong>：根据日志定位 Bug</li>
+</ol>
+<blockquote>
+<p>💡 <strong>提示</strong>：版本控制需要使用者自行保证</p>
+</blockquote>
+<hr>
+<h1 id="📚-示例代码"><a href="#📚-示例代码" class="headerlink" title="📚 示例代码"></a>📚 示例代码</h1><p>🔗 <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/record">完整示例项目</a></p>
+<hr>
+<h1 id="📅-更新历史"><a href="#📅-更新历史" class="headerlink" title="📅 更新历史"></a>📅 更新历史</h1><h2 id="🆕-2024-x2F-12-x2F-22-优化改动"><a href="#🆕-2024-x2F-12-x2F-22-优化改动" class="headerlink" title="🆕 2024&#x2F;12&#x2F;22 优化改动"></a>🆕 2024&#x2F;12&#x2F;22 优化改动</h2><h3 id="pairs-遍历顺序优化"><a href="#pairs-遍历顺序优化" class="headerlink" title="pairs 遍历顺序优化"></a>pairs 遍历顺序优化</h3><p>通过分析 <code>pairs</code> 源码发现：String Key 的遍历顺序依赖于 <code>lua_state</code> 创建时的 <code>strseed</code> 种子。</p>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>录像时记录 <code>strseed</code> 种子</li>
+<li>重放时设置相同的 <code>strseed</code></li>
+</ul>
+<p><strong>效果</strong>：</p>
+<ul>
+<li>✅ Number Key：顺序一致</li>
+<li>✅ String Key：顺序一致</li>
+<li>❌ Table&#x2F;Userdata Key：无法保证（Hash 基于指针地址）</li>
+</ul>
+<hr>
+<h3 id="测试验证"><a href="#测试验证" class="headerlink" title="测试验证"></a>测试验证</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 测试 pairs 遍历</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test_pairs</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">-- ✅ String Key - 重放时顺序一致</span><br>    <span class="hljs-keyword">local</span> t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        t[<span class="hljs-string">&#x27;i&#x27;</span> .. i] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;string pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">-- ✅ Number Key - 重放时顺序一致</span><br>    <span class="hljs-keyword">local</span> num_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        <span class="hljs-keyword">local</span> num = <span class="hljs-built_in">math</span>.<span class="hljs-built_in">random</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10000</span>)<br>        num_t[num] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(num_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;number pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">-- ❌ Table Key - 重放时顺序可能不一致</span><br>    <span class="hljs-keyword">local</span> table_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        table_t[&#123;&#125;] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(table_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;table pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="测试结果对比"><a href="#测试结果对比" class="headerlink" title="测试结果对比"></a>测试结果对比</h3><details>
+<summary>📊 点击展开查看详细日志</summary>
+
+<p><strong>正常运行结果</strong>：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i1&quot; 1 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i2&quot; 2 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i10&quot; 10 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i9&quot; 9 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i3&quot; 3 <br>...<br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;number pairs:&quot; 6165 8 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;number pairs:&quot; 7622 4 <br>...<br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;table pairs:&quot; &#123;&#125; 1 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;table pairs:&quot; &#123;&#125; 5 <br>...<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>重放结果</strong>：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 20][info][B_m] &quot;string pairs:&quot; &quot;i1&quot; 1  ✅ 一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;string pairs:&quot; &quot;i2&quot; 2  ✅ 一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;string pairs:&quot; &quot;i10&quot; 10 ✅ 一致<br>...<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;number pairs:&quot; 6165 8  ✅ 一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;number pairs:&quot; 7622 4  ✅ 一致<br>...<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;table pairs:&quot; &#123;&#125; 3  ❌ 不一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;table pairs:&quot; &#123;&#125; 7  ❌ 不一致<br>...<br><br></code></pre></td></tr></table></figure>
+
+</details>
+
+<p><strong>结论</strong>：Number 和 String Key 重放完全一致 ✅</p>
+<hr>
+<h2 id="🔄-2024-x2F-12-x2F-01-优化改动"><a href="#🔄-2024-x2F-12-x2F-01-优化改动" class="headerlink" title="🔄 2024&#x2F;12&#x2F;01 优化改动"></a>🔄 2024&#x2F;12&#x2F;01 优化改动</h2><h3 id="命名规范优化"><a href="#命名规范优化" class="headerlink" title="命名规范优化"></a>命名规范优化</h3><h4 id="录像文件命名"><a href="#录像文件命名" class="headerlink" title="录像文件命名"></a>录像文件命名</h4><p><strong>格式</strong>：<code>room_game_hall_m-1-1-20241205-180640.record</code></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>room_game_hall_m</code></td>
+<td>可热更服务名</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>启动版本号</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>启动索引</td>
+</tr>
+<tr>
+<td><code>20241205-180640</code></td>
+<td>启动时间</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="热更记录路径"><a href="#热更记录路径" class="headerlink" title="热更记录路径"></a>热更记录路径</h4><p><strong>格式</strong>：<code>hotfix_room_game_hall_m-1-20241205-194136/patch_20241205-204136/</code></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>1</code></td>
+<td>启动版本号</td>
+</tr>
+<tr>
+<td><code>20241205-194136</code></td>
+<td>启动时间</td>
+</tr>
+<tr>
+<td><code>20241205-204136</code></td>
+<td>热更时间</td>
+</tr>
+</tbody></table>
+<p><strong>共享配置路径</strong>：<code>sharedata_room_game_hall_m-1-20241205-194136/patch_20241205-204136/</code></p>
+<hr>
+<h3 id="录像文件切割机制"><a href="#录像文件切割机制" class="headerlink" title="录像文件切割机制"></a>录像文件切割机制</h3><blockquote>
+<p>💡 <strong>问题</strong>：录像文件必须从头开始播放，无法像日志文件一样切割</p>
+</blockquote>
+<p><strong>解决方案</strong>：利用框架的 <code>reload</code> 热更机制</p>
+<p><strong>流程</strong>：</p>
+<ol>
+<li>定时每天 <code>reload</code> 自身服务</li>
+<li>开始记录新的录像文件</li>
+<li>旧录像文件通过策略删除（如 <code>logrotate</code>）</li>
+</ol>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>✅ 保留近期录像</li>
+<li>✅ 节省磁盘空间</li>
+<li>✅ 文件更小，方便重放</li>
+</ul>
+<hr>
+<h3 id="新增配置项"><a href="#新增配置项" class="headerlink" title="新增配置项"></a>新增配置项</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 大厅服务配置示例</span><br>room_game_hall_m = &#123;<br>    launch_seq = <span class="hljs-number">6000</span>,<br>    launch_num = <span class="hljs-number">6</span>,        <span class="hljs-comment">-- 启动 6 个实例</span><br>    is_record_on = <span class="hljs-number">1</span>,      <span class="hljs-comment">-- 开启录像</span><br>    <br>    <span class="hljs-comment">-- ⏰ 自动定时热更（参考 skynet-fly.time_extend.time_point.lua）</span><br>    auto_reload = &#123;<br>        <span class="hljs-built_in">type</span> = <span class="hljs-number">3</span>,          <span class="hljs-comment">-- 每天</span><br>        hour = <span class="hljs-number">5</span>,          <span class="hljs-comment">-- 5 点</span><br>        <span class="hljs-built_in">min</span> = <span class="hljs-number">30</span>,          <span class="hljs-comment">-- 30 分</span><br>        sec = <span class="hljs-number">30</span>,          <span class="hljs-comment">-- 30 秒</span><br>    &#125;,<br>    <br>    <span class="hljs-comment">-- 🗂️ 录像文件自动整理（需要启动 logrotate_m）</span><br>    record_backup = &#123;<br>        max_age = <span class="hljs-number">3</span>,       <span class="hljs-comment">-- 最大保留天数</span><br>        max_backups = <span class="hljs-number">50</span>,  <span class="hljs-comment">-- 最大保留文件数</span><br>        point_type = <span class="hljs-number">3</span>,    <span class="hljs-comment">-- 每天</span><br>        hour = <span class="hljs-number">5</span>,          <span class="hljs-comment">-- 5 点</span><br>        sec = <span class="hljs-number">20</span>,          <span class="hljs-comment">-- 20 秒</span><br>    &#125;,<br>    <br>    default_arg = &#123;<br>        hall_plug = <span class="hljs-string">&quot;common.plug.hall_plug&quot;</span>,  <span class="hljs-comment">-- 大厅插件模块</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>配置说明</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>auto_reload</code></td>
+<td>自动定时热更配置</td>
+</tr>
+<tr>
+<td><code>record_backup</code></td>
+<td>录像文件自动整理配置</td>
+</tr>
+<tr>
+<td><code>max_age</code></td>
+<td>最大保留天数</td>
+</tr>
+<tr>
+<td><code>max_backups</code></td>
+<td>最大保留文件数</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="📊-功能总结"><a href="#📊-功能总结" class="headerlink" title="📊 功能总结"></a>📊 功能总结</h1><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>服务录像</td>
+<td>✅</td>
+<td>记录所有消息</td>
+</tr>
+<tr>
+<td>服务重放</td>
+<td>✅</td>
+<td>完整还原现场</td>
+</tr>
+<tr>
+<td>热更支持</td>
+<td>✅</td>
+<td>拷贝热更文件</td>
+</tr>
+<tr>
+<td>Session 一致性</td>
+<td>✅</td>
+<td>记录并重放</td>
+</tr>
+<tr>
+<td>随机数一致性</td>
+<td>✅</td>
+<td>记录种子</td>
+</tr>
+<tr>
+<td>pairs String Key</td>
+<td>✅</td>
+<td>顺序一致</td>
+</tr>
+<tr>
+<td>pairs Number Key</td>
+<td>✅</td>
+<td>顺序一致</td>
+</tr>
+<tr>
+<td>pairs Table Key</td>
+<td>❌</td>
+<td>无法保证</td>
+</tr>
+<tr>
+<td>自动切割</td>
+<td>✅</td>
+<td>定时 reload</td>
+</tr>
+<tr>
+<td>自动清理</td>
+<td>✅</td>
+<td>logrotate 支持</td>
+</tr>
+</tbody></table>
+<hr>
+<div align="center">
+
+<p><strong>🎉 开始使用服务录像，让 Bug 无处可逃！</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/record">查看示例</a> | <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/issues">提交 Issue</a></p>
+</div>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>服务录像与重放</div>
+      <div>https://huahua132.github.io/2024/10/27/skynet_fly_word/word_3/S_record/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/12/01/skynet_fly_api/snowflake/" title="全局唯一ID(guid)的生成">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">全局唯一ID(guid)的生成</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" title="代码加密">
+                        <span class="hidden-mobile">代码加密</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
