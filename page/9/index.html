@@ -229,67 +229,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/01/07/skynet_fly_api/rpcf/" target="_self">
-          远程rpc调用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/07/skynet_fly_api/rpcf/" target="_self">
-        <div>
-          关联文件 frpc_client.lua  最常用API M:new(svr_name,module_name,instance_name) 创建调用对象。  参数：  * svr_name(string) 访问节点名称。  * module_name(string)  模块名称，需要send或者call通信的模块名称(相当于一级索引)。  * instance_name(string) 实例名称
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-01-07 11:30" pubdate>
-              2024-01-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2024/01/07/skynet_fly_api/rpc/" target="_self">
           内部rpc调用
         </a>
@@ -796,6 +735,67 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-11-19 14:00" pubdate>
               2023-11-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/10/22/skynet_fly_ss/time_point/" target="_self">
+          关于新增定时器的扩展 整点报时
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/22/skynet_fly_ss/time_point/" target="_self">
+        <div>
+          前言对于游戏来说，经常有一些跨天整点的活动，比如英雄联盟手游的峡谷之巅每天12点到0点开放。做这种功能就需要分别在每天的12点和0点触发事件调用。 如何新增一开始想在timer.lua去新增一些新增一些方法，但是想保持timer.lua足够简单，就独立了一个文件用继承的方式来扩展。 提供功能可以像设置闹钟一样设置。  设置每分钟的哪一秒。 设置每小时几分几秒。 设置每天的几时几分几秒。 设置每周的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-22 13:42" pubdate>
+              2023-10-22
             </time>
           </div>
         

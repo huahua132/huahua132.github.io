@@ -487,74 +487,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
-          共享配置数据
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
-        <div>
-          前言由于skynet每个服务都是独立的lua虚拟机，一般游戏开发又需要加载大量的配置文件，如果每个服务都加载一遍，会造成过多的内存浪费，所有skynet就提供了sharedata,sharetable共享配置数据的手段。由于两种方案各有优缺点，所以我在封装实现上让使用者可以任选其一，在make&#x2F;script增加热更配置命令，方便于热更配置。 优缺点对比sharedata 优点  c内存占
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-09-14 22:00" pubdate>
-              2024-09-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2024/08/17/skynet_fly_word/word_1/N_question/" target="_self">
           常见问题收录
         </a>
@@ -858,6 +790,74 @@
     <span>></span>
     
   <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3/" class="category-chain-item">日志相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/sharedata/" target="_self">
+          共享配置数据
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/sharedata/" target="_self">
+        <div>
+          sharedata使用注意点对于使用sharedata配置，被其他外部引用的表会被更新到，sharetable不会，所以如果想拿到最新的配置就必须用这个文件的get_map,get_map_list,get_data_table拿取对于不想更新到的表sharedata需要做个深拷贝直接用sharedata 的表数据传入pb，该部分数据打包不进去，需要深拷贝后导入 function M.hotfix
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%85%B1%E4%BA%AB%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE/" class="category-chain-item">共享配置数据</a>
   
   
 
