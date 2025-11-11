@@ -1,0 +1,1422 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="huahua132">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="container_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="启动函数">
+<meta property="og:url" content="https://huahua132.github.io/2024/06/29/skynet_fly_api_word/container/container_launcher/index.html">
+<meta property="og:site_name" content="huahua132 blog">
+<meta property="og:description" content="container_launcher function M.run()描述 这是启动函数通常在main.lua中调用参数 返回值  function 返回需要延迟启动的可热更模块">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-29T14:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-11T09:56:15.068Z">
+<meta property="article:author" content="huahua132">
+<meta property="article:tag" content="skynet_fly_api">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>启动函数 - huahua132 blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"huahua132.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>huahua132 blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/bg.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="启动函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-06-29 22:00" pubdate>
+          2024年6月29日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          82 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          1 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar category-bar" style="margin-right: -1rem">
+    
+
+
+
+
+
+<div class="category-list">
+  
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="skynet_fly API 文档"
+        id="heading-914be2f574381fd3e208c2d1e1fa87a4" role="tab" data-toggle="collapse" href="#collapse-914be2f574381fd3e208c2d1e1fa87a4"
+        aria-expanded="true"
+      >
+        skynet_fly API 文档
+        <span class="list-group-count">(45)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-914be2f574381fd3e208c2d1e1fa87a4"
+           role="tabpanel" aria-labelledby="heading-914be2f574381fd3e208c2d1e1fa87a4">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="共享配置数据"
+        id="heading-a38d05b339ac4a3a50422d71111c30c3" role="tab" data-toggle="collapse" href="#collapse-a38d05b339ac4a3a50422d71111c30c3"
+        aria-expanded="false"
+      >
+        共享配置数据
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-a38d05b339ac4a3a50422d71111c30c3"
+           role="tabpanel" aria-labelledby="heading-a38d05b339ac4a3a50422d71111c30c3">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/sharedata/" title="共享配置数据"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">共享配置数据</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem 
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="可热更服务模块"
+        id="heading-b0daabdad0ae2dc3e05d0c23c547acdc" role="tab" data-toggle="collapse" href="#collapse-b0daabdad0ae2dc3e05d0c23c547acdc"
+        aria-expanded="true"
+      >
+        可热更服务模块
+        <span class="list-group-count">(8)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse show" id="collapse-b0daabdad0ae2dc3e05d0c23c547acdc"
+           role="tabpanel" aria-labelledby="heading-b0daabdad0ae2dc3e05d0c23c547acdc">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/container/container_interface/" title="对外接口"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">对外接口</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/client/container_client/" title="访问对象[内部rpc]"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">访问对象[内部rpc]</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/container/container_launcher/" title="启动函数"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">启动函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" title="访问对象[远程rpc]"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">访问对象[远程rpc]</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_interface/" title="对外接口"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">对外接口</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/client/contriner_client/" title="访问对象[内部rpc]"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">访问对象[内部rpc]</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/contriner/contriner_launcher/" title="启动函数"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">启动函数</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/etc/module_info/" title="模块信息与配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">模块信息与配置</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="唯一ID生成"
+        id="heading-e62e14a9c91de575961d0d71a267df92" role="tab" data-toggle="collapse" href="#collapse-e62e14a9c91de575961d0d71a267df92"
+        aria-expanded="false"
+      >
+        唯一ID生成
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-e62e14a9c91de575961d0d71a267df92"
+           role="tabpanel" aria-labelledby="heading-e62e14a9c91de575961d0d71a267df92">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/snowflake/" title="雪花算法生成唯一ID"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">雪花算法生成唯一ID</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="定时器相关"
+        id="heading-0c6f92c580433a087e899d9ed155b8a6" role="tab" data-toggle="collapse" href="#collapse-0c6f92c580433a087e899d9ed155b8a6"
+        aria-expanded="false"
+      >
+        定时器相关
+        <span class="list-group-count">(3)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-0c6f92c580433a087e899d9ed155b8a6"
+           role="tabpanel" aria-labelledby="heading-0c6f92c580433a087e899d9ed155b8a6">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/timer/" title="定时器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">定时器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/time_extend/timer_point/" title="整点报时"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">整点报时</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/time_extend/wait/" title="执行流挂起等待"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">执行流挂起等待</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="工具函数"
+        id="heading-2ac18c98a08e56752553d98a41218ee0" role="tab" data-toggle="collapse" href="#collapse-2ac18c98a08e56752553d98a41218ee0"
+        aria-expanded="false"
+      >
+        工具函数
+        <span class="list-group-count">(8)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-2ac18c98a08e56752553d98a41218ee0"
+           role="tabpanel" aria-labelledby="heading-2ac18c98a08e56752553d98a41218ee0">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/env_util/" title="env_util env相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">env_util env相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/file_util/" title="file_util file相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">file_util file相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/04/01/skynet_fly_api_word/utils/guid_util/" title="guid_util guid相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">guid_util guid相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/math_util/" title="math_util math相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">math_util math相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/skynet_util/" title="skynet_util skynet相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">skynet_util skynet相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/string_util/" title="string_util string相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">string_util string相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/table_util/" title="table_util table相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">table_util table相关</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/utils/time_util/" title="time_util 时间相关"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">time_util 时间相关</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="执行队列"
+        id="heading-63789a35887a898fb372377d45e0ae28" role="tab" data-toggle="collapse" href="#collapse-63789a35887a898fb372377d45e0ae28"
+        aria-expanded="false"
+      >
+        执行队列
+        <span class="list-group-count">(2)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-63789a35887a898fb372377d45e0ae28"
+           role="tabpanel" aria-labelledby="heading-63789a35887a898fb372377d45e0ae28">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" title="mod映射队列"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">mod映射队列</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/mult_queue/" title="并发，单发互斥的队列"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">并发，单发互斥的队列</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="数据库相关"
+        id="heading-bb052afcdf970e1ad5f2d41b3146d9ab" role="tab" data-toggle="collapse" href="#collapse-bb052afcdf970e1ad5f2d41b3146d9ab"
+        aria-expanded="false"
+      >
+        数据库相关
+        <span class="list-group-count">(12)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-bb052afcdf970e1ad5f2d41b3146d9ab"
+           role="tabpanel" aria-labelledby="heading-bb052afcdf970e1ad5f2d41b3146d9ab">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2025/10/30/skynet_fly_api_word/client/orm_frpc_client/" title="orm远程访问对象"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm远程访问对象</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/client/orm_table_client/" title="orm访问对象"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm访问对象</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/mongof/" title="mongo直连"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">mongo直连</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/mysqlf/" title="mysql连接池调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">mysql连接池调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/mysqli/" title="mysql直连调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">mysql直连调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/redisf/" title="redis调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">redis调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/redisc/" title="redis命令扩展"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">redis命令扩展</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormentry/" title="orm条目"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm条目</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/orm/ormtable/" title="orm表"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm表</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mongo/" title="orm mongo适配器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm mongo适配器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/db/ormadapter/ormadapter_mysql/" title="orm mysql适配器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm mysql适配器</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/28/skynet_fly_api_word/db/ormadapter/ormadapter_uselog/" title="orm uselog适配器"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm uselog适配器</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="日志相关"
+        id="heading-6239e894ebd3d21f2a1919bb1caeb69d" role="tab" data-toggle="collapse" href="#collapse-6239e894ebd3d21f2a1919bb1caeb69d"
+        aria-expanded="false"
+      >
+        日志相关
+        <span class="list-group-count">(2)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-6239e894ebd3d21f2a1919bb1caeb69d"
+           role="tabpanel" aria-labelledby="heading-6239e894ebd3d21f2a1919bb1caeb69d">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/logrotate/" title="日志轮换"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">日志轮换</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2025/03/28/skynet_fly_api_word/use_log/" title="用户日志"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">用户日志</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="热更脚本"
+        id="heading-dc5abbd2494aad33100b042eade0c955" role="tab" data-toggle="collapse" href="#collapse-dc5abbd2494aad33100b042eade0c955"
+        aria-expanded="false"
+      >
+        热更脚本
+        <span class="list-group-count">(1)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-dc5abbd2494aad33100b042eade0c955"
+           role="tabpanel" aria-labelledby="heading-dc5abbd2494aad33100b042eade0c955">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/hotfix/state_data/" title="旧数据处理"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">旧数据处理</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="订阅发布，订阅同步"
+        id="heading-5c1276ea4c8b4df3018f85679d0f63a2" role="tab" data-toggle="collapse" href="#collapse-5c1276ea4c8b4df3018f85679d0f63a2"
+        aria-expanded="false"
+      >
+        订阅发布，订阅同步
+        <span class="list-group-count">(7)</span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+      <div class="category-collapse collapse " id="collapse-5c1276ea4c8b4df3018f85679d0f63a2"
+           role="tabpanel" aria-labelledby="heading-5c1276ea4c8b4df3018f85679d0f63a2">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/rpc/watch_server/" title="远程订阅同步-推送端"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">远程订阅同步-推送端</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/rpc/watch_client/" title="远程订阅-订阅端"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">远程订阅-订阅端</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/rpc/watch_syn_client/" title="远程订阅同步-订阅端"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">远程订阅同步-订阅端</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/watch/watch_syn/" title="进程内的订阅同步"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">进程内的订阅同步</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/container_watch_interface/" title="进程内的订阅同步-可热更服务的接口"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">进程内的订阅同步-可热更服务的接口</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/contriner_watch_interface/" title="进程内的订阅同步-可热更服务的接口"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">进程内的订阅同步-可热更服务的接口</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/06/29/skynet_fly_api_word/watch/interface/service_watch_interface/" title="进程内的订阅同步-可热更服务的接口"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">进程内的订阅同步-可热更服务的接口</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+
+  </aside>
+
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">启动函数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/container/container_launcher.lua">container_launcher</a></p>
+<h2 id="function-M-run"><a href="#function-M-run" class="headerlink" title="function M.run()"></a>function M.run()</h2><p><strong>描述</strong></p>
+<p>这是启动函数通常在main.lua中调用<br><strong>参数</strong></p>
+<p><strong>返回值</strong></p>
+<ul>
+<li>function 返回需要延迟启动的可热更模块</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E5%8F%AF%E7%83%AD%E6%9B%B4%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9D%97/" class="category-chain-item">可热更服务模块</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>启动函数</div>
+      <div>https://huahua132.github.io/2024/06/29/skynet_fly_api_word/container/container_launcher/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>huahua132</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年6月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/06/29/skynet_fly_api_word/client/container_client/" title="访问对象[内部rpc]">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">访问对象[内部rpc]</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/06/29/skynet_fly_api_word/client/frpc_client/" title="访问对象[远程rpc]">
+                        <span class="hidden-mobile">访问对象[远程rpc]</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
