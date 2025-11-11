@@ -358,74 +358,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/10/27/skynet_fly_word/word_3/S_record/" target="_self">
-          服务录像与重放
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/27/skynet_fly_word/word_3/S_record/" target="_self">
-        <div>
-          前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-10-27 22:00" pubdate>
-              2024-10-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" target="_self">
           代码加密
         </a>
@@ -434,7 +366,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" target="_self">
         <div>
-          前言很多群友都有加密代码的需求。为了群友辛辛苦苦写的游戏不被人轻易白嫖，这必须得安排上。 实现方案lua加载代码通常都是用loadfile跟require，所以我们可以先把lua文件通过string.dump打成二进制格式，再通过加密算法加密，之后直接使用加密的文件去运行，通过重写loadfile的底层函数，内置解密过程，即可实现代码加密的效果。 如何使用修改解密key修改skynet_fly\s
+          📖 前言许多开发者都有代码加密保护的需求。为了保护辛辛苦苦开发的游戏不被轻易盗用，我们提供了完善的代码加密方案。  💡 目标：让您的劳动成果得到应有的保护   🔐 实现方案核心原理Lua 代码加载主要通过 loadfile 和 require 实现。我们的加密方案基于以下流程： graph LR     A[原始 Lua 文件] --&gt; B[string.dump 转二进制]
         </div>
       </a>
 
@@ -882,11 +814,79 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
+          日志轮换
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
+        <div>
+          logrotate function M:new(filename)描述 新建对象参数  filename string? 文件名  返回值  table 对象  function M:set_rename_format(rename_format)描述 重命名文件格式参数  rename_format string  返回值  table 对象  function M:set_file_path
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 22:00" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly API 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3/" class="category-chain-item">日志相关</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#board">16</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/#board">15</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
