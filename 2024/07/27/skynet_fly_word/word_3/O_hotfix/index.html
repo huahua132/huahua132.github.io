@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📖 前言对于有状态服务，通常采用滚服更新方式（启动新服务替换旧服务）。但当旧服务维持状态时，简单的逻辑 Bug 无法立即修复。这时就需要热更脚本功能来快速解决突发问题。  🔄 热更方式对比两种热更策略graph TB     Start[服务更新需求] --&gt; Choice&amp;#123;更新方式?&amp;#125;          Choice --&gt;|滚服更新| A[启动新服务]">
+    <meta name="description" content="前言对于有状态的服务，利用新服务替换旧服务的方式，旧服务我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，旧服务没法立即更新，没法完美的解决问题，这时候可能就需要用到热更脚本来解决突发的一些简单逻辑bug。 限制热更脚本对比滚服更新的最大区别就是：  热更脚本是在旧的lua服务中完成  滚服更新启动新lua服务，流量切入新的lua服务   使用滚服更新的好处是，我们不需要考虑热更后对于服">
 <meta property="og:type" content="article">
-<meta property="og:title" content="可热更服务 - 热更脚本支持">
+<meta property="og:title" content="可热更服务，热更脚本支持">
 <meta property="og:url" content="https://huahua132.github.io/2024/07/27/skynet_fly_word/word_3/O_hotfix/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="📖 前言对于有状态服务，通常采用滚服更新方式（启动新服务替换旧服务）。但当旧服务维持状态时，简单的逻辑 Bug 无法立即修复。这时就需要热更脚本功能来快速解决突发问题。  🔄 热更方式对比两种热更策略graph TB     Start[服务更新需求] --&gt; Choice&amp;#123;更新方式?&amp;#125;          Choice --&gt;|滚服更新| A[启动新服务]">
+<meta property="og:description" content="前言对于有状态的服务，利用新服务替换旧服务的方式，旧服务我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，旧服务没法立即更新，没法完美的解决问题，这时候可能就需要用到热更脚本来解决突发的一些简单逻辑bug。 限制热更脚本对比滚服更新的最大区别就是：  热更脚本是在旧的lua服务中完成  滚服更新启动新lua服务，流量切入新的lua服务   使用滚服更新的好处是，我们不需要考虑热更后对于服">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-27T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-11T12:52:41.901Z">
+<meta property="article:modified_time" content="2025-11-12T01:22:05.820Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>可热更服务 - 热更脚本支持 - huahua132 blog</title>
+  <title>可热更服务，热更脚本支持 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="可热更服务 - 热更脚本支持"></span>
+            <span id="subtitle" data-typed-text="可热更服务，热更脚本支持"></span>
           
         </div>
 
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.5k 字
+          2.8k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          54 分钟
+          24 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(43)</span>
+        <span class="list-group-count">(44)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -622,7 +622,7 @@
         aria-expanded="true"
       >
         强化篇
-        <span class="list-group-count">(18)</span>
+        <span class="list-group-count">(19)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -744,28 +744,37 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程订阅发布模式 - sub/pub 与 subsyn/pubsyn"
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">远程订阅发布模式 - sub/pub 与 subsyn/pubsyn</span>
+          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
         </a>
       
     
       
       
-        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务 - 热更脚本支持"
+        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">可热更服务 - 热更脚本支持</span>
+          <span class="category-post">可热更服务，热更脚本支持</span>
         </a>
       
     
       
       
-        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调试的支持"
+        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调式的支持"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">断点调试的支持</span>
+          <span class="category-post">断点调式的支持</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">共享配置数据</span>
         </a>
       
     
@@ -789,10 +798,10 @@
     
       
       
-        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持"
+        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持</span>
+          <span class="category-post">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</span>
         </a>
       
     
@@ -819,450 +828,63 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">可热更服务 - 热更脚本支持</h1>
+            <h1 style="display: none">可热更服务，热更脚本支持</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="📖-前言"><a href="#📖-前言" class="headerlink" title="📖 前言"></a>📖 前言</h1><p>对于<strong>有状态服务</strong>，通常采用<strong>滚服更新</strong>方式（启动新服务替换旧服务）。但当旧服务维持状态时，简单的逻辑 Bug 无法立即修复。这时就需要<strong>热更脚本</strong>功能来快速解决突发问题。</p>
-<hr>
-<h1 id="🔄-热更方式对比"><a href="#🔄-热更方式对比" class="headerlink" title="🔄 热更方式对比"></a>🔄 热更方式对比</h1><h2 id="两种热更策略"><a href="#两种热更策略" class="headerlink" title="两种热更策略"></a>两种热更策略</h2><pre><code class=" mermaid">graph TB
-    Start[服务更新需求] --&gt; Choice&#123;更新方式?&#125;
-    
-    Choice --&gt;|滚服更新| A[启动新服务]
-    Choice --&gt;|热更脚本| B[原地更新代码]
-    
-    A --&gt; A1[流量切入新服务]
-    A1 --&gt; A2[旧服务等待状态清空]
-    A2 --&gt; A3[旧服务退出]
-    
-    B --&gt; B1[替换函数实现]
-    B1 --&gt; B2[保持服务运行]
-    B2 --&gt; B3[状态无缝延续]
-    
-    style A fill:#d4edda
-    style B fill:#fff3cd
-    style Start fill:#e1f5ff
-
-</code></pre>
-
-<hr>
-<h2 id="📊-特性对比"><a href="#📊-特性对比" class="headerlink" title="📊 特性对比"></a>📊 特性对比</h2><table>
-<thead>
-<tr>
-<th>特性</th>
-<th>滚服更新</th>
-<th>热更脚本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>更新范围</strong></td>
-<td>✅ 完整代码</td>
-<td>⚠️ 部分代码</td>
-</tr>
-<tr>
-<td><strong>状态迁移</strong></td>
-<td>✅ 无需考虑</td>
-<td>❌ 需要谨慎处理</td>
-</tr>
-<tr>
-<td><strong>编码限制</strong></td>
-<td>✅ 无限制</td>
-<td>❌ 有严格限制</td>
-</tr>
-<tr>
-<td><strong>更新速度</strong></td>
-<td>⚠️ 慢（需启动新服务）</td>
-<td>✅ 快（即时生效）</td>
-</tr>
-<tr>
-<td><strong>风险程度</strong></td>
-<td>✅ 低</td>
-<td>⚠️ 中等</td>
-</tr>
-<tr>
-<td><strong>适用场景</strong></td>
-<td>大版本更新</td>
-<td>紧急 Bug 修复</td>
-</tr>
-<tr>
-<td><strong>闭包支持</strong></td>
-<td>✅ 完全支持</td>
-<td>❌ 不支持</td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="⚠️-使用限制"><a href="#⚠️-使用限制" class="headerlink" title="⚠️ 使用限制"></a>⚠️ 使用限制</h1><p>热更脚本虽然方便，但有严格的编码限制。违反这些限制可能导致<strong>更新失败</strong>或<strong>运行异常</strong>。</p>
-<hr>
-<h2 id="❌-限制一：禁止返回匿名函数-x2F-闭包"><a href="#❌-限制一：禁止返回匿名函数-x2F-闭包" class="headerlink" title="❌ 限制一：禁止返回匿名函数&#x2F;闭包"></a>❌ 限制一：禁止返回匿名函数&#x2F;闭包</h2><h3 id="错误示例"><a href="#错误示例" class="headerlink" title="错误示例"></a>错误示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ❌ hello.lua（错误）</span><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_count</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> a = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>  <span class="hljs-comment">-- ❌ 返回闭包函数</span><br>        a = a + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> a<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- main.lua</span><br><span class="hljs-keyword">local</span> hello = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hello&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> count = hello.create_count()  <span class="hljs-comment">-- 旧版本闭包</span><br>    <span class="hljs-comment">-- 执行热更...</span><br>    <span class="hljs-keyword">local</span> count2 = hello.create_count() <span class="hljs-comment">-- 新版本闭包</span><br>    <br>    count()   <span class="hljs-comment">-- ❌ 仍然使用旧版本逻辑（a = a + 1）</span><br>    count2()  <span class="hljs-comment">-- ✅ 使用新版本逻辑（a = a + 2）</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
-
-<p><strong>问题</strong>：已经创建的闭包 <code>count</code> 无法被热更，仍然执行旧逻辑。</p>
-<hr>
-<h3 id="✅-正确示例"><a href="#✅-正确示例" class="headerlink" title="✅ 正确示例"></a>✅ 正确示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ✅ hello.lua（正确）</span><br><span class="hljs-keyword">local</span> state_data = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.state_data&quot;</span><br><span class="hljs-keyword">local</span> count_map = state_data.alloc_table(<span class="hljs-string">&quot;count_map&quot;</span>)<br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.count</span><span class="hljs-params">(id)</span></span><br>    count_map[id] = (count_map[id] <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>  <span class="hljs-comment">-- ✅ 热更前：+1</span><br>    <span class="hljs-comment">-- 热更后可改为：count_map[id] = (count_map[id] or 0) + 2</span><br>    <span class="hljs-keyword">return</span> count_map[id]<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- main.lua</span><br><span class="hljs-keyword">local</span> hello = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hello&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> result1 = hello.count(<span class="hljs-number">1</span>)  <span class="hljs-comment">-- 无论何时调用都是最新版本</span><br>    <span class="hljs-comment">-- 执行热更...</span><br>    <span class="hljs-keyword">local</span> result2 = hello.count(<span class="hljs-number">1</span>)  <span class="hljs-comment">-- ✅ 使用新版本逻辑</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="❌-限制二：禁止修改全局变量"><a href="#❌-限制二：禁止修改全局变量" class="headerlink" title="❌ 限制二：禁止修改全局变量"></a>❌ 限制二：禁止修改全局变量</h2><h3 id="错误示例-1"><a href="#错误示例-1" class="headerlink" title="错误示例"></a>错误示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ❌ 错误</span><br><span class="hljs-built_in">_G</span>.some_config = &#123; value = <span class="hljs-number">100</span> &#125;  <span class="hljs-comment">-- ❌ 污染全局空间</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.init</span><span class="hljs-params">()</span></span><br>    DEBUG = <span class="hljs-literal">true</span>  <span class="hljs-comment">-- ❌ 意外创建全局变量</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
-
-<p><strong>危险性</strong>：</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于有状态的服务，利用<strong>新服务</strong>替换<strong>旧服务</strong>的方式，<strong>旧服务</strong>我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，<strong>旧服务</strong>没法立即更新，没法完美的解决问题，这时候可能就需要用到<strong>热更脚本</strong>来解决突发的一些简单逻辑bug。</p>
+<h1 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h1><p><strong>热更脚本</strong>对比<strong>滚服更新</strong>的最大区别就是：</p>
 <ul>
-<li>影响其他模块</li>
-<li>热更后难以回滚</li>
-<li>可能引发不可预知的问题</li>
+<li><p><strong>热更脚本</strong><br>是在旧的lua服务中完成</p>
+</li>
+<li><p><strong>滚服更新</strong><br>启动新lua服务，流量切入新的lua服务</p>
+</li>
 </ul>
-<hr>
-<h3 id="✅-正确示例-1"><a href="#✅-正确示例-1" class="headerlink" title="✅ 正确示例"></a>✅ 正确示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ✅ 正确</span><br><span class="hljs-keyword">local</span> state_data = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.state_data&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">config</span> = state_data.alloc_table(<span class="hljs-string">&quot;config&quot;</span>)<br><br><span class="hljs-built_in">config</span>.value = <span class="hljs-number">100</span>  <span class="hljs-comment">-- ✅ 使用隔离的状态空间</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><span class="hljs-keyword">local</span> DEBUG = <span class="hljs-literal">true</span>  <span class="hljs-comment">-- ✅ 局部变量</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
+<p>使用<strong>滚服更新</strong>的好处是，我们不需要考虑热更后对于服务内部状态的影响，编码方式可以随意使用，闭包，函数式编程，随便用。<br>想安全可靠的使用<strong>热更脚本</strong>更新，我们必须要限制我们的编码行为，才能做到功能按照预期完成更新。</p>
+<h2 id="限制一-匿名函数生成"><a href="#限制一-匿名函数生成" class="headerlink" title="限制一 匿名函数生成"></a>限制一 匿名函数生成</h2><p>假设我们需要热更模块如下:</p>
+<figure class="highlight lua"><figcaption><span>hello.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.create_count</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> a = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>        a = a + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> a<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
 
-<hr>
-<h2 id="❌-限制三：模块引用必须从表根部开始"><a href="#❌-限制三：模块引用必须从表根部开始" class="headerlink" title="❌ 限制三：模块引用必须从表根部开始"></a>❌ 限制三：模块引用必须从表根部开始</h2><h3 id="错误示例-2"><a href="#错误示例-2" class="headerlink" title="错误示例"></a>错误示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- mode1.lua</span><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hello</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;hello skynet&quot;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> hello = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;hello&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> count = hello.create_count()<br>    <span class="hljs-comment">--hotfix</span><br>    <span class="hljs-keyword">local</span> count2 = hello.create_count()<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<p>如果我们想把<code>a = a + 1</code>改成 <code>a = a + 2</code>，那么<code>main</code>函数中的count是热更不到的，所以可热更脚本模块，不能使用返回闭包函数。</p>
+<h2 id="限制二-修改全局变量"><a href="#限制二-修改全局变量" class="headerlink" title="限制二 修改全局变量"></a>限制二 修改全局变量</h2><p>改动全局变量本身就是非常危险的行为，需要禁止。</p>
+<h2 id="限制三-模块返回值必须是table-并且其他模块引用时都需要从表根部开始引用"><a href="#限制三-模块返回值必须是table-并且其他模块引用时都需要从表根部开始引用" class="headerlink" title="限制三 模块返回值必须是table,并且其他模块引用时都需要从表根部开始引用"></a>限制三 模块返回值必须是table,并且其他模块引用时都需要从表根部开始引用</h2><p>假设如下例子</p>
+<figure class="highlight lua"><figcaption><span>mode1.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hello</span><span class="hljs-params">()</span></span><br>    <span class="hljs-string">&quot;hello skynet&quot;</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
 
+<figure class="highlight lua"><figcaption><span>main.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> mode1 = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;mode1&quot;</span><br><br><span class="hljs-keyword">local</span> hello = mode1.hello<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    hello()<br>    mode1.hello()<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ❌ main.lua（错误）</span><br><span class="hljs-keyword">local</span> mode1 = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;mode1&quot;</span><br><span class="hljs-keyword">local</span> hello = mode1.hello  <span class="hljs-comment">-- ❌ 直接引用函数</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    hello()         <span class="hljs-comment">-- ❌ 热更后仍是旧版本</span><br>    mode1.hello()   <span class="hljs-comment">-- ✅ 热更后是新版本</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
+<p>热更后脚本</p>
+<figure class="highlight lua"><figcaption><span>mode1.lua</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hello</span><span class="hljs-params">()</span></span><br>    <span class="hljs-string">&quot;hello skynet_fly&quot;</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
 
-<p><strong>问题</strong>：<code>hello</code> 变量持有的是旧函数引用，热更不会影响它。</p>
-<hr>
-<h3 id="✅-正确示例-2"><a href="#✅-正确示例-2" class="headerlink" title="✅ 正确示例"></a>✅ 正确示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ✅ main.lua（正确）</span><br><span class="hljs-keyword">local</span> mode1 = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;mode1&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br>    mode1.hello()  <span class="hljs-comment">-- ✅ 每次都从表根部访问，保证获取最新版本</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="❌-限制四：禁止改变模块-Key-的-Value-类型"><a href="#❌-限制四：禁止改变模块-Key-的-Value-类型" class="headerlink" title="❌ 限制四：禁止改变模块 Key 的 Value 类型"></a>❌ 限制四：禁止改变模块 Key 的 Value 类型</h2><h3 id="错误示例-3"><a href="#错误示例-3" class="headerlink" title="错误示例"></a>错误示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 热更前</span><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br>M.<span class="hljs-built_in">config</span> = &#123; level = <span class="hljs-number">1</span> &#125;  <span class="hljs-comment">-- table 类型</span><br><span class="hljs-keyword">return</span> M<br><br><span class="hljs-comment">-- ❌ 热更后（错误）</span><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br>M.<span class="hljs-built_in">config</span> = <span class="hljs-number">100</span>  <span class="hljs-comment">-- ❌ 改为 number 类型</span><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>风险</strong>：</p>
+<p>这样热更后，<code>main</code>中的hello是用的旧版本，而 <code>mode1.hello</code>是新版本。</p>
+<h2 id="限制四-模块-key-对应的value-类型不能变"><a href="#限制四-模块-key-对应的value-类型不能变" class="headerlink" title="限制四 模块 key 对应的value 类型不能变"></a>限制四 模块 key 对应的value 类型不能变</h2><p>突然改变类型，大概率是非常危险的行为。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>实现之前，有仔细的研究下云大的<a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Snax#%E7%83%AD%E6%9B%B4%E6%96%B0-hotfix">snax中实现的热更方案</a>。<br>云大的方案是通过注入的方式，刷更新脚本。热更流程会把热更到的<strong>旧版函数</strong>的<strong>upvalue</strong>挂到<strong>新版函数</strong>的<strong>upvalue</strong>，主要考虑的是引用之前的状态数据。<br>而我觉得不想被热更的状态数据完全可以挂到一个不热更的模块中，这样热更并不会重置它，所以我的做法是把<strong>M</strong>中的key value，替换到旧版的。不处理<strong>upvalue</strong>，再新增一个挂载状态数据的模块即可。</p>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><p>云大的热更方式，需要写额外的热更脚本，并不是在原文件直接热更，但是实际项目中，我们并不想额外写一个热更脚本，就想在原文件上修改，然后一键热更。<br>实际项目中，大多时候我们只需要热更经常改动的业务逻辑代码，所以我的做法是区分<strong>可热更脚本</strong>和<strong>不可热更脚本</strong>，可热更脚本用一个特殊的<strong>require</strong>加载，这样也能方便记录到哪些脚本文件是需要检测热更的，启动之后，就能把信息记录到文件中，方便利用shell脚本检测热更。</p>
+<h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><h2 id="hotfix-require-引入"><a href="#hotfix-require-引入" class="headerlink" title="hotfix_require 引入"></a>hotfix_require 引入</h2><p>想<strong>热更</strong>的脚本，需要使用<strong>hotfix_require</strong>加载。</p>
+<h2 id="make-x2F-script-x2F-check-hotfix-sh-make-x2F-script-x2F-hotfix-sh"><a href="#make-x2F-script-x2F-check-hotfix-sh-make-x2F-script-x2F-hotfix-sh" class="headerlink" title="make&#x2F;script&#x2F;check_hotfix.sh  make&#x2F;script&#x2F;hotfix.sh"></a>make&#x2F;script&#x2F;check_hotfix.sh  make&#x2F;script&#x2F;hotfix.sh</h2><p><code>make_server.sh</code> 增加了这2个脚本的生成。</p>
 <ul>
-<li>其他模块可能依赖原类型</li>
-<li>可能导致类型错误崩溃</li>
+<li><code>make/script/check_hotfix.sh</code> 检测并执行热更</li>
+<li><code>make/script/hotfix.sh</code> 手动指定热更脚本</li>
 </ul>
-<hr>
-<h3 id="✅-正确示例-3"><a href="#✅-正确示例-3" class="headerlink" title="✅ 正确示例"></a>✅ 正确示例</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 热更前</span><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br>M.<span class="hljs-built_in">config</span> = &#123; level = <span class="hljs-number">1</span> &#125;<br><span class="hljs-keyword">return</span> M<br><br><span class="hljs-comment">-- ✅ 热更后（正确）</span><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br>M.<span class="hljs-built_in">config</span> = &#123; level = <span class="hljs-number">2</span>, <span class="hljs-built_in">exp</span> = <span class="hljs-number">100</span> &#125;  <span class="hljs-comment">-- ✅ 保持 table 类型，仅修改内容</span><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
+<h2 id="state-data-lua"><a href="#state-data-lua" class="headerlink" title="state_data.lua"></a>state_data.lua</h2><p>用于挂载状态数据。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> state_data = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.state_data&quot;</span><br><br><span class="hljs-keyword">local</span> state_map = state_data.alloc_table(<span class="hljs-string">&quot;state_map&quot;</span>)<br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">-------------------------------test1----------------------------</span><br><span class="hljs-comment">--[[</span><br><span class="hljs-comment">    有些状态数据，我们并不想随着热更被重置</span><br><span class="hljs-comment">]]</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.test1</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> state_map.a <span class="hljs-keyword">then</span><br>        state_map.a = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">end</span><br>    state_map.a = state_map.a + <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> state_map.a<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--[[</span><br><span class="hljs-comment">    预期结果: 热更后数据不能被重置</span><br><span class="hljs-comment">]]</span><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p>需要记录状态数据的，在<strong>可热更脚本</strong>中这样写即可，热更后state_map还是之前的<code>table</code>。</p>
+<h2 id="热更完成的回调"><a href="#热更完成的回调" class="headerlink" title="热更完成的回调"></a>热更完成的回调</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hotfix</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p>可热更脚本中可以实现<code>hotfix</code>函数，热更成功后调用。</p>
+<h1 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h1><p>只有可热更服务中可以使用。</p>
+<h2 id="不要热更服务之间调用的CMD命令"><a href="#不要热更服务之间调用的CMD命令" class="headerlink" title="不要热更服务之间调用的CMD命令"></a>不要热更服务之间调用的CMD命令</h2><p>假设有2个服务 A B</p>
+<figure class="highlight lua"><figcaption><span>A服务</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--热更前</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.add</span><span class="hljs-params">(a,b)</span></span><br>    <span class="hljs-keyword">return</span> a + b<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">--热更后</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.add</span><span class="hljs-params">(a,b,c)</span></span><br>    <span class="hljs-keyword">return</span> a + b + c<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
 
-<hr>
-<h1 id="🛠️-实现方案"><a href="#🛠️-实现方案" class="headerlink" title="🛠️ 实现方案"></a>🛠️ 实现方案</h1><h2 id="设计思路对比"><a href="#设计思路对比" class="headerlink" title="设计思路对比"></a>设计思路对比</h2><h3 id="Snax-的热更方案"><a href="#Snax-的热更方案" class="headerlink" title="Snax 的热更方案"></a>Snax 的热更方案</h3><p>云风在 <a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Snax#%E7%83%AD%E6%9B%B4%E6%96%B0-hotfix">Snax 热更新</a> 中采用的方案：</p>
-<pre><code class=" mermaid">graph LR
-    A[旧函数] --&gt; B[提取 upvalue]
-    C[新函数] --&gt; D[注入旧 upvalue]
-    B --&gt; D
-    D --&gt; E[完成热更]
-    
-    style A fill:#ffc107
-    style C fill:#4caf50
-    style E fill:#2196f3
-
-</code></pre>
-
-<p><strong>特点</strong>：</p>
+<figure class="highlight lua"><figcaption><span>B服务</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> CMD = &#123;&#125;<br><br><span class="hljs-comment">--热更前</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.do_add</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> count = call(<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;add&#x27;</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">--热更后</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">CMD.do_add</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">local</span> count = call(<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;add&#x27;</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> CMD<br></code></pre></td></tr></table></figure>
+<p>由于AB是2个服务，热更过程并不是串行的，就可能出现</p>
 <ul>
-<li>✅ 保留函数的 upvalue 状态</li>
-<li>❌ 需要编写额外的热更脚本</li>
+<li><p>旧B调用新A<br>调用之后 A肯定要报错，c参数不存在。</p>
+</li>
+<li><p>新B调用旧A<br>结果不符合预期，c参数没加上。</p>
+</li>
 </ul>
-<hr>
-<h3 id="skynet-fly-的热更方案"><a href="#skynet-fly-的热更方案" class="headerlink" title="skynet_fly 的热更方案"></a>skynet_fly 的热更方案</h3><pre><code class=" mermaid">graph LR
-    A[旧模块表 M] --&gt; B[新模块表 M&#x27;]
-    B --&gt; C[替换 M 的 key-value]
-    C --&gt; D[保持 M 引用不变]
-    D --&gt; E[完成热更]
-    
-    style A fill:#ffc107
-    style B fill:#4caf50
-    style E fill:#2196f3
-
-</code></pre>
-
-<p><strong>特点</strong>：</p>
-<ul>
-<li>✅ 无需编写额外脚本</li>
-<li>✅ 直接在原文件修改</li>
-<li>✅ 一键热更</li>
-<li>⚠️ 不处理 upvalue（通过 state_data 解决）</li>
-</ul>
-<hr>
-<h2 id="核心机制"><a href="#核心机制" class="headerlink" title="核心机制"></a>核心机制</h2><h3 id="1️⃣-可热更脚本-vs-不可热更脚本"><a href="#1️⃣-可热更脚本-vs-不可热更脚本" class="headerlink" title="1️⃣ 可热更脚本 vs 不可热更脚本"></a>1️⃣ 可热更脚本 vs 不可热更脚本</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>加载方式</th>
-<th>是否检测热更</th>
-<th>适用场景</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>可热更</strong></td>
-<td><code>hotfix_require</code></td>
-<td>✅</td>
-<td>业务逻辑代码</td>
-</tr>
-<tr>
-<td><strong>不可热更</strong></td>
-<td><code>require</code></td>
-<td>❌</td>
-<td>框架代码、第三方库</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="2️⃣-热更检测机制"><a href="#2️⃣-热更检测机制" class="headerlink" title="2️⃣ 热更检测机制"></a>2️⃣ 热更检测机制</h3><p>启动时记录所有通过 <code>hotfix_require</code> 加载的文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 记录文件位置</span><br>.hotfix_record/module_list.txt<br><br><span class="hljs-comment"># 内容示例</span><br>module/player/player_mgr.lua<br>module/room/room_mgr.lua<br>module/item/item_mgr.lua<br><br></code></pre></td></tr></table></figure>
-
-<p>Shell 脚本检测这些文件的修改时间，自动触发热更。</p>
-<hr>
-<h1 id="💻-使用指南"><a href="#💻-使用指南" class="headerlink" title="💻 使用指南"></a>💻 使用指南</h1><h2 id="步骤-1️⃣：使用-hotfix-require-加载"><a href="#步骤-1️⃣：使用-hotfix-require-加载" class="headerlink" title="步骤 1️⃣：使用 hotfix_require 加载"></a>步骤 1️⃣：使用 hotfix_require 加载</h2><h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ✅ 可热更模块</span><br><span class="hljs-keyword">local</span> player_mgr = hotfix_require <span class="hljs-string">&quot;module.player.player_mgr&quot;</span><br><br><span class="hljs-comment">-- ❌ 不可热更模块（框架代码）</span><br><span class="hljs-keyword">local</span> skynet = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet&quot;</span><br><span class="hljs-keyword">local</span> <span class="hljs-built_in">log</span> = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.log&quot;</span><br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="步骤-2️⃣：使用-state-data-管理状态"><a href="#步骤-2️⃣：使用-state-data-管理状态" class="headerlink" title="步骤 2️⃣：使用 state_data 管理状态"></a>步骤 2️⃣：使用 state_data 管理状态</h2><h3 id="状态数据管理"><a href="#状态数据管理" class="headerlink" title="状态数据管理"></a>状态数据管理</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> state_data = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.state_data&quot;</span><br><br><span class="hljs-comment">-- 分配状态表（热更后不会重置）</span><br><span class="hljs-keyword">local</span> state_map = state_data.alloc_table(<span class="hljs-string">&quot;state_map&quot;</span>)<br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.test1</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> state_map.a <span class="hljs-keyword">then</span><br>        state_map.a = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">end</span><br>    state_map.a = state_map.a + <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> state_map.a<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>特点</strong>：</p>
-<ul>
-<li>✅ 热更后 <code>state_map</code> 保持不变</li>
-<li>✅ 状态数据不会丢失</li>
-</ul>
-<hr>
-<h2 id="步骤-3️⃣：编写热更完成回调"><a href="#步骤-3️⃣：编写热更完成回调" class="headerlink" title="步骤 3️⃣：编写热更完成回调"></a>步骤 3️⃣：编写热更完成回调</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-comment">-- ✅ 可选：热更完成后调用</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hotfix</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;模块热更成功！&quot;</span>)<br>    <span class="hljs-comment">-- 可以在这里做一些清理或初始化工作</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="步骤-4️⃣：执行热更"><a href="#步骤-4️⃣：执行热更" class="headerlink" title="步骤 4️⃣：执行热更"></a>步骤 4️⃣：执行热更</h2><h3 id="自动检测热更"><a href="#自动检测热更" class="headerlink" title="自动检测热更"></a>自动检测热更</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 检测并执行热更</span><br>sh make/script/check_hotfix.sh<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>工作流程</strong>：</p>
-<ol>
-<li>扫描 <code>.hotfix_record/module_list.txt</code> 中的文件</li>
-<li>对比文件修改时间</li>
-<li>发现变化后自动热更</li>
-<li>输出热更结果</li>
-</ol>
-<hr>
-<h3 id="手动指定热更"><a href="#手动指定热更" class="headerlink" title="手动指定热更"></a>手动指定热更</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 手动指定单个文件热更</span><br>sh make/script/hotfix.sh module/player/player_mgr.lua<br><br><span class="hljs-comment"># 手动指定多个文件热更</span><br>sh make/script/hotfix.sh \<br>    module/player/player_mgr.lua \<br>    module/room/room_mgr.lua<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="🎯-最佳实践"><a href="#🎯-最佳实践" class="headerlink" title="🎯 最佳实践"></a>🎯 最佳实践</h1><h2 id="✅-推荐做法"><a href="#✅-推荐做法" class="headerlink" title="✅ 推荐做法"></a>✅ 推荐做法</h2><h3 id="1-状态数据独立管理"><a href="#1-状态数据独立管理" class="headerlink" title="1. 状态数据独立管理"></a>1. 状态数据独立管理</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ✅ 正确</span><br><span class="hljs-keyword">local</span> state_data = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.hotfix.state_data&quot;</span><br><span class="hljs-keyword">local</span> player_list = state_data.alloc_table(<span class="hljs-string">&quot;player_list&quot;</span>)<br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.add_player</span><span class="hljs-params">(player_id, data)</span></span><br>    player_list[player_id] = data<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="2-函数调用从表根部访问"><a href="#2-函数调用从表根部访问" class="headerlink" title="2. 函数调用从表根部访问"></a>2. 函数调用从表根部访问</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ✅ 正确</span><br><span class="hljs-keyword">local</span> player_mgr = hotfix_require <span class="hljs-string">&quot;module.player_mgr&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process_player</span><span class="hljs-params">(player_id)</span></span><br>    player_mgr.update(player_id)  <span class="hljs-comment">-- ✅ 每次都从表根部访问</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3-热更后验证"><a href="#3-热更后验证" class="headerlink" title="3. 热更后验证"></a>3. 热更后验证</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">M.hotfix</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">-- ✅ 验证关键功能</span><br>    <span class="hljs-built_in">assert</span>(M.core_function, <span class="hljs-string">&quot;core_function is missing!&quot;</span>)<br>    <br>    <span class="hljs-comment">-- ✅ 重新初始化某些数据</span><br>    M.init_cache()<br>    <br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;Hot fix completed and validated&quot;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="❌-避免做法"><a href="#❌-避免做法" class="headerlink" title="❌ 避免做法"></a>❌ 避免做法</h2><h3 id="1-跨服务-CMD-命令热更"><a href="#1-跨服务-CMD-命令热更" class="headerlink" title="1. 跨服务 CMD 命令热更"></a>1. 跨服务 CMD 命令热更</h3><pre><code class=" mermaid">sequenceDiagram
-    participant A as 服务 A
-    participant B as 服务 B
-    
-    Note over A: 热更前：add(a,b)
-    Note over B: 热更前：调用 add(1,2)
-    
-    A-&gt;&gt;A: 热更为 add(a,b,c)
-    Note over A,B: ⚠️ 异步热更，顺序不可控
-    
-    B-&gt;&gt;A: 调用 add(1,2) ❌ 参数不匹配
-    A--&gt;&gt;B: 错误：c 参数缺失
-    
-    B-&gt;&gt;B: 热更为调用 add(1,2,3)
-    B-&gt;&gt;A: 调用 add(1,2,3)
-    A--&gt;&gt;B: ✅ 正常
-
-</code></pre>
-
-<p><strong>问题</strong>：</p>
-<ul>
-<li>❌ 旧 B 调用新 A → 参数不匹配</li>
-<li>❌ 新 B 调用旧 A → 结果不符合预期</li>
-</ul>
-<hr>
-<h3 id="2-在模块中改写其他模块"><a href="#2-在模块中改写其他模块" class="headerlink" title="2. 在模块中改写其他模块"></a>2. 在模块中改写其他模块</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- ❌ 错误</span><br><span class="hljs-keyword">local</span> cccc = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;cccc&quot;</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cccc.xxxx</span><span class="hljs-params">()</span></span>  <span class="hljs-comment">-- ❌ 污染其他模块</span><br>    <span class="hljs-comment">-- ...</span><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>问题</strong>：</p>
-<ul>
-<li>如果当前模块热更失败，<code>cccc.xxxx</code> 仍然是新版本</li>
-<li>破坏了模块的封装性</li>
-</ul>
-<hr>
-<h1 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h1><h2 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h2><table>
-<thead>
-<tr>
-<th>限制项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>服务类型</strong></td>
-<td>⚠️ 仅可热更服务支持</td>
-</tr>
-<tr>
-<td><strong>跨服务调用</strong></td>
-<td>❌ 不要热更服务间的 CMD 接口</td>
-</tr>
-<tr>
-<td><strong>模块污染</strong></td>
-<td>❌ 不要在模块中修改其他模块</td>
-</tr>
-<tr>
-<td><strong>全局变量</strong></td>
-<td>❌ 禁止使用全局变量</td>
-</tr>
-<tr>
-<td><strong>闭包函数</strong></td>
-<td>❌ 禁止返回闭包</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="风险评估"><a href="#风险评估" class="headerlink" title="风险评估"></a>风险评估</h2><table>
-<thead>
-<tr>
-<th>风险等级</th>
-<th>场景</th>
-<th>建议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>🟢 <strong>低风险</strong></td>
-<td>纯函数逻辑修复</td>
-<td>✅ 适合热更</td>
-</tr>
-<tr>
-<td>🟡 <strong>中风险</strong></td>
-<td>状态数据结构调整</td>
-<td>⚠️ 谨慎热更</td>
-</tr>
-<tr>
-<td>🔴 <strong>高风险</strong></td>
-<td>跨服务接口变更</td>
-<td>❌ 不建议热更</td>
-</tr>
-<tr>
-<td>🔴 <strong>高风险</strong></td>
-<td>核心框架代码修改</td>
-<td>❌ 滚服更新</td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="🔄-完整工作流程"><a href="#🔄-完整工作流程" class="headerlink" title="🔄 完整工作流程"></a>🔄 完整工作流程</h1><pre><code class=" mermaid">flowchart TD
-    Start([发现 Bug]) --&gt; A&#123;严重程度?&#125;
-    
-    A --&gt;|紧急| B[准备热更]
-    A --&gt;|非紧急| C[计划滚服更新]
-    
-    B --&gt; D[修改代码]
-    D --&gt; E&#123;检查限制?&#125;
-    E --&gt;|违反限制| F[改为滚服更新]
-    E --&gt;|符合限制| G[本地测试]
-    
-    G --&gt; H&#123;测试通过?&#125;
-    H --&gt;|否| D
-    H --&gt;|是| I[执行热更]
-    
-    I --&gt; J[验证功能]
-    J --&gt; K&#123;验证通过?&#125;
-    K --&gt;|否| L[回滚代码]
-    K --&gt;|是| M([完成 ✅])
-    
-    L --&gt; N[分析问题]
-    N --&gt; D
-    
-    C --&gt; O[下个版本修复]
-    F --&gt; O
-    
-    style Start fill:#e1f5ff
-    style M fill:#d4edda
-    style A fill:#fff3cd
-    style E fill:#fff3cd
-    style H fill:#fff3cd
-    style K fill:#fff3cd
-
-</code></pre>
-
-<hr>
-<h1 id="🐛-常见问题"><a href="#🐛-常见问题" class="headerlink" title="🐛 常见问题"></a>🐛 常见问题</h1><h2 id="❓-热更后功能异常？"><a href="#❓-热更后功能异常？" class="headerlink" title="❓ 热更后功能异常？"></a>❓ 热更后功能异常？</h2><p><strong>检查清单</strong>：</p>
-<ol>
-<li>✅ 是否违反了四大限制？</li>
-<li>✅ 状态数据是否正确管理？</li>
-<li>✅ 是否有其他模块缓存了旧引用？</li>
-<li>✅ 热更回调函数是否执行成功？</li>
-</ol>
-<hr>
-<h2 id="❓-如何回滚热更？"><a href="#❓-如何回滚热更？" class="headerlink" title="❓ 如何回滚热更？"></a>❓ 如何回滚热更？</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 方法 1：恢复旧代码后重新热更</span><br>git checkout HEAD -- module/player/player_mgr.lua<br>sh make/script/hotfix.sh module/player/player_mgr.lua<br><br><span class="hljs-comment"># 方法 2：重启服务（如果影响严重）</span><br>sh make/script/restart.sh load_mods.lua 0<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="❓-热更和滚服如何选择？"><a href="#❓-热更和滚服如何选择？" class="headerlink" title="❓ 热更和滚服如何选择？"></a>❓ 热更和滚服如何选择？</h2><table>
-<thead>
-<tr>
-<th>场景</th>
-<th>推荐方案</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>紧急 Bug 修复（5分钟内）</td>
-<td>🔥 热更脚本</td>
-</tr>
-<tr>
-<td>简单逻辑错误</td>
-<td>🔥 热更脚本</td>
-</tr>
-<tr>
-<td>函数参数变更</td>
-<td>❌ 滚服更新</td>
-</tr>
-<tr>
-<td>新增字段&#x2F;功能</td>
-<td>❌ 滚服更新</td>
-</tr>
-<tr>
-<td>框架代码修改</td>
-<td>❌ 滚服更新</td>
-</tr>
-<tr>
-<td>数据结构大改</td>
-<td>❌ 滚服更新</td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="📊-性能影响"><a href="#📊-性能影响" class="headerlink" title="📊 性能影响"></a>📊 性能影响</h1><h2 id="热更性能测试"><a href="#热更性能测试" class="headerlink" title="热更性能测试"></a>热更性能测试</h2><table>
-<thead>
-<tr>
-<th>指标</th>
-<th>数据</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>单模块热更耗时</td>
-<td>~10ms</td>
-</tr>
-<tr>
-<td>100 模块热更耗时</td>
-<td>~500ms</td>
-</tr>
-<tr>
-<td>热更期间 CPU 峰值</td>
-<td>+20%</td>
-</tr>
-<tr>
-<td>内存增长</td>
-<td>&lt; 1MB</td>
-</tr>
-<tr>
-<td>服务暂停时间</td>
-<td>&lt; 1ms</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>💡 <strong>结论</strong>：热更对性能影响极小，可以在生产环境使用</p>
-</blockquote>
-<hr>
-<h1 id="🔗-相关资源"><a href="#🔗-相关资源" class="headerlink" title="🔗 相关资源"></a>🔗 相关资源</h1><ul>
-<li>📖 <a target="_blank" rel="noopener" href="https://github.com/cloudwu/skynet/wiki/Snax#%E7%83%AD%E6%9B%B4%E6%96%B0-hotfix">Snax 热更新文档</a></li>
-<li>🛠️ <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly">热更示例代码</a></li>
-<li>📚 <a href="#">state_data API 文档</a></li>
-<li>💬 <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/issues">提交 Issue</a></li>
-</ul>
-<hr>
-<div align="center">
-
-<p><strong>🔥 安全热更，快速修复 Bug！</strong></p>
-<p>有问题欢迎提 Issue 或加入技术交流群</p>
-</div>
-
-<pre><code class="hljs">
----
-</code></pre>
+<h2 id="尽量不要在模块中改写其他模块的内容"><a href="#尽量不要在模块中改写其他模块的内容" class="headerlink" title="尽量不要在模块中改写其他模块的内容"></a>尽量不要在模块中改写其他模块的内容</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> cccc = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;cccc&quot;</span><br><br><span class="hljs-keyword">local</span> M = &#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cccc.xxxx</span><span class="hljs-params">()</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
+<p>像这种，如果热更失败了，cccc.xxxx的函数也成新版了。</p>
 
                 
               </div>
@@ -1315,7 +937,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>可热更服务 - 热更脚本支持</div>
+      <div>可热更服务，热更脚本支持</div>
       <div>https://huahua132.github.io/2024/07/27/skynet_fly_word/word_3/O_hotfix/</div>
     </div>
     <div class="license-meta">
@@ -1360,9 +982,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调试的支持">
+                      <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调式的支持">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">断点调试的支持</span>
+                        <span class="hidden-mobile">断点调式的支持</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -1370,8 +992,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/29/skynet_fly_api/frpc_watch/" title="远程订阅发布模式">
-                        <span class="hidden-mobile">远程订阅发布模式</span>
+                      <a href="/2024/06/29/skynet_fly_api_word/logrotate/" title="日志轮换">
+                        <span class="hidden-mobile">日志轮换</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

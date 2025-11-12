@@ -16,12 +16,12 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📖 前言许多开发者询问如何调试 skynet_fly，因此我们引入了断点调试支持。虽然老手更倾向于使用日志调试，但对于新手来说，断点调试能够极大地帮助理解代码执行流程，提升学习效率。  💡 开发建议：    🆕 新手：建议使用断点调试快速定位问题   👨‍💻 老手：日志调试通常更高效    🔧 实现方案技术选型调研在 VSCode 中虽然有部分插件声称支持 Skynet 调试，但经过测">
+    <meta name="description" content="前言很多群友都问怎样调试skynet_fly，于是就有了对单点调式的支持，调式对于老手来说并不是那么的必要，对于新手来说确实有助于编码学习，毕竟刚学编程那会儿也比较依赖调试，后面逐渐习惯用打印日志的方式查找问题。 实现方案在vscode有部分插件说支持了对skynet的调试，我跟着他们的步骤进行操作，都没能成功调试。之后尝试能不能用lua helper插件支持的调式功能。研究之后发现lua hel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="断点调试的支持">
+<meta property="og:title" content="断点调式的支持">
 <meta property="og:url" content="https://huahua132.github.io/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="📖 前言许多开发者询问如何调试 skynet_fly，因此我们引入了断点调试支持。虽然老手更倾向于使用日志调试，但对于新手来说，断点调试能够极大地帮助理解代码执行流程，提升学习效率。  💡 开发建议：    🆕 新手：建议使用断点调试快速定位问题   👨‍💻 老手：日志调试通常更高效    🔧 实现方案技术选型调研在 VSCode 中虽然有部分插件声称支持 Skynet 调试，但经过测">
+<meta property="og:description" content="前言很多群友都问怎样调试skynet_fly，于是就有了对单点调式的支持，调式对于老手来说并不是那么的必要，对于新手来说确实有助于编码学习，毕竟刚学编程那会儿也比较依赖调试，后面逐渐习惯用打印日志的方式查找问题。 实现方案在vscode有部分插件说支持了对skynet的调试，我跟着他们的步骤进行操作，都没能成功调试。之后尝试能不能用lua helper插件支持的调式功能。研究之后发现lua hel">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug1.png">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug2.png">
@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug6.png">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/break_points_debug7.png">
 <meta property="article:published_time" content="2024-08-03T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-11T12:47:44.334Z">
+<meta property="article:modified_time" content="2025-11-12T01:22:05.822Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -41,7 +41,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>断点调试的支持 - huahua132 blog</title>
+  <title>断点调式的支持 - huahua132 blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="断点调试的支持"></span>
+            <span id="subtitle" data-typed-text="断点调式的支持"></span>
           
         </div>
 
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k 字
+          2.9k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          46 分钟
+          25 分钟
         
       </span>
     
@@ -294,7 +294,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(43)</span>
+        <span class="list-group-count">(44)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -630,7 +630,7 @@
         aria-expanded="true"
       >
         强化篇
-        <span class="list-group-count">(18)</span>
+        <span class="list-group-count">(19)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -752,28 +752,37 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程订阅发布模式 - sub/pub 与 subsyn/pubsyn"
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">远程订阅发布模式 - sub/pub 与 subsyn/pubsyn</span>
+          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
         </a>
       
     
       
       
-        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务 - 热更脚本支持"
+        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更服务 - 热更脚本支持</span>
+          <span class="category-post">可热更服务，热更脚本支持</span>
         </a>
       
     
       
       
-        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调试的支持"
+        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调式的支持"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">断点调试的支持</span>
+          <span class="category-post">断点调式的支持</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">共享配置数据</span>
         </a>
       
     
@@ -797,10 +806,10 @@
     
       
       
-        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持"
+        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持</span>
+          <span class="category-post">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</span>
         </a>
       
     
@@ -827,383 +836,34 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">断点调试的支持</h1>
+            <h1 style="display: none">断点调式的支持</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="📖-前言"><a href="#📖-前言" class="headerlink" title="📖 前言"></a>📖 前言</h1><p>许多开发者询问如何调试 <code>skynet_fly</code>，因此我们引入了<strong>断点调试</strong>支持。虽然老手更倾向于使用日志调试，但对于新手来说，断点调试能够极大地帮助理解代码执行流程，提升学习效率。</p>
-<blockquote>
-<p>💡 <strong>开发建议</strong>：  </p>
-<ul>
-<li>🆕 <strong>新手</strong>：建议使用断点调试快速定位问题  </li>
-<li>👨‍💻 <strong>老手</strong>：日志调试通常更高效</li>
-</ul>
-</blockquote>
-<hr>
-<h1 id="🔧-实现方案"><a href="#🔧-实现方案" class="headerlink" title="🔧 实现方案"></a>🔧 实现方案</h1><h2 id="技术选型调研"><a href="#技术选型调研" class="headerlink" title="技术选型调研"></a>技术选型调研</h2><p>在 VSCode 中虽然有部分插件声称支持 Skynet 调试，但经过测试均未成功。最终我们选择了基于 <strong>Lua Helper</strong> 插件的调试方案。</p>
-<h3 id="为什么选择-LuaPanda？"><a href="#为什么选择-LuaPanda？" class="headerlink" title="为什么选择 LuaPanda？"></a>为什么选择 LuaPanda？</h3><table>
-<thead>
-<tr>
-<th>特性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>成熟度</strong></td>
-<td>在 xLua、sLua 等项目中广泛使用</td>
-</tr>
-<tr>
-<td><strong>稳定性</strong></td>
-<td>经过多个大型项目验证</td>
-</tr>
-<tr>
-<td><strong>兼容性</strong></td>
-<td>支持多种 Lua 运行环境</td>
-</tr>
-<tr>
-<td><strong>易用性</strong></td>
-<td>集成简单，配置方便</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="集成架构"><a href="#集成架构" class="headerlink" title="集成架构"></a>集成架构</h2><pre><code class=" mermaid">graph LR
-    A[VSCode&lt;br/&gt;调试服务端] --&gt;|监听 8818| B[LuaPanda 协议]
-    B --&gt;|连接| C[skynet_fly&lt;br/&gt;调试客户端]
-    C --&gt; D[LuaSocket]
-    C --&gt; E[debug.sethook]
-    
-    style A fill:#e1f5ff
-    style C fill:#fff3cd
-    style D fill:#d4edda
-    style E fill:#d4edda
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很多群友都问怎样调试<code>skynet_fly</code>，于是就有了对单点调式的支持，调式对于老手来说并不是那么的必要，对于新手来说确实有助于编码学习，毕竟刚学编程那会儿也比较依赖调试，后面逐渐习惯用打印日志的方式查找问题。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>在<code>vscode</code>有部分插件说支持了对skynet的调试，我跟着他们的步骤进行操作，都没能成功调试。<br>之后尝试能不能用<code>lua helper</code>插件支持的调式功能。研究之后发现<code>lua helper</code>是引入了<code>lua panda</code>，<code>lua panda</code>在<code>xlua</code>,<code>slua</code>等等都有引入，也比较成熟稳定，就开始尝试引入，引入<code>luaPanda</code>，只需要将<code>luaPanda.lua</code>文件加入到<code>skynet_fly</code>在需要调用的服务中加载并连接调试端口即可。由于<code>luaPanda.lua</code>依赖<code>luaSocket</code>，我也尝试过直接用<code>skynet</code>中的<code>socket</code>，但是<code>debug.sethook</code>中调用携程挂起会报错，所以只能把<code>luasocket</code>也引入进来。</p>
+<h1 id="对skynet的修改"><a href="#对skynet的修改" class="headerlink" title="对skynet的修改"></a>对skynet的修改</h1><p>由于<code>luaPanda.lua</code>有重写<code>coroutine.create</code>函数，但是<code>skynet.lua</code>对<code>coroutine.create</code>做了局部引用，使得重写的函数没被调用到，导致断点调试没法生效。<br>只能把<code>skynet.lua</code>中对<code>coroutine.create</code>函数的局部引用去掉。</p>
+<h1 id="调用方式"><a href="#调用方式" class="headerlink" title="调用方式"></a>调用方式</h1><p><code>lua panda</code> 采用的调试方式是远程调试，<code>vscode</code>作为<code>server</code>端通常监听<code>8818</code>端口，<code>skynet_fly</code>作为客户端进行连接。</p>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>需要下载安装插件<code>luaHelper</code><br><img src="/img/skynet_fly_word/word_3/break_points_debug1.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="linux系统"><a href="#linux系统" class="headerlink" title="linux系统"></a>linux系统</h1><p>如果你的服务不是在本地启动，启动<code>skynet_fly</code>的机器又没发连接到你本地，那就需要再安装<code>Remote SSH</code>插件。<br><img src="/img/skynet_fly_word/word_3/break_points_debug2.png" srcset="/img/loading.gif" lazyload></p>
+<p>按<code>ctrl shift + P</code>设置远程连接。<br><img src="/img/skynet_fly_word/word_3/break_points_debug3.png" srcset="/img/loading.gif" lazyload></p>
+<p>之后用<code>vscode</code>打开远程连接上对应项目。<br>在远程上再安装<code>luaHelper</code>插件。</p>
+<h1 id="windows系统"><a href="#windows系统" class="headerlink" title="windows系统"></a>windows系统</h1><p>直接跑skynet_fly的windows 版本即可，断点调式。</p>
+<h2 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h2><p>点击创建<code>launch.json</code>,选择<code>luaHelper</code><br><img src="/img/skynet_fly_word/word_3/break_points_debug4.png" srcset="/img/loading.gif" lazyload><br>把<code>stopOnEntry</code>(调试器启动后自动停止在调用的第一行代码处) 配置项改为<code>false</code>。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 使用 IntelliSense 了解相关属性。 </span><br>    <span class="hljs-comment">// 悬停以查看现有属性的描述。</span><br>    <span class="hljs-comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.2.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-Debug&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-Attach&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;通用模式,通常调试项目请选择此模式&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;luaFileExtension&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;connectionPort&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8818</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;stopOnEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>   <span class="hljs-comment">//改为false</span><br>            <span class="hljs-attr">&quot;useCHook&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;autoPathMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-Debug&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-DebugFile&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;独立文件调试模式&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;luaPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;packagePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;luaFileExtension&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;connectionPort&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8818</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;stopOnEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;useCHook&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<h2 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h2><p>在<code>skynet_fly</code>有一个调试示例。<br><code>test/module/debug_test_m.lua</code> 对应<code>load_mods_debug.lua</code>启动配置。</p>
+<p><code>load_mods_debug.lua</code></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>	 <span class="hljs-comment">--共享配置</span><br>	share_config_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">1</span>,<br>		default_arg = &#123;<br>			server_cfg = &#123;<br>				breakpoint_debug_module_name = <span class="hljs-string">&quot;debug_test_m&quot;</span>,   <span class="hljs-comment">--调试的可热更服务名</span><br>				breakpoint_debug_module_index = <span class="hljs-number">2</span>,               <span class="hljs-comment">--启动下标</span><br>				breakpoint_debug_host = <span class="hljs-string">&quot;127.0.0.1&quot;</span>,             <span class="hljs-comment">--vscode监听的IP</span><br>				breakpoint_debug_port = <span class="hljs-number">8818</span>,                    <span class="hljs-comment">--vscode监听的端口</span><br>			&#125;<br>		&#125;,<br>	&#125;,<br><br>    debug_test_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">2</span>,<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-</code></pre>
-
-<p><strong>核心组件</strong>：</p>
-<ol>
-<li><strong>luaPanda.lua</strong>：调试核心库</li>
-<li><strong>luaSocket</strong>：网络通信（必需，因为 Skynet socket 在 <code>debug.sethook</code> 中会报错）</li>
-<li><strong>VSCode Lua Helper</strong>：调试前端界面</li>
-</ol>
-<hr>
-<h1 id="⚙️-对-Skynet-的修改"><a href="#⚙️-对-Skynet-的修改" class="headerlink" title="⚙️ 对 Skynet 的修改"></a>⚙️ 对 Skynet 的修改</h1><h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p><code>luaPanda.lua</code> 重写了 <code>coroutine.create</code> 函数以支持协程调试，但 <code>skynet.lua</code> 对该函数做了局部引用，导致重写失效。</p>
-<h3 id="修改前"><a href="#修改前" class="headerlink" title="修改前"></a>修改前</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- skynet.lua</span><br><span class="hljs-keyword">local</span> co_create = <span class="hljs-built_in">coroutine</span>.<span class="hljs-built_in">create</span>  <span class="hljs-comment">-- ❌ 局部引用，绕过了重写</span><br><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">new_coroutine</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> co_create(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> ... <span class="hljs-keyword">end</span>)<br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
-
-<h3 id="修改后"><a href="#修改后" class="headerlink" title="修改后"></a>修改后</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- skynet.lua</span><br><span class="hljs-comment">-- ✅ 直接使用全局函数，应用重写</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">new_coroutine</span><span class="hljs-params">()</span></span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">coroutine</span>.<span class="hljs-built_in">create</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> ... <span class="hljs-keyword">end</span>)<br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="🚀-使用指南"><a href="#🚀-使用指南" class="headerlink" title="🚀 使用指南"></a>🚀 使用指南</h1><h2 id="调试架构"><a href="#调试架构" class="headerlink" title="调试架构"></a>调试架构</h2><pre><code class=" mermaid">sequenceDiagram
-    participant VSCode as VSCode (Server)
-    participant LuaPanda as LuaPanda Client
-    participant Skynet as Skynet Service
-    
-    VSCode-&gt;&gt;VSCode: 监听 8818 端口
-    Note over VSCode: 启动调试会话
-    
-    Skynet-&gt;&gt;LuaPanda: 加载 luaPanda.lua
-    LuaPanda-&gt;&gt;VSCode: 连接调试端口
-    Note over LuaPanda,VSCode: 建立调试连接
-    
-    VSCode-&gt;&gt;LuaPanda: 设置断点
-    LuaPanda-&gt;&gt;Skynet: 注入 hook
-    
-    Skynet-&gt;&gt;LuaPanda: 触发断点
-    LuaPanda-&gt;&gt;VSCode: 报告断点命中
-    VSCode-&gt;&gt;VSCode: 暂停并显示调试信息
-
-</code></pre>
-
-<hr>
-<h2 id="步骤-1️⃣：安装插件"><a href="#步骤-1️⃣：安装插件" class="headerlink" title="步骤 1️⃣：安装插件"></a>步骤 1️⃣：安装插件</h2><h3 id="必需插件：Lua-Helper"><a href="#必需插件：Lua-Helper" class="headerlink" title="必需插件：Lua Helper"></a>必需插件：Lua Helper</h3><p>在 VSCode 扩展市场搜索并安装 <strong>Lua Helper</strong></p>
-<p><img src="/img/skynet_fly_word/word_3/break_points_debug1.png" srcset="/img/loading.gif" lazyload alt="安装 Lua Helper"></p>
-<hr>
-<h2 id="步骤-2️⃣：配置调试环境"><a href="#步骤-2️⃣：配置调试环境" class="headerlink" title="步骤 2️⃣：配置调试环境"></a>步骤 2️⃣：配置调试环境</h2><h3 id="🐧-Linux-系统（远程调试）"><a href="#🐧-Linux-系统（远程调试）" class="headerlink" title="🐧 Linux 系统（远程调试）"></a>🐧 Linux 系统（远程调试）</h3><p>如果服务运行在远程 Linux 服务器上，需要额外安装 <strong>Remote SSH</strong> 插件。</p>
-<p><img src="/img/skynet_fly_word/word_3/break_points_debug2.png" srcset="/img/loading.gif" lazyload alt="安装 Remote SSH"></p>
-<h4 id="配置远程连接"><a href="#配置远程连接" class="headerlink" title="配置远程连接"></a>配置远程连接</h4><ol>
-<li>按 <code>Ctrl + Shift + P</code> 打开命令面板</li>
-<li>选择 <strong>Remote-SSH: Connect to Host</strong></li>
-</ol>
-<p><img src="/img/skynet_fly_word/word_3/break_points_debug3.png" srcset="/img/loading.gif" lazyload alt="配置 SSH"></p>
-<ol start="3">
-<li>在远程服务器上<strong>重新安装</strong> Lua Helper 插件</li>
-<li>使用 VSCode 打开远程项目目录</li>
-</ol>
-<hr>
-<h3 id="🪟-Windows-系统（本地调试）"><a href="#🪟-Windows-系统（本地调试）" class="headerlink" title="🪟 Windows 系统（本地调试）"></a>🪟 Windows 系统（本地调试）</h3><p>直接运行 skynet_fly 的 Windows 版本即可，无需额外配置。</p>
-<hr>
-<h2 id="步骤-3️⃣：创建调试配置"><a href="#步骤-3️⃣：创建调试配置" class="headerlink" title="步骤 3️⃣：创建调试配置"></a>步骤 3️⃣：创建调试配置</h2><h3 id="创建-launch-json"><a href="#创建-launch-json" class="headerlink" title="创建 launch.json"></a>创建 launch.json</h3><ol>
-<li>点击调试面板的 <strong>创建 launch.json 文件</strong></li>
-<li>选择 <strong>LuaHelper</strong></li>
-</ol>
-<p><img src="/img/skynet_fly_word/word_3/break_points_debug4.png" srcset="/img/loading.gif" lazyload alt="创建配置"></p>
-<hr>
-<h3 id="配置文件示例"><a href="#配置文件示例" class="headerlink" title="配置文件示例"></a>配置文件示例</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.2.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;configurations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-Debug&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-Attach&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;通用模式，通常调试项目请选择此模式&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;workspaceFolder&#125;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;luaFileExtension&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;connectionPort&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8818</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;stopOnEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>     <span class="hljs-comment">// ⚠️ 改为 false（不自动停在第一行）</span><br>            <span class="hljs-attr">&quot;useCHook&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;autoPathMode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-Debug&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;request&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;launch&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;LuaHelper-DebugFile&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;独立文件调试模式&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;luaPath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;packagePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;luaFileExtension&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;connectionPort&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8818</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;stopOnEntry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;useCHook&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
-
-<p><strong>关键配置</strong>：</p>
-<ul>
-<li><code>stopOnEntry: false</code>：不自动停在第一行代码</li>
-<li><code>connectionPort: 8818</code>：调试端口（需与服务端配置一致）</li>
-</ul>
-<hr>
-<h2 id="步骤-4️⃣：配置服务端"><a href="#步骤-4️⃣：配置服务端" class="headerlink" title="步骤 4️⃣：配置服务端"></a>步骤 4️⃣：配置服务端</h2><h3 id="示例配置文件"><a href="#示例配置文件" class="headerlink" title="示例配置文件"></a>示例配置文件</h3><p><code>load_mods_debug.lua</code>：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-comment">-- 共享配置</span><br>    share_config_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            server_cfg = &#123;<br>                <span class="hljs-comment">-- 调试配置</span><br>                breakpoint_debug_module_name = <span class="hljs-string">&quot;debug_test_m&quot;</span>,   <span class="hljs-comment">-- 🎯 调试的服务名</span><br>                breakpoint_debug_module_index = <span class="hljs-number">2</span>,               <span class="hljs-comment">-- 📍 启动索引（第几个实例）</span><br>                breakpoint_debug_host = <span class="hljs-string">&quot;127.0.0.1&quot;</span>,             <span class="hljs-comment">-- 🌐 VSCode 监听 IP</span><br>                breakpoint_debug_port = <span class="hljs-number">8818</span>,                    <span class="hljs-comment">-- 🔌 VSCode 监听端口</span><br>            &#125;<br>        &#125;,<br>    &#125;,<br><br>    <span class="hljs-comment">-- 被调试的服务</span><br>    debug_test_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">2</span>,  <span class="hljs-comment">-- 启动 2 个实例，调试第 2 个</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h3><table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>说明</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>breakpoint_debug_module_name</code></td>
-<td>被调试的服务模块名</td>
-<td><code>debug_test_m</code></td>
-</tr>
-<tr>
-<td><code>breakpoint_debug_module_index</code></td>
-<td>调试第几个实例（从 1 开始）</td>
-<td><code>2</code></td>
-</tr>
-<tr>
-<td><code>breakpoint_debug_host</code></td>
-<td>VSCode 所在机器 IP</td>
-<td><code>127.0.0.1</code></td>
-</tr>
-<tr>
-<td><code>breakpoint_debug_port</code></td>
-<td>VSCode 监听端口</td>
-<td><code>8818</code></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="步骤-5️⃣：设置断点"><a href="#步骤-5️⃣：设置断点" class="headerlink" title="步骤 5️⃣：设置断点"></a>步骤 5️⃣：设置断点</h2><p>在需要调试的代码文件中点击行号左侧设置断点。</p>
-<p><strong>示例文件</strong>：<code>test/module/debug_test_m.lua</code></p>
-<p><img src="/img/skynet_fly_word/word_3/break_points_debug5.png" srcset="/img/loading.gif" lazyload alt="设置断点"></p>
-<hr>
-<h2 id="步骤-6️⃣：启动调试"><a href="#步骤-6️⃣：启动调试" class="headerlink" title="步骤 6️⃣：启动调试"></a>步骤 6️⃣：启动调试</h2><h3 id="1-启动-VSCode-调试器"><a href="#1-启动-VSCode-调试器" class="headerlink" title="1. 启动 VSCode 调试器"></a>1. 启动 VSCode 调试器</h3><p>按 <strong>F5</strong> 或点击调试面板的 <strong>启动调试</strong> 按钮</p>
-<p><img src="/img/skynet_fly_word/word_3/break_points_debug6.png" srcset="/img/loading.gif" lazyload alt="启动调试器"></p>
-<p>VSCode 底部状态栏会显示 <strong>正在监听端口 8818</strong></p>
-<hr>
-<h3 id="2-启动-skynet-fly-服务"><a href="#2-启动-skynet-fly-服务" class="headerlink" title="2. 启动 skynet_fly 服务"></a>2. 启动 skynet_fly 服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-built_in">test</span><br>sh make.sh<br>sh make/script/restart.sh load_mods_debug.lua 0<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3-命中断点"><a href="#3-命中断点" class="headerlink" title="3. 命中断点"></a>3. 命中断点</h3><p>当代码执行到断点位置时，VSCode 会自动暂停并高亮显示当前行。</p>
-<p><img src="/img/skynet_fly_word/word_3/break_points_debug7.png" srcset="/img/loading.gif" lazyload alt="命中断点"></p>
-<hr>
-<h2 id="调试功能"><a href="#调试功能" class="headerlink" title="调试功能"></a>调试功能</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>快捷键</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>继续执行</strong></td>
-<td>F5</td>
-<td>继续运行到下一个断点</td>
-</tr>
-<tr>
-<td><strong>单步跳过</strong></td>
-<td>F10</td>
-<td>执行下一行（不进入函数）</td>
-</tr>
-<tr>
-<td><strong>单步进入</strong></td>
-<td>F11</td>
-<td>进入函数内部</td>
-</tr>
-<tr>
-<td><strong>单步跳出</strong></td>
-<td>Shift + F11</td>
-<td>跳出当前函数</td>
-</tr>
-<tr>
-<td><strong>重启</strong></td>
-<td>Ctrl + Shift + F5</td>
-<td>重启调试会话</td>
-</tr>
-<tr>
-<td><strong>停止</strong></td>
-<td>Shift + F5</td>
-<td>停止调试</td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="⚠️-使用限制"><a href="#⚠️-使用限制" class="headerlink" title="⚠️ 使用限制"></a>⚠️ 使用限制</h1><h2 id="❌-限制一：不支持多服务同时调试"><a href="#❌-限制一：不支持多服务同时调试" class="headerlink" title="❌ 限制一：不支持多服务同时调试"></a>❌ 限制一：不支持多服务同时调试</h2><p>配置文件只能指定<strong>一个服务的一个实例</strong>进行调试。</p>
-<p><strong>原因</strong>：</p>
-<ul>
-<li>单个 VSCode 调试会话只能连接一个调试客户端</li>
-<li>多实例调试会导致端口冲突</li>
-</ul>
-<p><strong>解决方案</strong>：</p>
-<ul>
-<li>如需调试多个服务，需启动多个 VSCode 窗口，使用不同端口</li>
-</ul>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 服务 A 配置</span><br>breakpoint_debug_module_name = <span class="hljs-string">&quot;service_a&quot;</span>,<br>breakpoint_debug_port = <span class="hljs-number">8818</span>,<br><br><span class="hljs-comment">-- 服务 B 配置（另一个 VSCode 窗口）</span><br>breakpoint_debug_module_name = <span class="hljs-string">&quot;service_b&quot;</span>,<br>breakpoint_debug_port = <span class="hljs-number">8819</span>,<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="⚡-限制二：生产环境禁用"><a href="#⚡-限制二：生产环境禁用" class="headerlink" title="⚡ 限制二：生产环境禁用"></a>⚡ 限制二：生产环境禁用</h2><p>调试功能会显著<strong>影响性能</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>影响</th>
-<th>程度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CPU 占用</td>
-<td>+30% ~ 50%</td>
-</tr>
-<tr>
-<td>响应延迟</td>
-<td>+100ms ~ 500ms</td>
-</tr>
-<tr>
-<td>内存占用</td>
-<td>+10% ~ 20%</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>⚠️ <strong>重要</strong>：生产服务器<strong>禁止</strong>开启调试配置！</p>
-</blockquote>
-<p><strong>安全措施</strong>：</p>
-<ul>
-<li>✅ 不配置调试相关参数 &#x3D; 不会加载调试模块</li>
-<li>✅ 建议使用独立的调试配置文件（如 <code>load_mods_debug.lua</code>）</li>
-</ul>
-<hr>
-<h1 id="🔧-调试非热更服务"><a href="#🔧-调试非热更服务" class="headerlink" title="🔧 调试非热更服务"></a>🔧 调试非热更服务</h1><p>如果需要调试<strong>非可热更服务</strong>（如 C 服务的 Lua 部分），需手动加载 LuaPanda。</p>
-<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 在服务启动代码中添加</span><br><span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;skynet-fly.LuaPanda&quot;</span>).start(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">8818</span>)<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>参数说明</strong>：</p>
-<ul>
-<li>第一个参数：VSCode 所在机器 IP</li>
-<li>第二个参数：VSCode 监听端口</li>
-</ul>
-<hr>
-<h1 id="🎯-调试最佳实践"><a href="#🎯-调试最佳实践" class="headerlink" title="🎯 调试最佳实践"></a>🎯 调试最佳实践</h1><h2 id="推荐工作流"><a href="#推荐工作流" class="headerlink" title="推荐工作流"></a>推荐工作流</h2><pre><code class=" mermaid">flowchart TD
-    Start([需要调试]) --&gt; A&#123;问题类型?&#125;
-    
-    A --&gt;|逻辑错误| B[设置断点]
-    A --&gt;|性能问题| C[使用日志 + 性能分析]
-    A --&gt;|崩溃问题| D[查看错误日志]
-    
-    B --&gt; E[启动调试]
-    E --&gt; F[单步执行]
-    F --&gt; G[检查变量]
-    G --&gt; H&#123;问题定位?&#125;
-    H --&gt;|是| I[修复代码]
-    H --&gt;|否| F
-    
-    I --&gt; J[验证修复]
-    J --&gt; K([完成])
-    
-    C --&gt; L[添加计时日志]
-    L --&gt; M[分析瓶颈]
-    M --&gt; I
-    
-    D --&gt; N[定位崩溃位置]
-    N --&gt; I
-    
-    style Start fill:#e1f5ff
-    style K fill:#d4edda
-    style A fill:#fff3cd
-    style H fill:#fff3cd
-
-</code></pre>
-
-<hr>
-<h2 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h2><h3 id="1️⃣-条件断点"><a href="#1️⃣-条件断点" class="headerlink" title="1️⃣ 条件断点"></a>1️⃣ 条件断点</h3><p>右键断点 → <strong>编辑断点</strong> → 设置条件表达式</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 示例：只在 player_id == 1001 时暂停</span><br>player_id == <span class="hljs-number">1001</span><br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="2️⃣-日志断点"><a href="#2️⃣-日志断点" class="headerlink" title="2️⃣ 日志断点"></a>2️⃣ 日志断点</h3><p>右键断点 → <strong>编辑断点</strong> → 选择 <strong>日志消息</strong></p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 不暂停执行，仅输出日志</span><br>Player &#123;player_id&#125; entered room &#123;room_id&#125;<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3️⃣-监视表达式"><a href="#3️⃣-监视表达式" class="headerlink" title="3️⃣ 监视表达式"></a>3️⃣ 监视表达式</h3><p>在 <strong>监视</strong> 面板添加表达式，实时查看值的变化</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua">player.hp<br>player.<span class="hljs-built_in">exp</span><br>#room.players<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="🐛-常见问题"><a href="#🐛-常见问题" class="headerlink" title="🐛 常见问题"></a>🐛 常见问题</h1><h2 id="❓-无法连接调试器"><a href="#❓-无法连接调试器" class="headerlink" title="❓ 无法连接调试器"></a>❓ 无法连接调试器</h2><p><strong>检查清单</strong>：</p>
-<ol>
-<li>✅ VSCode 调试器是否已启动（底部状态栏显示监听中）</li>
-<li>✅ 服务端配置的端口是否与 VSCode 一致</li>
-<li>✅ 防火墙是否允许端口通信</li>
-<li>✅ 远程调试时，IP 地址是否正确</li>
-</ol>
-<hr>
-<h2 id="❓-断点不生效"><a href="#❓-断点不生效" class="headerlink" title="❓ 断点不生效"></a>❓ 断点不生效</h2><p><strong>可能原因</strong>：</p>
-<ol>
-<li>❌ 代码未执行到断点位置</li>
-<li>❌ 调试的服务实例索引配置错误</li>
-<li>❌ 代码文件路径不匹配</li>
-</ol>
-<p><strong>解决方法</strong>：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 添加日志确认代码执行</span><br><span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;=== 调试检查点 ===&quot;</span>)<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="❓-性能下降严重"><a href="#❓-性能下降严重" class="headerlink" title="❓ 性能下降严重"></a>❓ 性能下降严重</h2><p>调试模式下性能下降是正常现象。</p>
-<p><strong>优化建议</strong>：</p>
-<ul>
-<li>减少断点数量</li>
-<li>使用日志断点代替普通断点</li>
-<li>调试完成后立即关闭调试模式</li>
-</ul>
-<hr>
-<h1 id="📊-调试性能对比"><a href="#📊-调试性能对比" class="headerlink" title="📊 调试性能对比"></a>📊 调试性能对比</h1><table>
-<thead>
-<tr>
-<th>场景</th>
-<th>正常模式</th>
-<th>调试模式</th>
-<th>性能损失</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>空循环 1M 次</td>
-<td>100ms</td>
-<td>150ms</td>
-<td>+50%</td>
-</tr>
-<tr>
-<td>函数调用 100K 次</td>
-<td>50ms</td>
-<td>120ms</td>
-<td>+140%</td>
-</tr>
-<tr>
-<td>协程创建 10K 次</td>
-<td>30ms</td>
-<td>80ms</td>
-<td>+167%</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>💡 <strong>建议</strong>：仅在开发和测试环境使用调试功能</p>
-</blockquote>
-<hr>
-<h1 id="🔗-相关资源"><a href="#🔗-相关资源" class="headerlink" title="🔗 相关资源"></a>🔗 相关资源</h1><ul>
-<li>📖 <a target="_blank" rel="noopener" href="https://github.com/Tencent/LuaPanda">LuaPanda 官方文档</a></li>
-<li>🛠️ <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/test/module/debug_test_m.lua">调试示例代码</a></li>
-<li>📚 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/debugging">VSCode 调试指南</a></li>
-<li>💬 <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/issues">提交 Issue</a></li>
-</ul>
-<hr>
-<div align="center">
-
-<p><strong>🐛 断点调试，让 Bug 无所遁形！</strong></p>
-<p>有问题欢迎提 Issue 或加入技术交流群</p>
-</div>
-
-<pre><code class="hljs">
----
-</code></pre>
+<p>设置好断点。<br><img src="/img/skynet_fly_word/word_3/break_points_debug5.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="luaHelper调试启动"><a href="#luaHelper调试启动" class="headerlink" title="luaHelper调试启动"></a>luaHelper调试启动</h2><p>按F5即可。<br><img src="/img/skynet_fly_word/word_3/break_points_debug6.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="启动skynet-fly程序"><a href="#启动skynet-fly程序" class="headerlink" title="启动skynet_fly程序"></a>启动skynet_fly程序</h2><p><code>cd test</code><br><code>sh make.sh</code><br><code>sh make/script/restart.sh load_mods_debug.lua 0</code></p>
+<p><img src="/img/skynet_fly_word/word_3/break_points_debug7.png" srcset="/img/loading.gif" lazyload><br>即可命中断点。</p>
+<h1 id="使用限制"><a href="#使用限制" class="headerlink" title="使用限制"></a>使用限制</h1><h2 id="限制一-不支持多服务同时调试"><a href="#限制一-不支持多服务同时调试" class="headerlink" title="限制一 不支持多服务同时调试"></a>限制一 不支持多服务同时调试</h2><p>可以看到配置项是指定了<code>调试的可热更服务名</code>和对应的<code>启动下标</code>。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lua">   breakpoint_debug_module_name = <span class="hljs-string">&quot;debug_test_m&quot;</span>,   <span class="hljs-comment">--调试的可热更服务名</span><br>breakpoint_debug_module_index = <span class="hljs-number">2</span>,               <span class="hljs-comment">--启动下标</span><br>breakpoint_debug_host = <span class="hljs-string">&quot;127.0.0.1&quot;</span>,             <span class="hljs-comment">--vscode监听的IP</span><br>breakpoint_debug_port = <span class="hljs-number">8818</span>,                    <span class="hljs-comment">--vscode监听的端口</span><br></code></pre></td></tr></table></figure>
+<h2 id="限制二-正式服别用"><a href="#限制二-正式服别用" class="headerlink" title="限制二 正式服别用"></a>限制二 正式服别用</h2><p>调试开启会影响性能,不配置相关配置就不会使用了</p>
+<h1 id="非可热更服务如何调试"><a href="#非可热更服务如何调试" class="headerlink" title="非可热更服务如何调试"></a>非可热更服务如何调试</h1><p>自行在服务中加载<code>luaPanda</code>即可。<br><code>require(&quot;skynet-fly.LuaPanda&quot;).start(&#39;127.0.0.1&#39;, 8818);</code></p>
 
                 
               </div>
@@ -1256,7 +916,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>断点调试的支持</div>
+      <div>断点调式的支持</div>
       <div>https://huahua132.github.io/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/</div>
     </div>
     <div class="license-meta">
@@ -1311,8 +971,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务 - 热更脚本支持">
-                        <span class="hidden-mobile">可热更服务 - 热更脚本支持</span>
+                      <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持">
+                        <span class="hidden-mobile">可热更服务，热更脚本支持</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

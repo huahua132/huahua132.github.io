@@ -16,16 +16,16 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="📖 前言对于复杂的业务逻辑，当出现的 Bug 通过日志分析或代码审查都无法查明原因时，我们可以使用服务录像重放功能来完整还原事故现场，就像游戏的”回放系统”一样。  🎯 实现方案核心思路Skynet 是多线程架构，对整个进程录像较为困难。但单个 Skynet 服务能保证消息同步处理，因此可以方便地实现单服务录像（支持同时录制多个服务）。 实现原理：记录所有消息 → 重放时读取记录 → 解析并重">
+    <meta name="description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务录像与重放">
 <meta property="og:url" content="https://huahua132.github.io/2024/10/27/skynet_fly_word/word_3/S_record/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="📖 前言对于复杂的业务逻辑，当出现的 Bug 通过日志分析或代码审查都无法查明原因时，我们可以使用服务录像重放功能来完整还原事故现场，就像游戏的”回放系统”一样。  🎯 实现方案核心思路Skynet 是多线程架构，对整个进程录像较为困难。但单个 Skynet 服务能保证消息同步处理，因此可以方便地实现单服务录像（支持同时录制多个服务）。 实现原理：记录所有消息 → 重放时读取记录 → 解析并重">
+<meta property="og:description" content="前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://huahua132.github.io/img/skynet_fly_word/word_3/record_1.png">
 <meta property="article:published_time" content="2024-10-27T14:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-11T12:47:41.101Z">
+<meta property="article:modified_time" content="2025-11-12T01:22:05.826Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_word">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k 字
+          10k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          46 分钟
+          85 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
         aria-expanded="true"
       >
         skynet_fly 文档
-        <span class="list-group-count">(43)</span>
+        <span class="list-group-count">(44)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -624,7 +624,7 @@
         aria-expanded="true"
       >
         强化篇
-        <span class="list-group-count">(18)</span>
+        <span class="list-group-count">(19)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -746,28 +746,37 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程订阅发布模式 - sub/pub 与 subsyn/pubsyn"
+        <a href="/2024/06/29/skynet_fly_word/word_3/N_frpc_watch/" title="远程sub/pub 模式 和 远程subsyn/pubsyn 模式"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">远程订阅发布模式 - sub/pub 与 subsyn/pubsyn</span>
+          <span class="category-post">远程sub/pub 模式 和 远程subsyn/pubsyn 模式</span>
         </a>
       
     
       
       
-        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务 - 热更脚本支持"
+        <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" title="可热更服务，热更脚本支持"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更服务 - 热更脚本支持</span>
+          <span class="category-post">可热更服务，热更脚本支持</span>
         </a>
       
     
       
       
-        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调试的支持"
+        <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" title="断点调式的支持"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">断点调试的支持</span>
+          <span class="category-post">断点调式的支持</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" title="共享配置数据"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">共享配置数据</span>
         </a>
       
     
@@ -791,10 +800,10 @@
     
       
       
-        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持"
+        <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" title="可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持</span>
+          <span class="category-post">可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持</span>
         </a>
       
     
@@ -826,312 +835,62 @@
             
               <div class="markdown-body">
                 
-                <h1 id="📖-前言"><a href="#📖-前言" class="headerlink" title="📖 前言"></a>📖 前言</h1><p>对于复杂的业务逻辑，当出现的 Bug 通过<strong>日志分析</strong>或<strong>代码审查</strong>都无法查明原因时，我们可以使用<strong>服务录像重放</strong>功能来完整还原事故现场，就像游戏的”回放系统”一样。</p>
-<hr>
-<h1 id="🎯-实现方案"><a href="#🎯-实现方案" class="headerlink" title="🎯 实现方案"></a>🎯 实现方案</h1><h2 id="核心思路"><a href="#核心思路" class="headerlink" title="核心思路"></a>核心思路</h2><p>Skynet 是多线程架构，对整个进程录像较为困难。但单个 Skynet 服务能保证消息同步处理，因此可以方便地实现<strong>单服务录像</strong>（支持同时录制多个服务）。</p>
-<p><strong>实现原理</strong>：记录所有消息 → 重放时读取记录 → 解析并重放</p>
-<hr>
-<h2 id="🔧-技术细节处理"><a href="#🔧-技术细节处理" class="headerlink" title="🔧 技术细节处理"></a>🔧 技术细节处理</h2><p>为确保录像重放的一致性，需要特殊处理以下关键点：</p>
-<table>
-<thead>
-<tr>
-<th>技术点</th>
-<th>处理方式</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Session 分配</strong></td>
-<td>记录值</td>
-<td>重放时读取</td>
-</tr>
-<tr>
-<td><strong>Socket ID</strong></td>
-<td>记录值</td>
-<td>重放时读取</td>
-</tr>
-<tr>
-<td><strong>时间函数</strong></td>
-<td>记录值</td>
-<td><code>skynet.time()</code> &#x2F; <code>os.time()</code></td>
-</tr>
-<tr>
-<td><strong>随机数</strong></td>
-<td>记录种子</td>
-<td><code>math.randomseed(x,y)</code> 相同种子确保相同随机序列</td>
-</tr>
-<tr>
-<td><strong>热更 (Hotfix)</strong></td>
-<td>拷贝文件</td>
-<td>每次热更文件存储在 <code>recordpath/serverId/</code></td>
-</tr>
-<tr>
-<td><strong>共享配置</strong></td>
-<td>替换加载方式</td>
-<td><code>sharedata</code>&#x2F;<code>sharetable</code> → <code>loadfile</code> 直接加载</td>
-</tr>
-</tbody></table>
-<hr>
-<h3 id="📌-sharedata-x2F-sharetable-特殊处理"><a href="#📌-sharedata-x2F-sharetable-特殊处理" class="headerlink" title="📌 sharedata &#x2F; sharetable 特殊处理"></a>📌 <code>sharedata</code> &#x2F; <code>sharetable</code> 特殊处理</h3><blockquote>
-<p>⚠️ <strong>问题</strong>：录像记录的是共享数据的 C 指针，重放时该地址数据不存在，访问会崩溃。</p>
-</blockquote>
-<p><strong>解决方案（2选1）</strong>：</p>
-<ol>
-<li><strong>方案A</strong>：启动对应服务并加载数据，重放时重新获取指针</li>
-<li><strong>方案B</strong>：直接使用 <code>loadfile</code> 加载配置 ✅ <strong>推荐（更简单）</strong></li>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对于复杂的业务逻辑，出现的bug，通过<strong>日志手段</strong>或者<strong>review代码</strong>都没法查明原因的情况下，这时候我们可以通过<strong>服务录像重放</strong>来还原整个事故现场。</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。<br>其中有一些细节点，比如<code>session</code>分配，<code>socket_id</code>分配，<code>time</code>时间，<code>math.random</code>随机数，<code>hotfix</code>热更，<code>sharedata</code>,<code>sharetable</code>共享配置处理，都需要一些特殊处理才能保证录像重放时确保一致。</p>
+<ul>
+<li><p>session socket_id skynet.time os.time<br>这些只需要调用时，记录下值，重放时读取即可。</p>
+</li>
+<li><p>math.random 如何保证一致了<br>只需要记录<code>math.randomseed(x,y)</code>随机数种子，相同的种子，随机出来的值会是一致的。</p>
+</li>
+<li><p>hotfix 热更<br>每一次热更，会把热更过的文件拷贝存在在<code>recordpath</code>对应serverId 关联的目录下,用于重放时能加载到修改后的文件。</p>
+</li>
+<li><p><code>sharedata</code>,<code>sharetable</code><br>因为录像记录的是共享数据之前由<code>sharedata</code>或者<code>sharetable</code>返回的C指针，重放时地址数据并不存在，这种访问肯定会崩溃。解决方式有2种，一种方法就是启动对应<code>sharedata</code>,<code>sharetable</code>并加载数据，重放时重新去拿数据的指针，第二种方法就是直接使用<code>loadfile</code>加载配置，显然第二种方式更简单直接一些。</p>
+</li>
+</ul>
+<p><img src="/img/skynet_fly_word/word_3/record_1.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="如何录制？"><a href="#如何录制？" class="headerlink" title="如何录制？"></a>如何录制？</h1><p>可热更服务在<code>load_mods.lua</code>配置中配置<code>is_record_on = 1</code>即可,<code>recordlimit</code> 是录像大小限制，超过即不再写入(针对单个录像文件的限制)，<code>recordpath</code>指定录像存放目录。普通<code>skynet</code>服务需要自行接入录像。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-comment">--共享配置</span><br>	share_config_m = &#123;<br>		launch_seq = <span class="hljs-number">1</span>,<br>		launch_num = <span class="hljs-number">1</span>,<br>		default_arg = &#123;<br>			server_cfg = &#123;<br>                recordlimit = <span class="hljs-number">1024</span> * <span class="hljs-number">10</span>,<br>                 recordpath = <span class="hljs-string">&quot;../records&quot;</span>,<br>			&#125;,<br><br>            redis = &#123;<br>                test = &#123;<br>                    host = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<br>                    port = <span class="hljs-number">6379</span>,<br>                    auth = <span class="hljs-string">&#x27;123456&#x27;</span>,<br>                    db = <span class="hljs-number">0</span>,<br>                &#125;<br>            &#125;<br>		&#125;,<br>	&#125;,<br>    A_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>    &#125;,<br>    B_m = &#123;<br>        launch_seq = <span class="hljs-number">3</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        is_record_on = <span class="hljs-number">1</span>, <span class="hljs-comment">--录像</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="如何重放？"><a href="#如何重放？" class="headerlink" title="如何重放？"></a>如何重放？</h1><p>在<code>make/script/run.sh</code>和<code>make/script/restart.sh</code>中增加了 <code>recordfile</code>参数，播放录像时加上录像文件路径即可。<br><code>sh make/script/restart.sh load_mods.lua 0 records/00000010.record</code></p>
+<h1 id="重放注意点"><a href="#重放注意点" class="headerlink" title="重放注意点"></a>重放注意点</h1><ol>
+<li><p>确保代码环境一致，代码不一致可能会导致录像没有按预期回放,这时候通常会代码出错。<br>比如说 <code>skynet.time()</code>,<code>os.time()</code>,<code>math.randomseed</code>,还有会创建<code>session</code>和<code>socket_id</code>的函数调用，少调或者多调用一次都会导致录像对不上，因为重放录像的时候每次都是去记录中拿对应的值，少或多都会导致顺序错乱。</p>
+</li>
+<li><p>逻辑代码中<code>pairs</code>调用可能导致重放逻辑乱序<br>因为<code>pairs</code>每次调用并不保证顺序，如果在<code>pairs</code>循环操作分配了<code>session</code>(call,time_out),<code>socket_id</code>(socket.connect),<code>os.time, skynet.time</code>, <code>math.randomseed,math.random</code>，都会因为<code>pairs</code>遍历无法保证顺序而导致重放乱序出错。目前没有想到非常完美的办法来解决这个问题，强行重写<code>pairs</code>让其变成有序遍历，太过损失其性能。我们只好在需要重放录像的业务逻辑中，通过规避上述情况下的<code>pairs使用</code>。</p>
+</li>
 </ol>
-<p><img src="/img/skynet_fly_word/word_3/record_1.png" srcset="/img/loading.gif" lazyload alt="录像架构图"></p>
-<hr>
-<h1 id="🎬-如何录制？"><a href="#🎬-如何录制？" class="headerlink" title="🎬 如何录制？"></a>🎬 如何录制？</h1><h2 id="配置方式"><a href="#配置方式" class="headerlink" title="配置方式"></a>配置方式</h2><p>在 <code>load_mods.lua</code> 中配置可热更服务：</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-comment">-- 共享配置</span><br>    share_config_m = &#123;<br>        launch_seq = <span class="hljs-number">1</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        default_arg = &#123;<br>            server_cfg = &#123;<br>                recordlimit = <span class="hljs-number">1024</span> * <span class="hljs-number">10</span>,      <span class="hljs-comment">-- 录像大小限制 (KB)</span><br>                recordpath = <span class="hljs-string">&quot;../records&quot;</span>,    <span class="hljs-comment">-- 录像存放目录</span><br>            &#125;,<br>            redis = &#123;<br>                test = &#123;<br>                    host = <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,<br>                    port = <span class="hljs-number">6379</span>,<br>                    auth = <span class="hljs-string">&#x27;123456&#x27;</span>,<br>                    db = <span class="hljs-number">0</span>,<br>                &#125;<br>            &#125;<br>        &#125;,<br>    &#125;,<br>    <br>    A_m = &#123;<br>        launch_seq = <span class="hljs-number">2</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>    &#125;,<br>    <br>    B_m = &#123;<br>        launch_seq = <span class="hljs-number">3</span>,<br>        launch_num = <span class="hljs-number">1</span>,<br>        is_record_on = <span class="hljs-number">1</span>,  <span class="hljs-comment">-- 🎥 开启录像</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>配置说明</strong>：</p>
+<h1 id="对hotfix的处理"><a href="#对hotfix的处理" class="headerlink" title="对hotfix的处理"></a>对hotfix的处理</h1><p>对于录像的服务，我们可能通过<code>check_hotfix.sh</code>对其进行了多次脚本热更，重放的时候我们怎么保证也能重放热更过程，有2种办法，1是把热更文件写进录像，2是把热更文件CP一份，我选择了第二种方法，因为我们重放过程中，一般需要加一些打印日志，这样热更后的文件，我们也能去增加日志打印。</p>
+<h1 id="对于sharedata-sharetable-共享配置热更的处理"><a href="#对于sharedata-sharetable-共享配置热更的处理" class="headerlink" title="对于sharedata,sharetable 共享配置热更的处理"></a>对于sharedata,sharetable 共享配置热更的处理</h1><p>同hotfix处理一样，cp被热更的文件。</p>
+<h1 id="如何正确的重放"><a href="#如何正确的重放" class="headerlink" title="如何正确的重放"></a>如何正确的重放</h1><p>我们应该想办法让代码先回到启动前，通过借助svn，git这些版本控制工具，不过这需要使用者自己去保证了。</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/record">示例</a></h1><h1 id="2024-x2F-12-x2F-01-优化改动"><a href="#2024-x2F-12-x2F-01-优化改动" class="headerlink" title="2024&#x2F;12&#x2F;01 优化改动"></a>2024&#x2F;12&#x2F;01 优化改动</h1><h2 id="命名优化"><a href="#命名优化" class="headerlink" title="命名优化"></a>命名优化</h2><p>录像的文件命名改为 <code>room_game_hall_m-1-1-20241205-180640.record</code></p>
 <ul>
-<li><code>is_record_on = 1</code>：开启录像功能</li>
-<li><code>recordlimit</code>：单个录像文件大小限制（KB），超过后停止写入</li>
-<li><code>recordpath</code>：录像文件存储目录</li>
+<li>room_game_hall_m 可热更服务名</li>
+<li>1 启动版本号</li>
+<li>1 启动索引 </li>
+<li>20241205-180640 启动时间</li>
 </ul>
-<hr>
-<h1 id="▶️-如何重放？"><a href="#▶️-如何重放？" class="headerlink" title="▶️ 如何重放？"></a>▶️ 如何重放？</h1><h2 id="命令方式"><a href="#命令方式" class="headerlink" title="命令方式"></a>命令方式</h2><p>在启动脚本中添加 <code>recordfile</code> 参数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 启动重放</span><br>sh make/script/run.sh load_mods.lua 0 records/00000010.record<br><br><span class="hljs-comment"># 重启重放</span><br>sh make/script/restart.sh load_mods.lua 0 records/00000010.record<br><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="⚠️-重放注意事项"><a href="#⚠️-重放注意事项" class="headerlink" title="⚠️ 重放注意事项"></a>⚠️ 重放注意事项</h1><h2 id="1️⃣-确保代码环境一致"><a href="#1️⃣-确保代码环境一致" class="headerlink" title="1️⃣ 确保代码环境一致"></a>1️⃣ 确保代码环境一致</h2><blockquote>
-<p>💡 <strong>重要</strong>：代码不一致会导致录像回放失败或出错</p>
-</blockquote>
-<p><strong>关键点</strong>：以下函数调用次数必须完全一致</p>
+<p>录像的热更记录路径命名改为 <code>hotfix_room_game_hall_m-1-20241205-194136\patch_20241205-204136\</code><br>共享配置数据的热更记录路径命名改为 <code>sharedata_room_game_hall_m-1-20241205-194136\patch_20241205-204136\</code></p>
 <ul>
-<li><code>skynet.time()</code> &#x2F; <code>os.time()</code></li>
-<li><code>math.randomseed()</code> &#x2F; <code>math.random()</code></li>
-<li>创建 Session 的函数（如 <code>skynet.call</code>、<code>skynet.timeout</code>）</li>
-<li>创建 Socket ID 的函数（如 <code>socket.connect</code>）</li>
+<li>1 启动版本号</li>
+<li>20241205-194136 启动时间</li>
+<li>20241205-204136 热更时间</li>
 </ul>
-<p><strong>原因</strong>：重放时每次都从记录中读取对应值，调用次数不同会导致顺序错乱。</p>
-<hr>
-<h2 id="2️⃣-pairs-遍历顺序问题"><a href="#2️⃣-pairs-遍历顺序问题" class="headerlink" title="2️⃣ pairs 遍历顺序问题"></a>2️⃣ <code>pairs</code> 遍历顺序问题</h2><h3 id="⚠️-问题描述"><a href="#⚠️-问题描述" class="headerlink" title="⚠️ 问题描述"></a>⚠️ 问题描述</h3><p><code>pairs()</code> 每次调用不保证遍历顺序。如果在 <code>pairs</code> 循环中操作了以下内容，会导致重放顺序错乱：</p>
+<h2 id="录像文件的切割方式"><a href="#录像文件的切割方式" class="headerlink" title="录像文件的切割方式"></a>录像文件的切割方式</h2><p>由于录像文件必须从头开始跑，所以我们并不能像切割日志文件一样去切割录像文件。只能另辟蹊径了。得益于框架的<code>reload</code>热更机制，我们可以定时每天<code>reload</code>自身服务，这样就开始记录新的录像，而旧的录像文件我们根据策略去删掉，比如用<code>logrotate</code>去整理历史的录像文件。这样一来，我们可以一直保留近期的录像文件，避免了过多占用系统磁盘资源，录像文件更小，也方便重放。</p>
+<p>因此新增了可热更服务 2种机制配置</p>
 <ul>
-<li>❌ 分配 Session（<code>call</code>、<code>timeout</code>）</li>
-<li>❌ 分配 Socket ID（<code>socket.connect</code>）</li>
-<li>❌ 调用时间函数（<code>os.time</code>、<code>skynet.time</code>）</li>
-<li>❌ 使用随机数（<code>math.randomseed</code>、<code>math.random</code>）</li>
+<li>auto_reload 自动定时热更 skynet-fly.time_extend.time_point.lua 的配置项</li>
+<li>record_backup  录像文件自动整理 需要启动logrotate_m</li>
 </ul>
-<h3 id="✅-解决方案"><a href="#✅-解决方案" class="headerlink" title="✅ 解决方案"></a>✅ 解决方案</h3><p>在需要重放的业务逻辑中，<strong>规避</strong>上述场景下的 <code>pairs</code> 使用，可改用：</p>
-<ul>
-<li><code>ipairs</code>（数组遍历）</li>
-<li>有序 Key 列表遍历</li>
-</ul>
-<hr>
-<h1 id="🔄-Hotfix-热更处理"><a href="#🔄-Hotfix-热更处理" class="headerlink" title="🔄 Hotfix 热更处理"></a>🔄 Hotfix 热更处理</h1><h2 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h2><p>录像服务的热更文件采用 <strong>CP 拷贝方式</strong>（而非写入录像）。</p>
-<p><strong>原因</strong>：</p>
-<ol>
-<li>✅ 方便在热更后的文件中添加调试日志</li>
-<li>✅ 可独立管理热更版本</li>
-</ol>
-<p><strong>路径</strong>：热更文件存储在 <code>recordpath/serverId/hotfix/</code> 目录下</p>
-<hr>
-<h1 id="📦-共享配置热更处理"><a href="#📦-共享配置热更处理" class="headerlink" title="📦 共享配置热更处理"></a>📦 共享配置热更处理</h1><p>同 Hotfix 处理方式，拷贝被热更的配置文件。</p>
-<p><strong>路径</strong>：<code>recordpath/serverId/sharedata/</code></p>
-<hr>
-<h1 id="🎯-如何正确重放"><a href="#🎯-如何正确重放" class="headerlink" title="🎯 如何正确重放"></a>🎯 如何正确重放</h1><h2 id="推荐流程"><a href="#推荐流程" class="headerlink" title="推荐流程"></a>推荐流程</h2><ol>
-<li><strong>代码回退</strong>：使用 Git&#x2F;SVN 将代码回退到录像时的版本</li>
-<li><strong>启动重放</strong>：运行重放命令</li>
-<li><strong>添加日志</strong>：在关键位置添加调试日志</li>
-<li><strong>分析问题</strong>：根据日志定位 Bug</li>
-</ol>
-<blockquote>
-<p>💡 <strong>提示</strong>：版本控制需要使用者自行保证</p>
-</blockquote>
-<hr>
-<h1 id="📚-示例代码"><a href="#📚-示例代码" class="headerlink" title="📚 示例代码"></a>📚 示例代码</h1><p>🔗 <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/record">完整示例项目</a></p>
-<hr>
-<h1 id="📅-更新历史"><a href="#📅-更新历史" class="headerlink" title="📅 更新历史"></a>📅 更新历史</h1><h2 id="🆕-2024-x2F-12-x2F-22-优化改动"><a href="#🆕-2024-x2F-12-x2F-22-优化改动" class="headerlink" title="🆕 2024&#x2F;12&#x2F;22 优化改动"></a>🆕 2024&#x2F;12&#x2F;22 优化改动</h2><h3 id="pairs-遍历顺序优化"><a href="#pairs-遍历顺序优化" class="headerlink" title="pairs 遍历顺序优化"></a>pairs 遍历顺序优化</h3><p>通过分析 <code>pairs</code> 源码发现：String Key 的遍历顺序依赖于 <code>lua_state</code> 创建时的 <code>strseed</code> 种子。</p>
-<p><strong>解决方案</strong>：</p>
-<ul>
-<li>录像时记录 <code>strseed</code> 种子</li>
-<li>重放时设置相同的 <code>strseed</code></li>
-</ul>
-<p><strong>效果</strong>：</p>
-<ul>
-<li>✅ Number Key：顺序一致</li>
-<li>✅ String Key：顺序一致</li>
-<li>❌ Table&#x2F;Userdata Key：无法保证（Hash 基于指针地址）</li>
-</ul>
-<hr>
-<h3 id="测试验证"><a href="#测试验证" class="headerlink" title="测试验证"></a>测试验证</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 测试 pairs 遍历</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test_pairs</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">-- ✅ String Key - 重放时顺序一致</span><br>    <span class="hljs-keyword">local</span> t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        t[<span class="hljs-string">&#x27;i&#x27;</span> .. i] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;string pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">-- ✅ Number Key - 重放时顺序一致</span><br>    <span class="hljs-keyword">local</span> num_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        <span class="hljs-keyword">local</span> num = <span class="hljs-built_in">math</span>.<span class="hljs-built_in">random</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10000</span>)<br>        num_t[num] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(num_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;number pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">-- ❌ Table Key - 重放时顺序可能不一致</span><br>    <span class="hljs-keyword">local</span> table_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        table_t[&#123;&#125;] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(table_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;table pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br><br></code></pre></td></tr></table></figure>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua">   <span class="hljs-comment">--大厅服</span><br>room_game_hall_m = &#123;<br>	launch_seq = <span class="hljs-number">6000</span>,<br>	launch_num = <span class="hljs-number">6</span>,     <span class="hljs-comment">--启动6个</span><br>	is_record_on = <span class="hljs-number">1</span>,   <span class="hljs-comment">--录像</span><br><br>	<span class="hljs-comment">--自动定时热更 skynet-fly.time_extend.time_point.lua 的配置项</span><br>	auto_reload = &#123;<br>		<span class="hljs-built_in">type</span> = <span class="hljs-number">3</span>,    <span class="hljs-comment">--每天</span><br>		hour = <span class="hljs-number">5</span>,    <span class="hljs-comment">--5点</span><br>		<span class="hljs-built_in">min</span> = <span class="hljs-number">30</span>,    <span class="hljs-comment">--30分</span><br>		sec = <span class="hljs-number">30</span>,    <span class="hljs-comment">--30秒</span><br>	&#125;,<br><br>	<span class="hljs-comment">--录像文件自动整理</span><br>	<span class="hljs-comment">--需要启动logrotate_m</span><br>	record_backup = &#123;<br>		max_age = <span class="hljs-number">3</span>,      <span class="hljs-comment">--最大保留天数</span><br>		max_backups = <span class="hljs-number">50</span>, <span class="hljs-comment">--最大保留文件数</span><br>		point_type = <span class="hljs-number">3</span>,   <span class="hljs-comment">--每天</span><br>		hour = <span class="hljs-number">5</span>,         <span class="hljs-comment">--5点</span><br>		sec = <span class="hljs-number">20</span>,         <span class="hljs-comment">--20</span><br>	&#125;,<br><br>	default_arg = &#123;<br>		hall_plug = <span class="hljs-string">&quot;common.plug.hall_plug&quot;</span>,         <span class="hljs-comment">--大厅加载的插件lua模块文件名</span><br>	&#125;<br>&#125;,<br></code></pre></td></tr></table></figure>
 
-<hr>
-<h3 id="测试结果对比"><a href="#测试结果对比" class="headerlink" title="测试结果对比"></a>测试结果对比</h3><details>
-<summary>📊 点击展开查看详细日志</summary>
+<h1 id="2024-x2F-12-x2F-22-优化改动"><a href="#2024-x2F-12-x2F-22-优化改动" class="headerlink" title="2024&#x2F;12&#x2F;22 优化改动"></a>2024&#x2F;12&#x2F;22 优化改动</h1><p>通过查看pairs的源码实现发现 pairs遍历string key 会依赖于 lua_state 创建时生成的strseed 种子。那么只需要录像时记录到strseed 种子。播放时设置好对应的strseed就能保证pairs 遍历 table string key 的顺序了。这样一来。对于number,string key都遍历顺序都能保证一致。<br>table, userdata 为 key 的没发保证顺序，因为hash是基于 table, userdata 的指针地址。 录像重复没发保证指针地址也一致。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">--测试 pairs遍历</span><br><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test_pairs</span><span class="hljs-params">()</span></span><br>    <span class="hljs-comment">--测试 string key   播放时可以保证顺序</span><br>    <span class="hljs-keyword">local</span> t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        t[<span class="hljs-string">&#x27;i&#x27;</span> .. i] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;string pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">--测试number key    播放时可以保证顺序</span><br>    <span class="hljs-keyword">local</span> num_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        <span class="hljs-keyword">local</span> num = <span class="hljs-built_in">math</span>.<span class="hljs-built_in">random</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10000</span>)<br>        num_t[num] = i<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(num_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;number pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><br>    <span class="hljs-comment">--测试table key    播放时不能保证顺序</span><br>    <span class="hljs-keyword">local</span> table_t = &#123;&#125;<br>    <span class="hljs-keyword">for</span> i = <span class="hljs-number">1</span>, <span class="hljs-number">10</span> <span class="hljs-keyword">do</span><br>        table_t[&#123;&#125;] = i<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(table_t) <span class="hljs-keyword">do</span><br>        <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;table pairs:&quot;</span>, k, v)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
 
-<p><strong>正常运行结果</strong>：</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i1&quot; 1 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i2&quot; 2 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i10&quot; 10 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i9&quot; 9 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;string pairs:&quot; &quot;i3&quot; 3 <br>...<br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;number pairs:&quot; 6165 8 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;number pairs:&quot; 7622 4 <br>...<br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;table pairs:&quot; &#123;&#125; 1 <br>[:00000013][20241221 12:46:43 31][info][B_m] &quot;table pairs:&quot; &#123;&#125; 5 <br>...<br><br></code></pre></td></tr></table></figure>
+<h3 id="正常跑服务结果"><a href="#正常跑服务结果" class="headerlink" title="正常跑服务结果"></a>正常跑服务结果</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i1&quot; 1 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i2&quot; 2 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i10&quot; 10 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i9&quot; 9 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i3&quot; 3 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i4&quot; 4 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i6&quot; 6 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i5&quot; 5 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i7&quot; 7 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i8&quot; 8 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6165 8 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 7622 4 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 8647 1 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6339 6 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5005 5 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 432 10 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 3777 9 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 2564 2 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5714 7 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6690 3 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 1 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 5 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 9 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 2 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 6 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 10 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 3 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 7 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 4 <br>[:00000013][20241221 12:46:43 31][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 8 <br></code></pre></td></tr></table></figure>
 
-<p><strong>重放结果</strong>：</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 20][info][B_m] &quot;string pairs:&quot; &quot;i1&quot; 1  ✅ 一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;string pairs:&quot; &quot;i2&quot; 2  ✅ 一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;string pairs:&quot; &quot;i10&quot; 10 ✅ 一致<br>...<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;number pairs:&quot; 6165 8  ✅ 一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;number pairs:&quot; 7622 4  ✅ 一致<br>...<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;table pairs:&quot; &#123;&#125; 3  ❌ 不一致<br>[:00000013][20241221 12:46:43 20][info][B_m] &quot;table pairs:&quot; &#123;&#125; 7  ❌ 不一致<br>...<br><br></code></pre></td></tr></table></figure>
+<h3 id="重放结果"><a href="#重放结果" class="headerlink" title="重放结果"></a>重放结果</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs txt">[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i1&quot; 1 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i2&quot; 2 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i10&quot; 10 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i9&quot; 9 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i3&quot; 3 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i4&quot; 4 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i6&quot; 6 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i5&quot; 5 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i7&quot; 7 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:140]&quot;string pairs:&quot; &quot;i8&quot; 8 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6165 8 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 7622 4 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 8647 1 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6339 6 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5005 5 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 432 10 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 3777 9 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 2564 2 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 5714 7 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:151]&quot;number pairs:&quot; 6690 3 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 3 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 7 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 4 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 8 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 5 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 9 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 1 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 6 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 10 <br>[:00000013][20241221 12:46:43 20][info][B_m][./module/B_m.lua:160]&quot;table pairs:&quot; &#123;<br>&#125;<br> 2 <br></code></pre></td></tr></table></figure>
 
-</details>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>可以发现number和string重放是一致的。</p>
 
-<p><strong>结论</strong>：Number 和 String Key 重放完全一致 ✅</p>
-<hr>
-<h2 id="🔄-2024-x2F-12-x2F-01-优化改动"><a href="#🔄-2024-x2F-12-x2F-01-优化改动" class="headerlink" title="🔄 2024&#x2F;12&#x2F;01 优化改动"></a>🔄 2024&#x2F;12&#x2F;01 优化改动</h2><h3 id="命名规范优化"><a href="#命名规范优化" class="headerlink" title="命名规范优化"></a>命名规范优化</h3><h4 id="录像文件命名"><a href="#录像文件命名" class="headerlink" title="录像文件命名"></a>录像文件命名</h4><p><strong>格式</strong>：<code>room_game_hall_m-1-1-20241205-180640.record</code></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>room_game_hall_m</code></td>
-<td>可热更服务名</td>
-</tr>
-<tr>
-<td><code>1</code></td>
-<td>启动版本号</td>
-</tr>
-<tr>
-<td><code>1</code></td>
-<td>启动索引</td>
-</tr>
-<tr>
-<td><code>20241205-180640</code></td>
-<td>启动时间</td>
-</tr>
-</tbody></table>
-<hr>
-<h4 id="热更记录路径"><a href="#热更记录路径" class="headerlink" title="热更记录路径"></a>热更记录路径</h4><p><strong>格式</strong>：<code>hotfix_room_game_hall_m-1-20241205-194136/patch_20241205-204136/</code></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>1</code></td>
-<td>启动版本号</td>
-</tr>
-<tr>
-<td><code>20241205-194136</code></td>
-<td>启动时间</td>
-</tr>
-<tr>
-<td><code>20241205-204136</code></td>
-<td>热更时间</td>
-</tr>
-</tbody></table>
-<p><strong>共享配置路径</strong>：<code>sharedata_room_game_hall_m-1-20241205-194136/patch_20241205-204136/</code></p>
-<hr>
-<h3 id="录像文件切割机制"><a href="#录像文件切割机制" class="headerlink" title="录像文件切割机制"></a>录像文件切割机制</h3><blockquote>
-<p>💡 <strong>问题</strong>：录像文件必须从头开始播放，无法像日志文件一样切割</p>
-</blockquote>
-<p><strong>解决方案</strong>：利用框架的 <code>reload</code> 热更机制</p>
-<p><strong>流程</strong>：</p>
-<ol>
-<li>定时每天 <code>reload</code> 自身服务</li>
-<li>开始记录新的录像文件</li>
-<li>旧录像文件通过策略删除（如 <code>logrotate</code>）</li>
-</ol>
-<p><strong>优点</strong>：</p>
-<ul>
-<li>✅ 保留近期录像</li>
-<li>✅ 节省磁盘空间</li>
-<li>✅ 文件更小，方便重放</li>
-</ul>
-<hr>
-<h3 id="新增配置项"><a href="#新增配置项" class="headerlink" title="新增配置项"></a>新增配置项</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 大厅服务配置示例</span><br>room_game_hall_m = &#123;<br>    launch_seq = <span class="hljs-number">6000</span>,<br>    launch_num = <span class="hljs-number">6</span>,        <span class="hljs-comment">-- 启动 6 个实例</span><br>    is_record_on = <span class="hljs-number">1</span>,      <span class="hljs-comment">-- 开启录像</span><br>    <br>    <span class="hljs-comment">-- ⏰ 自动定时热更（参考 skynet-fly.time_extend.time_point.lua）</span><br>    auto_reload = &#123;<br>        <span class="hljs-built_in">type</span> = <span class="hljs-number">3</span>,          <span class="hljs-comment">-- 每天</span><br>        hour = <span class="hljs-number">5</span>,          <span class="hljs-comment">-- 5 点</span><br>        <span class="hljs-built_in">min</span> = <span class="hljs-number">30</span>,          <span class="hljs-comment">-- 30 分</span><br>        sec = <span class="hljs-number">30</span>,          <span class="hljs-comment">-- 30 秒</span><br>    &#125;,<br>    <br>    <span class="hljs-comment">-- 🗂️ 录像文件自动整理（需要启动 logrotate_m）</span><br>    record_backup = &#123;<br>        max_age = <span class="hljs-number">3</span>,       <span class="hljs-comment">-- 最大保留天数</span><br>        max_backups = <span class="hljs-number">50</span>,  <span class="hljs-comment">-- 最大保留文件数</span><br>        point_type = <span class="hljs-number">3</span>,    <span class="hljs-comment">-- 每天</span><br>        hour = <span class="hljs-number">5</span>,          <span class="hljs-comment">-- 5 点</span><br>        sec = <span class="hljs-number">20</span>,          <span class="hljs-comment">-- 20 秒</span><br>    &#125;,<br>    <br>    default_arg = &#123;<br>        hall_plug = <span class="hljs-string">&quot;common.plug.hall_plug&quot;</span>,  <span class="hljs-comment">-- 大厅插件模块</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<p><strong>配置说明</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>auto_reload</code></td>
-<td>自动定时热更配置</td>
-</tr>
-<tr>
-<td><code>record_backup</code></td>
-<td>录像文件自动整理配置</td>
-</tr>
-<tr>
-<td><code>max_age</code></td>
-<td>最大保留天数</td>
-</tr>
-<tr>
-<td><code>max_backups</code></td>
-<td>最大保留文件数</td>
-</tr>
-</tbody></table>
-<hr>
-<h1 id="📊-功能总结"><a href="#📊-功能总结" class="headerlink" title="📊 功能总结"></a>📊 功能总结</h1><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>状态</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>服务录像</td>
-<td>✅</td>
-<td>记录所有消息</td>
-</tr>
-<tr>
-<td>服务重放</td>
-<td>✅</td>
-<td>完整还原现场</td>
-</tr>
-<tr>
-<td>热更支持</td>
-<td>✅</td>
-<td>拷贝热更文件</td>
-</tr>
-<tr>
-<td>Session 一致性</td>
-<td>✅</td>
-<td>记录并重放</td>
-</tr>
-<tr>
-<td>随机数一致性</td>
-<td>✅</td>
-<td>记录种子</td>
-</tr>
-<tr>
-<td>pairs String Key</td>
-<td>✅</td>
-<td>顺序一致</td>
-</tr>
-<tr>
-<td>pairs Number Key</td>
-<td>✅</td>
-<td>顺序一致</td>
-</tr>
-<tr>
-<td>pairs Table Key</td>
-<td>❌</td>
-<td>无法保证</td>
-</tr>
-<tr>
-<td>自动切割</td>
-<td>✅</td>
-<td>定时 reload</td>
-</tr>
-<tr>
-<td>自动清理</td>
-<td>✅</td>
-<td>logrotate 支持</td>
-</tr>
-</tbody></table>
-<hr>
-<div align="center">
-
-<p><strong>🎉 开始使用服务录像，让 Bug 无处可逃！</strong></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/tree/master/examples/record">查看示例</a> | <a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/issues">提交 Issue</a></p>
-</div>
                 
               </div>
             

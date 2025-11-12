@@ -230,14 +230,14 @@
       <h1 class="index-header">
         
         <a href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" target="_self">
-          可热更匹配房间类游戏架构基础设施 - 客户端 RPC 协议支持
+          可热更匹配房间类游戏架构基础设施 客户端 rpc 协议的支持
         </a>
       </h1>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/12/29/skynet_fly_word/word_3/T_game_c_rpc/" target="_self">
         <div>
-          📖 前言在项目初期，客户端与服务端的交互协议采用了简单的 name + body 模式（包名 + 包体）。其中 body 支持多种编码方式（JSON、Protobuf、Sproto 等），使用起来非常灵活。 随着项目发展，我们发现 name 字段增加了不必要的包体积，于是优化为 packid + body（协议码 + 包体）的方式。 但这两种方式都存在一个问题：无法让客户端 RPC 调用服务端。
+          前言一开始，对与客户端交互协议仅仅提供了name, body，包名加包体的简单打包方式，对于body大家可以自由选择任意编码解码方式(json、protobuff、sproto …)。后面觉得name少许增加了包体大小，就新增了packid,body协议码加包体的方式。这两种方式都没法让客户端rpc调用服务端，客户端在编码时只能监听服务端的各种消息，有时候非常不方便。于是就有打算新增 客户端rpc
         </div>
       </a>
 
@@ -366,7 +366,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/10/27/skynet_fly_word/word_3/S_record/" target="_self">
         <div>
-          📖 前言对于复杂的业务逻辑，当出现的 Bug 通过日志分析或代码审查都无法查明原因时，我们可以使用服务录像重放功能来完整还原事故现场，就像游戏的”回放系统”一样。  🎯 实现方案核心思路Skynet 是多线程架构，对整个进程录像较为困难。但单个 Skynet 服务能保证消息同步处理，因此可以方便地实现单服务录像（支持同时录制多个服务）。 实现原理：记录所有消息 → 重放时读取记录 → 解析并重
+          前言对于复杂的业务逻辑，出现的bug，通过日志手段或者review代码都没法查明原因的情况下，这时候我们可以通过服务录像重放来还原整个事故现场。 实现方案skynet是多线程的，不太方便对整个进程进行录像，而对于skynet的单个服务，能保证消息是同步处理的，所以可以比较方便实现对于单个服务录像，可以同时录制多个服务。实现思路就是把所有消息记录下来，重放时读取记录，解析重放即可。其中有一些细节点，
         </div>
       </a>
 
@@ -434,7 +434,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/10/14/skynet_fly_word/word_3/R_encrycode/" target="_self">
         <div>
-          📖 前言许多开发者都有代码加密保护的需求。为了保护辛辛苦苦开发的游戏不被轻易盗用，我们提供了完善的代码加密方案。  💡 目标：让您的劳动成果得到应有的保护   🔐 实现方案核心原理Lua 代码加载主要通过 loadfile 和 require 实现。我们的加密方案基于以下流程： graph LR     A[原始 Lua 文件] --&gt; B[string.dump 转二进制]
+          前言很多群友都有加密代码的需求。为了群友辛辛苦苦写的游戏不被人轻易白嫖，这必须得安排上。 实现方案lua加载代码通常都是用loadfile跟require，所以我们可以先把lua文件通过string.dump打成二进制格式，再通过加密算法加密，之后直接使用加密的文件去运行，通过重写loadfile的底层函数，内置解密过程，即可实现代码加密的效果。 如何使用修改解密key修改skynet_fly\s
         </div>
       </a>
 
@@ -555,6 +555,74 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
+          共享配置数据
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/14/skynet_fly_word/word_3/Q_sharedata/" target="_self">
+        <div>
+          前言由于skynet每个服务都是独立的lua虚拟机，一般游戏开发又需要加载大量的配置文件，如果每个服务都加载一遍，会造成过多的内存浪费，所有skynet就提供了sharedata,sharetable共享配置数据的手段。由于两种方案各有优缺点，所以我在封装实现上让使用者可以任选其一，在make&#x2F;script增加热更配置命令，方便于热更配置。 优缺点对比sharedata 优点  c内存占
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-14 22:00" pubdate>
+              2024-09-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/" class="category-chain-item">skynet_fly 文档</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/skynet-fly-%E6%96%87%E6%A1%A3/%E5%BC%BA%E5%8C%96%E7%AF%87/" class="category-chain-item">强化篇</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-word/">#skynet_fly_word</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2024/08/17/skynet_fly_word/word_1/N_question/" target="_self">
           常见问题收录
         </a>
@@ -624,14 +692,14 @@
       <h1 class="index-header">
         
         <a href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" target="_self">
-          断点调试的支持
+          断点调式的支持
         </a>
       </h1>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/08/03/skynet_fly_word/word_3/P_breakpointdebug/" target="_self">
         <div>
-          📖 前言许多开发者询问如何调试 skynet_fly，因此我们引入了断点调试支持。虽然老手更倾向于使用日志调试，但对于新手来说，断点调试能够极大地帮助理解代码执行流程，提升学习效率。  💡 开发建议：    🆕 新手：建议使用断点调试快速定位问题   👨‍💻 老手：日志调试通常更高效    🔧 实现方案技术选型调研在 VSCode 中虽然有部分插件声称支持 Skynet 调试，但经过测
+          前言很多群友都问怎样调试skynet_fly，于是就有了对单点调式的支持，调式对于老手来说并不是那么的必要，对于新手来说确实有助于编码学习，毕竟刚学编程那会儿也比较依赖调试，后面逐渐习惯用打印日志的方式查找问题。 实现方案在vscode有部分插件说支持了对skynet的调试，我跟着他们的步骤进行操作，都没能成功调试。之后尝试能不能用lua helper插件支持的调式功能。研究之后发现lua hel
         </div>
       </a>
 
@@ -692,14 +760,14 @@
       <h1 class="index-header">
         
         <a href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" target="_self">
-          可热更服务 - 热更脚本支持
+          可热更服务，热更脚本支持
         </a>
       </h1>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/07/27/skynet_fly_word/word_3/O_hotfix/" target="_self">
         <div>
-          📖 前言对于有状态服务，通常采用滚服更新方式（启动新服务替换旧服务）。但当旧服务维持状态时，简单的逻辑 Bug 无法立即修复。这时就需要热更脚本功能来快速解决突发问题。  🔄 热更方式对比两种热更策略graph TB     Start[服务更新需求] --&gt; Choice&#123;更新方式?&#125;          Choice --&gt;|滚服更新| A[启动新服务]
+          前言对于有状态的服务，利用新服务替换旧服务的方式，旧服务我们一直会维持到没有状态存在为止，当有简单逻辑bug的时候，旧服务没法立即更新，没法完美的解决问题，这时候可能就需要用到热更脚本来解决突发的一些简单逻辑bug。 限制热更脚本对比滚服更新的最大区别就是：  热更脚本是在旧的lua服务中完成  滚服更新启动新lua服务，流量切入新的lua服务   使用滚服更新的好处是，我们不需要考虑热更后对于服
         </div>
       </a>
 
@@ -759,76 +827,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
-          远程订阅发布模式
+        <a href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
+          日志轮换
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api/frpc_watch/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/logrotate/" target="_self">
         <div>
-          watch_server.luasever M.publish(channel_name, …)  描述:  发布名为channel_name的事件  参数:  - channel_name (string): 事件名  M.pubsyn(channel_name, …)  描述:  发布名为channel_name的同步事件  参数:  - channel_name (string): 事件名
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-29 22:00" pubdate>
-              2024-06-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
-          mod映射队列
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/skynet_fly_api_word/mod_queue/" target="_self">
-        <div>
-          mod_queue function M:new(cap)描述 新建队列对象参数  cap number 容量  返回值  table  function M:exec(mod_num, func, …)描述 执行函数参数  mod_num number mod_num % cap + 1 决定使用队列 func function 执行函数 … any 函数参数  返回值  … 函数返回值
+          logrotate function M:new(filename)描述 新建对象参数  filename string? 文件名  返回值  table 对象  function M:set_rename_format(rename_format)描述 重命名文件格式参数  rename_format string  返回值  table 对象  function M:set_file_path
         </div>
       </a>
 
@@ -857,7 +864,7 @@
   
     <span>></span>
     
-  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%89%A7%E8%A1%8C%E9%98%9F%E5%88%97/" class="category-chain-item">执行队列</a>
+  <a href="/categories/skynet-fly-API-%E6%96%87%E6%A1%A3/%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3/" class="category-chain-item">日志相关</a>
   
   
 
@@ -886,7 +893,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/#board">15</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#board">16</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
