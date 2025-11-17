@@ -365,15 +365,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
-          前言
+        <a href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
+          用户是如何注册的？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/03/skynet_fly_word/word_4/B_q/" target="_self">
         <div>
-          这个篇章主要介绍skynet_fly_demo的设计，如何基于skynet_fly_demo做开发。我将会以讲解一个个问题的方式带你走进了解skynet_fly_demo。 skynet_fly_demo简介skynet_fly_demo是基于skynet_fly的试验性项目，目的是全面的使用skynet_fly的功能并验证其可行性。skynet_fly_demo深度的使用了skynet_fly如
+          简介skynet_fly_demo在账号上采用了传统的账号密码方式。 流程 c2s 用户调用loginserver的注册接口 s2s loginserver 调用 centerserver 注册 s2s centerserver 调用 hallserver 注册 s2c loginserver 返回注册结果  流程1涉及skynet_fly技术* http server  * cluster rp
         </div>
       </a>
 
@@ -433,15 +433,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
-          前言
+        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
+          开发环境推荐
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
         <div>
-          项目简介skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。skynet_fly持续迭代的原则，尽量向下兼容，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。 框架优势skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。使用sky
+          vscode + Oracle VM VirtualBoxvscode加虚拟机的方式，是我常用的开发方式。 安装虚拟机 安装VirtualBox,官网下载安装即可 下载centos或者ubantu镜像   centos ubuntu   使用VirtualBox安装虚拟机这里自行百度。  vscode安装插件luaHelpersftp 配置SFTP 创建配置ctrl shift p  编辑配置 1
         </div>
       </a>
 
@@ -501,15 +501,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
-          开发环境推荐
+        <a href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
+          前言
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/B_env/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/A_home/" target="_self">
         <div>
-          vscode + Oracle VM VirtualBoxvscode加虚拟机的方式，是我常用的开发方式。 安装虚拟机 安装VirtualBox,官网下载安装即可 下载centos或者ubantu镜像   centos ubuntu   使用VirtualBox安装虚拟机这里自行百度。  vscode安装插件luaHelpersftp 配置SFTP 创建配置ctrl shift p  编辑配置 1
+          项目简介skynet_fly的理念是基于skynet开发开箱即用的微服务框架，旨在大家使用该框架，不会想着需要修改底层源码，而是基于该框架对服务端做一个快速搭建。skynet_fly持续迭代的原则，尽量向下兼容，不会因向下兼容性而束手束脚，后续考虑使用版本更新日志记录大版本的改动信息。 框架优势skynet_fly是基于skynet扩展的可以快速开发web，游戏，和需要rpc调用的框架。使用sky
         </div>
       </a>
 
@@ -773,15 +773,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
-          如何编写可热更服务模块
+        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
+          项目文件夹介绍
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
         <div>
-          前言使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。 简介可热更服务模块 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会加载指定的 xxx_m.lua文件,相当于用相同的盒子包装不同的东西。 示例12345678910111213141516171819202122232
+          3rd存放第三方依赖 binshell服务构建工具 examples示例学习服务 lualibskynet_fly lua库文件代码 moduleskynet_fly 提供的可热更服务模块 scriptlua shell 脚本工具代码 serviceskynet普通服务 skynetskynet代码 test单元测试服务代码，主要用来编写一些模块的单元测试。
         </div>
       </a>
 
@@ -841,15 +841,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
-          项目文件夹介绍
+        <a href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
+          如何编写可热更服务模块
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/G_dir/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/25/skynet_fly_word/word_1/F_module/" target="_self">
         <div>
-          3rd存放第三方依赖 binshell服务构建工具 examples示例学习服务 lualibskynet_fly lua库文件代码 moduleskynet_fly 提供的可热更服务模块 scriptlua shell 脚本工具代码 serviceskynet普通服务 skynetskynet代码 test单元测试服务代码，主要用来编写一些模块的单元测试。
+          前言使用skynet开发服务，通常不会把所有任务写在一个服务中，一般会拆分成一个个服务单元，服务单元通过rpc调用协同工作。 简介可热更服务模块 本质上就是一个skynet的lua服务，是用skynet.newservice API 创建的。只是会加载指定的 xxx_m.lua文件,相当于用相同的盒子包装不同的东西。 示例12345678910111213141516171819202122232
         </div>
       </a>
 
