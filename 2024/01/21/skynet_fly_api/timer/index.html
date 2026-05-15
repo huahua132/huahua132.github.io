@@ -16,15 +16,15 @@
   <meta name="author" content="huahua132">
   <meta name="keywords" content="">
   
-    <meta name="description" content="timer.lua对skynet的定时器做了基础封装，提供了注销，延时，循环次数，获得下次触发的剩余时间等等功能。 注册 new(expire,times,callback,…)  函数作用域：M 对象的成员函数  函数名称：new  描述:  创建一个定时器对象  参数:  - expire (number): 过期时间 100等于1秒  - times (number): 次数，0表示循环触发">
+    <meta name="description" content="timer.lua基于分级时间轮（Hierarchical Timing Wheel）实现的高性能定时器模块，提供了创建、取消、延长、循环、单次触发、剩余时间查询等功能。 性能特征 create O(1) cancel O(1) —— 双向链表直接摘除 extend O(1) —— cancel + create dispatch O(k) —— k &#x3D; 当前 tick 到期数量 最大可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="定时器的使用">
 <meta property="og:url" content="https://huahua132.github.io/2024/01/21/skynet_fly_api/timer/index.html">
 <meta property="og:site_name" content="huahua132 blog">
-<meta property="og:description" content="timer.lua对skynet的定时器做了基础封装，提供了注销，延时，循环次数，获得下次触发的剩余时间等等功能。 注册 new(expire,times,callback,…)  函数作用域：M 对象的成员函数  函数名称：new  描述:  创建一个定时器对象  参数:  - expire (number): 过期时间 100等于1秒  - times (number): 次数，0表示循环触发">
+<meta property="og:description" content="timer.lua基于分级时间轮（Hierarchical Timing Wheel）实现的高性能定时器模块，提供了创建、取消、延长、循环、单次触发、剩余时间查询等功能。 性能特征 create O(1) cancel O(1) —— 双向链表直接摘除 extend O(1) —— cancel + create dispatch O(k) —— k &#x3D; 当前 tick 到期数量 最大可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-21T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-03-09T07:09:54.104Z">
+<meta property="article:modified_time" content="2026-05-15T07:15:21.864Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          3.5k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          15 分钟
+          30 分钟
         
       </span>
     
@@ -286,7 +286,7 @@
         aria-expanded="true"
       >
         skynet_fly_api
-        <span class="list-group-count">(11)</span>
+        <span class="list-group-count">(12)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -300,15 +300,6 @@
     
       
       
-        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" title="远程订阅发布模式"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">远程订阅发布模式</span>
-        </a>
-      
-    
-      
-      
         <a href="/2023/12/17/skynet_fly_api/load_mods/" title="启动配置load_mods.lua"
            class="list-group-item list-group-item-action
            ">
@@ -318,10 +309,10 @@
     
       
       
-        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
+        <a href="/2024/06/29/skynet_fly_api/frpc_watch/" title="远程订阅发布模式"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">可热更模块的启动配置项</span>
+          <span class="category-post">远程订阅发布模式</span>
         </a>
       
     
@@ -336,10 +327,10 @@
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/orm/" title="orm"
+        <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">orm</span>
+          <span class="category-post">可热更模块的启动配置项</span>
         </a>
       
     
@@ -354,10 +345,28 @@
     
       
       
+        <a href="/2024/01/28/skynet_fly_api/orm/" title="orm"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm</span>
+        </a>
+      
+    
+      
+      
         <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
            class="list-group-item list-group-item-action
            ">
           <span class="category-post">远程rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2026/05/15/skynet_fly_api/orm_frpc_client/" title="orm_frpc_client远程orm访问"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">orm_frpc_client远程orm访问</span>
         </a>
       
     
@@ -381,19 +390,19 @@
     
       
       
-        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
+        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">定时器的使用</span>
+           ">
+          <span class="category-post">watch_syn.lua 监听同步机制</span>
         </a>
       
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
+        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">watch_syn.lua 监听同步机制</span>
+           active">
+          <span class="category-post">定时器的使用</span>
         </a>
       
     
@@ -421,19 +430,127 @@
             
               <div class="markdown-body">
                 
-                <h1 id="timer-lua"><a href="#timer-lua" class="headerlink" title="timer.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/timer.lua">timer.lua</a></h1><p>对skynet的定时器做了基础封装，提供了注销，延时，循环次数，获得下次触发的剩余时间等等功能。</p>
-<h1 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h1><ul>
-<li><p><strong>new(expire,times,callback,…)</strong><br>  函数作用域：M 对象的成员函数<br>  函数名称：new<br>  描述:  创建一个定时器对象<br>  参数:<br>  - expire (number): 过期时间 100等于1秒<br>  - times (number): 次数，0表示循环触发<br>  - callback (function): 回调函数<br>  - …  回调参数</p>
+                <h1 id="timer-lua"><a href="#timer-lua" class="headerlink" title="timer.lua"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/timer.lua">timer.lua</a></h1><p>基于分级时间轮（Hierarchical Timing Wheel）实现的高性能定时器模块，提供了创建、取消、延长、循环、单次触发、剩余时间查询等功能。</p>
+<h2 id="性能特征"><a href="#性能特征" class="headerlink" title="性能特征"></a>性能特征</h2><ul>
+<li><strong>create</strong> O(1)</li>
+<li><strong>cancel</strong> O(1) —— 双向链表直接摘除</li>
+<li><strong>extend</strong> O(1) —— cancel + create</li>
+<li><strong>dispatch</strong> O(k) —— k &#x3D; 当前 tick 到期数量</li>
+<li>最大可调度延迟：67108863 ticks ≈ 671088 秒 ≈ 7.77 天</li>
+<li>内置对象池复用，减少 GC 压力</li>
+</ul>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><table>
+<thead>
+<tr>
+<th>常量</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>M.loop</code></td>
+<td>0</td>
+<td>循环触发标记</td>
+</tr>
+<tr>
+<td><code>M.second</code></td>
+<td>100</td>
+<td>1秒</td>
+</tr>
+<tr>
+<td><code>M.minute</code></td>
+<td>6000</td>
+<td>1分钟</td>
+</tr>
+<tr>
+<td><code>M.hour</code></td>
+<td>360000</td>
+<td>1小时</td>
+</tr>
+<tr>
+<td><code>M.day</code></td>
+<td>8640000</td>
+<td>1天</td>
+</tr>
+</tbody></table>
+<h2 id="创建定时器"><a href="#创建定时器" class="headerlink" title="创建定时器"></a>创建定时器</h2><ul>
+<li><p><strong>M:new(expire, times, callback, …)</strong><br>  描述:  创建一个定时器对象<br>  参数:<br>  - expire (number): 过期时间 100等于1秒<br>  - times (number): 次数，0表示循环触发<br>  - callback (function): 回调函数<br>  - …  回调参数<br>  返回值:</p>
+<ol>
+<li>timer_obj(table): 定时器对象</li>
+</ol>
 </li>
-<li><p><strong>cancel()</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：cancel<br>  描述:  取消定时器</p>
+<li><p><strong>M:once(expire, callback, …)</strong><br>  描述:  创建一个单次触发的定时器（等同于 <code>M:new(expire, 1, callback, ...)</code>）<br>  参数:<br>  - expire (number): 过期时间 100等于1秒<br>  - callback (function): 回调函数<br>  - …  回调参数<br>  返回值:</p>
+<ol>
+<li>timer_obj(table): 定时器对象</li>
+</ol>
 </li>
-<li><p><strong>after_next</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：after_next<br>  描述:  之后下一次 ： 回调函数执行完，再注册下一次，默认先注册下一次再执行回调</p>
-</li>
-<li><p><strong>extend</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：extend<br>  描述:  延长定时器<br>  参数:<br>  - ex_expire (number): 延长时间 100等于1秒</p>
-</li>
-<li><p><strong>remain_expire</strong><br>  函数作用域：M:new 对象的成员函数<br>  函数名称：remain_expire<br>  描述:  剩余触发时间</p>
+<li><p><strong>M:new_loop(expire, callback, …)</strong><br>  描述:  创建一个循环定时器（等同于 <code>M:new(expire, 0, callback, ...)</code>）<br>  参数:<br>  - expire (number): 过期时间 100等于1秒<br>  - callback (function): 回调函数<br>  - …  回调参数<br>  返回值:</p>
+<ol>
+<li>timer_obj(table): 定时器对象</li>
+</ol>
 </li>
 </ul>
+<h2 id="定时器对象方法"><a href="#定时器对象方法" class="headerlink" title="定时器对象方法"></a>定时器对象方法</h2><ul>
+<li><p><strong>timer_obj:cancel()</strong><br>  描述:  取消定时器<br>  返回值:</p>
+<ol>
+<li>timer_obj(table): 自身，支持链式调用</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:after_next()</strong><br>  描述:  设置”之后下一次”模式：回调函数执行完再注册下一次，默认是先注册下一次再执行回调<br>  返回值:</p>
+<ol>
+<li>timer_obj(table): 自身，支持链式调用</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:extend(ex_expire)</strong><br>  描述:  延长定时器触发时间<br>  参数:<br>  - ex_expire (number): 延长时间 100等于1秒<br>  返回值:</p>
+<ol>
+<li>timer_obj(table): 自身，支持链式调用<br>  说明:<ul>
+<li>已取消或已完成的定时器调用无效</li>
+<li>延长时间会在当前剩余时间基础上追加</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:remain_expire()</strong><br>  描述:  获取剩余触发时间<br>  返回值:</p>
+<ol>
+<li>remain(number): 剩余tick数，0表示已触发完或已取消</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:is_cancelled()</strong><br>  描述:  是否已被取消<br>  返回值:</p>
+<ol>
+<li>ret(boolean)</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:is_finished()</strong><br>  描述:  是否已完成（所有次数都触发了）<br>  返回值:</p>
+<ol>
+<li>ret(boolean)</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:is_loop()</strong><br>  描述:  是否是循环定时器<br>  返回值:</p>
+<ol>
+<li>ret(boolean)</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:remain_times()</strong><br>  描述:  剩余触发次数<br>  返回值:</p>
+<ol>
+<li>times(number): 剩余次数，0表示循环或已结束</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:is_valid()</strong><br>  描述:  定时器是否仍有效（未取消且未完成）<br>  返回值:</p>
+<ol>
+<li>ret(boolean)</li>
+</ol>
+</li>
+<li><p><strong>timer_obj:release()</strong><br>  描述:  释放定时器对象，允许对象池回收复用<br>  说明:<br>  - 引用计数减1，当计数&lt;&#x3D;0且定时器已结束时归还对象池<br>  - 如果忘记调用，对象由Lua GC自然回收（不会泄漏）</p>
+</li>
+</ul>
+<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><ul>
+<li><p><strong>M.set_warn_threshold(ticks)</strong><br>  描述:  设置回调执行耗时告警阈值<br>  参数:<br>  - ticks (number): 阈值（100&#x3D;1秒），0表示不检测</p>
+</li>
+<li><p><strong>M.set_pool_max(max)</strong><br>  描述:  设置对象池最大缓存数量<br>  参数:<br>  - max (number): 最大数量，默认256</p>
+</li>
+</ul>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> timer = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;skynet-fly.timer&quot;</span><br><br><span class="hljs-comment">-- 5秒后单次触发</span><br><span class="hljs-keyword">local</span> t1 = timer:once(timer.second * <span class="hljs-number">5</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span></span><br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;once fired!&quot;</span>, a, b)<br><span class="hljs-keyword">end</span>, <span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;world&quot;</span>)<br><br><span class="hljs-comment">-- 循环定时器，每2秒触发</span><br><span class="hljs-keyword">local</span> t2 = timer:new_loop(timer.second * <span class="hljs-number">2</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span><br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;loop tick&quot;</span>)<br><span class="hljs-keyword">end</span>)<br><br><span class="hljs-comment">-- 触发3次，间隔1秒</span><br><span class="hljs-keyword">local</span> t3 = timer:new(timer.second, <span class="hljs-number">3</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(count)</span></span><br>    <span class="hljs-built_in">log</span>.info(<span class="hljs-string">&quot;fired&quot;</span>, count)<br><span class="hljs-keyword">end</span>, <span class="hljs-number">0</span>)<br><br><span class="hljs-comment">-- 取消定时器</span><br>t2:cancel()<br><br><span class="hljs-comment">-- 延长定时器</span><br>t1:extend(timer.second * <span class="hljs-number">3</span>)  <span class="hljs-comment">-- 再延长3秒</span><br><br><span class="hljs-comment">-- 查询状态</span><br><span class="hljs-built_in">print</span>(t1:is_valid())       <span class="hljs-comment">-- true/false</span><br><span class="hljs-built_in">print</span>(t1:remain_expire())  <span class="hljs-comment">-- 剩余tick数</span><br><span class="hljs-built_in">print</span>(t3:remain_times())   <span class="hljs-comment">-- 剩余次数</span><br><br><span class="hljs-comment">-- 释放对象（可选，允许对象池复用）</span><br>t1:release()<br></code></pre></td></tr></table></figure>
+
 <h1 id="timer-point"><a href="#timer-point" class="headerlink" title="timer_point"></a><a target="_blank" rel="noopener" href="https://github.com/huahua132/skynet_fly/blob/master/lualib/skynet-fly/time_extend/timer_point.lua">timer_point</a></h1><p>使用基础的timer.lua模块，封装的整点报时功能，功能的概念类似闹钟，比如设置每天下午2点半第30秒，就只需要这样设置。</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">call_back</span><span class="hljs-params">(a, b ,c, d)</span></span><br><br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">local</span> a,b,c,d = <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span><br><span class="hljs-keyword">local</span> point = timer_point:new(time_point.EVERY_DAY)<br>:set_hour(<span class="hljs-number">14</span>) <span class="hljs-comment">--下午2点</span><br>:set_min(<span class="hljs-number">30</span>)  <span class="hljs-comment">--30分</span><br>:set_sec(<span class="hljs-number">30</span>)  <span class="hljs-comment">--30秒</span><br>:builder(call_back, a, b, c, d)<br><br>point:cancel()  <span class="hljs-comment">--取消整点报时</span><br></code></pre></td></tr></table></figure>
 

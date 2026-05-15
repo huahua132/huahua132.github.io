@@ -229,6 +229,250 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2025/06/04/skynet_fly_ss/trace/" target="_self">
+          链路追踪的实现
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/04/skynet_fly_ss/trace/" target="_self">
+        <div>
+          前言使用skynet开发都会启动多个lua服务，如果加上使用远程集群调用的话，服务就更多了，如果被调用方存在多链路，出问题时，无法快速定位问题源头。链接追踪通过给处理添加全局唯一的tag标记，在链路上加上详细的日志，从而达到通过日志快速分析问题的手段。云大为skynet增加过链路追踪，通过使用者主动调用skynet.trace，从而开启一次详细的trace日志。trace_tag是服务地址加递增编
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-06-04 21:15" pubdate>
+              2025-06-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
+          给demo hallserver大厅服加上队列
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
+        <div>
+          前言因为skynet中单进程写业务也容易遇到异步重入问题，写简单个人系统也得警惕此问题，着实让人难受。索性直接用queue包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。 实现方案大厅服的业务函数处理通常以player_id为第一参数用来处理玩家个人系统的数据。我们以player_id来区分不同的队列，这样既可以有效利用skynet多携程优势，又能避免个人系统的重入问题。而对
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-24 21:15" pubdate>
+              2025-05-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" target="_self">
+          orm在用户数据日志上的应用
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/09/skynet_fly_ss/orm_log_use/" target="_self">
+        <div>
+          前言游戏服务器免不了需要记录大量玩家数据变化、玩家操作行为、对局战斗数据等等数据的记录以及后台提供数据的查询入口。我遇到过两种做法。  方案一   手动创建数据表结构。 服务器代码拼接sql调用插入。 后台再根据表结构定义写查询页面。   方案二   服务器先写本地json文件。 再选用某种日志采集方案采集日志。 采集那边也需要定义表结构，然后插入数据库。 后台再根据表结构定义写查询页面。  总的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-09 21:15" pubdate>
+              2025-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2025/04/03/skynet_fly_ss/psub_syn/" target="_self">
+          psub_syn批订阅同步的实现
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/03/skynet_fly_ss/psub_syn/" target="_self">
+        <div>
+          前言最近有空在给skynet_fly_demo增加用户日志相关，用于记录游戏中产生的日志，比如用户登录登出记录，道具增加，减少记录。我的想法是把用户日志对接上orm，这样写的日志的方便日志服采集后，根据orm设定的字段索引信息直接构建对接数据库的orm，从而实现日志服无需修改就能采集新增或者变更的日志数据。这个过程就遇到一个问题，日志服如何同步到其他服务的日志orm信息。之前的subsyn监听同步
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-04-03 21:15" pubdate>
+              2025-04-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/04/01/skynet_fly_api_word/utils/guid_util/" target="_self">
           guid_util guid相关
         </a>
@@ -610,264 +854,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/02/10/skynet_fly_ss/frpc_error_code/" target="_self">
-          关于frpc错误处理的优化
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/10/skynet_fly_ss/frpc_error_code/" target="_self">
-        <div>
-          前言之前对于frpc call调用的错误处理，只是简单的打印了日志、返回nil结果，这对于调用处其实不太友好，没法第一时间得知问题所在。 优化方案 新增返回错误码，错误内容，错误方。 取消掉frpc_client call调用出错就打印的日志，交给调用的地方做错误处理决定打不打印日志。  错误码frpc 会出现三种错误。  WAIT_CONNECT_TIME_OUT这种情况就是等待指定时间后还没有
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-02-10 22:00" pubdate>
-              2025-02-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/01/23/skynet_fly_ss/record/" target="_self">
-          记录一次使用录像查bug
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/23/skynet_fly_ss/record/" target="_self">
-        <div>
-          前言skynet_fly_demo 项目被开着5千机器人跑了一晚上之后，我第二天查下一下有没有啥异常日志，结果发现有一个机器人邮件插入失败，是因为主键冲突，插入的邮件是全服邮件，因为使用的批量插入并没有触发断言，并不能第一时间发现调用来源。只有错误日志。 1234567891011121314151617181920212223242526272829[:0000001a][20250123 05
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-23 22:00" pubdate>
-              2025-01-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/01/09/quarter/2025-1-2025-3/" target="_self">
-          季度更新日志2025-1 2025-3
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/01/09/quarter/2025-1-2025-3/" target="_self">
-        <div>
-          最终还原perl环境 pb 打包sharedata数据应注意先copy 编译好skynet_sly之后，perl没有还原，会影响到系统其他软件正常工作。 pb打包用sharedata共享的table时，数据打包不进去。怀疑是因为sharedata是skynet封装的c object，pb底层无法识别访问，通过先深拷贝sharedata表，再传入pb打包可以规避此问题。  优化sharedata_s
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-01-09 22:00" pubdate>
-              2025-01-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/" class="category-chain-item">季度更新日志</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/2025/" class="category-chain-item">2025</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A3%E5%BA%A6%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/">#季度更新日志</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/12/31/year/2024/" target="_self">
-          2024 年度总结
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/31/year/2024/" target="_self">
-        <div>
-          前言今年是skynet_fly的第二年，但是这却是skynet_fly的第一篇年度总结，我相信这肯定不是最后一篇，第一年是因为确实没有这个规划，这个想法也是2024的最后一天才有的。想着这一年加了很多新东西，也方便使用者能快速知道这一年更新了什么，也算是对skynet_fly做一个年度回顾吧，可能会有一些遗漏，因为是临时起意，不是修改后立马写记录，只能靠记忆和查阅提交记录来汇总了。来年想着安排一个
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-12-31 22:00" pubdate>
-              2024-12-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" class="category-chain-item">年度总结</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/2024/" class="category-chain-item">2024</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">#年度总结</a>
             
           </div>
         

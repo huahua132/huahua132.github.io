@@ -229,6 +229,250 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2026/05/15/skynet_fly_ss/orm_frpc_client/" target="_self">
+          orm远程访问对象的实现思路
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/15/skynet_fly_ss/orm_frpc_client/" target="_self">
+        <div>
+          前言在skynet_fly的微服务架构中，数据通常由一个节点的ORM服务管理（例如玩家数据由game节点的orm_agent负责）。但其他节点（如大厅、匹配服务）也经常需要读取这些数据。传统方案有两种：  按需RPC查询 —— 每次需要时远程调用获取数据，延迟高 全量推送 —— 把数据推给所有需要的节点，浪费带宽  orm_frpc_client走的是第三条路：按需订阅 + 增量同步。订阅某个主键
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-15 16:00" pubdate>
+              2026-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/05/15/skynet_fly_ss/timer_wheel/" target="_self">
+          定时器升级为分级时间轮
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/15/skynet_fly_ss/timer_wheel/" target="_self">
+        <div>
+          前言之前skynet_fly的定时器是用一个间隔60秒的check循环来实现的，这样做的好处是避免了skynet注册长时间定时器占用lua携程的问题。但随着使用场景的增多，这种实现暴露出了一些不足：1是精度被限制在check间隔内；2是取消操作需要遍历查找；3是大量定时器时check开销增大。所以决定把底层换成经典的分级时间轮（Hierarchical Timing Wheel），对标Linux内
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-15 15:00" pubdate>
+              2026-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/05/15/skynet_fly_api/orm_frpc_client/" target="_self">
+          orm_frpc_client远程orm访问
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/15/skynet_fly_api/orm_frpc_client/" target="_self">
+        <div>
+          orm_frpc_client.lua用于远程同步和调用其他节点的orm数据，基于watch_client实现增量同步，支持新增、修改、删除回调。 创建与获取 M:new(svr_name, svr_id, orm_entity_instance_name)  描述:  创建远程orm访问对象  参数:  - svr_name (string): 远程结点名称  - svr_id (number)
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-15 14:50" pubdate>
+              2026-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly-api/" class="category-chain-item">skynet_fly_api</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly-api/">#skynet_fly_api</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/05/15/skynet_fly_ss/unpubsyn/" target="_self">
+          unpubsyn取消同步数据的实现
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/15/skynet_fly_ss/unpubsyn/" target="_self">
+        <div>
+          前言之前skynet_fly的subsyn监听同步机制只支持发布和更新，但实际业务中经常会遇到需要取消已发布数据的场景。比如一个玩家下线了，它的状态信息不再有效，需要通知所有监听方”这个数据已经作废了”。之前的做法只能发布一个空数据或者约定一个特殊值表示”无效”，这样不够优雅也不够明确。所以决定给subsyn加上unpubsyn取消同步的能力，让推送端能主动通知所有监听端“数据已取消”，监听端可以
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-15 14:45" pubdate>
+              2026-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2025/10/30/skynet_fly_api_word/client/orm_frpc_client/" target="_self">
           orm远程访问对象
         </a>
@@ -573,250 +817,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2025-06-07 22:10" pubdate>
               2025-06-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/06/04/skynet_fly_ss/trace/" target="_self">
-          链路追踪的实现
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/04/skynet_fly_ss/trace/" target="_self">
-        <div>
-          前言使用skynet开发都会启动多个lua服务，如果加上使用远程集群调用的话，服务就更多了，如果被调用方存在多链路，出问题时，无法快速定位问题源头。链接追踪通过给处理添加全局唯一的tag标记，在链路上加上详细的日志，从而达到通过日志快速分析问题的手段。云大为skynet增加过链路追踪，通过使用者主动调用skynet.trace，从而开启一次详细的trace日志。trace_tag是服务地址加递增编
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-06-04 21:15" pubdate>
-              2025-06-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
-          给demo hallserver大厅服加上队列
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/24/skynet_fly_ss/demo_hall_queue/" target="_self">
-        <div>
-          前言因为skynet中单进程写业务也容易遇到异步重入问题，写简单个人系统也得警惕此问题，着实让人难受。索性直接用queue包裹一些执行入口，这样简单个人系统没有跨服的业务根本无需考虑此问题了。 实现方案大厅服的业务函数处理通常以player_id为第一参数用来处理玩家个人系统的数据。我们以player_id来区分不同的队列，这样既可以有效利用skynet多携程优势，又能避免个人系统的重入问题。而对
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-24 21:15" pubdate>
-              2025-05-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/04/09/skynet_fly_ss/orm_log_use/" target="_self">
-          orm在用户数据日志上的应用
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/09/skynet_fly_ss/orm_log_use/" target="_self">
-        <div>
-          前言游戏服务器免不了需要记录大量玩家数据变化、玩家操作行为、对局战斗数据等等数据的记录以及后台提供数据的查询入口。我遇到过两种做法。  方案一   手动创建数据表结构。 服务器代码拼接sql调用插入。 后台再根据表结构定义写查询页面。   方案二   服务器先写本地json文件。 再选用某种日志采集方案采集日志。 采集那边也需要定义表结构，然后插入数据库。 后台再根据表结构定义写查询页面。  总的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-04-09 21:15" pubdate>
-              2025-04-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/" class="category-chain-item">skynet_fly实现思路历程</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/skynet-fly%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E5%8E%86%E7%A8%8B/">#skynet_fly实现思路历程</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2025/04/03/skynet_fly_ss/psub_syn/" target="_self">
-          psub_syn批订阅同步的实现
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/03/skynet_fly_ss/psub_syn/" target="_self">
-        <div>
-          前言最近有空在给skynet_fly_demo增加用户日志相关，用于记录游戏中产生的日志，比如用户登录登出记录，道具增加，减少记录。我的想法是把用户日志对接上orm，这样写的日志的方便日志服采集后，根据orm设定的字段索引信息直接构建对接数据库的orm，从而实现日志服无需修改就能采集新增或者变更的日志数据。这个过程就遇到一个问题，日志服如何同步到其他服务的日志orm信息。之前的subsyn监听同步
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-04-03 21:15" pubdate>
-              2025-04-03
             </time>
           </div>
         
