@@ -19,12 +19,12 @@
     <meta name="description" content="orm_frpc_client.lua用于远程同步和调用其他节点的orm数据，基于watch_client实现增量同步，支持新增、修改、删除回调。 创建与获取 M:new(svr_name, svr_id, orm_entity_instance_name)  描述:  创建远程orm访问对象  参数:  - svr_name (string): 远程结点名称  - svr_id (number)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="orm_frpc_client远程orm访问">
-<meta property="og:url" content="https://huahua132.github.io/2026/05/15/skynet_fly_api/orm_frpc_client/index.html">
+<meta property="og:url" content="https://huahua132.github.io/2026/05/18/skynet_fly_api/orm_frpc_client/index.html">
 <meta property="og:site_name" content="huahua132 blog">
 <meta property="og:description" content="orm_frpc_client.lua用于远程同步和调用其他节点的orm数据，基于watch_client实现增量同步，支持新增、修改、删除回调。 创建与获取 M:new(svr_name, svr_id, orm_entity_instance_name)  描述:  创建远程orm访问对象  参数:  - svr_name (string): 远程结点名称  - svr_id (number)">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-05-15T06:50:00.000Z">
-<meta property="article:modified_time" content="2026-05-15T06:59:13.671Z">
+<meta property="article:published_time" content="2026-05-18T06:50:00.000Z">
+<meta property="article:modified_time" content="2026-05-19T11:50:49.647Z">
 <meta property="article:author" content="huahua132">
 <meta property="article:tag" content="skynet_fly_api">
 <meta name="twitter:card" content="summary_large_image">
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-05-15 14:50" pubdate>
-          2026年5月15日 下午
+        <time datetime="2026-05-18 14:50" pubdate>
+          2026年5月18日 下午
         </time>
       </span>
     
@@ -318,15 +318,6 @@
     
       
       
-        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">新增可热更服务</span>
-        </a>
-      
-    
-      
-      
         <a href="/2024/01/14/skynet_fly_api/mods/" title="可热更模块的启动配置项"
            class="list-group-item list-group-item-action
            ">
@@ -336,10 +327,10 @@
     
       
       
-        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
+        <a href="/2026/05/18/skynet_fly_api/orm_frpc_client/" title="orm_frpc_client远程orm访问"
            class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">内部rpc调用</span>
+           active">
+          <span class="category-post">orm_frpc_client远程orm访问</span>
         </a>
       
     
@@ -354,19 +345,28 @@
     
       
       
-        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
+        <a href="/2023/12/17/skynet_fly_api/module/" title="新增可热更服务"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">远程rpc调用</span>
+          <span class="category-post">新增可热更服务</span>
         </a>
       
     
       
       
-        <a href="/2026/05/15/skynet_fly_api/orm_frpc_client/" title="orm_frpc_client远程orm访问"
+        <a href="/2024/01/07/skynet_fly_api/rpc/" title="内部rpc调用"
            class="list-group-item list-group-item-action
-           active">
-          <span class="category-post">orm_frpc_client远程orm访问</span>
+           ">
+          <span class="category-post">内部rpc调用</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2024/01/07/skynet_fly_api/rpcf/" title="远程rpc调用"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">远程rpc调用</span>
         </a>
       
     
@@ -390,19 +390,19 @@
     
       
       
-        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
+        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">watch_syn.lua 监听同步机制</span>
+          <span class="category-post">定时器的使用</span>
         </a>
       
     
       
       
-        <a href="/2024/01/21/skynet_fly_api/timer/" title="定时器的使用"
+        <a href="/2024/01/28/skynet_fly_api/watch_syn/" title="watch_syn.lua 监听同步机制"
            class="list-group-item list-group-item-action
            ">
-          <span class="category-post">定时器的使用</span>
+          <span class="category-post">watch_syn.lua 监听同步机制</span>
         </a>
       
     
@@ -533,7 +533,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>orm_frpc_client远程orm访问</div>
-      <div>https://huahua132.github.io/2026/05/15/skynet_fly_api/orm_frpc_client/</div>
+      <div>https://huahua132.github.io/2026/05/18/skynet_fly_api/orm_frpc_client/</div>
     </div>
     <div class="license-meta">
       
@@ -545,7 +545,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年5月15日</div>
+          <div>2026年5月18日</div>
         </div>
       
       
@@ -577,7 +577,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/15/skynet_fly_ss/timer_wheel/" title="定时器升级为分级时间轮">
+                      <a href="/2026/05/18/skynet_fly_ss/timer_wheel/" title="定时器升级为分级时间轮">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">定时器升级为分级时间轮</span>
                         <span class="visible-mobile">上一篇</span>
@@ -587,7 +587,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/15/skynet_fly_ss/unpubsyn/" title="unpubsyn取消同步数据的实现">
+                      <a href="/2026/05/18/skynet_fly_ss/unpubsyn/" title="unpubsyn取消同步数据的实现">
                         <span class="hidden-mobile">unpubsyn取消同步数据的实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
